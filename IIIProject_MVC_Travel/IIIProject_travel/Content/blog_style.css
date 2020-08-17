@@ -1,0 +1,85 @@
+#sidebar {
+  background-color: rgba(1250, 240, 230, 0.4);
+  border-radius: 3%;
+}
+
+#main-section {
+  background-color: rgba(1250, 240, 230, 0.4);
+  border-radius: 3%;
+}
+
+.btn-primary {
+  background-color: rgba(255, 128, 0, 0.5);
+  border-color: rgba(1250, 240, 230, 1);
+  color: black;
+}
+
+#btnPrev {
+  margin-right: 20px;
+}
+
+#btnNext {
+  margin-left: 20px;
+}
+
+.pDateSection {
+  color: orange;
+  margin-bottom: 0px;
+}
+
+.blogbox {
+  margin-bottom: 30px;
+}
+
+.content {
+  padding-left: 10px;
+}
+
+.fas {
+  font-size: 30px;
+}
+
+#main-title {
+  text-align: center;
+}
+
+.input-group {
+  padding-top: 10px;
+  border-radius: 5%;
+}
+
+#post-content {
+  height: 800px;
+}
+
+#post-image {
+  align-self: center;
+  width: 100%;
+}
+
+#Browse-section {
+  /* display: flex;
+    align-self: flex-end; */
+  /* flex-direction: row; */
+  /* border: 1px solid red; */
+  width: 80%;
+}
+
+#inputGroupFile02 {
+  width: 100%;
+}
+
+#inputGroupFileAddon02 {
+  margin-left: 10px;
+}
+
+#pTitle {
+  font-size: 25px;
+  margin-right: 10px;
+}
+
+#titleContent {
+  margin-right: 5px;
+
+  width: 40%;
+}

@@ -1,0 +1,277 @@
+﻿@model IEnumerable<tArticle>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>文章 | Jouta</title>
+    <link rel="stylesheet" href="~/Content/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/Content/css/style.css">
+    <link rel="stylesheet" href="~/Content/css/blog_style.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css">
+
+
+</head>
+
+<body>
+    <div class="container-fluid">
+        <!-- navbar -->
+        <nav class="navbar navbar-expand-lg navbar-light header" id="main">
+            <div class="container">
+                <a class="navbar-brand" href="main.html">
+                    <img src="~/Content/images/joutalogo_black.png" alt="" width="100">
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
+                    <ul class="nav navbar-nav">
+                        <li class="nav-item">@Html.ActionLink("首頁", "Home", "Home", new { }, new { @class = "nav-link nav-main text-dark" })</li>
+                        <li class="nav-item">@Html.ActionLink("找飯局", "EatIndex", "Eat", new { }, new { @class = "nav-link nav-eat text-dark" })</li>
+                        <li class="nav-item">@Html.ActionLink("找旅遊", "TravelIndex", "Travel", new { }, new { @class = "nav-link nav-travel text-dark" })</li>
+                        <li class="nav-item">@Html.ActionLink("找文章", "List", "Blog", new { }, new { @class = "nav-link nav-blog text-dark" })</li>
+                    </ul>
+                    <ul class="nav navbar-nav">
+                        <li class="nav-item">@Html.ActionLink("登入", "LoginIndex", "Login", new { }, new { @class = "nav-link nav-login text-dark" })</li>
+                        <li class="nav-item">@Html.ActionLink("註冊", "Register", "Home", new { }, new { @class = "nav-link nav-register text-dark" })</li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+
+    <!-- Page Content -->
+    <div class="container mb-5">
+
+        <div class="row blogbox" id="main-section">
+
+            <!-- Post Content Column -->
+            <div class="col-lg-8">
+
+                <!-- Title -->
+
+
+                @{
+
+                    foreach (tArticle tArticle in Model)
+                    {
+                        
+                        
+                     <h1 class="mt-4">
+                     @tArticle.f標題
+                     </h1>
+                        
+
+                    }
+
+
+                }
+               
+
+                <!-- Author -->
+                <p class="lead">
+                    by
+                    <a href="#">Jouta</a>
+                </p>
+
+                <hr>
+
+                <!-- Date/Time -->
+                <p class="pDateSection">Posted on January 1, 2019 at 12:00 PM</p>
+
+                <hr>
+
+                <!-- Preview Image -->
+                <img class="img-fluid rounded" src="~/Content/images/blogPost.jpg" alt="">
+
+
+
+                <hr>
+
+                <!-- Post Content -->
+
+                @{
+                    
+
+
+
+                    foreach (tArticle tArticle in Model)
+                    {
+
+
+                        <p>
+                            @tArticle.f發文內容
+                        </p>
+
+                    }
+
+
+                }
+
+
+
+
+
+                <div class="con">
+                    <i class="fas fa-star" id="s1"></i>
+                    <i class="fas fa-star" id="s2"></i>
+                    <i class="fas fa-star" id="s3"></i>
+                    <i class="fas fa-star" id="s4"></i>
+                    <i class="fas fa-star" id="s5"></i>
+                </div>
+
+                <hr>
+
+
+
+                <!-- Comments Form -->
+                <div class="card my-4">
+                    <h5 class="card-header">留下您的留言：</h5>
+                    <div class="card-body">
+                        <form>
+                            <div class="form-group">
+                                <textarea class="form-control" rows="3"></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary">提交</button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Single Comment -->
+                <div class="media mb-4">
+                    <img class="d-flex mr-3 rounded-circle" src="https://picsum.photos/50/50/?random=2" alt="">
+                    <div class="media-body">
+                        <h5 class="mt-0">Commenter Name</h5>
+                        Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+                    </div>
+                </div>
+
+                <div class="media mb-4">
+                    <img class="d-flex mr-3 rounded-circle" src="https://picsum.photos/50/50/?random=1" alt="">
+                    <div class="media-body">
+                        <h5 class="mt-0">Commenter Name</h5>
+                        Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+                    </div>
+                </div>
+
+
+
+
+
+            </div>
+
+            <!-- Sidebar Widgets Column -->
+            <div class="col-md-4" id="sidebar">
+
+
+
+                <section id="achang-intro-2" class="card my-4">
+                    <h3>會員名稱</h3>
+                    <img src="https://picsum.photos/300/300/?random=1">
+                    <p class="content">
+                        Food &amp; Wine Lover, Bilingual Blogger, Marketing Freelancer and Content Creator
+                        <br>美食與酒類愛好者,行銷創作接案者
+                        <br>
+                        <br><i class="fab fa-instagram"></i> Jouta
+                        <br>
+                        <br><i class="far fa-envelope"></i> jouta@gmail.com
+                        <br>
+                    </p>
+                </section>
+
+                <!-- Search Widget -->
+                <div class="card my-4">
+                    <h5 class="card-header">Search</h5>
+                    <div class="card-body">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Search for...">
+                            <span class="input-group-append">
+                                <button class="btn btn-secondary"
+                                        type="button">
+                                    Go!
+                                </button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Categories Widget -->
+                <div class="card my-4">
+                    <h5 class="card-header">分類</h5>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <ul class="list-unstyled mb-0">
+                                    <li>
+                                        <a href="#">美食</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">旅遊</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">美好回憶</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="col-lg-6">
+                                <ul class="list-unstyled mb-0">
+                                    <li>
+                                        <a href="#">大港開唱</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">爵士音樂節</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Side Widget -->
+                <div class="card my-4">
+                    <h5 class="card-header">Side Widget</h5>
+                    <!-- <div class="card-body"> -->
+
+                    <iframe src="https://www.instagram.com/p/CBukoFancTu/embed/captioned/?cr=1&amp;v=12&amp;wp=956&amp;rd=https%3A%2F%2Fletswritetw.github.io&amp;rp=%2Fletswrite-instagram-embed%2F#%7B%22ci%22%3A0%2C%22os%22%3A54857.92500000389%2C%22ls%22%3A457.45000000169966%2C%22le%22%3A458.2700000028126%7D"
+                            width="340" height="500" style="border:none;overflow:hidden ;height: 500px;" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
+                    <script async src="//www.instagram.com/embed.js"></script>
+                </div>
+                <div class="card my-4">
+                    <!-- <h5 class="card-header">Side Widget</h5> -->
+                    <!-- <div class="card-body"> -->
+                    <iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fnoraneko.nyankichi%2F&tabs=timeline&width=340&height=500&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&appId" width="340"
+                            height="500" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+        <!-- footer -->
+        <div class="container-fluid footer">
+            <p class="text-center mt-2 mb-2">&copy; @DateTime.Now.Year Jouta All rights reserved</p>
+        </div>
+
+        <!-- script -->
+        <script src="~/Content/js/jquery-3.5.1.js"></script>
+        <script src="~/Content/js/popper.min.js"></script>
+        <script src="~/Content/bootstrap-4.2.1-dist/js/bootstrap.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/semantic-ui/2.2.7/semantic.min.js"></script>
+        <script src="~/Content/js/navbar.js"></script>
+        <script src="~/Scripts/blog.js"></script>
+
+
+    
+</body>
+
+</html>

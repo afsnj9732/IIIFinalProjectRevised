@@ -1,0 +1,290 @@
+﻿@model IIIProject_travel.ViewModel.CTravel
+
+@{
+    Layout = null;
+}
+
+@{
+    <!DOCTYPE html>
+    <html lang="zh-Hant-tw">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>揪旅遊 | Jouta</title>
+        @*@Styles.Render("~/Content/bootstrap-4.2.1-dist/css/bootstrap.css")
+            @Styles.Render("~/Content/fontawesome/css/all.css")
+            @Styles.Render("~/Content/css/style.css")
+            @Styles.Render("~/Content/css/travel.css")*@
+        <link rel="stylesheet" href="~/Content/bootstrap-4.2.1-dist/css/bootstrap.css">
+        <link rel="stylesheet" href="~/Content/fontawesome/css/all.css">
+        <link rel="stylesheet" href="~/Content/css/style.css">
+        <link rel="stylesheet" href="~/Content/css/travel.css">
+        <link rel="shortcut icon" href="favicon.ico" />
+    </head>
+
+    <body style="background-color: #FAFAFA;">
+        <div class="container-fluid ">
+            <!-- navbar -->
+            <nav class="navbar navbar-expand-lg navbar-light header" id="main">
+                <div class="container">
+                    <a class="navbar-brand" href="main.html">
+                        <img src="~/Content/images/joutalogo_black.png" alt="" width="100">
+                    </a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">@Html.ActionLink("首頁", "Home", "Home", new { }, new { @class = "nav-link nav-main text-dark" })</li>
+                            <li class="nav-item">@Html.ActionLink("找飯局", "EatIndex", "Eat", new { }, new { @class = "nav-link nav-eat text-dark" })</li>
+                            <li class="nav-item">@Html.ActionLink("找旅遊", "TravelIndex", "Travel", new { }, new { @class = "nav-link nav-travel text-dark" })</li>
+                            <li class="nav-item">@Html.ActionLink("找文章", "List", "Blog", new { }, new { @class = "nav-link nav-blog text-dark" })</li>
+                        </ul>
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">@Html.ActionLink("登入", "LoginIndex", "Login", new { }, new { @class = "nav-link nav-login text-dark" })</li>
+                            <li class="nav-item">@Html.ActionLink("註冊", "Register", "Home", new { }, new { @class = "nav-link nav-register text-dark" })</li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
+
+        <!-- 網頁主體 -->
+        <div class="container-fluid mt-3">
+            <div class="row justify-content-between">
+                <!-- 各項排序 -->
+                <div id="replace"></div>
+                <div class="col-lg-3 pt-5 pl-5 " id="travel_sort">
+                    <!--左邊欄位-->
+                    <div class=" pl-2 " style="cursor: pointer;">
+                        <!-- 查詢 搜尋-->
+                        @*<form method="post">*@
+                        @*action="./article_AJAX"*@
+                        @*<input type="hidden" name="order" value="null" />
+                            <input type="hidden" name="border_color" value="null" />*@
+                        <input type="text" style="width:86%;" name="contain" id="contain">
+                        <input type="image" src="~/Content/images/18.png" id="contain_pic" />  @*alt="submit"*@
+                        @*</form>*@
+                        <br>
+                    </div>
+                    <ul class="sort">
+                        <li class="m-2 mb-3 row justify-content-between" id="02" style="list-style-type:none;cursor: pointer;">
+                            <span>
+                                <img src="~/Content/images/02.png" order="f文章發文日期"
+                                     alt="">最新
+                            </span>
+                        </li>
+                        <li class="m-2 mb-3 row justify-content-between" id="01" style="list-style-type:none;cursor: pointer;">
+                            <span>
+                                <img src="~/Content/images/01.png" order="f文章瀏覽次數"
+                                     alt="">熱門
+                            </span>
+                        </li>
+                        <li class="m-2 mb-3 row justify-content-between" id="03" style="list-style-type:none;cursor: pointer;">
+                            <span>
+                                <img src="~/Content/images/03.png" order="f文章地區"
+                                     alt="">地區
+                            </span>
+                        </li>
+                        <li class="m-2 mb-3 row justify-content-between" id="04" style="list-style-type:none;cursor: pointer;">
+                            <span>
+                                <img src="~/Content/images/04.png" order="f文章預算"
+                                     alt="">預算
+                            </span>
+                        </li>
+                        <li class="m-2 mb-3 row justify-content-between" id="05" style="list-style-type:none;cursor: pointer;">
+                            <span>
+                                <img src="~/Content/images/05.png" order="f文章讚數"
+                                     alt="">讚數
+                            </span>
+                        </li>
+                        <li class="m-2 mb-3 row justify-content-between" id="06" style="list-style-type:none;cursor: pointer;">
+                            <span>
+                                <img src="~/Content/images/06.png" order="f文章瀏覽次數"
+                                     alt="">瀏覽次數
+                            </span>
+                        </li>
+                        <li class="m-2 mb-3 row justify-content-between" id="07" style="list-style-type:none;cursor: pointer;">
+                            <span>
+                                <img src="~/Content/images/07.png" order="f文章活動開始日期"
+                                     alt="">活動日期
+                            </span>
+                        </li>
+                        <li class="m-2 mb-3 row justify-content-between" id="08" style="list-style-type:none;cursor: pointer;">
+                            <span>
+                                <img src="~/Content/images/08.png" order="f文章活動招募日期"
+                                     alt="">入團截止
+                            </span>
+                        </li>
+                    </ul>
+                    <!-- 各項排序 -->
+                    <br />
+                    <!-- 人氣團主 -->
+                    <div>
+                        <p class="ml-3" style="text-align: start;">人氣團主</p>
+                        <ul class="row   ml-3">
+                            <li class="mr-3" style="list-style-type:none;cursor: pointer;">
+                                <img src="~/Content/images/09.png"
+                                     alt="">
+                            </li>
+                            <li class="mr-3" style="list-style-type:none;cursor: pointer;">
+                                <img src="~/Content/images/09.png"
+                                     alt="">
+                            </li>
+                            <li class="mr-3" style="list-style-type:none;cursor: pointer;">
+                                <img src="~/Content/images/09.png"
+                                     alt="">
+                            </li>
+                            <li class="mr-3" style="list-style-type:none;cursor: pointer;">
+                                <img src="~/Content/images/09.png"
+                                     alt="">
+                            </li>
+                            <li class="mr-3" style="list-style-type:none;cursor: pointer;">
+                                <img src="~/Content/images/09.png"
+                                     alt="">
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- 人氣團主 -->
+                </div>
+
+                <!-- 文章區主體 -->
+                <div class="col-lg-6 mt-1">
+                    <div class="button row justify-content-between pt-1 pb-2 align-items-center">
+                        <!-- 現在排序頭 -->
+                        <div id="row">
+                            <div style="list-style-type:none;cursor: pointer;"></div>
+
+                        </div>
+                        <!-- 現在排序尾 -->
+                        <!-- 開團按鈕頭 -->
+                        <div id="new" class="row align-items-center pr-2  ">
+                            <form action="" style="font-size:smaller" class="mr-3">
+                                <span>分類：</span>
+                                <select name="" id="" style="border: none;">
+                                    <option value="" selected>所有</option>
+                                </select>
+                                &nbsp;&nbsp;
+                                <span> 標籤：</span>
+                                <select name="" id="" style="border: none;">
+                                    <option value="" selected>全部</option>
+                                </select>
+                            </form>
+                            <button class="btn btn-block mr-1   p-1" style="background-color:#FFE0B2 ;" type="submit" data-toggle="modal"
+                                    data-target="#exampleModal">
+                                <img src="~/Content/images/10.png" class="mb-1" alt=""> Jou團去
+                            </button>
+                        </div>
+                        <!-- 開團按鈕尾 -->
+                    </div>
+                    <!-- 揪團視窗頭  boostrap為方便滾輪出現會多出padding-right 17px之屬性-->
+                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                         aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog change-max-width-1400" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header border-main-color">
+                                    <h5 class="modal-title" id="exampleModalLabel"><span style="font-weight:bolder;"> 開團</span></h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <!-- 揪團內容頭 -->
+                                    @if (Session["member"] != null)
+                                    {
+                                        <form enctype="multipart/form-data" method="post">
+                                            <div class="container-fluid">
+                                                <span>標題：<input type="text" name="f文章標題" style="width:90%"></span>
+                                                <div class="row m-0 mb-3 justify-content-around">
+                                                    <span>旅遊開始日期： <input type="date" name="f文章活動開始日期"></span>
+                                                    <span>旅遊結束日期： <input type="date" name="f文章活動結束日期"></span>
+                                                    <span>入團截止： <input type="date" name="f文章活動招募日期"></span>
+                                                </div>
+                                                <div class="row mb-4 mx-auto align-items-center justify-content-around">
+                                                    <span><img src="~/Content/images/04.png" class="mb-1" alt="">預算：<input type="text" name="f文章預算"></span>
+                                                    <span> <img src="~/Content/images/17.png" class="mb-1" alt="">分類：<input type="text" name="f分類"></span>
+                                                    <span><img src="~/Content/images/13.png" class="mb-1" alt=""> 標籤：<input type="text" name="f標籤"></span>
+                                                </div>
+                                                <div class="row mb-4 mx-auto align-items-center justify-content-around">
+                                                    <span>團圖：<input type="file" name="PicFile"></span>
+
+                                                    <span class=" ">
+                                                        <img src="~/Content/images/03.png" class="mb-1" alt="">
+                                                        地區：
+                                                        <select name="f文章地區">
+                                                            <option value="北部">北部</option>
+                                                            <option value="中部">中部</option>
+                                                            <option value="南部">南部</option>
+                                                            <option value="東部">東部</option>
+                                                        </select>
+                                                    </span>
+                                                </div>
+
+                                                <div class="row align-items-center">
+                                                    <div class="mx-auto mb-3">
+                                                        內容：<textarea name="f文章內容" style="width:1000px;height:220px;vertical-align:top;"></textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- 揪團內容尾 -->
+                                            <div class="modal-footer  mt-2 border-main-color">
+                                                <input type="submit" class="btn" style="background-color:#FFE0B2" value="送出" />
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
+                                            </div>
+                                            <!-- 揪團隱藏不顯示項目 -->
+                                            <input type="hidden" name="f文章瀏覽次數" value="0">
+                                            <input type="hidden" name="f文章讚數" value="0">
+                                            <input type="hidden" name="f文章發文日期" value="@DateTime.Now.ToString("yyyy-MM-dd  hh:mm:ss")">
+                                            <input type="hidden" name="f文章團主名稱" value="Test">
+                                        </form>
+                                    }
+                                    else
+                                    {
+                                        <p>先登入才能揪團</p>
+                                    }
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 揪團視窗尾 -->
+                    <!-- 文章內容區 -->
+                    <div id="article">
+                        <div id="article_ajax"></div>
+                        @*<button id="showCharts">顯示統計圖表</button>
+                        <img src="~/Views/Travel/Chart"/>
+                        <div id="showChartsTag"></div>*@
+                        <div class="mt-3">
+                            @*<button class="btn btn-block mr-1  p-1 row mx-auto" style="background-color:#FFE0B2 ;">
+                <img src="~/Content/images/10.png" alt="" class="pb-1">讀取更多
+            </button>*@
+                        </div>
+                        <div class="mb-5"></div> <!--底部墊高-->
+
+
+                    </div>
+                </div>
+                <!-- 文章內容區結束 -->
+                <div class="col-lg-3 row">
+
+                </div>
+            </div>
+        </div>
+
+
+        <!-- footer -->
+        <div class="container-fluid footer">
+            <p class="text-center mt-2 mb-2">Copyright © 2020 Jouta All rights reserved</p>
+        </div>
+        <!--    script      -->
+        <script src="~/Content/js/jquery-3.5.1.js"></script>
+        <script src="~/Content/js/popper.min.js"></script>
+        <script src="~/Content/bootstrap-4.2.1-dist/js/bootstrap.js"></script>
+        <script src="~/Content/js/navbar.js"></script>
+        <script src="~/Content/js/travel.js?number=random6"></script>
+    </body>
+
+</html>
+}

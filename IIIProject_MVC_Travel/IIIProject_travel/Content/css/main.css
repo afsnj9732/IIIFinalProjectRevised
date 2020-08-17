@@ -1,0 +1,397 @@
+@import url(https://fonts.googleapis.com/earlyaccess/notosanstc.css);
+
+body{
+    background-color: #fffef4;
+}
+
+.topbanner{
+    position: relative;
+}
+
+a{
+    color: #fff;
+}
+
+a:hover{
+    color: #fff;
+    text-decoration: none;
+}
+
+.nav-main{
+    background-color: #fee567;
+    border-radius: 20px;
+}
+
+/* 主視覺 */
+.v-title {
+    max-width: 940px;
+}
+
+.slogan{
+    text-align: left;
+    letter-spacing: 1rem;
+}
+
+.slogan1{
+    line-height: 2.5;
+    font-size: 1.2rem;
+    letter-spacing: 1rem;
+    color: #fffbdf;
+}
+
+.slogan2{
+    font-size: 4.5rem;
+    color: #fffc35;
+}
+
+.slogan1,.slogan2{
+    font-family: 'Noto Sans TC', sans-serif;
+    text-transform: uppercase;
+    text-shadow: 5px 5px 5px rgba(0,0,0,0.8);
+    transition-duration: 1s;
+}
+
+.slogan1:hover{
+    transition-duration: 1s;
+    letter-spacing: 1.1rem;
+}
+
+.slogan2:hover{
+    text-shadow: 5px 5px 10px rgba(20, 20, 20, 0.8);
+    transition-duration: 1s;
+    font-size: 4.6rem;
+}
+
+.btn{
+    box-shadow: 1px 1px 3px rgba(20,20,20,0.5);
+    transition-duration: .5s;
+}
+
+.btn:hover{
+    box-shadow: 1px 1px 9px rgba(80,80,80,0.5);
+    transition-duration: .5s;
+    background-color: #fee567;
+}
+
+.btnQuickmatch{
+    background-color: #fffc35;
+}
+
+.btnContent{
+    background-color: #f5be2e;
+}
+
+
+.btnQuickmatch a,.btnContent a{
+    color: rgb(20, 20, 20);
+}
+
+/* 主視覺影片 */
+.main {
+    position: relative;
+    overflow: hidden;
+    height: 600px;
+    text-align: center;
+}
+
+.main video {
+    width: 100%;
+}
+
+.main .content {
+    position: absolute;
+    top: 100px;
+    width: 100%;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    text-align: center;
+}
+
+/* Tabs */
+.tabs {
+    flex-wrap: wrap;
+    position: absolute;
+    left: 50%;  /*置中*/
+    top: 50%;   /*置中*/
+    transform: translate(-50%,60%); /*置中*/
+    max-width: 1000px;
+}
+
+.tabs label {
+  	order: 1;
+	display: block;
+	padding: 1rem 2rem;
+    margin-right: 0.2rem;
+    margin-bottom: 0;
+  	cursor: pointer;
+    background: transparent;
+    font-weight: bold;
+    border-radius: 20px 20px 0 0;
+    transition-duration: 0.3s;
+    color: white;
+}
+
+.tabs .tab {
+    order: 99;
+    flex-grow: 1;
+    width: 100%;
+    display: none;
+    padding: 1rem;
+    background: 	#F0F0F0;
+    border-radius: 0 20px 20px 20px;
+}
+
+.tabs input[type="radio"] {
+  	display: none;
+}
+
+.tabs input[type="radio"]:checked + label {
+    background: aquamarine;
+    color: rgb(20, 20, 20);
+    transition-duration: 0.2s;
+    border-radius: 20px 20px 0 0;
+}
+
+.tabs input[type="radio"]:checked + label + .tab {
+  	display: block;
+}
+
+.location{
+    width: 190px;
+}
+
+/* 資料搜尋 */
+@media (max-width: 45em) {
+    .tabs .tab,
+    .tabs label {
+        order: initial;
+    }
+    .tabs label {
+        width: 100%;
+        margin-right: 0;
+        margin-top: 0.2rem;
+    }
+}
+
+.table{
+    padding: 5px;
+    width: 800px;
+    text-align: left;
+}
+
+.table label{
+    color: black;
+    padding: 5px;
+}
+
+.table .time{
+    width: 200px;
+}
+
+.table .btnstyle{
+    margin: auto 0;
+}
+
+/* 主視覺 */
+@media (max-width: 960px) {
+    .main {
+        height: 540px;
+    }
+    .main video {
+        height: 540px;
+        width: 960px;
+    }
+    .main h1 {
+        font-size: 32px;
+    }
+}
+
+/* 精選團主 */
+.member{
+    padding-top: 80px;
+    position: relative;
+}
+
+.member_content{
+    position: relative;
+    width: 100%;
+    flex-wrap: wrap;
+    align-content: flex-start;
+}
+
+.member_icon,.member_title{
+    text-align: center;
+}
+
+.member_title h2{
+    font-size: 30px;
+}
+
+.member_block{
+    width: 100%;
+    position: relative;
+}
+
+.block,.snip1518{
+    padding: 15px;
+}
+
+.person{
+    position: relative;
+    width: 100%;
+    flex-wrap: wrap;
+    align-content: flex-start;
+}
+
+.card,figure.snip1518{
+    box-shadow: 3px 3px 10px #e8e8e8;
+    transition-duration: .5s;
+}
+
+.card:hover,figure.snip1518:hover{
+    box-shadow: 2px 2px 5px #aaaaaa;
+    transition-duration: .5s;
+}
+
+
+/* 跟我趴趴走 */
+.gowhere{
+    position: relative;
+    padding-top: 20px;
+    margin-bottom: 2rem;
+}
+
+/*  footer  */
+.page-wrapper{
+    bottom: 0;
+    width: 100%;
+    z-index: 99;
+}
+
+footer p, footer,.posts li a {
+    font-family: 'Noto Sans TC', sans-serif;
+    color: #fff;
+}
+
+.mask{
+    background-color: black;
+    opacity: .5;
+    transition: background 0.3s, border-radius 0.3s, opacity 0.3s;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    position: absolute;
+}
+
+.footer-top {
+    position: relative;
+    background-image: url(../images/footer.jpg);
+    background-position: center center;
+    background-size: cover;
+    padding:50px;
+}
+
+.footer-bottom {
+    padding: 15px 0;
+    background-color: #fffbdf !important;
+    color: #000;
+}
+
+/*  copyright   */
+.footer-site-info { 
+    font-size: 92.86%;
+}
+
+.clearfix:after, .clearfix:before {
+    content: "";
+    display: table;
+}
+
+#footer-socials {
+    text-align: right;
+}
+
+a.socials-item {
+    display: inline-block;
+    -o-transition: all 0.3s;
+    -webkit-transition: all 0.3s;
+    transition: all 0.3s;
+    margin: 0 5px;
+    line-height: 16px;
+    padding: 10px;
+    border-radius: 50%;
+    background-color:#e8e8e8;
+    box-shadow: 2px 2px 2px #000;
+}
+
+.socials-item i {
+    display: inline-block;
+    font-weight: normal;
+    width: 1em;
+    font-size: 16px;
+    text-align: center;
+    vertical-align: top;
+}
+
+.facebook {
+    color: #4e64b5;
+}
+
+.twitter {
+    color: #00aced;
+}
+.instagram {
+    color: #9a8f62;
+}
+.youtube {
+    color: #c82929;
+}
+
+.telegram {
+    color: #2ca5e0;
+}
+
+
+a.socials-item{
+    transition-duration: 0.3s;
+}
+
+a.socials-item:hover {
+    box-shadow: 0 0px 20px rgba(20, 20, 20, 0.7);
+    background: linear-gradient(to right,#ffff93,#fee567);
+}
+
+footer .widget ul {
+    list-style: none;
+    margin-left: 2em;
+}
+
+.posts li {
+    padding-bottom: 12px;
+    padding-top: 6px;
+}
+
+.posts li a{
+    transition-duration: 0.3s;
+}
+
+.posts li a:hover{
+    color: 	#f5be2e;
+    text-decoration: none;
+    font-size: 1.2rem;
+    transition-duration: 0.3s;
+}
+
+footer p {
+    line-height: 35px;
+    font-size: 20px;
+}
+
+img {
+    border-style: none;
+    height: auto;
+    max-width: 100%;
+    vertical-align: middle;
+}

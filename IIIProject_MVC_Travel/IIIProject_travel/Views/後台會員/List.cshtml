@@ -1,0 +1,173 @@
+﻿@{
+    Layout = null;
+}
+@model IEnumerable<tMember>
+
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Jekyll v3.8.5">
+    <title>Dashboard Template · Bootstrap 4 繁體中文手冊 [六角學院譯]</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="~/Content/bootstrap-4.2.1-dist/css/bootstrap.css" rel="stylesheet">
+
+
+    <style>
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+        }
+    </style>
+    <!-- Custom styles for this template -->
+    <link href="~/Content/css/後台css/dashboard.css" rel="stylesheet">
+</head>
+
+<body>
+    <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
+        <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Company name</a>
+        <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
+        <ul class="navbar-nav px-3">
+            <li class="nav-item text-nowrap">
+                <a class="nav-link" href="#">Sign out</a>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row">
+            <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+                <div class="sidebar-sticky">
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#">
+                                <span data-feather="home"></span>
+                                首頁 <span class="sr-only">(current)</span>
+                            </a>
+                        </li>
+                        <li class="nav-item" href="@Url.Action("List","後台會員")">
+                            <a class="nav-link">
+                                <span data-feather="users"></span>
+                                會員列表
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <span data-feather="file"></span>
+                                旅遊列表
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <span data-feather="bar-chart-2"></span>
+                                飯局列表
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <span data-feather="layers"></span>
+                                文章列表
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <span data-feather="layers"></span>
+                                意見列表
+                            </a>
+                        </li>
+
+                    </ul>
+
+                </div>
+            </nav>
+
+            <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+
+
+                <h2>會員列表</h2>
+                <div class="table-responsive">
+                    <table class="table table-striped table-sm">
+                        <thead>
+                            <tr>
+                                <td>筆數</td>
+                                <td>會員編號</td>
+                                <td>名稱</td>
+                                <td>評分</td>
+                                <td>稱號</td>
+                                <td>大頭貼</td>
+                                <td>帳號</td>
+                                <td>密碼</td>
+                                <td>電子郵件</td>
+                                <td>手機</td>
+                                <td>電話</td>
+                                <td>生日</td>
+                                <td>自我介紹</td>
+                                <td>暱稱</td>
+                                <td>英文名稱</td>
+                                <td>性別</td>
+                                <td>興趣</td>
+                                <td>按鈕</td>
+                                <td>按鈕</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{
+                                int c筆數 = 0;
+                                foreach (tMember t in Model)
+                                {
+                                    c筆數++;
+                                    <tr>
+                                        <td>@c筆數.ToString()</td>
+                                        <td>@t.f會員編號</td>
+                                        <td>@t.f會員名稱</td>
+                                        <td>@t.f會員評分</td>
+                                        <td>@t.f會員稱號</td>
+                                        <td>@t.f會員大頭貼</td>
+                                        <td>@t.f會員帳號</td>
+                                        <td>@t.f會員密碼</td>
+                                        <td>@t.f電子郵件</td>
+                                        <td>@t.f手機</td>
+                                        <td>@t.f電話</td>
+                                        <td>@t.f生日</td>
+                                        <td>@t.f自我介紹</td>
+                                        <td>@t.f暱稱</td>
+                                        <td>@t.f英文名字</td>
+                                        <td>@t.f性別</td>
+                                        <td>@t.f興趣</td>
+                                        <td>
+                                            @Html.ActionLink("編輯", "e修改", "後台會員", new { id = t.f會員編號 }, new { Class = "btn btn-info" })
+                                        </td>
+
+                                        <td>
+                                            @Html.ActionLink("刪除", "d刪除", "後台會員", new { id = t.f會員編號 },
+                                            new { OnClick = "return confirm('確定要刪除嗎?')", Class = "btn btn-danger" })
+                                        </td>
+                                    </tr>
+                                }
+                            }
+
+
+                        </tbody>
+                    </table>
+                </div>
+            </main>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+    <script>window.jQuery || document.write('<script src="~/Content/js/後台js/jquery-slim.min.js"><\/script>')</script>
+    <script src="~/Content/js/後台js/bootstrap.bundle.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.9.0/feather.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
+    <script src="~/Content/js/後台js/dashboard.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,50 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Jouta</title>
+    @Styles.Render("~/Content/bootstrap.min.css")
+    @Styles.Render("~/Content/style.css")
+</head>
+<body>
+    <div class="navbar navbar-expand-lg navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header" id="main">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <a class="navbar-brand" href="main.html">
+                <img src="~/Content/joutalogo_black.png" alt="" width="100">
+            </a>
+            <div class="navbar-collapse collapse justify-content-between">
+                <ul class="nav navbar-nav">
+                    <li class="nav-item active">@Html.ActionLink("首頁", "Home", "Home", new { @class = "nav-link nav-main text-dark" })</li>
+                    <li class="nav-item">@Html.ActionLink("找飯局", "Eat", "Home", new { @class = "nav-link nav-eat text-dark" })</li>
+                    <li class="nav-item">@Html.ActionLink("找旅遊", "TravelIndex", "Travel", new { @class = "nav-link nav-travel text-dark" })</li>
+                    <li class="nav-item">@Html.ActionLink("找文章", "List", "Blog", new { @class = "nav-link nav-blog text-dark" })</li>
+                </ul>
+                <ul class="nav navbar-nav">
+                    <li class="nav-item">@Html.ActionLink("登入", "Login", "Home", new { @class = "nav-link nav-login text-dark" })</li>
+                    <li class="nav-item">@Html.ActionLink("註冊", "Register", "Home", new { @class = "nav-link nav-register text-dark" })</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+
+    </div>
+    <div class="container-fluid footer">
+        <p class="text-center mt-2 mb-2">&copy; @DateTime.Now.Year Jouta All rights reserved</p>
+    </div>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

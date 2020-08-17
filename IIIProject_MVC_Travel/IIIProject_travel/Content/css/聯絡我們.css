@@ -1,0 +1,104 @@
+body{
+    /* background-image: url("../images/backimg1.jpg"); */
+    background-repeat: repeat-x;
+    background-color: #fffef4;
+}
+
+h2{
+    text-align: center;
+    font-weight: 600;
+    font-size: 3rem;
+}
+
+fieldset{
+    width: 1000px;
+    margin: auto;
+    border:1px solid #ADADAD;
+}
+legend{
+    margin-bottom: 3rem;
+    width: 100px;
+    text-align: center;/*標題置中*/
+}
+.st1 {
+    border-bottom: 3px solid #F0F0F0;
+    margin: 10px;
+    padding-bottom: 10px;
+}
+.st2{
+    margin-left: 23%; 
+}
+
+.sub {
+    margin: 20px;
+    text-align: center;
+    /*置中*/
+}
+
+.t1 {
+    width: 100px;
+    float: left;
+    text-align: right;
+    
+
+}
+
+textarea {
+    resize: none;
+}
+
+.words{
+    color: #d8d278;
+    font-size: 100px;
+    letter-spacing: 10px;
+    position: absolute;
+    top:50%;
+    left: 30%;
+}
+.imgw{
+    position: relative;
+}
+select{
+    width:200px;
+    padding:1px;
+}
+
+.op{
+    margin:0px 34% 0px; 
+
+}
+.pb{
+    text-align:center ;
+    margin: 0 auto;
+    background-color: rgb(131, 128, 125);
+    color: white;
+}
+span {
+    color: red;
+    font-size: 80%;
+}
+
+.sub input{
+    background-color: #fee567;
+    border-radius: 5px;
+    padding: 5px 15px;
+    border: 1px solid #f5be2e;
+    transition-duration: 0.15s;
+}
+
+.sub input:hover{
+    background-color: #f5be2e;
+    transition-duration: 0.15s;
+}
+
+.imgLetter{
+    border-radius: 50%;
+    transition-duration: 1s;
+}
+
+.imgLetter:hover{
+    width: 102px;
+    border-radius: 50%;
+    box-shadow: 0px 0px 10px 1px #046d09;
+    transition-duration: 0.5s;
+}

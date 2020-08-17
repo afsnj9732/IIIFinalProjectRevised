@@ -1,0 +1,125 @@
+body{
+    background-color: #fffef4;
+}
+
+.nav-blog{
+    background-color: #fee567;
+    border-radius: 20px;
+}
+
+#sidebar {
+    background-color: #fff5f5;
+    border-radius: 50px;
+}
+
+#main-section {
+    background-color:#fff5f5;
+    border-radius: 50px;
+}
+
+.btnContent {
+    background-color:#fee567;
+    color: black;
+}
+
+.btnContent:hover{
+    background-color:#f5be2e;
+}
+
+#btnPrev {
+    margin-right: 20px;
+}
+
+#btnNext {
+    margin-left: 20px;
+}
+
+.pDateSection {
+    color: #f5be2e;
+    margin-bottom: 0px;
+}
+
+.blogbox {
+    margin-bottom: 30px;
+}
+
+.content {
+    padding-left: 10px;
+}
+
+.fas {
+    font-size: 30px;
+}
+
+.card{
+    box-shadow: 0px 0px 4px 0px #fff5f5;
+    transition-duration: 1s;
+}
+
+.card:hover{
+    box-shadow: 0px 0px 4px 2px #ff5b45;
+    transition-duration: 0.5s;
+}
+
+#main-title {
+    text-align: center;
+}
+
+.input-group {
+    padding-top: 10px;
+}
+
+#post-content {
+    height: 500px;
+    height: 800px;
+    height: 800px;
+}
+
+#post-image {
+    align-self: center;
+    width: 100%;
+}
+
+#Browse-section {
+    /* display: flex;
+    align-self: flex-end;
+    flex-direction: row;
+    border: 1px solid red; */
+    width: 80%;
+}
+
+#inputGroupFile02 {
+    width: 100%;
+}
+
+#inputGroupFileAddon02 {
+    margin-left: 10px;
+}
+
+#pTitle {
+    font-size: 25px;
+    margin-right: 10px;
+    margin-right:10px;
+}
+
+#titleContent {
+    margin-right: 5px;
+    width: 100%;
+}
+
+#btnPrev,#btnNext{
+    background-color: #f5be2e;
+    border: 0px;
+    border-radius: 5px;
+    padding: 10px 20px;
+    transition-duration: 0.15s;
+}
+
+#btnPrev:hover,#btnNext:hover{
+    background-color:#fee567;
+    transition-duration: 0.15s;
+}
+
+.x img{
+    width: 100%;
+}

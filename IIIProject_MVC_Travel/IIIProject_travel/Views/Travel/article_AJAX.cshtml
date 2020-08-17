@@ -1,0 +1,141 @@
+﻿@model IEnumerable<tTravel>
+@{
+    Layout = null;
+    int article_count = 0;
+    int readmore_count = 0;
+    string combine = "";
+}
+
+<!-- read more視窗控制頭1 -->
+@foreach (var item in Model)
+{
+    readmore_count++;
+    combine = "exampleModal" + readmore_count;
+    tMember postman = (new dbJoutaEntities())
+        .tMember.FirstOrDefault(o => o.f會員編號 == item.f團主會員編號);
+
+    <div class="modal fade" id="@combine" tabindex="-1" role="dialog"
+         aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog change-max-width-1400" role="document">
+            <div class="modal-content">
+                <div class="modal-header  border-main-color">
+                    <h5 class="modal-title" id="exampleModalLabel"><span style="font-weight:bolder;"> @item.f文章標題</span></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <!-- 互動文章 -->
+                    <div class="container-fluid">
+                        <div class="row m-0 mb-3 justify-content-around">
+                            <span>揪團日期： <span>@item.f文章發文日期</span></span>
+                            <span>活動日期： <span>@item.f文章活動開始日期</span></span>
+                            <span>入團截止： <span>@item.f文章活動招募日期</span></span>
+                            <span><img src="~/Content/images/03.png" alt="">@item.f文章地區</span>
+                            <span><img src="~/Content/images/04.png" alt="">@item.f文章預算</span>
+                            <span><img src="~/Content/images/06.png" alt="">@item.f文章瀏覽次數</span>
+                            <span><img src="~/Content/images/05.png" alt="">@item.f文章讚數</span>
+
+                            <span class="col-auto"><img style="cursor: pointer;" src="~/Content/images/11.png" alt=""></span>
+                        </div>
+                        <div class="row mb-4">
+                            <img src="~/Content/images/@item.f文章團圖" alt="" class="mx-auto" style="width: 60%;margin: auto;">
+                        </div>
+
+                        <div class="row align-items-center">
+                            <div id="UserBlock">
+                                <p><img src="~/Content/images/16.png" class="pb-1" alt="">@postman.f會員稱號</p>
+                                <img src="~/Content/images/@postman.f會員大頭貼" alt="" class="col-auto" style="width: 300px;">
+                                <p>@postman.f會員名稱</p>
+                                <p>團主評分:@postman.f會員評分 </p>
+                            </div>
+                            <div class="change-max-width-1000 ">
+                                <p>
+                                    @item.f文章內容
+                                </p>
+                            </div>
+                        </div>
+
+                        @if (Session["member"] != null)
+                        {
+                            <div class="container">
+                                <div class="row   justify-content-around">
+                                    <button class="btn btn-block mr-1  p-1 FeelGood" style="background-color:#FFE0B2;" target="@item.f旅遊文章編號">
+                                        <img src="~/Content/images/05.png" class="pb-1 ">覺得讚
+                                    </button>
+                                    <button class="btn btn-block mr-1  p-1" style="background-color:#FFE0B2 ;">
+                                        <img src="~/Content/images/10.png" class="pb-1" alt="">想加入
+                                    </button>
+                                    <div style="cursor: pointer;">
+                                        <button class="btn btn-block mr-1  p-1" style="background-color:#FFE0B2 ;">
+                                            <img src="~/Content/images/12.png" alt="">留言區
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                    <!-- 互動文章 -->
+                    <div class="modal-footer   mt-3  border-main-color">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- read more視窗控制尾 -->
+}
+
+
+
+@foreach (var item in Model)
+{
+    article_count++;
+    combine = "#exampleModal" + article_count;
+    <!-- -------------文章區頭-------------- -->
+    <div class="row Travel_border align-items-center p-3">
+        <div class="container-fluid">
+            <div class="row m-0 mb-3   justify-content-between" style="font-size: 16px;">
+                <div class="pl-1">
+                    <span style="cursor: pointer;"><img src="~/Content/images/09.png" alt="">@item.f文章團主名稱</span>
+                    <span>&nbsp; &nbsp;</span>
+                    <span>揪團日期： <span>@item.f文章發文日期</span></span>
+                    <span>&nbsp; &nbsp;</span>
+                    <span>活動日期： <span>@item.f文章活動開始日期</span></span>
+                    <span>&nbsp; &nbsp;</span>
+                    <span>入團截止： <span>@item.f文章活動招募日期</span></span>
+                </div>
+                <div class="p-0  ">
+                    <img style="cursor: pointer;" src="~/Content/images/14.png" alt="">
+                </div>
+            </div>
+        </div>
+        <div class="row pl-3" style="width:100%;">
+            <div class="content mb-3" style="cursor: pointer;width:70%;height: 150px;" data-toggle="modal" data-target="@combine">
+                <span style="font-weight:bolder;"> @item.f文章標題</span>
+                <br>
+                <span style="font-size: 13px;">
+                    @item.f文章內容
+                </span>
+
+            </div>
+            <img src="~/Content/images/@item.f文章團圖" alt="" class="col-auto" style="width: 30%;height: 150px;">
+        </div>
+        <div class="container">
+            <div class="row   justify-content-between">
+                <div>
+                    <img src="~/Content/images/03.png" alt="">@item.f文章地區
+                    <img src="~/Content/images/04.png" alt="">@item.f文章預算
+                    <img src="~/Content/images/06.png" alt="">@item.f文章瀏覽次數
+                    <img src="~/Content/images/05.png" alt="">@item.f文章讚數
+                </div>
+                <div style="cursor: pointer;">
+                    <img src="~/Content/images/12.png" alt="">留言
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- -------------文章分割線-------------- -->
+}
