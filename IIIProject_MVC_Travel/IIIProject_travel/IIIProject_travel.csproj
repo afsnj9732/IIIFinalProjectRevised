@@ -134,6 +134,7 @@
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\TravelController.cs" />
     <Compile Include="Controllers\後台會員Controller.cs" />
+    <Compile Include="C驗證.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -175,6 +176,7 @@
     <Compile Include="ViewModel\CBlog.cs" />
     <Compile Include="ViewModel\CEat.cs" />
     <Compile Include="ViewModel\CLogin.cs" />
+    <Compile Include="ViewModel\CRegister.cs" />
     <Compile Include="ViewModel\CSelect.cs" />
     <Compile Include="ViewModel\CTravel.cs" />
   </ItemGroup>
