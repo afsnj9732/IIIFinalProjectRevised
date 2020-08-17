@@ -2095,7 +2095,6 @@
     <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\Home\Register.cshtml" />
     <Content Include="Views\Eat\EatIndex.cshtml" />
-    <Content Include="Views\Eat\CreateEatPost.cshtml" />
     <Content Include="Views\後台會員\List.cshtml" />
     <Content Include="Views\後台會員\e修改.cshtml" />
   </ItemGroup>

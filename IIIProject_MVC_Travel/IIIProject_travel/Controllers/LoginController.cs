@@ -23,7 +23,7 @@ namespace IIIProject_travel.Controllers
             Session["member"] = target;
             if (p.txtAccount == "Admin" && p.txtPassword == "1234")
                 return RedirectToAction("List", "後台會員");
-            return View(target);
+            return RedirectToAction("Home","Home");
         }
     }
 }

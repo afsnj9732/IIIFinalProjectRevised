@@ -11,8 +11,13 @@ namespace IIIProject_travel.Controllers
     public class HomeController : Controller
     {
         // GET: Home
-        public ActionResult Home()
+        public ActionResult Home(int? id)
         {
+            if (id==0)
+            {
+                Session.Remove("member");
+                
+            }
                 return View();   
         }
 
