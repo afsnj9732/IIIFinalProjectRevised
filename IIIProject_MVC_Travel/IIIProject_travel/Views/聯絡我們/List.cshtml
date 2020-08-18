@@ -1,12 +1,7 @@
-﻿@model IIIProject_travel.tMember
-
-@{
-    ViewBag.Title = "e修改";
-}
-@{
+﻿@{
     Layout = null;
 }
-
+@model IEnumerable<t聯絡我們>
 
 <!doctype html>
 <html lang="en">
@@ -39,9 +34,7 @@
         <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
         <ul class="navbar-nav px-3">
             <li class="nav-item text-nowrap">
-                <a>
-                    @Html.ActionLink("Sign out", "Home", "Home", new { id = 0 }, new { @class = "nav-link" })
-                </a>
+                <a class="nav-link" href="#">Sign out</a>
             </li>
         </ul>
     </nav>
@@ -62,6 +55,8 @@
                                 <span data-feather="users"></span>
                                 會員列表
                             </a>
+                        </li>
+
                         <li class="nav-item">
                             <a class="nav-link" href="@Url.Action("List","後台旅遊")">
                                 <span data-feather="file"></span>
@@ -96,81 +91,49 @@
             <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
 
 
-                <h2>修改會員</h2>
+                <h2>意見列表</h2>
                 <div class="table-responsive">
+                    <table class="table table-striped table-sm">
+                        <thead>
+                            <tr>
+                                <td>筆數</td>
+                                <td>會員編號</td>
+                                <td>帳號</td>
+                                <td>聯絡人</td>
+                                <td>電子郵件</td>
+                                <td>電話</td>
+                                <td>意見類型</td>
+                                <td>意見</td>
+                                <td>按鈕</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{
+                                int c筆數 = 0;
+                                foreach (t聯絡我們 t in Model)
+                                {
+                                    c筆數++;
+                                    <tr>
+                                        <td>@c筆數.ToString()</td>
+                                        <td>@t.f會員編號</td>
+                                        <td>@t.f帳號</td>
+                                        <td>@t.f聯絡人</td>
+                                        <td>@t.f電子郵件</td>
+                                        <td>@t.f電話</td>
+                                        <td>@t.f意見類型</td>
+                                        <td>@t.f意見</td>
+                                        <td>
+                                            @Html.ActionLink("回覆", "r回覆", "聯絡我們", new { id = t.f會員編號 }, new { Class = "btn btn-info" })
+                                        </td>
 
-                    <form method="post">
+                                    </tr>
+                                }
+                            }
 
-                        <input type="hidden" name="f會員編號" value="@Model.f會員編號" />
-                        <div class="row">
-                            <div class="col">
-                                <p>
-                                    姓名<br />
-                                    <input type="text" name="f會員名稱" value="@Model.f會員名稱" />
-                                </p>
-                                <p>
-                                    評分<br />
-                                    <input type="text" name="f會員評分" value="@Model.f會員評分" />
-                                </p>
-                                <p>
-                                    稱號<br />
-                                    <input type="text" name="f會員稱號" value="@Model.f會員稱號" />
-                                </p>
-                                <p>
-                                    大頭貼<br />
-                                    <input type="text" name="f會員大頭貼" value="@Model.f會員大頭貼" />
-                                </p>
-                                <p>
-                                    帳號<br />
-                                    <input type="text" name="f會員帳號" value="@Model.f會員帳號" />
-                                </p>
-                                <p>
-                                    密碼<br />
-                                    <input type="text" name="f會員密碼" value="@Model.f會員密碼" />
-                                </p>
-                                <p>
-                                    電子郵件<br />
-                                    <input type="text" name="f電子郵件" value="@Model.f電子郵件" />
-                                </p>
-                            </div>
-                            <div class="col">
-                                <p>
-                                    手機<br />
-                                    <input type="text" name="f手機" value="@Model.f手機" />
-                                </p>
-                                <p>
-                                    電話<br />
-                                    <input type="text" name="f會員密碼" value="@Model.f電話" />
-                                </p>
-                                <p>
-                                    生日<br />
-                                    <input type="text" name="f生日" value="@Model.f生日" />
-                                </p>
-                                <p>
-                                    自我介紹<br />
-                                    <input type="text" name="f會員密碼" value="@Model.f自我介紹" />
-                                </p>
-                                <p>
-                                    暱稱<br />
-                                    <input type="text" name="f暱稱" value="@Model.f暱稱" />
-                                </p>
-                                <p>
-                                    性別<br />
-                                    <input type="text" name="f性別" value="@Model.f性別" />
-                                </p>
-                                <p>
-                                    興趣<br />
-                                    <input type="text" name="f興趣" value="@Model.f興趣" />
-                                </p>
 
-                            </div>
+                        </tbody>
 
-                        </div>
-                        <p>
-                            <input type="submit" value="送出" />
-                        </p>
-                    </form>
-
+                    </table>
                 </div>
             </main>
         </div>
