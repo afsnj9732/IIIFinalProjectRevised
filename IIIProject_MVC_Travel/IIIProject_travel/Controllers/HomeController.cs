@@ -61,16 +61,18 @@ namespace IIIProject_travel.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Register([Bind(Exclude = "f會員編號, f會員名稱,f會員評分, f會員稱號,f會員大頭貼,f手機,f生日," +
-            "f興趣,f已占用時間,f按過讚的文章編號,f自我介紹,f暱稱,f英文名字fActivationCode,fIsAdmin")]tMember p)
+        public ActionResult Register([Bind(Exclude = "fIs信箱已驗證,fActivationCode")]CRegister p)
         {
+            var y = p.txtNickname;
+            var z = p.txtPassword;
+            var d = p.txtPassword_confirm;
             bool Status = false;
             string Message = "";
 
             //Model Validation
             if (ModelState.IsValid)
             {
-                var isExist_mail = is信箱已存在(p.f電子郵件);
+                var isExist_mail = is信箱已存在(p.txtEmail);
                 if (isExist_mail)
                 {
                     ModelState.AddModelError("emailExist", "信箱已存在");
@@ -79,18 +81,24 @@ namespace IIIProject_travel.Controllers
                 //驗證碼
                 p.fActivationCode = Guid.NewGuid();
                 //密碼驗證
-                p.f會員密碼 = C驗證.Hash(p.f會員密碼);
-                p.f會員密碼確認 = C驗證.Hash(p.f會員密碼確認);
+                p.txtPassword = C驗證.Hash(p.txtPassword);
+                p.txtPassword_confirm = C驗證.Hash(p.txtPassword_confirm);
 
                 p.fIs信箱已驗證 = false;
 
                 using (dbJoutaEntities db = new dbJoutaEntities())
                 {
-                    db.tMember.Add(p);
+                    tMember NewMember = new tMember();
+                    NewMember.f性別 = p.txtGender;
+                    NewMember.f會員帳號 = p.txtEmail;
+                    NewMember.f會員密碼 = p.txtPassword;
+                    NewMember.f電子郵件 = p.txtEmail;
+                    NewMember.f會員名稱 = p.txtNickname;
+                    db.tMember.Add(NewMember);
                     db.SaveChanges();
 
-                    send確認信(p.f電子郵件, p.fActivationCode.ToString());
-                    Message = "註冊已完成。確認連結已發送到您的信箱:"+p.f電子郵件;
+                    send確認信(p.txtEmail, p.fActivationCode.ToString());
+                    Message = "註冊已完成。確認連結已發送到您的信箱:"+p.txtEmail;
 
                     Status = true;
                 }
@@ -101,7 +109,7 @@ namespace IIIProject_travel.Controllers
             }
             ViewBag.Message = Message;
             ViewBag.Status = Status;
-            return View(p);
+            return View();
         }
 
 
@@ -120,23 +128,25 @@ namespace IIIProject_travel.Controllers
         {
             var verifyUrl = "/Home/VerifyAccount/" + c確認碼;
             var link = Request.Url.AbsoluteUri.Replace(Request.Url.PathAndQuery,verifyUrl);
-            var fromEmail = new MailAddress("Jouta@gmail.com","確認");
+            var fromEmail = new MailAddress("agrwdcd1356@gmail.com", "確認");
             var toEmail = new MailAddress(emailID);
-            var fromEmailPassword = "123456";
+            var fromEmailPassword = "1234afcb";
             string subject = "註冊成功";
 
             string body = "<br/><br/>很高興通知您，會員註冊成功。請點以下連結確認帳號"
                 + "<br/><br/><a href='" + link+"'>"+link+"</a>";
 
-            var smtp = new SmtpClient
-            {
-                Host = "smtp.gmail.com",
-                Port = 587,
-                EnableSsl = true,
-                DeliveryMethod = SmtpDeliveryMethod.Network,
-                UseDefaultCredentials = false,
-                Credentials = new NetworkCredential(fromEmail.Address,fromEmailPassword)
-            };
+            //var smtp = new SmtpClient
+            //{
+            //    Host = "smtp.gmail.com",
+            //    Port = 587,
+            //    EnableSsl = true,
+            //    DeliveryMethod = SmtpDeliveryMethod.Network,
+            //    UseDefaultCredentials = false,
+            //    Credentials = new NetworkCredential(fromEmail.Address,fromEmailPassword)
+            //};
+
+
 
             using (var message = new MailMessage(fromEmail, toEmail)
             {
@@ -144,7 +154,16 @@ namespace IIIProject_travel.Controllers
                 Body = body,
                 IsBodyHtml = true
             })
-                smtp.Send(message);
+
+            using (var client = new SmtpClient("smtp.gmail.com", 587))
+            {
+                client.Credentials = new NetworkCredential(
+                    "agrwdcd1356@gmail.com", "1234afcb"
+                    );
+                client.EnableSsl = true;
+                client.Send(message);
+            }
+            //smtp.Send(message);
         }
 
         //public ActionResult Save()
