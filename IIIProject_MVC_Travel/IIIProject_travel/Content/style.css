@@ -28,7 +28,7 @@ html{
 /* banner */
 .navbar{
     z-index: 99;
-    background-color: rgba(232, 232, 232, 0.5);
+    background-color: #fffbdf;
 }
 
 a{

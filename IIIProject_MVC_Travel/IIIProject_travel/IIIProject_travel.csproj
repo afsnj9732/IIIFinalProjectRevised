@@ -134,6 +134,7 @@
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\TravelController.cs" />
     <Compile Include="Controllers\後台會員Controller.cs" />
+    <Compile Include="Controllers\聯絡我們Controller.cs" />
     <Compile Include="C驗證.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -2102,6 +2103,8 @@
     <Content Include="Views\後台會員\List.cshtml" />
     <Content Include="Views\後台會員\e修改.cshtml" />
     <Content Include="Views\Blog\Index.cshtml" />
+    <Content Include="Views\聯絡我們\List.cshtml" />
+    <Content Include="Views\聯絡我們\New.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
