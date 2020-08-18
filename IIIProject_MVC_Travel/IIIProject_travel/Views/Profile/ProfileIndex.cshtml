@@ -1,0 +1,225 @@
+﻿
+@{
+
+                Layout = null;
+                var x = (tMember)Session["member"];
+}
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <link rel="stylesheet" href="~/Content/bootstrap-4.2.1-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/Content/style.css">
+    <link rel="stylesheet" href="~/Content/css/profile.css">
+    <link href="~/Content/fontawesome/css/all.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+          integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="container-fluid topbanner">
+        <!-- navbar -->
+        <nav class="navbar navbar-expand-lg navbar-light header" id="main">
+            <a class="navbar-brand" href="main.html">
+                <img src="images/joutalogo_black.png" alt="" width="100">
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
+                <ul class="nav navbar-nav">
+                    <li class="nav-item active">@Html.ActionLink("首頁", "Home", "Home", new { }, new { @class = "nav-link nav-main text-dark" })</li>
+                    <li class="nav-item">@Html.ActionLink("找飯局", "EatIndex", "Eat", new { }, new { @class = "nav-link nav-eat text-dark" })</li>
+                    <li class="nav-item">@Html.ActionLink("找旅遊", "TravelIndex", "Travel", new { }, new { @class = "nav-link nav-travel text-dark" })</li>
+                    <li class="nav-item">@Html.ActionLink("找文章", "Index", "Blog", new { }, new { @class = "nav-link nav-blog text-dark" })</li>
+                </ul>
+                <ul class="nav navbar-nav">
+                    @if (Session["member"] != null)
+                    {
+                        <li class="nav-item nav-link nav-login text-dark">@Html.ActionLink("歡迎" + @x.f會員名稱, "ProfileIndex", "Profile", new { id = 0 }, new { @class = "nav-link nav-login text-dark" }) </li>
+                        <li class="nav-item">@Html.ActionLink("登出", "Home", "Home", new { id = 0 }, new { @class = "nav-link nav-login text-dark" })</li>
+                    }
+                    else
+                    {
+                        <li class="nav-item">@Html.ActionLink("登入", "LoginIndex", "Login", new { }, new { @class = "nav-link nav-login text-dark" })</li>
+                    }
+                    <li class="nav-item">@Html.ActionLink("註冊", "Register", "Home", new { }, new { @class = "nav-link nav-register text-dark" })</li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+    <div class="container">
+        <div class="profile-header">
+            <div class="profile-img">
+                <img src="~/Content/images/proheadshot.jpg" alt="" class="">
+            </div>
+            <div class="profile-nav-info">
+                <h3 class="user-name">Bright Code</h3>
+                <div class="address">
+                    <p class="state">New York,</p>
+                    <span class="country">USA.</span>
+                </div>
+            </div>
+            <div class="profile-option">
+                <div class="notification">
+                    <i class="fas fa-bell"></i>
+                    <span class="alert-message"></span>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4"></div>
+                <div class="col-lg-4"></div>
+            </div>
+        </div>
+        <div class="main-bd">
+            <div class="col-lg-3 left-side">
+                <div class="profile-side">
+                    <p class="mobile-no">
+                        <i class="fa fa-phone"></i>+23470xxxxx5464
+                    </p>
+                    <p class="user-mail">
+                        <i class="fa fa-envelope">
+                        </i>Brightisaac80@gmail.com
+                    </p>
+                    <div class="user-bio">
+                        <p class="bio">
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi eum incidunt atque qui
+                            quasi, at reiciendis aspernatur sit vitae, ipsam commodi nam omnis recusandae laboriosam
+                            accusantium quidem amet dolorum perferendis!
+                        </p>
+                    </div>
+                    <div class="profile-btn">
+                        <button class="chatbtn">
+                            <i class="fa fa-comment"></i>
+                            </i>Chat
+                        </button>
+                        <button class="createbtn">
+                            <i class="fa fa-plus"></i>Create
+                        </button>
+                    </div>
+                    <div class="user-rating">
+                        <h3 class="rating">4.5</h3>
+                        <div class="rate">
+                            <div class="stars">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                            </div>
+                            <span class="no-user"><span>123</span>&nbsp;&nbsp;reviews</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-9 right-side ml-4">
+                <div class="tab_nav">
+                    <ul>
+                        <li class="user active" onclick="tabs(0)">個人檔案</li>
+                        <li class="user" onclick="tabs(1)">我的發文</li>
+                        <li class="user" onclick="tabs(2)">參加活動</li>
+                        <li class="user" onclick="tabs(3)">關注活動</li>
+                        <li class="user" onclick="tabs(4)">追蹤團主</li>
+                        <li class="user" onclick="tabs(5)">歷史紀錄</li>
+                    </ul>
+                </div>
+                <div class="profile-body">
+                    <div class="profile-detail tab_info">
+                        <h1 id="title">個人檔案</h1>
+                        <form method="post" action="Profile">
+                            <button type="button" class="btn btn-warning">編輯資料</button>
+                            <h6 class="profiletag">會員編號</h6>
+                            <input type="text" size="50" placeholder="4843168431" name="account" disabled>
+                            <h6 class="profiletag">帳號</h6>
+                            <input type="text" size="50" placeholder="Mary123" name="passward" disabled>
+                            <h6 class="profiletag">密碼</h6>
+                            <input type="text" size="50" placeholder="Maryyyyyy" name="nickname" disabled>
+                            <h6 class="profiletag" id="nickname">暱稱</h6>
+                            <input type="text" size="50" name="age">
+                            <h6 class="profiletag">年紀</h6>
+                            <input type="text" size="50" name="birth">
+                            <h6 class="profiletag">生日</h6>
+                            <input type="text" size="50" name="interest">
+                            <h6 class="profiletag">興趣</h6>
+                            <input type="text" size="50" name="location">
+                            <h6 class="profiletag">所在地區</h6>
+                            <input type="text" size="50" name="work">
+                            <h6 class="profiletag">工作</h6>
+                            <input type="text" size="50" name="intro">
+                            <h6 class="profiletag">自我介紹</h6>
+                            <textarea id="intro" name="intro" rows="5" cols="50" name="introduction">哈囉!我叫...</textarea><br>
+                            <button type="button" class="btn btn-warning">繳交</button>
+                        </form>
+                    </div>
+                    <div class="profile-posts tab_info">
+                        <h1>我的發文</h1>
+                        <p>
+                            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aperiam animi alias doloribus,
+                            dolor necessitatibus reiciendis, magni molestias ut perferendis corrupti assumenda
+                            nobis,
+                            veritatis eos fugiat nisi quas rem repudiandae neque?
+                        </p>
+                    </div>
+                    <div class="profile-event tab_info">
+                        <h1>參加活動</h1>
+                        <p>
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Error voluptatem explicabo
+                            voluptate, nisi deserunt magni? Laborum sapiente odit fugit sequi non, illum labore
+                            veniam minima eligendi iusto impedit officia voluptatum!
+                        </p>
+                    </div>
+                    <div class="profile-follow tab_info">
+                        <h1>關注活動</h1>
+                        <p>
+                            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aperiam animi alias doloribus,
+                            dolor
+                            necessitatibus reiciendis, magni molestias ut perferendis corrupti assumenda nobis,
+                            veritatis
+                            eos fugiat nisi quas rem repudiandae neque?
+                        </p>
+                    </div>
+                    <div class="profile-follower tab_info">
+                        <h1>追蹤團主</h1>
+                        <p>
+                            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aperiam animi alias doloribus,
+                            dolor
+                            necessitatibus reiciendis, magni molestias ut perferendis corrupti assumenda nobis,
+                            veritatis
+                            eos fugiat nisi quas rem repudiandae neque?
+                        </p>
+                    </div>
+                    <div class="profile-history tab_info">
+                        <h1>歷史紀錄</h1>
+                        <p>
+                            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aperiam animi alias doloribus,
+                            dolor
+                            necessitatibus reiciendis, magni molestias ut perferendis corrupti assumenda nobis,
+                            veritatis
+                            eos fugiat nisi quas rem repudiandae neque?
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid footer">
+        <p class="text-center mt-2 mb-2">Copyright © 2020 Jouta All rights reserved</p>
+    </div>
+
+    <script src="~/Content/js/jquery-3.5.1.js"></script>
+    <script src="~/Content/js/profile.js"></script>
+    <script src="~/Content/js/navbar.js"></script>
+    <script src="~/Content/bootstrap-4.2.1-dist/js/bootstrap.min.js"></script>
+
+</body>
+
+</html>

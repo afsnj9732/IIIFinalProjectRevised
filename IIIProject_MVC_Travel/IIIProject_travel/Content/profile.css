@@ -209,7 +209,7 @@ button.createbtn i {
     padding: 20px;
     width: 100%;
     text-align: center;
-    display: none;
+    display:none;
 }
 #see-more-bio,
 #see-less-bio{

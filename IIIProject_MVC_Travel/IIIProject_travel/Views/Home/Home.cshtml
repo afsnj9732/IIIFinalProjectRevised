@@ -38,7 +38,7 @@
                         <li class="nav-item active">@Html.ActionLink("首頁", "Home", "Home", new { }, new { @class = "nav-link nav-main text-dark" })</li>
                         <li class="nav-item">@Html.ActionLink("找飯局", "EatIndex", "Eat", new { }, new { @class = "nav-link nav-eat text-dark" })</li>
                         <li class="nav-item">@Html.ActionLink("找旅遊", "TravelIndex", "Travel", new { }, new { @class = "nav-link nav-travel text-dark" })</li>
-                        <li class="nav-item">@Html.ActionLink("找文章", "List", "Blog", new { }, new { @class = "nav-link nav-blog text-dark" })</li>
+                        <li class="nav-item">@Html.ActionLink("找文章", "Index", "Blog", new { }, new { @class = "nav-link nav-blog text-dark" })</li>
                     </ul>
                     <ul class="nav navbar-nav">
                         @if (Session["member"] != null)
@@ -167,8 +167,7 @@
                                                     是一個兒童職能治療師，因為擁有對生活的熱情，又不想被上下班打卡綁架，
                                                     因此工作變得有些斜槓，目前擁有正職，但仍然經營... <a href="#">read more</a>
                                                 </p>
-                                                @Html.ActionLink("瞻仰一下", "profile", "", new { }, new { @class = "btn btnContent" })
-                                                @*<a href="profile.html" class="btn btnContent">Go somewhere</a>*@
+                                                @Html.ActionLink("瞻仰一下", "ProfileIndex", "Profile", new { }, new { @class = "btn btnContent" })                                                @*<a href="profile.html" class="btn btnContent">Go somewhere</a>*@
                                             </div>
                                         </div>
 
@@ -184,8 +183,7 @@
                                                     除了愛吃之外，我也非常喜歡研究料理，不論是小時候在廚房裡探頭探腦當個愛偷吃的小幫手，
                                                     或是外出用餐時觀察老闆如何做出令人垂涎三尺... <a href="#">read more</a>
                                                 </p>
-                                                @Html.ActionLink("瞻仰一下", "profile", "", new { }, new { @class = "btn btnContent" })
-                                                @*<a href="profile.html" class="btn btnContent">Go somewhere</a>*@
+                                                @Html.ActionLink("瞻仰一下", "ProfileIndex", "Profile", new { }, new { @class = "btn btnContent" })                                                @*<a href="profile.html" class="btn btnContent">Go somewhere</a>*@
                                             </div>
                                         </div>
                                     </div>
@@ -200,7 +198,7 @@
                                                     我是個主觀、偏頗的人，也不追求所謂專業的遊記、書評或影評。
                                                     我只想把心裡認為值得分享的分享出去、眼裡看到最美麗的記錄...<a href="#">read more</a>
                                                 </p>
-                                                @Html.ActionLink("瞻仰一下", "profile", "", new { }, new { @class = "btn btnContent" })
+                                                @Html.ActionLink("瞻仰一下", "ProfileIndex", "Profile", new { }, new { @class = "btn btnContent" })
                                                 @*<a href="profile.html" class="btn btnContent">Go somewhere</a>*@
                                             </div>
                                         </div>

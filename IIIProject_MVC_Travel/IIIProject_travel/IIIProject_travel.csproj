@@ -132,9 +132,9 @@
     <Compile Include="Controllers\EatController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Controllers\TravelController.cs" />
     <Compile Include="Controllers\後台會員Controller.cs" />
-    <Compile Include="Controllers\聯絡我們Controller.cs" />
     <Compile Include="C驗證.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -182,6 +182,7 @@
     <Compile Include="ViewModel\CTravel.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Start\proheadshot.jpg" />
     <Content Include="Content\blog_style.css" />
     <Content Include="Content\bootstrap-4.2.1-dist\css\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-4.2.1-dist\css\bootstrap-grid.min.css" />
@@ -214,8 +215,8 @@
     <Content Include="Content\images\14876883363_94995b4f88_o.jpg" />
     <Content Include="Content\images\20190105141437_100.jpg" />
     <Content Include="Content\images\McDonalds.png" />
-    <Content Include="Content\js\check.js" />
-    <Content Include="Content\js\debounce.js" />
+    <Content Include="Content\images\proheadshot.jpg" />
+    <Content Include="Content\js\profile.js" />
     <Content Include="Content\js\後台js\bootstrap.bundle.js" />
     <Content Include="Content\js\後台js\dashboard.js" />
     <Content Include="Content\js\後台js\jquery-slim.min.js" />
@@ -2102,9 +2103,8 @@
     <Content Include="Views\Eat\EatIndex.cshtml" />
     <Content Include="Views\後台會員\List.cshtml" />
     <Content Include="Views\後台會員\e修改.cshtml" />
+    <Content Include="Views\Profile\ProfileIndex.cshtml" />
     <Content Include="Views\Blog\Index.cshtml" />
-    <Content Include="Views\聯絡我們\List.cshtml" />
-    <Content Include="Views\聯絡我們\New.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
