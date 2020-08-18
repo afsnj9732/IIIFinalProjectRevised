@@ -22,6 +22,7 @@
         //console.log(contain);
         let p = JSON.stringify({ "order": order, "border_color": border_color, "contain": contain })
         $.ajax({
+            async: false, 
             url: "/Travel/article_AJAX",
             type: 'POST',
             data: {"p":p},
@@ -34,26 +35,26 @@
     //搜尋ajax
 
     //增加讚
-    $("body").on('click',".FeelGood", function () {
-        //console.log("123"); 
-        let target = $(".FeelGood").attr("target");
-        //console.log(target);
-        $.ajax({
-            url: "/Travel/FeelGood",
-            data: { "target": target},
-            success: function (data) {
-                if (data == "0") {
-                    window.confirm("請先登入");
-                }
-                else if (data == "1") {
-                    window.confirm("讚");
-                }
+    //$("body").on('click',".FeelGood", function () {
+    //    //console.log("123"); 
+    //    let target = $(".FeelGood").attr("target");
+    //    //console.log(target);
+    //    $.ajax({
+    //        url: "/Travel/FeelGood",
+    //        data: { "target": target},
+    //        success: function (data) {
+    //            if (data == "0") {
+    //                window.confirm("請先登入");
+    //            }
+    //            else if (data == "1") {
+    //                window.confirm("讚");
+    //            }
  
-            }   
-        });
+    //        }   
+    //    });
 
 
-    });
+    //});
 
 
 
@@ -83,7 +84,7 @@
     //搜尋，應該也可以在不提供排序條件的情況下提交ajax，
     $("#contain_pic").on('click', function (e) {
         e.stopPropagation;
-        $("#travel_sort .sort li img").eq(0).click();
+        $("#travel_sort .sort li").eq(0).click();                     
     });
 
 
