@@ -213,6 +213,8 @@
     <Content Include="Content\images\14876883363_94995b4f88_o.jpg" />
     <Content Include="Content\images\20190105141437_100.jpg" />
     <Content Include="Content\images\McDonalds.png" />
+    <Content Include="Content\js\check.js" />
+    <Content Include="Content\js\debounce.js" />
     <Content Include="Content\js\後台js\bootstrap.bundle.js" />
     <Content Include="Content\js\後台js\dashboard.js" />
     <Content Include="Content\js\後台js\jquery-slim.min.js" />

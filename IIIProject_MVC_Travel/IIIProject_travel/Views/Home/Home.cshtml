@@ -1,7 +1,7 @@
 ﻿
 @{
     Layout = null;
-    var x = (tMember)Session["member"];
+    //var x = (tMember)Session["member"];
 }
 
 <!DOCTYPE html>
@@ -11,12 +11,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jouta | 揪團</title>
-    @Styles.Render("~/Content/bootstrap.min.css")
-    @Styles.Render("~/Content/fontawesome/css/all.css")
-    @Styles.Render("~/Content/style.css")
-    @Styles.Render("~/Content/main.css")
-    @Styles.Render("~/Content/slider.css")
-    @Styles.Render("~/Content/travel_main.css")
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/fontawesome/css/all.css" rel="stylesheet" />
+    <link href="~/Content/style.css" rel="stylesheet" />
+    <link href="~/Content/main.css" rel="stylesheet" />
+    <link href="~/Content/slider.css" rel="stylesheet" />
+    <link href="~/Content/travel_main.css" rel="stylesheet" />
 </head>
 
 <body>
@@ -30,7 +30,7 @@
                         <span class="navbar-toggler-icon"></span>
                     </button>
                 </div>
-                <a class="navbar-brand" href="main.html">
+                <a class="navbar-brand" href="@Html.ActionLink("", "Home", "Home")">
                     <img src="~/Content/images/joutalogo_black.png" alt="" width="100">
                 </a>
                 <div class="navbar-collapse collapse justify-content-between" id="navbarNav">
@@ -41,15 +41,15 @@
                         <li class="nav-item">@Html.ActionLink("找文章", "List", "Blog", new { }, new { @class = "nav-link nav-blog text-dark" })</li>
                     </ul>
                     <ul class="nav navbar-nav">
-                        @if (Session["member"] != null)
+                        @*@if (Session["member"] != null)
                         {
                             <li class="nav-item nav-link nav-login text-dark">觀迎 @x.f會員名稱 </li>
                             <li class="nav-item">@Html.ActionLink("登出", "Home", "Home", new { id = 0 }, new { @class = "nav-link nav-login text-dark" })</li>
                         }
                         else
-                        {
+                        {*@
                             <li class="nav-item">@Html.ActionLink("登入", "LoginIndex", "Login", new { }, new { @class = "nav-link nav-login text-dark" })</li>
-                        }
+                        @*}*@
                         <li class="nav-item">@Html.ActionLink("註冊", "Register", "Home", new { }, new { @class = "nav-link nav-register text-dark" })</li>
                     </ul>
                 </div>
@@ -63,10 +63,10 @@
                     <h2 class="slogan2">我的旅程精彩有你</h2>
                     <p class="slogan1">
                         你還在等待與你旅行的那個人出現嗎? <br>
-                        想要一同歡樂卻總是3缺1呢c
+                        想要一同歡樂卻總是3缺1呢
                     </p>
                 </div>
-                <a class="btn btnQuickmatch" href="quickmatch.html">點我快速加團</a>
+                <a class="btn btnQuickmatch" href="@Html.ActionLink("", "quickmatch", "")">點我快速加團</a>
             </div>
 
         </div>
@@ -167,7 +167,8 @@
                                                     是一個兒童職能治療師，因為擁有對生活的熱情，又不想被上下班打卡綁架，
                                                     因此工作變得有些斜槓，目前擁有正職，但仍然經營... <a href="#">read more</a>
                                                 </p>
-                                                <a href="profile.html" class="btn btnContent">Go somewhere</a>
+                                                @Html.ActionLink("瞻仰一下", "profile", "", new { }, new { @class = "btn btnContent" })
+                                                @*<a href="profile.html" class="btn btnContent">Go somewhere</a>*@
                                             </div>
                                         </div>
 
@@ -183,7 +184,8 @@
                                                     除了愛吃之外，我也非常喜歡研究料理，不論是小時候在廚房裡探頭探腦當個愛偷吃的小幫手，
                                                     或是外出用餐時觀察老闆如何做出令人垂涎三尺... <a href="#">read more</a>
                                                 </p>
-                                                <a href="profile.html" class="btn btnContent">Go somewhere</a>
+                                                @Html.ActionLink("瞻仰一下", "profile", "", new { }, new { @class = "btn btnContent" })
+                                                @*<a href="profile.html" class="btn btnContent">Go somewhere</a>*@
                                             </div>
                                         </div>
                                     </div>
@@ -198,7 +200,8 @@
                                                     我是個主觀、偏頗的人，也不追求所謂專業的遊記、書評或影評。
                                                     我只想把心裡認為值得分享的分享出去、眼裡看到最美麗的記錄...<a href="#">read more</a>
                                                 </p>
-                                                <a href="profile.html" class="btn btnContent">Go somewhere</a>
+                                                @Html.ActionLink("瞻仰一下", "profile", "", new { }, new { @class = "btn btnContent" })
+                                                @*<a href="profile.html" class="btn btnContent">Go somewhere</a>*@
                                             </div>
                                         </div>
                                     </div>
@@ -316,7 +319,8 @@
                         <figcaption>
                             <h5>你說我和飛機誰大?</h5>
                             <h3>我是個喜歡四處遊玩的blogger，喜歡我的背影還不快點擊加入我們，讓姊帶你飛 </h3>
-                            <a class="btn btnContent mt-2" href="travel.html"> 朕要+1</a>
+                            @Html.ActionLink("朕要+1", "TravelIndex", "Travel", new { }, new { @class = "btn btnContent mt-2" })
+                            @*<a class="btn btnContent mt-2" href="travel.html"> 朕要+1</a>*@
                             <footer>
                                 <div class="date">October 30, 2015</div>
                                 <div class="icons">
@@ -333,7 +337,8 @@
                         <figcaption>
                             <h5>老子不怕高</h5>
                             <h3>加入我們~帶你飛高高，站高高....摔痛痛....</h3>
-                            <a class="btn btnContent mt-2" href="travel.html"> 朕要+1</a>
+                            @Html.ActionLink("朕要+1", "TravelIndex", "Travel", new { }, new { @class = "btn btnContent mt-2" })
+                            @*<a class="btn btnContent mt-2" href="travel.html"> 朕要+1</a>*@
                             <footer>
                                 <div class="date">November 7, 2016</div>
                                 <div class="icons">
@@ -350,7 +355,8 @@
                         <figcaption>
                             <h5>南洋沙灘浪漫一夏</h5>
                             <h3>網美看過來，姊的技術一流，化腐朽為神奇...</h3>
-                            <a class="btn btnContent mt-2" href="travel.html"> 朕要+1</a>
+                            @Html.ActionLink("朕要+1", "TravelIndex", "Travel", new { }, new { @class = "btn btnContent mt-2" })
+                            @*<a class="btn btnContent mt-2" href="travel.html"> 朕要+1</a>*@
                             <footer>
                                 <div class="date">January 21, 2016</div>
                                 <div class="icons">
@@ -398,19 +404,24 @@
                             <div class="widget footer_widget">
                                 <ul class="posts styled">
                                     <li class="clearfix gem-pp-posts">
-                                        <a href="eat.html">找飯局</a>
+                                        @Html.ActionLink("找飯局", "EatIndex", "Eat")
+                                        @*<a href="eat.html">找飯局</a>*@
                                     </li>
                                     <li class="clearfix gem-pp-posts">
-                                        <a href="travel.html">找旅遊</a>
+                                        @Html.ActionLink("找旅遊", "TravelIndex", "Travel")
+                                        @*<a href="travel.html">找旅遊</a>*@
                                     </li>
                                     <li class="clearfix gem-pp-posts">
-                                        <a href="blog_main.html">找文章</a>
+                                        @Html.ActionLink("找文章", "List", "Blog")
+                                        @*<a href="blog_main.html">找文章</a>*@
                                     </li>
                                     <li class="clearfix gem-pp-posts">
-                                        <a href="about_us.html">關於我們</a>
+                                        @Html.ActionLink("關於我們", "About", "Home")
+                                        @*<a href="about_us.html">關於我們</a>*@
                                     </li>
                                     <li class="clearfix gem-pp-posts">
-                                        <a href="contact_us.html">聯絡我們</a>
+                                        @Html.ActionLink("聯絡我們", "Contact", "Home")
+                                        @*<a href="contact_us.html">聯絡我們</a>*@
                                     </li>
                                 </ul>
                             </div>
