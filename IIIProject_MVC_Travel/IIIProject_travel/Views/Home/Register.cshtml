@@ -1,7 +1,7 @@
 ﻿@model IIIProject_travel.ViewModel.CRegister
 @{
     Layout = null;
-    var x = (tMember)Session["member"];
+    @*var x = (tMember)Session["member"];*@
 }
 
 <!DOCTYPE html>
@@ -29,7 +29,7 @@
                         <span class="navbar-toggler-icon"></span>
                     </button>
                 </div>
-                <a class="navbar-brand" href="main.html">
+                <a class="navbar-brand" href="@Url.Action("Home","Home")">
                     <img src="~/Content/images/joutalogo_black.png" alt="" width="100">
                 </a>
                 <div class="navbar-collapse collapse justify-content-between" id="navbarNav">
@@ -40,15 +40,15 @@
                         <li class="nav-item">@Html.ActionLink("找文章", "List", "Blog", new { }, new { @class = "nav-link nav-blog text-dark" })</li>
                     </ul>
                     <ul class="nav navbar-nav">
-                        @if (Session["member"] != null)
+                        @*@if (Session["member"] != null)
                         {
                             <li class="nav-item nav-link nav-login text-dark">觀迎 @x.f會員名稱 </li>
                             <li class="nav-item">@Html.ActionLink("登出", "Home", "Home", new { id = 0 }, new { @class = "nav-link nav-login text-dark" })</li>
                         }
-                        else
-                        {
+                        else*@
+                        @*{*@
                             <li class="nav-item">@Html.ActionLink("登入", "LoginIndex", "Login", new { }, new { @class = "nav-link nav-login text-dark" })</li>
-                        }
+                        @*}*@
                         <li class="nav-item">@Html.ActionLink("註冊", "Register", "Home", new { }, new { @class = "nav-link nav-register text-dark" })</li>
                     </ul>
                 </div>
@@ -111,7 +111,7 @@
                                         <input name="txtPassword_confirm" type="password" class="form-control" placeholder="再次輸入密碼">
                                         @Html.ValidationMessageFor(model => model.txtPassword_confirm, "", new { @class = "text-danger" })
                                     </div>
-                                    
+
 
                                     <button type="submit" class="btn btn-primary">註冊</button>
                                     <button type="reset" class="btn btn-default">清除</button>

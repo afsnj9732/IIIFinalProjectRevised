@@ -12,6 +12,19 @@ namespace IIIProject_travel.Controllers
     public class BlogController : Controller
     {
         // GET: Blog
+
+
+        public ActionResult Index()
+        {
+
+            var article = from t in (new dbJoutaEntities()).tArticle
+                          select t;
+
+
+            return View(article);
+
+
+        }
         public ActionResult List()
         {
 

@@ -25,26 +25,26 @@ namespace IIIProject_travel.Controllers
 
         public ActionResult Login()
         {
-            string code = Session[CDictionary.SK_USERLOGIN_CODE] as string;
-            if (string.IsNullOrEmpty(code))
-            {
-                Random r = new Random();
-                code = r.Next(0, 10).ToString() + r.Next(0, 10).ToString() + r.Next(0, 10).ToString() + r.Next(0, 10).ToString();
-                Session[CDictionary.SK_USERLOGIN_CODE] = code;
-            }
-            ViewBag.CODE = code;
+            //string code = Session[CDictionary.SK_USERLOGIN_CODE] as string;
+            //if (string.IsNullOrEmpty(code))
+            //{
+            //    Random r = new Random();
+            //    code = r.Next(0, 10).ToString() + r.Next(0, 10).ToString() + r.Next(0, 10).ToString() + r.Next(0, 10).ToString();
+            //    Session[CDictionary.SK_USERLOGIN_CODE] = code;
+            //}
+            //ViewBag.CODE = code;
             return View();
         }
         [HttpPost]
         public ActionResult Login(CLogin p)
         {
 
-            string code = Session[CDictionary.SK_USERLOGIN_CODE] as string;
-            if (!p.txtPassword.Equals(code))
-            {
-                ViewBag.CODE = code;
-                return View();
-            }
+            //string code = Session[CDictionary.SK_USERLOGIN_CODE] as string;
+            //if (!p.txtPassword.Equals(code))
+            //{
+            //    ViewBag.CODE = code;
+            //    return View();
+            //}
             String fAccount = p.txtAccount;
             
             tMember cust = (new dbJoutaEntities()).tMember.FirstOrDefault(t => t.f會員帳號== fAccount && t.f會員密碼.Equals(p.txtPassword));
@@ -162,5 +162,14 @@ namespace IIIProject_travel.Controllers
         //    return RedirectToAction("Login");
         //}
 
+        public ActionResult About()
+        {
+            return View();
+        }
+
+        public ActionResult Contact()
+        {
+            return View();
+        }
     }
 }
