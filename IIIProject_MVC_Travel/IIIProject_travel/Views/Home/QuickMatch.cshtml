@@ -1,0 +1,151 @@
+﻿
+@{
+    Layout = null;
+    var x = (tMember)Session["member"];
+}
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jouta | 極速配對</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+          integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="~/Content/css/style.css">
+    <link rel="stylesheet" href="~/Content/css/quickmatch.css">
+    <link rel="shortcut icon" href="favicon.ico" />
+</head>
+
+<body>
+    <div class="container-fluid ">
+        <!-- navbar -->
+        <nav class="navbar navbar-expand-lg navbar-light header" id="main">
+            <div class="container">
+                <a class="navbar-brand" href="main.html">
+                    <img src="~/Content/images/joutalogo_black.png" alt="" width="100">
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
+                    <ul class="nav navbar-nav">
+                        <li class="nav-item">@Html.ActionLink("首頁", "Home", "Home", new { }, new { @class = "nav-link nav-main text-dark" })</li>
+                        <li class="nav-item">@Html.ActionLink("找飯局", "EatIndex", "Eat", new { }, new { @class = "nav-link nav-eat text-dark" })</li>
+                        <li class="nav-item">@Html.ActionLink("找旅遊", "TravelIndex", "Travel", new { }, new { @class = "nav-link nav-travel text-dark" })</li>
+                        <li class="nav-item">@Html.ActionLink("找文章", "Index", "Blog", new { }, new { @class = "nav-link nav-blog text-dark" })</li>
+                    </ul>
+                    <ul class="nav navbar-nav">
+                        @if (Session["member"] != null)
+                        {
+                            <li class="nav-item nav-link nav-login text-dark">觀迎 @x.f會員名稱 </li>
+                            <li class="nav-item">@Html.ActionLink("登出", "Home", "Home", new { id = 0 }, new { @class = "nav-link nav-login text-dark" })</li>
+                        }
+                        else
+                        {
+                            <li class="nav-item">@Html.ActionLink("登入", "LoginIndex", "Login", new { }, new { @class = "nav-link nav-login text-dark" })</li>
+                        }
+                        <li class="nav-item">@Html.ActionLink("註冊", "Register", "Home", new { }, new { @class = "nav-link nav-register text-dark" })</li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+
+    <!-- main -->
+    <div class="container-fluid text-center">
+        <button class="btnLocation" onclick="getLocation()">
+            開啟定位尋找附近的TA !
+        </button>
+        <div class="cols">
+            <div class="col" ontouchstart="this.classList.toggle('hover');">
+                <div class="container">
+                    <div class="front" style="background-image: url(https://fun8.us/gamepic/fun8/1454.jpg)">
+                        <div class="inner">
+                            <p>找吃貨</p>
+                            <span>Lorem ipsum</span>
+                        </div>
+                    </div>
+                    <div class="back">
+                        <div class="inner">
+                            <p>
+                                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Alias cum repellat
+                                velit
+                                quae suscipit c.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col" ontouchstart="this.classList.toggle('hover');">
+                <div class="container">
+                    <div class="front"
+                         style="background-image: url(https://i1.kknews.cc/SIG=vujmi0/ctp-vzntr/15op5340575r40nqnq40p668pr76q8s6.jpg)">
+                        <div class="inner">
+                            <p>找旅伴</p>
+                            <span>Lorem ipsum</span>
+                        </div>
+                    </div>
+                    <div class="back">
+                        <div class="inner">
+                            <p>
+                                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Alias cum repellat
+                                velit
+                                quae suscipit c.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- show result -->
+        <div class="container-fluid">
+            <div class="container">
+                <div class="d-flex resultbox">
+                    <div id="UserBlock">
+                        <p>失落的帝國</p>
+                        <img src="~/Content/images/1.jpg" alt="" class="col-auto ArticlePic">
+                        <p>使用者名稱:怕豹</p>
+                        <p>使用者評分:5</p>
+                    </div>
+                    <div class="contentblock">
+                        <p>剩餘時間</p><span>17:02:15</span>
+                        <p class="content">
+                            三亞亞特蘭蒂斯酒店位於海棠北路，雄踞海棠灣，俯瞰迷人的中國南海，距離國際免稅城約數分鐘車程。
+                            酒店占地面積約30萬平方米，是融合酒店，餐飲，購物，水樂園以及水族館為一體的綜合性娛樂度假目的地。
+                            這裡擁有千餘間寬敞的海景客房及套房...<a href="#">read more</a>
+
+                        </p>
+                        <div id="share" class="row justify-content-end pr-4">
+                            <button class="btn  btn-warning btn-block" type="submit">更多</button>
+                            <button class="btn  btn-warning btn-block" type="submit">分享</button>
+                            <button class="btn  btn-warning btn-block" type="submit">留言</button>
+                        </div><br>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- footer -->
+        <div class="container-fluid footer">
+            <p class="text-center mt-2 mb-2">Copyright © 2020 Jouta All rights reserved</p>
+        </div>
+
+        <!-- script -->
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+                integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+                crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+                integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+                crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+                integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+                crossorigin="anonymous"></script>
+
+        <script src="~/Content/js/navbar.js"></script>
+        <script src="~/Scripts/location.js"></script>
+</body>
+
+</html>

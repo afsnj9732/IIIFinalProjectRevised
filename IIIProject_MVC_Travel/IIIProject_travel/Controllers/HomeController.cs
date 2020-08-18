@@ -23,6 +23,11 @@ namespace IIIProject_travel.Controllers
                 return View();   
         }
 
+        public ActionResult QuickMatch()
+        {
+            return View();
+        }
+
         public ActionResult Login()
         {
             //string code = Session[CDictionary.SK_USERLOGIN_CODE] as string;

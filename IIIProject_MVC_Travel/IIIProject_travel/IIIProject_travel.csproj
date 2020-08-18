@@ -2106,6 +2106,7 @@
     <Content Include="Views\後台會員\e修改.cshtml" />
     <Content Include="Views\Profile\ProfileIndex.cshtml" />
     <Content Include="Views\Blog\Index.cshtml" />
+    <Content Include="Views\Home\QuickMatch.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
