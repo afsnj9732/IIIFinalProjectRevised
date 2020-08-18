@@ -43,8 +43,8 @@
                     <ul class="nav navbar-nav">
                         @if (Session["member"] != null)
                         {
-                            <li class="nav-item nav-link nav-login text-dark">觀迎 @x.f會員名稱 </li>
-                            <li class="nav-item">@Html.ActionLink("登出", "Home", "Home", new { id = 0 }, new { @class = "nav-link nav-login text-dark" })</li>
+                        <li class="nav-item nav-link nav-login text-dark">@Html.ActionLink("Hi!," + @x.f會員名稱, "ProfileIndex", "Profile", new { id = 0 }, new { @class = "nav-link nav-login text-dark" }) </li>
+                        <li class="nav-item">@Html.ActionLink("登出", "Home", "Home", new { id = 0 }, new { @class = "nav-link nav-login text-dark" })</li>
                         }
                         else
                         {
@@ -167,7 +167,7 @@
                                                     是一個兒童職能治療師，因為擁有對生活的熱情，又不想被上下班打卡綁架，
                                                     因此工作變得有些斜槓，目前擁有正職，但仍然經營... <a href="#">read more</a>
                                                 </p>
-                                                <a href="profile.html" class="btn btnContent">Go somewhere</a>
+                                                <div>@Html.ActionLink("Go Somewhere", "ProfileIndex", "Profile", new { }, new { @class = "text-dark btn btn-warning" })</div>                             
                                             </div>
                                         </div>
 
@@ -183,7 +183,7 @@
                                                     除了愛吃之外，我也非常喜歡研究料理，不論是小時候在廚房裡探頭探腦當個愛偷吃的小幫手，
                                                     或是外出用餐時觀察老闆如何做出令人垂涎三尺... <a href="#">read more</a>
                                                 </p>
-                                                <a href="profile.html" class="btn btnContent">Go somewhere</a>
+                                                <div>@Html.ActionLink("Go Somewhere", "ProfileIndex", "Profile",new{},new { @class = "text-dark btn btn-warning" })</div>
                                             </div>
                                         </div>
                                     </div>
@@ -198,7 +198,7 @@
                                                     我是個主觀、偏頗的人，也不追求所謂專業的遊記、書評或影評。
                                                     我只想把心裡認為值得分享的分享出去、眼裡看到最美麗的記錄...<a href="#">read more</a>
                                                 </p>
-                                                <a href="profile.html" class="btn btnContent">Go somewhere</a>
+                                                <div>@Html.ActionLink("Go Somewhere", "ProfileIndex", "Profile", new { }, new { @class = "text-dark btn btn-warning" })</div>
                                             </div>
                                         </div>
                                     </div>
