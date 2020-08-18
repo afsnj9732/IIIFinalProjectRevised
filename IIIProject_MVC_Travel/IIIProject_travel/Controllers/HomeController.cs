@@ -81,6 +81,7 @@ namespace IIIProject_travel.Controllers
                 //驗證碼
                 p.fActivationCode = Guid.NewGuid();
                 //密碼驗證
+                string fact_password = p.txtPassword;
                 p.txtPassword = C驗證.Hash(p.txtPassword);
                 p.txtPassword_confirm = C驗證.Hash(p.txtPassword_confirm);
 
@@ -91,7 +92,7 @@ namespace IIIProject_travel.Controllers
                     tMember NewMember = new tMember();
                     NewMember.f性別 = p.txtGender;
                     NewMember.f會員帳號 = p.txtEmail;
-                    NewMember.f會員密碼 = p.txtPassword;
+                    NewMember.f會員密碼 = fact_password;
                     NewMember.f電子郵件 = p.txtEmail;
                     NewMember.f會員名稱 = p.txtNickname;
                     db.tMember.Add(NewMember);
