@@ -217,6 +217,8 @@
     <Content Include="Content\images\20190105141437_100.jpg" />
     <Content Include="Content\images\McDonalds.png" />
     <Content Include="Content\images\proheadshot.jpg" />
+    <Content Include="Content\images\qm1.jpg" />
+    <Content Include="Content\images\qm2.jpeg" />
     <Content Include="Content\js\profile.js" />
     <Content Include="Content\js\後台js\bootstrap.bundle.js" />
     <Content Include="Content\js\後台js\dashboard.js" />

@@ -10,8 +10,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jouta | 極速配對</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
-          integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    @*<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+          integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">*@
+    <link rel="stylesheet" href="~/Content/bootstrap.min.css">
     <link rel="stylesheet" href="~/Content/css/style.css">
     <link rel="stylesheet" href="~/Content/css/quickmatch.css">
     <link rel="shortcut icon" href="favicon.ico" />
@@ -61,18 +62,20 @@
         <div class="cols">
             <div class="col" ontouchstart="this.classList.toggle('hover');">
                 <div class="container">
-                    <div class="front" style="background-image: url(https://fun8.us/gamepic/fun8/1454.jpg)">
+                    <div class="front" style="background-image: url(../../Content/images/qm1.jpg)">
                         <div class="inner">
                             <p>找吃貨</p>
-                            <span>Lorem ipsum</span>
+                            <span>
+                                不知道會抽到什麼飯局呢~?
+                            </span>
                         </div>
                     </div>
                     <div class="back">
                         <div class="inner">
                             <p>
-                                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Alias cum repellat
-                                velit
-                                quae suscipit c.
+                                SELECT id FROM tEat<br>
+                                ORDER BY RAND()<br>
+                                LIMIT 1!
                             </p>
                         </div>
                     </div>
@@ -81,18 +84,20 @@
             <div class="col" ontouchstart="this.classList.toggle('hover');">
                 <div class="container">
                     <div class="front"
-                         style="background-image: url(https://i1.kknews.cc/SIG=vujmi0/ctp-vzntr/15op5340575r40nqnq40p668pr76q8s6.jpg)">
+                         style="background-image: url(../../Content/images/qm2.jpeg)">
                         <div class="inner">
                             <p>找旅伴</p>
-                            <span>Lorem ipsum</span>
+                            <span>
+                                想找幾個朋友一起去戶外踏青...
+                            </span>
                         </div>
                     </div>
                     <div class="back">
                         <div class="inner">
                             <p>
-                                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Alias cum repellat
-                                velit
-                                quae suscipit c.
+                                SELECT id FROM tTravel<br>
+                                ORDER BY RAND()<br>
+                                LIMIT 1!
                             </p>
                         </div>
                     </div>
@@ -134,16 +139,9 @@
         </div>
 
         <!-- script -->
-        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-                integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-                crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-                integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-                crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
-                integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
-                crossorigin="anonymous"></script>
-
+        <script src="~/Content/js/jquery-3.5.1.js"></script>
+        <script src="~/Content/js/popper.min.js"></script>
+        <script src="~/Content/bootstrap-4.2.1-dist/js/bootstrap.min.js"></script>
         <script src="~/Content/js/navbar.js"></script>
         <script src="~/Scripts/location.js"></script>
 </body>
