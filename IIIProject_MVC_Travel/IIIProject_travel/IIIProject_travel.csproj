@@ -2099,6 +2099,7 @@
     <Content Include="Views\Eat\EatIndex.cshtml" />
     <Content Include="Views\後台會員\List.cshtml" />
     <Content Include="Views\後台會員\e修改.cshtml" />
+    <Content Include="Views\Blog\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
