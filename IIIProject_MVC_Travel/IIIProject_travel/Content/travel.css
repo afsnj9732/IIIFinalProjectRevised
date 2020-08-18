@@ -2,6 +2,10 @@ p{
   margin-bottom: 5px;
   text-align: center;
 }
+body {
+    background-color: #fffef4;
+}
+
 .btn-secondary{
   background-color: #222222;
 }
