@@ -33,7 +33,5 @@ namespace IIIProject_travel
         public string f興趣 { get; set; }
         public string f已占用時間 { get; set; }
         public string f按過讚的文章編號 { get; set; }
-        public bool fIs信箱已驗證 { get; set; }   //狀態管理
-        public System.Guid fActivationCode { get; set; }     //認證碼
     }
 }

@@ -1,7 +1,7 @@
 ﻿@model IIIProject_travel.ViewModel.CRegister
 @{
     Layout = null;
-    @*var x = (tMember)Session["member"];*@
+    var x = (tMember)Session["member"];
 }
 
 <!DOCTYPE html>
@@ -40,15 +40,15 @@
                         <li class="nav-item">@Html.ActionLink("找文章", "List", "Blog", new { }, new { @class = "nav-link nav-blog text-dark" })</li>
                     </ul>
                     <ul class="nav navbar-nav">
-                        @*@if (Session["member"] != null)
+                        @if (Session["member"] != null)
                         {
                             <li class="nav-item nav-link nav-login text-dark">觀迎 @x.f會員名稱 </li>
                             <li class="nav-item">@Html.ActionLink("登出", "Home", "Home", new { id = 0 }, new { @class = "nav-link nav-login text-dark" })</li>
                         }
-                        else*@
-                        @*{*@
+                        else
+                        {
                             <li class="nav-item">@Html.ActionLink("登入", "LoginIndex", "Login", new { }, new { @class = "nav-link nav-login text-dark" })</li>
-                        @*}*@
+                        }
                         <li class="nav-item">@Html.ActionLink("註冊", "Register", "Home", new { }, new { @class = "nav-link nav-register text-dark" })</li>
                     </ul>
                 </div>
@@ -84,32 +84,32 @@
                                     <!--    資料驗證開始範圍    -->
                                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                                     <div class="form-group">
-                                        <input type="email" class="form-control" placeholder="信箱">
+                                        <input type="email" class="form-control" name="txtEmail" placeholder="信箱">
                                         @Html.ValidationMessageFor(model => model.txtEmail, "", new { @class = "text-danger" })
                                         @Html.ValidationMessage("emailExist", new { @class = "text-danger" })
                                     </div>
                                     <div class="form-group">
-                                        <input name="txtPassword" type="text" class="form-control" placeholder="使用者名稱">
+                                        <input name="txtNickname" type="text" class="form-control" placeholder="使用者名稱">
                                         @Html.ValidationMessageFor(model => model.txtNickname, "", new { @class = "text-danger" })
                                     </div>
                                     <div class="gender d-flex">
                                         <div class="sex d-flex form-check align-items-center col-lg-6 col-sm-12">
                                             <label for="sex" class="form-check-label">Female(女)</label>
-                                            <input type="radio" name="choose" class="form-control">
+                                            <input type="radio" name="txtGender" value="Female" class="form-control">
                                         </div>
                                         <div class="sex d-flex form-check align-items-center col-lg-6 col-sm-12">
                                             <label for="sex" class="form-check-label">Male(男)</label>
-                                            <input type="radio" name="choose" class="form-control">
+                                            <input type="radio" name="txtGender" value="Male" class="form-control">
                                         </div>
                                     </div>
 
                                     <div class="form-group">
                                         <input name="txtPassword" type="password" class="form-control" placeholder="密碼">
-                                        @Html.ValidationMessageFor(model => model.txtPassword, "", new { @class = "text-danger" })
+                                        @Html.ValidationMessageFor(m => m.txtPassword, "", new { @class = "text-danger" })
                                     </div>
                                     <div class="form-group">
                                         <input name="txtPassword_confirm" type="password" class="form-control" placeholder="再次輸入密碼">
-                                        @Html.ValidationMessageFor(model => model.txtPassword_confirm, "", new { @class = "text-danger" })
+                                        @Html.ValidationMessageFor(m => m.txtPassword_confirm, "", new { @class = "text-danger" })
                                     </div>
 
 
