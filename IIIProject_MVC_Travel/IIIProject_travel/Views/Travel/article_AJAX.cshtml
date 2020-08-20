@@ -1,16 +1,15 @@
 ﻿@model IEnumerable<tTravel>
 @{
     Layout = null;
-    int article_count = 0;
-    int readmore_count = 0;
+    int count = 0;
     string combine = "";
 }
 
 <!-- read more視窗控制頭1 -->
 @foreach (var item in Model)
 {
-    readmore_count++;
-    combine = "exampleModal" + readmore_count;
+    count++;
+    combine = "exampleModal" + count;
     tMember postman = (new dbJoutaEntities())
         .tMember.FirstOrDefault(o => o.f會員編號 == item.f團主會員編號);
 
@@ -86,14 +85,8 @@
         </div>
     </div>
     <!-- read more視窗控制尾 -->
-}
 
 
-
-@foreach (var item in Model)
-{
-    article_count++;
-    combine = "#exampleModal" + article_count;
     <!-- -------------文章區頭-------------- -->
     <div class="row Travel_border align-items-center p-3 pl-4">
         <div class="container-fluid">
