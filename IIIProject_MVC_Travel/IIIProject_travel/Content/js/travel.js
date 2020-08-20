@@ -132,7 +132,10 @@
                 $(this).append("<span id='temp'>高－>低</span>");
             }
         }
-        $(this).siblings().css('background-color', 'transparent');    //剔除未選取排序     
+        //border - color: rgb(250, 224, 178);
+        $(this).css('border-color', 'rgb(250, 224, 110)');
+        $(this).siblings().css('background-color', 'transparent');    //剔除未選取排序   
+        $(this).siblings().css('border-color', 'transparent');    //剔除未選取排序   
         //$("img",this).click(); //會無限迴圈
         this.childNodes[1].childNodes[1].click();//連動點擊圖片觸發排序和ajax
         //子元素預設點下去會再次觸發父元素點擊事件

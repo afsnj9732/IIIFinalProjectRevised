@@ -21,18 +21,17 @@ p{
     background-color: #f5be2e;
 }
 
-#travel_sort .sort li{
+#travel_sort .sort li {
     /*border-bottom: solid;
     border-top: solid;*/
-    border-width: 3px;
-    border-style:solid;
-    border-color:white;
-    width:83.5%;
+    border-width: 4px;
+    border-style: solid;
+    border-color: white;
+    width: 83.5%;
     /*padding-left:10px;
     padding-right:10px;*/
     /*border-radius:10%;*/
-    transition-duration:0.4s
-    
+    transition-duration:0.3s
 }
 
 .modal{
