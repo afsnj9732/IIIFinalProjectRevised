@@ -134,7 +134,10 @@
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Controllers\TravelController.cs" />
+    <Compile Include="Controllers\後台文章Controller.cs" />
+    <Compile Include="Controllers\後台旅遊Controller.cs" />
     <Compile Include="Controllers\後台會員Controller.cs" />
+    <Compile Include="Controllers\後台飯局Controller.cs" />
     <Compile Include="Controllers\聯絡我們Controller.cs" />
     <Compile Include="C驗證.cs" />
     <Compile Include="Global.asax.cs">
@@ -2109,6 +2112,9 @@
     <Content Include="Views\Profile\ProfileIndex.cshtml" />
     <Content Include="Views\Blog\Index.cshtml" />
     <Content Include="Views\Home\QuickMatch.cshtml" />
+    <Content Include="Views\後台旅遊\List.cshtml" />
+    <Content Include="Views\後台飯局\List.cshtml" />
+    <Content Include="Views\後台文章\List.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

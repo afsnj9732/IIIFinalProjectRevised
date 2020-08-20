@@ -77,10 +77,10 @@
 #pTitle {
   font-size: 25px;
   margin-right: 10px;
+  width: 80%;
 }
 
-#titleContent {
-  margin-right: 5px;
-
-  width: 40%;
+#selectsection {
+    margin-left: 10px;
+    width: 40%;
 }
