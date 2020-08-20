@@ -78,6 +78,17 @@
         // }
     }
     travel_sort_scrollHandler();
+    window.addEventListener("resize", function () {
+        console.log(document.body.clientWidth);
+        if (document.body.clientWidth >= 975 ) {            
+            travel_sort_scrollHandler();
+        } else {
+            travel_sort.classList.remove("fix");
+            travel_sort.style.top = 0 + "px";
+            document.querySelector("#replace").classList.remove("col-3");
+            travel_sort.classList.add("col-3");
+        }
+    });
     // window.addEventListener("scroll", travel_sort_scrollHandler);
     // }
 
