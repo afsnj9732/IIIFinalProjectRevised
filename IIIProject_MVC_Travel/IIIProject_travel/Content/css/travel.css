@@ -1,5 +1,6 @@
-body{
+body {
     background-color: #fffef4;
+    padding-right: 0 !important;
 }
 
 p{
@@ -21,11 +22,17 @@ p{
 }
 
 #travel_sort .sort li{
-    border-bottom: solid;
-    border-top: solid;
+    /*border-bottom: solid;
+    border-top: solid;*/
     border-width: 3px;
+    border-style:solid;
+    border-color:white;
     width:83.5%;
-    transition-duration:0.3s
+    /*padding-left:10px;
+    padding-right:10px;*/
+    /*border-radius:10%;*/
+    transition-duration:0.4s
+    
 }
 
 .modal{
@@ -49,7 +56,6 @@ p{
 }
 
 .Travel_border{
-    border: 1.3px solid #ff5b45;
     border-radius: 5px;
     margin-bottom: 10px;
     box-shadow: 0px 0px 4px 2px rgb(200, 200, 200);
@@ -58,13 +64,11 @@ p{
 }
 
 .Travel_border:hover{
-    margin: 10px -20px;
-    box-shadow: 0px 0px 12px 2px rgba(255,91,69);
-    border: 1.3px solid #fff;
+    box-shadow: 0px 0px 12px 2px #cc9922;
     transition-duration: 0.5s;
 }
 
-.border-main-color {
+.border-main-color{
     border-color: #ff5b45;
 }
 
@@ -98,6 +102,17 @@ p{
     /* background-color: rgba(20, 80, 220, 0.746); */
     display: -webkit-box;
     -webkit-line-clamp: 5; 
+    -webkit-box-orient: vertical;
+}
+
+.content-title {
+    /* margin: 0 auto; */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    /* border-color:#fde57a */
+    /* background-color: rgba(20, 80, 220, 0.746); */
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
     -webkit-box-orient: vertical;
 }
 
