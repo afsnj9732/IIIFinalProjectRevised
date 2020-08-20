@@ -53,7 +53,7 @@ namespace IIIProject_travel.Controllers
                         .AsEnumerable().OrderByDescending(a => tTravel_order.GetValue(a, null))
                         .Select(a => a); //升冪
 
-                if (obj.border_color == "rgb(250, 224, 178)")
+                if (obj.background_color == "rgb(250, 224, 178)")
                 {
                     order_travel_list = (new dbJoutaEntities()).tTravel
                         .AsEnumerable().OrderBy(a => tTravel_order.GetValue(a, null))

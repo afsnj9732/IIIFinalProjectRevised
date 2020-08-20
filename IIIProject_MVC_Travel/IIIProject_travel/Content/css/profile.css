@@ -9,6 +9,13 @@ body{
     overflow-x: hidden;
     font-family: "poppings", sans-serif;
 }
+.temp{
+    color:white;
+}
+.temp:hover {
+    color: white;
+    text-decoration:none;
+}
 .profile-header{
     background: #f5be2e;
     width: 100%;
