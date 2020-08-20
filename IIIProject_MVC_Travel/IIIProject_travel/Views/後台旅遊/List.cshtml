@@ -1,0 +1,171 @@
+﻿@{
+    Layout = null;
+}
+@model IEnumerable<tTravel>
+
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Jekyll v3.8.5">
+    <title>Dashboard Template · Bootstrap 4 繁體中文手冊 [六角學院譯]</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="~/Content/bootstrap-4.2.1-dist/css/bootstrap.css" rel="stylesheet">
+
+
+    <style>
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+        }
+    </style>
+    <!-- Custom styles for this template -->
+    <link href="~/Content/css/後台css/dashboard.css" rel="stylesheet">
+</head>
+
+<body>
+    <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
+        <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Company name</a>
+        <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
+        <ul class="navbar-nav px-3">
+            <li class="nav-item text-nowrap">
+                <a>
+                    @Html.ActionLink("Sign out", "Home", "Home", new { id = 0 }, new { @class = "nav-link" })
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row">
+            <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+                <div class="sidebar-sticky">
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#">
+                                <span data-feather="home"></span>
+                                首頁 <span class="sr-only">(current)</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="@Url.Action("List","後台會員")">
+                                <span data-feather="users"></span>
+                                會員列表
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="@Url.Action("List","後台旅遊")">
+                                <span data-feather="file"></span>
+                                旅遊列表
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="@Url.Action("List","後台飯局")">
+                                <span data-feather="bar-chart-2"></span>
+                                飯局列表
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="@Url.Action("List","後台文章")">
+                                <span data-feather="layers"></span>
+                                文章列表
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="@Url.Action("List","聯絡我們")">
+                                <span data-feather="layers"></span>
+                                意見列表
+                            </a>
+                        </li>
+
+                    </ul>
+
+                </div>
+            </nav>
+
+            <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+
+
+                <h2>文章列表</h2>
+                <div class="table-responsive">
+                    <table class="table table-striped table-sm">
+                        <thead>
+                            <tr>
+                                <td>筆數</td>
+                                <td>文章編號</td>
+                                <td>團主會員</td>
+                                <td>文章團主名稱</td>
+                                <td>發文日期</td>
+                                <td>活動開始日期</td>
+                                <td>活動結束日期</td>
+                                <td>招募日期</td>
+                                <td>標題</td>
+                                <td>內容</td>
+                                <td>地區</td>
+                                <td>預算</td>
+                                <td>分類</td>
+                                <td>標籤</td>
+                                <td>文章團圖</td>
+                                <td>按鈕</td>
+                                <td>按鈕</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{
+                                int c筆數 = 0;
+                                foreach (tTravel t in Model)
+                                {
+                                    c筆數++;
+                            <tr>
+                                <td>@c筆數.ToString()</td>
+                                <td>@t.f旅遊文章編號</td>
+                                <td>@t.f團主會員編號</td>
+                                <td>@t.f文章團主名稱</td>
+                                <td>@t.f文章發文日期</td>
+                                <td>@t.f文章活動開始日期</td>
+                                <td>@t.f文章活動結束日期</td>
+                                <td>@t.f文章活動招募日期</td>
+                                <td>@t.f文章標題</td>
+                                <td>@t.f文章內容</td>
+                                <td>@t.f文章地區</td>
+                                <td>@t.f文章預算</td>
+                                <td>@t.f分類</td>
+                                <td>@t.f標籤</td>
+                                <td>@t.f文章團圖</td>
+                                <td>
+                                    @Html.ActionLink("查看", "v查看", "後台旅遊", new { id = t.f團主會員編號 }, new { Class = "btn btn-info" })
+                                </td>
+
+                                <td>
+                                    @Html.ActionLink("刪除", "d刪除", "後台旅遊", new { id = t.f團主會員編號 },
+                                    new { OnClick = "return confirm('確定要刪除嗎?')", Class = "btn btn-danger" })
+                                </td>
+                            </tr>
+                                }
+                            }
+
+
+                        </tbody>
+                    </table>
+                </div>
+            </main>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+    <script>window.jQuery || document.write('<script src="~/Content/js/後台js/jquery-slim.min.js"><\/script>')</script>
+    <script src="~/Content/js/後台js/bootstrap.bundle.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.9.0/feather.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
+    <script src="~/Content/js/後台js/dashboard.js"></script>
+</body>
+
+</html>
