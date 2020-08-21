@@ -1,8 +1,7 @@
 ﻿@model IEnumerable<tTravel>
 @{
     Layout = null;
-    int article_count = 0;
-    int readmore_count = 0;
+    int count = 0;
     string combine = "";
 
 }
@@ -10,8 +9,8 @@
 <!-- read more視窗控制頭1 -->
 @foreach (var item in Model)
 {
-    readmore_count++;
-    combine = "exampleModal" + readmore_count;
+    count++;
+    combine = "exampleModal" + count;
     tMember postman = (new dbJoutaEntities())
         .tMember.FirstOrDefault(o => o.f會員編號 == item.f團主會員編號);
 
@@ -87,14 +86,7 @@
         </div>
     </div>
     <!-- read more視窗控制尾 -->
-}
 
-
-
-@foreach (var item in Model)
-{
-    article_count++;
-    combine = "#exampleModal" + article_count;
     <!-- -------------文章區頭-------------- -->
     <div class="row Travel_border align-items-center p-3 pl-4">
         <div class="container-fluid">
@@ -114,7 +106,7 @@
             </div>
         </div>
         <div class="row pl-2 flex-wrap-reverse" style="width:100%;">
-            <div class="mb-3 pl-4 pr-4 mx-auto" style="cursor: pointer;width:66%;height: 238px;" data-toggle="modal" data-target="@combine">
+            <div class="mb-3 pl-4 pr-4 mx-auto" style="cursor: pointer;width:66%;height: 238px;" data-toggle="modal" data-target="#@combine">
                 <div class="" style="font-weight:bolder;"> <p class="mb-4 mt-3 content-title">@item.f文章標題</p></div>
 
                 <span class="content" style="font-size: 16px;line-height:1.8;">
