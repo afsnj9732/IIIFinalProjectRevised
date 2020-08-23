@@ -80,6 +80,14 @@
     }
 
     function Travel_RWD() {
+        if (document.body.clientWidth > 1500 || document.body.clientWidth < 970) {
+            $(".popguys").attr('class', "mr-2 ml-2 popguys");
+        }
+        else
+        {
+            $(".popguys").attr('class', "mr-1 ml-1 popguys");
+        }
+        
         if (document.body.clientWidth < 1850) {
             $(".RWD_1850").css('display', '');
             $(".RWD_1851").css('display', 'none');

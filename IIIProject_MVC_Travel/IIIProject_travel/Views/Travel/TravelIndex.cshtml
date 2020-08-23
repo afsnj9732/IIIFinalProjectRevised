@@ -131,29 +131,16 @@
                     <!-- 各項排序 -->
                     <br />
                     <!-- 人氣團主 -->
-                    <div>
-                        <p class="ml-3 " style="text-align: start;">人氣團主</p>
-                        <ul class="row   ml-3">
-                            <li class="mr-3" style="list-style-type:none;cursor: pointer;">
-                                <img src="~/Content/images/09.png"
-                                     alt="">
-                            </li>
-                            <li class="mr-3" style="list-style-type:none;cursor: pointer;">
-                                <img src="~/Content/images/09.png"
-                                     alt="">
-                            </li>
-                            <li class="mr-3" style="list-style-type:none;cursor: pointer;">
-                                <img src="~/Content/images/09.png"
-                                     alt="">
-                            </li>
-                            <li class="mr-3" style="list-style-type:none;cursor: pointer;">
-                                <img src="~/Content/images/09.png"
-                                     alt="">
-                            </li>
-                            <li class="mr-3" style="list-style-type:none;cursor: pointer;">
-                                <img src="~/Content/images/09.png"
-                                     alt="">
-                            </li>
+                    <div class="mb-5">
+                        <p class=" ml-3 " style="text-align: center;width:83.5%;">人氣團主</p>
+                        <ul class="row    ml-3" style="width:83.5%;" >
+                            <li class="mx-auto" style="list-style-type:none;cursor: pointer;">
+                                @for (int i = 0; i < 5; i++)
+                                {
+                                    <img src="~/Content/images/09.png"
+                                         alt="" class="popguys">
+                                }
+                            </li>                            
                         </ul>
                     </div>
                     <!-- 人氣團主 -->
