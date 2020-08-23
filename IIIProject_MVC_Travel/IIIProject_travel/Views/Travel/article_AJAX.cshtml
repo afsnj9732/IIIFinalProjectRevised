@@ -91,18 +91,41 @@
     <div class="row Travel_border align-items-center p-3 pl-4">
         <div class="container-fluid">
             <div class="row m-0 mb-3   justify-content-between">
-                <div class="pl-1">
-                    <span style="cursor: pointer;"><img src="~/Content/images/09.png" alt="">@item.f文章團主名稱</span>
-                    <span>&nbsp; &nbsp;</span>
+                <div class="pl-1" >
+                    <span style="cursor: pointer;">
+                        <img src="~/Content/images/09.png" alt="">@item.f文章團主名稱
+                    </span>
+                </div>
+                <div class="RWD_1851">
                     <span>揪團日期： <span>@item.f文章發文日期</span></span>
                     <span>&nbsp; &nbsp;</span>
                     <span>活動日期： <span>@item.f文章活動開始日期</span></span>
                     <span>&nbsp; &nbsp;</span>
                     <span>入團截止： <span>@item.f文章活動招募日期</span></span>
                 </div>
-                <div class="p-0  ">
-                    <img style="cursor: pointer;" src="~/Content/images/14.png" alt="">
-                </div>
+                <span class="row">
+                    <div class="dropdown RWD_1850 pr-3">
+                        <button class="btn btn-secondary dropdown-toggle RWD_1850 border-0 p-0 pl-2 pr-2" style="height:30px;!important" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            More
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu2">
+                            <button class="dropdown-item drop-site1" style="cursor: pointer;" type="button">
+                                <span>揪團日期： <span>@item.f文章發文日期</span></span>
+                            </button>
+                            <div class="dropdown-divider"></div>
+                            <button class="dropdown-item drop-site2" style="cursor: pointer;" type="button">
+                                <span>活動日期： <span>@item.f文章活動開始日期</span></span>
+                            </button>
+                            <div class="dropdown-divider"></div>
+                            <button class="dropdown-item drop-site3" style="cursor: pointer;" type="button">
+                                <span>入團截止： <span>@item.f文章活動招募日期</span></span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="p-0 pr-3">
+                        <img style="cursor: pointer;" class="pb-1" src="~/Content/images/14.png" alt="">
+                    </div>
+                </span>
             </div>
         </div>
         <div class="row pl-2 flex-wrap-reverse" style="width:100%;">

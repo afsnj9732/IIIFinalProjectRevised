@@ -29,6 +29,7 @@
           success: function (data) {
               $("#article_ajax div").remove();
               $("#article_ajax").append(data);
+              Travel_RWD();
             }          
         });
     });
@@ -58,7 +59,7 @@
 
 
 
-    // 排序固定    
+    // 排序固定RWD    
     // TravelSortFix();
     // function TravelSortFix() {
     let header = document.querySelector(".header");
@@ -77,10 +78,18 @@
         //     travel_sort.style.top = 0 + "px";
         // }
     }
-    travel_sort_scrollHandler();
-    window.addEventListener("resize", function () {
-        console.log(document.body.clientWidth);
-        if (document.body.clientWidth >= 975 ) {            
+
+    function Travel_RWD() {
+        if (document.body.clientWidth < 1850) {
+            $(".RWD_1850").css('display', '');
+            $(".RWD_1851").css('display', 'none');
+
+        } else {
+            $(".RWD_1850").css('display', 'none');
+            $(".RWD_1851").css('display', '');
+        }
+
+        if (document.body.clientWidth >= 975) {
             travel_sort_scrollHandler();
         } else {
             travel_sort.classList.remove("fix");
@@ -88,7 +97,13 @@
             document.querySelector("#replace").classList.remove("col-3");
             travel_sort.classList.add("col-3");
         }
-    });
+    };
+    Travel_RWD();
+     
+
+    window.addEventListener("resize", function () {
+        Travel_RWD();
+    });    
     // window.addEventListener("scroll", travel_sort_scrollHandler);
     // }
 
@@ -100,7 +115,7 @@
 
 
     //排序變化，注意JS.CSS好像不吃Hex碼
-    $("#travel_sort .sort li").on('click', function () {
+    $("#travel_sort .sort li").on('click', function () {        
         //console.log("HI");
         $("#row span").remove();
         $("#row div").append($(this).html());
