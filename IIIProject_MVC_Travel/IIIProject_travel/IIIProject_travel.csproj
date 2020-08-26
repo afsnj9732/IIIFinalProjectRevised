@@ -218,10 +218,12 @@
     <Content Include="Content\css\後台css\dashboard.css" />
     <Content Include="Content\images\14876883363_94995b4f88_o.jpg" />
     <Content Include="Content\images\20190105141437_100.jpg" />
+    <Content Include="Content\images\f899c3a6-45ba-4d37-ba05-8f4e031b0a63.jpg" />
     <Content Include="Content\images\McDonalds.png" />
     <Content Include="Content\images\proheadshot.jpg" />
     <Content Include="Content\images\qm1.jpg" />
     <Content Include="Content\images\qm2.jpeg" />
+    <Content Include="Content\js\eat.js" />
     <Content Include="Content\js\profile.js" />
     <Content Include="Content\js\後台js\bootstrap.bundle.js" />
     <Content Include="Content\js\後台js\dashboard.js" />
