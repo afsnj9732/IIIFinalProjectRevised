@@ -1964,6 +1964,9 @@
     <Content Include="Content\profile.css" />
     <Content Include="Content\quickmatch.css" />
     <Content Include="Content\register.css" />
+    <Content Include="Content\sass\main.css" />
+    <Content Include="Content\sass\slider.css" />
+    <Content Include="Content\sass\style.css" />
     <Content Include="Content\Site.css" />
     <Content Include="Content\slider.css" />
     <Content Include="Content\style.css" />
@@ -2060,6 +2063,12 @@
     <Content Include="JoutaEntities.edmx.diagram">
       <DependentUpon>JoutaEntities.edmx</DependentUpon>
     </Content>
+    <Content Include="Content\sass\main.css.map" />
+    <Content Include="Content\sass\main.scss" />
+    <Content Include="Content\sass\slider.css.map" />
+    <Content Include="Content\sass\slider.scss" />
+    <Content Include="Content\sass\style.css.map" />
+    <Content Include="Content\sass\style.scss" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\check.js" />
     <Content Include="Scripts\debounce.js" />

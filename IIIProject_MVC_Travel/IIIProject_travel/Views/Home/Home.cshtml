@@ -13,10 +13,9 @@
     <title>Jouta | 揪團</title>
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
     <link href="~/Content/fontawesome/css/all.css" rel="stylesheet" />
-    <link href="~/Content/style.css" rel="stylesheet" />
-    <link href="~/Content/main.css" rel="stylesheet" />
+    <link href="~/Content/sass/style.css" rel="stylesheet" />
+    <link href="~/Content/sass/main.css" rel="stylesheet" />
     <link href="~/Content/slider.css" rel="stylesheet" />
-    <link href="~/Content/travel_main.css" rel="stylesheet" />
 </head>
 
 <body>
@@ -42,15 +41,23 @@
                     </ul>
                     <ul class="nav navbar-nav">
                         @if (Session["member"] != null)
-                {
-                    <li class="nav-item nav-link nav-login text-dark">觀迎 @x.f會員名稱 </li>
-                    <li class="nav-item">@Html.ActionLink("登出", "Home", "Home", new { id = 0 }, new { @class = "nav-link nav-login text-dark" })</li>
-                }
-                else
-                {
-                        <li class="nav-item">@Html.ActionLink("登入", "LoginIndex", "Login", new { }, new { @class = "nav-link nav-login text-dark" })</li>
+                        {
+                            <li class="nav-item">@Html.ActionLink("聯絡我們", "Contact", "聯絡我們", new { }, new { @class = "nav-link nav-login text-dark" })</li>
+
+                            <li class="nav-item">@Html.ActionLink("關於我們", "About", "Home", new { }, new { @class = "nav-link nav-register text-dark" })</li>
+                            <li class="nav-item nav-link nav-login text-dark">觀迎 @x.f會員名稱 </li>
+                            <li class="nav-item">@Html.ActionLink("登出", "Home", "Home", new { id = 0 }, new { @class = "nav-link nav-login text-dark" })</li>
                         }
-                        <li class="nav-item">@Html.ActionLink("註冊", "Register", "Home", new { }, new { @class = "nav-link nav-register text-dark" })</li>
+                        else
+                        {
+                            <li class="nav-item">@Html.ActionLink("聯絡我們", "List", "Home", new { }, new { @class = "nav-link nav-login text-dark" })</li>
+
+                            <li class="nav-item">@Html.ActionLink("關於我們", "About", "Home", new { }, new { @class = "nav-link nav-register text-dark" })</li>
+
+                            <li class="nav-item">@Html.ActionLink("登入", "LoginIndex", "Login", new { }, new { @class = "nav-link nav-login text-dark" })</li>
+
+                            <li class="nav-item">@Html.ActionLink("註冊", "Register", "Home", new { }, new { @class = "nav-link nav-register text-dark" })</li>
+                        }
                     </ul>
                 </div>
             </div>
@@ -61,9 +68,9 @@
             <div class="content v-title">
                 <div class="slogan">
                     <h2 class="slogan2">我的旅程精彩有你</h2>
-                    <p class="slogan1">
+                    <p class="mt-3">
                         你還在等待與你旅行的那個人出現嗎? <br>
-                        想要一同歡樂卻總是3缺1呢
+                        想要一同歡樂卻總是3缺1呢?
                     </p>
                 </div>
                 <a class="btn btnQuickmatch" href='@Url.Action("QuickMatch")'>點我快速加團</a> @*改用Url.Action*@
@@ -71,74 +78,92 @@
 
         </div>
         <!--    selection table    -->
-        <div class="tabs d-flex">
-            <input type="radio" name="tabs" id="tabone" checked="checked">
-            <label for="tabone"><i class="fas fa-utensils mr-3"></i>找飯局</label>
-            <div class="tab">
-                <form class="table d-flex" action="" method="POST">
-                    <div class="form-group col-lg-3 col-sm-12">
-                        <label for="location">餐廳所在地區</label>
-                        <select class="form-control location" name="location" id="location">
-                            <option value=""></option>
-                        </select>
-                    </div>
-                    <div class="form-group col-lg-3 col-sm-12 mr-2">
-                        <label for="date">時間:</label>
-                        <input class="form-control time" type="date" name="date" id="date">
-                    </div>
-                    <div class="form-group col-lg-4 col-sm-12 mr-2">
-                        <label for="search">直接搜尋</label>
-                        <input class="form-control" type="text" name="search" id="search">
-                    </div>
-                    <div class="form-group btnstyle col-lg-2 col-sm-12 mr-2">
-                        <button type="button" class="btn btn-warning">搜尋</button>
-                    </div>
-                </form>
-            </div>
+        <div class="tabs">
+            <ul class="nav nav-tabs">
+                <li class="">
+                    <a class="active label" data-toggle="tab" href="#tabone">
+                        <i class="fas fa-utensils mr-3"></i>找飯局
+                    </a>
+                </li>
+                <li class="">
+                    <a class="label" data-toggle="tab" href="#tabtwo">
+                        <i class="fas fa-suitcase-rolling mr-3"></i>找旅遊
+                    </a>
+                </li>
+                <li class="">
+                    <a class="label" data-toggle="tab" href="#tabthree">
+                        <i class="fas fa-pen mr-3"></i>找文章
+                    </a>
+                </li>
+            </ul>
 
-            <input type="radio" name="tabs" id="tabtwo">
-            <label for="tabtwo"><i class="fas fa-suitcase-rolling mr-3"></i>找旅遊</label>
-            <div class="tab">
-                <form class="table d-flex" action="" method="POST">
-                    <div class="form-group col-lg-3 col-sm-12">
-                        <label for="location">地點</label>
-                        <select class="form-control location" name="location" id="location">
-                            <option value=""></option>
-                        </select>
-                    </div>
-                    <div class="form-group col-lg-3 col-sm-12 mr-2">
-                        <label for="date">時間:</label>
-                        <input class="form-control time" type="date" name="date" id="date">
-                    </div>
-                    <div class="form-group col-lg-4 col-sm-12 mr-2">
-                        <label for="search">直接搜尋</label>
-                        <input class="form-control" type="text" name="search" id="search">
-                    </div>
-                    <div class="form-group btnstyle col-lg-2 col-sm-12 mr-2">
-                        <button type="button" class="btn btn-warning">搜尋</button>
-                    </div>
+            <div class="tab-content">
+                <div id="tabone" class="tab-pane fade in active show">
+                    <form class="form-inline table d-flex align-items-end" method="POST" action="">
+                        <div class="form-group col-lg-3 col-md-3 col-sm-12 inner">
+                            <label for="location_eat">所在地區:</label>
+                            <select class="form-control" id="location_eat">
+                                <option value="1">大安區</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-lg-3 col-md-3 col-sm-12 inner">
+                            <label for="time">日期:</label>
+                            <input type="date" class="form-control" id="time">
+                        </div>
+                        <div class="form-group col-lg-3 col-md-3 col-sm-12 inner">
+                            <label for="keyword">關鍵字:</label>
+                            <input type="text" class="form-control" id="keyword">
+                        </div>
+                        <div class="form-group col-lg-3 col-md-3 col-sm-12 inner">
+                            <button type="submit" class="btn btn-warning">搜尋</button>
+                        </div>
 
-                </form>
-            </div>
+                    </form>
 
-            <input type="radio" name="tabs" id="tabthree">
-            <label for="tabthree"><i class="fas fa-pen mr-3"></i>找文章</label>
-            <div class="tab">
-                <form class="table d-flex" action="" method="POST">
-
-                    <div class="form-group col-lg-5 col-sm-12 mr-2">
-                        <label for="date">時間:</label>
-                        <input class="form-control time" type="date" name="date" id="date">
-                    </div>
-                    <div class="form-group col-lg-5 col-sm-12 mr-2">
-                        <label for="search">直接搜尋</label>
-                        <input class="form-control" type="text" name="search" id="search">
-                    </div>
-                    <div class="form-group btnstyle col-lg-2 col-sm-12 mr-2">
-                        <button type="button" class="btn btn-warning">搜尋</button>
-                    </div>
-
-                </form>
+                </div>
+                <div id="tabtwo" class="tab-pane fade">
+                    <form class="form-inline table d-flex align-items-end" method="POST" action="">
+                        <div class="form-group col-lg-3 col-md-3 col-sm-12 inner">
+                            <label for="location_travel">所在地區:</label>
+                            <select class="form-control" id="location_travel">
+                                <option value="1">非洲</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-lg-3 col-md-3 col-sm-12 inner">
+                            <label for="time_travel">日期:</label>
+                            <input type="date" class="form-control" id="time_travel">
+                        </div>
+                        <div class="form-group col-lg-3 col-md-3 col-sm-12 inner">
+                            <label for="keyword_travel">關鍵字:</label>
+                            <input type="text" class="form-control" id="keyword_travel">
+                        </div>
+                        <div class="form-group col-lg-3 col-md-3 col-sm-12 inner">
+                            <button type="submit" class="btn btn-warning">搜尋</button>
+                        </div>
+                    </form>
+                </div>
+                <div id="tabthree" class="tab-pane fade">
+                    <form class="form-inline table d-flex align-items-end" method="POST" action="">
+                        <div class="form-group col-lg-3 col-md-3 col-sm-12 inner">
+                            <label for="location_article">類型:</label>
+                            <select class="form-control" id="location_article">
+                                <option value="1">揪旅遊</option>
+                                <option value="2">揪飯局</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-lg-3 col-md-3 col-sm-12 inner">
+                            <label for="time_article">日期:</label>
+                            <input type="date" class="form-control" id="time_article">
+                        </div>
+                        <div class="form-group col-lg-3 col-md-3 col-sm-12 inner">
+                            <label for="keyword_article">關鍵字:</label>
+                            <input type="text" class="form-control" id="keyword_article">
+                        </div>
+                        <div class="form-group col-lg-3 col-md-3 col-sm-12 inner">
+                            <button type="submit" class="btn btn-warning">搜尋</button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
@@ -160,14 +185,14 @@
                                 <div class="col-lg-4 col-sm-12 block">
                                     <div class="person">
                                         <div class="card" style="width: 18rem;">
-                                            <img src="~/Content/images/6.jpg" class="card-img-top" alt="">
+                                            <img src="~/Content/images/6.jpg" class="card-img-top" alt="" width="350" height="250">
                                             <div class="card-body">
                                                 <h5 class="card-title">Peipei 吳佩佩</h5>
                                                 <p class="card-text">
                                                     是一個兒童職能治療師，因為擁有對生活的熱情，又不想被上下班打卡綁架，
                                                     因此工作變得有些斜槓，目前擁有正職，但仍然經營... <a href="#">read more</a>
                                                 </p>
-                                                @Html.ActionLink("瞻仰一下", "ProfileIndex", "Profile", new { }, new { @class = "btn btnContent" })                                                @*<a href="profile.html" class="btn btnContent">Go somewhere</a>*@
+                                                @Html.ActionLink("了解一下", "ProfileIndex", "Profile", new { }, new { @class = "btn btnContent" })                                                @*<a href="profile.html" class="btn btnContent">Go somewhere</a>*@
                                             </div>
                                         </div>
 
@@ -176,14 +201,14 @@
                                 <div class="col-lg-4 col-sm-12 block">
                                     <div class="person">
                                         <div class="card" style="width: 18rem;">
-                                            <img src="~/Content/images/5.jpg" class="card-img-top" alt="">
+                                            <img src="~/Content/images/5.jpg" class="card-img-top" alt="" width="350" height="250">
                                             <div class="card-body">
                                                 <h5 class="card-title">迷糊兔Love Eat</h5>
                                                 <p class="card-text">
                                                     除了愛吃之外，我也非常喜歡研究料理，不論是小時候在廚房裡探頭探腦當個愛偷吃的小幫手，
                                                     或是外出用餐時觀察老闆如何做出令人垂涎三尺... <a href="#">read more</a>
                                                 </p>
-                                                @Html.ActionLink("瞻仰一下", "ProfileIndex", "Profile", new { }, new { @class = "btn btnContent" })                                                @*<a href="profile.html" class="btn btnContent">Go somewhere</a>*@
+                                                @Html.ActionLink("了解一下", "ProfileIndex", "Profile", new { }, new { @class = "btn btnContent" })                                                @*<a href="profile.html" class="btn btnContent">Go somewhere</a>*@
                                             </div>
                                         </div>
                                     </div>
@@ -191,14 +216,14 @@
                                 <div class="col-lg-4 col-sm-12 block">
                                     <div class="person">
                                         <div class="card" style="width: 18rem;">
-                                            <img src="~/Content/images/4.jpg" class="card-img-top" alt="">
+                                            <img src="~/Content/images/4.jpg" class="card-img-top" alt="" width="350" height="250">
                                             <div class="card-body">
                                                 <h5 class="card-title">Kristin</h5>
                                                 <p class="card-text">
                                                     我是個主觀、偏頗的人，也不追求所謂專業的遊記、書評或影評。
                                                     我只想把心裡認為值得分享的分享出去、眼裡看到最美麗的記錄...<a href="#">read more</a>
                                                 </p>
-                                                @Html.ActionLink("瞻仰一下", "ProfileIndex", "Profile", new { }, new { @class = "btn btnContent" })
+                                                @Html.ActionLink("了解一下", "ProfileIndex", "Profile", new { }, new { @class = "btn btnContent" })
                                                 @*<a href="profile.html" class="btn btnContent">Go somewhere</a>*@
                                             </div>
                                         </div>
@@ -312,56 +337,67 @@
                     </div>
                 </div>
                 <div class="col-lg-4">
-                    <figure class="snip1518">
-                        <div class="image"><img src="~/Content/images/001.jpg" alt="" /></div>
+                    <figure class="traveller">
+                        <div class="image">
+                            <img src="~/Content/images/001.jpg" alt="愛旅行的喵" width="350" height="300" />
+                        </div>
                         <figcaption>
-                            <h5>你說我和飛機誰大?</h5>
-                            <h3>我是個喜歡四處遊玩的blogger，喜歡我的背影還不快點擊加入我們，讓姊帶你飛 </h3>
-                            @Html.ActionLink("朕要+1", "TravelIndex", "Travel", new { }, new { @class = "btn btnContent mt-2" })
-                            @*<a class="btn btnContent mt-2" href="travel.html"> 朕要+1</a>*@
-                            <footer>
+                            <h3>飛向宇宙浩瀚無垠</h3>
+                            <p class="card-text" style="text-align: left;">
+                                我是個喜歡四處遊玩的blogger，旅行的奧妙樂趣無窮，
+                                喜歡我的背影嗎?還不快點擊加入我們，讓姊帶你飛帶你遊世界
+                            </p>
+                            @Html.ActionLink("我要+1", "TravelIndex", "Travel", new { }, new { @class = "btn btnContent mt-2" })
+
+                            <section class="block_footer">
                                 <div class="date">October 30, 2015</div>
                                 <div class="icons">
                                     <div class="views"><i class="ion-eye"></i>2,907</div>
                                     <div class="love"><i class="ion-heart"></i>623</div>
                                 </div>
-                            </footer>
+                            </section>
                         </figcaption>
                     </figure>
                 </div>
                 <div class="col-lg-4">
-                    <figure class="snip1518 hover">
-                        <div class="image"><img src="~/Content/images/002.jpg" alt="" /></div>
+                    <figure class="traveller hover">
+                        <div class="image"><img src="~/Content/images/002.jpg" alt="遊牧民族" width="350" height="300" /></div>
                         <figcaption>
-                            <h5>老子不怕高</h5>
-                            <h3>加入我們~帶你飛高高，站高高....摔痛痛....</h3>
-                            @Html.ActionLink("朕要+1", "TravelIndex", "Travel", new { }, new { @class = "btn btnContent mt-2" })
-                            @*<a class="btn btnContent mt-2" href="travel.html"> 朕要+1</a>*@
-                            <footer>
+                            <h3>登高望遠</h3>
+                            <p class="card-text" style="text-align: left;">
+                                其實人很渺小，只有待在高處才能看見平時看不到的風景，
+                                有幸與我同遊，帶你領略這一切，加入我們~帶你飛高高，站高高....摔痛痛....
+                            </p>
+                            @Html.ActionLink("我要+1", "TravelIndex", "Travel", new { }, new { @class = "btn btnContent mt-2" })
+                            <section class="block_footer">
                                 <div class="date">November 7, 2016</div>
                                 <div class="icons">
                                     <div class="views"><i class="ion-eye"></i>1,870</div>
                                     <div class="love"><i class="ion-heart"></i>973</div>
                                 </div>
-                            </footer>
+                            </section>
                         </figcaption>
                     </figure>
                 </div>
                 <div class="col-lg-4">
-                    <figure class="snip1518">
-                        <div class="image"><img src="~/Content/images/003.jpg" alt="" /></div>
+                    <figure class="traveller">
+                        <div class="image">
+                            <img src="~/Content/images/003.jpg" alt="南洋的梨" width="350" height="300" />
+                        </div>
                         <figcaption>
-                            <h5>南洋沙灘浪漫一夏</h5>
-                            <h3>網美看過來，姊的技術一流，化腐朽為神奇...</h3>
-                            @Html.ActionLink("朕要+1", "TravelIndex", "Travel", new { }, new { @class = "btn btnContent mt-2" })
-                            @*<a class="btn btnContent mt-2" href="travel.html"> 朕要+1</a>*@
-                            <footer>
+                            <h3>南洋沙灘浪漫一夏</h3>
+                            <p class="card-text" style="text-align: left;">
+                                誰說度假要去南方小島，隆重介紹一下這是我家後院，
+                                網美看過來，姊的技術一流，化腐朽為神奇...
+                            </p>
+                            @Html.ActionLink("我要+1", "TravelIndex", "Travel", new { }, new { @class = "btn btnContent mt-2" })
+                            <section class="block_footer">
                                 <div class="date">January 21, 2016</div>
                                 <div class="icons">
                                     <div class="views"><i class="ion-eye"></i>928</div>
                                     <div class="love"><i class="ion-heart"></i>198</div>
                                 </div>
-                            </footer>
+                            </section>
                         </figcaption>
                     </figure>
                 </div>

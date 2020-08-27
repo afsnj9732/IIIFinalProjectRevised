@@ -1,0 +1,72 @@
+@charset "UTF-8";
+@import url(https://fonts.googleapis.com/earlyaccess/notosanstc.css);
+*, *:before, *:after {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+body, html {
+  font-family: 'Noto Sans TC','微軟正黑體', monospace !important;
+  overflow-x: hidden;
+}
+
+html {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+a {
+  font-weight: bolder;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+.container-fluid {
+  padding: 0;
+}
+
+/* banner */
+.navbar {
+  z-index: 99;
+  background-color: #fffbdf;
+}
+
+.nav-item {
+  -webkit-transition-duration: 0.3s;
+          transition-duration: 0.3s;
+  border-radius: 10px;
+}
+
+.nav-item:hover {
+  background-color: #fee567;
+  color: #111111;
+  border-radius: 20px;
+  -webkit-transition-duration: 0.3s;
+          transition-duration: 0.3s;
+}
+
+.header {
+  border-bottom: 3px solid #f5be2e;
+}
+
+/* sticky navbar */
+.fixedMenu #main {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+
+.footer {
+  border-radius: 75% 75%  0% 0%;
+  bottom: 0;
+  font-size: 16px;
+  background-color: #fffbdf;
+  color: black;
+  border-top: 3px solid #f5be2e;
+}
+/*# sourceMappingURL=style.css.map */
