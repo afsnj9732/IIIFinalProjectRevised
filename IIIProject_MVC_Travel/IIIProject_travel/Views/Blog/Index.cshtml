@@ -69,16 +69,17 @@
                 </h1>
 
                 <hr size="8" width="100%">
+                @{ 
+                    foreach (tArticle tArticle in Model)
+                    {
 
                 <!-- Blog Post -->
                 <div class="card mb-4">
                     <img class="card-img-top" src="~/Content/images/blogPost.jpg" w alt="Card image cap">
                     <div class="card-body">
-                        <h2 class="card-title">Wild Donkey 野驢小餐館</h2>
+                        <h2 class="card-title">@tArticle.f標題</h2>
                         <p class="card-text">
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis
-                            aliquid atque, nulla? Quos cum ex quis soluta, a laboriosam. Dicta expedita corporis animi
-                            vero voluptate voluptatibus possimus, veniam magni quis!
+                            @tArticle.f發文內容
                         </p>
                         <a class="nav-item">@Html.ActionLink("Read More", "List", "Blog", new { }, new { @class = "btn btnContent" })</a>
                     </div>
@@ -88,47 +89,11 @@
 
                     </div>
                 </div>
-
-                <!-- Blog Post -->
-                <div class="card mb-4">
-                    <img class="card-img-top" src="https://picsum.photos/750/400/?random=2" alt="Card image cap">
+                        } 
+                    }
 
 
-                    <div class="card-body">
-                        <h2 class="card-title">Post Title</h2>
-                        <p class="card-text">
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis
-                            aliquid atque, nulla? Quos cum ex quis soluta, a laboriosam. Dicta expedita corporis animi
-                            vero voluptate voluptatibus possimus, veniam magni quis!
-                        </p>
-                        <a href="blog_post.html" class="btn btnContent">Read More &rarr;</a>
-                    </div>
-                    <div class="card-footer text-muted">
 
-                        <p class="pDateSection"> Posted on January 1, 2020 by <a href="#">Jouta</a></p>
-
-                    </div>
-                </div>
-
-                <!-- Blog Post -->
-                <div class="card mb-4">
-                    <img class="card-img-top" src="https://picsum.photos/750/400/?random=3" alt="Card image cap">
-
-
-                    <div class="card-body">
-                        <h2 class="card-title">Post Title</h2>
-                        <p class="card-text">
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis
-                            aliquid atque, nulla? Quos cum ex quis soluta, a laboriosam. Dicta expedita corporis animi
-                            vero voluptate voluptatibus possimus, veniam magni quis!
-                        </p>
-                        <a href="blog_post.html" class="btn btnContent">Read More &rarr;</a>
-                    </div>
-                    <div class="card-footer text-muted">
-
-                        <p class="pDateSection"> Posted on January 1, 2020 by <a href="#">Jouta</a></p>
-                    </div>
-                </div>
 
                 <!-- Pagination -->
                 <ul class="pagination justify-content-center mb-4">
