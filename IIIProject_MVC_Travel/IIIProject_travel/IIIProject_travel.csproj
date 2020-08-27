@@ -134,6 +134,7 @@
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Controllers\TravelController.cs" />
+    <Compile Include="Controllers\後台HomeController.cs" />
     <Compile Include="Controllers\後台文章Controller.cs" />
     <Compile Include="Controllers\後台旅遊Controller.cs" />
     <Compile Include="Controllers\後台會員Controller.cs" />
@@ -2130,6 +2131,7 @@
     <Content Include="Views\後台旅遊\List.cshtml" />
     <Content Include="Views\後台飯局\List.cshtml" />
     <Content Include="Views\後台文章\List.cshtml" />
+    <Content Include="Views\後台Home\Home.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

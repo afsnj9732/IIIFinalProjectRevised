@@ -1,7 +1,7 @@
 ﻿@{
     Layout = null;
 }
-@model IEnumerable<tEat>
+@model IEnumerable<tMember>
 
 <!doctype html>
 <html lang="en">
@@ -29,17 +29,21 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
+    @using (Html.BeginForm())
+    {
+        <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
         <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Company name</a>
         <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
         <ul class="navbar-nav px-3">
             <li class="nav-item text-nowrap">
-                <a>
-                    @Html.ActionLink("Sign out", "Home", "Home", new { id = 0 }, new { @class = "nav-link" })
-                </a>
-            </li>
-        </ul>
-    </nav>
+                    <a>
+                        @Html.ActionLink("Sign out", "Home", "Home", new { id = 0 }, new { @class = "nav-link" })
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+    }
 
     <div class="container-fluid">
         <div class="row">
@@ -90,72 +94,15 @@
                 </div>
             </nav>
 
+            
             <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
 
 
-                <h2>飯局列表</h2>
-                <div class="table-responsive">
-                    <table class="table table-striped table-sm">
-                        <thead>
-                            <tr>
-                                <td>筆數</td>
-                                <td>飯局編號</td>
-                                <td>帳號</td>
-                                <td>暱稱</td>
-                                <td>大頭貼</td>
-                                <td>團圖</td>
-                                <td>內容</td>
-                                <td>點讚次數</td>
-                                <td>建立時間</td>
-                                <td>開團標題</td>
-                                <td>活動開始時間</td>
-                                <td>地點</td>
-                                <td>預算</td>
-                                <td>分類</td>
-                                <td>按鈕</td>
-                                <td>按鈕</td>
-
-                            </tr>
-                        </thead>
-
-                        <tbody>
-
-                            @{
-                                int c筆數 = 0;
-                                foreach (tEat t in Model)
-                                {
-                                    c筆數++;
-                                    <tr>
-                                        <td>@c筆數.ToString()</td>
-                                        <td>@t.f飯局編號</td>
-                                        <td>@t.f帳號</td>
-                                        <td>@t.f暱稱</td>
-                                        <td>@t.f大頭貼</td>
-                                        <td>@t.f團圖</td>
-                                        <td>@t.f內容</td>
-                                        <td>@t.f點讚次數</td>
-                                        <td>@t.f建立時間</td>
-                                        <td>@t.f開團標題</td>
-                                        <td>@t.f活動開始時間</td>
-                                        <td>@t.f地點</td>
-                                        <td>@t.f預算</td>
-                                        <td>@t.f分類</td>
-                                        <td>
-                                            @Html.ActionLink("查看", "v查看", "後台飯局", new { id = t.f飯局編號 }, new { Class = "btn btn-info" })
-                                    </td>
-                                    <td>
-                                        @Html.ActionLink("刪除", "d刪除", "後台飯局", new { id = t.f飯局編號 },
-                                        new { OnClick = "return confirm('確定要刪除嗎?')", Class = "btn btn-danger" })
-                                    </td>
-                                    </tr>
-                                }
-                            }
-
-
-                        </tbody>
-                    </table>
-                </div>
             </main>
+
+
+
+
         </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
