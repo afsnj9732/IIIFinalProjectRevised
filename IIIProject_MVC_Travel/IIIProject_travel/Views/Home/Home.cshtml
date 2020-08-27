@@ -16,6 +16,7 @@
     <link href="~/Content/sass/style.css" rel="stylesheet" />
     <link href="~/Content/sass/main.css" rel="stylesheet" />
     <link href="~/Content/slider.css" rel="stylesheet" />
+    
 </head>
 
 <body>
@@ -28,8 +29,9 @@
                             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
-                </div>               
-                <a class="navbar-brand" href="@Url.Action("Home", "Home")">@*改用Url.Action*@
+                </div>
+                <a class="navbar-brand" href="@Url.Action("Home", "Home")">
+                    @*改用Url.Action*@
                     <img src="~/Content/images/joutalogo_black.png" alt="" width="100">
                 </a>
                 <div class="navbar-collapse collapse justify-content-between" id="navbarNav">
@@ -42,7 +44,7 @@
                     <ul class="nav navbar-nav">
                         @if (Session["member"] != null)
                         {
-                            <li class="nav-item">@Html.ActionLink("聯絡我們", "Contact", "聯絡我們", new { }, new { @class = "nav-link nav-login text-dark" })</li>
+                            <li class="nav-item">@Html.ActionLink("聯絡我們", "New", "聯絡我們", new { }, new { @class = "nav-link nav-login text-dark" })</li>
 
                             <li class="nav-item">@Html.ActionLink("關於我們", "About", "Home", new { }, new { @class = "nav-link nav-register text-dark" })</li>
                             <li class="nav-item nav-link nav-login text-dark">觀迎 @x.f會員名稱 </li>
@@ -63,14 +65,14 @@
             </div>
         </nav>
         <!-- main -->
-        <div class="main video-section">
+        <div id="mainView" class="main video-section">
             <video src="~/Content/images/video.mp4" autoplay muted loop></video>
             <div class="content v-title">
                 <div class="slogan">
-                    <h2 class="slogan2">我的旅程精彩有你</h2>
+                    <h2 class="slogan2">{{slogan2}}</h2>
                     <p class="mt-3">
-                        你還在等待與你旅行的那個人出現嗎? <br>
-                        想要一同歡樂卻總是3缺1呢?
+                        {{ slogan1}}<br>
+                        {{ slogan3}}
                     </p>
                 </div>
                 <a class="btn btnQuickmatch" href='@Url.Action("QuickMatch")'>點我快速加團</a> @*改用Url.Action*@
@@ -181,7 +183,7 @@
                     </div>
                     <div class="member_block">
                         <div class="container">
-                            <div class="row">
+                            <div id="member" class="row">
                                 <div class="col-lg-4 col-sm-12 block">
                                     <div class="person">
                                         <div class="card" style="width: 18rem;">
@@ -501,13 +503,22 @@
 
     <!-- script -->
     @Scripts.Render("~/Scripts/jquery-3.5.1.js")
+    @Scripts.Render("~/Content/js/vue.js")
     @Scripts.Render("~/Scripts/popper.min.js")
     @Scripts.Render("~/Scripts/bootstrap.min.js")
     @Scripts.Render("~/Scripts/slider.js")
     @Scripts.Render("~/Scripts/travel_main.js")
-    @Scripts.Render("~/Scripts/navbar.js")
-    <script>
+    @Scripts.Render("~/Scripts/main_Vue.js")
 
+    <script>
+        let vm = new Vue({
+            el: '#mainView',
+            data: {
+                slogan2: '我的旅程精彩有你',
+                slogan1: `你還在等待與你旅行的那個人出現嗎?`,
+                slogan3: `想要一同歡樂卻總是3缺1呢?`
+            }
+        });
 
 
     </script>

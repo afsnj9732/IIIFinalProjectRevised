@@ -225,6 +225,7 @@
     <Content Include="Content\images\qm2.jpeg" />
     <Content Include="Content\js\eat.js" />
     <Content Include="Content\js\profile.js" />
+    <Content Include="Content\js\vue.js" />
     <Content Include="Content\js\後台js\bootstrap.bundle.js" />
     <Content Include="Content\js\後台js\dashboard.js" />
     <Content Include="Content\js\後台js\jquery-slim.min.js" />
