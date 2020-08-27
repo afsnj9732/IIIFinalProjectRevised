@@ -1,0 +1,63 @@
+﻿@model IEnumerable<tEat>
+@{
+    Layout = null;
+    int count = 0;
+}
+
+@foreach (var item in Model)
+{
+    count++;
+    tMember poster = (new dbJoutaEntities())
+        .tMember.FirstOrDefault(o => o.f會員帳號 == item.f帳號);
+
+    <!-- 活動格 -->
+    <div class="qBoxblock mb-4">
+        <!-- box左 -->
+        <div class="qEvent col-lg-5 col-md-6 col-sm-6">
+            <!-- 團主 -->
+            <div class="eMember">
+                <!-- 團主頭貼 -->
+                <div class="memberAvatar mr-1">
+                    <img src="~/Content/images/@poster.f會員大頭貼" alt="">
+                </div>
+                <!-- 團主稱號&名字 -->
+                <div class="memberInfo">
+                    <!-- 團主稱號 -->
+                    <div class="memberTitle">@poster.f會員稱號</div>
+                    <!-- 團主名 -->
+                    <div class="memberName">@poster.f會員名稱</div>
+                </div>
+                <!-- 團主評分 -->
+                <div class="memberRating">@poster.f會員評分</div>
+            </div>
+            <!-- 活動圖 -->
+            <div class="eEventPic">
+                <img src="~/Content/images/@item.f團圖" alt="">
+            </div>
+        </div>
+        <!-- box右 -->
+        <div class="qContent col-lg-7 col-md-6 col-sm-6">
+            <!-- 標題 -->
+            <div class="cTitle mb-1">@item.f開團標題</div>
+            <!-- 時間 -->
+            <div class="cStartTime mb-1">．@item.f活動開始時間</div>
+            <!-- 地點 -->
+            <div class="cPosition">．@item.f地點</div>
+            <hr>
+            <!-- 簡易資訊 -->
+            <div class="cInfo">
+                @item.f內容...<a href="#">(read more)</a>
+            </div>
+            <!-- 社交按鈕 -->
+            @if (Session["member"] != null)
+            {
+                <div class="cSocial btn-group btn-group-sm" role="group" aria-label="Basic example">
+                    <button type="button" class="btn btnSocial-warning">關注</button>
+                    <button type="button" class="btn btnSocial-warning">分享</button>
+                    <button type="button" class="btn btnSocial-warning">留言</button>
+                </div>
+            }
+        </div>
+    </div>
+}
+

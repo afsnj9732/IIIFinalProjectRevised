@@ -4,413 +4,417 @@
     var x = (tMember)Session["member"];
 }
 
-<!DOCTYPE html>
-<html lang="zh-Hant-TW">
+@{
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jouta | 揪飯局</title>
-    @Styles.Render("~/Content/bootstrap.min.css")
-    @Styles.Render("~/Content/css/style.css")
-    @Styles.Render("~/Content/css/eat.css")
-    <link rel="shortcut icon" href="favicon.ico" />
-</head>
+    <!DOCTYPE html>
+    <html lang="zh-Hant-TW">
 
-<body>
-    <div class="container-fluid">
-        <!-- navbar -->
-        <nav class="navbar navbar-expand-lg navbar-light header" id="main">
-            <div class="container">
-                <a class="navbar-brand" href="main.html">
-                    <img src="~/Content/images/joutalogo_black.png" alt="" width="100">
-                </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-                        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
-                    <ul class="nav navbar-nav">
-                        <li class="nav-item">@Html.ActionLink("首頁", "Home", "Home", new { }, new { @class = "nav-link nav-main text-dark" })</li>
-                        <li class="nav-item">@Html.ActionLink("找飯局", "EatIndex", "Eat", new { }, new { @class = "nav-link nav-eat text-dark" })</li>
-                        <li class="nav-item">@Html.ActionLink("找旅遊", "TravelIndex", "Travel", new { }, new { @class = "nav-link nav-travel text-dark" })</li>
-                        <li class="nav-item">@Html.ActionLink("找文章", "Index", "Blog", new { }, new { @class = "nav-link nav-blog text-dark" })</li>
-                    </ul>
-                    <ul class="nav navbar-nav">
-                        @if (Session["member"] != null)
-                        {
-                            <li class="nav-item nav-link nav-login text-dark">觀迎 @x.f會員名稱 </li>
-                            <li class="nav-item">@Html.ActionLink("登出", "Home", "Home", new { id = 0 }, new { @class = "nav-link nav-login text-dark" })</li>
-                        }
-                        else
-                        {
-                            <li class="nav-item">@Html.ActionLink("登入", "LoginIndex", "Login", new { }, new { @class = "nav-link nav-login text-dark" })</li>
-                        }
-                        <li class="nav-item">@Html.ActionLink("註冊", "Register", "Home", new { }, new { @class = "nav-link nav-register text-dark" })</li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </div>
-    <!-- filter -->
-    <div class="container-fluid filter" id="filter">
-        <div class="container text-white">
-            <form class="top_form">
-                <div class="input-group">
-                    <input type="text" id="search" placeholder="輸入任何關鍵字..." autocomplete="off">
-                    <!-- <label for="search"><i class="fas fa-search"></i></label>-->
-                </div>
-                <div class="suggestion-list hidden">
-                </div>
-            </form>
-        </div>
-    </div>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Jouta | 揪飯局</title>
+        @Styles.Render("~/Content/bootstrap.min.css")
+        @Styles.Render("~/Content/css/style.css")
+        @Styles.Render("~/Content/css/eat.css")
+        <link rel="shortcut icon" href="favicon.ico" />
+    </head>
 
-    <!-- main_quest -->
-    <div class="container-fluid">
-        <div class="container quests">
-            <div class="row">
-                <!-- 篩選器 -->
-                <div class="sidebar col-xl-3 col-lg-3 col-md">
-                    <button type="button" class="btn btnContent btn-lg btn-block mb-3" id="sidebaritems"
-                            data-toggle="modal" data-target="#JouModal">
-                        Jou團去!
+    <body>
+        <div class="container-fluid">
+            <!-- navbar -->
+            <nav class="navbar navbar-expand-lg navbar-light header" id="main">
+                <div class="container">
+                    <a class="navbar-brand" href="main.html">
+                        <img src="~/Content/images/joutalogo_black.png" alt="" width="100">
+                    </a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
                     </button>
-
-                    <div class="filterbtn">
-                        <p class="mb-3" id="sidebaritems">▽ 搜尋結果排序根據</p>
-                    </div>
-
-                    <button type="button" class="btn btn-outline-warning btn-block btn-sm mb-3"
-                            id="sidebaritems">
-                        <span><img src="~/Content/images/01.png" alt="">熱門</span>
-                    </button>
-                    <button type="button" class="btn btn-outline-warning btn-block btn-sm mb-3"
-                            id="sidebaritems">
-                        <span><img src="~/Content/images/02.png" alt="">最新</span>
-                    </button>
-                    <button type="button" class="btn btn-outline-warning btn-block btn-sm mb-3"
-                            id="sidebaritems">
-                        <span><img src="~/Content/images/03.png" alt="">地區</span>
-                    </button>
-                    <button type="button" class="btn btn-outline-warning btn-block btn-sm mb-3"
-                            id="sidebaritems">
-                        <span><img src="~/Content/images/04.png" alt="">預算</span>
-                    </button>
-                    <button type="button" class="btn btn-outline-warning btn-block btn-sm mb-3"
-                            id="sidebaritems">
-                        <span><img src="~/Content/images/05.png" alt="">讚數</span>
-                    </button>
-                    <button type="button" class="btn btn-outline-warning btn-block btn-sm mb-3"
-                            id="sidebaritems">
-                        <span><img src="~/Content/images/06.png" alt="">瀏覽次數</span>
-                    </button>
-                    <button type="button" class="btn btn-outline-warning btn-block btn-sm mb-3"
-                            id="sidebaritems">
-                        <span><img src="~/Content/images/07.png" alt="">活動日期</span>
-                    </button>
-                    <button type="button" class="btn btn-outline-warning btn-block btn-sm mb-3"
-                            id="sidebaritems">
-                        <span><img src="~/Content/images/08.png" alt="">入團截止</span>
-                    </button>
-
-                    <div class="popularMemberbtn">
-                        <p class="mb-3" id="sidebaritems">▽ 人氣團主</p>
-                    </div>
-
-                    <ul class="d-flex mb-3">
-                        <li class="popularAvatar mr-3" style="list-style-type:none;cursor: pointer;">
-                            <img src="~/Content/images/09.png" alt="">
-                        </li>
-                        <li class="popularAvatar mr-3" style="list-style-type:none;cursor: pointer;">
-                            <img src="~/Content/images/09.png" alt="">
-                        </li>
-                        <li class="popularAvatar mr-3" style="list-style-type:none;cursor: pointer;">
-                            <img src="~/Content/images/09.png" alt="">
-                        </li>
-                        <li class="popularAvatar mr-3" style="list-style-type:none;cursor: pointer;">
-                            <img src="~/Content/images/09.png" alt="">
-                        </li>
-                        <li class="popularAvatar mr-3" style="list-style-type:none;cursor: pointer;">
-                            <img src="~/Content/images/09.png" alt="">
-                        </li>
-                    </ul>
-                </div>
-
-                <!-- jou modal head -->
-                <div class="modal fade" id="JouModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-                     aria-hidden="true">
-                    <div class="modal-dialog change-max-width-1400" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header border-main-color">
-                                <h5 class="modal-title" id="exampleModalLabel">
-                                    <span style="font-weight:bolder;">
-                                        開團
-                                    </span>
-                                </h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-
-                            <!-- jou modal content -->
+                    <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">@Html.ActionLink("首頁", "Home", "Home", new { }, new { @class = "nav-link nav-main text-dark" })</li>
+                            <li class="nav-item">@Html.ActionLink("找飯局", "EatIndex", "Eat", new { }, new { @class = "nav-link nav-eat text-dark" })</li>
+                            <li class="nav-item">@Html.ActionLink("找旅遊", "TravelIndex", "Travel", new { }, new { @class = "nav-link nav-travel text-dark" })</li>
+                            <li class="nav-item">@Html.ActionLink("找文章", "Index", "Blog", new { }, new { @class = "nav-link nav-blog text-dark" })</li>
+                        </ul>
+                        <ul class="nav navbar-nav">
                             @if (Session["member"] != null)
                             {
-                                <form enctype="multipart/form-data" method="post">
-                                    <div class="modal-body">
-                                        <div class="container">
-                                            <div class="m-0 mb-3 modalContent row justify-content-around">
-                                                <p>
-                                                    <img src="./images/19.png" class="mb-1" alt="">標題：<input type="text"
-                                                                                                             name="UserName" id="modalTitle">
-                                                </p>
-                                            </div>
-
-                                            <div class="m-0 mb-3 modalContent row justify-content-around">
-                                                <div class="modalContentLeft mb-1">
-                                                    <p>
-                                                        <img src="./images/08.png" class="mb-1" alt="">旅遊開始日期： <input class="mb-1" type="date" name="UserName">
-                                                    </p>
-                                                    <p>
-                                                        <img src="./images/08.png" class="mb-1" alt="">旅遊結束日期： <input class="mb-1" type="date" name="UserName">
-                                                    </p>
-                                                    <p>
-                                                        <img src="./images/08.png" class="mb-1" alt="">入團截止日期： <input class="mb-1" type="date" name="UserName">
-                                                    </p>
-                                                    <p>
-                                                        <img src="./images/20.png" class="mb-1" alt="">團圖：<input class="mb-1"
-                                                                                                                 Type="File" Name="YouFile">
-                                                    </p>
-                                                </div>
-                                                <div class="modalContentRight">
-                                                    <p>
-                                                        <img src="./images/04.png" class="mb-1" alt="">預算：<input class="mb-1"
-                                                                                                                 type="text" name="UserName">
-                                                    </p>
-                                                    <p>
-                                                        <img src="./images/17.png" class="mb-1" alt="">分類：<input class="mb-1"
-                                                                                                                 type="text" name="UserName">
-                                                    </p>
-                                                    <p>
-                                                        <img src="./images/13.png" class="mb-1" alt="">標籤：<input class="mb-1"
-                                                                                                                 type="text" name="UserName">
-                                                    </p>
-                                                    <p>
-                                                        <img src="./images/03.png" class="mb-1" alt="">
-                                                        地區：
-                                                        <select name="" id="">
-                                                            <option value="">北部</option>
-                                                            <option value="">中部</option>
-                                                            <option value="">南部</option>
-                                                            <option value="">東部</option>
-                                                        </select>
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="m-0 mb-3 modalContent row justify-content-around">
-                                            <div class="mx-auto mb-3">
-                                                內容：<textarea name="Content"></textarea>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                    <!-- jou modal btns -->
-                                    <div class="modal-footer  mt-2 border-main-color">
-                                        <button type="submit" class="btn" style="background-color:#fee567"
-                                                data-dismiss="modal">
-                                            送出
-                                        </button>
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
-                                    </div>
-
-                                    <!-- jouta modal hidden -->
-                                    <input type="hidden" name="f帳號" value="0">
-                                    <input type="hidden" name="f大頭貼" value="0">
-                                    <input type="hidden" name="f點讚次數" value="0">
-                                    <input type="hidden" name="f建立時間" value="@DateTime.Now.ToString("yyyy-MM-dd")">
-                                    <input type="hidden" name="f暱稱" value="Test">
-                                </form>
+                                <li class="nav-item nav-link nav-login text-dark">觀迎 @x.f會員名稱 </li>
+                                <li class="nav-item">@Html.ActionLink("登出", "Home", "Home", new { id = 0 }, new { @class = "nav-link nav-login text-dark" })</li>
                             }
                             else
                             {
-                                <p>請先登入會員</p>
+                                <li class="nav-item">@Html.ActionLink("登入", "LoginIndex", "Login", new { }, new { @class = "nav-link nav-login text-dark" })</li>
                             }
-                        </div>
+                            <li class="nav-item">@Html.ActionLink("註冊", "Register", "Home", new { }, new { @class = "nav-link nav-register text-dark" })</li>
+                        </ul>
                     </div>
                 </div>
+            </nav>
+        </div>
+        <!-- filter -->
+        <div class="container-fluid filter" id="filter">
+            <div class="container text-white">
+                <form class="top_form">
+                    <div class="input-group">
+                        <input type="text" id="search" placeholder="輸入任何關鍵字..." autocomplete="off">
+                        <!-- <label for="search"><i class="fas fa-search"></i></label>-->
+                    </div>
+                    <div class="suggestion-list hidden">
+                    </div>
+                </form>
+            </div>
+        </div>
 
-                <!-- 活動清單 -->
-                <div class="questbox col-xl-9 col-lg-9 col-md">
-                    <!-- 活動格 -->
-                    <div class="qBoxblock mb-4">
-                        <!-- box左 -->
-                        <div class="qEvent col-lg-5 col-md-6 col-sm-6">
-                            <!-- 團主 -->
-                            <div class="eMember">
-                                <!-- 團主頭貼 -->
-                                <div class="memberAvatar mr-1">
-                                    <img src="images/memberAvatar.jpg" alt="">
-                                </div>
-                                <!-- 團主稱號&名字 -->
-                                <div class="memberInfo">
-                                    <!-- 團主稱號 -->
-                                    <div class="memberTitle">一天八餐</div>
-                                    <!-- 團主名 -->
-                                    <div class="memberName">no face</div>
-                                </div>
-                                <!-- 團主評分 -->
-                                <div class="memberRating">☆4.7</div>
-                            </div>
-                            <!-- 活動圖 -->
-                            <div class="eEventPic">
-                                <img src="~/Content/images/foods.jpg" alt="">
-                            </div>
+        <!-- main_quest -->
+        <div class="container-fluid">
+            <div class="container quests">
+                <div class="row">
+                    <!-- 篩選器 -->
+                    <div class="sidebar col-xl-3 col-lg-3 col-md">
+                        <button type="button" class="btn btnContent btn-lg btn-block mb-3" id="sidebaritems"
+                                data-toggle="modal" data-target="#JouModal">
+                            Jou團去!
+                        </button>
+
+                        <div class="filterbtn">
+                            <p class="mb-3" id="sidebaritems">▽ 搜尋結果排序根據</p>
                         </div>
-                        <!-- box右 -->
-                        <div class="qContent col-lg-7 col-md-6 col-sm-6">
-                            <!-- 標題 -->
-                            <div class="cTitle mb-1">豪大雞排·非吃不可</div>
-                            <!-- 時間 -->
-                            <div class="cStartTime mb-1">．2020/08/18 18:55</div>
-                            <!-- 地點 -->
-                            <div class="cPosition">．臺北, 台北車站西三門</div>
-                            <hr>
-                            <!-- 簡易資訊 -->
-                            <div class="cInfo">
-                                約在火車站的火字下方
 
-                                我要吃一百片♾...<a href="#">(read more)</a>
-                            </div>
-                            <!-- 社交按鈕 -->
-                            <div class="cSocial btn-group btn-group-sm" role="group" aria-label="Basic example">
-                                <button type="button" class="btn btnSocial-warning">關注</button>
-                                <button type="button" class="btn btnSocial-warning">分享</button>
-                                <button type="button" class="btn btnSocial-warning">留言</button>
+                        <button type="button" class="btn btn-outline-warning btn-block btn-sm mb-3"
+                                id="sidebaritems">
+                            <span><img src="~/Content/images/01.png" alt="">熱門</span>
+                        </button>
+                        <button type="button" class="btn btn-outline-warning btn-block btn-sm mb-3"
+                                id="sidebaritems">
+                            <span><img src="~/Content/images/02.png" alt="">最新</span>
+                        </button>
+                        <button type="button" class="btn btn-outline-warning btn-block btn-sm mb-3"
+                                id="sidebaritems">
+                            <span><img src="~/Content/images/03.png" alt="">地區</span>
+                        </button>
+                        <button type="button" class="btn btn-outline-warning btn-block btn-sm mb-3"
+                                id="sidebaritems">
+                            <span><img src="~/Content/images/04.png" alt="">預算</span>
+                        </button>
+                        <button type="button" class="btn btn-outline-warning btn-block btn-sm mb-3"
+                                id="sidebaritems">
+                            <span><img src="~/Content/images/05.png" alt="">讚數</span>
+                        </button>
+                        <button type="button" class="btn btn-outline-warning btn-block btn-sm mb-3"
+                                id="sidebaritems">
+                            <span><img src="~/Content/images/06.png" alt="">瀏覽次數</span>
+                        </button>
+                        <button type="button" class="btn btn-outline-warning btn-block btn-sm mb-3"
+                                id="sidebaritems">
+                            <span><img src="~/Content/images/07.png" alt="">活動日期</span>
+                        </button>
+                        <button type="button" class="btn btn-outline-warning btn-block btn-sm mb-3"
+                                id="sidebaritems">
+                            <span><img src="~/Content/images/08.png" alt="">入團截止</span>
+                        </button>
+
+                        <div class="popularMemberbtn">
+                            <p class="mb-3" id="sidebaritems">▽ 人氣團主</p>
+                        </div>
+
+                        <ul class="d-flex mb-3">
+                            <li class="popularAvatar mr-3" style="list-style-type:none;cursor: pointer;">
+                                <img src="~/Content/images/09.png" alt="">
+                            </li>
+                            <li class="popularAvatar mr-3" style="list-style-type:none;cursor: pointer;">
+                                <img src="~/Content/images/09.png" alt="">
+                            </li>
+                            <li class="popularAvatar mr-3" style="list-style-type:none;cursor: pointer;">
+                                <img src="~/Content/images/09.png" alt="">
+                            </li>
+                            <li class="popularAvatar mr-3" style="list-style-type:none;cursor: pointer;">
+                                <img src="~/Content/images/09.png" alt="">
+                            </li>
+                            <li class="popularAvatar mr-3" style="list-style-type:none;cursor: pointer;">
+                                <img src="~/Content/images/09.png" alt="">
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- jou modal head -->
+                    <div class="modal fade" id="JouModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                         aria-hidden="true">
+                        <div class="modal-dialog change-max-width-1400" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header border-main-color">
+                                    <h5 class="modal-title" id="exampleModalLabel">
+                                        <span style="font-weight:bolder;">
+                                            開團
+                                        </span>
+                                    </h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+
+                                    <!-- jou modal content -->
+                                    @if (Session["member"] != null)
+                                    {
+                                        <form enctype="multipart/form-data" method="post">
+                                            <div class="container">
+                                                <div class="m-0 mb-3 modalContent row justify-content-around">
+                                                    <p>
+                                                        <img src="~/Content/images/19.png" class="mb-1" alt="">標題：<input type="text"
+                                                         name="f開團標題" id="modalTitle">
+                                                    </p>
+                                                </div>
+
+                                                <div class="m-0 mb-3 modalContent row justify-content-around">
+                                                    <div class="modalContentLeft mb-1">
+                                                        <p>
+                                                            <img src="~/Content/images/08.png" class="mb-1" alt="">飯局開始時間： <input class="mb-1" type="date" name="f活動開始時間">
+                                                        </p>
+                                                        <p>
+                                                            <img src="~/Content/images/08.png" class="mb-1" alt="">飯局結束時間： <input class="mb-1" type="date" name="f活動開始時間">
+                                                        </p>
+                                                        <p>
+                                                            <img src="~/Content/images/08.png" class="mb-1" alt="">入團截止日期： <input class="mb-1" type="date" name="f活動開始時間">
+                                                        </p>
+                                                        <p>
+                                                            <img src="~/Content/images/20.png" class="mb-1" alt="">團圖：<input class="mb-1"
+                                                                                                                             Type="file" Name="fImgPath">
+                                                        </p>
+                                                    </div>
+                                                    <div class="modalContentRight">
+                                                        <p>
+                                                            <img src="~/Content/images/04.png" class="mb-1" alt="">預算：<input class="mb-1"
+                                                                                                                             type="text" name="f預算">
+                                                        </p>
+                                                        <p>
+                                                            <img src="~/Content/images/17.png" class="mb-1" alt="">分類：<input class="mb-1"
+                                                                                                                             type="text" name="f分類">
+                                                        </p>
+                                                        <p>
+                                                            <img src="~/Content/images/13.png" class="mb-1" alt="">標籤：<input class="mb-1"
+                                                                                                                             type="text" name="f分類">
+                                                        </p>
+                                                        <p>
+                                                            <img src="~/Content/images/03.png" class="mb-1" alt="">
+                                                            地區：
+                                                            <select name="f地點">
+                                                                <option value="">北部</option>
+                                                                <option value="">中部</option>
+                                                                <option value="">南部</option>
+                                                                <option value="">東部</option>
+                                                            </select>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="m-0 mb-3 modalContent row justify-content-around">
+                                                <div class="mx-auto mb-3">
+                                                    內容：<textarea name="f內容"></textarea>
+                                                </div>
+                                            </div>
+
+                                            <!-- jou modal btns -->
+                                            <div class="modal-footer  mt-2 border-main-color">
+                                             
+                                                <input type="submit" class="btn" style="background-color:#fee567"
+                                                       value="送出">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
+                                            </div>
+
+                                            <!-- jouta modal hidden -->
+                                            <input type="hidden" name="f帳號" value="0">
+                                            <input type="hidden" name="f大頭貼" value="0">
+                                            <input type="hidden" name="f點讚次數" value="0">
+                                            <input type="hidden" name="f建立時間" value="@DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")">
+                                            <input type="hidden" name="f暱稱" value="Test">
+                                        </form>
+                                    }
+                                    else
+                                    {
+                                        <p>請先登入會員</p>
+                                    }
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <!-- 活動格 -->
-                    <div class="qBoxblock mb-4">
-                        <!-- box左 -->
-                        <div class="qEvent col-lg-5 col-md-6 col-sm-6">
-                            <!-- 團主 -->
-                            <div class="eMember">
-                                <!-- 團主頭貼 -->
-                                <div class="memberAvatar mr-1">
-                                    <img src="~/Content/images/f899c3a6-45ba-4d37-ba05-8f4e031b0a63.jpg" alt="">
-                                </div>
-                                <!-- 團主稱號&名字 -->
-                                <div class="memberInfo">
-                                    <!-- 團主稱號 -->
-                                    <div class="memberTitle">吃后</div>
-                                    <!-- 團主名 -->
-                                    <div class="memberName">kimchi</div>
-                                </div>
-                                <!-- 團主評分 -->
-                                <div class="memberRating">☆4.8</div>
-                            </div>
-                            <!-- 活動圖 -->
-                            <div class="eEventPic">
-                                <img src="~/Content/images/carousel03.jpg" alt="">
-                            </div>
-                        </div>
-                        <!-- box右 -->
-                        <div class="qContent col-lg-7 col-md-6 col-sm-6">
-                            <!-- 標題 -->
-                            <div class="cTitle mb-1">不能只有我喝到!</div>
-                            <!-- 時間 -->
-                            <div class="cStartTime mb-1">．2020/08/18 19:00</div>
-                            <!-- 地點 -->
-                            <div class="cPosition">．臺北, Molino de Urdániz餐廳</div>
-                            <hr>
-                            <!-- 簡易資訊 -->
-                            <div class="cInfo">
-                                沒事想喝喝小酒，內建人氣踩雷專家與愛酒雅士，再徵一位有興趣的朋友。若報名朋友超過一位，則會再詢問餐廳可否加位...<a href="#">(read more)</a>
-                            </div>
-                            <!-- 社交按鈕 -->
-                            <div class="cSocial btn-group btn-group-sm" role="group" aria-label="Basic example">
-                                <button type="button" class="btn btnSocial-warning">關注</button>
-                                <button type="button" class="btn btnSocial-warning">分享</button>
-                                <button type="button" class="btn btnSocial-warning">留言</button>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- 活動格 -->
-                    <div class="qBoxblock mb-4">
-                        <!-- box左 -->
-                        <div class="qEvent col-lg-5 col-md-6 col-sm-6">
-                            <!-- 團主 -->
-                            <div class="eMember">
-                                <!-- 團主頭貼 -->
-                                <div class="memberAvatar mr-1">
-                                    <img src="~/Content/images/3.jpg" alt="">
-                                </div>
-                                <!-- 團主稱號&名字 -->
-                                <div class="memberInfo">
-                                    <!-- 團主稱號 -->
-                                    <div class="memberTitle">旅遊達人</div>
-                                    <!-- 團主名 -->
-                                    <div class="memberName">Jane</div>
-                                </div>
-                                <!-- 團主評分 -->
-                                <div class="memberRating">☆4.5</div>
-                            </div>
-                            <!-- 活動圖 -->
-                            <div class="eEventPic">
-                                <img src="~/Content/images/contact3.jpg" alt="">
-                            </div>
-                        </div>
-                        <!-- box右 -->
-                        <div class="qContent col-lg-7 col-md-6 col-sm-6">
-                            <!-- 標題 -->
-                            <div class="cTitle mb-1">廚師下班吃些什麼？ 開鍋囉</div>
-                            <!-- 時間 -->
-                            <div class="cStartTime mb-1">．2020/08/18 19:00</div>
-                            <!-- 地點 -->
-                            <div class="cPosition">．臺北, 汀州路三段196號</div>
-                            <hr>
-                            <!-- 簡易資訊 -->
-                            <div class="cInfo">
-                                最近看到一家百元火鍋，料實在，而且明治冰淇淋隨妳吃，感覺老闆佛心來的，就甘心耶‼️
 
-                                約喜歡吃火鍋的朋友下班一起來吃喲～～
-
-                                本月小妹偶生日，別忘了最後說聲「生日快樂喲」...<a href="#">(read more)</a>
+                    <!-- 活動清單 -->
+                    <div class="questbox col-xl-9 col-lg-9 col-md">
+                        <!-- 活動格 -->
+                        <div id="eatArticleAjax"></div>
+                        <!-- 活動格 -->
+                        <div class="qBoxblock mb-4">
+                            <!-- box左 -->
+                            <div class="qEvent col-lg-5 col-md-6 col-sm-6">
+                                <!-- 團主 -->
+                                <div class="eMember">
+                                    <!-- 團主頭貼 -->
+                                    <div class="memberAvatar mr-1">
+                                        <img src="images/memberAvatar.jpg" alt="">
+                                    </div>
+                                    <!-- 團主稱號&名字 -->
+                                    <div class="memberInfo">
+                                        <!-- 團主稱號 -->
+                                        <div class="memberTitle">一天八餐</div>
+                                        <!-- 團主名 -->
+                                        <div class="memberName">no face</div>
+                                    </div>
+                                    <!-- 團主評分 -->
+                                    <div class="memberRating">☆4.7</div>
+                                </div>
+                                <!-- 活動圖 -->
+                                <div class="eEventPic">
+                                    <img src="~/Content/images/foods.jpg" alt="">
+                                </div>
                             </div>
-                            <!-- 社交按鈕 -->
-                            <div class="cSocial btn-group btn-group-sm" role="group" aria-label="Basic example">
-                                <button type="button" class="btn btnSocial-warning">關注</button>
-                                <button type="button" class="btn btnSocial-warning">分享</button>
-                                <button type="button" class="btn btnSocial-warning">留言</button>
+                            <!-- box右 -->
+                            <div class="qContent col-lg-7 col-md-6 col-sm-6">
+                                <!-- 標題 -->
+                                <div class="cTitle mb-1">豪大雞排·非吃不可</div>
+                                <!-- 時間 -->
+                                <div class="cStartTime mb-1">．2020/08/18 18:55</div>
+                                <!-- 地點 -->
+                                <div class="cPosition">．臺北, 台北車站西三門</div>
+                                <hr>
+                                <!-- 簡易資訊 -->
+                                <div class="cInfo">
+                                    約在火車站的火字下方
+
+                                    我要吃一百片♾...<a href="#">(read more)</a>
+                                </div>
+                                <!-- 社交按鈕 -->
+                                <div class="cSocial btn-group btn-group-sm" role="group" aria-label="Basic example">
+                                    <button type="button" class="btn btnSocial-warning">關注</button>
+                                    <button type="button" class="btn btnSocial-warning">分享</button>
+                                    <button type="button" class="btn btnSocial-warning">留言</button>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                        <!-- 活動格 -->
+                        <div class="qBoxblock mb-4">
+                            <!-- box左 -->
+                            <div class="qEvent col-lg-5 col-md-6 col-sm-6">
+                                <!-- 團主 -->
+                                <div class="eMember">
+                                    <!-- 團主頭貼 -->
+                                    <div class="memberAvatar mr-1">
+                                        <img src="~/Content/images/f899c3a6-45ba-4d37-ba05-8f4e031b0a63.jpg" alt="">
+                                    </div>
+                                    <!-- 團主稱號&名字 -->
+                                    <div class="memberInfo">
+                                        <!-- 團主稱號 -->
+                                        <div class="memberTitle">吃后</div>
+                                        <!-- 團主名 -->
+                                        <div class="memberName">kimchi</div>
+                                    </div>
+                                    <!-- 團主評分 -->
+                                    <div class="memberRating">☆4.8</div>
+                                </div>
+                                <!-- 活動圖 -->
+                                <div class="eEventPic">
+                                    <img src="~/Content/images/carousel03.jpg" alt="">
+                                </div>
+                            </div>
+                            <!-- box右 -->
+                            <div class="qContent col-lg-7 col-md-6 col-sm-6">
+                                <!-- 標題 -->
+                                <div class="cTitle mb-1">不能只有我喝到!</div>
+                                <!-- 時間 -->
+                                <div class="cStartTime mb-1">．2020/08/18 19:00</div>
+                                <!-- 地點 -->
+                                <div class="cPosition">．臺北, Molino de Urdániz餐廳</div>
+                                <hr>
+                                <!-- 簡易資訊 -->
+                                <div class="cInfo">
+                                    沒事想喝喝小酒，內建人氣踩雷專家與愛酒雅士，再徵一位有興趣的朋友。若報名朋友超過一位，則會再詢問餐廳可否加位...<a href="#">(read more)</a>
+                                </div>
+                                <!-- 社交按鈕 -->
+                                <div class="cSocial btn-group btn-group-sm" role="group" aria-label="Basic example">
+                                    <button type="button" class="btn btnSocial-warning">關注</button>
+                                    <button type="button" class="btn btnSocial-warning">分享</button>
+                                    <button type="button" class="btn btnSocial-warning">留言</button>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- 活動格 -->
+                        <div class="qBoxblock mb-4">
+                            <!-- box左 -->
+                            <div class="qEvent col-lg-5 col-md-6 col-sm-6">
+                                <!-- 團主 -->
+                                <div class="eMember">
+                                    <!-- 團主頭貼 -->
+                                    <div class="memberAvatar mr-1">
+                                        <img src="~/Content/images/3.jpg" alt="">
+                                    </div>
+                                    <!-- 團主稱號&名字 -->
+                                    <div class="memberInfo">
+                                        <!-- 團主稱號 -->
+                                        <div class="memberTitle">旅遊達人</div>
+                                        <!-- 團主名 -->
+                                        <div class="memberName">Jane</div>
+                                    </div>
+                                    <!-- 團主評分 -->
+                                    <div class="memberRating">☆4.5</div>
+                                </div>
+                                <!-- 活動圖 -->
+                                <div class="eEventPic">
+                                    <img src="~/Content/images/contact3.jpg" alt="">
+                                </div>
+                            </div>
+                            <!-- box右 -->
+                            <div class="qContent col-lg-7 col-md-6 col-sm-6">
+                                <!-- 標題 -->
+                                <div class="cTitle mb-1">廚師下班吃些什麼？ 開鍋囉</div>
+                                <!-- 時間 -->
+                                <div class="cStartTime mb-1">．2020/08/18 19:00</div>
+                                <!-- 地點 -->
+                                <div class="cPosition">．臺北, 汀州路三段196號</div>
+                                <hr>
+                                <!-- 簡易資訊 -->
+                                <div class="cInfo">
+                                    最近看到一家百元火鍋，料實在，而且明治冰淇淋隨妳吃，感覺老闆佛心來的，就甘心耶‼️
 
-                    <!-- loading icon -->
-                    <div class="loadicon">
-                        <div class="spinner-border text-warning" role="status">
-                            <span class="sr-only">Loading...</span>
+                                    約喜歡吃火鍋的朋友下班一起來吃喲～～
+
+                                    本月小妹偶生日，別忘了最後說聲「生日快樂喲」...<a href="#">(read more)</a>
+                                </div>
+                                <!-- 社交按鈕 -->
+                                <div class="cSocial btn-group btn-group-sm" role="group" aria-label="Basic example">
+                                    <button type="button" class="btn btnSocial-warning">關注</button>
+                                    <button type="button" class="btn btnSocial-warning">分享</button>
+                                    <button type="button" class="btn btnSocial-warning">留言</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- loading icon -->
+                        <div class="loadicon">
+                            <div class="spinner-border text-warning" role="status">
+                                <span class="sr-only">Loading...</span>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <!-- footer -->
-    <div class="container-fluid footer">
-        <p class="text-center mt-2 mb-2">&copy; @DateTime.Now.Year Jouta All rights reserved</p>
-    </div>
+        <!-- footer -->
+        <div class="container-fluid footer">
+            <p class="text-center mt-2 mb-2">&copy; @DateTime.Now.Year Jouta All rights reserved</p>
+        </div>
 
-    <!-- script -->
-    @Scripts.Render("~/Content/js/jquery-3.5.1.js")
-    @Scripts.Render("~/Content/js/popper.min.js")
-    @Scripts.Render("~/Content/bootstrap-4.2.1-dist/js/bootstrap.min.js")
-    @Scripts.Render("~/Content/js/navbar.js")
-    @Scripts.Render("~/Content/js/eat.js")
+        <!-- script -->
+        @Scripts.Render("~/Content/js/jquery-3.5.1.js")
+        @Scripts.Render("~/Content/js/popper.min.js")
+        @Scripts.Render("~/Content/bootstrap-4.2.1-dist/js/bootstrap.min.js")
+        @Scripts.Render("~/Content/js/navbar.js")
+        @Scripts.Render("~/Content/js/eat.js")
 
-</body>
+    </body>
 
 </html>
+}

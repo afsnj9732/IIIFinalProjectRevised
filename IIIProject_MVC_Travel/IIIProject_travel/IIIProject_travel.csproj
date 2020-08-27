@@ -2126,6 +2126,7 @@
     <Content Include="Views\後台旅遊\List.cshtml" />
     <Content Include="Views\後台飯局\List.cshtml" />
     <Content Include="Views\後台文章\List.cshtml" />
+    <Content Include="Views\Eat\eatArticleAjax.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
