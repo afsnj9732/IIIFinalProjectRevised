@@ -161,10 +161,16 @@
     </Compile>
     <Compile Include="Models\CDictionary.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="sysdiagrams.cs">
+      <DependentUpon>JoutaEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="tArticle.cs">
       <DependentUpon>JoutaEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="tEat.cs">
+      <DependentUpon>JoutaEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tIdentity.cs">
       <DependentUpon>JoutaEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="tMember.cs">
@@ -2059,6 +2065,12 @@
     <Content Include="Content\bootstrap-4.2.1-dist\js\bootstrap.js.map" />
     <Content Include="Content\bootstrap-4.2.1-dist\js\bootstrap.min.js.map" />
     <Content Include="Content\jquery-ui-1.12.1\package.json" />
+    <Content Include="Content\sass\main.css.map" />
+    <Content Include="Content\sass\main.scss" />
+    <Content Include="Content\sass\slider.css.map" />
+    <Content Include="Content\sass\slider.scss" />
+    <Content Include="Content\sass\style.css.map" />
+    <Content Include="Content\sass\style.scss" />
     <EntityDeploy Include="JoutaEntities.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>JoutaEntities.Designer.cs</LastGenOutput>
@@ -2066,12 +2078,6 @@
     <Content Include="JoutaEntities.edmx.diagram">
       <DependentUpon>JoutaEntities.edmx</DependentUpon>
     </Content>
-    <Content Include="Content\sass\main.css.map" />
-    <Content Include="Content\sass\main.scss" />
-    <Content Include="Content\sass\slider.css.map" />
-    <Content Include="Content\sass\slider.scss" />
-    <Content Include="Content\sass\style.css.map" />
-    <Content Include="Content\sass\style.scss" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\check.js" />
     <Content Include="Scripts\debounce.js" />

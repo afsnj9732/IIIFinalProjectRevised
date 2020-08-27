@@ -14,12 +14,18 @@ namespace IIIProject_travel
     
     public partial class t聯絡我們
     {
-        public int f會員編號 { get; set; }
-        public string f帳號 { get; set; }
-        public string f聯絡人 { get; set; }
-        public string f電子郵件 { get; set; }
-        public string f電話 { get; set; }
-        public string f意見 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public t聯絡我們()
+        {
+            this.tIdentity = new HashSet<tIdentity>();
+        }
+    
+        public int f聯絡我們文章編號 { get; set; }
+        public string f聯絡我們使用者編號 { get; set; }
+        public string f意見內容 { get; set; }
         public string f意見類型 { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tIdentity> tIdentity { get; set; }
     }
 }
