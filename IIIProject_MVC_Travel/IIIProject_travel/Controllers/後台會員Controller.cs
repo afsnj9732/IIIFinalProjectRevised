@@ -11,8 +11,19 @@ namespace IIIProject_travel.Controllers
         // GET: 後台會員
         public ActionResult List()
         {
-            var 會員 = from t in (new dbJoutaEntities()).tMember
-                      select t;
+            IQueryable<tMember> 會員 = null;
+            string k關鍵字 = Request.Form["txt關鍵字"];
+            if (string.IsNullOrEmpty(k關鍵字))
+            {
+                會員 = from p in (new dbJoutaEntities()).tMember
+                      select p;
+            }
+            else
+            {
+                會員 = from p in (new dbJoutaEntities()).tMember
+                      where p.f會員名稱.Contains(k關鍵字)
+                      select p;
+            }
             return View(會員);
 
         }

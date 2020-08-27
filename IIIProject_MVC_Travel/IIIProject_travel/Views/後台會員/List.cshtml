@@ -29,18 +29,22 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
-        <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Company name</a>
-        <input class="form-control form-control-dark w-100" type="text" placeholder="關鍵字" aria-label="Search">
-        <input type="submit" value="搜尋" class=" btn btn-default" />
-        <ul class="navbar-nav px-3">
-            <li class="nav-item text-nowrap">
-                <a>
-                    @Html.ActionLink("Sign out", "Home", "Home", new { id = 0 }, new { @class = "nav-link" })
-                </a>
-            </li>
-        </ul>
-    </nav>
+    @using (Html.BeginForm())
+    {
+        <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
+            <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Company name</a>
+            <input type="text" placeholder="關鍵字" aria-label="Search" name="txt關鍵字" class="form-control form-control-dark w-100">
+            <input type="submit" value="搜尋" class=" btn btn-dark" />
+            <ul class="navbar-nav px-3">
+                <li class="nav-item text-nowrap">
+                    <a>
+                        @Html.ActionLink("Sign out", "Home", "Home", new { id = 0 }, new { @class = "nav-link" })
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+    }
 
     <div class="container-fluid">
         <div class="row">
@@ -48,7 +52,7 @@
                 <div class="sidebar-sticky">
                     <ul class="nav flex-column">
                         <li class="nav-item">
-                            <a class="nav-link active" href="#">
+                            <a class="nav-link active" href="@Url.Action("Home","後台Home")">
                                 <span data-feather="home"></span>
                                 首頁 <span class="sr-only">(current)</span>
                             </a>
@@ -99,7 +103,7 @@
                     <table class="table table-striped table-sm">
                         <thead>
                             <tr>
-                                <td>筆數</td>
+                                @*<td>序號</td>*@
                                 <td>會員編號</td>
                                 <td>名稱</td>
                                 <td>評分</td>
@@ -121,41 +125,102 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @{
-                                int c筆數 = 0;
-                                foreach (tMember t in Model)
-                                {
-                                    c筆數++;
-                                    <tr>
-                                        <td>@c筆數.ToString()</td>
-                                        <td>@t.f會員編號</td>
-                                        <td>@t.f會員名稱</td>
-                                        <td>@t.f會員評分</td>
-                                        <td>@t.f會員稱號</td>
-                                        <td>@t.f會員大頭貼</td>
-                                        <td>@t.f會員帳號</td>
-                                        <td>@t.f會員密碼</td>
-                                        <td>@t.f電子郵件</td>
-                                        <td>@t.f手機</td>
-                                        <td>@t.f電話</td>
-                                        <td>@t.f生日</td>
-                                        <td>@t.f自我介紹</td>
-                                        <td>@t.f暱稱</td>
-                                        <td>@t.f英文名字</td>
-                                        <td>@t.f性別</td>
-                                        <td>@t.f興趣</td>
-                                        <td>
-                                            @Html.ActionLink("編輯", "e修改", "後台會員", new { id = t.f會員編號 }, new { Class = "btn btn-info" })
-                                        </td>
+                            @*@{
+                                    int c筆數 = 0;
+                                    foreach (tMember t in Model)
+                                    {
+                                        c筆數++;
+                                        <tr>
+                                            <td>@c筆數.ToString()</td>
+                                            <td>@t.f會員編號</td>
+                                            <td>@t.f會員名稱</td>
+                                            <td>@t.f會員評分</td>
+                                            <td>@t.f會員稱號</td>
+                                            <td>@t.f會員大頭貼</td>
+                                            <td>@t.f會員帳號</td>
+                                            <td>@t.f會員密碼</td>
+                                            <td>@t.f電子郵件</td>
+                                            <td>@t.f手機</td>
+                                            <td>@t.f電話</td>
+                                            <td>@t.f生日</td>
+                                            <td>@t.f自我介紹</td>
+                                            <td>@t.f暱稱</td>
+                                            <td>@t.f英文名字</td>
+                                            <td>@t.f性別</td>
+                                            <td>@t.f興趣</td>
+                                            <td>
+                                                @Html.ActionLink("編輯", "e修改", "後台會員", new { id = t.f會員編號 }, new { Class = "btn btn-info" })
+                                            </td>
 
-                                        <td>
-                                            @Html.ActionLink("刪除", "d刪除", "後台會員", new { id = t.f會員編號 },
-                                            new { OnClick = "return confirm('確定要刪除嗎?')", Class = "btn btn-danger" })
-                                        </td>
-                                    </tr>
-                                }
+                                            <td>
+                                                @Html.ActionLink("刪除", "d刪除", "後台會員", new { id = t.f會員編號 },
+                                                new { OnClick = "return confirm('確定要刪除嗎?')", Class = "btn btn-danger" })
+                                            </td>
+                                        </tr>
+                                    }
+                                }*@
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.f會員編號)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.f會員名稱)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.f會員評分)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.f會員稱號)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.f會員大頭貼)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.f會員帳號)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.f會員密碼)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.f電子郵件)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.f手機)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.f電話)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.f生日)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.f自我介紹)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.f暱稱)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.f英文名字)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.f性別)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.f興趣)
+                                    </td>
+                                    <td>
+                                        @Html.ActionLink("編輯", "e修改", "後台會員", new { id = item.f會員編號 }, new { Class = "btn btn-info" })
+                                    </td>
+                                    <td>
+                                        @Html.ActionLink("刪除", "d刪除", "後台會員", new { id = item.f會員編號 },
+                                        new { OnClick = "return confirm('確定要刪除嗎?')", Class = "btn btn-danger" })
+                                    </td>
+
+                                </tr>
+
                             }
-
 
                         </tbody>
                     </table>
