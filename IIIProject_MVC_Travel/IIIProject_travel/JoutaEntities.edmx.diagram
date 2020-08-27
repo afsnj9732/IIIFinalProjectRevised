@@ -4,13 +4,21 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="bffaab521aca467fa5d065ee57db9201" Name="Diagram1">
-        <EntityTypeShape EntityType="joutaModel.tArticle" Width="1.5" PointX="0.75" PointY="0.75" />
-        <EntityTypeShape EntityType="joutaModel.tEat" Width="1.5" PointX="2.75" PointY="0.75" />
-        <EntityTypeShape EntityType="joutaModel.tMember" Width="1.5" PointX="4.75" PointY="0.75" />
-        <EntityTypeShape EntityType="joutaModel.tTravel" Width="1.5" PointX="0.75" PointY="5.75" />
-        <EntityTypeShape EntityType="joutaModel.t留言" Width="1.5" PointX="6.75" PointY="0.75" />
-        <EntityTypeShape EntityType="joutaModel.t聯絡我們" Width="1.5" PointX="2.75" PointY="6.75" />
+      <Diagram DiagramId="38fdd57a1e714e78bc630409d4c76e9a" Name="Diagram1">
+        <EntityTypeShape EntityType="joutaModel.sysdiagrams" Width="1.5" PointX="0.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="joutaModel.tArticle" Width="1.5" PointX="0.75" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="joutaModel.tEat" Width="1.5" PointX="9.875" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="joutaModel.tIdentity" Width="1.5" PointX="5.75" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="joutaModel.tMember" Width="1.5" PointX="2.75" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="joutaModel.tTravel" Width="1.5" PointX="8" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="joutaModel.t留言" Width="1.5" PointX="3.5" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="joutaModel.t聯絡我們" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="joutaModel.FK_tIdentity_tArticle" ManuallyRouted="false" />
+        <AssociationConnector Association="joutaModel.FK_tIdentity_tEat" ManuallyRouted="false" />
+        <AssociationConnector Association="joutaModel.FK_tIdentity_tTravel" ManuallyRouted="false" />
+        <AssociationConnector Association="joutaModel.FK_tIdentity_t留言" ManuallyRouted="false" />
+        <AssociationConnector Association="joutaModel.FK_tIdentity_t聯絡我們" ManuallyRouted="false" />
+        <AssociationConnector Association="joutaModel.FK_tMember_tIdentity" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

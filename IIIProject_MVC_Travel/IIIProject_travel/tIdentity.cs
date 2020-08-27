@@ -12,21 +12,27 @@ namespace IIIProject_travel
     using System;
     using System.Collections.Generic;
     
-    public partial class t留言
+    public partial class tIdentity
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public t留言()
+        public tIdentity()
         {
-            this.tIdentity = new HashSet<tIdentity>();
+            this.tMember = new HashSet<tMember>();
         }
     
-        public int f留言編號 { get; set; }
+        public int f會員編號 { get; set; }
+        public string f文章區使用者編號 { get; set; }
+        public string f旅遊區使用者編號 { get; set; }
+        public string f飯局區使用者編號 { get; set; }
+        public string f聯絡我們使用者編號 { get; set; }
         public string f留言功能使用者編號 { get; set; }
-        public string f留言內容 { get; set; }
-        public string f留言時間 { get; set; }
-        public string f留言所屬 { get; set; }
     
+        public virtual tArticle tArticle { get; set; }
+        public virtual tEat tEat { get; set; }
+        public virtual tTravel tTravel { get; set; }
+        public virtual t留言 t留言 { get; set; }
+        public virtual t聯絡我們 t聯絡我們 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tIdentity> tIdentity { get; set; }
+        public virtual ICollection<tMember> tMember { get; set; }
     }
 }

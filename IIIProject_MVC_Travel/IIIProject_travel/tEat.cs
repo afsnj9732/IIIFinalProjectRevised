@@ -11,23 +11,35 @@ namespace IIIProject_travel
 {
     using System;
     using System.Collections.Generic;
-    using System.Web;
-
+    
     public partial class tEat
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public tEat()
+        {
+            this.tIdentity = new HashSet<tIdentity>();
+        }
+    
         public int f飯局編號 { get; set; }
-        public string f帳號 { get; set; }
-        public string f暱稱 { get; set; }
-        public string f大頭貼 { get; set; }
-        public string f團圖 { get; set; }
-        public string f內容 { get; set; }
-        public Nullable<int> f點讚次數 { get; set; }
-        public Nullable<System.DateTime> f建立時間 { get; set; }
-        public string f開團標題 { get; set; }
-        public Nullable<System.DateTime> f活動開始時間 { get; set; }
-        public string f地點 { get; set; }
-        public Nullable<decimal> f預算 { get; set; }
-        public string f分類 { get; set; }
-        public HttpPostedFileBase fImgPath { get; set; }
+        public string f飯局區使用者編號 { get; set; }
+        public string f飯局發文日期 { get; set; }
+        public string f飯局活動開始時間 { get; set; }
+        public string f飯局活動結束時間 { get; set; }
+        public string f飯局招募截止時間 { get; set; }
+        public string f飯局標題 { get; set; }
+        public string f飯局內容 { get; set; }
+        public string f飯局地區 { get; set; }
+        public string f飯局預算 { get; set; }
+        public string f飯局瀏覽次數 { get; set; }
+        public string f飯局讚數 { get; set; }
+        public string f飯局分類 { get; set; }
+        public string f飯局標籤 { get; set; }
+        public string f飯局團圖 { get; set; }
+        public string f飯局按過讚的會員編號 { get; set; }
+        public string f飯局經度 { get; set; }
+        public string f飯局緯度 { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tIdentity> tIdentity { get; set; }
     }
 }
