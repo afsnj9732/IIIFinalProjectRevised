@@ -226,6 +226,7 @@
     <Content Include="Content\images\qm2.jpeg" />
     <Content Include="Content\js\eat.js" />
     <Content Include="Content\js\profile.js" />
+    <Content Include="Content\js\vue.js" />
     <Content Include="Content\js\後台js\bootstrap.bundle.js" />
     <Content Include="Content\js\後台js\dashboard.js" />
     <Content Include="Content\js\後台js\jquery-slim.min.js" />
@@ -2095,6 +2096,8 @@
     <Content Include="Scripts\profile.js" />
     <Content Include="Scripts\slider.js" />
     <Content Include="Scripts\travel_main.js" />
+    <Content Include="Views\聯絡我們\List.cshtml" />
+    <Content Include="Views\聯絡我們\New.cshtml" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -2130,7 +2133,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\後台\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
