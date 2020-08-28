@@ -1,4 +1,4 @@
-﻿@model tMember
+﻿@model IIIProject_travel.ViewModel.CLogin
 @{
     Layout = null;
 }
@@ -45,18 +45,30 @@
             </div>
         </nav>
     </div>
-    @if (Model == null)
+    @*@if (Model == null)
+        {*@
+    @using (Html.BeginForm())
     {
+        @Html.AntiForgeryToken()
         <form method="post">
             <div id="background">
                 <!-- 註冊box -->
                 <div id="login-box">
                     <div class="left">
                         <h2>登入</h2>
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
                         <input type="text" name="txtAccount" placeholder="使用者帳號" />
-                        <input type="text" name="txtPassword" placeholder="密碼" />
-
+                        @Html.ValidationMessageFor(model => model.txtAccount, "", new { @class = "text-danger" })
+                        <input type="password" name="txtPassword" placeholder="密碼" />
+                        @Html.ValidationMessageFor(model => model.txtPassword, "", new { @class = "text-danger" })
+                        <div>
+                            <label>記住我</label>
+                            <div class="checkbox">
+                                @Html.EditorFor(model => model.rememberMe)
+                                @Html.ValidationMessageFor(model => model.rememberMe, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
                         <input type="submit" name="signup_submit" value="登入" />
                     </div>
 
@@ -70,7 +82,10 @@
                     <div class="or">OR</div>
                 </div>
             </div>
-        </form> }
+        </form>
+    }
+
+    @*}*@
 
     <!-- footer -->
     <div class="container-fluid footer">
@@ -78,16 +93,11 @@
     </div>
 
     <!-- script -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-            integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-            crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-            crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
-            integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
-            crossorigin="anonymous"></script>
+    <script src="~/Content/js/jquery-3.5.1.js"></script>
+    <script src="~/Content/js/popper.min.js"></script>
+    <script src="~/Content/bootstrap-4.2.1-dist/js/bootstrap.min.js"></script>
     <script src="~/Content/navbar.js"></script>
+
     <script>
         document.querySelector("#login_show").click();
     </script>

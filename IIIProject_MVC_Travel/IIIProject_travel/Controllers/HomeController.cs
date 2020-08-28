@@ -13,12 +13,21 @@ namespace IIIProject_travel.Controllers
     public class HomeController : Controller
     {
         // GET: Home
+        [Authorize]
         public ActionResult Home(int? id)
         {
+           
             if (id == 0)
             {
                 Session.Remove("member");
-
+            }
+            else {
+                string displayImg = (string)Session["member"];
+                dbJoutaEntities db = new dbJoutaEntities();
+                tMember t = db.tMember.FirstOrDefault(k => k.f會員編號 == id);
+                Session["member"] = t;
+                string v =  t.f會員大頭貼.ToString();
+                ViewData["Img"] = v;
             }
             return View();
         }
@@ -28,36 +37,6 @@ namespace IIIProject_travel.Controllers
             return View();
         }
 
-        //public ActionResult Login()
-        //{
-        //    //string code = Session[CDictionary.SK_USERLOGIN_CODE] as string;
-        //    //if (string.IsNullOrEmpty(code))
-        //    //{
-        //    //    Random r = new Random();
-        //    //    code = r.Next(0, 10).ToString() + r.Next(0, 10).ToString() + r.Next(0, 10).ToString() + r.Next(0, 10).ToString();
-        //    //    Session[CDictionary.SK_USERLOGIN_CODE] = code;
-        //    //}
-        //    //ViewBag.CODE = code;
-        //    return View();
-        //}
-        //[HttpPost]
-        //public ActionResult Login(CLogin p)
-        //{
-
-        //    //string code = Session[CDictionary.SK_USERLOGIN_CODE] as string;
-        //    //if (!p.txtPassword.Equals(code))
-        //    //{
-        //    //    ViewBag.CODE = code;
-        //    //    return View();
-        //    //}
-        //    String fAccount = p.txtAccount;
-
-        //    tMember cust = (new dbJoutaEntities()).tMember.FirstOrDefault(t => t.f會員帳號== fAccount && t.f會員密碼.Equals(p.txtPassword));
-        //    if (cust == null)
-        //        return View();
-        //    Session[CDictionary.SK_LOGIN_MEMBER] = cust;
-        //    return RedirectToAction("Home");
-        //}
         [HttpGet]
         public ActionResult Register()
         {
@@ -68,9 +47,6 @@ namespace IIIProject_travel.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Register([Bind(Exclude = "fIs信箱已驗證,fActivationCode")]CRegister p)
         {
-            //var y = p.txtNickname;
-            //var z = p.txtPassword;
-            //var d = p.txtPassword_confirm;
             bool Status = false;
             string Message = "";
 
@@ -100,6 +76,9 @@ namespace IIIProject_travel.Controllers
                     NewMember.f會員密碼 = fact_password;
                     NewMember.f會員電子郵件 = p.txtEmail;
                     NewMember.f會員名稱 = p.txtNickname;
+                    //大頭貼(使用者圖示)...待補
+                    
+
                     db.tMember.Add(NewMember);
                     db.SaveChanges();
 
@@ -142,18 +121,6 @@ namespace IIIProject_travel.Controllers
             string body = "<br/><br/>很高興通知您，會員註冊成功。請點以下連結確認帳號"
                 + "<br/><br/><a href='" + link + "'>" + link + "</a>";
 
-            //var smtp = new SmtpClient
-            //{
-            //    Host = "smtp.gmail.com",
-            //    Port = 587,
-            //    EnableSsl = true,
-            //    DeliveryMethod = SmtpDeliveryMethod.Network,
-            //    UseDefaultCredentials = false,
-            //    Credentials = new NetworkCredential(fromEmail.Address,fromEmailPassword)
-            //};
-
-
-
             using (var message = new MailMessage(fromEmail, toEmail)
             {
                 Subject = subject,
@@ -177,9 +144,5 @@ namespace IIIProject_travel.Controllers
             return View();
         }
 
-        //public ActionResult Contact()
-        //{
-        //    return View();
-        //}
     }
 }

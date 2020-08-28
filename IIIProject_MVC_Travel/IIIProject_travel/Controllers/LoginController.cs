@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 
 namespace IIIProject_travel.Controllers
 {
@@ -15,16 +16,58 @@ namespace IIIProject_travel.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult LoginIndex(CLogin p)
+        [ValidateAntiForgeryToken]
+        public ActionResult LoginIndex(CLogin user,string returnUrl="")
         {
+            string msg = "";
             tMember target = (new dbJoutaEntities()).tMember
-                             .FirstOrDefault(o => o.f會員帳號 == p.txtAccount
-                             && o.f會員密碼 == p.txtPassword);
+                             .FirstOrDefault(o => o.f會員帳號 == user.txtAccount
+                             && o.f會員密碼 == user.txtPassword);
+            
+            if (target != null)
+            {
+                if (string.Compare(user.txtPassword, target.f會員密碼) == 0)
+                {
+                    int timeout = user.rememberMe ? 525600 : 20;   //525600 min = 1 year(保質期一年)
+                    var ticket = new FormsAuthenticationTicket(user.txtAccount, user.rememberMe, timeout);
+                    string encrypted = FormsAuthentication.Encrypt(ticket);
+                    var cookie = new HttpCookie(FormsAuthentication.FormsCookieName, encrypted);
+                    cookie.Expires = DateTime.Now.AddMinutes(timeout);
+                    cookie.HttpOnly = true;
+
+                    Response.Cookies.Add(cookie);
+                    if (Url.IsLocalUrl(returnUrl))
+                    {
+                        return Redirect(returnUrl);
+                    }
+                    else {
+                        return RedirectToAction("Home","Home");
+                    }
+                } else
+                    msg = "帳號或密碼錯誤，請重新登入";
+            }
             Session["member"] = target;
-            if (p.txtAccount == "Admin" && p.txtPassword == "1234")
+            if (user.txtAccount == "Admin" && user.txtPassword == "1234")
                 return RedirectToAction("List", "後台會員");
             return RedirectToAction("Home", "Home");
-            //return View();
+        }
+
+        //Logout
+        [Authorize]
+        [HttpPost]
+        public ActionResult Logout()
+        {
+            FormsAuthentication.SignOut();
+            return RedirectToAction("LoginIndex", "Login");
+        }
+
+
+        [NonAction]
+        public bool is信箱存在(string emailId)
+        {
+            dbJoutaEntities db = new dbJoutaEntities();
+            var t = db.tMember.FirstOrDefault(a => a.f會員電子郵件 == emailId);
+            return t != null;
         }
     }
 }
