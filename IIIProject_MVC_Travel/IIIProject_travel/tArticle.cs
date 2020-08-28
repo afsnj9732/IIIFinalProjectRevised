@@ -14,23 +14,15 @@ namespace IIIProject_travel
     
     public partial class tArticle
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public tArticle()
-        {
-            this.tIdentity = new HashSet<tIdentity>();
-        }
-    
         public int f文章編號 { get; set; }
-        public string f文章區使用者編號 { get; set; }
-        public string f文章標題 { get; set; }
-        public Nullable<int> f文章讚數 { get; set; }
-        public string f文章地點 { get; set; }
-        public string f文章分類 { get; set; }
-        public string f文章結束日期 { get; set; }
-        public string f文章發文日期 { get; set; }
-        public string f文章發文內容 { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tIdentity> tIdentity { get; set; }
+        public string f帳號 { get; set; }
+        public string f大頭貼路徑 { get; set; }
+        public string f標題 { get; set; }
+        public Nullable<int> f點讚 { get; set; }
+        public string f地點 { get; set; }
+        public string f分類 { get; set; }
+        public string f結束日期 { get; set; }
+        public string f發文日期 { get; set; }
+        public string f發文內容 { get; set; }
     }
 }

@@ -170,9 +170,6 @@
     <Compile Include="tEat.cs">
       <DependentUpon>JoutaEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="tIdentity.cs">
-      <DependentUpon>JoutaEntities.tt</DependentUpon>
-    </Compile>
     <Compile Include="tMember.cs">
       <DependentUpon>JoutaEntities.tt</DependentUpon>
     </Compile>

@@ -14,19 +14,11 @@ namespace IIIProject_travel
     
     public partial class t留言
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public t留言()
-        {
-            this.tIdentity = new HashSet<tIdentity>();
-        }
-    
         public int f留言編號 { get; set; }
-        public string f留言功能使用者編號 { get; set; }
-        public string f留言內容 { get; set; }
-        public string f留言時間 { get; set; }
-        public string f留言所屬 { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tIdentity> tIdentity { get; set; }
+        public string f帳號 { get; set; }
+        public string f內容 { get; set; }
+        public string f大頭貼 { get; set; }
+        public string f時間 { get; set; }
+        public Nullable<int> f讚 { get; set; }
     }
 }

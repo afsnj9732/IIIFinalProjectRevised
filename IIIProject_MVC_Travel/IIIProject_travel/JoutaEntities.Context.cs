@@ -28,7 +28,6 @@ namespace IIIProject_travel
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<tArticle> tArticle { get; set; }
         public virtual DbSet<tEat> tEat { get; set; }
-        public virtual DbSet<tIdentity> tIdentity { get; set; }
         public virtual DbSet<tMember> tMember { get; set; }
         public virtual DbSet<tTravel> tTravel { get; set; }
         public virtual DbSet<t留言> t留言 { get; set; }

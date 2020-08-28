@@ -14,32 +14,21 @@ namespace IIIProject_travel
     
     public partial class tTravel
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public tTravel()
-        {
-            this.tIdentity = new HashSet<tIdentity>();
-        }
-    
-        public int f旅遊編號 { get; set; }
-        public string f旅遊區使用者編號 { get; set; }
-        public string f旅遊發文日期 { get; set; }
-        public string f旅遊活動開始時間 { get; set; }
-        public string f旅遊活動結束時間 { get; set; }
-        public string f旅遊招募截止時間 { get; set; }
-        public string f旅遊標題 { get; set; }
-        public string f旅遊內容 { get; set; }
-        public string f旅遊地區 { get; set; }
-        public string f旅遊預算 { get; set; }
-        public string f旅遊瀏覽次數 { get; set; }
-        public string f旅遊讚數 { get; set; }
-        public string f旅遊分類 { get; set; }
-        public string f旅遊標籤 { get; set; }
-        public string f旅遊團圖 { get; set; }
-        public string f旅遊按過讚的會員編號 { get; set; }
-        public string f旅遊經度 { get; set; }
-        public string f旅遊緯度 { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tIdentity> tIdentity { get; set; }
+        public int f旅遊文章編號 { get; set; }
+        public Nullable<int> f團主會員編號 { get; set; }
+        public string f文章團主名稱 { get; set; }
+        public string f文章發文日期 { get; set; }
+        public string f文章活動開始日期 { get; set; }
+        public string f文章活動結束日期 { get; set; }
+        public string f文章活動招募日期 { get; set; }
+        public string f文章標題 { get; set; }
+        public string f文章內容 { get; set; }
+        public string f文章地區 { get; set; }
+        public string f文章預算 { get; set; }
+        public string f文章瀏覽次數 { get; set; }
+        public string f文章讚數 { get; set; }
+        public string f分類 { get; set; }
+        public string f標籤 { get; set; }
+        public string f文章團圖 { get; set; }
     }
 }
