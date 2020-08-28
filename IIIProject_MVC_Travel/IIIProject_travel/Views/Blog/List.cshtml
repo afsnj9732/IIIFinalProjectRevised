@@ -1,4 +1,4 @@
-﻿@model IEnumerable<tArticle>
+﻿@model IEnumerable<tActivity>
 
 @{
     Layout = null;
@@ -70,12 +70,12 @@
 
                 @{
 
-                    foreach (tArticle tArticle in Model)
+                    foreach (tActivity tArticle in Model)
                     {
                         
                         
                      <h1 class="mt-4">
-                     @tArticle.f標題
+                     @tArticle.f活動標籤
                      </h1>
                         
 
@@ -112,12 +112,12 @@
 
 
 
-                    foreach (tArticle tArticle in Model)
+                    foreach (tActivity tArticle in Model)
                     {
 
 
                         <p>
-                            @tArticle.f發文內容
+                            @tArticle.f活動內容
                         </p>
 
                     }
