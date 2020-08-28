@@ -18,12 +18,13 @@ namespace IIIProject_travel.Controllers
         public ActionResult LoginIndex(CLogin p)
         {
             tMember target = (new dbJoutaEntities()).tMember
-                             .FirstOrDefault(o => o.f會員帳號 == p.txtAccount 
+                             .FirstOrDefault(o => o.f會員帳號 == p.txtAccount
                              && o.f會員密碼 == p.txtPassword);
             Session["member"] = target;
             if (p.txtAccount == "Admin" && p.txtPassword == "1234")
                 return RedirectToAction("List", "後台會員");
-            return RedirectToAction("Home","Home");
+            return RedirectToAction("Home", "Home");
+            //return View();
         }
     }
 }

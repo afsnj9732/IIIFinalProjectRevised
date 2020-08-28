@@ -16,13 +16,13 @@ namespace IIIProject_travel.Controllers
             if (string.IsNullOrEmpty(k關鍵字))
             {
                 會員 = from p in (new dbJoutaEntities()).tMember
-                      select p;
+                     select p;
             }
             else
             {
                 會員 = from p in (new dbJoutaEntities()).tMember
-                      where p.f會員名稱.Contains(k關鍵字)
-                      select p;
+                     where p.f會員名稱.Contains(k關鍵字)
+                     select p;
             }
             return View(會員);
 
@@ -67,15 +67,15 @@ namespace IIIProject_travel.Controllers
                 A.f會員大頭貼 = p.f會員大頭貼;
                 A.f會員帳號 = p.f會員帳號;
                 A.f會員密碼 = p.f會員密碼;
-                A.f電子郵件 = p.f電子郵件;
-                A.f手機 = p.f手機;
-                A.f電話 = p.f電話;
-                A.f生日 = p.f生日;
-                A.f自我介紹 = p.f自我介紹;
-                A.f暱稱 = p.f暱稱;
-                A.f英文名字 = p.f英文名字;
-                A.f性別 = p.f性別;
-                A.f興趣 = p.f興趣;
+                A.f會員電子郵件 = p.f會員電子郵件;
+                A.f會員手機 = p.f會員手機;
+                A.f會員電話 = p.f會員電話;
+                A.f會員生日 = p.f會員生日;
+                A.f會員自我介紹 = p.f會員自我介紹;
+                A.f會員暱稱 = p.f會員暱稱;
+                A.f會員英文姓名 = p.f會員英文姓名;
+                A.f會員性別 = p.f會員性別;
+                A.f會員興趣 = p.f會員興趣;
 
                 db.SaveChanges();
             }

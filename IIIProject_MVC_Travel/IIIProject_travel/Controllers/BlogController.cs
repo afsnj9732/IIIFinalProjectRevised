@@ -17,7 +17,8 @@ namespace IIIProject_travel.Controllers
         public ActionResult Index()
         {
 
-            var article = from t in (new dbJoutaEntities()).tArticle
+            var article = from t in (new dbJoutaEntities()).tActivity
+                          where t.f活動類型=="文章"
                           select t;
 
 
@@ -28,19 +29,20 @@ namespace IIIProject_travel.Controllers
         public ActionResult List()
         {
 
-            var article = from t in (new dbJoutaEntities()).tArticle
-                     select t;
+            var article = from t in (new dbJoutaEntities()).tActivity
+                          where t.f活動類型 == "文章"
+                          select t;
 
 
             return View(article);
 
-            
+
         }
 
 
         public ActionResult Create()
         {
-  
+
             return View();
 
         }
@@ -60,20 +62,21 @@ namespace IIIProject_travel.Controllers
 
 
 
-            tArticle article = new tArticle();
+            tActivity article = new tActivity();
 
-            article.f標題 = p.txtTitle;
-            article.f地點 = p.txtLocation;
-            article.f發文內容 = p.txtContent;
-            article.f大頭貼路徑 = p.fImagPath;
+            article.f活動類型 = "文章";
+            article.f活動標題 = p.txtTitle;
+            article.f活動地點 = p.txtLocation;
+            article.f活動內容 = p.txtContent;
+            //article.f大頭貼路徑 = p.fImagPath;
 
-            
+
 
             dbJoutaEntities db = new dbJoutaEntities();
-            db.tArticle.Add(article);
+            db.tActivity.Add(article);
             db.SaveChanges();
 
-            return RedirectToAction ("List");
+            return RedirectToAction("List");
 
         }
     }

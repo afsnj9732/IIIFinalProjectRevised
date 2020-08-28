@@ -14,23 +14,34 @@ namespace IIIProject_travel
     
     public partial class tMember
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public tMember()
+        {
+            this.tActivity = new HashSet<tActivity>();
+        }
+    
         public int f會員編號 { get; set; }
-        public string f會員名稱 { get; set; }
-        public string f會員評分 { get; set; }
-        public string f會員稱號 { get; set; }
-        public string f會員大頭貼 { get; set; }
         public string f會員帳號 { get; set; }
         public string f會員密碼 { get; set; }
-        public string f電子郵件 { get; set; }
-        public string f手機 { get; set; }
-        public string f電話 { get; set; }
-        public string f生日 { get; set; }
-        public string f自我介紹 { get; set; }
-        public string f暱稱 { get; set; }
-        public string f英文名字 { get; set; }
-        public string f性別 { get; set; }
-        public string f興趣 { get; set; }
-        public string f已占用時間 { get; set; }
-        public string f按過讚的文章編號 { get; set; }
+        public string f會員名稱 { get; set; }
+        public string f會員評分 { get; set; }
+        public string f會員電子郵件 { get; set; }
+        public string f會員稱號 { get; set; }
+        public string f會員大頭貼 { get; set; }
+        public string f會員手機 { get; set; }
+        public string f會員電話 { get; set; }
+        public string f會員生日 { get; set; }
+        public string f會員暱稱 { get; set; }
+        public string f會員英文姓名 { get; set; }
+        public string f會員性別 { get; set; }
+        public string f會員興趣 { get; set; }
+        public string f會員已占用時間 { get; set; }
+        public string f會員自我介紹 { get; set; }
+        public string f會員現在參加的活動編號 { get; set; }
+        public string f會員過去參加的活動編號 { get; set; }
+        public string f會員發起的活動編號 { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tActivity> tActivity { get; set; }
     }
 }

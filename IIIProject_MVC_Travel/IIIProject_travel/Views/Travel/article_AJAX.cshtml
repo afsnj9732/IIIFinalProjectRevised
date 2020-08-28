@@ -1,4 +1,4 @@
-﻿@model IEnumerable<tTravel>
+﻿@model IEnumerable<tActivity>
 @{
     Layout = null;
     int count = 0;
@@ -11,15 +11,15 @@
 {
     count++;
     combine = "exampleModal" + count;
-    tMember postman = (new dbJoutaEntities())
-        .tMember.FirstOrDefault(o => o.f會員編號 == item.f團主會員編號);
+    //tMember postman = (new dbJoutaEntities())
+    //    .tMember.FirstOrDefault(o => o.f會員編號 == item.f團主會員編號);
 
     <div class="modal fade" id="@combine" tabindex="-1" role="dialog"
          aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog change-max-width-1400" role="document">
             <div class="modal-content">
                 <div class="modal-header  border-main-color">
-                    <h5 class="modal-title" id="exampleModalLabel"><span style="font-weight:bolder;"> @item.f文章標題</span></h5>
+                    <h5 class="modal-title" id="exampleModalLabel"><span style="font-weight:bolder;"> @item.f活動標題</span></h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -28,30 +28,31 @@
                     <!-- 互動文章 -->
                     <div class="container-fluid">
                         <div class="row m-0 mb-3 justify-content-around">
-                            <span>揪團日期： <span>@item.f文章發文日期</span></span>
-                            <span>活動日期： <span>@item.f文章活動開始日期</span></span>
-                            <span>入團截止： <span>@item.f文章活動招募日期</span></span>
-                            <span><img src="~/Content/images/03.png" alt="">@item.f文章地區</span>
-                            <span><img src="~/Content/images/04.png" alt="">@item.f文章預算</span>
-                            <span><img src="~/Content/images/06.png" alt="">@item.f文章瀏覽次數</span>
-                            <span><img src="~/Content/images/05.png" alt="">@item.f文章讚數</span>
+                            <span>揪團日期： <span>@item.f活動發起日期</span></span>
+                            <span>活動日期： <span>@item.f活動開始時間</span></span>
+                            <span>入團截止： <span>@item.f活動結束時間</span></span>
+                            <span><img src="~/Content/images/03.png" alt="">@item.f活動地區</span>
+                            <span><img src="~/Content/images/04.png" alt="">@item.f活動預算</span>
+                            <span><img src="~/Content/images/06.png" alt="">@item.f活動瀏覽次數</span>
+                            <span><img src="~/Content/images/05.png" alt="">@item.f活動讚數</span>
 
                             <span class="col-auto"><img style="cursor: pointer;" src="~/Content/images/11.png" alt=""></span>
                         </div>
+                        @*<hr />*@
                         <div class="row mb-4">
-                            <img src="~/Content/images/@item.f文章團圖" alt="" class="mx-auto" style="width: 60%;margin: auto;">
+                            <img src="~/Content/images/@item.f活動團圖" alt="" class="mx-auto" style="width: 60%;margin: auto;">
                         </div>
 
                         <div class="row align-items-center">
                             <div id="UserBlock">
-                                <p><img src="~/Content/images/16.png" class="pb-1" alt="">@postman.f會員稱號</p>
-                                <img src="~/Content/images/@postman.f會員大頭貼" alt="" class="col-auto" style="width: 300px;">
-                                <p>@postman.f會員名稱</p>
-                                <p>團主評分:@postman.f會員評分 </p>
+                                <p><img src="~/Content/images/16.png" class="pb-1" alt="">@item.tMember.f會員稱號</p>
+                                <img src="~/Content/images/@item.tMember.f會員大頭貼" alt="" class="col-auto" style="width: 300px;">
+                                <p>@item.tMember.f會員名稱</p>
+                                <p>團主評分:@item.tMember.f會員評分 </p>
                             </div>
                             <div class="change-max-width-1000 ">
                                 <p>
-                                    @item.f文章內容
+                                    @item.f活動內容
                                 </p>
                             </div>
                         </div>
@@ -60,7 +61,7 @@
                         {
                             <div class="container">
                                 <div class="row   justify-content-around">
-                                    <button class="btn btn-block mr-1  p-1 FeelGood" style="background-color:#FFE0B2;" target="@item.f旅遊文章編號">
+                                    <button class="btn btn-block mr-1  p-1 FeelGood" style="background-color:#FFE0B2;" target="@item.f活動編號">
                                         <img src="~/Content/images/05.png" class="pb-1 ">覺得讚
                                     </button>
                                     <button class="btn btn-block mr-1  p-1" style="background-color:#FFE0B2 ;">
@@ -91,63 +92,67 @@
     <div class="row Travel_border align-items-center p-3 pl-4">
         <div class="container-fluid">
             <div class="row m-0 mb-4   justify-content-between">
-                <div class="pl-1" >
+                <div class="pl-1">
                     <span style="cursor: pointer;">
-                        <img src="~/Content/images/09.png" alt="">@item.f文章團主名稱
+                        <img src="~/Content/images/09.png" alt="">@item.tMember.f會員名稱
                     </span>
                 </div>
                 <div class="RWD_1851">
-                    <span>揪團日期： <span>@item.f文章發文日期</span></span>
+                    <span>揪團日期： <span>@item.f活動發起日期</span></span>
                     <span>&nbsp; &nbsp;</span>
-                    <span>活動日期： <span>@item.f文章活動開始日期</span></span>
+                    <span>活動日期： <span>@item.f活動開始時間</span></span>
                     <span>&nbsp; &nbsp;</span>
-                    <span>入團截止： <span>@item.f文章活動招募日期</span></span>
+                    <span>入團截止： <span>@item.f活動結束時間</span></span>
                 </div>
-                <span class="row">
+                <div class="row " >
                     <div class="dropdown RWD_1850 pr-3">
                         <button class="btn btn-secondary dropdown-toggle RWD_1850 border-0 p-0 pl-2 pr-2" style="height:30px;!important" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             More
                         </button>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu2">
                             <button class="dropdown-item drop-site1" style="cursor: pointer;" type="button">
-                                <span>揪團日期： <span>@item.f文章發文日期</span></span>
+                                <span>揪團日期： <span>@item.f活動發起日期</span></span>
                             </button>
                             <div class="dropdown-divider"></div>
                             <button class="dropdown-item drop-site2" style="cursor: pointer;" type="button">
-                                <span>活動日期： <span>@item.f文章活動開始日期</span></span>
+                                <span>活動日期： <span>@item.f活動開始時間</span></span>
                             </button>
                             <div class="dropdown-divider"></div>
                             <button class="dropdown-item drop-site3" style="cursor: pointer;" type="button">
-                                <span>入團截止： <span>@item.f文章活動招募日期</span></span>
+                                <span>入團截止： <span>@item.f活動結束時間</span></span>
                             </button>
                         </div>
                     </div>
                     <div class="p-0 pr-3">
                         <img style="cursor: pointer;" class="pb-1" src="~/Content/images/14.png" alt="">
                     </div>
-                </span>
+                </div>
+                @*<div class="col-12"><hr /></div>*@
             </div>
         </div>
+        
+        
         <div class="row pl-2 flex-wrap-reverse mt-2" style="width:100%;">
+            
             <div class="mb-3 pl-4 pr-4 mx-auto" style="cursor: pointer;width:66%;" data-toggle="modal" data-target="#@combine">
-                <div class="" style="font-weight:bolder;"> <p class="mb-4   content-title">@item.f文章標題</p></div>
+                <div class="" style="font-weight:bolder;"> <p class="mb-4   content-title">@item.f活動標題</p></div>
 
                 <span class="content" style="font-size: 16px;line-height:1.8;">
-                    @item.f文章內容
+                    @item.f活動內容
                 </span>
 
             </div>
 
-            <img src="~/Content/images/@item.f文章團圖" alt="" class="col-xl-auto col-6    mx-auto" style="width: 30%;">
+            <img src="~/Content/images/@item.f活動團圖" alt="" class="col-xl-auto col-6    mx-auto" style="width: 30%;">
 
         </div>
         <div class="container mt-2">
             <div class="row   justify-content-between  mt-2">
                 <div>
-                    <img src="~/Content/images/03.png" alt="">@item.f文章地區
-                    <img src="~/Content/images/04.png" alt="">@item.f文章預算
-                    <img src="~/Content/images/06.png" alt="">@item.f文章瀏覽次數
-                    <img src="~/Content/images/05.png" alt="">@item.f文章讚數
+                    <img src="~/Content/images/03.png" alt="">@item.f活動地區
+                    <img src="~/Content/images/04.png" alt="">@item.f活動預算
+                    <img src="~/Content/images/06.png" alt="">@item.f活動瀏覽次數
+                    <img src="~/Content/images/05.png" alt="">@item.f活動讚數
                 </div>
                 <div style="cursor: pointer;">
                     <img src="~/Content/images/12.png" alt="">留言

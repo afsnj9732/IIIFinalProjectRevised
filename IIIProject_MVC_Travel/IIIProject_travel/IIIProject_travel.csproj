@@ -164,30 +164,16 @@
     <Compile Include="sysdiagrams.cs">
       <DependentUpon>JoutaEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="tArticle.cs">
-      <DependentUpon>JoutaEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="tEat.cs">
+    <Compile Include="tActivity.cs">
       <DependentUpon>JoutaEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="tMember.cs">
       <DependentUpon>JoutaEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="tTravel.cs">
-      <DependentUpon>JoutaEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="t留言.cs">
-      <DependentUpon>JoutaEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="t聯絡我們.cs">
-      <DependentUpon>JoutaEntities.tt</DependentUpon>
-    </Compile>
     <Compile Include="ViewModel\CBlog.cs" />
-    <Compile Include="ViewModel\CEat.cs" />
     <Compile Include="ViewModel\CLogin.cs" />
     <Compile Include="ViewModel\CRegister.cs" />
     <Compile Include="ViewModel\CSelect.cs" />
-    <Compile Include="ViewModel\CTravel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Start\proheadshot.jpg" />

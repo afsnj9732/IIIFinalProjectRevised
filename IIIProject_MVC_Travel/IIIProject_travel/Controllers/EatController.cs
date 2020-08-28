@@ -18,21 +18,22 @@ namespace IIIProject_travel.Controllers
         }
 
         [HttpPost]
-        public ActionResult EatIndex(tEat p)
+        public ActionResult EatIndex(tActivity p)
         {
-            if (Session["member"] != null && p.f內容 != null)
+            if (Session["member"] != null && p.f活動標題 != null)
             {
-                if (p.fImgPath != null)
-                {
-                    var photoName = Guid.NewGuid() + Path.GetExtension(p.fImgPath.FileName);
+                HttpPostedFileBase PicFile = Request.Files["PicFile"];
+                if (PicFile != null)
+                {                    
+                    var photoName = Guid.NewGuid() + Path.GetExtension(PicFile.FileName);
                     var photoPath = Path.Combine(Server.MapPath("~/Content/images/"), photoName);
-                    p.fImgPath.SaveAs(photoPath);
-                    p.f團圖 = photoName;
+                    PicFile.SaveAs(photoPath);
+                    p.f活動團圖 = photoName;
                 }
                 tMember Member = (tMember)Session["member"];
-                p.f帳號 = Member.f會員帳號;
+                p.f會員編號 = Member.f會員編號;
                 dbJoutaEntities db = new dbJoutaEntities();
-                db.tEat.Add(p);
+                db.tActivity.Add(p);
                 db.SaveChanges();
             }
             return View();
@@ -40,28 +41,28 @@ namespace IIIProject_travel.Controllers
 
         public ActionResult eatArticleAjax(string p)
         {
-            IEnumerable<tEat> order_eat_list;
-            order_eat_list = from x in (new dbJoutaEntities()).tEat
+            IEnumerable<tActivity> order_eat_list;
+            order_eat_list = from x in (new dbJoutaEntities()).tActivity
                              select x;
             JavaScriptSerializer serializer = new JavaScriptSerializer();
             CSelect obj = serializer.Deserialize<CSelect>(p);
             if (!string.IsNullOrEmpty(obj.order))
             {
-                var tEat_order = typeof(tEat).GetProperty(obj.order);
-                order_eat_list = (new dbJoutaEntities()).tEat
+                var tEat_order = typeof(tActivity).GetProperty(obj.order);
+                order_eat_list = (new dbJoutaEntities()).tActivity
                     .AsEnumerable().OrderByDescending(a => tEat_order.GetValue(a, null))
                     .Select(a => a);
 
                 if (obj.background_color == "rgb(250,224,178)")
                 {
-                    order_eat_list = (new dbJoutaEntities()).tEat
+                    order_eat_list = (new dbJoutaEntities()).tActivity
                        .AsEnumerable().OrderBy(a => tEat_order.GetValue(a, null))
                        .Select(a => a);
                 }
 
                 if (!string.IsNullOrEmpty(obj.contain))
                 {
-                    order_eat_list = order_eat_list.Where(b => b.f開團標題.Contains(obj.contain))
+                    order_eat_list = order_eat_list.Where(b => b.f活動標題.Contains(obj.contain))
                         .Select(a => a);
                 }
             }

@@ -31,38 +31,38 @@ namespace IIIProject_travel.Controllers
             //        .Select(a => a); //升冪
 
             int variable = Convert.ToInt32(target);
-            tTravel the_target = db.tTravel.FirstOrDefault(o=>o.f旅遊文章編號== variable);
-
-            the_target.f文章讚數 += 1;
+            //tTravel the_target = db.tTravel.FirstOrDefault(o=>o.f旅遊文章編號== variable);
+            tActivity the_target = db.tActivity.FirstOrDefault(o => o.f活動編號 == variable);
+            the_target.f活動讚數 += 1;
             db.SaveChanges();
             return "1";
         }
 
         public ActionResult article_AJAX(string p)
         {
-            IEnumerable<tTravel> order_travel_list;
-            order_travel_list = from x in (new dbJoutaEntities()).tTravel
+            IEnumerable<tActivity> order_travel_list;
+            order_travel_list = from x in (new dbJoutaEntities()).tActivity
                                 select x;
             JavaScriptSerializer serializer = new JavaScriptSerializer();
             CSelect obj = serializer.Deserialize<CSelect>(p);
             if (!string.IsNullOrEmpty(obj.order))
             {
                 //不使用if，動態抓取排序條件
-                var tTravel_order = typeof(tTravel).GetProperty(obj.order);
-                order_travel_list = (new dbJoutaEntities()).tTravel
+                var tTravel_order = typeof(tActivity).GetProperty(obj.order);
+                order_travel_list = (new dbJoutaEntities()).tActivity
                         .AsEnumerable().OrderByDescending(a => tTravel_order.GetValue(a, null))
                         .Select(a => a); //升冪
 
                 if (obj.background_color == "rgb(250, 224, 178)")
                 {
-                    order_travel_list = (new dbJoutaEntities()).tTravel
+                    order_travel_list = (new dbJoutaEntities()).tActivity
                         .AsEnumerable().OrderBy(a => tTravel_order.GetValue(a, null))
                         .Select(a => a); //降冪
                 }
 
                 if (!string.IsNullOrEmpty(obj.contain)) //搜尋欄位若非空
                 {
-                    order_travel_list = order_travel_list.Where(b => b.f文章標題.Contains(obj.contain))
+                    order_travel_list = order_travel_list.Where(b => b.f活動標題.Contains(obj.contain))
                                 .Select(a => a);                                                 
                 }
             }
@@ -84,22 +84,23 @@ namespace IIIProject_travel.Controllers
         }
 
         [HttpPost]
-        public ActionResult TravelIndex(tTravel p)
+        public ActionResult TravelIndex(tActivity p)
         {
-            HttpPostedFileBase PicFile = Request.Files["PicFile"];
-            if (Session["member"] != null&&p.f文章標題!=null)
+            
+            if (Session["member"] != null&&p.f活動標題!=null)
             {
+                HttpPostedFileBase PicFile = Request.Files["PicFile"];
                 if (PicFile != null)
                 {
                     var NewFileName = Guid.NewGuid() + Path.GetExtension(PicFile.FileName);
                     var NewFilePath = Path.Combine(Server.MapPath("~/Content/images/"), NewFileName);
                     PicFile.SaveAs(NewFilePath);
-                    p.f文章團圖 = NewFileName;
+                    p.f活動團圖 = NewFileName;
                 }
                 tMember Member = (tMember)Session["member"];
-                p.f團主會員編號 = Member.f會員編號;
+                p.f會員編號 = Member.f會員編號;
                 dbJoutaEntities db = new dbJoutaEntities();
-                db.tTravel.Add(p);
+                db.tActivity.Add(p);
                 db.SaveChanges();
             }
             return View();

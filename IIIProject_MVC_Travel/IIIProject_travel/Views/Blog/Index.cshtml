@@ -1,4 +1,4 @@
-﻿@model IEnumerable<tArticle>
+﻿@model IEnumerable<tActivity>
 
 @{
     Layout = null;
@@ -70,16 +70,16 @@
 
                 <hr size="8" width="100%">
                 @{ 
-                    foreach (tArticle tArticle in Model)
+                    foreach (tActivity tArticle in Model)
                     {
 
                 <!-- Blog Post -->
                 <div class="card mb-4">
                     <img class="card-img-top" src="~/Content/images/blogPost.jpg" w alt="Card image cap">
                     <div class="card-body">
-                        <h2 class="card-title">@tArticle.f標題</h2>
+                        <h2 class="card-title">@tArticle.f活動標題</h2>
                         <p class="card-text">
-                            @tArticle.f發文內容
+                            @tArticle.f活動內容
                         </p>
                         <a class="nav-item">@Html.ActionLink("Read More", "List", "Blog", new { }, new { @class = "btn btnContent" })</a>
                     </div>

@@ -15,12 +15,12 @@ namespace IIIProject_travel.Controllers
         // GET: Home
         public ActionResult Home(int? id)
         {
-            if (id==0)
+            if (id == 0)
             {
                 Session.Remove("member");
-                
+
             }
-                return View();   
+            return View();
         }
 
         public ActionResult QuickMatch()
@@ -51,7 +51,7 @@ namespace IIIProject_travel.Controllers
         //    //    return View();
         //    //}
         //    String fAccount = p.txtAccount;
-            
+
         //    tMember cust = (new dbJoutaEntities()).tMember.FirstOrDefault(t => t.f會員帳號== fAccount && t.f會員密碼.Equals(p.txtPassword));
         //    if (cust == null)
         //        return View();
@@ -68,9 +68,9 @@ namespace IIIProject_travel.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Register([Bind(Exclude = "fIs信箱已驗證,fActivationCode")]CRegister p)
         {
-            var y = p.txtNickname;
-            var z = p.txtPassword;
-            var d = p.txtPassword_confirm;
+            //var y = p.txtNickname;
+            //var z = p.txtPassword;
+            //var d = p.txtPassword_confirm;
             bool Status = false;
             string Message = "";
 
@@ -95,16 +95,16 @@ namespace IIIProject_travel.Controllers
                 using (dbJoutaEntities db = new dbJoutaEntities())
                 {
                     tMember NewMember = new tMember();
-                    NewMember.f性別 = p.txtGender;
+                    NewMember.f會員性別 = p.txtGender;
                     NewMember.f會員帳號 = p.txtEmail;
                     NewMember.f會員密碼 = fact_password;
-                    NewMember.f電子郵件 = p.txtEmail;
+                    NewMember.f會員電子郵件 = p.txtEmail;
                     NewMember.f會員名稱 = p.txtNickname;
                     db.tMember.Add(NewMember);
                     db.SaveChanges();
 
                     send確認信(p.txtEmail, p.fActivationCode.ToString());
-                    Message = "註冊已完成。確認連結已發送到您的信箱:"+p.txtEmail;
+                    Message = "註冊已完成。確認連結已發送到您的信箱:" + p.txtEmail;
 
                     Status = true;
                 }
@@ -124,23 +124,23 @@ namespace IIIProject_travel.Controllers
         {
             using (dbJoutaEntities db = new dbJoutaEntities())
             {
-                var v = db.tMember.Where(a => a.f電子郵件 == emailID).FirstOrDefault();
+                var v = db.tMember.Where(a => a.f會員電子郵件 == emailID).FirstOrDefault();
                 return v != null;
             }
         }
 
         [NonAction]
-        public void send確認信(string emailID,string c確認碼)
+        public void send確認信(string emailID, string c確認碼)
         {
             var verifyUrl = "/Home/VerifyAccount/" + c確認碼;
-            var link = Request.Url.AbsoluteUri.Replace(Request.Url.PathAndQuery,verifyUrl);
+            var link = Request.Url.AbsoluteUri.Replace(Request.Url.PathAndQuery, verifyUrl);
             var fromEmail = new MailAddress("agrwdcd1356@gmail.com", "確認");
             var toEmail = new MailAddress(emailID);
             var fromEmailPassword = "1234afcb";
             string subject = "註冊成功";
 
             string body = "<br/><br/>很高興通知您，會員註冊成功。請點以下連結確認帳號"
-                + "<br/><br/><a href='" + link+"'>"+link+"</a>";
+                + "<br/><br/><a href='" + link + "'>" + link + "</a>";
 
             //var smtp = new SmtpClient
             //{
