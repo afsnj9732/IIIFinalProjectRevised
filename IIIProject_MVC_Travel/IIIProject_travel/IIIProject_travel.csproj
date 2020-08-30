@@ -177,17 +177,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Start\proheadshot.jpg" />
-    <Content Include="Content\blog_style.css" />
-    <Content Include="Content\bootstrap-4.2.1-dist\css\bootstrap-grid.css" />
-    <Content Include="Content\bootstrap-4.2.1-dist\css\bootstrap-grid.min.css" />
-    <Content Include="Content\bootstrap-4.2.1-dist\css\bootstrap-reboot.css" />
-    <Content Include="Content\bootstrap-4.2.1-dist\css\bootstrap-reboot.min.css" />
-    <Content Include="Content\bootstrap-4.2.1-dist\css\bootstrap.css" />
-    <Content Include="Content\bootstrap-4.2.1-dist\css\bootstrap.min.css" />
-    <Content Include="Content\bootstrap-4.2.1-dist\js\bootstrap.bundle.js" />
-    <Content Include="Content\bootstrap-4.2.1-dist\js\bootstrap.bundle.min.js" />
-    <Content Include="Content\bootstrap-4.2.1-dist\js\bootstrap.js" />
-    <Content Include="Content\bootstrap-4.2.1-dist\js\bootstrap.min.js" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -200,12 +189,9 @@
     <Content Include="Content\css\match.css" />
     <Content Include="Content\css\profile.css" />
     <Content Include="Content\css\quickmatch.css" />
-    <Content Include="Content\css\register.css" />
-    <Content Include="Content\css\slider.css" />
-    <Content Include="Content\css\style.css" />
+    <Content Include="Content\css\style_n.css" />
     <Content Include="Content\css\travel.css" />
     <Content Include="Content\css\travel_main.css" />
-    <Content Include="Content\css\後台css\dashboard.css" />
     <Content Include="Content\images\14876883363_94995b4f88_o.jpg" />
     <Content Include="Content\images\20190105141437_100.jpg" />
     <Content Include="Content\images\f899c3a6-45ba-4d37-ba05-8f4e031b0a63.jpg" />
@@ -214,16 +200,7 @@
     <Content Include="Content\images\proheadshot.jpg" />
     <Content Include="Content\images\qm1.jpg" />
     <Content Include="Content\images\qm2.jpeg" />
-    <Content Include="Content\js\eat.js" />
-    <Content Include="Content\js\profile.js" />
-    <Content Include="Content\js\vue.js" />
-    <Content Include="Content\js\後台js\bootstrap.bundle.js" />
-    <Content Include="Content\js\後台js\dashboard.js" />
-    <Content Include="Content\js\後台js\jquery-slim.min.js" />
-    <Content Include="Content\css\聯絡我們.css" />
     <Content Include="Content\css\關於我們.css" />
-    <Content Include="Content\css\關於我們2.min.css" />
-    <Content Include="Content\eat.css" />
     <Content Include="Content\fontawesome\css\all.css" />
     <Content Include="Content\fontawesome\css\all.min.css" />
     <Content Include="Content\fontawesome\css\brands.css" />
@@ -1950,23 +1927,12 @@
     <Content Include="Content\jquery-ui-1.12.1\jquery-ui.theme.css" />
     <Content Include="Content\jquery-ui-1.12.1\jquery-ui.theme.min.css" />
     <Content Include="Content\jquery-ui-1.12.1\LICENSE.txt" />
-    <Content Include="Content\login.css" />
-    <Content Include="Content\main.css" />
-    <Content Include="Content\match.css" />
-    <Content Include="Content\profile.css" />
-    <Content Include="Content\quickmatch.css" />
-    <Content Include="Content\register.css" />
     <Content Include="Content\sass\main.css" />
     <Content Include="Content\sass\slider.css" />
     <Content Include="Content\sass\style.css" />
-    <Content Include="Content\Site.css" />
-    <Content Include="Content\slider.css" />
-    <Content Include="Content\style.css" />
-    <Content Include="Content\travel.css" />
-    <Content Include="Content\travel_main.css" />
-    <Content Include="Content\聯絡我們.css" />
-    <Content Include="Content\關於我們.css" />
-    <Content Include="Content\關於我們2.min.css" />
+    <Content Include="Content\css\slider.css" />
+    <Content Include="Content\css\style.css" />
+    <Content Include="Content\css\聯絡我們.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -1980,6 +1946,8 @@
       <DependentUpon>JoutaEntities.edmx</DependentUpon>
       <LastGenOutput>JoutaEntities.cs</LastGenOutput>
     </Content>
+    <Content Include="Scripts\additional-methods.js" />
+    <Content Include="Scripts\additional-methods.min.js" />
     <Content Include="Scripts\blog.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -2037,16 +2005,6 @@
     <Content Include="Content\fontawesome\webfonts\fa-solid-900.ttf" />
     <Content Include="Content\fontawesome\webfonts\fa-solid-900.woff" />
     <Content Include="Content\fontawesome\webfonts\fa-solid-900.woff2" />
-    <Content Include="Content\bootstrap-4.2.1-dist\css\bootstrap-grid.css.map" />
-    <Content Include="Content\bootstrap-4.2.1-dist\css\bootstrap-grid.min.css.map" />
-    <Content Include="Content\bootstrap-4.2.1-dist\css\bootstrap-reboot.css.map" />
-    <Content Include="Content\bootstrap-4.2.1-dist\css\bootstrap-reboot.min.css.map" />
-    <Content Include="Content\bootstrap-4.2.1-dist\css\bootstrap.css.map" />
-    <Content Include="Content\bootstrap-4.2.1-dist\css\bootstrap.min.css.map" />
-    <Content Include="Content\bootstrap-4.2.1-dist\js\bootstrap.bundle.js.map" />
-    <Content Include="Content\bootstrap-4.2.1-dist\js\bootstrap.bundle.min.js.map" />
-    <Content Include="Content\bootstrap-4.2.1-dist\js\bootstrap.js.map" />
-    <Content Include="Content\bootstrap-4.2.1-dist\js\bootstrap.min.js.map" />
     <Content Include="Content\jquery-ui-1.12.1\package.json" />
     <Content Include="Content\sass\main.css.map" />
     <Content Include="Content\sass\main.scss" />
@@ -2061,31 +2019,21 @@
     <Content Include="JoutaEntities.edmx.diagram">
       <DependentUpon>JoutaEntities.edmx</DependentUpon>
     </Content>
-    <None Include="Scripts\jquery-3.3.1.intellisense.js" />
-    <Content Include="Scripts\check.js" />
-    <Content Include="Scripts\debounce.js" />
-    <Content Include="Scripts\jquery-3.3.1.js" />
-    <Content Include="Scripts\jquery-3.3.1.min.js" />
-    <Content Include="Scripts\jquery-3.3.1.slim.js" />
-    <Content Include="Scripts\jquery-3.3.1.slim.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
-    <Content Include="Content\js\jquery-3.5.1.js" />
     <Content Include="Scripts\jquery-3.5.1.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
-    <Content Include="Scripts\location.js" />
-    <Content Include="Scripts\match.js" />
+    <Content Include="Scripts\IIIProject\location.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
-    <Content Include="Content\js\navbar.js" />
-    <Content Include="Content\js\popper.min.js" />
-    <Content Include="Content\js\travel.js" />
-    <Content Include="Scripts\navbar.js" />
-    <Content Include="Scripts\popper.min.js" />
-    <Content Include="Scripts\profile.js" />
-    <Content Include="Scripts\slider.js" />
-    <Content Include="Scripts\travel_main.js" />
+    <Content Include="Scripts\IIIProject\navbar.js" />
+    <Content Include="Scripts\IIIProject\popper.min.js" />
+    <Content Include="Scripts\IIIProject\travel.js" />
+    <Content Include="Scripts\IIIProject\slider.js" />
+    <Content Include="Scripts\IIIProject\travel_main.js" />
+    <Content Include="Scripts\vue.js" />
+    <Content Include="Scripts\vue.min.js" />
     <Content Include="Views\聯絡我們\List.cshtml" />
     <Content Include="Views\聯絡我們\New.cshtml" />
     <Content Include="Web.config">
@@ -2136,8 +2084,6 @@
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <None Include="packages.config" />
-    <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
-    <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

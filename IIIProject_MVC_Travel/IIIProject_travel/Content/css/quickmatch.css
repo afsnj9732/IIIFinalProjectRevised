@@ -1,8 +1,8 @@
-body{
+body {
     background-color: #fffef4;
 }
 
-.btnLocation{
+.btnLocation {
     font-size: 2.5rem;
     font-weight: normal;
     background-color: #fee567;
@@ -10,27 +10,27 @@ body{
     text-align: center;
     padding: 30px;
     margin: 2rem 0;
-    border:3px solid orange;
-    border-radius: 30px;
+    border: 3px solid orange;
+    border-radius: 5px;
     display: inline-block;
     transition-duration: 1s;
-  }
-  
-.btnLocation:hover{
-    background-color: #f5be2e;
-    border:3px solid transparent;
-    color: #444;
-    box-shadow: 0px 0px 10px 1px #444;
-    transition-duration: 0.5s;    
 }
 
-.wrapper{
+    .btnLocation:hover {
+        background-color: #f5be2e;
+        border: 3px solid transparent;
+        color: #444;
+        box-shadow: 0px 0px 10px 1px #444;
+        transition-duration: 0.5s;
+    }
+
+.wrapper {
     width: 90%;
     margin: 0 auto;
     max-width: 80rem;
 }
-  
-.cols{
+
+.cols {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -40,22 +40,22 @@ body{
     -ms-flex-pack: center;
     justify-content: center;
 }
-  
-.col{
+
+.col {
     width: calc(25% - 2rem);
     margin: 1rem;
     margin-bottom: 7rem;
     cursor: pointer;
 }
-  
-.container{
+
+.container {
     -webkit-transform-style: preserve-3d;
     transform-style: preserve-3d;
     -webkit-perspective: 1000px;
     perspective: 1000px;
 }
-  
-.front,.back{
+
+.front, .back {
     background-size: cover;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.25);
     border-radius: 10px;
@@ -74,16 +74,16 @@ body{
     color: #fff;
     font-size: 1.5rem;
 }
-  
-.back{
+
+.back {
     background: #cedce7;
-    background: -webkit-linear-gradient(10deg,  #cedce7 0%,#f3e4c6 100%);
-    background: -o-linear-gradient(10deg,  #cedce7 0%,#f3e4c6 100%);
-    background: linear-gradient(50deg,  #cedce7 0%,#f3e4c6 100%);
-    color:#444;
-  }
-  
-.front:after{
+    background: -webkit-linear-gradient(10deg, #cedce7 0%,#f3e4c6 100%);
+    background: -o-linear-gradient(10deg, #cedce7 0%,#f3e4c6 100%);
+    background: linear-gradient(50deg, #cedce7 0%,#f3e4c6 100%);
+    color: #444;
+}
+
+.front:after {
     position: absolute;
     top: 0;
     left: 0;
@@ -100,22 +100,22 @@ body{
 }
 
 .container:hover .front,
-.container:hover .back{
+.container:hover .back {
     -webkit-transition: -webkit-transform .7s cubic-bezier(0.4, 0.2, 0.2, 1);
     transition: -webkit-transform .7s cubic-bezier(0.4, 0.2, 0.2, 1);
     -o-transition: transform .7s cubic-bezier(0.4, 0.2, 0.2, 1);
     transition: transform .7s cubic-bezier(0.4, 0.2, 0.2, 1);
     transition: transform .7s cubic-bezier(0.4, 0.2, 0.2, 1), -webkit-transform .7s cubic-bezier(0.4, 0.2, 0.2, 1);
 }
- 
-.back{
+
+.back {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
 }
-  
-.inner{
+
+.inner {
     -webkit-transform: translateY(-50%) translateZ(60px) scale(0.94);
     transform: translateY(-50%) translateZ(60px) scale(0.94);
     top: 50%;
@@ -130,87 +130,85 @@ body{
     perspective: inherit;
     z-index: 2;
 }
-  
-.container .back{
+
+.container .back {
     -webkit-transform: rotateY(180deg);
     transform: rotateY(180deg);
     -webkit-transform-style: preserve-3d;
     transform-style: preserve-3d;
 }
-  
-.container .front{
+
+.container .front {
     -webkit-transform: rotateY(0deg);
     transform: rotateY(0deg);
     -webkit-transform-style: preserve-3d;
     transform-style: preserve-3d;
 }
-  
-.container:hover .back{
+
+.container:hover .back {
     -webkit-transform: rotateY(0deg);
     transform: rotateY(0deg);
     -webkit-transform-style: preserve-3d;
     transform-style: preserve-3d;
 }
-  
-.container:hover .front{
+
+.container:hover .front {
     -webkit-transform: rotateY(-180deg);
     transform: rotateY(-180deg);
     -webkit-transform-style: preserve-3d;
     transform-style: preserve-3d;
 }
-  
-.front .inner p{
+
+.front .inner p {
     font-size: 2rem;
     margin-bottom: 2rem;
     position: relative;
 }
-  
-.front .inner p:after{
-    content: '';
-    width: 4rem;
-    height: 2px;
-    position: absolute;
-    background: #C6D4DF;
-    display: block;
-    left: 0;
-    right: 0;
-    margin: 0 auto;
-    bottom: -.75rem;
-}
-  
-.front .inner span{
+
+    .front .inner p:after {
+        content: '';
+        width: 4rem;
+        height: 2px;
+        position: absolute;
+        background: #C6D4DF;
+        display: block;
+        left: 0;
+        right: 0;
+        margin: 0 auto;
+        bottom: -.75rem;
+    }
+
+.front .inner span {
     color: rgba(255,255,255,0.7);
-    font-family: 'Montserrat';
+    font-family: '·L³n¥¿¶ÂÅé';
     font-weight: 300;
 }
 
-.resultbox{
-    border: 1px solid #444;
-    border-radius: 20px;
+.resultbox {
+    border-radius: 5px;
     justify-content: space-evenly;
-    padding:40px 0;
+    padding: 40px 0;
     margin-bottom: 70px;
     background-color: #fff;
     box-shadow: 0 0 8px 2px rgba(0,0,0,0.25);
     transition-duration: 1s;
 }
 
-.resultbox:hover{
-    box-shadow: 0 0 8px 2px #ff5b45;
-    border: 1px solid #ff5b45 ;
-    transition-duration: 0.3s;
-}
+    .resultbox:hover {
+        box-shadow: 0 0 8px 2px #cc9922;
+        transition-duration: 0.3s;
+    }
 
-#UserBlock{
+#UserBlock {
     width: 40%;
 }
 
-.btn-block{
-    width:auto;
+.btn-block {
+    width: auto;
     margin-top: 0rem !important;
 }
 
-.content{
+.content {
     width: 520px;
     height: 150px;
     margin: 0 auto;
@@ -218,25 +216,25 @@ body{
     text-overflow: ellipsis;
     /* background-color: rgba(20, 80, 220, 0.746); */
     display: -webkit-box;
-    -webkit-line-clamp: 5; 
+    -webkit-line-clamp: 5;
     -webkit-box-orient: vertical;
     margin-bottom: 20%;
 }
-  
-@media screen and (max-width: 64rem){
-    .col{
+
+@media screen and (max-width: 64rem) {
+    .col {
         width: calc(33.333333% - 2rem);
     }
 }
-  
-@media screen and (max-width: 48rem){
-    .col{
+
+@media screen and (max-width: 48rem) {
+    .col {
         width: calc(50% - 2rem);
     }
 }
-  
-@media screen and (max-width: 32rem){
-    .col{
+
+@media screen and (max-width: 32rem) {
+    .col {
         width: 100%;
         margin: 0 0 2rem 0;
     }

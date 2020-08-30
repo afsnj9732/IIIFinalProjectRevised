@@ -41,6 +41,10 @@ a{
     border-radius: 10px;
 }
 
+.header{
+    border-bottom: 3px solid #f5be2e;
+}
+
 .nav-item:hover{
     background-color: #fee567;
     color: #111111;
@@ -63,4 +67,8 @@ a{
     font-size: 16px;
     background-color: #fffbdf;
     color: black;
+}
+
+.footer{
+    border-top: 3px solid #f5be2e;
 }

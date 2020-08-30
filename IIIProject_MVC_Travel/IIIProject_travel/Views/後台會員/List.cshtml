@@ -15,17 +15,16 @@
     <title>Dashboard Template · Bootstrap 4 繁體中文手冊 [六角學院譯]</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="~/Content/bootstrap-4.2.1-dist/css/bootstrap.css" rel="stylesheet">
-
-
+    <link href="~/Content/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- Custom styles for this template -->
+    <link href="~/Content/css/dashboard.css" rel="stylesheet" />
     <style>
         .bd-placeholder-img {
             font-size: 1.125rem;
             text-anchor: middle;
         }
     </style>
-    <!-- Custom styles for this template -->
-    <link href="~/Content/css/後台css/dashboard.css" rel="stylesheet">
+
 </head>
 
 <body>
@@ -161,64 +160,64 @@
                                 }*@
                             @foreach (var item in Model)
                             {
-                            <tr>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.f會員編號)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.f會員名稱)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.f會員評分)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.f會員稱號)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.f會員大頭貼)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.f會員帳號)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.f會員密碼)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.f會員電子郵件)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.f會員手機)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.f會員電話)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.f會員生日)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.f會員自我介紹)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.f會員暱稱)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.f會員英文姓名)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.f會員性別)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.f會員興趣)
-                                </td>
-                                <td>
-                                    @Html.ActionLink("編輯", "e修改", "後台會員", new { id = item.f會員編號 }, new { Class = "btn btn-info" })
-                                </td>
-                                <td>
-                                    @Html.ActionLink("刪除", "d刪除", "後台會員", new { id = item.f會員編號 },
-                                    new { OnClick = "return confirm('確定要刪除嗎?')", Class = "btn btn-danger" })
-                                </td>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.f會員編號)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.f會員名稱)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.f會員評分)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.f會員稱號)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.f會員大頭貼)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.f會員帳號)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.f會員密碼)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.f會員電子郵件)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.f會員手機)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.f會員電話)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.f會員生日)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.f會員自我介紹)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.f會員暱稱)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.f會員英文姓名)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.f會員性別)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.f會員興趣)
+                                    </td>
+                                    <td>
+                                        @Html.ActionLink("編輯", "e修改", "後台會員", new { id = item.f會員編號 }, new { Class = "btn btn-info" })
+                                    </td>
+                                    <td>
+                                        @Html.ActionLink("刪除", "d刪除", "後台會員", new { id = item.f會員編號 },
+                                        new { OnClick = "return confirm('確定要刪除嗎?')", Class = "btn btn-danger" })
+                                    </td>
 
-                            </tr>
+                                </tr>
 
                             }
 
@@ -231,11 +230,12 @@
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
             integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
             crossorigin="anonymous"></script>
-    <script>window.jQuery || document.write('<script src="~/Content/js/後台js/jquery-slim.min.js"><\/script>')</script>
-    <script src="~/Content/js/後台js/bootstrap.bundle.js"></script>
+    <script>window.jQuery || document.write('<script src="~/Scripts/jquery-slim.min.js"><\/script>')</script>
+    <script src="~/Content/bootstrap-4.5.2-dist/js/bootstrap.bundle.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.9.0/feather.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
-    <script src="~/Content/js/後台js/dashboard.js"></script>
+    <script src="~/Scripts/IIIProject/dashboard.js"></script>
+
 </body>
 
 </html>

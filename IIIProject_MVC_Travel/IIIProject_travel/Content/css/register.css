@@ -1,15 +1,7 @@
 body{
-    background-color: burlywood;
+    background-image: linear-gradient(to left,#f3e4c6,#e94c1d);
 }
 
-.navbar{
-    background-color:#fffbdf;
-}
-
-.nav-register{
-    background-color: #fee567;
-    border-radius: 20px;
-}
 .register-left{
     text-align: center;
     color: #fff;
@@ -28,9 +20,9 @@ body{
     border: none;
     background-color: #f8f8f8;
     padding: 50px;
-    border-top-left-radius: 10% 50%;
-    border-bottom-left-radius: 10% 50%;
-    box-shadow:5px 6px 10px 1px #323232;
+   border-top-left-radius: 10% 50%;
+   border-bottom-left-radius: 10% 50%;
+   box-shadow:5px 6px 7px #323232;
 }
 
 .register-right h2
@@ -49,7 +41,7 @@ body{
     border-radius: 1.5rem;
     border: none;
     width: 120px;
-    background:#f5be2e;
+    background:#ff9800;
     font-weight: 600;
     color: #555;
     margin-top: 20px;
@@ -68,14 +60,5 @@ body{
 }
 
 .register-right .btn-primary:hover{
-    background: #fee567;
-}
-
-input:focus {
-    outline: -webkit-focus-ring-color auto 5px !important;
-}
-
-input[type="radio"]:focus {
-    outline: none !important;
-    box-shadow: none;
+    background: #ff5722;
 }
