@@ -20,11 +20,13 @@ namespace IIIProject_travel.Controllers
         [HttpPost]
         public ActionResult EatIndex(tActivity p)
         {
-            if (Session["member"] != null && p.f活動標題 != null)
+            //if (Session["member"] != null && p.f活動標題 != null)
+            if (p.f活動標題 != null)
+
             {
                 HttpPostedFileBase PicFile = Request.Files["PicFile"];
                 if (PicFile != null)
-                {                    
+                {
                     var photoName = Guid.NewGuid() + Path.GetExtension(PicFile.FileName);
                     var photoPath = Path.Combine(Server.MapPath("~/Content/images/"), photoName);
                     PicFile.SaveAs(photoPath);

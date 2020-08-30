@@ -26,7 +26,7 @@ namespace IIIProject_travel.Controllers
                 dbJoutaEntities db = new dbJoutaEntities();
                 tMember t = db.tMember.FirstOrDefault(k => k.f會員編號 == id);
                 Session["member"] = t;
-                string v =  t.f會員大頭貼.ToString();
+                string v = t.f會員大頭貼.ToString();
                 ViewData["Img"] = v;
             }
             return View();
