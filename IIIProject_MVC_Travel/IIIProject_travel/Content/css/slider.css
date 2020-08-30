@@ -88,7 +88,7 @@ body {
   display: block;
   height: 80vh;
   width: 100%;
-  background: 		#e8e8e8;
+  background: 		#FCFCFC;
   -webkit-transition: background 1s cubic-bezier(0.99, 1, 0.92, 1);
   transition: background 1s cubic-bezier(0.99, 1, 0.92, 1);
   padding-top: 20px;
@@ -155,10 +155,10 @@ body {
 }
 
 .slide__title {
-  font-family: 'Noto Sans TC','微軟正黑體';
+  font-family: Montserrat, helvetica;
   font-size: 2.5em;
   font-weight: 700;
-  color: #f5be2e;
+  color: #FF8F59;
   overflow-y: hidden;
 }
 

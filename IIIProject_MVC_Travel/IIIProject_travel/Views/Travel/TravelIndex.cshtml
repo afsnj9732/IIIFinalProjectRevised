@@ -16,7 +16,7 @@
             @Styles.Render("~/Content/fontawesome/css/all.css")
             @Styles.Render("~/Content/css/style.css")
             @Styles.Render("~/Content/css/travel.css")*@
-        <link rel="stylesheet" href="~/Content/bootstrap-4.2.1-dist/css/bootstrap.css">
+        <link rel="stylesheet" href="~/Content/css/bootstrap.min.css">
         <link rel="stylesheet" href="~/Content/fontawesome/css/all.css">
         <link rel="stylesheet" href="~/Content/css/style.css">
         <link rel="stylesheet" href="~/Content/css/travel.css">
@@ -71,7 +71,7 @@
                         @*<form method="post">*@
                         @*action="./article_AJAX"*@
                         @*<input type="hidden" name="order" value="null" />
-                            <input type="hidden" name="border_color" value="null" />*@
+                        <input type="hidden" name="border_color" value="null" />*@
                         <input type="text" class="mt-4" style="width:86%;" name="contain" id="contain">
                         <input type="image" src="~/Content/images/18.png" id="contain_pic" />  @*alt="submit"*@
                         @*</form>*@
@@ -132,14 +132,14 @@
                     <!-- 人氣團主 -->
                     <div class="mb-5">
                         <p class=" ml-3 " style="text-align: center;width:83.5%;">人氣團主</p>
-                        <ul class="row    ml-3" style="width:83.5%;" >
+                        <ul class="row    ml-3" style="width:83.5%;">
                             <li class="mx-auto" style="list-style-type:none;cursor: pointer;">
                                 @for (int i = 0; i < 5; i++)
                                 {
                                     <img src="~/Content/images/09.png"
                                          alt="" class="popguys">
                                 }
-                            </li>                            
+                            </li>
                         </ul>
                     </div>
                     <!-- 人氣團主 -->
@@ -189,51 +189,51 @@
                                     <!-- 揪團內容頭 -->
                                     @if (Session["member"] != null)
                                     {
-                                    <form enctype="multipart/form-data" method="post">
-                                        <div class="container-fluid">
-                                            <span>標題：<input type="text" name="f活動標題" style="width:90%"></span>
-                                            <div class="row m-0 mb-3 justify-content-around">
-                                                <span>旅遊開始日期： <input type="date" name="f活動開始時間"></span>
-                                                <span>旅遊結束日期： <input type="date" name="f活動結束時間"></span>
-                                                <span>入團截止： <input type="date" name="f活動招募截止時間"></span>
-                                            </div>
-                                            <div class="row mb-4 mx-auto align-items-center justify-content-around">
-                                                <span><img src="~/Content/images/04.png" class="mb-1" alt="">預算：<input type="text" name="f活動預算"></span>
-                                                <span> <img src="~/Content/images/17.png" class="mb-1" alt="">分類：<input type="text" name="f活動分類"></span>
-                                                <span><img src="~/Content/images/13.png" class="mb-1" alt=""> 標籤：<input type="text" name="f活動標籤"></span>
-                                            </div>
-                                            <div class="row mb-4 mx-auto align-items-center justify-content-around">
-                                                <span>團圖：<input type="file" name="PicFile"></span>
+                                        <form enctype="multipart/form-data" method="post">
+                                            <div class="container-fluid">
+                                                <span>標題：<input type="text" name="f活動標題" style="width:90%"></span>
+                                                <div class="row m-0 mb-3 justify-content-around">
+                                                    <span>旅遊開始日期： <input type="date" name="f活動開始時間"></span>
+                                                    <span>旅遊結束日期： <input type="date" name="f活動結束時間"></span>
+                                                    <span>入團截止： <input type="date" name="f活動招募截止時間"></span>
+                                                </div>
+                                                <div class="row mb-4 mx-auto align-items-center justify-content-around">
+                                                    <span><img src="~/Content/images/04.png" class="mb-1" alt="">預算：<input type="text" name="f活動預算"></span>
+                                                    <span> <img src="~/Content/images/17.png" class="mb-1" alt="">分類：<input type="text" name="f活動分類"></span>
+                                                    <span><img src="~/Content/images/13.png" class="mb-1" alt=""> 標籤：<input type="text" name="f活動標籤"></span>
+                                                </div>
+                                                <div class="row mb-4 mx-auto align-items-center justify-content-around">
+                                                    <span>團圖：<input type="file" name="PicFile"></span>
 
-                                                <span class=" ">
-                                                    <img src="~/Content/images/03.png" class="mb-1" alt="">
-                                                    地區：
-                                                    <select name="f活動地區">
-                                                        <option value="北部">北部</option>
-                                                        <option value="中部">中部</option>
-                                                        <option value="南部">南部</option>
-                                                        <option value="東部">東部</option>
-                                                    </select>
-                                                </span>
-                                            </div>
+                                                    <span class=" ">
+                                                        <img src="~/Content/images/03.png" class="mb-1" alt="">
+                                                        地區：
+                                                        <select name="f活動地區">
+                                                            <option value="北部">北部</option>
+                                                            <option value="中部">中部</option>
+                                                            <option value="南部">南部</option>
+                                                            <option value="東部">東部</option>
+                                                        </select>
+                                                    </span>
+                                                </div>
 
-                                            <div class="row align-items-center">
-                                                <div class="mx-auto mb-3">
-                                                    內容：<textarea name="f活動內容" style="width:1000px;height:220px;vertical-align:top;"></textarea>
+                                                <div class="row align-items-center">
+                                                    <div class="mx-auto mb-3">
+                                                        內容：<textarea name="f活動內容" style="width:1000px;height:220px;vertical-align:top;"></textarea>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <!-- 揪團內容尾 -->
-                                        <div class="modal-footer  mt-2 border-main-color">
-                                            <input type="submit" class="btn" style="background-color:#FFE0B2" value="送出" />
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
-                                        </div>
-                                        <!-- 揪團隱藏不顯示項目 -->
-                                        <input type="hidden" name="f活動讚數" value="0">
-                                        <input type="hidden" name="f活動瀏覽次數" value="0">
-                                        <input type="hidden" name="f活動發起日期" value="@DateTime.Now.ToString("yyyy-MM-dd  HH:mm:ss")">
-                                        <input type="hidden" name="f活動類型">
-                                    </form>
+                                            <!-- 揪團內容尾 -->
+                                            <div class="modal-footer  mt-2 border-main-color">
+                                                <input type="submit" class="btn" style="background-color:#FFE0B2" value="送出" />
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
+                                            </div>
+                                            <!-- 揪團隱藏不顯示項目 -->
+                                            <input type="hidden" name="f活動讚數" value="0">
+                                            <input type="hidden" name="f活動瀏覽次數" value="0">
+                                            <input type="hidden" name="f活動發起日期" value="@DateTime.Now.ToString("yyyy-MM-dd  HH:mm:ss")">
+                                            <input type="hidden" name="f活動類型">
+                                        </form>
                                     }
                                     else
                                     {
@@ -253,8 +253,8 @@
                         <div id="showChartsTag"></div>*@
                         <div class="mt-3">
                             @*<button class="btn btn-block mr-1  p-1 row mx-auto" style="background-color:#FFE0B2 ;">
-                <img src="~/Content/images/10.png" alt="" class="pb-1">讀取更多
-            </button>*@
+                                <img src="~/Content/images/10.png" alt="" class="pb-1">讀取更多
+                            </button>*@
                         </div>
                         <div class="mb-5"></div> <!--底部墊高-->
 
@@ -274,11 +274,11 @@
             <p class="text-center mt-2 mb-2">Copyright © 2020 Jouta All rights reserved</p>
         </div>
         <!--    script      -->
-        <script src="~/Content/js/jquery-3.5.1.js"></script>
-        <script src="~/Content/js/popper.min.js"></script>
-        <script src="~/Content/bootstrap-4.2.1-dist/js/bootstrap.js"></script>
-        <script src="~/Content/js/navbar.js"></script>
-        <script src="~/Content/js/travel.js?number=random6"></script>
+        <script src="~/Scripts/jquery-3.5.1.js"></script>
+        <script src="~/Scripts/IIIProject/popper.min.js"></script>
+        <script src="~/Scripts/bootstrap.min.js"></script>
+        <script src="~/Scripts/IIIProject/navbar.js"></script>
+        <script src="~/Scripts/IIIProject/travel.js"></script>
     </body>
 
 </html>
