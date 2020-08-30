@@ -6,47 +6,27 @@ using System.Web;
 
 namespace IIIProject_travel.ViewModel
 {
-    [MetadataType(typeof(CRegisterMetadata))]
-    public partial class CRegister
+    public class CRegister
     {
-        //txtAccount,txtNickname,txtPassword,txtPassword_confirm,txtEmail,txtGender,fIs信箱已驗證,fActivationCode
-        //public string txtAccount { get; set; }
-        public string txtNickname { get; set; }
-        public string txtPassword { get; set; }
-        public string txtPassword_confirm { get; set; }
+        [Required(AllowEmptyStrings = false, ErrorMessage = "會員信箱不可空白")]
+        [EmailAddress(ErrorMessage ="信箱格式有誤")]
         public string txtEmail { get; set; }
-        public string txtGender { get; set; }
-        public bool fIs信箱已驗證 { get; set; }   //狀態管理
-        public System.Guid fActivationCode { get; set; }     //認證碼
-    }
 
-    public class CRegisterMetadata
-    {
-        //[Display(Name ="會員帳號")]
-        //[Required(AllowEmptyStrings =false,ErrorMessage ="帳號不可空白")]
-        //public string txtAccount { get; set; }
-
-        [Display(Name ="會員名稱")]
         [Required(AllowEmptyStrings =false,ErrorMessage = "會員名稱不可空白")]
         public string txtNickname { get; set; }
 
-        [Display(Name = "會員密碼")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "會員密碼不可空白")]
         [DataType(DataType.Password)]
+        [RegularExpression(@"/[a-zA-Z]|\d{6,}/",ErrorMessage ="密碼須包含英文，數字且字數6位以上")]
         [MinLength(6,ErrorMessage ="密碼長度至少6位")]
         public string txtPassword { get; set; }
 
-        [Display(Name = "再次輸入密碼")]
         [DataType(DataType.Password)]
         [Compare("txtPassword",ErrorMessage ="密碼不一致")]
         public string txtPassword_confirm { get; set; }
 
-        [Display(Name = "會員信箱")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "會員信箱不可空白")]
-        [DataType(DataType.EmailAddress)]
-        public string txtEmail { get; set; }
-
-        public string txtGender { get; set; }
+        [FileExtensions(ErrorMessage ="所上傳檔案不是圖片")]
+        public string txtFiles { get; set; }    //使用者圖示
 
         public bool fIs信箱已驗證 { get; set; }   //狀態管理
         public System.Guid fActivationCode { get; set; }     //認證碼

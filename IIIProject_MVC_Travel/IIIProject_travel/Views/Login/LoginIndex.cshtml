@@ -58,17 +58,14 @@
                         <h2>登入</h2>
                         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-                        <input type="text" name="txtAccount" placeholder="使用者帳號" />
-                        @Html.ValidationMessageFor(model => model.txtAccount, "", new { @class = "text-danger" })
+                        <input type="text" name="txtEmail" placeholder="信箱" />
+                        @Html.ValidationMessageFor(model => model.txtEmail, "", new { @class = "text-danger" })
                         <input type="password" name="txtPassword" placeholder="密碼" />
                         @Html.ValidationMessageFor(model => model.txtPassword, "", new { @class = "text-danger" })
-                        <div>
-                            <label>記住我</label>
-                            <div class="checkbox">
-                                @Html.EditorFor(model => model.rememberMe)
-                                @Html.ValidationMessageFor(model => model.rememberMe, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
+                        <br />
+                        @Html.DisplayTextFor(model=> model.txtRememberMe)
+                        @Html.CheckBoxFor(model => model.remember)
+                        <br />
                         <input type="submit" name="signup_submit" value="登入" />
                     </div>
 

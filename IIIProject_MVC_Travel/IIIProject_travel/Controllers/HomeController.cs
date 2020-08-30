@@ -13,7 +13,7 @@ namespace IIIProject_travel.Controllers
     public class HomeController : Controller
     {
         // GET: Home
-        [Authorize]
+        [AllowAnonymous]        //不須做登入驗證即可進入
         public ActionResult Home(int? id)
         {
            
@@ -31,12 +31,12 @@ namespace IIIProject_travel.Controllers
             }
             return View();
         }
-
+        [Authorize]     //通過驗證才可進入頁面
         public ActionResult QuickMatch()
         {
             return View();
         }
-
+        [AllowAnonymous]
         [HttpGet]
         public ActionResult Register()
         {
@@ -71,7 +71,7 @@ namespace IIIProject_travel.Controllers
                 using (dbJoutaEntities db = new dbJoutaEntities())
                 {
                     tMember NewMember = new tMember();
-                    NewMember.f會員性別 = p.txtGender;
+                    NewMember.f會員大頭貼 = p.txtFiles;
                     NewMember.f會員帳號 = p.txtEmail;
                     NewMember.f會員密碼 = fact_password;
                     NewMember.f會員電子郵件 = p.txtEmail;
@@ -138,7 +138,7 @@ namespace IIIProject_travel.Controllers
             }
             //smtp.Send(message);
         }
-
+        [AllowAnonymous]
         public ActionResult About()
         {
             return View();

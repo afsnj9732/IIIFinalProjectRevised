@@ -1980,6 +1980,8 @@
       <DependentUpon>JoutaEntities.edmx</DependentUpon>
       <LastGenOutput>JoutaEntities.cs</LastGenOutput>
     </Content>
+    <Content Include="Scripts\additional-methods.js" />
+    <Content Include="Scripts\additional-methods.min.js" />
     <Content Include="Scripts\blog.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
