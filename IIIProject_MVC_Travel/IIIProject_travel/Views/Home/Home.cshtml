@@ -1,7 +1,7 @@
 ﻿
 @{
     Layout = null;
-    var x = (tMember)Session["member"];
+    //var x = (tMember)Session["member"];
 }
 
 <!DOCTYPE html>
@@ -42,23 +42,21 @@
                         <li class="nav-item">@Html.ActionLink("找文章", "Index", "Blog", new { }, new { @class = "nav-link nav-blog text-dark" })</li>
                     </ul>
                     <ul class="nav navbar-nav">
-                        @if (Session["member"] != null)
+                        <li class="nav-item">@Html.ActionLink("聯絡我們", "New", "聯絡我們", new { }, new { @class = "nav-link nav-login text-dark" })</li>
+
+                        <li class="nav-item">@Html.ActionLink("關於我們", "About", "Home", new { }, new { @class = "nav-link nav-register text-dark" })</li>
+                        @*@if (Session["member"] != null)*@
+                        @if (User.Identity.IsAuthenticated)
                         {
-                            <li class="nav-item">@Html.ActionLink("聯絡我們", "New", "聯絡我們", new { }, new { @class = "nav-link nav-login text-dark" })</li>
-
-                            <li class="nav-item">@Html.ActionLink("關於我們", "About", "Home", new { }, new { @class = "nav-link nav-register text-dark" })</li>
-
-                            <li class="nav-item nav-link nav-login text-dark">歡迎  @x.f會員名稱 </li>
-                            <li class="nav-item">
-                                <img src="@ViewData["Img"]" alt="img" width="30" height="30" style="border:2px solid green;"/>
-                            </li>
+                            <li class="nav-item nav-link nav-login text-dark">您好，  @(User.Identity.Name) </li>
+                            @*<li class="nav-item nav-link nav-login text-dark">歡迎  @x.f會員名稱 </li>*@
+                            @*<li class="nav-item">
+                <img src="@ViewData["Img"]" alt="img" width="30" height="30" style="border:2px solid green;" />
+            </li>*@
                             <li class="nav-item">@Html.ActionLink("登出", "Home", "Home", new { id = 0 }, new { @class = "nav-link nav-login text-dark" })</li>
                         }
                         else
                         {
-                            <li class="nav-item">@Html.ActionLink("聯絡我們", "List", "Home", new { }, new { @class = "nav-link nav-login text-dark" })</li>
-
-                            <li class="nav-item">@Html.ActionLink("關於我們", "About", "Home", new { }, new { @class = "nav-link nav-register text-dark" })</li>
 
                             <li class="nav-item">@Html.ActionLink("登入", "LoginIndex", "Login", new { }, new { @class = "nav-link nav-login text-dark" })</li>
 
