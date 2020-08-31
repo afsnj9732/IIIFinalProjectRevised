@@ -3,6 +3,7 @@
 @{
     Layout = null;
     var x = (tMember)Session["member"];
+    
 }
 
 <!DOCTYPE html>
@@ -87,13 +88,17 @@
                 <!-- Author -->
                 <p class="lead">
                     by
-                    <a href="#">Jouta</a>
+                    <a href="#">Jouta </a>
+
                 </p>
+
+
+
 
                 <hr>
 
                 <!-- Date/Time -->
-                <p class="pDateSection">Posted on January 1, 2019 at 12:00 PM</p>
+                <p class="pDateSection">Posted on January 1, 2019 at 12:00 PM <span align="Right"> <img src="@Url.Action("PhotoGet","Blog")" width="50" /> </span> </p>
 
                 <hr>
 
@@ -192,6 +197,7 @@
                         <br>
                         <br><i class="far fa-envelope"></i> jouta@gmail.com
                         <br>
+                        
                     </p>
                 </section>
 

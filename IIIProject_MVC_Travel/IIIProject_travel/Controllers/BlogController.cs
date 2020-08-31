@@ -6,6 +6,10 @@ using System.Linq;
 using System.Web;
 using System.Web.Compilation;
 using System.Web.Mvc;
+using System.Drawing;
+using System.Drawing.Imaging;
+using ZXing;
+using ZXing.QrCode;
 
 namespace IIIProject_travel.Controllers
 {
@@ -26,7 +30,7 @@ namespace IIIProject_travel.Controllers
 
 
         }
-        public ActionResult List()
+        public ActionResult BlogContent()
         {
 
             var article = from t in (new dbJoutaEntities()).tActivity
@@ -76,7 +80,53 @@ namespace IIIProject_travel.Controllers
             db.tActivity.Add(article);
             db.SaveChanges();
 
-            return RedirectToAction("List");
+            return RedirectToAction("BlogContent");
+
+        }
+
+
+
+        public ActionResult QRcode()
+        {
+
+            var writer = new BarcodeWriter
+            {
+                Format = BarcodeFormat.QR_CODE,
+                Options = new QrCodeEncodingOptions
+                {
+                    Height = 50,
+                    Width = 50,
+                }
+            };
+
+
+
+            var img = writer.Write("https://localhost:44380/");
+            string FileName = "michelin-guide";
+            Bitmap myBitmap = new Bitmap(img);
+
+            string filePath = string.Format("C:\\Users\\User\\Desktop\\slnprjQRcode\\prjQRcode\\Content\\{0}.bmp", FileName);
+            ViewBag.filePath = filePath;
+
+            myBitmap.Save(filePath, ImageFormat.Bmp);
+            ViewBag.IMG = myBitmap;
+
+            return View();
+        }
+
+        public ActionResult PhotoGet()
+        {
+            string FileName = "michelin-guide";
+            string filepath = string.Format("C:\\Users\\User\\Desktop\\slnprjQRcode\\prjQRcode\\Content\\{0}.bmp", FileName);
+            byte[] filedata = System.IO.File.ReadAllBytes(filepath);
+            string contentType = MimeMapping.GetMimeMapping(filepath);
+            var cd = new System.Net.Mime.ContentDisposition
+            {
+                FileName = filepath,
+                Inline = false
+            };
+            Response.AppendHeader("Content-Disposition", cd.ToString());
+            return File(filedata, contentType);
 
         }
     }

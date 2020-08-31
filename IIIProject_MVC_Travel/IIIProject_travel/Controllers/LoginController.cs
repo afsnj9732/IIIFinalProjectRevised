@@ -51,7 +51,7 @@ namespace IIIProject_travel.Controllers
             }
             Session["member"] = target;
             if (user.txtEmail == "Admin@gmail.com" && user.txtPassword == "1234")
-                return RedirectToAction("List", "後台會員");
+                return RedirectToAction("BlogContent", "後台會員");
             return RedirectToAction("Home", "Home");
         }
 

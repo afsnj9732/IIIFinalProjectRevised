@@ -9,7 +9,7 @@
 //    public class 聯絡我們Controller : Controller
 //    {
 //        // GET: 聯絡我們
-//        public ActionResult List()
+//        public ActionResult BlogContent()
 //        {
 //            var 意見表 = from t in (new dbJoutaEntities()).t聯絡我們
 //                      select t;

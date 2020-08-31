@@ -9,7 +9,7 @@
 //    public class 後台旅遊Controller : Controller
 //    {
 //        // GET: 後台旅遊
-//        public ActionResult List()
+//        public ActionResult BlogContent()
 //        {
 //            var 旅遊 = from t in (new dbJoutaEntities()).tTravel
 //                     select t;
@@ -19,7 +19,7 @@
 //        public ActionResult d刪除(int? id)
 //        {
 //            if (id == null)
-//                RedirectToAction("List");
+//                RedirectToAction("BlogContent");
 
 //            tTravel x = new tTravel();
 //            dbJoutaEntities db = new dbJoutaEntities();
@@ -27,7 +27,7 @@
 //            db.tTravel.Remove(x);
 //            db.SaveChanges();
 
-//            return RedirectToAction("List");
+//            return RedirectToAction("BlogContent");
 
 //        }
 //        public ActionResult v查看()

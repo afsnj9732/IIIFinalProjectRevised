@@ -9,7 +9,7 @@
 //    public class 後台文章Controller : Controller
 //    {
 //        // GET: 後台文章
-//        public ActionResult List()
+//        public ActionResult BlogContent()
 //        {
 //            var 文章 = from t in (new dbJoutaEntities()).tArticle
 //                     select t;
@@ -18,7 +18,7 @@
 //        public ActionResult d刪除(int? id)
 //        {
 //            if (id == null)
-//                RedirectToAction("List");
+//                RedirectToAction("BlogContent");
 
 //            tArticle x = new tArticle();
 //            dbJoutaEntities db = new dbJoutaEntities();
@@ -26,7 +26,7 @@
 //            db.tArticle.Remove(x);
 //            db.SaveChanges();
 
-//            return RedirectToAction("List");
+//            return RedirectToAction("BlogContent");
 
 //        }
 //        public ActionResult v查看()
