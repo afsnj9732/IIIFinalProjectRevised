@@ -24,7 +24,7 @@ namespace IIIProject_travel.Controllers
             {
                 HttpPostedFileBase PicFile = Request.Files["PicFile"];
                 if (PicFile != null)
-                {                    
+                {
                     var photoName = Guid.NewGuid() + Path.GetExtension(PicFile.FileName);
                     var photoPath = Path.Combine(Server.MapPath("~/Content/images/"), photoName);
                     PicFile.SaveAs(photoPath);

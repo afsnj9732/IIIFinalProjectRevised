@@ -10,5 +10,7 @@ namespace IIIProject_travel.ViewModel
         public string order { get; set; }
         public string background_color { get; set; }
         public string contain { get; set; }
+        public string category { get; set; }
+        public string label { get; set; }
     }
 }

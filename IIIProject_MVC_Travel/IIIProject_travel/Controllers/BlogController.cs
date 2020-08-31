@@ -6,6 +6,10 @@ using System.Linq;
 using System.Web;
 using System.Web.Compilation;
 using System.Web.Mvc;
+using System.Drawing;
+using System.Drawing.Imaging;
+using ZXing;
+using ZXing.QrCode;
 
 namespace IIIProject_travel.Controllers
 {
@@ -18,7 +22,7 @@ namespace IIIProject_travel.Controllers
         {
 
             var article = from t in (new dbJoutaEntities()).tActivity
-                          where t.f活動類型=="文章"
+                          where t.f活動類型 == "文章"
                           select t;
 
 
@@ -26,7 +30,7 @@ namespace IIIProject_travel.Controllers
 
 
         }
-        public ActionResult List()
+        public ActionResult BlogContent()
         {
 
             var article = from t in (new dbJoutaEntities()).tActivity
@@ -76,7 +80,55 @@ namespace IIIProject_travel.Controllers
             db.tActivity.Add(article);
             db.SaveChanges();
 
-            return RedirectToAction("List");
+            return RedirectToAction("BlogContent");
+
+        }
+
+
+
+        public ActionResult QRcode()
+        {
+
+            var writer = new BarcodeWriter
+            {
+                Format = BarcodeFormat.QR_CODE,
+                Options = new QrCodeEncodingOptions
+                {
+                    Height = 50,
+                    Width = 50,
+                }
+            };
+
+
+
+            var img = writer.Write("https://localhost:44380/");
+            string FileName = "michelin-guide";
+            Bitmap myBitmap = new Bitmap(img);
+
+            //string filePath = string.Format("//Content//images//{0}.bmp", FileName);
+            string filePath = Path.Combine(Server.MapPath("~/Content/images/"), FileName + ".bmp");
+            ViewBag.filePath = filePath;
+
+            myBitmap.Save(filePath, ImageFormat.Bmp);
+            ViewBag.IMG = myBitmap;
+
+            return View();
+        }
+
+        public ActionResult PhotoGet()
+        {
+            string FileName = "michelin-guide";
+            //string filepath = string.Format("//Content//images//{0}.bmp", FileName);
+            string filepath = Path.Combine(Server.MapPath("~/Content/images/"), FileName + ".bmp");
+            byte[] filedata = System.IO.File.ReadAllBytes(filepath);
+            string contentType = MimeMapping.GetMimeMapping(filepath);
+            var cd = new System.Net.Mime.ContentDisposition
+            {
+                FileName = filepath,
+                Inline = false
+            };
+            Response.AppendHeader("Content-Disposition", cd.ToString());
+            return File(filedata, contentType);
 
         }
     }

@@ -122,6 +122,12 @@
       <Private>True</Private>
       <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
     </Reference>
+    <Reference Include="zxing, Version=0.16.5.0, Culture=neutral, PublicKeyToken=4e88037ac681fe60, processorArchitecture=MSIL">
+      <HintPath>..\packages\ZXing.Net.0.16.5\lib\net461\zxing.dll</HintPath>
+    </Reference>
+    <Reference Include="zxing.presentation, Version=0.16.5.0, Culture=neutral, PublicKeyToken=4e88037ac681fe60, processorArchitecture=MSIL">
+      <HintPath>..\packages\ZXing.Net.0.16.5\lib\net461\zxing.presentation.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform">
@@ -1958,8 +1964,6 @@
     </Content>
     <Content Include="Scripts\additional-methods.js" />
     <Content Include="Scripts\additional-methods.min.js" />
-    <Content Include="Scripts\blog.js" />
-    <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Content\fontawesome\less\brands.less" />
     <Content Include="Content\fontawesome\less\fontawesome.less" />
@@ -2030,6 +2034,14 @@
       <DependentUpon>JoutaEntities.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\IIIProject\blog.js" />
+    <Content Include="Scripts\IIIProject\check.js" />
+    <Content Include="Scripts\IIIProject\dashboard.js" />
+    <Content Include="Scripts\IIIProject\debounce.js" />
+    <Content Include="Scripts\IIIProject\eat.js" />
+    <Content Include="Scripts\IIIProject\profile.js" />
+    <Content Include="Scripts\IIIProject\quickmatch.js" />
+    <Content Include="Scripts\IIIProject\travel.js" />
     <Content Include="Scripts\jquery-3.5.1.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
@@ -2039,7 +2051,6 @@
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\IIIProject\navbar.js" />
     <Content Include="Scripts\IIIProject\popper.min.js" />
-    <Content Include="Scripts\IIIProject\travel.js" />
     <Content Include="Scripts\IIIProject\slider.js" />
     <Content Include="Scripts\IIIProject\travel_main.js" />
     <Content Include="Scripts\vue.js" />
@@ -2064,7 +2075,7 @@
     <Content Include="Views\Login\LoginIndex.cshtml" />
     <Content Include="Views\Travel\article_AJAX.cshtml" />
     <Content Include="Views\Blog\Create.cshtml" />
-    <Content Include="Views\Blog\List.cshtml" />
+    <Content Include="Views\Blog\BlogContent.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Home.cshtml" />

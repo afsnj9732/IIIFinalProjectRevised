@@ -9,7 +9,7 @@
 //    public class 後台飯局Controller : Controller
 //    {
 //        // GET: 後台飯局
-//        public ActionResult List()
+//        public ActionResult BlogContent()
 //        {
 //            var 飯局 = from t in (new dbJoutaEntities()).tEat
 //                     select t;
@@ -19,7 +19,7 @@
 //        public ActionResult d刪除(int? id)
 //        {
 //            if (id == null)
-//                RedirectToAction("List");
+//                RedirectToAction("BlogContent");
 
 //            tEat x = new tEat();
 //            dbJoutaEntities db = new dbJoutaEntities();
@@ -27,7 +27,7 @@
 //            db.tEat.Remove(x);
 //            db.SaveChanges();
 
-//            return RedirectToAction("List");
+//            return RedirectToAction("BlogContent");
 
 //        }
 //        public ActionResult v查看()

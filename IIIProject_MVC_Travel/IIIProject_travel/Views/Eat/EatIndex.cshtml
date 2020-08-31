@@ -1,5 +1,4 @@
-﻿@*@model IIIProject_travel.ViewModel.CEat*@
-@{
+﻿@{
     Layout = null;
     var x = (tMember)Session["member"];
 }
@@ -12,7 +11,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Jouta | 揪飯局</title>
+        <title>揪飯局 | Jouta</title>
         @Styles.Render("~/Content/css/bootstrap.min.css")
         @Styles.Render("~/Content/css/style.css")
         @Styles.Render("~/Content/css/eat.css")
@@ -59,7 +58,7 @@
             <div class="container text-white">
                 <form class="top_form">
                     <div class="input-group">
-                        <input type="text" id="search" placeholder="輸入任何關鍵字..." autocomplete="off">
+                        <input type="text" id="search" name="contain" placeholder="輸入任何關鍵字..." autocomplete="off">
                         <!-- <label for="search"><i class="fas fa-search"></i></label>-->
                     </div>
                     <div class="suggestion-list hidden">
@@ -85,35 +84,35 @@
 
                         <button type="button" class="btn btn-outline-warning btn-block btn-sm mb-3"
                                 id="sidebaritems">
-                            <span><img src="~/Content/images/01.png" alt="">熱門</span>
+                            <span><img src="~/Content/images/01.png" order="f活動瀏覽次數" alt="">熱門</span>
                         </button>
                         <button type="button" class="btn btn-outline-warning btn-block btn-sm mb-3"
                                 id="sidebaritems">
-                            <span><img src="~/Content/images/02.png" alt="">最新</span>
+                            <span><img src="~/Content/images/02.png" order="f活動發起日期" alt="">最新</span>
                         </button>
                         <button type="button" class="btn btn-outline-warning btn-block btn-sm mb-3"
                                 id="sidebaritems">
-                            <span><img src="~/Content/images/03.png" alt="">地區</span>
+                            <span><img src="~/Content/images/03.png" order="f活動地區" alt="">地區</span>
                         </button>
                         <button type="button" class="btn btn-outline-warning btn-block btn-sm mb-3"
                                 id="sidebaritems">
-                            <span><img src="~/Content/images/04.png" alt="">預算</span>
+                            <span><img src="~/Content/images/04.png" order="f活動預算" alt="">預算</span>
                         </button>
                         <button type="button" class="btn btn-outline-warning btn-block btn-sm mb-3"
                                 id="sidebaritems">
-                            <span><img src="~/Content/images/05.png" alt="">讚數</span>
+                            <span><img src="~/Content/images/05.png" order="f活動讚數" alt="">讚數</span>
                         </button>
                         <button type="button" class="btn btn-outline-warning btn-block btn-sm mb-3"
                                 id="sidebaritems">
-                            <span><img src="~/Content/images/06.png" alt="">瀏覽次數</span>
+                            <span><img src="~/Content/images/06.png" order="f文章瀏覽次數" alt="">瀏覽次數</span>
                         </button>
                         <button type="button" class="btn btn-outline-warning btn-block btn-sm mb-3"
                                 id="sidebaritems">
-                            <span><img src="~/Content/images/07.png" alt="">活動日期</span>
+                            <span><img src="~/Content/images/07.png" order="f活動開始時間" alt="">活動日期</span>
                         </button>
                         <button type="button" class="btn btn-outline-warning btn-block btn-sm mb-3"
                                 id="sidebaritems">
-                            <span><img src="~/Content/images/08.png" alt="">入團截止</span>
+                            <span><img src="~/Content/images/08.png" order="f活動招募截止時間" alt="">入團截止</span>
                         </button>
 
                         <div class="popularMemberbtn">
@@ -122,20 +121,10 @@
 
                         <ul class="d-flex mb-3">
                             <li class="popularAvatar mr-3" style="list-style-type:none;cursor: pointer;">
-                                <img src="~/Content/images/09.png" alt="">
-                            </li>
-                            <li class="popularAvatar mr-3" style="list-style-type:none;cursor: pointer;">
-                                <img src="~/Content/images/09.png" alt="">
-                            </li>
-                            <li class="popularAvatar mr-3" style="list-style-type:none;cursor: pointer;">
-                                <img src="~/Content/images/09.png" alt="">
-                            </li>
-                            <li class="popularAvatar mr-3" style="list-style-type:none;cursor: pointer;">
-                                <img src="~/Content/images/09.png" alt="">
-                            </li>
-                            <li class="popularAvatar mr-3" style="list-style-type:none;cursor: pointer;">
-                                <img src="~/Content/images/09.png" alt="">
-                            </li>
+                                @for (int i = 0; i < 5; i++)
+                                {
+                                    <img src="~/Content/images/09.png" alt="" />
+                                }
                         </ul>
                     </div>
 
@@ -157,14 +146,14 @@
                                 <div class="modal-body">
 
                                     <!-- jou modal content -->
-                                    @if (Session["member"] != null)
-                                    {
+                                    @*@if (Session["member"] != null)
+                                    {*@
                                         <form enctype="multipart/form-data" method="post">
                                             <div class="container">
                                                 <div class="m-0 mb-3 modalContent row justify-content-around">
                                                     <p>
                                                         <img src="~/Content/images/19.png" class="mb-1" alt="">標題：<input type="text"
-                                                         name="f活動標題" id="modalTitle">
+                                                                                                                         name="f活動標題" id="modalTitle">
                                                     </p>
                                                 </div>
 
@@ -174,33 +163,33 @@
                                                             <img src="~/Content/images/08.png" class="mb-1" alt="">飯局開始時間： <input class="mb-1" type="date" name="f活動開始時間">
                                                         </p>
                                                         <p>
-                                                            <img src="~/Content/images/08.png" class="mb-1" alt="">飯局結束時間： <input class="mb-1" type="date" name="f活動開始時間">
+                                                            <img src="~/Content/images/08.png" class="mb-1" alt="">入團截止日期： <input class="mb-1" type="date" name="f活動招募截止時間">
                                                         </p>
                                                         <p>
-                                                            <img src="~/Content/images/08.png" class="mb-1" alt="">入團截止日期： <input class="mb-1" type="date" name="f活動開始時間">
+                                                            <img src="~/Content/images/08.png" class="mb-1" alt="">飯局詳細地點： <input class="mb-1" type="text" name="f活動地點">
                                                         </p>
                                                         <p>
                                                             <img src="~/Content/images/20.png" class="mb-1" alt="">團圖：<input class="mb-1"
-                                                                                                                             Type="file" Name="PicFile">
+                                                                                                                             type="file" name="PicFile">
                                                         </p>
                                                     </div>
                                                     <div class="modalContentRight">
                                                         <p>
                                                             <img src="~/Content/images/04.png" class="mb-1" alt="">預算：<input class="mb-1"
-                                                                                                                             type="text" name="f預算">
+                                                                                                                             type="text" name="f活動預算">
                                                         </p>
                                                         <p>
                                                             <img src="~/Content/images/17.png" class="mb-1" alt="">分類：<input class="mb-1"
-                                                                                                                             type="text" name="f分類">
+                                                                                                                             type="text" name="f活動分類">
                                                         </p>
                                                         <p>
                                                             <img src="~/Content/images/13.png" class="mb-1" alt="">標籤：<input class="mb-1"
-                                                                                                                             type="text" name="f分類">
+                                                                                                                             type="text" name="f活動分類">
                                                         </p>
                                                         <p>
                                                             <img src="~/Content/images/03.png" class="mb-1" alt="">
                                                             地區：
-                                                            <select name="f地點">
+                                                            <select name="f活動地區">
                                                                 <option value="">北部</option>
                                                                 <option value="">中部</option>
                                                                 <option value="">南部</option>
@@ -213,30 +202,28 @@
 
                                             <div class="m-0 mb-3 modalContent row justify-content-around">
                                                 <div class="mx-auto mb-3">
-                                                    內容：<textarea name="f內容"></textarea>
+                                                    內容：<textarea name="f活動內容"></textarea>
                                                 </div>
                                             </div>
 
                                             <!-- jou modal btns -->
                                             <div class="modal-footer  mt-2 border-main-color">
-                                             
-                                                <input type="submit" class="btn" style="background-color:#fee567"
+                                                <input type="submit" class="btn btnSubmit" style="background-color:#fee567"
                                                        value="送出">
                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
                                             </div>
 
                                             <!-- jouta modal hidden -->
-                                            <input type="hidden" name="f帳號" value="0">
-                                            <input type="hidden" name="f大頭貼" value="0">
-                                            <input type="hidden" name="f點讚次數" value="0">
-                                            <input type="hidden" name="f建立時間" value="@DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")">
-                                            <input type="hidden" name="f暱稱" value="Test">
+                                            <input type="hidden" name="f瀏覽次數" value="0">
+                                            <input type="hidden" name="f活動類型" value="0">
+                                            <input type="hidden" name="f活動讚數" value="0">
+                                            <input type="hidden" name="f活動發起日期" value="@DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")">
                                         </form>
-                                    }
+                                    @*}
                                     else
                                     {
                                         <p>請先登入會員</p>
-                                    }
+                                    }*@
                                 </div>
                             </div>
                         </div>

@@ -1,5 +1,10 @@
 ; (function () {
-
+    var order;
+    var background_color;
+    var contain;
+    var category;
+    var label;
+    var p;
     //$("#showCharts").on('click', function () {
     //    console.log("123");
     //    $.ajax({
@@ -11,16 +16,81 @@
         
     //});
 
+    //增加讚
+    function getGoodCounts() {
+        var j = 0;
+        let target = $(".FeelGood").attr("target");
+        //console.log(target);
+        $.ajax({
+            url: "/Travel/FeelGood",
+            type: 'POST',
+            data: { "target": target, "p": p },
+            success: function (data) {
+                $(".GoodCountTemp").remove();//刪除html原有資料
+                for (var i of data) {
+                    $(".updateGoodCounts").eq(j).after("<span class='GoodCountTemp'>" + i + "</span>");
+                    j++;
+                    $(".updateGoodCounts").eq(j).after("<span class='GoodCountTemp'>" + i + "</span>");
+                    j++;
+                }
+
+            }
+
+        });
+    };
+
+    //瀏覽次數
+    function getViewCounts() {
+        var j = 0;         
+        let target = $(this).attr("updateVC");
+        //console.log("1231")
+        $.ajax({
+            url: "/Travel/CountView",
+            type: 'POST',
+            data: { "target":target,"p":p },
+            success: function (data) {
+                $(".ViewCountTemp").remove();//刪除html原有資料
+                for (var i of data) {                            
+                    $(".updateViewCounts").eq(j).after("<span class='ViewCountTemp'>" + i + "</span>");
+                    j++;
+                    $(".updateViewCounts").eq(j).after("<span class='ViewCountTemp'>" + i + "</span>");
+                    j++;
+                }
+
+            }
+
+        });
+    }
+    //瀏覽次數，注意因為文章項目是ajax動態產生，因此事件必須使用氣泡動態綁定寫法
+    $("body").on('click', ".ViewCounts", getViewCounts );
+    $("body").on('click', ".FeelGood", getGoodCounts );
+
+    //即時性搜尋
+    //$("#contain").on('keyup', function () {
+    //    $("#travel_sort .sort li").eq(0).click();   //用這樣搜尋剛搜尋完第一下會有BUG
+    //});
+    $("#category").on('change', function () {
+        $("#travel_sort .sort li img").eq(0).click(); 
+    })
+    $("#label").on('change', function () {
+        $("#travel_sort .sort li img").eq(0).click();
+    })
 
     //排序用點擊事件(因為li太大)，已測試可運行
     $("#travel_sort .sort li img").on('click',function (e) {
         e.stopPropagation(); //停止氣泡，防止子元素點擊父元素
         //console.log("test");
-        let order = $(this).attr("order");
-        let background_color = $(this).parent().parent().css("background-color");
-        let contain = $("#contain").val();
-        //console.log(contain);
-        let p = JSON.stringify({ "order": order, "background_color": background_color, "contain": contain });
+        order = $(this).attr("order");
+        background_color = $(this).parent().parent().css("background-color");
+        contain = $("#contain").val();
+        category = $("#category").val();
+        label = $("#label").val();
+        //console.log(category);
+        //console.log(label);
+        p = JSON.stringify({
+            "order": order, "background_color": background_color, "contain": contain
+            , "category": category, "label": label
+        });
         $.ajax({
             async: false, 
             url: "/Travel/article_AJAX",
@@ -30,32 +100,13 @@
               $("#article_ajax div").remove();
               $("#article_ajax").append(data);
               Travel_RWD();
+              getViewCounts();
             }          
         });
     });
     //搜尋ajax
 
-    //增加讚
-    //$("body").on('click',".FeelGood", function () {
-    //    //console.log("123"); 
-    //    let target = $(".FeelGood").attr("target");
-    //    //console.log(target);
-    //    $.ajax({
-    //        url: "/Travel/FeelGood",
-    //        data: { "target": target},
-    //        success: function (data) {
-    //            if (data == "0") {
-    //                window.confirm("請先登入");
-    //            }
-    //            else if (data == "1") {
-    //                window.confirm("讚");
-    //            }
- 
-    //        }   
-    //    });
 
-
-    //});
 
 
 
@@ -115,7 +166,9 @@
     // window.addEventListener("scroll", travel_sort_scrollHandler);
     // }
 
-    //搜尋，應該也可以在不提供排序條件的情況下提交ajax，
+    //window.setInterval(function () { $("#contain_pic").click(); console.log("123"); }, 3000);
+
+    //點選搜尋
     $("#contain_pic").on('click', function (e) {
         e.stopPropagation;
         $("#travel_sort .sort li").eq(0).click();                     
@@ -177,5 +230,5 @@
     });
     $("#travel_sort .sort li").eq(0).click();                               //預設熱門被選為排序
 
-
+    
 })(); 

@@ -9,12 +9,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jouta | 極速配對</title>
-    @*<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
-          integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">*@
-    <link rel="stylesheet" href="~/Content/css/bootstrap.min.css">
-    <link rel="stylesheet" href="~/Content/css/style.css">
-    <link rel="stylesheet" href="~/Content/css/quickmatch.css">
+    <title>極速配對 | Jouta</title>
+    @Styles.Render("~/Content/css/bootstrap.min.css")
+    @Styles.Render("~/Content/css/style.css")
+    @Styles.Render("~/Content/quickmatch.css")
     <link rel="shortcut icon" href="favicon.ico" />
 </head>
 
@@ -59,59 +57,55 @@
         <button class="btnLocation" onclick="getLocation()">
             開啟定位尋找附近的TA !
         </button>
-        <div class="cols">
-            <div class="col" ontouchstart="this.classList.toggle('hover');">
-                <div class="container">
-                    <div class="front" style="background-image: url(../../Content/images/qm1.jpg)">
-                        <div class="inner">
-                            <p>找吃貨</p>
-                            <span>
-                                不知道會抽到什麼飯局呢~?
-                            </span>
+        <div class="fakecontainer">
+            <div class="cols">
+                <div class="col" ontouchstart="this.classList.toggle('hover');">
+                    <div class="container resultTrigger">
+                        <div class="front" style="background-image: url(../../Content/images/qm1.jpg)">
+                            <div class="inner">
+                                <p>找吃貨</p>
+                                <span>下班之後吃什麼好呢...?</span>
+                            </div>
                         </div>
-                    </div>
-                    <div class="back">
-                        <div class="inner">
-                            <p>
-                                SELECT id FROM tEat<br>
-                                ORDER BY RAND()<br>
-                                LIMIT 1!
-                            </p>
+                        <div class="back">
+                            <div class="inner">
+                                <p>
+                                    SELECT id FROM tEat<br>
+                                    ORDER BY RAND()<br>
+                                    LIMIT 1!
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col" ontouchstart="this.classList.toggle('hover');">
-                <div class="container">
-                    <div class="front"
-                         style="background-image: url(../../Content/images/qm2.jpeg)">
-                        <div class="inner">
-                            <p>找旅伴</p>
-                            <span>
-                                想找幾個朋友一起去戶外踏青...
-                            </span>
+                <div class="col" ontouchstart="this.classList.toggle('hover');">
+                    <div class="container resultTrigger">
+                        <div class="front" style="background-image: url(../../Content/images/qm2.jpeg)">
+                            <div class="inner">
+                                <p>找旅伴</p>
+                                <span>週末想找朋友出去放鬆心情~</span>
+                            </div>
                         </div>
-                    </div>
-                    <div class="back">
-                        <div class="inner">
-                            <p>
-                                SELECT id FROM tTravel<br>
-                                ORDER BY RAND()<br>
-                                LIMIT 1!
-                            </p>
+                        <div class="back">
+                            <div class="inner">
+                                <p>
+                                    SELECT id FROM tTravel<br>
+                                    ORDER BY RAND()<br>
+                                    LIMIT 1!
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
         <!-- show result -->
-        <div class="container-fluid">
+        <div class="container-fluid downbox">
             <div class="container">
                 <div class="d-flex resultbox">
                     <div id="UserBlock">
                         <p>失落的帝國</p>
-                        <img src="~/Content/images/1.jpg" alt="" class="col-auto ArticlePic">
+                        <img src="images/1.jpg" alt="" class="col-auto ArticlePic">
                         <p>使用者名稱:怕豹</p>
                         <p>使用者評分:5</p>
                     </div>
@@ -127,23 +121,26 @@
                             <button class="btn  btn-warning btn-block" type="submit">更多</button>
                             <button class="btn  btn-warning btn-block" type="submit">分享</button>
                             <button class="btn  btn-warning btn-block" type="submit">留言</button>
-                        </div><br>
+                        </div>
+                        <br>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 
-        <!-- footer -->
-        <div class="container-fluid footer">
-            <p class="text-center mt-2 mb-2">Copyright © 2020 Jouta All rights reserved</p>
-        </div>
+    <!-- footer -->
+    <div class="container-fluid footer">
+        <p class="text-center mt-2 mb-2">Copyright © 2020 Jouta All rights reserved</p>
+    </div>
 
-        <!-- script -->
-        <script src="~/Scripts/jquery-3.5.1.js"></script>
-        <script src="~/Scripts/IIIProject/popper.min.js"></script>
-        <script src="~/Scripts/bootstrap.min.js"></script>
-        <script src="~/Scripts/IIIProject/navbar.js"></script>
-        <script src="~/Scripts/IIIProject/location.js"></script>
+    <!-- script -->
+    @Scripts.Render("~/Scripts/jquery-3.5.1.js")
+    @Scripts.Render("~/Scripts/IIIProject/popper.min.js")
+    @Scripts.Render("~/Scripts/bootstrap.min.js")
+    @Scripts.Render("~/Scripts/IIIProject/navbar.js")
+    @Scripts.Render("~/Scripts/IIIProject/location.js")
+    @Scripts.Render("~/Scripts/IIIProject/quickmatch.js")
 </body>
 
 </html>
