@@ -16,6 +16,11 @@ body{
     transition-duration: 1s;
 }
 
+.fakecontainer{
+    max-width:1140px;
+    margin: auto;
+}
+
     .btnLocation:hover {
         background-color: #f5be2e;
         border: 3px solid transparent;
@@ -68,7 +73,7 @@ body{
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
     text-align: center;
-    min-height: 50vh;
+    min-height: 30vh;
     height: auto;
     border-radius: 10px;
     color: #fff;
@@ -182,6 +187,17 @@ body{
     color: rgba(255,255,255,0.7);
     font-family: '·L³n¥¿¶ÂÅé';
     font-weight: 300;
+}
+
+.downbox{
+    opacity:0;
+    transition-duration:0.3s;
+}
+
+.active{
+    opacity:1;
+    height:auto;
+    transition-duration:0.3s;
 }
 
 .resultbox {

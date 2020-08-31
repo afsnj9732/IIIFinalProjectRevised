@@ -20,9 +20,7 @@ namespace IIIProject_travel.Controllers
         [HttpPost]
         public ActionResult EatIndex(tActivity p)
         {
-            //if (Session["member"] != null && p.f活動標題 != null)
-            if (p.f活動標題 != null)
-
+            if (Session["member"] != null && p.f活動標題 != null)
             {
                 HttpPostedFileBase PicFile = Request.Files["PicFile"];
                 if (PicFile != null)

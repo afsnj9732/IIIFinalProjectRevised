@@ -146,8 +146,8 @@
                                 <div class="modal-body">
 
                                     <!-- jou modal content -->
-                                    @if (Session["member"] != null)
-                                    {
+                                    @*@if (Session["member"] != null)
+                                    {*@
                                         <form enctype="multipart/form-data" method="post">
                                             <div class="container">
                                                 <div class="m-0 mb-3 modalContent row justify-content-around">
@@ -170,7 +170,7 @@
                                                         </p>
                                                         <p>
                                                             <img src="~/Content/images/20.png" class="mb-1" alt="">團圖：<input class="mb-1"
-                                                                                                                             Type="file" Name="f活動團圖">
+                                                                                                                             type="file" name="PicFile">
                                                         </p>
                                                     </div>
                                                     <div class="modalContentRight">
@@ -219,11 +219,11 @@
                                             <input type="hidden" name="f活動讚數" value="0">
                                             <input type="hidden" name="f活動發起日期" value="@DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")">
                                         </form>
-                                    }
+                                    @*}
                                     else
                                     {
                                         <p>請先登入會員</p>
-                                    }
+                                    }*@
                                 </div>
                             </div>
                         </div>
