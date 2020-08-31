@@ -2024,6 +2024,7 @@
     <Content Include="Scripts\IIIProject\debounce.js" />
     <Content Include="Scripts\IIIProject\eat.js" />
     <Content Include="Scripts\IIIProject\profile.js" />
+    <Content Include="Scripts\IIIProject\quickmatch.js" />
     <Content Include="Scripts\jquery-3.5.1.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />

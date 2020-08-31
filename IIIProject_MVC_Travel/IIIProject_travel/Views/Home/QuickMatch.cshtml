@@ -9,12 +9,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jouta | 極速配對</title>
-    @*<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
-        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">*@
-    <link rel="stylesheet" href="~/Content/css/bootstrap.min.css">
-    <link rel="stylesheet" href="~/Content/css/style.css">
-    <link rel="stylesheet" href="~/Content/css/quickmatch.css">
+    <title>極速配對 | Jouta</title>
+    @Styles.Render("~/Content/css/bootstrap.min.css")
+    @Styles.Render("~/Content/css/style.css")
+    @Styles.Render("~/Content/quickmatch.css")
     <link rel="shortcut icon" href="favicon.ico" />
 </head>
 
@@ -59,49 +57,50 @@
         <button class="btnLocation" onclick="getLocation()">
             開啟定位尋找附近的TA !
         </button>
-        <div class="cols">
-            <div class="col" ontouchstart="this.classList.toggle('hover');">
-                <div class="container">
-                    <div class="front" style="background-image: url(../../Content/images/qm1.jpg)">
-                        <div class="inner">
-                            <p>找吃貨</p>
-                            <span>下班之後吃什麼好呢...?</span>
+        <div class="fakecontainer">
+            <div class="cols">
+                <div class="col" ontouchstart="this.classList.toggle('hover');">
+                    <div class="container resultTrigger">
+                        <div class="front" style="background-image: url(../../Content/images/qm1.jpg)">
+                            <div class="inner">
+                                <p>找吃貨</p>
+                                <span>下班之後吃什麼好呢...?</span>
+                            </div>
                         </div>
-                    </div>
-                    <div class="back">
-                        <div class="inner">
-                            <p>
-                                SELECT id FROM tEat<br>
-                                ORDER BY RAND()<br>
-                                LIMIT 1!
-                            </p>
+                        <div class="back">
+                            <div class="inner">
+                                <p>
+                                    SELECT id FROM tEat<br>
+                                    ORDER BY RAND()<br>
+                                    LIMIT 1!
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col" ontouchstart="this.classList.toggle('hover');">
-                <div class="container">
-                    <div class="front" style="background-image: url(../../Content/images/qm2.jpeg)">
-                        <div class="inner">
-                            <p>找旅伴</p>
-                            <span>週末想找朋友出去放鬆心情~</span>
+                <div class="col" ontouchstart="this.classList.toggle('hover');">
+                    <div class="container resultTrigger">
+                        <div class="front" style="background-image: url(../../Content/images/qm2.jpeg)">
+                            <div class="inner">
+                                <p>找旅伴</p>
+                                <span>週末想找朋友出去放鬆心情~</span>
+                            </div>
                         </div>
-                    </div>
-                    <div class="back">
-                        <div class="inner">
-                            <p>
-                                SELECT id FROM tTravel<br>
-                                ORDER BY RAND()<br>
-                                LIMIT 1!
-                            </p>
+                        <div class="back">
+                            <div class="inner">
+                                <p>
+                                    SELECT id FROM tTravel<br>
+                                    ORDER BY RAND()<br>
+                                    LIMIT 1!
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
         <!-- show result -->
-        <div class="container-fluid">
+        <div class="container-fluid downbox">
             <div class="container">
                 <div class="d-flex resultbox">
                     <div id="UserBlock">
@@ -122,7 +121,8 @@
                             <button class="btn  btn-warning btn-block" type="submit">更多</button>
                             <button class="btn  btn-warning btn-block" type="submit">分享</button>
                             <button class="btn  btn-warning btn-block" type="submit">留言</button>
-                        </div><br>
+                        </div>
+                        <br>
                     </div>
                 </div>
             </div>
@@ -135,11 +135,12 @@
     </div>
 
     <!-- script -->
-    <script src="~/Content/js/jquery-3.5.1.js"></script>
-    <script src="~/Content/js/popper.min.js"></script>
-    <script src="~/Content/bootstrap-4.2.1-dist/js/bootstrap.min.js"></script>
-    <script src="~/Content/js/navbar.js"></script>
-    <script src="~/Scripts/location.js"></script>
+    @Scripts.Render("~/Scripts/jquery-3.5.1.js")
+    @Scripts.Render("~/Scripts/IIIProject/popper.min.js")
+    @Scripts.Render("~/Scripts/bootstrap.min.js")
+    @Scripts.Render("~/Scripts/IIIProject/navbar.js")
+    @Scripts.Render("~/Scripts/IIIProject/location.js")
+    @Scripts.Render("~/Scripts/IIIProject/quickmatch.js")
 </body>
 
 </html>
