@@ -22,7 +22,7 @@ namespace IIIProject_travel.Controllers
         {
 
             var article = from t in (new dbJoutaEntities()).tActivity
-                          where t.f活動類型=="文章"
+                          where t.f活動類型 == "文章"
                           select t;
 
 
@@ -105,7 +105,8 @@ namespace IIIProject_travel.Controllers
             string FileName = "michelin-guide";
             Bitmap myBitmap = new Bitmap(img);
 
-            string filePath = string.Format("C:\\Users\\User\\Desktop\\slnprjQRcode\\prjQRcode\\Content\\{0}.bmp", FileName);
+            //string filePath = string.Format("//Content//images//{0}.bmp", FileName);
+            string filePath = Path.Combine(Server.MapPath("~/Content/images/"), FileName + ".bmp");
             ViewBag.filePath = filePath;
 
             myBitmap.Save(filePath, ImageFormat.Bmp);
@@ -117,7 +118,8 @@ namespace IIIProject_travel.Controllers
         public ActionResult PhotoGet()
         {
             string FileName = "michelin-guide";
-            string filepath = string.Format("C:\\Users\\User\\Desktop\\slnprjQRcode\\prjQRcode\\Content\\{0}.bmp", FileName);
+            //string filepath = string.Format("//Content//images//{0}.bmp", FileName);
+            string filepath = Path.Combine(Server.MapPath("~/Content/images/"), FileName + ".bmp");
             byte[] filedata = System.IO.File.ReadAllBytes(filepath);
             string contentType = MimeMapping.GetMimeMapping(filepath);
             var cd = new System.Net.Mime.ContentDisposition
