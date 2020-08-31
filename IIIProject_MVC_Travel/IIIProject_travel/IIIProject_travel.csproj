@@ -2057,7 +2057,7 @@
     <Content Include="Views\Login\LoginIndex.cshtml" />
     <Content Include="Views\Travel\article_AJAX.cshtml" />
     <Content Include="Views\Blog\Create.cshtml" />
-    <Content Include="Views\Blog\List.cshtml" />
+    <Content Include="Views\Blog\BlogContent.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Home.cshtml" />

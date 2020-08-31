@@ -26,7 +26,7 @@ namespace IIIProject_travel.Controllers
 
 
         }
-        public ActionResult List()
+        public ActionResult BlogContent()
         {
 
             var article = from t in (new dbJoutaEntities()).tActivity
@@ -76,7 +76,7 @@ namespace IIIProject_travel.Controllers
             db.tActivity.Add(article);
             db.SaveChanges();
 
-            return RedirectToAction("List");
+            return RedirectToAction("BlogContent");
 
         }
     }
