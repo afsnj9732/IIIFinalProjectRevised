@@ -15,11 +15,35 @@
     //    });
         
     //});
+
+    //增加讚
+    function getGoodCounts() {
+        var j = 0;
+        let target = $(".FeelGood").attr("target");
+        //console.log(target);
+        $.ajax({
+            url: "/Travel/FeelGood",
+            type: 'POST',
+            data: { "target": target, "p": p },
+            success: function (data) {
+                $(".GoodCountTemp").remove();//刪除html原有資料
+                for (var i of data) {
+                    $(".updateGoodCounts").eq(j).after("<span class='GoodCountTemp'>" + i + "</span>");
+                    j++;
+                    $(".updateGoodCounts").eq(j).after("<span class='GoodCountTemp'>" + i + "</span>");
+                    j++;
+                }
+
+            }
+
+        });
+    };
+
     //瀏覽次數
     function getViewCounts() {
         var j = 0;         
         let target = $(this).attr("updateVC");
-        console.log("1231")
+        //console.log("1231")
         $.ajax({
             url: "/Travel/CountView",
             type: 'POST',
@@ -39,7 +63,7 @@
     }
     //瀏覽次數，注意因為文章項目是ajax動態產生，因此事件必須使用氣泡動態綁定寫法
     $("body").on('click', ".ViewCounts", getViewCounts );
-    
+    $("body").on('click', ".FeelGood", getGoodCounts );
 
     //即時性搜尋
     //$("#contain").on('keyup', function () {
@@ -82,27 +106,7 @@
     });
     //搜尋ajax
 
-    //增加讚
-    //$("body").on('click',".FeelGood", function () {
-    //    //console.log("123"); 
-    //    let target = $(".FeelGood").attr("target");
-    //    //console.log(target);
-    //    $.ajax({
-    //        url: "/Travel/FeelGood",
-    //        data: { "target": target},
-    //        success: function (data) {
-    //            if (data == "0") {
-    //                window.confirm("請先登入");
-    //            }
-    //            else if (data == "1") {
-    //                window.confirm("讚");
-    //            }
- 
-    //        }   
-    //    });
 
-
-    //});
 
 
 
