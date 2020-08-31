@@ -187,8 +187,8 @@
                                 </div>
                                 <div class="modal-body">
                                     <!-- 揪團內容頭 -->
-                                    @if (Session["member"] != null)
-                                    {
+                                    @*@if (Session["member"] != null)
+                                    {*@
                                         <form enctype="multipart/form-data" method="post">
                                             <div class="container-fluid">
                                                 <span>標題：<input type="text" name="f活動標題" style="width:90%"></span>
@@ -234,11 +234,11 @@
                                             <input type="hidden" name="f活動發起日期" value="@DateTime.Now.ToString("yyyy-MM-dd  HH:mm:ss")">
                                             <input type="hidden" name="f活動類型">
                                         </form>
-                                    }
+                                    @*}
                                     else
                                     {
                                         <p>先登入才能揪團</p>
-                                    }
+                                    }*@
                                 </div>
 
                             </div>

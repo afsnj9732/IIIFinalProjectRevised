@@ -1948,8 +1948,6 @@
     </Content>
     <Content Include="Scripts\additional-methods.js" />
     <Content Include="Scripts\additional-methods.min.js" />
-    <Content Include="Scripts\blog.js" />
-    <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Content\fontawesome\less\brands.less" />
     <Content Include="Content\fontawesome\less\fontawesome.less" />
@@ -2020,6 +2018,12 @@
       <DependentUpon>JoutaEntities.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\IIIProject\blog.js" />
+    <Content Include="Scripts\IIIProject\check.js" />
+    <Content Include="Scripts\IIIProject\dashboard.js" />
+    <Content Include="Scripts\IIIProject\debounce.js" />
+    <Content Include="Scripts\IIIProject\eat.js" />
+    <Content Include="Scripts\IIIProject\profile.js" />
     <Content Include="Scripts\jquery-3.5.1.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
