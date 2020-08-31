@@ -1,7 +1,9 @@
 ﻿
 @{
     Layout = null;
-    var x = (tMember)Session["member"];
+    //var x = (tMember)Session["member"];
+    tMember x = (new dbJoutaEntities()).tMember.FirstOrDefault(y => y.f會員編號 == 3);
+    Session["member"] = x;
 }
 
 @{
@@ -110,7 +112,7 @@
                         </li>
                         <li class="m-2 mb-3 row justify-content-between" id="06" style="list-style-type:none;cursor: pointer;">
                             <span>
-                                <img src="~/Content/images/06.png" order="f文章瀏覽次數"
+                                <img src="~/Content/images/06.png" order="f活動瀏覽次數"
                                      alt="">瀏覽次數
                             </span>
                         </li>
@@ -158,13 +160,27 @@
                         <div id="new" class="row align-items-center pr-2  ">
                             <form action="" style="font-size:smaller" class="mr-3">
                                 <span>分類：</span>
-                                <select name="" id="" style="border: none;">
-                                    <option value="" selected>所有</option>
+                                <select  id="category" style="border: none;" >
+                                    <option style="width:auto;margin:0 auto;" value="所有" selected>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;所有
+                                    </option>
+                                    <option value="兩天一夜" >兩天一夜</option>
+                                    <option value="三天兩夜" >三天兩夜</option>
+                                    <option value="五天四夜" >五天四夜</option>
+                                    <option value="七天六夜" >七天六夜</option>
+                                    <option style="text-align:center;" value="其他">
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;其他
+                                    </option>
+
                                 </select>
                                 &nbsp;&nbsp;
-                                <span> 標籤：</span>
-                                <select name="" id="" style="border: none;">
-                                    <option value="" selected>全部</option>
+                                <span>標籤：</span>
+                                <select id="label" style="border: none;">
+                                    <option value="全部" selected>&nbsp;全部</option>
+                                    <option value="10">讚>10</option>
+                                    <option value="30">讚>30</option>
+                                    <option value="50">讚>50</option>
+                                    <option value="100">讚>100</option>
                                 </select>
                             </form>
                             <button class="btn btn-block mr-1   p-1" style="background-color:#FFE0B2 ;" type="submit" data-toggle="modal"
@@ -187,8 +203,8 @@
                                 </div>
                                 <div class="modal-body">
                                     <!-- 揪團內容頭 -->
-                                    @*@if (Session["member"] != null)
-                                    {*@
+                                    @if (Session["member"] != null)
+                                    {
                                         <form enctype="multipart/form-data" method="post">
                                             <div class="container-fluid">
                                                 <span>標題：<input type="text" name="f活動標題" style="width:90%"></span>
@@ -199,8 +215,34 @@
                                                 </div>
                                                 <div class="row mb-4 mx-auto align-items-center justify-content-around">
                                                     <span><img src="~/Content/images/04.png" class="mb-1" alt="">預算：<input type="text" name="f活動預算"></span>
-                                                    <span> <img src="~/Content/images/17.png" class="mb-1" alt="">分類：<input type="text" name="f活動分類"></span>
-                                                    <span><img src="~/Content/images/13.png" class="mb-1" alt=""> 標籤：<input type="text" name="f活動標籤"></span>
+
+                                                    <span>
+                                                        <img src="~/Content/images/17.png" class="mb-1" alt="">分類：
+                                                        <select name="f活動分類" style="">
+                                                            <option style="width:auto;margin:0 auto;" value="所有" selected>
+                                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;所有
+                                                            </option>
+                                                            <option value="兩天一夜">兩天一夜</option>
+                                                            <option value="三天兩夜">三天兩夜</option>
+                                                            <option value="五天四夜">五天四夜</option>
+                                                            <option value="七天六夜">七天六夜</option>
+                                                            <option style="text-align:center;" value="其他">
+                                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;其他
+                                                            </option>
+
+                                                        </select>
+                                                    </span>
+                                                    &nbsp;&nbsp;
+                                                    <span class="pr-4">
+                                                        <img src="~/Content/images/13.png" class="mb-1" alt="">標籤：
+                                                        <select name="f活動標籤" style="">
+                                                            <option value="全部" selected>&nbsp;全部</option>
+                                                            <option value="10">讚>10</option>
+                                                            <option value="30">讚>30</option>
+                                                            <option value="50">讚>50</option>
+                                                            <option value="100">讚>100</option>
+                                                        </select>
+                                                    </span>
                                                 </div>
                                                 <div class="row mb-4 mx-auto align-items-center justify-content-around">
                                                     <span>團圖：<input type="file" name="PicFile"></span>
@@ -234,11 +276,11 @@
                                             <input type="hidden" name="f活動發起日期" value="@DateTime.Now.ToString("yyyy-MM-dd  HH:mm:ss")">
                                             <input type="hidden" name="f活動類型">
                                         </form>
-                                    @*}
+                                    }
                                     else
                                     {
                                         <p>先登入才能揪團</p>
-                                    }*@
+                                    }
                                 </div>
 
                             </div>

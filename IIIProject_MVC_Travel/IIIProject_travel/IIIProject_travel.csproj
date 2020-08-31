@@ -2031,6 +2031,7 @@
     <Content Include="Scripts\IIIProject\eat.js" />
     <Content Include="Scripts\IIIProject\profile.js" />
     <Content Include="Scripts\IIIProject\quickmatch.js" />
+    <Content Include="Scripts\IIIProject\travel.js" />
     <Content Include="Scripts\jquery-3.5.1.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
@@ -2040,7 +2041,6 @@
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\IIIProject\navbar.js" />
     <Content Include="Scripts\IIIProject\popper.min.js" />
-    <Content Include="Scripts\IIIProject\travel.js" />
     <Content Include="Scripts\IIIProject\slider.js" />
     <Content Include="Scripts\IIIProject\travel_main.js" />
     <Content Include="Scripts\vue.js" />
