@@ -134,10 +134,6 @@
         getAJAX();
     });
 
-    ////排序連動之ajax事件
-    //$("#travel_sort .sort li img").on('click', function () {
-    //    getAJAX();
-    //});
     //排序特效，注意JS.CSS使用Hex碼有些許狀況，本身不帶ajax，以事件連動觸發ajax
     $("#travel_sort .sort li").on('click', function () {             
         $(this).addClass('using');
@@ -145,11 +141,10 @@
         $("#row span").remove();
         $("#row div").append($(this).html());
         $("#row #temp").remove();             
-        //if ($(this).css('background-color') === 'rgb(250, 224, 178)') {             
-        //    $(this).css('background-color', 'rgb(250, 224, 177)');   
+ 
         if (this.style.backgroundColor === 'rgb(250, 224, 178)') {
             this.style.backgroundColor = 'rgb(250, 224, 177)';
-            console.log("177");
+
             $("#temp").remove();
             if ($(this).attr('id') === "07") {
                 $(this).append("<span id='temp'>近－>遠</span>");
@@ -169,8 +164,7 @@
         }
         else {            
             this.style.backgroundColor = 'rgb(250, 224, 178)';
-            //$(this).css('background-color', 'rgb(250, 224, 178)');     
-            console.log("178");
+   
             $("#temp").remove();
             if ($(this).attr('id') === "07") {
                 $(this).append("<span id='temp'>遠－>近</span>");
@@ -190,7 +184,6 @@
         }
         background_color = document.querySelector(".using").style.backgroundColor;
         //$(this).css()抓出來的有點問題，與項目實際情形不符，待查證
-        //console.log("我是排序按鈕，拿到的背景顏色是" + background_color);
         $(this).css('border-color', 'rgb(250, 224, 110)');
         $(this).siblings().css('background-color', 'transparent');    //剔除未選取排序   
         $(this).siblings().css('border-color', 'transparent');    //剔除未選取排序         
