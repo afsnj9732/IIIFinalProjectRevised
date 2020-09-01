@@ -23,12 +23,11 @@ namespace IIIProject_travel.Services
             newMember.txtPassword = HashPassword(newMember.txtPassword);
             //sql新增     isAdmin預設為0
             tMember t = db.tMember.FirstOrDefault(k=>k.f會員電子郵件 == newMember.txtEmail&&
-            k.f會員名稱==newMember.txtNickname&&k.f會員密碼==newMember.txtPassword&&
-            k.f會員大頭貼==newMember.txtFiles&&k.f驗證碼==newMember.fActivationCode);
+            k.f會員名稱==newMember.txtNickname&&k.f會員密碼==newMember.txtPassword);
             t.f會員電子郵件 = newMember.txtEmail;
             t.f會員名稱 = newMember.txtNickname;
             t.f會員密碼 = newMember.txtPassword;
-            t.f會員大頭貼 = newMember.txtFiles;
+            //t.f會員大頭貼 = newMember.txtFiles;
             t.f驗證碼 = newMember.fActivationCode;
             t.isAdmin = false;
             db.tMember.Add(t);
@@ -94,7 +93,6 @@ namespace IIIProject_travel.Services
             {
                 c.txtEmail = t.f會員電子郵件;
                 c.txtNickname = t.f會員名稱;
-                c.txtFiles = t.f會員大頭貼;
             }
             catch (Exception e)
             {

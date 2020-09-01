@@ -56,59 +56,41 @@ namespace IIIProject_travel.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Register(CRegisterModel p)
         {
+            if ((p == null) && (!ModelState.IsValid))
+                return View();
             //判斷資料是否通過驗證
             if (ModelState.IsValid)
             {
-                if (p.MembersImg != null)
-                {
-                    if (membersService.CheckImg(p.MembersImg.ContentType))
-                    {
-                        string fileName = Path.GetFileName(p.MembersImg.FileName);
-                        string url = Path.Combine(Server.MapPath($@"~/Upload/Members/"), fileName);
-                        //將檔案存進伺服器
-                        p.MembersImg.SaveAs(url);
-                        //設定路徑
-                        p.newMember.txtFiles = fileName;
-                        //將頁面資料中的密碼填入
-                        p.newMember.txtPassword = p.txtPassword;
-                        //取得信箱驗證碼
-                        string AuthCode = mailService.getValidationCode();
-                        //填入驗證碼
-                        p.newMember.fActivationCode = AuthCode;
-                        //呼叫service註冊新會員
-                        membersService.Register(p.newMember);
-                        string tempMail = System.IO.File.ReadAllText(
-                            Server.MapPath("~/Views/Shared/RegisterEmailTemplate.html"));
+                //將頁面資料中的密碼填入
+                p.newMember.txtPassword = p.txtPassword;
+                //取得信箱驗證碼
+                string AuthCode = mailService.getValidationCode();
+                //填入驗證碼
+                p.newMember.fActivationCode = AuthCode;
+                //呼叫service註冊新會員
+                membersService.Register(p.newMember);
+                string tempMail = System.IO.File.ReadAllText(
+                    Server.MapPath("~/Views/Shared/RegisterEmailTemplate.html"));
 
-                        //宣告Email驗證用Url
-                        UriBuilder validateUrl = new UriBuilder(Request.Url)
-                        {
-                            Path = Url.Action("emailValidation", "Home", new
-                            {
-                                email = p.newMember.txtEmail,
-                                authCode = AuthCode
-                            })
-                        };
-                        //將資料寫入信中
-                        string MailBody = mailService.getRegisterMailBody(tempMail, p.newMember.txtNickname, validateUrl.ToString().Replace("%3F", "?"));
-                        //寄信
-                        mailService.sendRegisterMail(MailBody, p.newMember.txtEmail);
-                        //以tempData儲存註冊訊息
-                        TempData["RegisterState"] = "註冊成功，請去收取驗證信";
-                        return RedirectToAction("RegisterResult");
-                    }
-                    else
-                    {
-                        ModelState.AddModelError("MembersImg", "所上傳檔案不是圖片");
-                    }
-                }
-                else
+                //宣告Email驗證用Url
+                UriBuilder validateUrl = new UriBuilder(Request.Url)
                 {
-                    ModelState.AddModelError("MembersImg", "請選擇上傳檔案");
-                    return View(p);
-                }
+                    Path = Url.Action("emailValidation", "Home", new
+                    {
+                        email = p.newMember.txtEmail,
+                        authCode = AuthCode
+                    })
+                };
+                //將資料寫入信中
+                string MailBody = mailService.getRegisterMailBody(tempMail, p.newMember.txtNickname, validateUrl.ToString().Replace("%3F", "?"));
+                //寄信
+                mailService.sendRegisterMail(MailBody, p.newMember.txtEmail);
+                //以tempData儲存註冊訊息
+                TempData["RegisterState"] = "註冊成功，請去收取驗證信";
+                return RedirectToAction("RegisterResult");
             }
             //未經驗證清空密碼相關欄位
             p.txtPassword = null;
