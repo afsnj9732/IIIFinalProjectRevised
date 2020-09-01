@@ -64,8 +64,12 @@ namespace IIIProject_travel.Controllers
             //判斷資料是否通過驗證
             if (ModelState.IsValid)
             {
+
                 //將頁面資料中的密碼填入
                 p.newMember.txtPassword = p.txtPassword;
+                p.newMember.txtEmail = p.txtEmail;
+                p.newMember.txtNickname = p.txtNickname;
+                p.newMember.txtOriginPassword = p.txtPassword;
                 //取得信箱驗證碼
                 string AuthCode = mailService.getValidationCode();
                 //填入驗證碼
@@ -93,6 +97,8 @@ namespace IIIProject_travel.Controllers
                 return RedirectToAction("RegisterResult");
             }
             //未經驗證清空密碼相關欄位
+            p.txtEmail = null;
+            p.txtNickname = null;
             p.txtPassword = null;
             p.txtPassword_confirm = null;
             //資料回填至view中

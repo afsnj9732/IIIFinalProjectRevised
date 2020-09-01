@@ -22,11 +22,14 @@ namespace IIIProject_travel.Services
             //將密碼hash
             newMember.txtPassword = HashPassword(newMember.txtPassword);
             //sql新增     isAdmin預設為0
-            tMember t = db.tMember.FirstOrDefault(k=>k.f會員電子郵件 == newMember.txtEmail&&
-            k.f會員名稱==newMember.txtNickname&&k.f會員密碼==newMember.txtPassword);
+            tMember t = new tMember();
+            //tMember t = db.tMember.FirstOrDefault(k=>k.f會員電子郵件 == newMember.txtEmail&&
+            //k.f會員名稱==newMember.txtNickname&&k.f會員密碼==newMember.txtPassword);
             t.f會員電子郵件 = newMember.txtEmail;
+            t.f會員帳號 = newMember.txtEmail;
             t.f會員名稱 = newMember.txtNickname;
-            t.f會員密碼 = newMember.txtPassword;
+            t.f會員密碼 = newMember.txtOriginPassword;
+            //t.f會員密碼 = newMember.txtPassword;
             //t.f會員大頭貼 = newMember.txtFiles;
             t.f驗證碼 = newMember.fActivationCode;
             t.isAdmin = false;
