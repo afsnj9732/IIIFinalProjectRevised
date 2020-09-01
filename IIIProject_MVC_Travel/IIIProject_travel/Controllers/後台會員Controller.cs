@@ -9,8 +9,10 @@ namespace IIIProject_travel.Controllers
     public class 後台會員Controller : Controller
     {
         // GET: 後台會員
-        public ActionResult List()
+        public ActionResult List(int 頁 = 1)
         {
+            int pagesize = 3;
+            int pagecurrent = 頁 < 1 ? 1 : 頁;
             IQueryable<tMember> 會員 = null;
             string k關鍵字 = Request.Form["txt關鍵字"];
             if (string.IsNullOrEmpty(k關鍵字))
