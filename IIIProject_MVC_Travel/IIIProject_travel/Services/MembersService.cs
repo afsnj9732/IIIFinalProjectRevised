@@ -17,10 +17,10 @@ namespace IIIProject_travel.Services
         dbJoutaEntities db = new dbJoutaEntities();
 
         //註冊新會員
-        public void Register(CRegister newMember)
+        public void Register(CRegisterModel newMember)
         {
-            //將密碼hash
-            newMember.txtPassword = HashPassword(newMember.txtPassword);
+            ////將密碼hash
+            //newMember.txtPassword = HashPassword(newMember.txtPassword);
             //sql新增     isAdmin預設為0
             tMember t = db.tMember.FirstOrDefault(k=>k.f會員電子郵件 == newMember.txtEmail&&
             k.f會員名稱==newMember.txtNickname&&k.f會員密碼==newMember.txtPassword);
@@ -35,28 +35,28 @@ namespace IIIProject_travel.Services
         }
 
         //密碼加密
-        private string HashPassword(string txtPassword)
-        {
-            //宣告hash時添加的無意義亂數值
-            string saltkey = "dbvgd3423gdrgg4353534";
-            //將剛剛宣告的字串與密碼結合
-            string saltAndPassword = String.Concat(txtPassword, saltkey);
-            //定義SH256的hash物件
-            SHA256CryptoServiceProvider sha256Hasher = new SHA256CryptoServiceProvider();
-            //取得密碼轉換成byte資料
-            byte[] passwordData = Encoding.Default.GetBytes(saltAndPassword);
-            //取得hash後byte資料
-            byte[] h = sha256Hasher.ComputeHash(passwordData);
-            //將hash後byte資料轉換成string
-            string hashResult = Convert.ToBase64String(h);
-            //回傳結果
-            return hashResult;
-        }
+        //private string HashPassword(string txtPassword)
+        //{
+        //    //宣告hash時添加的無意義亂數值
+        //    string saltkey = "dbvgd3423gdrgg4353534";
+        //    //將剛剛宣告的字串與密碼結合
+        //    string saltAndPassword = String.Concat(txtPassword, saltkey);
+        //    //定義SH256的hash物件
+        //    SHA256CryptoServiceProvider sha256Hasher = new SHA256CryptoServiceProvider();
+        //    //取得密碼轉換成byte資料
+        //    byte[] passwordData = Encoding.Default.GetBytes(saltAndPassword);
+        //    //取得hash後byte資料
+        //    byte[] h = sha256Hasher.ComputeHash(passwordData);
+        //    //將hash後byte資料轉換成string
+        //    string hashResult = Convert.ToBase64String(h);
+        //    //回傳結果
+        //    return hashResult;
+        //}
 
         //藉由信箱取得單筆資料(全部資料)
-        private CRegister getAccount(string email)
+        private CRegisterModel getAccount(string email)
         {
-            CRegister c = new CRegister();
+            CRegisterModel c = new CRegisterModel();
             tMember t = db.tMember.FirstOrDefault(k=>k.f會員電子郵件 == email);
             try
             {
@@ -77,7 +77,7 @@ namespace IIIProject_travel.Services
         //確認信箱是否重複註冊
         public bool accountCheck(string email)
         {
-            CRegister c = getAccount(email);
+            CRegisterModel c = getAccount(email);
             //判斷是否查到資料
             bool result = (c == null);
             return result;
@@ -85,9 +85,9 @@ namespace IIIProject_travel.Services
 
 
         //取得公開資料
-        public CRegister getAccount_openSource(string email)
+        public CRegisterModel getAccount_openSource(string email)
         {
-            CRegister c = new CRegister();
+            CRegisterModel c = new CRegisterModel();
             tMember t = db.tMember.FirstOrDefault(k => k.f會員電子郵件 == email);
             try
             {
@@ -110,7 +110,7 @@ namespace IIIProject_travel.Services
         //信箱驗證碼驗證
         public string emailValidation(string email, string authCode)
         {
-            CRegister c = getAccount(email);
+            CRegisterModel c = getAccount(email);
             //宣告驗證後訊息字串
             string validationStr = string.Empty;
             if (c != null)
@@ -133,17 +133,17 @@ namespace IIIProject_travel.Services
 
 
         //密碼確認
-        private bool passwordCheck(CRegister p, string password)
+        private bool passwordCheck(CRegisterModel p, string password)
         {
             //判斷DB裡的密碼資料與傳入密碼資料Hash後是否一致
-            bool result = p.txtPassword.Equals(HashPassword(password));
+            bool result = p.txtPassword.Equals(password);
             return result;
         }
 
         public string LoginCheck(string email, string password)
         {
             //取得傳入email的會員資料
-            CRegister p = getAccount(email);
+            CRegisterModel p = getAccount(email);
             //判斷是否有此人
             if (p != null)
             {
@@ -173,11 +173,11 @@ namespace IIIProject_travel.Services
         //更改密碼
         public string ChangePassword(string email,string password,string newPassword)
         {
-            CRegister p = getAccount(email);
+            CRegisterModel p = getAccount(email);
             //確認舊密碼的正確性
             if (passwordCheck(p, password))
             {
-                p.txtPassword = HashPassword(newPassword);
+                p.txtPassword = newPassword;
                 tMember t = db.tMember.FirstOrDefault(k => k.f會員密碼 == p.txtPassword);
                 db.tMember.Add(t);
                 db.SaveChanges();
@@ -194,7 +194,7 @@ namespace IIIProject_travel.Services
         {
             //初始角色
             string Role = "User";
-            CRegister p = getAccount(email);
+            CRegisterModel p = getAccount(email);
             //判斷DB欄位，以確認是否為Admin
             if (p.isAdmin)
             {
