@@ -57,28 +57,28 @@
                         <div class="form-group">
                             @Html.LabelFor(model => model.txtEmail, new { @class = "col-xs-4 col-md-12 form-label" })
                             <div class="col-xs-8 col-md-11">
-                                @Html.TextBoxFor(model => model.txtEmail, new { @class = "form-control", id = "txtEmail" })
+                                @Html.TextBoxFor(model => model.txtEmail, new { @class = "form-control" })
                                 @Html.ValidationMessageFor(model => model.txtEmail, "", new { @class = "text-danger" })
                             </div>
                         </div>
                         <div class="form-group">
                             @Html.LabelFor(model => model.txtPassword, new { @class = "col-xs-4 col-md-12 form-label" })
                             <div class="col-xs-8 col-md-11">
-                                @Html.TextBoxFor(model => model.txtPassword, new { @class = "form-control", id = "txtPassword" })
+                                @Html.TextBoxFor(model => model.txtPassword, new { @class = "form-control" })
                                 @Html.ValidationMessageFor(model => model.txtPassword, "", new { @class = "text-danger" })
                             </div>
                         </div>
                         @*<input type="text" name="txtEmail" placeholder="信箱" />
-                            @Html.ValidationMessageFor(model => model.txtEmail, "", new { @class = "text-danger" })
-                            <input type="password" name="txtPassword" placeholder="密碼" />
-                            @Html.ValidationMessageFor(model => model.txtPassword, "", new { @class = "text-danger" })*@
+        @Html.ValidationMessageFor(model => model.txtEmail, "", new { @class = "text-danger" })
+        <input type="password" name="txtPassword" placeholder="密碼" />
+        @Html.ValidationMessageFor(model => model.txtPassword, "", new { @class = "text-danger" })*@
                         @Html.DisplayTextFor(model => model.txtRememberMe)
-                        <input type="checkbox" name="remember" checked="checked" id="txtRember" />
-                        <br />
-                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        @Html.CheckBoxFor(model => model.remember)
+                    <br />
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                         <div class="form-group">
                             <div class="col-md-offset-1 col-md-12 d-flex">
-                                <input class="btn btn-link col-5 mr-1" type="submit" name="signup_submit" value="登入" onclick="btnLogin()" />
+                                <input class="btn btn-link col-5 mr-1" type="submit" name="signup_submit" value="登入" />
                                 @Html.ActionLink("註冊", "Register", "", new { @class = "btn btn-primary col-5 ml-1" })
 
                             </div>
@@ -109,22 +109,6 @@
     <script src="~/Scripts/IIIProject/popper.min.js"></script>
     <script src="~/Scripts/bootstrap.min.js"></script>
     <script src="~/Scripts/IIIProject/navbar.js"></script>
-    <script>
-        function btnLogin() {
-            $.get("/Login/LoginIndex", { Email: $("#txtEmail").val(), Password: $("#txtPassword").val(), Ck: $("#txtRember").prop("checked") }, function (data, Status) {
-                if (Status = "success") {
-                    if (data > 0) {
-                        alert("登錄成功");
-                        window.location.href = "/Home/Home";
-                    }
-                    else {
-                        alert("用戶名或密碼錯誤");
-                    }
-                }
-            });
-        }
-
-    </script>
     @*匯入驗證用的js*@
     @section Scripts{
         @Scripts.Render("~/bundles/jqueryval")
