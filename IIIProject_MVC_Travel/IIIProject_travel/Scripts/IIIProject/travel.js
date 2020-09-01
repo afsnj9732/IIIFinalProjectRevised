@@ -102,7 +102,6 @@
         });
  
         $.ajax({
-            async: false,
             url: "/Travel/article_AJAX",
             type: 'POST',
             data: { "p": p },
@@ -117,15 +116,27 @@
     }
 
 
-    //即時性搜尋
-    $("#contain").on('keyup', function (e) {
-        getAJAX();   
+    ////即時性搜尋
+    //$("#contain").on('keyup', function (e) {
+    //    getAJAX();   
+    //});
+
+    $("#contain").on('keyup', function () { 
+        $.ajax({
+            url: "/Travel/autoComplete",
+            success: function (data) {
+                var getautoComplete = data.split(',');
+                $("#contain").autocomplete({
+                    source: getautoComplete
+                });
+            }
+        });
     });
 
     //點選搜尋
-    //$("#contain_pic").on('click', function () {
-    //    getAJAX();
-    //});
+    $("#contain_pic").on('click', function () {
+        getAJAX();
+    });
 
     $("#category").on('change', function () {
         getAJAX();
