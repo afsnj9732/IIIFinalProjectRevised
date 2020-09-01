@@ -21,7 +21,7 @@ namespace IIIProject_travel.Controllers
             {
                 int select = Convert.ToInt32(target);
                 tActivity theTarget = db.tActivity.FirstOrDefault(x => x.f活動編號 == select);
-                theTarget.f活動瀏覽次數 = (Convert.ToInt32(theTarget.f活動瀏覽次數) + 1).ToString();
+                theTarget.f活動瀏覽次數 = (theTarget.f活動瀏覽次數 + 1);
                 db.SaveChanges();
             }
             var tTravel_order = typeof(tActivity).GetProperty(obj.order);
@@ -53,7 +53,7 @@ namespace IIIProject_travel.Controllers
             if (obj.label != "全部")
             {
                 CountViewList = CountViewList
-                                    .Where(b => Convert.ToInt32(b.f活動讚數) > Convert.ToInt32(obj.label))
+                                    .Where(b => b.f活動讚數 > Convert.ToInt32(obj.label))
                                     .Select(a => a);
             }
 
@@ -72,7 +72,7 @@ namespace IIIProject_travel.Controllers
             {
                 int select = Convert.ToInt32(target);
                 tActivity theTarget = db.tActivity.FirstOrDefault(x => x.f活動編號 == select);
-                theTarget.f活動讚數 = (Convert.ToInt32(theTarget.f活動讚數) + 1).ToString();
+                theTarget.f活動讚數 = (theTarget.f活動讚數 + 1);
                 db.SaveChanges();
             }
             var tTravel_order = typeof(tActivity).GetProperty(obj.order);
@@ -104,7 +104,7 @@ namespace IIIProject_travel.Controllers
             if (obj.label != "全部")
             {
                 CountViewList = CountViewList
-                                    .Where(b => Convert.ToInt32(b.f活動讚數) > Convert.ToInt32(obj.label))
+                                    .Where(b => b.f活動讚數 > Convert.ToInt32(obj.label))
                                     .Select(a => a);
             }
 
@@ -151,7 +151,7 @@ namespace IIIProject_travel.Controllers
 
                 if (obj.label != "全部") {
                 order_travel_list = order_travel_list
-                                    .Where(b => Convert.ToInt32(b.f活動讚數) > Convert.ToInt32(obj.label))
+                                    .Where(b => b.f活動讚數 > Convert.ToInt32(obj.label))
                                     .Select(a => a);
                 }
 

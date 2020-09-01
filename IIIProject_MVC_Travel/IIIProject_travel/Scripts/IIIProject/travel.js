@@ -70,11 +70,11 @@
     //    $("#travel_sort .sort li").eq(0).click();   //用這樣搜尋剛搜尋完第一下會有BUG
     //});
     $("#category").on('change', function () {
-        $("#travel_sort .sort li img").eq(0).click(); 
-    })
+        $("#travel_sort .sort li img").eq(0).click();
+    });
     $("#label").on('change', function () {
         $("#travel_sort .sort li img").eq(0).click();
-    })
+    });
 
     //排序用點擊事件(因為li太大)，已測試可運行
     $("#travel_sort .sort li img").on('click',function (e) {
@@ -101,6 +101,7 @@
               $("#article_ajax").append(data);
               Travel_RWD();
               getViewCounts();
+              getGoodCounts();
             }          
         });
     });
