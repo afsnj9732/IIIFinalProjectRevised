@@ -33,8 +33,10 @@ namespace IIIProject_travel.Controllers
         public ActionResult BlogContent()
         {
 
+
             var article = from t in (new dbJoutaEntities()).tActivity
                           where t.f活動類型 == "文章"
+                          where t.f活動編號 == 8
                           select t;
 
 
