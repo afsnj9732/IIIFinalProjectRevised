@@ -25,7 +25,7 @@ namespace IIIProject_travel.Controllers
         public ActionResult Home(int? id)
         {
             var x = from t in (new dbJoutaEntities()).tMember
-                    where t.f會員編號>5&&t.f會員編號<9
+                    where t.f會員編號>5&&t.f會員編號<11
                     select t;
             //if (id == 0)
             //{
@@ -42,7 +42,7 @@ namespace IIIProject_travel.Controllers
             return View(x);
         }
 
-        [Authorize]     //通過驗證才可進入頁面
+        /*[Authorize]*/     //通過驗證才可進入頁面
         public ActionResult QuickMatch()
         {
             return View();
