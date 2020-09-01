@@ -25,6 +25,7 @@ namespace IIIProject_travel.Controllers
         public ActionResult Home(int? id)
         {
             var x = from t in (new dbJoutaEntities()).tMember
+                    where t.f會員編號>5&&t.f會員編號<9
                     select t;
             //if (id == 0)
             //{

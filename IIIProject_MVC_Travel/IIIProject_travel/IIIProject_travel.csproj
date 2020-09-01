@@ -176,7 +176,6 @@
       <DependentUpon>JoutaEntities.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\CDictionary.cs" />
-    <Compile Include="Models\CRegister.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Security\JwtObj.cs" />
     <Compile Include="Security\JwtService.cs" />

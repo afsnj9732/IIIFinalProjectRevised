@@ -19,42 +19,18 @@ namespace IIIProject_travel.Services
         //註冊新會員
         public void Register(CRegisterModel newMember)
         {
-            ////將密碼hash
-            //newMember.txtPassword = HashPassword(newMember.txtPassword);
             //sql新增     isAdmin預設為0
             tMember t = new tMember();
-            //tMember t = db.tMember.FirstOrDefault(k=>k.f會員電子郵件 == newMember.txtEmail&&
-            //k.f會員名稱==newMember.txtNickname&&k.f會員密碼==newMember.txtPassword);
             t.f會員電子郵件 = newMember.txtEmail;
             t.f會員帳號 = newMember.txtEmail;
             t.f會員名稱 = newMember.txtNickname;
-            t.f會員密碼 = newMember.txtOriginPassword;
-            //t.f會員密碼 = newMember.txtPassword;
+            t.f會員密碼 = newMember.txtPassword;
             //t.f會員大頭貼 = newMember.txtFiles;
             t.f驗證碼 = newMember.fActivationCode;
             t.isAdmin = false;
             db.tMember.Add(t);
             db.SaveChanges();
         }
-
-        //密碼加密
-        //private string HashPassword(string txtPassword)
-        //{
-        //    //宣告hash時添加的無意義亂數值
-        //    string saltkey = "dbvgd3423gdrgg4353534";
-        //    //將剛剛宣告的字串與密碼結合
-        //    string saltAndPassword = String.Concat(txtPassword, saltkey);
-        //    //定義SH256的hash物件
-        //    SHA256CryptoServiceProvider sha256Hasher = new SHA256CryptoServiceProvider();
-        //    //取得密碼轉換成byte資料
-        //    byte[] passwordData = Encoding.Default.GetBytes(saltAndPassword);
-        //    //取得hash後byte資料
-        //    byte[] h = sha256Hasher.ComputeHash(passwordData);
-        //    //將hash後byte資料轉換成string
-        //    string hashResult = Convert.ToBase64String(h);
-        //    //回傳結果
-        //    return hashResult;
-        //}
 
         //藉由信箱取得單筆資料(全部資料)
         private CRegisterModel getAccount(string email)
@@ -143,29 +119,40 @@ namespace IIIProject_travel.Services
             return result;
         }
 
-        public string LoginCheck(string email, string password)
+        public string LoginCheck(string email,string password)
         {
             //取得傳入email的會員資料
             CRegisterModel p = getAccount(email);
             //判斷是否有此人
             if (p != null)
             {
-                //判斷是否經過信箱驗證，有經過驗證驗證碼欄位會被清空
-                if (string.IsNullOrWhiteSpace(p.fActivationCode))
-                {
-                    //進行信箱密碼驗證
+                p.fActivationCode = "";
+                //進行信箱密碼驗證
                     if (passwordCheck(p, password))
-                    {
-                        return "";
-                    }
-                    else
-                    {
-                        return "密碼輸入錯誤";
-                    }
+                {
+                    return "";
                 }
-                else {
-                    return "此信箱尚未經過Email驗證，請去收信。";
+                else
+                {
+                    return "密碼輸入錯誤";
                 }
+
+                ////判斷是否經過信箱驗證，有經過驗證驗證碼欄位會被清空
+                //if (string.IsNullOrWhiteSpace(p.fActivationCode))
+                //{
+                //    //進行信箱密碼驗證
+                //    if (passwordCheck(p, password))
+                //    {
+                //        return "";
+                //    }
+                //    else
+                //    {
+                //        return "密碼輸入錯誤";
+                //    }
+                //}
+                //else {
+                //    return "此信箱尚未經過Email驗證，請去收信。";
+                //}
             }
             else
             {
