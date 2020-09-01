@@ -31,7 +31,7 @@ namespace IIIProject_travel.Controllers
         public ActionResult d刪除(int? id)
         {
             if (id == null)
-                RedirectToAction("BlogContent");
+                RedirectToAction("List");
 
             tMember x = new tMember();
             dbJoutaEntities db = new dbJoutaEntities();
@@ -39,13 +39,13 @@ namespace IIIProject_travel.Controllers
             db.tMember.Remove(x);
             db.SaveChanges();
 
-            return RedirectToAction("BlogContent");
+            return RedirectToAction("List");
 
         }
         public ActionResult e修改(int? id)
         {
             if (id == null)
-                RedirectToAction("BlogContent");
+                RedirectToAction("List");
 
             dbJoutaEntities db = new dbJoutaEntities();
             tMember x = new tMember();
@@ -80,7 +80,7 @@ namespace IIIProject_travel.Controllers
                 db.SaveChanges();
             }
 
-            return RedirectToAction("BlogContent");
+            return RedirectToAction("List");
 
         }
 
