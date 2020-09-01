@@ -41,14 +41,16 @@ namespace IIIProject_travel.Controllers
                 //先藉由Service取得登入者角色資料
                 string RoleData = membersService.getRole(user.txtEmail);
                 //設定JWT
-                JwtService js = new JwtService();
+                //JwtService js = new JwtService();
                 //從Web.Config撈出資料
                 string cookieName = WebConfigurationManager.AppSettings["CookieName"].ToString();
-                string token = js.GenerateToken(user.txtEmail, RoleData);
+                //string token = js.GenerateToken(user.txtEmail, RoleData);
                 //產生一個cookie
                 HttpCookie cookie = new HttpCookie(cookieName);
+                cookie["txtEmail"] = user.txtEmail;
+                cookie["txtPassword"] = user.txtPassword;
                 //設定單值
-                cookie.Value = Server.UrlEncode(token);
+                //cookie.Value = Server.UrlEncode(token);
                 //寫到用戶端
                 Response.Cookies.Add(cookie);
                 //設定cookie期限
