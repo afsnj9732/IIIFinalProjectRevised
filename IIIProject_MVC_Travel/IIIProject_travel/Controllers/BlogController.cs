@@ -30,11 +30,11 @@ namespace IIIProject_travel.Controllers
 
 
         }
-        public ActionResult BlogContent()
+        public ActionResult BlogContent(int id)
         {
 
             var article = from t in (new dbJoutaEntities()).tActivity
-                          where t.f活動類型 == "文章"
+                          where t.f活動類型 == "文章"&&t.f活動編號==id
                           select t;
 
 
