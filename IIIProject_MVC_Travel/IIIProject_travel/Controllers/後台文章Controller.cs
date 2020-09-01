@@ -16,6 +16,9 @@ namespace IIIProject_travel.Controllers
                      select t;
             return View(文章);
         }
+
+
+
         public ActionResult d刪除(int? id)
         {
             if (id == null)
@@ -36,6 +39,7 @@ namespace IIIProject_travel.Controllers
             return View();
 
         }
+
 
     }
 }
