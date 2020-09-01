@@ -21,8 +21,8 @@ namespace IIIProject_travel.Models
 
         public string txtPassword { get; set; }
 
-        [FileExtensions(ErrorMessage = "所上傳檔案不是圖片")]
-        public string txtFiles { get; set; }    //使用者圖示
+        //[FileExtensions(ErrorMessage = "所上傳檔案不是圖片")]
+        //public string txtFiles { get; set; }    //使用者圖示
 
         public string fActivationCode { get; set; }     //認證碼
         public bool isAdmin { get; set; }       //管理者
