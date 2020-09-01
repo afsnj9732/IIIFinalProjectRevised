@@ -1,7 +1,9 @@
 ﻿; (function () {
     $('.resultTrigger').click(function () {
-        $('.downbox').removeClass('active');
-        $('.downbox').addClass('active');
+        var scrollBottom = $(document).height() - $(window).height() - $(window).scrollTop();
 
+        $('section').removeClass('active');
+        $('section').addClass('active');
+        $('html,body').animate({ scrollTop: $(document).height() }, 1000);
     });
 })();
