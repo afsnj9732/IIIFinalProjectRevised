@@ -3,14 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using PagedList;
+using IIIProject_travel.Models;
+
+
 
 namespace IIIProject_travel.Controllers
 {
     public class 後台會員Controller : Controller
     {
+
         // GET: 後台會員
+        
         public ActionResult List()
         {
+
             IQueryable<tMember> 會員 = null;
             string k關鍵字 = Request.Form["txt關鍵字"];
             if (string.IsNullOrEmpty(k關鍵字))
@@ -25,8 +32,19 @@ namespace IIIProject_travel.Controllers
                      select p;
             }
             return View(會員);
-
         }
+        
+        public ActionResult Index(int page = 1)
+        {
+            dbJoutaEntities db = new dbJoutaEntities();
+            int 筆數 = 3;
+            int 當前頁面 = page < 1 ? 1 : page;
+            var 會員編號 = db.tMember.OrderBy(m => m.f會員編號).ToList();
+            var 結果 = 會員編號.ToPagedList(當前頁面, 筆數);
+
+            return View(結果);
+        }
+
 
         public ActionResult d刪除(int? id)
         {
@@ -83,6 +101,7 @@ namespace IIIProject_travel.Controllers
             return RedirectToAction("List");
 
         }
+
 
 
     }

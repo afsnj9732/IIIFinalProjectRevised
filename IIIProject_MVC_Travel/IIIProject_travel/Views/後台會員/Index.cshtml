@@ -1,0 +1,155 @@
+﻿@using PagedList
+@using PagedList.Mvc
+
+@model IPagedList<IIIProject_travel.tMember>
+
+@{
+    ViewBag.Title = "Index";
+}
+<link href="~/Content/PagedList.css" rel="stylesheet" />
+
+
+<h2>QQ</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            會員帳號)
+        </th>
+        <th>
+            會員密碼)
+        </th>
+        <th>
+            會員名稱)
+        </th>
+        <th>
+            會員評分)
+        </th>
+        <th>
+            會員電子郵件)
+        </th>
+        <th>
+            會員稱號)
+        </th>
+        <th>
+            會員大頭貼)
+        </th>
+        <th>
+            會員手機)
+        </th>
+        <th>
+            會員電話)
+        </th>
+        <th>
+            會員生日)
+        </th>
+        <th>
+            會員暱稱)
+        </th>
+        <th>
+            會員英文姓名)
+        </th>
+        <th>
+            會員性別)
+        </th>
+        <th>
+            會員興趣)
+        </th>
+        <th>
+            會員已占用時間)
+        </th>
+        <th>
+            會員自我介紹)
+        </th>
+        <th>
+            會員現在參加的活動編號)
+        </th>
+        <th>
+            會員過去參加的活動編號)
+        </th>
+        <th>
+            會員發起的活動編號)
+        </th>
+        <th>
+            驗證碼)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.f會員帳號)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.f會員密碼)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.f會員名稱)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.f會員評分)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.f會員電子郵件)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.f會員稱號)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.f會員大頭貼)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.f會員手機)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.f會員電話)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.f會員生日)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.f會員暱稱)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.f會員英文姓名)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.f會員性別)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.f會員興趣)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.f會員已占用時間)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.f會員自我介紹)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.f會員現在參加的活動編號)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.f會員過去參加的活動編號)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.f會員發起的活動編號)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.f驗證碼)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.f會員編號 }) |
+                @Html.ActionLink("Details", "Details", new { id = item.f會員編號 }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.f會員編號 })
+            </td>
+        </tr>
+    }
+
+</table>
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+

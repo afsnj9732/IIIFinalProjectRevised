@@ -12,6 +12,15 @@ namespace IIIProject_travel.Controllers
 {
     public class TravelController : Controller
     {
+        public string autoComplete()
+        {
+            var x = from t in (new dbJoutaEntities()).tActivity
+                    where t.f活動類型=="旅遊"
+                    select t.f活動標題;
+
+            return string.Join(",", x.ToArray());
+        }
+
         public IEnumerable<tActivity> AJAXcondition(string p)
         {
             JavaScriptSerializer serializer = new JavaScriptSerializer();
@@ -22,13 +31,13 @@ namespace IIIProject_travel.Controllers
 
             //不使用if，動態抓取排序條件
             var CountViewList = db.tActivity
-                        .AsEnumerable().OrderByDescending(a => tTravel_order.GetValue(a, null))
+                        .AsEnumerable().OrderBy(a => tTravel_order.GetValue(a, null))
                         .Select(a => a); //升冪
 
             if (obj.background_color == "rgb(250, 224, 178)")
             {
                 CountViewList = db.tActivity
-                .AsEnumerable().OrderBy(a => tTravel_order.GetValue(a, null))
+                .AsEnumerable().OrderByDescending(a => tTravel_order.GetValue(a, null))
                 .Select(a => a); //降冪
             }
 
@@ -75,13 +84,27 @@ namespace IIIProject_travel.Controllers
         public JsonResult FeelGood(string target, string p)
         {
             
-            if (target != null)
+            if (target != null&& Session["member"]!=null)
             {
+                var temp = (tMember)Session["member"];                             
                 dbJoutaEntities db = new dbJoutaEntities();
                 int select = Convert.ToInt32(target);
                 tActivity theTarget = db.tActivity.FirstOrDefault(x => x.f活動編號 == select);
+                int pos = -1;
+                if (!string.IsNullOrEmpty(theTarget.f活動按過讚的會員編號))
+                {
+                    var past = theTarget.f活動按過讚的會員編號.Split(',');//將按過讚得會員編號 字串 切割 成陣列
+
+                    pos = Array.IndexOf(past, temp.f會員編號.ToString());//透過查詢值在陣列內的索引值(不存在則回傳-1)
+                                                                         //查看是否會員編號包含在陣列內
+                }
+
+                if ( pos == -1 )//陣列起始為0，因此只要pos>=0則表示該編號已存在，反之pos=-1表示該編號不存在，可執行
+                {
                 theTarget.f活動讚數 = (theTarget.f活動讚數 + 1);
+                theTarget.f活動按過讚的會員編號 += "," + temp.f會員編號;
                 db.SaveChanges();
+                }
             }
  
             var FinalList = AJAXcondition(p)
@@ -101,7 +124,7 @@ namespace IIIProject_travel.Controllers
         {
             return View();
         }
-
+ 
         [HttpPost]
         public ActionResult TravelIndex(tActivity p)
         {            
