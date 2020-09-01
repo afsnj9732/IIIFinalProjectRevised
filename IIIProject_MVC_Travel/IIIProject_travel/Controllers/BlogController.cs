@@ -80,7 +80,7 @@ namespace IIIProject_travel.Controllers
             db.tActivity.Add(article);
             db.SaveChanges();
 
-            return RedirectToAction("BlogContent");
+            return RedirectToAction("index");
 
         }
 

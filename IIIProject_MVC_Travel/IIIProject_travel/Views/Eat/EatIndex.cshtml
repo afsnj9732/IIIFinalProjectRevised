@@ -1,6 +1,8 @@
 ﻿@{
     Layout = null;
-    var x = (tMember)Session["member"];
+    tMember x = (new dbJoutaEntities()).tMember.FirstOrDefault(y => y.f會員編號 == 3);
+    //var x = (tMember)Session["member"];
+    Session["member"] = x;
 }
 
 @{
@@ -146,8 +148,8 @@
                                 <div class="modal-body">
 
                                     <!-- jou modal content -->
-                                    @*@if (Session["member"] != null)
-                                    {*@
+                                    @if (Session["member"] != null)
+                                    {
                                         <form enctype="multipart/form-data" method="post">
                                             <div class="container">
                                                 <div class="m-0 mb-3 modalContent row justify-content-around">
@@ -214,16 +216,16 @@
                                             </div>
 
                                             <!-- jouta modal hidden -->
-                                            <input type="hidden" name="f瀏覽次數" value="0">
+                                            <input type="hidden" name="f活動瀏覽次數" value="0">
                                             <input type="hidden" name="f活動類型" value="0">
                                             <input type="hidden" name="f活動讚數" value="0">
                                             <input type="hidden" name="f活動發起日期" value="@DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")">
                                         </form>
-                                    @*}
+                                    }
                                     else
                                     {
                                         <p>請先登入會員</p>
-                                    }*@
+                                    }
                                 </div>
                             </div>
                         </div>
@@ -241,7 +243,7 @@
                                 <div class="eMember">
                                     <!-- 團主頭貼 -->
                                     <div class="memberAvatar mr-1">
-                                        <img src="images/memberAvatar.jpg" alt="">
+                                        <img src="~/Content/images/memberAvatar.jpg" alt="">
                                     </div>
                                     <!-- 團主稱號&名字 -->
                                     <div class="memberInfo">

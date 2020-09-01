@@ -24,7 +24,9 @@ namespace IIIProject_travel.Controllers
         [AllowAnonymous]        //不須做登入驗證即可進入
         public ActionResult Home(int? id)
         {
-           
+            var x = from t in (new dbJoutaEntities()).tMember
+                    where t.f會員編號>5&&t.f會員編號<9
+                    select t;
             //if (id == 0)
             //{
             //    Session.Remove("member");
@@ -37,7 +39,7 @@ namespace IIIProject_travel.Controllers
             //    string v =  t.f會員大頭貼.ToString();
             //    ViewData["Img"] = v;
             //}
-            return View();
+            return View(x);
         }
 
         [Authorize]     //通過驗證才可進入頁面
@@ -64,18 +66,14 @@ namespace IIIProject_travel.Controllers
             //判斷資料是否通過驗證
             if (ModelState.IsValid)
             {
-
                 //將頁面資料中的密碼填入
-                p.newMember.txtPassword = p.txtPassword;
-                p.newMember.txtEmail = p.txtEmail;
-                p.newMember.txtNickname = p.txtNickname;
-                p.newMember.txtOriginPassword = p.txtPassword;
+                //p.newMember.txtPassword = p.txtPassword;
                 //取得信箱驗證碼
                 string AuthCode = mailService.getValidationCode();
                 //填入驗證碼
-                p.newMember.fActivationCode = AuthCode;
+                p.fActivationCode = AuthCode;
                 //呼叫service註冊新會員
-                membersService.Register(p.newMember);
+                membersService.Register(p);
                 string tempMail = System.IO.File.ReadAllText(
                     Server.MapPath("~/Views/Shared/RegisterEmailTemplate.html"));
 
@@ -84,21 +82,19 @@ namespace IIIProject_travel.Controllers
                 {
                     Path = Url.Action("emailValidation", "Home", new
                     {
-                        email = p.newMember.txtEmail,
+                        email = p.txtEmail,
                         authCode = AuthCode
                     })
                 };
                 //將資料寫入信中
-                string MailBody = mailService.getRegisterMailBody(tempMail, p.newMember.txtNickname, validateUrl.ToString().Replace("%3F", "?"));
+                string MailBody = mailService.getRegisterMailBody(tempMail, p.txtNickname, validateUrl.ToString().Replace("%3F", "?"));
                 //寄信
-                mailService.sendRegisterMail(MailBody, p.newMember.txtEmail);
+                mailService.sendRegisterMail(MailBody, p.txtEmail);
                 //以tempData儲存註冊訊息
                 TempData["RegisterState"] = "註冊成功，請去收取驗證信";
                 return RedirectToAction("RegisterResult");
             }
             //未經驗證清空密碼相關欄位
-            p.txtEmail = null;
-            p.txtNickname = null;
             p.txtPassword = null;
             p.txtPassword_confirm = null;
             //資料回填至view中
@@ -115,7 +111,7 @@ namespace IIIProject_travel.Controllers
         public JsonResult accountCheck(CRegisterModel p)
         {
             //呼叫service來判斷，並回傳結果
-            return Json(membersService.accountCheck(p.newMember.txtEmail), JsonRequestBehavior.AllowGet);
+            return Json(membersService.accountCheck(p.txtEmail), JsonRequestBehavior.AllowGet);
         
         }
 

@@ -9,9 +9,9 @@ namespace IIIProject_travel.Services
     public class MailService
     {
         //Jouta官方帳號
-        private string gmail_account = "Jouta@gmail.com";
-        private string gmail_password = "jouta123456";
-        private string gmail_mail = "Jouta@gmail.com";     //gmail信箱
+        private string gmail_account = "Joutagroup445@gmail.com";
+        private string gmail_password = "admin123admin";
+        private string gmail_mail = "Joutagroup445@gmail.com";     //gmail信箱
 
         //產生驗證碼
         public string getValidationCode()
