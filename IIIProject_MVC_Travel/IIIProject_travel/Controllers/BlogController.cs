@@ -30,7 +30,7 @@ namespace IIIProject_travel.Controllers
 
 
         }
-        public ActionResult BlogContent(int id)
+        public ActionResult BlogContent(int? id)
         {
 
             var article = from t in (new dbJoutaEntities()).tActivity

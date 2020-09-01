@@ -87,12 +87,12 @@
     //因為文章項目是ajax動態產生，因此事件必須使用氣泡動態綁定寫法
     $("body").on('click', ".ViewCounts", getViewCounts );
     $("body").on('click', ".FeelGood", getGoodCounts );
-
-    //------下面未優化完畢分隔線-------
+ 
 
     function getAJAX() {
+        //console.log("我是AJAX，拿到的背景顏色是" + background_color);
         order = $(".using").attr("order");
-        background_color = $(".using").parent().parent().css("background-color");
+        document.querySelector(".using").style.backgroundColor;
         contain = $("#contain").val();
         category = $("#category").val();
         label = $("#label").val();
@@ -100,6 +100,7 @@
             "order": order, "background_color": background_color, "contain": contain
             , "category": category, "label": label
         });
+ 
         $.ajax({
             async: false,
             url: "/Travel/article_AJAX",
@@ -117,14 +118,14 @@
 
 
     //即時性搜尋
-    $("#contain").on('keyup', function () {
+    $("#contain").on('keyup', function (e) {
         getAJAX();   
     });
 
     //點選搜尋
-    $("#contain_pic").on('click', function () {
-        getAJAX();
-    });
+    //$("#contain_pic").on('click', function () {
+    //    getAJAX();
+    //});
 
     $("#category").on('change', function () {
         getAJAX();
@@ -133,28 +134,28 @@
         getAJAX();
     });
 
-    //------上面未優化完畢分隔線-------
-
-    //排序連動之ajax事件
-    $("#travel_sort .sort li img").on('click',function (e) {
-        e.stopPropagation(); //停止氣泡，防止子元素點擊父元素
-        $(this).addClass('using').siblings().removeClass('using');
-        getAJAX();
-    });
-
+    ////排序連動之ajax事件
+    //$("#travel_sort .sort li img").on('click', function () {
+    //    getAJAX();
+    //});
     //排序特效，注意JS.CSS使用Hex碼有些許狀況，本身不帶ajax，以事件連動觸發ajax
-    $("#travel_sort .sort li").on('click', function () {        
+    $("#travel_sort .sort li").on('click', function () {             
+        $(this).addClass('using');
+        $(this).siblings().removeClass('using');
         $("#row span").remove();
         $("#row div").append($(this).html());
-        $("#row #temp").remove();
-        if ($(this).css('background-color') === 'rgb(250, 224, 178)') {    //奇數次點擊           
-            $(this).css('background-color', 'rgb(250, 224, 177)');
+        $("#row #temp").remove();             
+        //if ($(this).css('background-color') === 'rgb(250, 224, 178)') {             
+        //    $(this).css('background-color', 'rgb(250, 224, 177)');   
+        if (this.style.backgroundColor === 'rgb(250, 224, 178)') {
+            this.style.backgroundColor = 'rgb(250, 224, 177)';
+            console.log("177");
             $("#temp").remove();
             if ($(this).attr('id') === "07") {
                 $(this).append("<span id='temp'>近－>遠</span>");
             }
             else if ($(this).attr('id') === "08") {
-                $(this).append("<span id='temp'>慢－>快</span>");
+                $(this).append("<span id='temp'>快－>慢</span>");
             }
             else if ($(this).attr('id') === "03") {
                 $(this).append("<span id='temp'>北－>南</span>");
@@ -166,14 +167,16 @@
                 $(this).append("<span id='temp'>低－>高</span>");
             }
         }
-        else {
-            $(this).css('background-color', 'rgb(250, 224, 178)');    //偶數次點擊
+        else {            
+            this.style.backgroundColor = 'rgb(250, 224, 178)';
+            //$(this).css('background-color', 'rgb(250, 224, 178)');     
+            console.log("178");
             $("#temp").remove();
             if ($(this).attr('id') === "07") {
                 $(this).append("<span id='temp'>遠－>近</span>");
             }
             else if ($(this).attr('id') === "08") {
-                $(this).append("<span id='temp'>快－>慢</span>");
+                $(this).append("<span id='temp'>慢－>快</span>");
             }
             else if ($(this).attr('id') === "03") {
                 $(this).append("<span id='temp'>南－>北</span>");
@@ -185,14 +188,18 @@
                 $(this).append("<span id='temp'>高－>低</span>");
             }
         }
+        background_color = document.querySelector(".using").style.backgroundColor;
+        //$(this).css()抓出來的有點問題，與項目實際情形不符，待查證
+        //console.log("我是排序按鈕，拿到的背景顏色是" + background_color);
         $(this).css('border-color', 'rgb(250, 224, 110)');
         $(this).siblings().css('background-color', 'transparent');    //剔除未選取排序   
-        $(this).siblings().css('border-color', 'transparent');    //剔除未選取排序          
-        this.childNodes[1].childNodes[1].click();//連動點擊圖片觸發排序和ajax
+        $(this).siblings().css('border-color', 'transparent');    //剔除未選取排序         
+        getAJAX();
+        //this.childNodes[1].childNodes[1].click();//連動點擊圖片觸發排序和ajax
         //注意，子元素特定事件觸發會連帶觸發所有父元素的該事件       
     });
 
-    //預設最新被選為排序
+    ////預設最新被選為排序
     $("#travel_sort .sort li").eq(0).click();                               
 
 

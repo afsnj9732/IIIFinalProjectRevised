@@ -22,13 +22,13 @@ namespace IIIProject_travel.Controllers
 
             //不使用if，動態抓取排序條件
             var CountViewList = db.tActivity
-                        .AsEnumerable().OrderByDescending(a => tTravel_order.GetValue(a, null))
+                        .AsEnumerable().OrderBy(a => tTravel_order.GetValue(a, null))
                         .Select(a => a); //升冪
 
             if (obj.background_color == "rgb(250, 224, 178)")
             {
                 CountViewList = db.tActivity
-                .AsEnumerable().OrderBy(a => tTravel_order.GetValue(a, null))
+                .AsEnumerable().OrderByDescending(a => tTravel_order.GetValue(a, null))
                 .Select(a => a); //降冪
             }
 
@@ -101,7 +101,7 @@ namespace IIIProject_travel.Controllers
         {
             return View();
         }
-
+ 
         [HttpPost]
         public ActionResult TravelIndex(tActivity p)
         {            
