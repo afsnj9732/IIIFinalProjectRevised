@@ -20,6 +20,7 @@ namespace IIIProject_travel.Services
         public void Register(CRegisterModel newMember)
         {
             //sql新增     isAdmin預設為0
+
             tMember t = new tMember();
             t.f會員電子郵件 = newMember.txtEmail;
             t.f會員帳號 = newMember.txtEmail;
