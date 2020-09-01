@@ -1,7 +1,7 @@
 ﻿@{
     Layout = null;
 }
-@model IEnumerable<tEat>
+@model IEnumerable<tActivity>
 
 <!doctype html>
 <html lang="en">
@@ -29,7 +29,7 @@
 
 <body>
     <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
-        <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Company name</a>
+        <a class="navbar-brand col-sm-3 col-md-2 mr-0">Jouta後台</a>
         <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
         <ul class="navbar-nav px-3">
             <li class="nav-item text-nowrap">
@@ -100,8 +100,6 @@
                                 <td>筆數</td>
                                 <td>飯局編號</td>
                                 <td>帳號</td>
-                                <td>暱稱</td>
-                                <td>大頭貼</td>
                                 <td>團圖</td>
                                 <td>內容</td>
                                 <td>點讚次數</td>
@@ -121,29 +119,27 @@
 
                             @{
                                 int c筆數 = 0;
-                                foreach (tEat t in Model)
+                                foreach (tActivity t in Model)
                                 {
                                     c筆數++;
                                     <tr>
                                         <td>@c筆數.ToString()</td>
-                                        <td>@t.f飯局編號</td>
-                                        <td>@t.f帳號</td>
-                                        <td>@t.f暱稱</td>
-                                        <td>@t.f大頭貼</td>
-                                        <td>@t.f團圖</td>
-                                        <td>@t.f內容</td>
-                                        <td>@t.f點讚次數</td>
-                                        <td>@t.f建立時間</td>
-                                        <td>@t.f開團標題</td>
+                                        <td>@t.f活動編號</td>
+                                        <td>@t.f會員編號</td>
+                                        <td>@t.f活動團圖</td>
+                                        <td>@t.f活動內容</td>
+                                        <td>@t.f活動讚數</td>
+                                        <td>@t.f活動發起日期</td>
+                                        <td>@t.f活動標題</td>
                                         <td>@t.f活動開始時間</td>
-                                        <td>@t.f地點</td>
-                                        <td>@t.f預算</td>
-                                        <td>@t.f分類</td>
+                                        <td>@t.f活動地點</td>
+                                        <td>@t.f活動預算</td>
+                                        <td>@t.f活動分類</td>
                                         <td>
-                                            @Html.ActionLink("查看", "v查看", "後台飯局", new { id = t.f飯局編號 }, new { Class = "btn btn-info" })
+                                            @Html.ActionLink("查看", "v查看", "後台飯局", new { id = t.f活動編號 }, new { Class = "btn btn-info" })
                                         </td>
                                         <td>
-                                            @Html.ActionLink("刪除", "d刪除", "後台飯局", new { id = t.f飯局編號 },
+                                            @Html.ActionLink("刪除", "d刪除", "後台飯局", new { id = t.f活動編號 },
                                             new { OnClick = "return confirm('確定要刪除嗎?')", Class = "btn btn-danger" })
                                         </td>
                                     </tr>

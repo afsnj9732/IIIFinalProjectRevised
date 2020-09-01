@@ -41,31 +41,35 @@ namespace IIIProject_travel.Controllers
                 //先藉由Service取得登入者角色資料
                 string RoleData = membersService.getRole(user.txtEmail);
                 //設定JWT
-                JwtService js = new JwtService();
+                //JwtService js = new JwtService();
                 //從Web.Config撈出資料
                 string cookieName = WebConfigurationManager.AppSettings["CookieName"].ToString();
-                string token = js.GenerateToken(user.txtEmail, RoleData);
+                //string token = js.GenerateToken(user.txtEmail, RoleData);
                 //產生一個cookie
                 HttpCookie cookie = new HttpCookie(cookieName);
+                cookie["txtEmail"] = user.txtEmail;
+                cookie["txtPassword"] = user.txtPassword;
                 //設定單值
-                cookie.Value = Server.UrlEncode(token);
+                //cookie.Value = Server.UrlEncode(token);
                 //寫到用戶端
                 Response.Cookies.Add(cookie);
                 //設定cookie期限
                 Response.Cookies[cookieName].Expires = DateTime.Now.AddMinutes(Convert.ToInt32(WebConfigurationManager.AppSettings["ExpireMinutes"]));
-                return RedirectToAction("Home", "Home");
+                return RedirectToAction("LoginIndex", "Login");
             }
-            else 
+            else
             {
-                ModelState.AddModelError("",validateStr);
+                ModelState.AddModelError("", validateStr);
                 //資料回填至view中
                 return View(user);
             }
+
+
             //string msg = "";
             //tMember target = (new dbJoutaEntities()).tMember
             //                 .FirstOrDefault(o => o.f會員電子郵件 == user.txtEmail
             //                 && o.f會員密碼 == user.txtPassword);
-            
+
             //if (target != null)
             //{
             //    if (string.Compare(user.txtPassword, target.f會員密碼) == 0)

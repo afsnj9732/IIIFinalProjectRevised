@@ -17,6 +17,10 @@ namespace IIIProject_travel.ViewModel
 
         public HttpPostedFileBase blogPhoto { get; set; }
 
+        public int id { get; set; }
+
+        
+
 
     }
 }

@@ -1,4 +1,4 @@
-﻿
+﻿@model IEnumerable<tMember>
 @{
     Layout = null;
     //var x = (tMember)Session["member"];
@@ -16,7 +16,7 @@
     <link href="~/Content/sass/style.css" rel="stylesheet" />
     <link href="~/Content/sass/main.css" rel="stylesheet" />
     <link href="~/Content/css/slider.css" rel="stylesheet" />
-    
+
 </head>
 
 <body>
@@ -51,8 +51,8 @@
                             <li class="nav-item nav-link nav-login text-dark">您好，  @(User.Identity.Name) </li>
                             @*<li class="nav-item nav-link nav-login text-dark">歡迎  @x.f會員名稱 </li>*@
                             @*<li class="nav-item">
-                <img src="@ViewData["Img"]" alt="img" width="30" height="30" style="border:2px solid green;" />
-            </li>*@
+                                    <img src="@ViewData["Img"]" alt="img" width="30" height="30" style="border:2px solid green;" />
+                                </li>*@
                             <li class="nav-item">@Html.ActionLink("登出", "Home", "Home", new { id = 0 }, new { @class = "nav-link nav-login text-dark" })</li>
                         }
                         else
@@ -184,57 +184,29 @@
                     <div class="member_title">
                         <h2>精選團主</h2>
                     </div>
+
                     <div class="member_block">
                         <div class="container">
                             <div id="member" class="row">
-                                <div class="col-lg-4 col-sm-12 block">
-                                    <div class="person">
-                                        <div class="card" style="width: 18rem;">
-                                            <img src="~/Content/images/6.jpg" class="card-img-top" alt="" width="350" height="250">
-                                            <div class="card-body">
-                                                <h5 class="card-title">Peipei 吳佩佩</h5>
-                                                <p class="card-text">
-                                                    是一個兒童職能治療師，因為擁有對生活的熱情，又不想被上下班打卡綁架，
-                                                    因此工作變得有些斜槓，目前擁有正職，但仍然經營... <a href="#">read more</a>
-                                                </p>
-                                                @Html.ActionLink("了解一下", "ProfileIndex", "Profile", new { }, new { @class = "btn btnContent" })                                                @*<a href="profile.html" class="btn btnContent">Go somewhere</a>*@
-                                            </div>
-                                        </div>
+                                @foreach (tMember t in Model)
+                                {
 
-                                    </div>
-                                </div>
-                                <div class="col-lg-4 col-sm-12 block">
-                                    <div class="person">
-                                        <div class="card" style="width: 18rem;">
-                                            <img src="~/Content/images/5.jpg" class="card-img-top" alt="" width="350" height="250">
-                                            <div class="card-body">
-                                                <h5 class="card-title">迷糊兔Love Eat</h5>
-                                                <p class="card-text">
-                                                    除了愛吃之外，我也非常喜歡研究料理，不論是小時候在廚房裡探頭探腦當個愛偷吃的小幫手，
-                                                    或是外出用餐時觀察老闆如何做出令人垂涎三尺... <a href="#">read more</a>
-                                                </p>
-                                                @Html.ActionLink("了解一下", "ProfileIndex", "Profile", new { }, new { @class = "btn btnContent" })                                                @*<a href="profile.html" class="btn btnContent">Go somewhere</a>*@
+                                    <div class="col-lg-4 col-sm-12 block">
+                                        <div class="person">
+                                            <div class="card" style="width: 18rem;">
+                                                <img src="~/Content/images/6.jpg" class="card-img-top" alt="" width="350" height="250">
+                                                <div class="card-body">
+                                                    <h5 class="card-title">@t.f會員名稱</h5>
+                                                    <p class="card-text">
+                                                        @t.f會員自我介紹
+                                                    </p>
+                                                    @Html.ActionLink("了解一下", "ProfileIndex", "Profile", new { }, new { @class = "btn btnContent" })                                                @*<a href="profile.html" class="btn btnContent">Go somewhere</a>*@
+                                                </div>
                                             </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4 col-sm-12 block">
-                                    <div class="person">
-                                        <div class="card" style="width: 18rem;">
-                                            <img src="~/Content/images/4.jpg" class="card-img-top" alt="" width="350" height="250">
-                                            <div class="card-body">
-                                                <h5 class="card-title">Kristin</h5>
-                                                <p class="card-text">
-                                                    我是個主觀、偏頗的人，也不追求所謂專業的遊記、書評或影評。
-                                                    我只想把心裡認為值得分享的分享出去、眼裡看到最美麗的記錄...<a href="#">read more</a>
-                                                </p>
-                                                @Html.ActionLink("了解一下", "ProfileIndex", "Profile", new { }, new { @class = "btn btnContent" })
-                                                @*<a href="profile.html" class="btn btnContent">Go somewhere</a>*@
-                                            </div>
-                                        </div>
-                                    </div>
 
-                                </div>
+                                        </div>
+                                    </div>
+                                }
                             </div>
                         </div>
                     </div>
