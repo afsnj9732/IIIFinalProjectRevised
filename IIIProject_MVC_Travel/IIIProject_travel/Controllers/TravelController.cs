@@ -67,6 +67,7 @@ namespace IIIProject_travel.Controllers
             }
 
             var FinalList = AJAXcondition(p)
+                            .Where(a=>a.f活動類型=="旅遊")
                             .Select(a => a.f活動瀏覽次數);
 
             return Json(FinalList, JsonRequestBehavior.AllowGet);
@@ -84,6 +85,7 @@ namespace IIIProject_travel.Controllers
             }
  
             var FinalList = AJAXcondition(p)
+                            .Where(a => a.f活動類型 == "旅遊")
                             .Select(a => a.f活動讚數);
 
             return Json(FinalList, JsonRequestBehavior.AllowGet);
@@ -91,7 +93,7 @@ namespace IIIProject_travel.Controllers
 
         public ActionResult article_AJAX(string p)
         {            
-            return View(AJAXcondition(p));
+            return View(AJAXcondition(p).Where(a => a.f活動類型 == "旅遊").Select(a=>a));
         }
 
         // GET: Travel
