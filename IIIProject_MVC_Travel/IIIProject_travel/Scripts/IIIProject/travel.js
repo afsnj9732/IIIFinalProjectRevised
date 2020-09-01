@@ -18,20 +18,22 @@
 
     //增加讚
     function getGoodCounts() {
-        var j = 0;
-        let target = $(".FeelGood").attr("target");
+        console.log("HI");
+        var g = 0;
+        let target = $(this).attr("target");
         //console.log(target);
         $.ajax({
             url: "/Travel/FeelGood",
             type: 'POST',
             data: { "target": target, "p": p },
             success: function (data) {
+                console.log("HI2");
                 $(".GoodCountTemp").remove();//刪除html原有資料
-                for (var i of data) {
-                    $(".updateGoodCounts").eq(j).after("<span class='GoodCountTemp'>" + i + "</span>");
-                    j++;
-                    $(".updateGoodCounts").eq(j).after("<span class='GoodCountTemp'>" + i + "</span>");
-                    j++;
+                for (let l of data) {
+                    $(".updateGoodCounts").eq(g).after("<span class='GoodCountTemp'>" + l + "</span>");
+                    g++;
+                    $(".updateGoodCounts").eq(g).after("<span class='GoodCountTemp'>" + l + "</span>");
+                    g++;
                 }
 
             }
