@@ -12,6 +12,15 @@ namespace IIIProject_travel.Controllers
 {
     public class TravelController : Controller
     {
+        public string autoComplete()
+        {
+            var x = from t in (new dbJoutaEntities()).tActivity
+                    where t.f活動類型=="旅遊"
+                    select t.f活動標題;
+
+            return string.Join(",", x.ToArray());
+        }
+
         public IEnumerable<tActivity> AJAXcondition(string p)
         {
             JavaScriptSerializer serializer = new JavaScriptSerializer();
