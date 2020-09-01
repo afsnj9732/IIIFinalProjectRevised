@@ -75,7 +75,7 @@ namespace IIIProject_travel.Controllers
         public JsonResult FeelGood(string target, string p)
         {
             
-            if (target != null)
+            if (target != null&& Session["member"]!=null)
             {
                 var temp = (tMember)Session["member"];                             
                 dbJoutaEntities db = new dbJoutaEntities();
@@ -84,7 +84,7 @@ namespace IIIProject_travel.Controllers
                 int pos = -1;
                 if (!string.IsNullOrEmpty(theTarget.f活動按過讚的會員編號))
                 {
-                    var past = theTarget.f活動按過讚的會員編號.Split(',');//將按過讚得會員編號字串切割成陣列
+                    var past = theTarget.f活動按過讚的會員編號.Split(',');//將按過讚得會員編號 字串 切割 成陣列
 
                     pos = Array.IndexOf(past, temp.f會員編號.ToString());//透過查詢值在陣列內的索引值(不存在則回傳-1)
                                                                          //查看是否會員編號包含在陣列內
