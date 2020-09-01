@@ -1,7 +1,7 @@
 ﻿@{
     Layout = null;
 }
-@model IEnumerable<tArticle>
+@model IEnumerable<tActivity>
 
 <!doctype html>
 <html lang="en">
@@ -99,7 +99,7 @@
                             <tr>
                                 <td>筆數</td>
                                 <td>文章編號</td>
-                                <td>帳號</td>
+                                <td>會員編號</td>
                                 <td>大頭貼路徑</td>
                                 <td>標題</td>
                                 <td>點讚</td>
@@ -115,26 +115,25 @@
 
                             @{
                                 int c筆數 = 0;
-                                foreach (tArticle t in Model)
+                                foreach (tActivity t in Model)
                                 {
                                     c筆數++;
                                     <tr>
                                         <td>@c筆數.ToString()</td>
-                                        <td>@t.f文章編號</td>
-                                        <td>@t.f帳號</td>
-                                        <td>@t.f大頭貼路徑</td>
-                                        <td>@t.f標題</td>
-                                        <td>@t.f點讚</td>
-                                        <td>@t.f地點</td>
-                                        <td>@t.f分類</td>
-                                        <td>@t.f結束日期</td>
-                                        <td>@t.f發文日期</td>
-                                        <td>@t.f發文內容</td>
+                                        <td>@t.f活動編號</td>
+                                        <td>@t.f會員編號</td>
+                                        <td>@t.f活動標題</td>
+                                        <td>@t.f活動讚數</td>
+                                        <td>@t.f活動地點</td>
+                                        <td>@t.f活動分類</td>
+                                        <td>@t.f活動結束時間</td>
+                                        <td>@t.f活動發起日期</td>
+                                        <td>@t.f活動內容</td>
                                         <td>
-                                            @Html.ActionLink("查看", "v查看", "後台文章", new { id = t.f文章編號 }, new { Class = "btn btn-info" })
+                                            @Html.ActionLink("查看", "v查看", "後台文章", new { id = t.f活動編號 }, new { Class = "btn btn-info" })
                                         </td>
                                         <td>
-                                            @Html.ActionLink("刪除", "d刪除", "後台文章", new { id = t.f文章編號 },
+                                            @Html.ActionLink("刪除", "d刪除", "後台文章", new { id = t.f活動編號 },
                                             new { OnClick = "return confirm('確定要刪除嗎?')", Class = "btn btn-danger" })
                                         </td>
                                     </tr>
