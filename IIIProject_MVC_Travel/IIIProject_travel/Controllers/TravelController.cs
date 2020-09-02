@@ -168,6 +168,10 @@ namespace IIIProject_travel.Controllers
                 theTarget.f活動按過讚的會員編號 += "," + temp.f會員編號;
                 db.SaveChanges();
                 }
+                else
+                {
+                    return Json("0", JsonRequestBehavior.AllowGet);
+                }
             }
  
             var FinalList = AJAXcondition(p)

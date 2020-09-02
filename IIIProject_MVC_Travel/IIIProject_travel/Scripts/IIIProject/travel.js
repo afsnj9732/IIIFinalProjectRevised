@@ -63,12 +63,17 @@
             type: 'POST',
             data: { "target": target, "p": p },
             success: function (data) {
-                $(".GoodCountTemp").remove();//刪除html原有資料
-                for (let l of data) {
-                    $(".updateGoodCounts").eq(g).after("<span class='GoodCountTemp'>" + l + "</span>");
-                    g++;
-                    $(".updateGoodCounts").eq(g).after("<span class='GoodCountTemp'>" + l + "</span>");
-                    g++;
+                if (data === "0") {
+                    window.confirm("這篇文章你按過讚囉!");
+                }
+                else {
+                    $(".GoodCountTemp").remove();//刪除html原有資料
+                    for (let l of data) {
+                        $(".updateGoodCounts").eq(g).after("<span class='GoodCountTemp'>" + l + "</span>");
+                        g++;
+                        $(".updateGoodCounts").eq(g).after("<span class='GoodCountTemp'>" + l + "</span>");
+                        g++;
+                    }
                 }
             }
         });

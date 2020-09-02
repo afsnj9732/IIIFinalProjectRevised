@@ -24,7 +24,7 @@ namespace IIIProject_travel
         public string f會員帳號 { get; set; }
         public string f會員密碼 { get; set; }
         public string f會員名稱 { get; set; }
-        public string f會員評分 { get; set; }
+        public Nullable<double> f會員評分 { get; set; }
         public string f會員電子郵件 { get; set; }
         public string f會員稱號 { get; set; }
         public string f會員大頭貼 { get; set; }
@@ -41,7 +41,8 @@ namespace IIIProject_travel
         public string f會員過去參加的活動編號 { get; set; }
         public string f會員發起的活動編號 { get; set; }
         public string f驗證碼 { get; set; }
-        public Nullable<bool> isAdmin { get; set; }
+        public bool isAdmin { get; set; }
+        public string f會員收藏的活動編號 { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tActivity> tActivity { get; set; }

@@ -32,8 +32,8 @@ namespace IIIProject_travel
         public string f活動標籤 { get; set; }
         public string f活動團圖 { get; set; }
         public string f活動按過讚的會員編號 { get; set; }
-        public Nullable<int> f活動經度 { get; set; }
-        public Nullable<int> f活動緯度 { get; set; }
+        public Nullable<double> f活動經度 { get; set; }
+        public Nullable<double> f活動緯度 { get; set; }
         public string f活動所屬 { get; set; }
     
         public virtual tMember tMember { get; set; }
