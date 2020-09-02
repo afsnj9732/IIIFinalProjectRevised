@@ -2,7 +2,9 @@
 @{
     Layout = null;
     int count = 0;
-    string combine = "";
+    string combine_readmore = "";
+    string combine_join = "";
+    string combine_msg = "";
     var NowMember = (tMember)Session["member"]; //注意Session抓到的資料，其資料內容為取得該Session當下的資料內容，
                                                 //因此若有修改過資料庫的資料，就要改藉由Session的會員編號
                                                 //去抓取現在資料庫的資料，否則會一直撈到不變的Session資料
@@ -13,9 +15,11 @@
 @foreach (var item in Model)
 {
     count++;
-    combine = "exampleModal" + count;
+    combine_readmore = "exampleModal" + count;
+    combine_join = "Join" + count;
+    combine_msg = "Msg" + count;
     string iflikeit = "11.png";
-    int pos = -1;    
+    int pos = -1;
     if (!string.IsNullOrEmpty(targetMember.f會員收藏的活動編號))
     {
         var analyze = targetMember.f會員收藏的活動編號.Split(',');
@@ -25,7 +29,48 @@
             iflikeit = "14.png";
         }
     }
-    <div class="modal fade" id="@combine" tabindex="-1" role="dialog"
+<div class="modal fade combine_msg" id="@combine_msg" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                MSG
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade combine_join" id="@combine_join" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Join
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+    <div class="modal fade combine_readmore" id="@combine_readmore" tabindex="-1" role="dialog"
          aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog change-max-width-1400" role="document">
             <div class="modal-content">
@@ -76,11 +121,11 @@
                                     <button class="btn btn-block mr-1  p-1 FeelGood" style="background-color:#FFE0B2;" target="@item.f活動編號">
                                         <img src="~/Content/images/05.png" class="pb-1 ">覺得讚
                                     </button>
-                                    <button class="btn btn-block mr-1  p-1" style="background-color:#FFE0B2 ;">
+                                    <button class="btn btn-block mr-1  p-1"  data-toggle="modal" data-target="#@combine_join" style="background-color:#FFE0B2 ;">
                                         <img src="~/Content/images/10.png" class="pb-1" alt="">想加入
                                     </button>
                                     <div style="cursor: pointer;">
-                                        <button class="btn btn-block mr-1  p-1" style="background-color:#FFE0B2 ;">
+                                        <button class="btn btn-block mr-1  p-1" data-toggle="modal" data-target="#@combine_msg" style="background-color:#FFE0B2 ;">
                                             <img src="~/Content/images/12.png" alt="">留言區
                                         </button>
                                     </div>
@@ -146,7 +191,7 @@
 
         <div class="row pl-2 flex-wrap-reverse mt-2" style="width:100%;">
 
-            <div class="mb-3 pl-4 pr-4 mx-auto  ViewCounts" updateVC="@item.f活動編號" style="cursor: pointer;width:66%;" data-toggle="modal" data-target="#@combine">
+            <div class="mb-3 pl-4 pr-4 mx-auto  ViewCounts" updateVC="@item.f活動編號" style="cursor: pointer;width:66%;" data-toggle="modal" data-target="#@combine_readmore">
                 <div class="" style="font-weight:bolder;"> <p class="mb-4   content-title">@item.f活動標題</p></div>
 
                 <span class="content" style="font-size: 16px;line-height:1.8;">
