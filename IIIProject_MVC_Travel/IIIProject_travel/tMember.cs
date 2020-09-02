@@ -42,6 +42,7 @@ namespace IIIProject_travel
         public string f會員發起的活動編號 { get; set; }
         public string f驗證碼 { get; set; }
         public Nullable<bool> isAdmin { get; set; }
+        public string resetPasswordCode { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tActivity> tActivity { get; set; }

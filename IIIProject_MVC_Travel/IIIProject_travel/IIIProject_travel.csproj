@@ -192,6 +192,7 @@
     </Compile>
     <Compile Include="ViewModel\CBlog.cs" />
     <Compile Include="ViewModel\CChangePassword.cs" />
+    <Compile Include="ViewModel\CData.cs" />
     <Compile Include="ViewModel\CLogin.cs" />
     <Compile Include="ViewModel\CRegisterModel.cs" />
     <Compile Include="ViewModel\CSelect.cs" />
@@ -2100,6 +2101,7 @@
     <Content Include="Views\Home\RegisterResult.cshtml" />
     <Content Include="Views\Home\emailValidation.cshtml" />
     <Content Include="Views\Home\ChangePassword.cshtml" />
+    <Content Include="Views\Home\forgetPassword.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

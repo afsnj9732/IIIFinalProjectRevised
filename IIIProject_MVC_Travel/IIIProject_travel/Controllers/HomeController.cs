@@ -24,7 +24,8 @@ namespace IIIProject_travel.Controllers
         [AllowAnonymous]        //不須做登入驗證即可進入
         public ActionResult Home(int? id)
         {
-            var x = from m in (new dbJoutaEntities()).tActivity
+            CData c = new CData();
+            var x = from m in (new dbJoutaEntities()).tMember
                     where m.f會員編號 > 19 && m.f會員編號 < 23
                     select m;
             //if (id == 0)
@@ -147,5 +148,24 @@ namespace IIIProject_travel.Controllers
             return View();
         }
 
+        public ActionResult ForgetPassword()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult ForgetPassword(string Email)
+        {
+            string msg = "";
+            bool status = false;
+
+            dbJoutaEntities db = new dbJoutaEntities();
+            var account = db.tMember.Where(a=>a.f會員電子郵件 == Email).FirstOrDefault();
+            if (account != null)
+            {
+
+            }
+            return View();
+        }
     }
 }
