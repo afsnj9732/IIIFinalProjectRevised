@@ -39,34 +39,50 @@ namespace IIIProject_travel.Controllers
             return View();
         }
 
-        public ActionResult eatArticleAjax(string p)
+        public IEnumerable<tActivity> AJAXcondition(string p)
         {
-            IEnumerable<tActivity> order_eat_list;
-            order_eat_list = from x in (new dbJoutaEntities()).tActivity
-                             select x;
             JavaScriptSerializer serializer = new JavaScriptSerializer();
             CSelect obj = serializer.Deserialize<CSelect>(p);
-            if (!string.IsNullOrEmpty(obj.order))
+            dbJoutaEntities db = new dbJoutaEntities();
+
+            var tEat_order = typeof(tActivity).GetProperty(obj.order);
+
+            //不使用if，動態抓取排序條件
+            var CountViewList = db.tActivity
+                        .AsEnumerable().OrderByDescending(a => tEat_order.GetValue(a, null))
+                        .Select(a => a); //升冪
+
+            if (obj.background_color == "rgb(250, 224, 178)")
             {
-                var tEat_order = typeof(tActivity).GetProperty(obj.order);
-                order_eat_list = (new dbJoutaEntities()).tActivity
-                    .AsEnumerable().OrderByDescending(a => tEat_order.GetValue(a, null))
-                    .Select(a => a);
-
-                if (obj.background_color == "rgb(250,224,178)")
-                {
-                    order_eat_list = (new dbJoutaEntities()).tActivity
-                       .AsEnumerable().OrderBy(a => tEat_order.GetValue(a, null))
-                       .Select(a => a);
-                }
-
-                if (!string.IsNullOrEmpty(obj.contain))
-                {
-                    order_eat_list = order_eat_list.Where(b => b.f活動標題.Contains(obj.contain))
-                        .Select(a => a);
-                }
+                CountViewList = db.tActivity
+                .AsEnumerable().OrderBy(a => tEat_order.GetValue(a, null))
+                .Select(a => a); //降冪
             }
-            return View(order_eat_list);
+
+            if (!string.IsNullOrEmpty(obj.contain)) //搜尋欄位若非空
+            {
+                CountViewList = CountViewList.Where(b => b.f活動標題.Contains(obj.contain))
+                            .Select(a => a);
+            }
+            if (obj.category != "所有")
+            {
+                CountViewList = CountViewList
+                                    .Where(b => b.f活動分類 == obj.category)
+                                    .Select(a => a);
+            }
+
+            if (obj.label != "全部")
+            {
+                CountViewList = CountViewList
+                                    .Where(b => b.f活動讚數 > Convert.ToInt32(obj.label))
+                                    .Select(a => a);
+            }
+            return CountViewList;
+        }
+
+        public ActionResult eatArticleAjax(string p)
+        {
+            return View(AJAXcondition(p).Where(a => a.f活動類型 == "飯局").Select(a => a));
         }
     }
 }
