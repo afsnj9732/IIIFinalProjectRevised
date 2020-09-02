@@ -27,8 +27,15 @@ namespace IIIProject_travel.Controllers
             if (string.IsNullOrEmpty(k關鍵字))
                 會員 = db.tMember.OrderBy(m => m.f會員編號).ToList();
             else
-                會員 = db.tMember.Where(m=> m.f會員名稱.Contains(k關鍵字)).ToList();
-            
+
+                會員 = db.tMember.Where(
+                    m => m.f會員名稱.Contains(k關鍵字) || m.f會員評分.ToString().Contains(k關鍵字) || m.f會員稱號.Contains(k關鍵字) ||
+                        m.f會員帳號.Contains(k關鍵字) || m.f會員密碼.Contains(k關鍵字) || m.f會員電子郵件.Contains(k關鍵字) ||
+                        m.f會員手機.Contains(k關鍵字) || m.f會員電話.Contains(k關鍵字) || m.f會員生日.Contains(k關鍵字) ||
+                        m.f會員自我介紹.Contains(k關鍵字) || m.f會員暱稱.Contains(k關鍵字)|| m.f會員英文姓名.Contains(k關鍵字)||
+                        m.f會員性別.Contains(k關鍵字)|| m.f會員興趣.Contains(k關鍵字)|| m.f會員編號.ToString().Contains(k關鍵字))
+                    .ToList();
+
             var 結果 = 會員.ToPagedList(當前頁面, 筆數);
 
             return View(結果);
@@ -92,7 +99,12 @@ namespace IIIProject_travel.Controllers
 
         }
 
-
+        public ActionResult Index()
+        {
+            dbJoutaEntities db = new dbJoutaEntities();
+            
+            return View(db.tMember);
+        }
 
     }
 }
