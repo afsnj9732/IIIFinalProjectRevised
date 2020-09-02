@@ -45,12 +45,15 @@
         Travel_RWD();
     });
 
-    //收藏按鈕
+    //收藏按鈕，抓活動編號
     $('body').on('click', '.likeIt', function () {
-        if ($(this).attr("src") === "../Content/images/14.png") {
-            $(this).attr("src", "../Content/images/11.png");
+        var target = $(this).attr("likeIndex");
+        var combine = "[likeIndex=" + target + "]";
+
+        if($(combine).attr("src") === "../Content/images/14.png") {
+           $(combine).attr("src", "../Content/images/11.png");
         } else {
-            $(this).attr("src", "../Content/images/14.png");
+            $(combine).attr("src", "../Content/images/14.png");
         }
     });
 
