@@ -26,8 +26,13 @@ namespace IIIProject_travel.Controllers
         {
             CData c = new CData();
             var x = from m in (new dbJoutaEntities()).tMember
-                    where m.f會員編號 > 19 && m.f會員編號 < 23
+                    where m.f會員編號 > 8 && m.f會員編號 < 13
                     select m;
+            var y = from k in (new dbJoutaEntities()).tActivity
+                    where k.f會員編號 > 12 && k.f會員編號 < 17
+                    select k;
+            c.tMembers = x;
+            c.tActivities = y;
             //if (id == 0)
             //{
             //    Session.Remove("member");
@@ -40,7 +45,7 @@ namespace IIIProject_travel.Controllers
             //    string v =  t.f會員大頭貼.ToString();
             //    ViewData["Img"] = v;
             //}
-            return View(x);
+            return View(c);
         }
 
         /*[Authorize]*/     //通過驗證才可進入頁面
@@ -160,10 +165,19 @@ namespace IIIProject_travel.Controllers
             bool status = false;
 
             dbJoutaEntities db = new dbJoutaEntities();
-            var account = db.tMember.Where(a=>a.f會員電子郵件 == Email).FirstOrDefault();
+            tMember account = db.tMember.FirstOrDefault(k=>k.f會員電子郵件 == Email);
             if (account != null)
             {
+                MailMessage user_mail = new MailMessage("Joutagroup445@gmail.com",
+                    account.f會員電子郵件, "找回密碼", "您好，您的密碼是:" + account.f會員密碼);
+                SmtpClient mail_client = new SmtpClient("127.0.0.1");
+                //mail_client.Credentials = CredentialCache.DefaultNetworkCredentials;
+                mail_client.Send(user_mail);
 
+            }
+            else
+            {
+                Response.Write("信箱有誤，查無此信箱");
             }
             return View();
         }
