@@ -43,7 +43,16 @@
     //視窗變化觸發RWD
     window.addEventListener("resize", function () {
         Travel_RWD();
-    });    
+    });
+
+    //收藏按鈕
+    $('body').on('click', '.likeIt', function () {
+        if ($(this).attr("src") === "../Content/images/14.png") {
+            $(this).attr("src", "../Content/images/11.png");
+        } else {
+            $(this).attr("src", "../Content/images/14.png");
+        }
+    });
 
     //增加讚
     function getGoodCounts() {
@@ -155,7 +164,7 @@
  
         if (this.style.backgroundColor === 'rgb(250, 224, 178)') {
             this.style.backgroundColor = 'rgb(250, 224, 177)';
-
+         
             $("#temp").remove();
             if ($(this).attr('id') === "07") {
                 $(this).append("<span id='temp'>近－>遠</span>");

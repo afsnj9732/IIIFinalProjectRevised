@@ -100,8 +100,6 @@ namespace IIIProject_travel.Services
                     dbJoutaEntities db = new dbJoutaEntities();
                     tMember t = db.tMember.FirstOrDefault(k=>k.f會員電子郵件 == email&&k.f驗證碼==authCode);
                     t.f驗證碼 = "";
-                    db.tMember.Add(t);
-                    db.SaveChanges();
                     validationStr = "信箱驗證成功，現在可以登入囉~";
                 }
                 else {
