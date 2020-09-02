@@ -1,5 +1,10 @@
 (function () {
-    var order, background_color,contain,category,label,p;
+    var order, background_color, contain, category, label, p;
+
+    //Bootstrap 疊加互動視窗 Scroll Debug
+    $(document).on('hidden.bs.modal', '.modal', function () {
+        $('.modal:visible').length && $(document.body).addClass('modal-open');
+    });
 
     // 排序固定   
     let header = document.querySelector(".header");
