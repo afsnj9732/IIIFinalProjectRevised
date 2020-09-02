@@ -63,13 +63,14 @@ namespace IIIProject_travel.Controllers
         [HttpPost]
         public ActionResult Create(CBlog p)
         {
+            HttpPostedFileBase blogPhoto = Request.Files["blogPhoto"];
             if (p.blogPhoto != null)
             {
                 string photName = Guid.NewGuid().ToString() + Path.GetExtension(p.blogPhoto.FileName);
 
                 var path = Path.Combine(Server.MapPath("~/Content/images/"), photName);
                 p.blogPhoto.SaveAs(path);
-                p.fImagPath = "~/Content/images/" + photName;
+                p.f活動團圖 =  photName;
             }
 
 
@@ -80,7 +81,7 @@ namespace IIIProject_travel.Controllers
             article.f活動標題 = p.txtTitle;
             article.f活動地點 = p.txtLocation;
             article.f活動內容 = p.txtContent;
-            //article.f大頭貼路徑 = p.fImagPath;
+            article.f活動團圖 = p.fImagPath;
             article.f會員編號 = 3;//暫時用，要改成儲存登入會員的編號
 
 
