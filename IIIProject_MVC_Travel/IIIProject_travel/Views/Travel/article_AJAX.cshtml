@@ -3,7 +3,10 @@
     Layout = null;
     int count = 0;
     string combine = "";
-    var NowMember = (tMember)Session["member"];
+    var NowMember = (tMember)Session["member"]; //注意Session抓到的資料，其資料內容為取得該Session當下的資料內容，
+                                                //因此若有修改過資料庫的資料，就要改藉由Session的會員編號
+                                                //去抓取現在資料庫的資料，否則會一直撈到不變的Session資料
+    tMember targetMember = (new dbJoutaEntities()).tMember.FirstOrDefault(x => x.f會員編號 == NowMember.f會員編號);
 }
 
 <!-- read more視窗控制頭1 -->
@@ -13,9 +16,9 @@
     combine = "exampleModal" + count;
     string iflikeit = "11.png";
     int pos = -1;    
-    if (!string.IsNullOrEmpty(NowMember.f會員收藏的活動編號))
+    if (!string.IsNullOrEmpty(targetMember.f會員收藏的活動編號))
     {
-        var analyze = NowMember.f會員收藏的活動編號.Split(',');
+        var analyze = targetMember.f會員收藏的活動編號.Split(',');
         pos = Array.IndexOf(analyze, item.f活動編號.ToString());
         if (pos > -1)
         {
