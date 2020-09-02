@@ -12,6 +12,69 @@ namespace IIIProject_travel.Controllers
 {
     public class TravelController : Controller
     {
+        public ActionResult article_AJAX(string p)
+        {
+            return View(AJAXcondition(p).Where(a => a.f活動類型 == "旅遊").Select(a => a));
+        }
+        // GET: Travel
+        public ActionResult TravelIndex()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult TravelIndex(tActivity p)
+        {
+            if (Session["member"] != null && p.f活動標題 != null)  //揪團驗證，待改良
+            {
+                HttpPostedFileBase PicFile = Request.Files["PicFile"];
+                if (PicFile != null)
+                {
+                    var NewFileName = Guid.NewGuid() + Path.GetExtension(PicFile.FileName);
+                    var NewFilePath = Path.Combine(Server.MapPath("~/Content/images/"), NewFileName);
+                    PicFile.SaveAs(NewFilePath);
+                    p.f活動團圖 = NewFileName;
+                }
+                tMember Member = (tMember)Session["member"];
+                p.f會員編號 = Member.f會員編號;
+                dbJoutaEntities db = new dbJoutaEntities();
+                db.tActivity.Add(p);
+                db.SaveChanges();
+            }
+            return View();
+        }
+
+        public void likeIt(string f)
+        {
+            var x = (tMember)Session["member"];
+
+            //if (target != null && Session["member"] != null)
+            //{
+            //    var temp = (tMember)Session["member"];
+            //    dbJoutaEntities db = new dbJoutaEntities();
+            //    int select = Convert.ToInt32(target);
+            //    tActivity theTarget = db.tActivity.FirstOrDefault(x => x.f活動編號 == select);
+            //    int pos = -1;
+            //    if (!string.IsNullOrEmpty(theTarget.f活動按過讚的會員編號))
+            //    {
+            //        var past = theTarget.f活動按過讚的會員編號.Split(',');//將按過讚得會員編號 字串 切割 成陣列
+
+            //        pos = Array.IndexOf(past, temp.f會員編號.ToString());//透過查詢值在陣列內的索引值(不存在則回傳-1)
+            //                                                         //查看是否會員編號包含在陣列內
+            //    }
+
+            //    if (pos == -1)//陣列起始為0，因此只要pos>=0則表示該編號已存在，反之pos=-1表示該編號不存在，可執行
+            //    {
+            //        theTarget.f活動讚數 = (theTarget.f活動讚數 + 1);
+            //        theTarget.f活動按過讚的會員編號 += "," + temp.f會員編號;
+            //        db.SaveChanges();
+            //    }
+            //}
+
+            //x.f會員收藏的文章編號 += "," + f;
+
+        }
+
         public string autoComplete()
         {
             var x = from t in (new dbJoutaEntities()).tActivity
@@ -114,37 +177,8 @@ namespace IIIProject_travel.Controllers
             return Json(FinalList, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult article_AJAX(string p)
-        {            
-            return View(AJAXcondition(p).Where(a => a.f活動類型 == "旅遊").Select(a=>a));
-        }
 
-        // GET: Travel
-        public ActionResult TravelIndex()
-        {
-            return View();
-        }
- 
-        [HttpPost]
-        public ActionResult TravelIndex(tActivity p)
-        {            
-            if (Session["member"] != null&&p.f活動標題!=null)  //揪團驗證，待改良
-            {
-                HttpPostedFileBase PicFile = Request.Files["PicFile"];
-                if (PicFile != null)
-                {
-                    var NewFileName = Guid.NewGuid() + Path.GetExtension(PicFile.FileName);
-                    var NewFilePath = Path.Combine(Server.MapPath("~/Content/images/"), NewFileName);
-                    PicFile.SaveAs(NewFilePath);
-                    p.f活動團圖 = NewFileName;
-                }
-                tMember Member = (tMember)Session["member"];
-                p.f會員編號 = Member.f會員編號;
-                dbJoutaEntities db = new dbJoutaEntities();
-                db.tActivity.Add(p);
-                db.SaveChanges();
-            }
-            return View();
-        }
+
+
     }
 }
