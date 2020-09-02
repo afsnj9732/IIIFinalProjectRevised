@@ -14,36 +14,26 @@ namespace IIIProject_travel.Controllers
     {
 
         // GET: 後台會員
-        
-        public ActionResult List()
-        {
-
-            IQueryable<tMember> 會員 = null;
-            string k關鍵字 = Request.Form["txt關鍵字"];
-            if (string.IsNullOrEmpty(k關鍵字))
-            {
-                會員 = from p in (new dbJoutaEntities()).tMember
-                     select p;
-            }
-            else
-            {
-                會員 = from p in (new dbJoutaEntities()).tMember
-                     where p.f會員名稱.Contains(k關鍵字)
-                     select p;
-            }
-            return View(會員);
-        }
-        
-        public ActionResult Index(int page = 1)
+        public ActionResult List(int page = 1)
         {
             dbJoutaEntities db = new dbJoutaEntities();
-            int 筆數 = 3;
+
+            int 筆數 = 20;
             int 當前頁面 = page < 1 ? 1 : page;
-            var 會員編號 = db.tMember.OrderBy(m => m.f會員編號).ToList();
-            var 結果 = 會員編號.ToPagedList(當前頁面, 筆數);
+
+            List<tMember> 會員 = null;
+            string k關鍵字 = Request.Form["txt關鍵字"];
+
+            if (string.IsNullOrEmpty(k關鍵字))
+                會員 = db.tMember.OrderBy(m => m.f會員編號).ToList();
+            else
+                會員 = db.tMember.Where(m=> m.f會員名稱.Contains(k關鍵字)).ToList();
+            
+            var 結果 = 會員.ToPagedList(當前頁面, 筆數);
 
             return View(結果);
         }
+
 
 
         public ActionResult d刪除(int? id)

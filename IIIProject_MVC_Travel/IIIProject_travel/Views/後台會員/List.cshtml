@@ -1,7 +1,10 @@
-﻿@{
+﻿@using PagedList
+@using PagedList.Mvc
+
+@{
     Layout = null;
 }
-@model IEnumerable<tMember>
+@model IPagedList<IIIProject_travel.tMember>
 
 <!doctype html>
 <html lang="en">
@@ -18,6 +21,8 @@
     <link href="~/Content/css/bootstrap.min.css" rel="stylesheet" />
     <!-- Custom styles for this template -->
     <link href="~/Content/css/dashboard.css" rel="stylesheet" />
+    <link href="~/Content/PagedList.css" rel="stylesheet" />
+
     <style>
         .bd-placeholder-img {
             font-size: 1.125rem;
@@ -188,6 +193,8 @@
 
                         </tbody>
                     </table>
+                    @Html.PagedListPager(Model, page => Url.Action("List", new { page }))
+
                 </div>
             </main>
         </div>
