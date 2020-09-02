@@ -212,6 +212,10 @@ hr {
     background-color: #ffee99;
 }
 
+.btn-outline-warning:focus {
+    background-color: rgb(250, 224, 178);
+}
+
 .sidebar > .btn-lg {
     padding: 2rem 2rem;
 }

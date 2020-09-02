@@ -1,4 +1,6 @@
 (function () {
+
+    //排序收起彈開
     $(".filterbtn").click(function () {
         $(".btn-outline-warning").toggle('fast');
     });
@@ -6,6 +8,7 @@
     $(".popularMemberbtn").click(function () {
         $(".popularAvatar").toggle('fast');
     });
+
 
     function getAJAX() {
         p = JSON.stringify({
@@ -16,7 +19,7 @@
         $.ajax({
             async: false,
             url: "/Eat/eatArticleAjax",
-            type: "POST",
+            type: 'POST',
             data: {
                 "p": p
             },
@@ -25,8 +28,9 @@
                 $("#eatArticleAjax").append(data);
             }
         });
-    };
+    }
 
+    //searchbar ajax
     $("#contain").on('keyup', function () {
         $.ajax({
             url: "/Eat/autoComplete",
