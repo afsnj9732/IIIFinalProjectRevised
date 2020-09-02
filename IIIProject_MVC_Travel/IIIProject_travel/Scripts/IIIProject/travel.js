@@ -49,11 +49,31 @@
     $('body').on('click', '.likeIt', function () {
         var target = $(this).attr("likeIndex");
         var combine = "[likeIndex=" + target + "]";
-        if($(combine).attr("src") === "../Content/images/14.png") {
-           $(combine).attr("src", "../Content/images/11.png");
+        var ActivityID = target;
+        console.log("原本src " +$(combine).attr("src"));
+        if ($(combine).attr("src") === "/Content/images/14.png") {
+            console.log("變成不收藏");
+            $(combine).attr("src", "/Content/images/11.png");           
+            $.ajax({
+                url: "/Travel/likeIt",
+                data: { "ActivityID": ActivityID },
+                success: function () {
+                    console.log("變成不收藏完成");
+                }
+
+            });
         } else {
-            $(combine).attr("src", "../Content/images/14.png");
+            console.log("變成收藏");
+            $(combine).attr("src", "/Content/images/14.png");
+            $.ajax({
+                url: "/Travel/likeIt",
+                data: { "ActivityID": ActivityID },
+                success: function () {
+                    console.log("變成收藏完成");
+                }
+            });
         }
+        console.log("現在src "+$(combine).attr("src"));
     });
 
     //增加讚
