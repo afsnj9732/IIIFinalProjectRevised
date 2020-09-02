@@ -43,19 +43,19 @@ namespace IIIProject_travel.Controllers
                 //設定JWT
                 //JwtService js = new JwtService();
                 //從Web.Config撈出資料
-                string cookieName = WebConfigurationManager.AppSettings["CookieName"].ToString();
+                //string cookieName = WebConfigurationManager.AppSettings["CookieName"].ToString();
                 //string token = js.GenerateToken(user.txtEmail, RoleData);
                 //產生一個cookie
-                HttpCookie cookie = new HttpCookie(cookieName);
-                cookie["txtEmail"] = user.txtEmail;
-                cookie["txtPassword"] = user.txtPassword;
+                //HttpCookie cookie = new HttpCookie(cookieName);
+                //cookie["txtEmail"] = user.txtEmail;
+                //cookie["txtPassword"] = user.txtPassword;
                 //設定單值
                 //cookie.Value = Server.UrlEncode(token);
                 //寫到用戶端
-                Response.Cookies.Add(cookie);
+                //Response.Cookies.Add(cookie);
                 //設定cookie期限
-                Response.Cookies[cookieName].Expires = DateTime.Now.AddMinutes(Convert.ToInt32(WebConfigurationManager.AppSettings["ExpireMinutes"]));
-                return RedirectToAction("LoginIndex", "Login");
+                //Response.Cookies[cookieName].Expires = DateTime.Now.AddMinutes(Convert.ToInt32(WebConfigurationManager.AppSettings["ExpireMinutes"]));
+                return RedirectToAction("Home", "Home");
             }
             else
             {
