@@ -53,22 +53,22 @@ namespace IIIProject_travel.Controllers
             {
                 string[] isExist = member.f會員收藏的活動編號.Split(',');
                 int pos = Array.IndexOf(isExist, ActivityID);
-                if (pos < 0)
+                if (pos < 0)   //若沒找到，存入資料庫，正確
                 {
                     member.f會員收藏的活動編號 += "," + ActivityID;
                     db.SaveChanges();
                 }
-                else
-                {
+                else  //若找到
+                {                     
                     var FinalList = isExist.ToList();
-                    FinalList.RemoveAt(pos);
-                    member.f會員收藏的活動編號 = string.Join(",", FinalList); ;
+                    FinalList.RemoveAt(pos);  //移除
+                    member.f會員收藏的活動編號 = string.Join(",", FinalList); 
                     db.SaveChanges();
                 }
             }
             else
             {
-                member.f會員收藏的活動編號 += "," + ActivityID;
+                member.f會員收藏的活動編號 += "," + ActivityID; //若資料庫完全是空的，則不可能有重複值，直接存入
                 db.SaveChanges();
             }
         }
