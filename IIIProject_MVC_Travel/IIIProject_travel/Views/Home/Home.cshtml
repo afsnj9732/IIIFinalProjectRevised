@@ -1,4 +1,4 @@
-﻿@model IEnumerable<tMember>
+﻿@model IEnumerable<tActivity>
 @{
     Layout = null;
     //var x = (tMember)Session["member"];
@@ -188,17 +188,17 @@
                     <div class="member_block">
                         <div class="container">
                             <div id="member" class="row">
-                                @foreach (tMember t in Model)
-                                {
+                                @{ foreach (tActivity t in Model)
+                                    {
 
                                     <div class="col-lg-4 col-sm-12 block">
                                         <div class="person">
                                             <div class="card" style="width: 18rem;">
-                                                <img src="~/Content/images/@t.f會員大頭貼" class="card-img-top" alt="" width="350" height="250">
+                                                <img src="~/Content/images/@t.tMember.f會員大頭貼" class="card-img-top" alt="" width="350" height="250">
                                                 <div class="card-body">
-                                                    <h5 class="card-title">@t.f會員名稱</h5>
+                                                    <h5 class="card-title">@t.tMember.f會員名稱</h5>
                                                     <p class="card-text">
-                                                        @t.f會員自我介紹
+                                                        @t.tMember.f會員自我介紹
                                                     </p>
                                                     @Html.ActionLink("了解一下", "ProfileIndex", "Profile", new { }, new { @class = "btn btnContent" })                                                @*<a href="profile.html" class="btn btnContent">Go somewhere</a>*@
                                                 </div>
@@ -206,7 +206,8 @@
 
                                         </div>
                                     </div>
-                                }
+                                        }
+                                    }
                             </div>
                         </div>
                     </div>
@@ -313,71 +314,33 @@
                         <h2>跟我趴趴走</h2>
                     </div>
                 </div>
+                @{ foreach (tActivity t in Model)
+                    {
                 <div class="col-lg-4">
                     <figure class="traveller">
                         <div class="image">
-                            <img src="~/Content/images/001.jpg" alt="愛旅行的喵" width="350" height="300" />
+                            <img src="~/Content/images/@t.f活動團圖" alt="@t.tMember.f會員名稱" width="350" height="300" />
                         </div>
                         <figcaption>
-                            <h3>飛向宇宙浩瀚無垠</h3>
+                            <h3>@t.f活動標題</h3>
                             <p class="card-text" style="text-align: left;">
-                                我是個喜歡四處遊玩的blogger，旅行的奧妙樂趣無窮，
-                                喜歡我的背影嗎?還不快點擊加入我們，讓姊帶你飛帶你遊世界
+                                @t.f活動內容
                             </p>
                             @Html.ActionLink("我要+1", "TravelIndex", "Travel", new { }, new { @class = "btn btnContent mt-2" })
 
                             <section class="block_footer">
-                                <div class="date">October 30, 2015</div>
+                                <div class="date">@t.f活動開始時間</div>
                                 <div class="icons">
-                                    <div class="views"><i class="ion-eye"></i>2,907</div>
-                                    <div class="love"><i class="ion-heart"></i>623</div>
+                                    <div class="views"><i class="ion-eye"></i>@t.f活動瀏覽次數</div>
+                                    <div class="love"><i class="ion-heart"></i>@t.f活動讚數</div>
                                 </div>
                             </section>
                         </figcaption>
                     </figure>
                 </div>
-                <div class="col-lg-4">
-                    <figure class="traveller hover">
-                        <div class="image"><img src="~/Content/images/002.jpg" alt="遊牧民族" width="350" height="300" /></div>
-                        <figcaption>
-                            <h3>登高望遠</h3>
-                            <p class="card-text" style="text-align: left;">
-                                其實人很渺小，只有待在高處才能看見平時看不到的風景，
-                                有幸與我同遊，帶你領略這一切，加入我們~帶你飛高高，站高高....摔痛痛....
-                            </p>
-                            @Html.ActionLink("我要+1", "TravelIndex", "Travel", new { }, new { @class = "btn btnContent mt-2" })
-                            <section class="block_footer">
-                                <div class="date">November 7, 2016</div>
-                                <div class="icons">
-                                    <div class="views"><i class="ion-eye"></i>1,870</div>
-                                    <div class="love"><i class="ion-heart"></i>973</div>
-                                </div>
-                            </section>
-                        </figcaption>
-                    </figure>
-                </div>
-                <div class="col-lg-4">
-                    <figure class="traveller">
-                        <div class="image">
-                            <img src="~/Content/images/003.jpg" alt="南洋的梨" width="350" height="300" />
-                        </div>
-                        <figcaption>
-                            <h3>南洋沙灘浪漫一夏</h3>
-                            <p class="card-text" style="text-align: left;">
-                                誰說度假要去南方小島，隆重介紹一下這是我家後院，
-                                網美看過來，姊的技術一流，化腐朽為神奇...
-                            </p>
-                            @Html.ActionLink("我要+1", "TravelIndex", "Travel", new { }, new { @class = "btn btnContent mt-2" })
-                            <section class="block_footer">
-                                <div class="date">January 21, 2016</div>
-                                <div class="icons">
-                                    <div class="views"><i class="ion-eye"></i>928</div>
-                                    <div class="love"><i class="ion-heart"></i>198</div>
-                                </div>
-                            </section>
-                        </figcaption>
-                    </figure>
-                </div>
+                        }
+                    }
+
 
             </div>
         </div>

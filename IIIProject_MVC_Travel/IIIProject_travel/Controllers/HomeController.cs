@@ -24,9 +24,9 @@ namespace IIIProject_travel.Controllers
         [AllowAnonymous]        //不須做登入驗證即可進入
         public ActionResult Home(int? id)
         {
-            var x = from t in (new dbJoutaEntities()).tMember
-                    where t.f會員編號>5&&t.f會員編號<11
-                    select t;
+            var x = from m in (new dbJoutaEntities()).tActivity
+                    where m.f會員編號 > 19 && m.f會員編號 < 23
+                    select m;
             //if (id == 0)
             //{
             //    Session.Remove("member");
