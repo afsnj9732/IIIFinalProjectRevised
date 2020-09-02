@@ -45,13 +45,35 @@
         Travel_RWD();
     });
 
-    //收藏按鈕
+    //收藏按鈕，抓活動編號
     $('body').on('click', '.likeIt', function () {
-        if ($(this).attr("src") === "../Content/images/14.png") {
-            $(this).attr("src", "../Content/images/11.png");
+        var target = $(this).attr("likeIndex");
+        var combine = "[likeIndex=" + target + "]";
+        var ActivityID = target;
+        console.log("原本src " +$(combine).attr("src"));
+        if ($(combine).attr("src") === "/Content/images/14.png") {
+            console.log("變成不收藏");
+            $(combine).attr("src", "/Content/images/11.png");           
+            $.ajax({
+                url: "/Travel/likeIt",
+                data: { "ActivityID": ActivityID },
+                success: function () {
+                    console.log("變成不收藏完成");
+                }
+
+            });
         } else {
-            $(this).attr("src", "../Content/images/14.png");
+            console.log("變成收藏");
+            $(combine).attr("src", "/Content/images/14.png");
+            $.ajax({
+                url: "/Travel/likeIt",
+                data: { "ActivityID": ActivityID },
+                success: function () {
+                    console.log("變成收藏完成");
+                }
+            });
         }
+        console.log("現在src "+$(combine).attr("src"));
     });
 
     //增加讚
@@ -63,12 +85,17 @@
             type: 'POST',
             data: { "target": target, "p": p },
             success: function (data) {
-                $(".GoodCountTemp").remove();//刪除html原有資料
-                for (let l of data) {
-                    $(".updateGoodCounts").eq(g).after("<span class='GoodCountTemp'>" + l + "</span>");
-                    g++;
-                    $(".updateGoodCounts").eq(g).after("<span class='GoodCountTemp'>" + l + "</span>");
-                    g++;
+                if (data === "0") {
+                    window.confirm("這篇文章你按過讚囉!");
+                }
+                else {
+                    $(".GoodCountTemp").remove();//刪除html原有資料
+                    for (let l of data) {
+                        $(".updateGoodCounts").eq(g).after("<span class='GoodCountTemp'>" + l + "</span>");
+                        g++;
+                        $(".updateGoodCounts").eq(g).after("<span class='GoodCountTemp'>" + l + "</span>");
+                        g++;
+                    }
                 }
             }
         });

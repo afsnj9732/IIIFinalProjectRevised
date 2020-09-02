@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="joutaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="joutaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="sysdiagrams">
           <Key>
             <PropertyRef Name="diagram_id" />
@@ -21,52 +21,54 @@
           </Key>
           <Property Name="f活動編號" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="f會員編號" Type="int" Nullable="false" />
-          <Property Name="f活動類型" Type="nvarchar" MaxLength="50" />
+          <Property Name="f活動類型" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="f活動內容" Type="nvarchar(max)" />
-          <Property Name="f活動發起日期" Type="nvarchar" MaxLength="30" />
-          <Property Name="f活動開始時間" Type="nvarchar" MaxLength="30" />
-          <Property Name="f活動結束時間" Type="nvarchar" MaxLength="30" />
-          <Property Name="f活動招募截止時間" Type="nvarchar" MaxLength="30" />
-          <Property Name="f活動標題" Type="nvarchar" MaxLength="30" />
-          <Property Name="f活動地區" Type="nvarchar" MaxLength="30" />
-          <Property Name="f活動地點" Type="nvarchar" MaxLength="150" />
+          <Property Name="f活動發起日期" Type="nvarchar" MaxLength="50" />
+          <Property Name="f活動開始時間" Type="nvarchar" MaxLength="50" />
+          <Property Name="f活動結束時間" Type="nvarchar" MaxLength="50" />
+          <Property Name="f活動招募截止時間" Type="nvarchar" MaxLength="50" />
+          <Property Name="f活動標題" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="f活動地區" Type="nvarchar" MaxLength="10" />
+          <Property Name="f活動地點" Type="nvarchar" MaxLength="30" />
           <Property Name="f活動預算" Type="int" />
           <Property Name="f活動瀏覽次數" Type="int" />
           <Property Name="f活動讚數" Type="int" />
           <Property Name="f活動分類" Type="nvarchar" MaxLength="10" />
           <Property Name="f活動標籤" Type="nvarchar" MaxLength="10" />
-          <Property Name="f活動團圖" Type="nvarchar" MaxLength="150" />
+          <Property Name="f活動團圖" Type="nvarchar" MaxLength="200" />
           <Property Name="f活動按過讚的會員編號" Type="nvarchar(max)" />
-          <Property Name="f活動經度" Type="int" />
-          <Property Name="f活動緯度" Type="int" />
+          <Property Name="f活動經度" Type="float" />
+          <Property Name="f活動緯度" Type="float" />
           <Property Name="f活動所屬" Type="nvarchar" MaxLength="30" />
+          <Property Name="f活動參加的會員編號" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="tMember">
           <Key>
             <PropertyRef Name="f會員編號" />
           </Key>
           <Property Name="f會員編號" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="f會員帳號" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="f會員帳號" Type="nvarchar" MaxLength="50" />
           <Property Name="f會員密碼" Type="nvarchar" MaxLength="20" Nullable="false" />
-          <Property Name="f會員名稱" Type="nvarchar" MaxLength="30" Nullable="false" />
-          <Property Name="f會員評分" Type="nvarchar" MaxLength="10" />
+          <Property Name="f會員名稱" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="f會員評分" Type="float" />
           <Property Name="f會員電子郵件" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="f會員稱號" Type="nvarchar" MaxLength="30" />
-          <Property Name="f會員大頭貼" Type="nvarchar" MaxLength="150" />
+          <Property Name="f會員稱號" Type="nvarchar" MaxLength="20" />
+          <Property Name="f會員大頭貼" Type="nvarchar" MaxLength="200" />
           <Property Name="f會員手機" Type="nvarchar" MaxLength="20" />
           <Property Name="f會員電話" Type="nvarchar" MaxLength="20" />
           <Property Name="f會員生日" Type="nvarchar" MaxLength="20" />
-          <Property Name="f會員暱稱" Type="nvarchar" MaxLength="30" />
+          <Property Name="f會員暱稱" Type="nvarchar" MaxLength="20" />
           <Property Name="f會員英文姓名" Type="nvarchar" MaxLength="20" />
           <Property Name="f會員性別" Type="nvarchar" MaxLength="10" />
-          <Property Name="f會員興趣" Type="nvarchar" MaxLength="150" />
+          <Property Name="f會員興趣" Type="nvarchar(max)" />
           <Property Name="f會員已占用時間" Type="nvarchar(max)" />
           <Property Name="f會員自我介紹" Type="nvarchar(max)" />
           <Property Name="f會員現在參加的活動編號" Type="nvarchar(max)" />
           <Property Name="f會員過去參加的活動編號" Type="nvarchar(max)" />
           <Property Name="f會員發起的活動編號" Type="nvarchar(max)" />
           <Property Name="f驗證碼" Type="nvarchar" MaxLength="50" />
-          <Property Name="isAdmin" Type="bit" />
+          <Property Name="isAdmin" Type="bit" Nullable="false" />
+          <Property Name="f會員收藏的活動編號" Type="nvarchar(max)" />
         </EntityType>
         <Association Name="FK_tActivity_tMember">
           <End Role="tMember" Type="Self.tMember" Multiplicity="1" />
@@ -89,8 +91,7 @@
             <End Role="tActivity" EntitySet="tActivity" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="joutaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -110,53 +111,55 @@
           </Key>
           <Property Name="f活動編號" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="f會員編號" Type="Int32" Nullable="false" />
-          <Property Name="f活動類型" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="f活動類型" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="f活動內容" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="f活動發起日期" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="f活動開始時間" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="f活動結束時間" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="f活動招募截止時間" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="f活動標題" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="f活動地區" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="f活動地點" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="f活動發起日期" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="f活動開始時間" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="f活動結束時間" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="f活動招募截止時間" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="f活動標題" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="f活動地區" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="f活動地點" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
           <Property Name="f活動預算" Type="Int32" />
           <Property Name="f活動瀏覽次數" Type="Int32" />
           <Property Name="f活動讚數" Type="Int32" />
           <Property Name="f活動分類" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="f活動標籤" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="f活動團圖" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="f活動團圖" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="f活動按過讚的會員編號" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="f活動經度" Type="Int32" />
-          <Property Name="f活動緯度" Type="Int32" />
+          <Property Name="f活動經度" Type="Double" />
+          <Property Name="f活動緯度" Type="Double" />
           <Property Name="f活動所屬" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="tMember" Relationship="Self.FK_tActivity_tMember" FromRole="tActivity" ToRole="tMember" />
+          <Property Name="f活動參加的會員編號" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="tMember">
           <Key>
             <PropertyRef Name="f會員編號" />
           </Key>
           <Property Name="f會員編號" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="f會員帳號" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="f會員帳號" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="f會員密碼" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="f會員名稱" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="f會員評分" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="f會員名稱" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="f會員評分" Type="Double" />
           <Property Name="f會員電子郵件" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="f會員稱號" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="f會員大頭貼" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="f會員稱號" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="f會員大頭貼" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="f會員手機" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="f會員電話" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="f會員生日" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="f會員暱稱" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="f會員暱稱" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="f會員英文姓名" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="f會員性別" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="f會員興趣" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="f會員興趣" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="f會員已占用時間" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="f會員自我介紹" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="f會員現在參加的活動編號" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="f會員過去參加的活動編號" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="f會員發起的活動編號" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="f驗證碼" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="isAdmin" Type="Boolean" />
+          <Property Name="isAdmin" Type="Boolean" Nullable="false" />
+          <Property Name="f會員收藏的活動編號" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="tActivity" Relationship="Self.FK_tActivity_tMember" FromRole="tMember" ToRole="tActivity" />
         </EntityType>
         <Association Name="FK_tActivity_tMember">
@@ -200,6 +203,7 @@
           <EntitySetMapping Name="tActivity">
             <EntityTypeMapping TypeName="joutaModel.tActivity">
               <MappingFragment StoreEntitySet="tActivity">
+                <ScalarProperty Name="f活動參加的會員編號" ColumnName="f活動參加的會員編號" />
                 <ScalarProperty Name="f活動編號" ColumnName="f活動編號" />
                 <ScalarProperty Name="f會員編號" ColumnName="f會員編號" />
                 <ScalarProperty Name="f活動類型" ColumnName="f活動類型" />
@@ -249,6 +253,7 @@
                 <ScalarProperty Name="f會員發起的活動編號" ColumnName="f會員發起的活動編號" />
                 <ScalarProperty Name="f驗證碼" ColumnName="f驗證碼" />
                 <ScalarProperty Name="isAdmin" ColumnName="isAdmin" />
+                <ScalarProperty Name="f會員收藏的活動編號" ColumnName="f會員收藏的活動編號" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

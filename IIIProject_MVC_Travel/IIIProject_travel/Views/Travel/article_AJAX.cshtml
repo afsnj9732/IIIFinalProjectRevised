@@ -3,7 +3,7 @@
     Layout = null;
     int count = 0;
     string combine = "";
-    
+    var NowMember = (tMember)Session["member"];
 }
 
 <!-- read more視窗控制頭1 -->
@@ -11,7 +11,17 @@
 {
     count++;
     combine = "exampleModal" + count;
-    string likeIndex = "likeIt" + item.f活動編號;
+    string iflikeit = "11.png";
+    int pos = -1;    
+    if (!string.IsNullOrEmpty(NowMember.f會員收藏的活動編號))
+    {
+        var analyze = NowMember.f會員收藏的活動編號.Split(',');
+        pos = Array.IndexOf(analyze, item.f活動編號.ToString());
+        if (pos > -1)
+        {
+            iflikeit = "14.png";
+        }
+    }
     <div class="modal fade" id="@combine" tabindex="-1" role="dialog"
          aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog change-max-width-1400" role="document">
@@ -35,7 +45,7 @@
                             <span><img src="~/Content/images/06.png" class="updateViewCounts" alt="">@*@item.f活動瀏覽次數*@</span>
                             <span><img src="~/Content/images/05.png" class="updateGoodCounts" alt="">@*@item.f活動讚數*@</span>
 
-                            <span class="col-auto"><img style="cursor: pointer;"   class="likeIt @likeIndex"  src="~/Content/images/11.png" alt=""></span>
+                            <span class="col-auto"><img style="cursor: pointer;" class="likeIt" likeIndex="@item.f活動編號" src="~/Content/images/@iflikeit" alt=""></span>
                         </div>
                         @*<hr />*@
                         <div class="row mb-4">
@@ -122,8 +132,8 @@
                             </button>
                         </div>
                     </div>
-                    <div class="p-0 pr-3">
-                        <img style="cursor: pointer;" class="pb-1 likeIt @likeIndex"    src="~/Content/images/11.png" alt="">
+                    <div class="p-0 pr-2">
+                        <img style="cursor: pointer;" class="pb-1 likeIt" likeIndex="@item.f活動編號" src="~/Content/images/@iflikeit" alt="">
                     </div>
                 </div>
                 @*<div class="col-12"><hr /></div>*@
