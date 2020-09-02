@@ -1,7 +1,7 @@
 ﻿@{
     Layout = null;
-    tMember x = (new dbJoutaEntities()).tMember.FirstOrDefault(y => y.f會員編號 == 3);
     //var x = (tMember)Session["member"];
+    tMember x = (new dbJoutaEntities()).tMember.FirstOrDefault(y => y.f會員編號 == 3);
     Session["member"] = x;
 }
 
@@ -17,6 +17,7 @@
         @Styles.Render("~/Content/css/bootstrap.min.css")
         @Styles.Render("~/Content/css/style.css")
         @Styles.Render("~/Content/css/eat.css")
+        @Styles.Render("~/Content/jquery-1.12.1/jquery-ui.css")
         <link rel="shortcut icon" href="favicon.ico" />
     </head>
 
@@ -398,6 +399,7 @@
 
         <!-- script -->
         @Scripts.Render("~/Scripts/jquery-3.5.1.js")
+        @Scripts.Render("~/Content/jquery-ui-1.12.1/jquery-ui.js")
         @Scripts.Render("~/Scripts/IIIProject/popper.min.js")
         @Scripts.Render("~/Scripts/bootstrap.min.js")
         @Scripts.Render("~/Scripts/IIIProject/navbar.js")

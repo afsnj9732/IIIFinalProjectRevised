@@ -27,4 +27,16 @@
         });
     };
 
+    $("#contain").on('keyup', function () {
+        $.ajax({
+            url: "/Eat/autoComplete",
+            success: function (data) {
+                var getautoComplete = data.split(',');
+                $("#contain").autocomplete({
+                    source: getautoComplete
+                });
+            }
+        });
+    });
+
 })();
