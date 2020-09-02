@@ -1,4 +1,7 @@
-﻿@model IEnumerable<tActivity>
+﻿@*@model IEnumerable<tActivity>*@
+@using PagedList
+@using PagedList.Mvc
+@model IPagedList<IIIProject_travel.tActivity>
 
 @{
     Layout = null;
@@ -16,7 +19,7 @@
     <link rel="stylesheet" href="~/Content/css/style.css">
     <link rel="stylesheet" href="~/Content/css/blog_style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css">
-
+    <link href="~/Content/PagedList.css" rel="stylesheet" />
 
 </head>
 
@@ -99,9 +102,10 @@
                 <ul class="pagination justify-content-center mb-4">
 
                     @*<button class="ui right floated button" id="btnPrev">Prev</button>*@
-                    @Html.ActionLink("Prev", "Index", "Blog", new { @class = "ui right floated button", id = "btnPrev" })
-                    @Html.ActionLink("Next", "Index", "Blog", new { @class = "ui left floated button", id = "btnNext" })
+                    @*@Html.ActionLink("Prev", "Index", "Blog", new { @class = "ui right floated button", id = "btnPrev" })
+                    @Html.ActionLink("Next", "Index", "Blog", new { @class = "ui left floated button", id = "btnNext" })*@
                     @*<button class="ui left floated button" id="btnNext">Next</button>*@
+                    @Html.PagedListPager(Model, Page => Url.Action("Index",new { Page}))
                 </ul>
             </div>
             <!-- Sidebar Widgets Column -->
