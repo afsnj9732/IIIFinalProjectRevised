@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="joutaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="joutaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="sysdiagrams">
           <Key>
             <PropertyRef Name="diagram_id" />
@@ -40,6 +40,7 @@
           <Property Name="f活動經度" Type="float" />
           <Property Name="f活動緯度" Type="float" />
           <Property Name="f活動所屬" Type="nvarchar" MaxLength="30" />
+          <Property Name="f活動參加的會員編號" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="tMember">
           <Key>
@@ -90,8 +91,7 @@
             <End Role="tActivity" EntitySet="tActivity" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="joutaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -131,6 +131,7 @@
           <Property Name="f活動緯度" Type="Double" />
           <Property Name="f活動所屬" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="tMember" Relationship="Self.FK_tActivity_tMember" FromRole="tActivity" ToRole="tMember" />
+          <Property Name="f活動參加的會員編號" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="tMember">
           <Key>
@@ -202,6 +203,7 @@
           <EntitySetMapping Name="tActivity">
             <EntityTypeMapping TypeName="joutaModel.tActivity">
               <MappingFragment StoreEntitySet="tActivity">
+                <ScalarProperty Name="f活動參加的會員編號" ColumnName="f活動參加的會員編號" />
                 <ScalarProperty Name="f活動編號" ColumnName="f活動編號" />
                 <ScalarProperty Name="f會員編號" ColumnName="f會員編號" />
                 <ScalarProperty Name="f活動類型" ColumnName="f活動類型" />

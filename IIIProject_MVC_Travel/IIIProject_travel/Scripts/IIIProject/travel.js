@@ -49,7 +49,6 @@
     $('body').on('click', '.likeIt', function () {
         var target = $(this).attr("likeIndex");
         var combine = "[likeIndex=" + target + "]";
-
         if($(combine).attr("src") === "../Content/images/14.png") {
            $(combine).attr("src", "../Content/images/11.png");
         } else {
