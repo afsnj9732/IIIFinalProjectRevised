@@ -82,34 +82,34 @@ namespace IIIProject_travel.Controllers
 
         public ActionResult eatArticleAjax(string p)
         {
-            return View(AJAXcondition(p).Where(a => a.f活動類型 == "旅遊").Select(a => a));
+            return View(AJAXcondition(p).Where(a => a.f活動類型 == "飯局").Select(a => a));
         }
 
         public string autoComplete()
         {
             var x = from t in (new dbJoutaEntities()).tActivity
-                    where t.f活動類型 == "旅遊"
+                    where t.f活動類型 == "飯局"
                     select t.f活動標題;
 
             return string.Join(",", x.ToArray());
         }
 
-        public JsonResult CountView(string target, string p)
-        {
-            if (target != null)
-            {
-                dbJoutaEntities db = new dbJoutaEntities();
-                int select = Convert.ToInt32(target);
-                tActivity theTarget = db.tActivity.FirstOrDefault(x => x.f活動編號 == select);
-                theTarget.f活動瀏覽次數 = (theTarget.f活動瀏覽次數 + 1);
-                db.SaveChanges();
-            }
+        //public JsonResult CountView(string target, string p)
+        //{
+        //    if (target != null)
+        //    {
+        //        dbJoutaEntities db = new dbJoutaEntities();
+        //        int select = Convert.ToInt32(target);
+        //        tActivity theTarget = db.tActivity.FirstOrDefault(x => x.f活動編號 == select);
+        //        theTarget.f活動瀏覽次數 = (theTarget.f活動瀏覽次數 + 1);
+        //        db.SaveChanges();
+        //    }
 
-            var FinalList = AJAXcondition(p)
-                            .Where(a => a.f活動類型 == "旅遊")
-                            .Select(a => a.f活動瀏覽次數);
+        //    var FinalList = AJAXcondition(p)
+        //                    .Where(a => a.f活動類型 == "飯局")
+        //                    .Select(a => a.f活動瀏覽次數);
 
-            return Json(FinalList, JsonRequestBehavior.AllowGet);
-        }
+        //    return Json(FinalList, JsonRequestBehavior.AllowGet);
+        //}
     }
 }
