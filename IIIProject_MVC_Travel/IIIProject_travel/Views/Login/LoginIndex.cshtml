@@ -95,13 +95,17 @@
     <script src="~/Scripts/IIIProject/popper.min.js"></script>
     <script src="~/Scripts/bootstrap.min.js"></script>
     <script src="~/Scripts/IIIProject/navbar.js"></script>
-    <script>
-        function btnLogin() {
-            $.get("/Login/LoginIndex", { Email: $("#txtEmail").val(), Password: $("#txtPassword").val(), Ck: $("#txtRember").prop("checked") }, function (data, Status) {
-                if (Status = "success") {
+    @*<script>
+        function btnlogin() {
+            $.get("/login/loginindex", {
+                email: $("#txtemail").val(),
+                password: $("#txtpassword").val(),
+                ck: $("#txtrember").prop("checked")
+            }, function (data, status) {
+                if (status = "success") {
                     if (data > 0) {
                         alert("登錄成功");
-                        window.location.href = "/Home/Home";
+                        window.location.href = "/home/home";
                     }
                     else {
                         alert("用戶名或密碼錯誤");
@@ -110,7 +114,7 @@
             });
         }
 
-    </script>
+    </script>*@
     @*匯入驗證用的js*@
     @section Scripts{
         @Scripts.Render("~/bundles/jqueryval")
