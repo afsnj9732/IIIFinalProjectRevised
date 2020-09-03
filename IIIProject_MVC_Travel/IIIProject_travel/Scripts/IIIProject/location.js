@@ -20,11 +20,11 @@ function showPosition(position) {
 }
 
 
-var mymap = L.map('mapid').setView([25.0335601, 121.542634], 18);
+var mymap = L.map('mapid').setView([25.0335601, 121.542634], 15);
 
 L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
     attribution: '&copy; Jouta',
-    maxZoom: 20,
+    maxZoom: 18,
     id: 'mapbox/streets-v11',
     tileSize: 512,
     zoomOffset: -1,
