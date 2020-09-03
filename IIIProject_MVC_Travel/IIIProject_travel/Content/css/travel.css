@@ -79,6 +79,13 @@ p{
     max-width: 1000px;
 }
 
+ 
+
+.change-max-width-1000 .textBox {
+    height: 382px;
+    overflow-y: scroll;
+}
+
 .change-max-width-1400 {
     max-width: 1400px;
 }

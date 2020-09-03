@@ -90,15 +90,18 @@
                             <span><img src="~/Content/images/17.png" alt="">@item.f活動分類</span>
                             <span><img src="~/Content/images/03.png" alt="">@item.f活動地區</span>
                             <span><img src="~/Content/images/04.png" alt="">@item.f活動預算</span>
-                            <span><img src="~/Content/images/06.png" class=""  alt=""><span ToUpdateVC="@item.f活動編號">@item.f活動瀏覽次數</span></span>
+                            <span><img src="~/Content/images/06.png" class="" alt=""><span ToUpdateVC="@item.f活動編號">@item.f活動瀏覽次數</span></span>
                             <span><img src="~/Content/images/05.png" class="updateGoodCounts" alt="">@*@item.f活動讚數*@</span>
 
                             <span class="col-auto"><img style="cursor: pointer;" class="likeIt" likeIndex="@item.f活動編號" src="~/Content/images/@iflikeit" alt=""></span>
                         </div>
                         @*<hr />*@
-                        <div class="row mb-4">
+                        <div class="row">
                             <img src="~/Content/images/@item.f活動團圖" alt="" class="mx-auto" style="width: 60%;margin: auto;">
                         </div>
+                        <br />
+                        <hr />
+                        <br />
 
                         <div class="row align-items-center">
                             <div id="UserBlock">
@@ -107,12 +110,13 @@
                                 <p>@item.tMember.f會員名稱</p>
                                 <p>團主評分:@item.tMember.f會員評分 </p>
                             </div>
-                            <div class="change-max-width-1000 ">
-                                <p>
+                            <div class="change-max-width-1000 ml-4">
+                                <div class="row align-items-center m-0 textBox">
                                     @item.f活動內容
-                                </p>
+                                </div>                            
                             </div>
                         </div>
+                        <br />
 
                         @if (Session["member"] != null)
                         {
@@ -121,7 +125,7 @@
                                     <button class="btn btn-block mr-1  p-1 FeelGood" style="background-color:#FFE0B2;" target="@item.f活動編號">
                                         <img src="~/Content/images/05.png" class="pb-1 ">覺得讚
                                     </button>
-                                    <button class="btn btn-block mr-1  p-1"  data-toggle="modal" data-target="#@combine_join" style="background-color:#FFE0B2 ;">
+                                    <button class="btn btn-block mr-1  p-1" data-toggle="modal" data-target="#@combine_join" style="background-color:#FFE0B2 ;">
                                         <img src="~/Content/images/10.png" class="pb-1" alt="">想加入
                                     </button>
                                     <div style="cursor: pointer;">
