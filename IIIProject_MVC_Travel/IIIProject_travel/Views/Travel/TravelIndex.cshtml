@@ -3,7 +3,7 @@
     Layout = null;
     var topMember = (new dbJoutaEntities()).tMember.OrderByDescending(n => n.f會員評分).Take(5);//抓評分前五團主
     //var x = (tMember)Session["member"];
-    tMember x = (new dbJoutaEntities()).tMember.FirstOrDefault(y => y.f會員編號 == 4);
+    tMember x = (new dbJoutaEntities()).tMember.FirstOrDefault(y => y.f會員編號 == 3);
     Session["member"] = x;
 
 }
@@ -309,7 +309,7 @@
                 </div>
                 <!-- 文章內容區結束 -->
                 <div class="col-xl-3   col-10 row mx-auto">
-
+        
                 </div>
             </div>
         </div>

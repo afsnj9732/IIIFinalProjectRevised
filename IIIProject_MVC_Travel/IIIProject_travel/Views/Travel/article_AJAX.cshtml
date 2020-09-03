@@ -16,11 +16,16 @@
 <!-- read more視窗控制頭1 -->
 @foreach (var item in Model)
 {
+    string[] MsgsTime = { };
     string[] Msgs = { };
     if (!string.IsNullOrEmpty(item.f活動留言))
     {
         Msgs = item.f活動留言.Split(',');
+        MsgsTime = item.f活動留言時間.Split(',');
     }
+
+    var targetMsgs = Msgs.Zip(MsgsTime, (n, w) => new { msg = n, time = w });//合併兩陣列
+
     string[] attendGuys = { };
     if (!string.IsNullOrEmpty(item.f活動參加的會員編號))
     {
@@ -52,9 +57,14 @@
             </div>
             <div class="modal-body">
                 <div MsgAdd="@item.f活動編號">
-                    @foreach (string Msg in Msgs)
+                    @foreach (var Msg in targetMsgs)
                     {
-                        <div>@Msg</div><br />                   
+                    <div class="row justify-content-between pl-5 pr-5 mr-5 ml-5">
+                        <div>@Msg.msg</div>
+
+                        <div>@Msg.time</div>
+                    </div>
+                        <br />
                     }
                 </div>
             </div>
