@@ -9,37 +9,44 @@
                                                 //因此若有修改過資料庫的資料，就要改藉由Session的會員編號
                                                 //去抓取現在資料庫的資料，否則會一直撈到不變的Session資料
     tMember targetMember = (new dbJoutaEntities()).tMember.FirstOrDefault(x => x.f會員編號 == NowMember.f會員編號);
+    var totalMember = from x in (new dbJoutaEntities()).tMember
+                      select x;
 }
 
 <!-- read more視窗控制頭1 -->
 @foreach (var item in Model)
-{
-    count++;
-    combine_readmore = "exampleModal" + count;
-    combine_join = "Join" + count;
-    combine_msg = "Msg" + count;
-    string iflikeit = "11.png";
-    int pos = -1;
-    if (!string.IsNullOrEmpty(targetMember.f會員收藏的活動編號))
     {
-        var analyze = targetMember.f會員收藏的活動編號.Split(',');
-        pos = Array.IndexOf(analyze, item.f活動編號.ToString());
-        if (pos > -1)
+        string[] attendGuys = { };
+        if (!string.IsNullOrEmpty(item.f活動參加的會員編號))
         {
-            iflikeit = "14.png";
+            attendGuys = item.f活動參加的會員編號.Split(',');
         }
-    }
+        count++;
+        combine_readmore = "exampleModal" + count;
+        combine_join = "Join" + count;
+        combine_msg = "Msg" + count;
+        string iflikeit = "11.png";
+        int pos = -1;
+        if (!string.IsNullOrEmpty(targetMember.f會員收藏的活動編號))
+        {
+            var analyze = targetMember.f會員收藏的活動編號.Split(',');
+            pos = Array.IndexOf(analyze, item.f活動編號.ToString());
+            if (pos > -1)
+            {
+                iflikeit = "14.png";
+            }
+        }
 <div class="modal fade combine_msg" id="@combine_msg" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog change-max-width-1420" role="document" style="padding-right: 17px !important;">
         <div class="modal-content" >
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <h5 class="modal-title" id="exampleModalLabel">@item.f活動標題 留言區</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                ...
+                MSG
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -53,17 +60,32 @@
     <div class="modal-dialog change-max-width-1420" role="document" style="padding-right: 17px !important;">
         <div class="modal-content" >
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <h5 class="modal-title" id="exampleModalLabel">@item.f活動標題 團員名單</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                ...
+                <div class="GuysList">
+                    @foreach (string guy in attendGuys)
+                    {
+                        var theGuy = totalMember.Where(x => x.f會員編號.ToString() == guy);
+                        var theGuyName = theGuy.Select(a => a.f會員名稱).FirstOrDefault();
+                        if (!string.IsNullOrEmpty(theGuyName))
+                        {
+                            <div>
+                                <img width="100" height="100" src="~/Content/images/@theGuy.Select(a => a.f會員大頭貼).FirstOrDefault()" />
+                                <span>@theGuyName</span>
+                            </div>
+                            <br />
+                        }
+                    }
+                </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+                <button type="button" class="btn btn-primary">我要入團</button>
+                <button type="button" class="btn btn-primary">我要退團</button>
+                @*<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>*@
             </div>
         </div>
     </div>

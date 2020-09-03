@@ -15,10 +15,6 @@
     });
 
 
- 
-
-
-
     // 排序固定   
     let header = document.querySelector(".header");
     let travel_sort = document.querySelector("#travel_sort");
