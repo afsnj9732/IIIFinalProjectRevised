@@ -26,7 +26,6 @@ namespace IIIProject_travel.Services
             t.f會員帳號 = newMember.txtEmail;
             t.f會員名稱 = newMember.txtNickname;
             t.f會員密碼 = newMember.txtPassword;
-            //t.f會員大頭貼 = newMember.txtFiles;
             t.f驗證碼 = newMember.fActivationCode;
             t.isAdmin = false;
             db.tMember.Add(t);
