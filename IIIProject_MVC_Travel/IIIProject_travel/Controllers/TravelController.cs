@@ -132,6 +132,49 @@ namespace IIIProject_travel.Controllers
             return CountViewList;
         }
 
+        public ActionResult Actadd(int target , bool isAdd)
+        {
+            var NowMember = (tMember)Session["member"];
+            dbJoutaEntities db = new dbJoutaEntities();
+            var ActList = db.tActivity.Where(n => n.f活動編號 == target).FirstOrDefault();
+            string[] GuysList = { };
+            int index = -1; //若此活動無人參加，則登入中的會員必定無參加
+
+            if (!string.IsNullOrEmpty(ActList.f活動參加的會員編號)) //若此活動有人參加
+            {
+                GuysList = ActList.f活動參加的會員編號.Split(',');
+                index = Array.IndexOf(GuysList, NowMember.f會員編號.ToString());  //尋找登入中的會員是否有參加
+            }                                                                     //注意會員標號是int，陣列內容是str，
+                                                                                  //不轉型index永遠會是-1
+            if (isAdd == true)//點選入團
+            {
+                if (index == -1)//登入中的會員不存在名單則直接加入
+                {
+                    ActList.f活動參加的會員編號 += "," + NowMember.f會員編號;
+                    db.SaveChanges();
+                }
+                else //若存在則要??
+                {
+                    return null;
+                }
+            }
+            else //點選退出
+            {
+                if (index != -1)//登入中的會員存在則讓他退出
+                {
+                    var List = GuysList.ToList();
+                    List.RemoveAt(index);
+                    var FinalList = string.Join(",",List);
+                    ActList.f活動參加的會員編號 = FinalList;
+                    db.SaveChanges();
+                }
+                else //若不存在則要??
+                {
+                    return null;
+                }
+            }                                            
+            return View(target);
+        }
 
         //public JsonResult CountView(string target, string p)
         //{            

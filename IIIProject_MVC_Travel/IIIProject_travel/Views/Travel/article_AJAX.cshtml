@@ -66,8 +66,8 @@
                 </button>
             </div>
             <div class="modal-body">
-                <div class="GuysList">
-                    @foreach (string guy in attendGuys)
+                <div class="GuysList" Actadd="@item.f活動編號" >
+                    @foreach (string guy in attendGuys) //先直接撈原本的資料，若有變動針對此處做AJAX修改
                     {
                         var theGuy = totalMember.Where(x => x.f會員編號.ToString() == guy);
                         var theGuyName = theGuy.Select(a => a.f會員名稱).FirstOrDefault();
@@ -83,8 +83,8 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary">我要入團</button>
-                <button type="button" class="btn btn-primary">我要退團</button>
+                <button type="button" class="btn btn-primary joinAct" joinAct="@item.f活動編號" >我要入團</button>
+                <button type="button" class="btn btn-primary leaveAct" leaveAct="@item.f活動編號">我要退團</button>
                 @*<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>*@
             </div>
         </div>
