@@ -1,10 +1,23 @@
 (function () {
     var order, background_color, contain, category, label, p;
-
-    //Bootstrap 疊加互動視窗 Scroll Debug
+    var i = 2;
+    //Bootstrap Modal 關閉觸發事件
     $(document).on('hidden.bs.modal', '.modal', function () {
-        $('.modal:visible').length && $(document.body).addClass('modal-open');
+        $('.modal:visible').length && $(document.body).addClass('modal-open'); //疊加互動視窗 Scroll Debug
+        $(".combine_readmore").addClass("show"); //顯示隱藏的第一個視窗
     });
+
+    $(document).on('click', '[data-toggle = modal]', function () {
+        if ($('.modal-backdrop').eq(0).css('background-color') !== null) {
+            $(".combine_readmore").removeClass("show"); //隱藏第一個視窗
+        }          
+        $('.modal-backdrop').eq(1).css('background-color', 'white'); 
+    });
+
+
+ 
+
+
 
     // 排序固定   
     let header = document.querySelector(".header");

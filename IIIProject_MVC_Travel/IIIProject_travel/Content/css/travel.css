@@ -3,13 +3,18 @@ body {
     padding-right: 0 !important;
 }
 .combine_readmore {
-     
+    
 }
-.combine_join{
-    z-index: 1051 ;
+/*.modal-backdrop {
+    background-color: red;
+}*/
+.combine_join {
+    z-index: 1051;
+    
 }
 .combine_msg {
-    z-index: 1051 ;
+    z-index: 1051;
+    
 }
 p{
     margin-bottom: 5px;
@@ -60,6 +65,12 @@ p{
 
 .change-max-width-1400 {
     max-width: 1400px;
+}
+
+.change-max-width-1420 {
+    max-width: 1420px;
+    /*height:500px;
+    max-height:500px !important;*/
 }
 
 .Travel_border{
