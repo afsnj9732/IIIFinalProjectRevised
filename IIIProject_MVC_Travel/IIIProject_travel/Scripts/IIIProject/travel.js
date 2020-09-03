@@ -1,5 +1,19 @@
 (function () {
-    var order, background_color,contain,category,label,p;
+    var order, background_color, contain, category, label, p;
+    var i = 2;
+    //Bootstrap Modal 關閉觸發事件
+    $(document).on('hidden.bs.modal', '.modal', function () {
+        $('.modal:visible').length && $(document.body).addClass('modal-open'); //疊加互動視窗 Scroll Debug
+        $(".combine_readmore").addClass("show"); //顯示隱藏的第一個視窗
+    });
+
+    $(document).on('click', '[data-toggle = modal]', function () {
+        if ($('.modal-backdrop').eq(0).css('background-color') !== null) {
+            $(".combine_readmore").removeClass("show"); //隱藏第一個視窗
+        }          
+        $('.modal-backdrop').eq(1).css('background-color', 'white'); 
+    });
+
 
     // 排序固定   
     let header = document.querySelector(".header");
@@ -50,27 +64,17 @@
         var target = $(this).attr("likeIndex");
         var combine = "[likeIndex=" + target + "]";
         var ActivityID = target;
-        console.log("原本src " +$(combine).attr("src"));
         if ($(combine).attr("src") === "/Content/images/14.png") {
-            console.log("變成不收藏");
             $(combine).attr("src", "/Content/images/11.png");           
             $.ajax({
                 url: "/Travel/likeIt",
-                data: { "ActivityID": ActivityID },
-                success: function () {
-                    console.log("變成不收藏完成");
-                }
-
+                data: { "ActivityID": ActivityID }
             });
         } else {
-            console.log("變成收藏");
             $(combine).attr("src", "/Content/images/14.png");
             $.ajax({
                 url: "/Travel/likeIt",
-                data: { "ActivityID": ActivityID },
-                success: function () {
-                    console.log("變成收藏完成");
-                }
+                data: { "ActivityID": ActivityID }
             });
         }
         console.log("現在src "+$(combine).attr("src"));
@@ -102,23 +106,16 @@
     }
 
     //增加瀏覽次數
-    function getViewCounts() {
-        var j = 0;         
+    function getViewCounts() {        
         let target = $(this).attr("updateVC");
+        var combine = "[ToUpdateVC=" + target + "]";
+        var getCounts = parseInt($(combine).html()) + 1;
+        $(combine).html(getCounts);
         $.ajax({
-            url: "/Travel/CountView",
-            type: 'POST',
-            data: { "target":target,"p":p },
-            success: function (data) {
-                $(".ViewCountTemp").remove();//刪除html原有資料
-                for (var i of data) {                            
-                    $(".updateViewCounts").eq(j).after("<span class='ViewCountTemp'>" + i + "</span>");
-                    j++;
-                    $(".updateViewCounts").eq(j).after("<span class='ViewCountTemp'>" + i + "</span>");
-                    j++;
-                }
+            url: "/Travel/ViewCounts",
+            data: { "ActivityID": target}
             }
-        });
+        );
     }
     //因為文章項目是ajax動態產生，因此事件必須使用氣泡動態綁定寫法
     $("body").on('click', ".ViewCounts", getViewCounts );
@@ -142,10 +139,11 @@
             type: 'POST',
             data: { "p": p },
             success: function (data) {
-                $("#article_ajax div").remove();
-                $("#article_ajax").append(data);
+                $("#article_ajax").html(data);
+                //$("#article_ajax div").remove();
+                //$("#article_ajax").append(data);
                 Travel_RWD();
-                getViewCounts();
+                //getViewCounts();
                 getGoodCounts();
             }
         });

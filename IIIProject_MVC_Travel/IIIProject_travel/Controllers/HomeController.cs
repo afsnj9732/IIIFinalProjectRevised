@@ -43,6 +43,7 @@ namespace IIIProject_travel.Controllers
         /*[Authorize]*/     //通過驗證才可進入頁面
         public ActionResult QuickMatch()
         {
+
             return View();
         }
 

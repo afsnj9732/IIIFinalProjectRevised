@@ -30,6 +30,8 @@
         });
     }
 
+    getAJAX();
+
     //searchbar ajax
     $("#contain").on('keyup', function () {
         $.ajax({

@@ -5,7 +5,7 @@ using System.Web;
 
 namespace IIIProject_travel.ViewModel
 {
-    public class CBlog
+    public class CBlog : tActivity
     {
         public string txtContent { get; set; }
 
