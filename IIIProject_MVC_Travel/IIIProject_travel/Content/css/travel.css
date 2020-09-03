@@ -76,6 +76,7 @@ p{
 }
 
 .change-max-width-1000 {
+    width:1000px;
     max-width: 1000px;
 }
 
