@@ -132,7 +132,19 @@ namespace IIIProject_travel.Controllers
             return CountViewList;
         }
 
-        public ActionResult Actadd(int target , bool isAdd)
+        public ActionResult MsgAdd(int target, string sentMsg)
+        {
+            var NowMember = (tMember)Session["member"];
+            dbJoutaEntities db = new dbJoutaEntities();
+            var ActList = db.tActivity.Where(n => n.f活動編號 == target).FirstOrDefault();
+            //string[] MsgsList = ActList.f活動留言.Split(',');
+            //index = Array.FindIndex(MsgsList,a=>a.StartsWith(NowMember.f會員名稱));  
+            ActList.f活動留言 += ","+NowMember.f會員名稱 + ":" + sentMsg;
+            db.SaveChanges();
+            return View(target);
+        }
+
+        public ActionResult ActAdd(int target , bool isAdd)
         {
             var NowMember = (tMember)Session["member"];
             dbJoutaEntities db = new dbJoutaEntities();
