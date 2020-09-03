@@ -33,12 +33,13 @@ namespace IIIProject_travel.Controllers
         [HttpPost]
         public ActionResult LoginIndex(CLogin user)
         {
+            if (user.txtEmail == "Admin@gmail.com" && user.txtPassword == "admin123456")
+                return RedirectToAction("List", "後台會員");
             tMember target = (new dbJoutaEntities()).tMember
                 .FirstOrDefault(a=>a.f會員電子郵件 == user.txtEmail&&a.f會員密碼==user.txtPassword);
 
             Session["member"] = target;
-            if (user.txtEmail == "Admin@gmail.com" && user.txtPassword == "admin123456")
-                return RedirectToAction("List", "後台會員");
+            
             return RedirectToAction("Home", "Home");
         }
 
@@ -55,14 +56,5 @@ namespace IIIProject_travel.Controllers
             Response.Cookies.Set(cookie);
             return RedirectToAction("LoginIndex");
         }
-
-
-        //[NonAction]
-        //public bool is信箱存在(string emailId)
-        //{
-        //    dbJoutaEntities db = new dbJoutaEntities();
-        //    var t = db.tMember.FirstOrDefault(a => a.f會員電子郵件 == emailId);
-        //    return t != null;
-        //}
     }
 }

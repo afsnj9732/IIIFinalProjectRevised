@@ -145,34 +145,6 @@ namespace IIIProject_travel.Controllers
         {
             return View();
         }
-
-        //public ActionResult ForgetPassword()
-        //{
-        //    return View();
-        //}
-
-        //[HttpPost]
-        //public ActionResult ForgetPassword(string Email)
-        //{
-        //    string msg = "";
-        //    bool status = false;
-
-        //    dbJoutaEntities db = new dbJoutaEntities();
-        //    tMember account = db.tMember.FirstOrDefault(k => k.f會員電子郵件 == Email);
-        //    if (account != null)
-        //    {
-        //        MailMessage user_mail = new MailMessage("Joutagroup445@gmail.com",
-        //            account.f會員電子郵件, "找回密碼", "您好，您的密碼是:" + account.f會員密碼);
-        //        SmtpClient mail_client = new SmtpClient("127.0.0.1");
-        //        mail_client.Credentials = CredentialCache.DefaultNetworkCredentials;
-        //        mail_client.Send(user_mail);
-
-        //    }
-        //    else
-        //    {
-        //        Response.Write("信箱有誤，查無此信箱");
-        //    }
-        //    return View();
-        //}
+        
     }
 }
