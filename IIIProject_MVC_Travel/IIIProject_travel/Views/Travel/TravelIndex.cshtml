@@ -1,9 +1,11 @@
 ﻿
 @{
     Layout = null;
+    var topMember = (new dbJoutaEntities()).tMember.OrderByDescending(n => n.f會員評分).Take(5);//抓評分前五團主
     //var x = (tMember)Session["member"];
     tMember x = (new dbJoutaEntities()).tMember.FirstOrDefault(y => y.f會員編號 == 3);
     Session["member"] = x;
+
 }
 
 @{
@@ -138,10 +140,10 @@
                         <p class=" ml-3 " style="text-align: center;width:83.5%;">人氣團主</p>
                         <ul class="row    ml-3" style="width:83.5%;">
                             <li class="mx-auto" style="list-style-type:none;cursor: pointer;">
-                                @for (int i = 0; i < 5; i++)
+                                @foreach (var item in topMember)
                                 {
-                                    <img src="~/Content/images/09.png"
-                                         alt="" class="popguys">
+                                    <img src="~/Content/images/@item.f會員大頭貼"
+                                         title="@item.f會員名稱" class="popguys" width="30" height="30">
                                 }
                             </li>
                         </ul>

@@ -151,7 +151,6 @@
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Controllers\TravelController.cs" />
-    <Compile Include="Controllers\學生Controller.cs" />
     <Compile Include="Controllers\後台HomeController.cs" />
     <Compile Include="Controllers\後台文章Controller.cs" />
     <Compile Include="Controllers\後台旅遊Controller.cs" />
@@ -2105,8 +2104,7 @@
     <Content Include="Views\Home\ChangePassword.cshtml" />
     <Content Include="Views\Home\forgetPassword.cshtml" />
     <Content Include="Views\DataPresent\Index.cshtml" />
-    <Content Include="Views\後台會員\Index.cshtml" />
-    <Content Include="Views\學生\Index.cshtml" />
+    <Content Include="Views\Travel\Actadd.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
