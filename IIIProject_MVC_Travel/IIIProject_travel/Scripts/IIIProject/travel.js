@@ -88,7 +88,11 @@
             url: "/Travel/Actadd",
             data: { "target": target,"isAdd":true},
             success: function (data) {
-                $("[Actadd=" + target + "]").html(data);
+                if (data === "") {
+                    window.confirm("你已經入團了哦!");
+                } else {
+                    $("[Actadd=" + target + "]").html(data);
+                }
             }
         });
     }
@@ -99,7 +103,12 @@
             url: "/Travel/Actadd",
             data: { "target": target, "isAdd": false},
             success: function (data) {
-                $("[Actadd=" + target + "]").html(data);
+                if (data === "") {
+                    window.confirm("你沒有入團哦!");                    
+                } else {
+                    $("[Actadd=" + target + "]").html(data);
+                }
+                
             }
         });
     }

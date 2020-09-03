@@ -155,7 +155,7 @@ namespace IIIProject_travel.Controllers
                 }
                 else //若存在則要??
                 {
-
+                    return null;
                 }
             }
             else //點選退出
@@ -170,7 +170,7 @@ namespace IIIProject_travel.Controllers
                 }
                 else //若不存在則要??
                 {
-
+                    return null;
                 }
             }                                            
             return View(target);
