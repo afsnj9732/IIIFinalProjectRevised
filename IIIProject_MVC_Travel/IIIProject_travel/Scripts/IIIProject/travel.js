@@ -80,6 +80,35 @@
         console.log("現在src "+$(combine).attr("src"));
     });
 
+    var isAdd;
+    //入團
+    function joinAct() {
+        let target = $(this).attr("joinAct");
+        $.ajax({
+            url: "/Travel/Actadd",
+            data: { "target": target,"isAdd":true},
+            success: function (data) {
+                $("[Actadd=" + target + "]").html(data);
+            }
+        });
+    }
+    //退團
+    function leaveAct() {
+        let target = $(this).attr("leaveAct");
+        $.ajax({
+            url: "/Travel/Actadd",
+            data: { "target": target, "isAdd": false},
+            success: function (data) {
+                $("[Actadd=" + target + "]").html(data);
+            }
+        });
+    }
+    //留言
+    function leaveMsg() {
+
+    }
+
+
     //增加讚
     function getGoodCounts() {
         var g = 0;
@@ -120,7 +149,10 @@
     //因為文章項目是ajax動態產生，因此事件必須使用氣泡動態綁定寫法
     $("body").on('click', ".ViewCounts", getViewCounts );
     $("body").on('click', ".FeelGood", getGoodCounts );
- 
+    $("body").on('click', ".joinAct", joinAct);
+    $("body").on('click', ".leaveAct", leaveAct);
+    $("body").on('click', ".leaveMsg", leaveMsg);
+
 
     function getAJAX() {
         //console.log("我是AJAX，拿到的背景顏色是" + background_color);
