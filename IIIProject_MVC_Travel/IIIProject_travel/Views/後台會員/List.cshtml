@@ -108,14 +108,14 @@
                         <thead>
                             <tr>
                                 <td>會員編號</td>
-                                <td>名稱</td>
+                                <td>@Html.ActionLink("名稱", "List", new { sortOrder = ViewBag.名稱排序 })</td>
                                 <td>評分</td>
                                 <td>稱號</td>
                                 <td>大頭貼</td>
                                 <td>帳號</td>
                                 <td>密碼</td>
-                                <td>電子郵件</td>
-                                <td>手機</td>
+                                <td>@Html.ActionLink("電子郵件", "List", new { sortOrder = ViewBag.電子郵件排序 })</td>
+                                <td>@Html.ActionLink("手機", "List", new { sortOrder = ViewBag.手機排序 })</td>
                                 <td>電話</td>
                                 <td>生日</td>
                                 <td>自我介紹</td>
