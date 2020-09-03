@@ -15,27 +15,37 @@
 
 <!-- read more視窗控制頭1 -->
 @foreach (var item in Model)
+{
+    string[] MsgsTime = { };
+    string[] Msgs = { };
+    if (!string.IsNullOrEmpty(item.f活動留言))
     {
-        string[] attendGuys = { };
-        if (!string.IsNullOrEmpty(item.f活動參加的會員編號))
+        Msgs = item.f活動留言.Split(',');
+        MsgsTime = item.f活動留言時間.Split(',');
+    }
+
+    var targetMsgs = Msgs.Zip(MsgsTime, (n, w) => new { msg = n, time = w });//合併兩陣列
+
+    string[] attendGuys = { };
+    if (!string.IsNullOrEmpty(item.f活動參加的會員編號))
+    {
+        attendGuys = item.f活動參加的會員編號.Split(',');
+    }
+    count++;
+    combine_readmore = "exampleModal" + count;
+    combine_join = "Join" + count;
+    combine_msg = "Msg" + count;
+    string iflikeit = "11.png";
+    int pos = -1;
+    if (!string.IsNullOrEmpty(targetMember.f會員收藏的活動編號))
+    {
+        var analyze = targetMember.f會員收藏的活動編號.Split(',');
+        pos = Array.IndexOf(analyze, item.f活動編號.ToString());
+        if (pos > -1)
         {
-            attendGuys = item.f活動參加的會員編號.Split(',');
+            iflikeit = "14.png";
         }
-        count++;
-        combine_readmore = "exampleModal" + count;
-        combine_join = "Join" + count;
-        combine_msg = "Msg" + count;
-        string iflikeit = "11.png";
-        int pos = -1;
-        if (!string.IsNullOrEmpty(targetMember.f會員收藏的活動編號))
-        {
-            var analyze = targetMember.f會員收藏的活動編號.Split(',');
-            pos = Array.IndexOf(analyze, item.f活動編號.ToString());
-            if (pos > -1)
-            {
-                iflikeit = "14.png";
-            }
-        }
+    }
 <div class="modal fade combine_msg" id="@combine_msg" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog change-max-width-1420" role="document" style="padding-right: 17px !important;">
         <div class="modal-content" >
@@ -46,11 +56,24 @@
                 </button>
             </div>
             <div class="modal-body">
-                MSG
+                <div MsgAdd="@item.f活動編號">
+                    @foreach (var Msg in targetMsgs)
+                    {
+                    <div class="row justify-content-between pl-5 pr-5 mr-5 ml-5">
+                        <div>@Msg.msg</div>
+
+                        <div>@Msg.time</div>
+                    </div>
+                        <br />
+                    }
+                </div>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+            <div class="modal-footer justify-content-between">
+                <input type="text" class="ml-4" sentMsg="@item.f活動編號" style="width:80%"/>
+                <span>
+                    <button type="button" class="btn btn-warning leaveMsg" leaveMsg="@item.f活動編號">送出</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
+                </span>
             </div>
         </div>
     </div>
@@ -66,7 +89,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <div class="GuysList" Actadd="@item.f活動編號" >
+                <div ActAdd="@item.f活動編號" >
                     @foreach (string guy in attendGuys) //先直接撈原本的資料，若有變動針對此處做AJAX修改
                     {
                         var theGuy = totalMember.Where(x => x.f會員編號.ToString() == guy);
@@ -83,8 +106,8 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary joinAct" joinAct="@item.f活動編號" >我要入團</button>
-                <button type="button" class="btn btn-primary leaveAct" leaveAct="@item.f活動編號">我要退團</button>
+                <button type="button" class="btn btn-warning joinAct" joinAct="@item.f活動編號" >我要入團</button>
+                <button type="button" class="btn btn-secondary leaveAct" leaveAct="@item.f活動編號">我要退團</button>
                 @*<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>*@
             </div>
         </div>
