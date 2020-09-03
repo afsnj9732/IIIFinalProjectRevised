@@ -44,6 +44,14 @@ namespace IIIProject_travel.Controllers
             return View();
         }
 
+        public void ViewCounts(int ActivityID)
+        {
+            dbJoutaEntities db = new dbJoutaEntities();
+            var target = db.tActivity.Where(t => t.f活動編號 == ActivityID).FirstOrDefault();
+            target.f活動瀏覽次數 += 1;
+            db.SaveChanges();
+        }
+
         public void likeIt(string ActivityID)
         {
             dbJoutaEntities db = new dbJoutaEntities();
@@ -125,23 +133,23 @@ namespace IIIProject_travel.Controllers
         }
 
 
-        public JsonResult CountView(string target, string p)
-        {            
-            if (target != null)
-            {
-                dbJoutaEntities db = new dbJoutaEntities();
-                int select = Convert.ToInt32(target);
-                tActivity theTarget = db.tActivity.FirstOrDefault(x => x.f活動編號 == select);
-                theTarget.f活動瀏覽次數 = (theTarget.f活動瀏覽次數 + 1);
-                db.SaveChanges();
-            }
+        //public JsonResult CountView(string target, string p)
+        //{            
+        //    if (target != null)
+        //    {
+        //        dbJoutaEntities db = new dbJoutaEntities();
+        //        int select = Convert.ToInt32(target);
+        //        tActivity theTarget = db.tActivity.FirstOrDefault(x => x.f活動編號 == select);
+        //        theTarget.f活動瀏覽次數 = (theTarget.f活動瀏覽次數 + 1);
+        //        db.SaveChanges();
+        //    }
 
-            var FinalList = AJAXcondition(p)
-                            .Where(a=>a.f活動類型=="旅遊")
-                            .Select(a => a.f活動瀏覽次數);
+        //    var FinalList = AJAXcondition(p)
+        //                    .Where(a=>a.f活動類型=="旅遊")
+        //                    .Select(a => a.f活動瀏覽次數);
 
-            return Json(FinalList, JsonRequestBehavior.AllowGet);
-        }
+        //    return Json(FinalList, JsonRequestBehavior.AllowGet);
+        //}
         public JsonResult FeelGood(string target, string p)
         {
             

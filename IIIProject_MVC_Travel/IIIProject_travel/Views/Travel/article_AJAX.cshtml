@@ -90,7 +90,7 @@
                             <span><img src="~/Content/images/17.png" alt="">@item.f活動分類</span>
                             <span><img src="~/Content/images/03.png" alt="">@item.f活動地區</span>
                             <span><img src="~/Content/images/04.png" alt="">@item.f活動預算</span>
-                            <span><img src="~/Content/images/06.png" class="updateViewCounts" alt="">@*@item.f活動瀏覽次數*@</span>
+                            <span><img src="~/Content/images/06.png" class=""  alt=""><span ToUpdateVC="@item.f活動編號">@item.f活動瀏覽次數</span></span>
                             <span><img src="~/Content/images/05.png" class="updateGoodCounts" alt="">@*@item.f活動讚數*@</span>
 
                             <span class="col-auto"><img style="cursor: pointer;" class="likeIt" likeIndex="@item.f活動編號" src="~/Content/images/@iflikeit" alt=""></span>
@@ -209,9 +209,10 @@
                     <img src="~/Content/images/17.png" alt="">@item.f活動分類
                     <img src="~/Content/images/03.png" alt="">@item.f活動地區
                     <img src="~/Content/images/04.png" alt="">@item.f活動預算
-                    <img src="~/Content/images/06.png" class="updateViewCounts" alt="">@*@item.f活動瀏覽次數*@
-                    <img src="~/Content/images/05.png" class="updateGoodCounts" alt="">@*@item.f活動讚數*@
-                </div>
+                    
+                        <img src="~/Content/images/06.png" class="" alt=""><span  ToUpdateVC="@item.f活動編號">@item.f活動瀏覽次數</span>
+                            <img src="~/Content/images/05.png" class="updateGoodCounts" alt="">@*@item.f活動讚數*@
+</div>
                 <div style="cursor: pointer;">
                     <img src="~/Content/images/12.png" alt="">留言
                 </div>
