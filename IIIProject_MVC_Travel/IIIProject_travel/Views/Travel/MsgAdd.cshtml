@@ -1,6 +1,18 @@
 ﻿
 @{
     Layout = null;
+    dbJoutaEntities db = new dbJoutaEntities();
+    string[] Msgs = { };
+    int targetNumber = Model;
+    var targetAct = db.tActivity.Where(s => s.f活動編號 == targetNumber).FirstOrDefault();
+    if (!string.IsNullOrEmpty(targetAct.f活動留言))
+    {
+        Msgs = targetAct.f活動留言.Split(',');
+    }
 }
 
 
+@foreach (string Msg in Msgs)
+{
+    <div>@Msg</div><br />
+}
