@@ -114,14 +114,16 @@
     function leaveMsg() {
         let target = $(this).attr("leaveMsg");
         let sentMsg = $("[sentMsg=" + target + "]").val();
-        //console.log(sentMsg);
+        console.log(sentMsg);
         $.ajax({
             url: "/Travel/MsgAdd",
             data: { "target": target, "sentMsg": sentMsg},
             success: function (data) {
-                    $("[MsgAdd=" + target + "]").html(data);               
+                $("[MsgAdd=" + target + "]").html(data); 
+                $("[sentMsg=" + target + "]").val("");
             }
         });
+        
     }
 
 
