@@ -14,21 +14,19 @@ namespace IIIProject_travel.Controllers
     {
 
         // GET: 後台會員
-        public ActionResult List(int page = 1)
+        public ActionResult List(string sortOrder,int page = 1 )
         {
             dbJoutaEntities db = new dbJoutaEntities();
 
-            int 筆數 = 20;
-            int 當前頁面 = page < 1 ? 1 : page;
-
+            //搜尋
             List<tMember> 會員 = null;
+            
             string k關鍵字 = Request.Form["txt關鍵字"];
 
             if (string.IsNullOrEmpty(k關鍵字))
                 會員 = db.tMember.OrderBy(m => m.f會員編號).ToList();
             else
-
-                會員 = db.tMember.Where(
+                會員 = 會員.Where(
                     m => m.f會員名稱.Contains(k關鍵字) || m.f會員評分.ToString().Contains(k關鍵字) ||
                          m.f會員稱號.Contains(k關鍵字) || m.f會員帳號.Contains(k關鍵字) || 
                          m.f會員密碼.Contains(k關鍵字) || m.f會員電子郵件.Contains(k關鍵字) ||
@@ -38,13 +36,76 @@ namespace IIIProject_travel.Controllers
                          m.f會員性別.Contains(k關鍵字) || m.f會員興趣.Contains(k關鍵字)||
                          m.f會員編號.ToString().Contains(k關鍵字))
                     .ToList();
+            //排序
+            ViewBag.名稱排序 = string.IsNullOrEmpty(sortOrder) ? "名稱描述" : "";
+            ViewBag.電子郵件排序 = sortOrder == "郵件" ? "郵件描述" : "郵件";
+            ViewBag.手機排序 = sortOrder == "手機" ? "手機描述" : "手機";
+            var 學生 = from s in 會員
+                     select s;
+            switch (sortOrder)
+            {
+                case "名稱描述":
+                    學生 = 學生.OrderByDescending(s => s.f會員名稱);
+                    break;
+                default:
+                    學生 = 學生.OrderBy(s => s.f會員名稱);
+                    break;
+                case "郵件描述":
+                    學生 = 學生.OrderByDescending(s => s.f會員電子郵件);
+                    break;
+                case "郵件":
+                    學生 = 學生.OrderBy(s => s.f會員電子郵件);
+                    break;
+                case "手機描述":
+                    學生 = 學生.OrderByDescending(s => s.f會員手機);
+                    break;
+                case "手機":
+                    學生 = 學生.OrderBy(s => s.f會員手機);
+                    break;
+            }
 
-            var 結果 = 會員.ToPagedList(當前頁面, 筆數);
+            //分頁
+            int 筆數 = 20;
+            int 當前頁面 = page < 1 ? 1 : page;
 
+            var 結果 = 學生.ToPagedList(當前頁面, 筆數);
             return View(結果);
         }
+       
 
+        public ActionResult Index(string sortOrder)
+        {
+            dbJoutaEntities db = new dbJoutaEntities();
+            ViewBag.名稱排序 = string.IsNullOrEmpty(sortOrder) ? "名稱描述" : "";
+            ViewBag.電子郵件排序 = sortOrder == "郵件" ? "郵件描述" : "郵件";
+            ViewBag.手機排序 = sortOrder == "手機" ? "手機描述" : "手機";
 
+            var 學生 = from s in db.tMember
+                     select s;
+            switch (sortOrder)
+            {
+                case "名稱描述":
+                    學生 = 學生.OrderByDescending(s => s.f會員名稱);
+                    break;
+                default:
+                    學生 = 學生.OrderBy(s => s.f會員名稱);
+                    break;
+                case "郵件描述":
+                    學生 = 學生.OrderByDescending(s => s.f會員電子郵件);
+                    break;
+                case "郵件":
+                    學生 = 學生.OrderBy(s => s.f會員電子郵件);
+                    break;
+                case "手機描述":
+                    學生 = 學生.OrderByDescending(s => s.f會員手機);
+                    break;
+                case "手機":
+                    學生 = 學生.OrderBy(s => s.f會員手機);
+                    break;
+
+            }
+            return View(學生.ToList());
+        }
 
         public ActionResult d刪除(int? id)
         {
@@ -101,7 +162,6 @@ namespace IIIProject_travel.Controllers
             return RedirectToAction("List");
 
         }
-
 
     }
 }
