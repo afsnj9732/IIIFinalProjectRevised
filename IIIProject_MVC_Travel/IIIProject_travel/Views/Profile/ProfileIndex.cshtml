@@ -1,8 +1,7 @@
 ﻿
 @{
-
-                Layout = null;
-                var x = (tMember)Session["member"];
+    Layout = null;
+    var x = (tMember)Session["member"];
 }
 
 
@@ -24,43 +23,57 @@
 <body>
     <div class="container-fluid topbanner">
         <!-- navbar -->
-        <nav class="navbar navbar-expand-lg navbar-light header" id="main">
-            <a class="navbar-brand" href="main.html">
-                <img src="images/joutalogo_black.png" alt="" width="100">
-            </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
-                <ul class="nav navbar-nav">
-                    <li class="nav-item active">@Html.ActionLink("首頁", "Home", "Home", new { }, new { @class = "nav-link nav-main text-dark" })</li>
-                    <li class="nav-item">@Html.ActionLink("找飯局", "EatIndex", "Eat", new { }, new { @class = "nav-link nav-eat text-dark" })</li>
-                    <li class="nav-item">@Html.ActionLink("找旅遊", "TravelIndex", "Travel", new { }, new { @class = "nav-link nav-travel text-dark" })</li>
-                    <li class="nav-item">@Html.ActionLink("找文章", "Index", "Blog", new { }, new { @class = "nav-link nav-blog text-dark" })</li>
-                </ul>
-                <ul class="nav navbar-nav">
-                    @if (Session["member"] != null)
-                    {
-                        <li class="nav-item nav-link nav-login text-dark">@Html.ActionLink("歡迎" + @x.f會員名稱, "ProfileIndex", "Profile", new { id = 0 }, new { @class = "nav-link nav-login text-dark" }) </li>
-                        <li class="nav-item">@Html.ActionLink("登出", "Home", "Home", new { id = 0 }, new { @class = "nav-link nav-login text-dark" })</li>
-                    }
-                    else
-                    {
-                        <li class="nav-item">@Html.ActionLink("登入", "LoginIndex", "Login", new { }, new { @class = "nav-link nav-login text-dark" })</li>
-                    }
-                    <li class="nav-item">@Html.ActionLink("註冊", "Register", "Home", new { }, new { @class = "nav-link nav-register text-dark" })</li>
-                </ul>
+        <nav class="navbar navbar-expand-lg navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header" id="main">
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                </div>
+                <a class="navbar-brand" href="@Url.Action("Home", "Home")">
+                    @*改用Url.Action*@
+                    <img src="~/Content/images/joutalogo_black.png" alt="" width="100">
+                </a>
+                <div class="navbar-collapse collapse justify-content-between" id="navbarNav">
+                    <ul class="nav navbar-nav">
+                        <li class="nav-item active">@Html.ActionLink("首頁", "Home", "Home", new { }, new { @class = "nav-link nav-main text-dark" })</li>
+                        <li class="nav-item">@Html.ActionLink("找飯局", "EatIndex", "Eat", new { }, new { @class = "nav-link nav-eat text-dark" })</li>
+                        <li class="nav-item">@Html.ActionLink("找旅遊", "TravelIndex", "Travel", new { }, new { @class = "nav-link nav-travel text-dark" })</li>
+                        <li class="nav-item">@Html.ActionLink("找文章", "Index", "Blog", new { }, new { @class = "nav-link nav-blog text-dark" })</li>
+                    </ul>
+                    <ul class="nav navbar-nav">
+                        <li class="nav-item">@Html.ActionLink("聯絡我們", "New", "聯絡我們", new { }, new { @class = "nav-link nav-login text-dark" })</li>
+
+                        <li class="nav-item">@Html.ActionLink("關於我們", "About", "Home", new { }, new { @class = "nav-link nav-register text-dark" })</li>
+                        @if (Session["member"] != null)
+                        {
+
+                            <li class="nav-item nav-link nav-login text-dark">@Html.ActionLink( "您好，"+x.f會員名稱,"ProfileIndex","Profile")</li>
+                            @*<li class="nav-item">
+                            <img src="@ViewData["Img"]" alt="img" width="30" height="30" style="border:2px solid green;" />
+                        </li>*@
+                            <li class="nav-item">@Html.ActionLink("登出", "Home", "Home", new { id = 0 }, new { @class = "nav-link nav-login text-dark" })</li>
+                        }
+                        else
+                        {
+
+                            <li class="nav-item">@Html.ActionLink("登入", "LoginIndex", "Login", new { }, new { @class = "nav-link nav-login text-dark" })</li>
+
+                            <li class="nav-item">@Html.ActionLink("註冊", "Register", "Home", new { }, new { @class = "nav-link nav-register text-dark" })</li>
+                        }
+                    </ul>
+                </div>
             </div>
         </nav>
     </div>
     <div class="container">
         <div class="profile-header">
             <div class="profile-img">
-                <img src="~/Content/images/proheadshot.jpg" alt="" class="">
+                <img src="~/Content/images/@x.f會員大頭貼" alt="" class="">
             </div>
             <div class="profile-nav-info">
-                <h3 class="user-name">Bright Code</h3>
+                <h3 class="user-name">@x.f會員名稱</h3>
                 <div class="address">
                     <p class="state">New York,</p>
                     <span class="country">USA.</span>
@@ -83,11 +96,11 @@
             <div class="col-lg-3 left-side">
                 <div class="profile-side">
                     <p class="mobile-no">
-                        <i class="fa fa-phone"></i>+23470xxxxx5464
+                        <i class="fa fa-phone"></i>@x.f會員手機 +23470xxxxx5464
                     </p>
                     <p class="user-mail">
                         <i class="fa fa-envelope">
-                        </i>Brightisaac80@gmail.com
+                        </i>@x.f會員電子郵件 
                     </p>
                     <div class="user-bio">
                         <p class="bio">
@@ -106,7 +119,7 @@
                         </button>
                     </div>
                     <div class="user-rating">
-                        <h3 class="rating">4.5</h3>
+                        <h3 class="rating">@x.f會員評分</h3>
                         <div class="rate">
                             <div class="stars">
                                 <i class="fa fa-star"></i>
