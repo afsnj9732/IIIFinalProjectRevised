@@ -81,49 +81,6 @@ namespace IIIProject_travel.Controllers
             return View(結果);
         }
 
-       
-
-        public ActionResult Index(string sortOrder, string searchString)
-        {
-            dbJoutaEntities db = new dbJoutaEntities();
-            ViewBag.名稱排序 = string.IsNullOrEmpty(sortOrder) ? "名稱描述" : "";
-            ViewBag.電子郵件排序 = sortOrder == "郵件" ? "郵件描述" : "郵件";
-            ViewBag.手機排序 = sortOrder == "手機" ? "手機描述" : "手機";
-
-            var 學生 = from s in db.tMember
-                     select s;
-
-            if (!string.IsNullOrEmpty(searchString))
-            {
-                學生 = 學生.Where(s => s.f會員名稱.Contains(searchString)
-                                        || s.f會員帳號.Contains(searchString)
-                            );
-            }
-            switch (sortOrder)
-            {
-                case "名稱描述":
-                    學生 = 學生.OrderByDescending(s => s.f會員名稱);
-                    break;
-                default:
-                    學生 = 學生.OrderBy(s => s.f會員名稱);
-                    break;
-                case "郵件描述":
-                    學生 = 學生.OrderByDescending(s => s.f會員電子郵件);
-                    break;
-                case "郵件":
-                    學生 = 學生.OrderBy(s => s.f會員電子郵件);
-                    break;
-                case "手機描述":
-                    學生 = 學生.OrderByDescending(s => s.f會員手機);
-                    break;
-                case "手機":
-                    學生 = 學生.OrderBy(s => s.f會員手機);
-                    break;
-
-            }
-            return View(學生.ToList());
-        }
-
         public ActionResult d刪除(int? id)
         {
             if (id == null)

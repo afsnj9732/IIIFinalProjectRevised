@@ -2109,7 +2109,6 @@
     <Content Include="Views\Travel\Actadd.cshtml" />
     <Content Include="Views\Travel\MsgAdd.cshtml" />
     <Content Include="Views\Blog\personalIndex.cshtml" />
-    <Content Include="Views\後台會員\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
