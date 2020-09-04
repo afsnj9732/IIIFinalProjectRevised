@@ -110,22 +110,21 @@
                     <table class="table table-striped table-sm">
                         <thead>
                             <tr>
-                                <td>會員編號</td>
-                                <td>@Html.ActionLink("名稱", "List", new { sortOrder = ViewBag.名稱排序,currentFilter = ViewBag.當前文件 })</td>
-                                <td>評分</td>
-                                <td>稱號</td>
+                                <td>@Html.ActionLink("編號", "List", new { sortOrder = ViewBag.編號排序, currentFilter = ViewBag.當前搜尋 })</td>
+                                <td>@Html.ActionLink("名稱", "List", new { sortOrder = ViewBag.名稱排序, currentFilter = ViewBag.當前搜尋 })</td>
+                                <td>@Html.ActionLink("評分", "List", new { sortOrder = ViewBag.評分排序, currentFilter = ViewBag.當前搜尋 })</td>
+                                <td>@Html.ActionLink("稱號", "List", new { sortOrder = ViewBag.稱號排序, currentFilter = ViewBag.當前搜尋 })</td>
                                 <td>大頭貼</td>
-                                <td>帳號</td>
+                                <td>@Html.ActionLink("帳號", "List", new { sortOrder = ViewBag.帳號排序, currentFilter = ViewBag.當前搜尋 })</td>
                                 <td>密碼</td>
-                                <td>@Html.ActionLink("電子郵件", "List", new { sortOrder = ViewBag.電子郵件排序, currentFilter = ViewBag.當前文件 })</td>
-                                <td>@Html.ActionLink("手機", "List", new { sortOrder = ViewBag.手機排序, currentFilter = ViewBag.當前文件 })</td>
-                                <td>電話</td>
-                                <td>生日</td>
+                                <td>@Html.ActionLink("電子郵件", "List", new { sortOrder = ViewBag.電子郵件排序, currentFilter = ViewBag.當前搜尋 })</td>
+                                <td>@Html.ActionLink("手機", "List", new { sortOrder = ViewBag.手機排序, currentFilter = ViewBag.當前搜尋 })</td>
+                                <td>@Html.ActionLink("電話", "List", new { sortOrder = ViewBag.電話排序, currentFilter = ViewBag.當前搜尋 })</td>
+                                <td>@Html.ActionLink("生日", "List", new { sortOrder = ViewBag.生日排序, currentFilter = ViewBag.當前搜尋 })</td>
                                 <td>自我介紹</td>
-                                <td>暱稱</td>
-                                <td>英文名稱</td>
-                                <td>性別</td>
-                                <td>興趣</td>
+                                <td>@Html.ActionLink("暱稱", "List", new { sortOrder = ViewBag.暱稱排序, currentFilter = ViewBag.當前搜尋 })</td>
+                                <td>@Html.ActionLink("性別", "List", new { sortOrder = ViewBag.性別排序, currentFilter = ViewBag.當前搜尋 })</td>
+                                <td>@Html.ActionLink("興趣", "List", new { sortOrder = ViewBag.興趣排序, currentFilter = ViewBag.當前搜尋 })</td>
                                 <td>按鈕</td>
                                 <td>按鈕</td>
                             </tr>
@@ -172,9 +171,6 @@
                                     </td>
                                     <td>
                                         @Html.DisplayFor(modelItem => item.f會員暱稱)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.f會員英文姓名)
                                     </td>
                                     <td>
                                         @Html.DisplayFor(modelItem => item.f會員性別)
