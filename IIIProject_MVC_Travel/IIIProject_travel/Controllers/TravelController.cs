@@ -54,8 +54,10 @@ namespace IIIProject_travel.Controllers
             db.SaveChanges();
         }
 
-        public void likeIt(string ActivityID)
+        public string likeIt(string ActivityID)
         {
+            if (Session["member"] == null)
+                return "0";
             dbJoutaEntities db = new dbJoutaEntities();
             var condition = (tMember)Session["member"];
             var member = db.tMember.Where(x => x.f會員編號 == condition.f會員編號).Select(a => a).FirstOrDefault();
@@ -81,6 +83,7 @@ namespace IIIProject_travel.Controllers
                 member.f會員收藏的活動編號 += "," + ActivityID; //若資料庫完全是空的，則不可能有重複值，直接存入
                 db.SaveChanges();
             }
+            return "1";
         }
 
         public string autoComplete()

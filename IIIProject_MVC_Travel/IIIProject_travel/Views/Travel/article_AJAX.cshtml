@@ -12,46 +12,57 @@
     var NowMember = (tMember)Session["member"]; //注意Session抓到的資料，其資料內容為取得該Session當下的資料內容，
                                                 //因此若有修改過資料庫的資料，就要改藉由Session的會員編號
                                                 //去抓取現在資料庫的資料，否則會一直撈到不變的Session資料
-    tMember targetMember = db.tMember.FirstOrDefault(x => x.f會員編號 == NowMember.f會員編號);
+
     var totalMember = from x in db.tMember
                       select x;
 }
 
 <!-- read more視窗控制頭1 -->
-@foreach (var item in Model)
-{
-    string[] MsgsTime = { };
-    string[] Msgs = { };
-    string[] MsgsTimeAndID = { };
-    if (!string.IsNullOrEmpty(item.f活動留言))
+@{
+    tMember targetMember = null ;
+    if (Session["member"] != null)
     {
-        Msgs = item.f活動留言.Split(new string[] { "_^$" }, StringSplitOptions.None);//因包含對話內容，
-                                                                                 //因此利用複數特殊字元做分割
-        MsgsTime = item.f活動留言時間.Split(',');
+        targetMember = db.tMember.FirstOrDefault(x => x.f會員編號 == NowMember.f會員編號);
     }
 
-    var targetMsgs = Msgs.Zip(MsgsTime, (n, w) => new { msg = n, time = w });//合併兩陣列
-
-    string[] attendGuys = { };
-    if (!string.IsNullOrEmpty(item.f活動參加的會員編號))
+    foreach (var item in Model)
     {
-        attendGuys = item.f活動參加的會員編號.Split(',');
-    }
-    count++;
-    combine_readmore = "exampleModal" + count;
-    combine_join = "Join" + count;
-    combine_msg = "Msg" + count;
-    string iflikeit = "11.png";
-    int pos = -1;
-    if (!string.IsNullOrEmpty(targetMember.f會員收藏的活動編號))
-    {
-        var analyze = targetMember.f會員收藏的活動編號.Split(',');
-        pos = Array.IndexOf(analyze, item.f活動編號.ToString());
-        if (pos > -1)
+        string[] MsgsTime = { };
+        string[] Msgs = { };
+        string[] MsgsTimeAndID = { };
+        if (!string.IsNullOrEmpty(item.f活動留言))
         {
-            iflikeit = "14.png";
+            Msgs = item.f活動留言.Split(new string[] { "_^$" }, StringSplitOptions.None);//因包含對話內容，
+                                                                                     //因此利用複數特殊字元做分割
+            MsgsTime = item.f活動留言時間.Split(',');
         }
-    }
+
+        var targetMsgs = Msgs.Zip(MsgsTime, (n, w) => new { msg = n, time = w });//合併兩陣列
+
+        string[] attendGuys = { };
+        if (!string.IsNullOrEmpty(item.f活動參加的會員編號))
+        {
+            attendGuys = item.f活動參加的會員編號.Split(',');
+        }
+        count++;
+        combine_readmore = "exampleModal" + count;
+        combine_join = "Join" + count;
+        combine_msg = "Msg" + count;
+        string iflikeit = "11.png";
+        int pos = -1;
+        if (Session["member"] != null)
+        {
+            if (!string.IsNullOrEmpty(targetMember.f會員收藏的活動編號))
+            {
+                var analyze = targetMember.f會員收藏的活動編號.Split(',');
+                pos = Array.IndexOf(analyze, item.f活動編號.ToString());
+                if (pos > -1)
+                {
+                    iflikeit = "14.png";
+                }
+            }
+        }
+    
     <div class="modal fade combine_msg" id="@combine_msg" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog change-max-width-1420" role="document" style="padding-right: 17px !important;">
             <div class="modal-content">
@@ -78,14 +89,14 @@
                             img = db.tMember.Where(t => t.f會員編號.ToString() == target)
                                   .Select(t => t.f會員大頭貼).FirstOrDefault();
 
-                                <div class="row justify-content-between pl-5 pr-5 mr-5 ml-5">
-                                    <div>
-                                        <span><img src="~/Content/images/@img" width="30" height="30"></span>
-                                        <span>@Msg.msg</span>
-                                    </div>
-                                    <div>@MsgsTimeAndID[0]</div>
+                            <div class="row justify-content-between pl-5 pr-5 mr-5 ml-5">
+                                <div>
+                                    <span><img src="~/Content/images/@img" width="30" height="30"></span>
+                                    <span>@Msg.msg</span>
                                 </div>
-                                <br />
+                                <div>@MsgsTimeAndID[0]</div>
+                            </div>
+                            <br />
 
                         }
                         @{exclude = 0;}
@@ -160,8 +171,10 @@
                             <span><img src="~/Content/images/04.png" alt="">@item.f活動預算</span>
                             <span><img src="~/Content/images/06.png" class="" alt=""><span ToUpdateVC="@item.f活動編號">@item.f活動瀏覽次數</span></span>
                             <span><img src="~/Content/images/05.png" class="updateGoodCounts" alt="">@*@item.f活動讚數*@</span>
-
-                            <span class="col-auto"><img style="cursor: pointer;" class="likeIt" likeIndex="@item.f活動編號" src="~/Content/images/@iflikeit" alt=""></span>
+                            @if (Session["member"] != null)
+                            {
+                                <span class="col-auto"><img style="cursor: pointer;" class="likeIt" likeIndex="@item.f活動編號" src="~/Content/images/@iflikeit" alt=""></span>
+                            }
                         </div>
                         @*<hr />*@
                         <div class="row">
@@ -253,7 +266,10 @@
                         </div>
                     </div>
                     <div class="p-0 pr-2">
-                        <img style="cursor: pointer;" class="pb-1 likeIt" likeIndex="@item.f活動編號" src="~/Content/images/@iflikeit" alt="">
+                        @if (Session["member"] != null)
+                        {
+                            <img style="cursor: pointer;" class="pb-1 likeIt" likeIndex="@item.f活動編號" src="~/Content/images/@iflikeit" alt="">
+                        }
                     </div>
                 </div>
                 @*<div class="col-12"><hr /></div>*@
@@ -292,4 +308,5 @@
         </div>
     </div>
     <!-- -------------文章分割線-------------- -->
+                            }
 }
