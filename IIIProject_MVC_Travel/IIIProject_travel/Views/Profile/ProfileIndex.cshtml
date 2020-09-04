@@ -1,8 +1,9 @@
-﻿
+﻿@model  IQueryable<tActivity>
+
 @{
 
-                Layout = null;
-                var x = (tMember)Session["member"];
+    Layout = null;
+    var x = (tMember)Session["member"];
 }
 
 
@@ -98,8 +99,7 @@
                     </div>
                     <div class="profile-btn">
                         <button class="chatbtn">
-                            <i class="fa fa-comment"></i>
-                            </i>Chat
+                            <i class="fa fa-comment"></i>Chat
                         </button>
                         <button class="createbtn">
                             <i>@Html.ActionLink("Create", "Create", "Blog", new { }, new { @class = "fa fa-plus temp" })</i>
@@ -133,88 +133,321 @@
                     </ul>
                 </div>
                 <div class="profile-body">
-                    <div class="profile-detail tab_info">
+                    <div class="profile-detail tab_info" id="myProfile">
                         <h1 id="title">個人檔案</h1>
-                        <form method="post" action="Profile">
-                            <button type="button" class="btn btn-warning">編輯資料</button>
+                        <form @*action="myForm"*@ id="myForm">
+                            <button type="button" id="revise" onclick="showsave();" class="btn btn-warning" f會員編號">編輯資料</button>
                             <h6 class="profiletag">會員編號</h6>
-                            <input type="text" size="50" placeholder="4843168431" name="account" disabled>
+                            <input type="text" name="f會員編號" id="accountn " form-control" size="50" disabled>
                             <h6 class="profiletag">帳號</h6>
-                            <input type="text" size="50" placeholder="Mary123" name="passward" disabled>
+                            <input type="text" class="form-control" size="50" placeholder="Mary123" disabled>
                             <h6 class="profiletag">密碼</h6>
-                            <input type="text" size="50" placeholder="Maryyyyyy" name="nickname" disabled>
+                            <input type="text" class="form-control" size="50" placeholder="Maryyyyyy" disabled>
                             <h6 class="profiletag" id="nickname">暱稱</h6>
-                            <input type="text" size="50" name="age">
+                            <input type="text" class="form-control" size="50">
                             <h6 class="profiletag">年紀</h6>
-                            <input type="text" size="50" name="birth">
+                            <input type="text" class="form-control" size="50">
                             <h6 class="profiletag">生日</h6>
-                            <input type="text" size="50" name="interest">
+                            <input type="text" class="form-control" size="50">
                             <h6 class="profiletag">興趣</h6>
-                            <input type="text" size="50" name="location">
+                            <input type="text" class="form-control" size="50">
                             <h6 class="profiletag">所在地區</h6>
-                            <input type="text" size="50" name="work">
+                            <input type="text" class="form-control" size="50">
                             <h6 class="profiletag">工作</h6>
-                            <input type="text" size="50" name="intro">
+                            <input type="text" class="form-control" size="50">
                             <h6 class="profiletag">自我介紹</h6>
-                            <textarea id="intro" name="intro" rows="5" cols="50" name="introduction">哈囉!我叫...</textarea><br>
-                            <button type="button" class="btn btn-warning">繳交</button>
+                            <textarea id="intro" name="intro" rows="5" cols="50">哈囉!我叫...</textarea><br>
+                            <div class="revisebutton">
+                                <input type="button" value="儲存" id="save" onclick="saveform()" style="display: none;" class="btn btn-warning"><span>&nbsp;</span>
+                                <input type="button" value="取消" id="cancel" style="display: none;" class="btn btn-warning">
+                            </div>
                         </form>
                     </div>
-                    <div class="profile-posts tab_info">
-                        <h1>我的發文</h1>
-                        <p>
-                            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aperiam animi alias doloribus,
-                            dolor necessitatibus reiciendis, magni molestias ut perferendis corrupti assumenda
-                            nobis,
-                            veritatis eos fugiat nisi quas rem repudiandae neque?
-                        </p>
-                    </div>
-                    <div class="profile-event tab_info">
+                </div>
+                <div class="profile-posts tab_info" id="myPost">
+                    <h1>我的發文</h1>
+                    @{
+                        foreach (tActivity tTravel in Model)
+                        {
+
+                            <!-- Blog Post -->
+                            <div class="card mb-4">
+                                <img class="card-img-top" src="~/Content/images/blogPost.jpg" w alt="Card image cap">
+                                <div class="card-body">
+                                    <h2 class="card-title">@tTravel.f活動標題</h2>
+                                    <p class="card-text">
+                                        @tTravel
+                                    </p>
+                                    <a class="nav-item">@Html.ActionLink("Read More", "BlogContent", "Blog", new { id = tTravel.f活動編號 }, new { @class = "btn btnContent  btn-warning" })</a>
+                                </div>
+                                <div class="card-footer text-muted">
+
+                                    <p class="pDateSection"> Posted on January 1, 2020 by <a href="#">Jouta</a></p>
+
+                                </div>
+                            </div>
+                        }
+                    }
+
+                    <div class="profile-event tab_info" id="myActivity">
                         <h1>參加活動</h1>
-                        <p>
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Error voluptatem explicabo
-                            voluptate, nisi deserunt magni? Laborum sapiente odit fugit sequi non, illum labore
-                            veniam minima eligendi iusto impedit officia voluptatum!
-                        </p>
-                    </div>
-                    <div class="profile-follow tab_info">
-                        <h1>關注活動</h1>
-                        <p>
-                            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aperiam animi alias doloribus,
-                            dolor
-                            necessitatibus reiciendis, magni molestias ut perferendis corrupti assumenda nobis,
-                            veritatis
-                            eos fugiat nisi quas rem repudiandae neque?
-                        </p>
-                    </div>
-                    <div class="profile-follower tab_info">
-                        <h1>追蹤團主</h1>
-                        <p>
-                            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aperiam animi alias doloribus,
-                            dolor
-                            necessitatibus reiciendis, magni molestias ut perferendis corrupti assumenda nobis,
-                            veritatis
-                            eos fugiat nisi quas rem repudiandae neque?
-                        </p>
-                    </div>
-                    <div class="profile-history tab_info">
-                        <h1>歷史紀錄</h1>
-                        <p>
-                            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aperiam animi alias doloribus,
-                            dolor
-                            necessitatibus reiciendis, magni molestias ut perferendis corrupti assumenda nobis,
-                            veritatis
-                            eos fugiat nisi quas rem repudiandae neque?
-                        </p>
+                        @*<div class="row  Travel_border align-items-center p-3">
+                            <div class="container-fluid">
+                                <div class="row m-0 mb-3   justify-content-between" style="font-size: 16px;">
+                                    <div class="pl-1">
+                                        <span style="cursor: pointer;"><img src="./images/09.png" alt="">大衛哥</span>
+                                        <span>&nbsp; &nbsp;</span>
+                                        <span>揪團日期： <span>2020/08/01</span></span>
+                                        <span>&nbsp; &nbsp;</span>
+                                        <span>活動日期： <span>2020/09/01</span></span>
+                                        <span>&nbsp; &nbsp;</span>
+                                        <span>入團截止： <span>17:02:15</span></span>
+                                        <span>&nbsp; &nbsp;</span>
+                                        <span>時間倒數: <span>60分鐘</span></span>
+                                    </div>
+                                </div>
+                                <div class="row pl-3">
+                                    <div class="content mb-3" style="cursor: pointer;width:70%;height: 150px;"
+                                         data-toggle="modal" data-target="#exampleModal2">
+                                        <span style="font-weight:bolder;"> 龜山步道。墾丁私房景點｜不到半小時即攻頂。全方位飽覽恆春山海景</span>
+                                        <br>
+                                        <span id="togglecontent" style="font-size: 13px;"></span>
+                                        <label id="togglebutton" onclick="toggleText()">詳文</label>
+
+                                    </div>
+                                    <img src="images/7.jpg" id="imgdisplay" alt="" class="col-auto" style="display:none; width: 30%;height: 150px;">
+                                </div>
+                            </div>
+                            <div class="row  Travel_border align-items-center p-3">
+                                <div class="container-fluid">
+                                    <div class="row m-0 mb-3   justify-content-between" style="font-size: 16px;">
+                                        <div class="pl-1">
+                                            <span style="cursor: pointer;"><img src="./images/09.png" alt="">Jackson</span>
+                                            <span>&nbsp; &nbsp;</span>
+                                            <span>揪團日期： <span>2020/08/01</span></span>
+                                            <span>&nbsp; &nbsp;</span>
+                                            <span>活動日期： <span>2020/09/01</span></span>
+                                            <span>&nbsp; &nbsp;</span>
+                                            <span>入團截止： <span>17:02:15</span></span>
+                                        </div>
+                                        <div class="p-0  ">
+                                            <img style="cursor: pointer;" src="./images/11.png" alt="">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row pl-3">
+                                    <div class="content mb-3" style="cursor: pointer;width:70%;height: 150px;"
+                                         data-toggle="modal" data-target="#exampleModal2">
+                                        <span style="font-weight:bolder;"> 龜山步道。墾丁私房景點｜不到半小時即攻頂。全方位飽覽恆春山海景</span>
+                                        <br>
+                                        <span style="font-size: 13px;">
+                                            由後灣發宅民宿主人發哥帶領走完龜山步道，
+                                            我下了一個註腳：這是C/P值很高的魯肉腳健行路線。路況平緩、沿途有路樹涼
+                                            亭遮蔭、不到半小時即可攻頂，來到山頂視野開闊，可眺望四重溪與保力溪出海
+                                            口，以及恆春山海景色，據說這裡的夕陽景色不遜於關山，逛完海生館再到這裡
+                                            賞落日，更是完美路線。除了山頂的開闊山海景，獨特的珊瑚礁岩地形、留存的
+                                            軍哨遺跡，以及不同角度的視野，讓這段輕鬆的健行，收穫良多。
+                                        </span>
+
+                                    </div>
+                                    <img src="images/7.jpg" alt="" class="col-auto" style="width: 30%;height: 150px;">
+                                </div>
+                            </div>
+                            <div class="row  Travel_border align-items-center p-3">
+                                <div class="container-fluid">
+                                    <div class="row m-0 mb-3   justify-content-between" style="font-size: 16px;">
+                                        <div class="pl-1">
+                                            <span style="cursor: pointer;"><img src="./images/09.png" alt="">Jackson</span>
+                                            <span>&nbsp; &nbsp;</span>
+                                            <span>揪團日期： <span>2020/08/01</span></span>
+                                            <span>&nbsp; &nbsp;</span>
+                                            <span>活動日期： <span>2020/09/01</span></span>
+                                            <span>&nbsp; &nbsp;</span>
+                                            <span>入團截止： <span>17:02:15</span></span>
+                                        </div>
+                                        <div class="p-0  ">
+                                            <img style="cursor: pointer;" src="./images/11.png" alt="">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row pl-3">
+                                    <div class="content mb-3" style="cursor: pointer;width:70%;height: 150px;"
+                                         data-toggle="modal" data-target="#exampleModal2">
+                                        <span style="font-weight:bolder;"> 龜山步道。墾丁私房景點｜不到半小時即攻頂。全方位飽覽恆春山海景</span>
+                                        <br>
+                                        <span style="font-size: 13px;">
+                                            由後灣發宅民宿主人發哥帶領走完龜山步道，
+                                            我下了一個註腳：這是C/P值很高的魯肉腳健行路線。路況平緩、沿途有路樹涼
+                                            亭遮蔭、不到半小時即可攻頂，來到山頂視野開闊，可眺望四重溪與保力溪出海
+                                            口，以及恆春山海景色，據說這裡的夕陽景色不遜於關山，逛完海生館再到這裡
+                                            賞落日，更是完美路線。除了山頂的開闊山海景，獨特的珊瑚礁岩地形、留存的
+                                            軍哨遺跡，以及不同角度的視野，讓這段輕鬆的健行，收穫良多。
+                                        </span>
+
+                                    </div>
+                                    <img src="images/7.jpg" alt="" class="col-auto" style="width: 30%;height: 150px;">
+                                </div>
+                            </div>
+                        </div>*@
+                        <div class="profile-follow tab_info" id="myFollow">
+                            <h1>關注活動</h1>
+                            @{
+                                foreach (tActivity tTravel in Model)
+                                {
+
+                                    <!-- Blog Post -->
+                                    <div class="card mb-4">
+                                        <img class="card-img-top" src="~/Content/images/blogPost.jpg" w alt="Card image cap">
+                                        <div class="card-body">
+                                            <h2 class="card-title">@tTravel.f活動標題</h2>
+                                            <p class="card-text">
+                                                @tTravel
+                                            </p>
+                                            <a class="nav-item">@Html.ActionLink("Read More", "BlogContent", "Blog", new { id = tTravel.f活動編號 }, new { @class = "btn btnContent  btn-warning" })</a>
+                                        </div>
+                                        <div class="card-footer text-muted">
+
+                                            <p class="pDateSection"> Posted on January 1, 2020 by <a href="#">Jouta</a></p>
+
+                                        </div>
+                                    </div>
+                                }
+                            }
+                            <div class="profile-follower tab_info" id="Follower">
+                                <h1>追蹤團主</h1>
+                                <div class="containerr">
+                                    <img src="images/6.jpg" class="followpic" alt="Peipei 吳佩佩" width="350" height="250">
+                                    <div class="roww">
+                                        <h5 class="followname">Peipei 吳佩佩</h5>
+                                        <p class="folllowdis">
+                                            是一個兒童職能治療師，因為擁有對生活的熱情，又不想被上下班打卡綁架，
+                                            因此工作變得有些斜槓，目前擁有正職，但仍然經營...
+                                        </p>
+                                        <a href="profile.html" class="btn btn-warning">了解一下</a>
+                                    </div>
+                                </div>
+                                <div class="containerr">
+                                    <img src="images/6.jpg" class="followpic" alt="Peipei 吳佩佩" width="350" height="250">
+                                    <div class="roww">
+                                        <h5 class="followname">Peipei 吳佩佩</h5>
+                                        <p class="folllowdis">
+                                            是一個兒童職能治療師，因為擁有對生活的熱情，又不想被上下班打卡綁架，
+                                            因此工作變得有些斜槓，目前擁有正職，但仍然經營...
+                                        </p>
+                                        <a href="profile.html" class="btn btn-warning">了解一下</a>
+                                    </div>
+                                </div>
+                                <div class="containerr">
+                                    <img src="images/6.jpg" class="followpic" alt="Peipei 吳佩佩" width="350" height="250">
+                                    <div class="roww">
+                                        <h5 class="followname">Peipei 吳佩佩</h5>
+                                        <p class="folllowdis">
+                                            是一個兒童職能治療師，因為擁有對生活的熱情，又不想被上下班打卡綁架，
+                                            因此工作變得有些斜槓，目前擁有正職，但仍然經營...
+                                        </p>
+                                        <a href="profile.html" class="btn btn-warning">了解一下</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="profile-history tab_info" id="history">
+                                <h1>歷史紀錄</h1>
+                                <div class="row  Travel_border align-items-center p-3">
+                                    <div class="container-fluid">
+                                        <div class="row m-0 mb-3   justify-content-between" style="font-size: 16px;">
+                                            <div class="pl-1">
+                                                <img src="~/Content/images/09.png" alt="">
+                                                <span>揪團者 :  <span style="cursor: pointer;">大衛哥</span></span>
+                                                <span>&nbsp; &nbsp;</span>
+                                                <span>揪團日期： <span>2020/08/01</span></span>
+                                                <span>&nbsp; &nbsp;</span>
+                                                <span>活動日期： <span>2020/09/01</span></span>
+                                                <span>&nbsp; &nbsp;</span>
+                                                <span>入團截止： <span>17:02:15</span></span>
+                                                <span>&nbsp; &nbsp;</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row pl-3">
+                                        <div class="content mb-3" style="cursor: pointer;width:70%;height: 150px;"
+                                             data-toggle="modal" data-target="#exampleModal2">
+                                            <span style="font-weight:bolder;"> 龜山步道。墾丁私房景點｜不到半小時即攻頂。全方位飽覽恆春山海景</span>
+                                            <br>
+                                            <span id="togglecontent" style="font-size: 13px;"></span>
+                                            <label id="togglebutton" onclick="toggleText()">詳文</label>
+
+                                        </div>
+                                        <img src="images/7.jpg" id="imgdisplay" alt="" class="col-auto" style="display:none; width: 30%;height: 150px;">
+                                    </div>
+                                </div>
+                                <div class="row  Travel_border align-items-center p-3">
+                                    <div class="container-fluid">
+                                        <div class="row m-0 mb-3   justify-content-between" style="font-size: 16px;">
+                                            <div class="pl-1">
+                                                <img src="~/Content/images/09.png" alt="">
+                                                <span>揪團者 :  <span style="cursor: pointer;">大衛哥</span></span>
+                                                <span>&nbsp; &nbsp;</span>
+                                                <span>揪團日期： <span>2020/08/01</span></span>
+                                                <span>&nbsp; &nbsp;</span>
+                                                <span>活動日期： <span>2020/09/01</span></span>
+                                                <span>&nbsp; &nbsp;</span>
+                                                <span>入團截止： <span>17:02:15</span></span>
+                                                <span>&nbsp; &nbsp;</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row pl-3">
+                                        <div class="content mb-3" style="cursor: pointer;width:70%;height: 150px;"
+                                             data-toggle="modal" data-target="#exampleModal2">
+                                            <span style="font-weight:bolder;"> 龜山步道。墾丁私房景點｜不到半小時即攻頂。全方位飽覽恆春山海景</span>
+                                            <br>
+                                            <span id="togglecontent" style="font-size: 13px;"></span>
+                                            <label id="togglebutton" onclick="toggleText()">詳文</label>
+
+                                        </div>
+                                        <img src="images/7.jpg" id="imgdisplay" alt="" class="col-auto" style="display:none; width: 30%;height: 150px;">
+                                    </div>
+                                </div>
+                                <div class="row  Travel_border align-items-center p-3">
+                                    <div class="container-fluid">
+                                        <div class="" style="font-size: 16px;">
+                                            <div class="">
+                                                <img src="~/Content/images/09.png" alt="">
+                                                <span>&nbsp; &nbsp;</span>
+                                                <span>揪團者 :  <span style="cursor: pointer;">大衛哥</span></span>
+                                                <span>&nbsp; &nbsp;</span>
+                                                <span>揪團日期： <span>2020/08/01</span></span>
+                                                <span>&nbsp; &nbsp;</span>
+                                                <span>活動日期： <span>2020/09/01</span></span><br />
+                                                <span>&nbsp; &nbsp;</span>
+                                                <span>入團截止： <span>17:02:16</span></span>
+                                                <span>&nbsp; &nbsp;</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row pl-3">
+                                        <div class="content mb-3" style="cursor: pointer;width:70%;height: 150px;"
+                                             data-toggle="modal" data-target="#exampleModal2">
+                                            <span style="font-weight:bolder;"> 龜山步道。墾丁私房景點｜不到半小時即攻頂。全方位飽覽恆春山海景</span>
+                                            <br>
+                                            <span id="togglecontent" style="font-size: 13px;"></span>
+                                            <label id="togglebutton" onclick="toggleText()">詳文</label>
+
+                                        </div>
+                                        <img src="images/7.jpg" id="imgdisplay" alt="" class="col-auto" style="display:none; width: 30%;height: 150px;">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
         </div>
-    </div>
+        </div>
+        </div>
     <div class="container-fluid footer">
-        <p class="text-center mt-2 mb-2">Copyright © 2020 Jouta All rights reserved</p>
+        <p class="text-center mt-2 mb-2"> Copyright © @DateTime.Now.Year Jouta All rights reserved</p>
     </div>
     <script src="~/Scripts/jquery-3.5.1.js"></script>
+
     <script src="~/Scripts/IIIProject/profile.js"></script>
     <script src="~/Scripts/IIIProject/navbar.js"></script>
     <script src="~/Scripts/bootstrap.min.js"></script>
