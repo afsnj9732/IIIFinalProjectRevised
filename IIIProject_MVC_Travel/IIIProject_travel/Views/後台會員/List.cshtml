@@ -33,12 +33,15 @@
 </head>
 
 <body>
-    @using (Html.BeginForm())
-    {
+    @*@using (Html.BeginForm(FormMethod.Get))
+        {*@
+    <form action="/後台會員/List" method="GET">
         <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
             <a class="navbar-brand col-sm-3 col-md-2 mr-0">Jouta後台</a>
+
             <input type="text" placeholder="關鍵字" aria-label="Search" name="txt關鍵字" class="form-control form-control-dark w-100">
             <input type="submit" value="搜尋" class=" btn btn-dark" />
+
             <ul class="navbar-nav px-3">
                 <li class="nav-item text-nowrap">
                     <a>
@@ -47,8 +50,8 @@
                 </li>
             </ul>
         </nav>
-
-    }
+    </form>
+    @*}*@
 
     <div class="container-fluid">
         <div class="row">
@@ -104,18 +107,18 @@
 
                 <h2>會員列表</h2>
                 <div class="table-responsive">
-                    <table class="table table-striped table-sm" >
+                    <table class="table table-striped table-sm">
                         <thead>
                             <tr>
                                 <td>會員編號</td>
-                                <td>@Html.ActionLink("名稱", "List", new { sortOrder = ViewBag.名稱排序 })</td>
+                                <td>@Html.ActionLink("名稱", "List", new { sortOrder = ViewBag.名稱排序,currentFilter = ViewBag.當前文件 })</td>
                                 <td>評分</td>
                                 <td>稱號</td>
                                 <td>大頭貼</td>
                                 <td>帳號</td>
                                 <td>密碼</td>
-                                <td>@Html.ActionLink("電子郵件", "List", new { sortOrder = ViewBag.電子郵件排序 })</td>
-                                <td>@Html.ActionLink("手機", "List", new { sortOrder = ViewBag.手機排序 })</td>
+                                <td>@Html.ActionLink("電子郵件", "List", new { sortOrder = ViewBag.電子郵件排序, currentFilter = ViewBag.當前文件 })</td>
+                                <td>@Html.ActionLink("手機", "List", new { sortOrder = ViewBag.手機排序, currentFilter = ViewBag.當前文件 })</td>
                                 <td>電話</td>
                                 <td>生日</td>
                                 <td>自我介紹</td>

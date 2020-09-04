@@ -38,6 +38,22 @@ namespace IIIProject_travel.Controllers
 
 
         }
+
+        public ActionResult personalIndex (int page = 1)
+        {
+
+            int currentPage = page < 1 ? 1 : page;
+
+            var article = from t in (new dbJoutaEntities()).tActivity
+                          where t.f活動類型 == "文章"
+                          orderby t.f活動編號
+                          select t;
+            var articleList = article.ToList();
+            var result = articleList.ToPagedList(currentPage, pagesize);
+
+
+            return View(result);
+        }
         public ActionResult BlogContent(int? id)
         {
 

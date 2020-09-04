@@ -1,9 +1,9 @@
-﻿@model  IQueryable<tActivity>
-
+﻿
 @{
-
     Layout = null;
-    var x = (tMember)Session["member"];
+    //var x = (tMember)Session["member"];
+    tMember x = (new dbJoutaEntities()).tMember.FirstOrDefault(y => y.f會員編號 == 19);
+    Session["member"] = x;
 }
 
 
@@ -153,34 +153,27 @@
                     </ul>
                 </div>
                 <div class="profile-body">
-                    <div class="profile-detail tab_info" id="myProfile">
+                    <div class="profile-detail tab_info">
                         <h1 id="title">個人檔案</h1>
-                        <form @*action="myForm"*@ id="myForm">
-                            <button type="button" id="revise" onclick="showsave();" class="btn btn-warning" f會員編號">編輯資料</button>
-
+                        <form method="post" action="Profile">
+                            <button type="button" class="btn btn-warning">編輯資料</button>
                             <h6 class="profiletag">會員編號</h6>
-                            <input type="text" name="f會員編號" id="accountn " form-control" size="50" disabled>
+                            <input type="text" size="50" placeholder="@x.f會員編號" name="account" disabled>
                             <h6 class="profiletag">帳號</h6>
                             <input type="text" size="50" placeholder="@x.f會員帳號" name="passward" disabled>
-
                             <h6 class="profiletag">密碼</h6>
                             <input type="text" size="50" placeholder="@x.f會員密碼" name="nickname" disabled>
-
-                            <h6 class="profiletag">會員名稱</h6>
-                            <input type="text" size="50" placeholder="@x.f會員名稱" name="age">
-
+                            <h6 class="profiletag" id="nickname">會員名稱</h6>
+                            <input type="text" size="50" name="age" placeholder="@x.f會員名稱">
                             <h6 class="profiletag">年紀</h6>
-                            <input type="text" size="50" placeholder="@(DateTime.Now- DateTime.Parse(x.f會員生日))" name="birth">
-
+                            <input type="text" size="50" name="birth">
                             <h6 class="profiletag">生日</h6>
-                            <input type="text" size="50" placeholder="@x.f會員生日" name="interest">
-
+                            <input type="text" size="50" name="interest" placeholder="@x.f會員生日">
                             <h6 class="profiletag">興趣</h6>
-                            <input type="text" size="50" placeholder="@x.f會員興趣" name="location">
-
+                            <input type="text" size="50" name="location" placeholder="@x.f會員興趣">
                             <h6 class="profiletag">自我介紹</h6>
                             <textarea id="intro" rows="5" cols="50" name="introduction">@x.f會員自我介紹</textarea><br>
-                            <button type="submit" class="btn btn-warning">修改資料</button>
+                            <button type="button" class="btn btn-warning">繳交</button>
                         </form>
                     </div>
                 </div>
@@ -376,15 +369,44 @@
                                     </div>
                                 </div>
                             </div>
+                    <div class="profile-follow tab_info">
+                        <h1>關注活動</h1>
+                        <p>
+                            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aperiam animi alias doloribus,
+                            dolor
+                            necessitatibus reiciendis, magni molestias ut perferendis corrupti assumenda nobis,
+                            veritatis
+                            eos fugiat nisi quas rem repudiandae neque?
+                        </p>
+                    </div>
+                    <div class="profile-follower tab_info">
+                        <h1>追蹤團主</h1>
+                        <p>
+                            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aperiam animi alias doloribus,
+                            dolor
+                            necessitatibus reiciendis, magni molestias ut perferendis corrupti assumenda nobis,
+                            veritatis
+                            eos fugiat nisi quas rem repudiandae neque?
+                        </p>
+                    </div>
+                    <div class="profile-history tab_info">
+                        <h1>歷史紀錄</h1>
+                        <p>
+                            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aperiam animi alias doloribus,
+                            dolor
+                            necessitatibus reiciendis, magni molestias ut perferendis corrupti assumenda nobis,
+                            veritatis
+                            eos fugiat nisi quas rem repudiandae neque?
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
     <div class="container-fluid footer">
-        <p class="text-center mt-2 mb-2"> Copyright © @DateTime.Now.Year Jouta All rights reserved</p>
+        <p class="text-center mt-2 mb-2">Copyright © 2020 Jouta All rights reserved</p>
     </div>
     <script src="~/Scripts/jquery-3.5.1.js"></script>
-
     <script src="~/Scripts/IIIProject/profile.js"></script>
     <script src="~/Scripts/IIIProject/navbar.js"></script>
     <script src="~/Scripts/bootstrap.min.js"></script>
