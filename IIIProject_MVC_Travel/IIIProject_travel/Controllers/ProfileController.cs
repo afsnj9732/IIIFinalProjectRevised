@@ -9,12 +9,10 @@ namespace IIIProject_travel.Controllers
 {
     public class ProfileController : Controller
     {
-        dbJoutaEntities db = new dbJoutaEntities();
         // GET: Profile
         
         public ActionResult ProfileIndex()
         {
-            var target = (tMember)Session["member"];
             return View();
         }
 
