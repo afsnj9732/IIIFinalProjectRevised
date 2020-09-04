@@ -71,6 +71,7 @@
           <Property Name="f驗證碼" Type="nvarchar" MaxLength="50" />
           <Property Name="isAdmin" Type="bit" Nullable="false" />
           <Property Name="f會員收藏的活動編號" Type="nvarchar(max)" />
+          <Property Name="f會員評分人數" Type="int" />
         </EntityType>
         <Association Name="FK_tActivity_tMember">
           <End Role="tMember" Type="Self.tMember" Multiplicity="1" />
@@ -165,6 +166,7 @@
           <Property Name="isAdmin" Type="Boolean" Nullable="false" />
           <Property Name="f會員收藏的活動編號" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="tActivity" Relationship="Self.FK_tActivity_tMember" FromRole="tMember" ToRole="tActivity" />
+          <Property Name="f會員評分人數" Type="Int32" />
         </EntityType>
         <Association Name="FK_tActivity_tMember">
           <End Role="tMember" Type="Self.tMember" Multiplicity="1" />
@@ -237,6 +239,7 @@
           <EntitySetMapping Name="tMember">
             <EntityTypeMapping TypeName="joutaModel.tMember">
               <MappingFragment StoreEntitySet="tMember">
+                <ScalarProperty Name="f會員評分人數" ColumnName="f會員評分人數" />
                 <ScalarProperty Name="f會員編號" ColumnName="f會員編號" />
                 <ScalarProperty Name="f會員帳號" ColumnName="f會員帳號" />
                 <ScalarProperty Name="f會員密碼" ColumnName="f會員密碼" />
