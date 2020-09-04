@@ -14,17 +14,13 @@ namespace IIIProject_travel.Controllers
         
         public ActionResult ProfileIndex()
         {
-            //var article = from t in (new dbJoutaEntities()).tActivity
-            //              where t.f活動類型 == "文章" 
-            //              select t;
-            //return View(article);
-
+            CMember c = new CMember();
             var travel = from t in (new dbJoutaEntities()).tActivity
-                         where t.f活動類型 == "旅遊"
-                         select t;
-            return View(travel);
+                         select t;  //從資料表抓資料
+            c.tActivities = travel;
+            c.tMembers = (tMember)Session["member"];
+            return View(c);
         }
-     
 
 
     }
