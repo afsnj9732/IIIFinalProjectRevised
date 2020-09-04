@@ -29,8 +29,9 @@ namespace IIIProject_travel.Controllers
                     where m.f會員編號 > 8 && m.f會員編號 < 13
                     select m;
             var y = from k in (new dbJoutaEntities()).tActivity
-                    where k.f會員編號 > 12 && k.f會員編號 < 17
+                    where !string.IsNullOrEmpty(k.f活動團圖)                    
                     select k;
+            y = y.Take(3);
             c.tMembers = x;
             c.tActivities = y;
             if (id == 0)
@@ -45,6 +46,7 @@ namespace IIIProject_travel.Controllers
         {
             return View();
         }
+
 
         //[HttpPost]
         //public JsonResult QuickMatch(double lat, double lng)
@@ -62,6 +64,7 @@ namespace IIIProject_travel.Controllers
         {
             //判斷使用者是否已經過登入驗證
             //if (User.Identity.IsAuthenticated)
+            //    return View("Home","Home");
             //若無登入驗證，則導向註冊頁面
             return View();
         }
@@ -131,21 +134,21 @@ namespace IIIProject_travel.Controllers
         }
 
         //修改密碼
-        [Authorize]
-        public ActionResult ChangePassword()
-        {
-            return View();
-        }
+        //[Authorize]
+        //public ActionResult ChangePassword()
+        //{
+        //    return View();
+        //}
 
-        [Authorize]
-        [HttpPost]
-        public ActionResult ChangePassword(CChangePassword p)
-        {
-            if (ModelState.IsValid)
-            {
-            }
-            return View();
-        }
+        //[Authorize]
+        //[HttpPost]
+        //public ActionResult ChangePassword(CChangePassword p)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //    }
+        //    return View();
+        //}
 
         [AllowAnonymous]
         public ActionResult About()
