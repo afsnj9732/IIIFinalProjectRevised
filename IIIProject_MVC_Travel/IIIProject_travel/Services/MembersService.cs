@@ -45,7 +45,7 @@ namespace IIIProject_travel.Services
                 c.fActivationCode =t.f驗證碼 ;
                 c.isAdmin = Convert.ToBoolean(t.isAdmin);
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 //查無資料
                 c = null;
@@ -73,7 +73,7 @@ namespace IIIProject_travel.Services
                 c.txtEmail = t.f會員電子郵件;
                 c.txtNickname = t.f會員名稱;
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 //查無資料
                 c = null;

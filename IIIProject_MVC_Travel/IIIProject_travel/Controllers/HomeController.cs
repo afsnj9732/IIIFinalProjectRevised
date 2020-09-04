@@ -29,8 +29,9 @@ namespace IIIProject_travel.Controllers
                     where m.f會員編號 > 8 && m.f會員編號 < 13
                     select m;
             var y = from k in (new dbJoutaEntities()).tActivity
-                    where k.f會員編號 > 12 && k.f會員編號 < 17
+                    where !string.IsNullOrEmpty(k.f活動團圖)                    
                     select k;
+            y = y.Take(3);
             c.tMembers = x;
             c.tActivities = y;
             if (id == 0)
@@ -43,15 +44,26 @@ namespace IIIProject_travel.Controllers
         /*[Authorize]*/     //通過驗證才可進入頁面
         public ActionResult QuickMatch()
         {
-
             return View();
         }
+
+        //[HttpPost]
+        //public JsonResult QuickMatch(double lat, double lng)
+        //{
+        //    dbJoutaEntities db = new dbJoutaEntities();
+
+        //    if (db.tActivity.)
+        //        var x = from t in db.tActivity
+        //                where (t.f活動類型 == "飯局")
+        //                select t;
+        //    return Json(x);
+        //}
 
         public ActionResult Register()
         {
             //判斷使用者是否已經過登入驗證
-            if (User.Identity.IsAuthenticated)
-                return RedirectToAction("Home","Home");
+            //if (User.Identity.IsAuthenticated)
+            //    return View("Home","Home");
             //若無登入驗證，則導向註冊頁面
             return View();
         }
@@ -111,34 +123,31 @@ namespace IIIProject_travel.Controllers
         {
             //呼叫service來判斷，並回傳結果
             return Json(membersService.accountCheck(p.txtEmail), JsonRequestBehavior.AllowGet);
-        
         }
 
         //接收驗證信連結傳進來
         public ActionResult emailValidation(string email, string AuthCode)
         {
             //用ViewData儲存，使用Service進行信箱驗證後的結果訊息
-            ViewData["emailValidation"] = membersService.emailValidation(email,AuthCode);
             return View();
         }
 
         //修改密碼
-        [Authorize]
-        public ActionResult ChangePassword()
-        {
-            return View();
-        }
+        //[Authorize]
+        //public ActionResult ChangePassword()
+        //{
+        //    return View();
+        //}
 
-        [Authorize]
-        [HttpPost]
-        public ActionResult ChangePassword(CChangePassword p)
-        {
-            if (ModelState.IsValid)
-            {
-                ViewData["ChangeState"] = membersService.ChangePassword(User.Identity.Name,p.txtPassword,p.txtNewPassword);
-            }
-            return View();
-        }
+        //[Authorize]
+        //[HttpPost]
+        //public ActionResult ChangePassword(CChangePassword p)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //    }
+        //    return View();
+        //}
 
         [AllowAnonymous]
         public ActionResult About()
