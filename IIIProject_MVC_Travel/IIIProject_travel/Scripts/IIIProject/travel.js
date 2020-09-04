@@ -80,18 +80,17 @@
         console.log("現在src "+$(combine).attr("src"));
     });
 
-    var isAdd;
     //入團
     function joinAct() {
         let target = $(this).attr("joinAct");
         $.ajax({
-            url: "/Travel/Actadd",
+            url: "/Travel/ActAdd",
             data: { "target": target,"isAdd":true},
             success: function (data) {
                 if (data === "") {
                     window.confirm("你已經入團了哦!");
                 } else {
-                    $("[Actadd=" + target + "]").html(data);
+                    $("[ActAdd=" + target + "]").html(data);
                 }
             }
         });
@@ -100,21 +99,31 @@
     function leaveAct() {
         let target = $(this).attr("leaveAct");
         $.ajax({
-            url: "/Travel/Actadd",
+            url: "/Travel/ActAdd",
             data: { "target": target, "isAdd": false},
             success: function (data) {
                 if (data === "") {
                     window.confirm("你沒有入團哦!");                    
                 } else {
-                    $("[Actadd=" + target + "]").html(data);
-                }
-                
+                    $("[ActAdd=" + target + "]").html(data);
+                }              
             }
         });
     }
     //留言
     function leaveMsg() {
-
+        let target = $(this).attr("leaveMsg");
+        let sentMsg = $("[sentMsg=" + target + "]").val();
+        console.log(sentMsg);
+        $.ajax({
+            url: "/Travel/MsgAdd",
+            data: { "target": target, "sentMsg": sentMsg},
+            success: function (data) {
+                $("[MsgAdd=" + target + "]").html(data); 
+                $("[sentMsg=" + target + "]").val("");
+            }
+        });
+        
     }
 
 

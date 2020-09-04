@@ -1,0 +1,26 @@
+﻿
+@{
+    Layout = null;
+    dbJoutaEntities db = new dbJoutaEntities();
+    string[] Msgs = { };
+    string[] MsgsTime = { };
+    int targetNumber = Model;
+    var targetAct = db.tActivity.Where(s => s.f活動編號 == targetNumber).FirstOrDefault();
+    if (!string.IsNullOrEmpty(targetAct.f活動留言))
+    {
+        Msgs = targetAct.f活動留言.Split(',');
+        MsgsTime = targetAct.f活動留言時間.Split(',');
+    }
+    var targetMsgs = Msgs.Zip(MsgsTime, (n, w) => new { msg = n, time = w });//合併兩陣列
+}
+
+
+@foreach (var Msg in targetMsgs)
+{
+    <div class="row justify-content-between pl-5 pr-5 mr-5 ml-5">
+        <div>@Msg.msg</div>
+
+        <div>@Msg.time</div>
+    </div>
+    <br />
+}

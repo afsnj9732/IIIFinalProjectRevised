@@ -42,6 +42,7 @@
           <Property Name="f活動所屬" Type="nvarchar" MaxLength="30" />
           <Property Name="f活動參加的會員編號" Type="nvarchar(max)" />
           <Property Name="f活動留言" Type="nvarchar(max)" />
+          <Property Name="f活動留言時間" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="tMember">
           <Key>
@@ -134,6 +135,7 @@
           <NavigationProperty Name="tMember" Relationship="Self.FK_tActivity_tMember" FromRole="tActivity" ToRole="tMember" />
           <Property Name="f活動參加的會員編號" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="f活動留言" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="f活動留言時間" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="tMember">
           <Key>
@@ -205,6 +207,7 @@
           <EntitySetMapping Name="tActivity">
             <EntityTypeMapping TypeName="joutaModel.tActivity">
               <MappingFragment StoreEntitySet="tActivity">
+                <ScalarProperty Name="f活動留言時間" ColumnName="f活動留言時間" />
                 <ScalarProperty Name="f活動留言" ColumnName="f活動留言" />
                 <ScalarProperty Name="f活動參加的會員編號" ColumnName="f活動參加的會員編號" />
                 <ScalarProperty Name="f活動編號" ColumnName="f活動編號" />

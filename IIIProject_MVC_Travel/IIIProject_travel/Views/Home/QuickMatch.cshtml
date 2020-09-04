@@ -1,4 +1,4 @@
-﻿
+﻿@model IEnumerable<tActivity>
 @{
     Layout = null;
     var x = (tMember)Session["member"];
@@ -63,17 +63,17 @@
         <button class="btnLocation" onclick="getLocation()">
             開啟定位尋找附近的TA !
         </button>
+        <div class="hint">
+            <span>將以顯示經緯度之方圓三公里作計算，若無定位將隨機抽選活動!</span>
+        </div>
         <div class="container">
             <div id="mapid"></div>
-        </div>
-        <div class="hint">
-            <span>將以顯示經緯度之方圓五公里作計算，若無定位將隨機抽選活動!</span>
         </div>
         <div class="fakecontainer">
             <div class="cols">
                 <div class="col" ontouchstart="this.classList.toggle('hover');">
                     <div class="container resultTrigger">
-                        <div class="front" style="background-image: url(../../Content/images/qm1.jpg)">
+                        <div class="front" id="f1" style="background-image: url(../../Content/images/qm1.jpg)">
                             <div class="inner">
                                 <p>找吃貨</p>
                                 <span>下班之後吃什麼好呢...?</span>
@@ -92,7 +92,7 @@
                 </div>
                 <div class="col" ontouchstart="this.classList.toggle('hover');">
                     <div class="container resultTrigger">
-                        <div class="front" style="background-image: url(../../Content/images/qm2.jpeg)">
+                        <div class="front" id="f2" style="background-image: url(../../Content/images/qm2.jpeg)">
                             <div class="inner">
                                 <p>找旅伴</p>
                                 <span>週末想找朋友出去放鬆心情~</span>
@@ -116,32 +116,32 @@
     <!-- show result -->
     <section class="">
         <div class="container-fluid theBottom">
-            <div class="container">
-                <div class="d-flex resultbox">
-                    <div id="UserBlock">
-                        <p>失落的帝國</p>
-                        <img src="~/Content/images/memberAvatar.jpg" alt="" class="col-auto ArticlePic">
-                        <p>使用者名稱:怕豹</p>
-                        <p>使用者評分:5</p>
-                    </div>
-                    <div class="contentblock">
-                        <p>剩餘時間</p><span>17:02:15</span>
-                        <p class="content">
-                            三亞亞特蘭蒂斯酒店位於海棠北路，雄踞海棠灣，俯瞰迷人的中國南海，距離國際免稅城約數分鐘車程。
-                            酒店占地面積約30萬平方米，是融合酒店，餐飲，購物，水樂園以及水族館為一體的綜合性娛樂度假目的地。
-                            這裡擁有千餘間寬敞的海景客房及套房...<a href="#">read more</a>
-
-                        </p>
-                        <div id="share" class="row justify-content-end pr-4">
-                            <button class="btn  btn-warning btn-block" type="submit">更多</button>
-                            <button class="btn  btn-warning btn-block" type="submit">分享</button>
-                            <button class="btn  btn-warning btn-block" type="submit">留言</button>
+                <div class="container">
+                    <div class="d-flex resultbox">
+                        <div id="UserBlock">
+                            <p>失落的帝國</p>
+                            <img src="~/Content/images/memberAvatar.jpg" alt="" class="col-auto ArticlePic">
+                            <p>使用者名稱:怕豹</p>
+                            <p>使用者評分:5</p>
                         </div>
-                        <br>
+                        <div class="contentblock">
+                            <p>剩餘時間</p><span>17:02:15</span>
+                            <p class="content">
+                                三亞亞特蘭蒂斯酒店位於海棠北路，雄踞海棠灣，俯瞰迷人的中國南海，距離國際免稅城約數分鐘車程。
+                                酒店占地面積約30萬平方米，是融合酒店，餐飲，購物，水樂園以及水族館為一體的綜合性娛樂度假目的地。
+                                這裡擁有千餘間寬敞的海景客房及套房...<a href="#">read more</a>
+
+                            </p>
+                            <div id="share" class="row justify-content-end pr-4">
+                                <button class="btn  btn-warning btn-block" type="submit">更多</button>
+                                <button class="btn  btn-warning btn-block" type="submit">分享</button>
+                                <button class="btn  btn-warning btn-block" type="submit">留言</button>
+                            </div>
+                            <br>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
     </section>
 
     <!-- footer -->
