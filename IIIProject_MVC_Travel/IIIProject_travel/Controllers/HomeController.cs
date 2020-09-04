@@ -51,15 +51,26 @@ namespace IIIProject_travel.Controllers
         /*[Authorize]*/     //通過驗證才可進入頁面
         public ActionResult QuickMatch()
         {
-
             return View();
         }
+
+        //[HttpPost]
+        //public JsonResult QuickMatch(double lat, double lng)
+        //{
+        //    dbJoutaEntities db = new dbJoutaEntities();
+
+        //    if (db.tActivity.)
+        //        var x = from t in db.tActivity
+        //                where (t.f活動類型 == "飯局")
+        //                select t;
+        //    return Json(x);
+        //}
 
         public ActionResult Register()
         {
             //判斷使用者是否已經過登入驗證
             if (User.Identity.IsAuthenticated)
-                return RedirectToAction("Home","Home");
+                return RedirectToAction("Home", "Home");
             //若無登入驗證，則導向註冊頁面
             return View();
         }
@@ -119,14 +130,14 @@ namespace IIIProject_travel.Controllers
         {
             //呼叫service來判斷，並回傳結果
             return Json(membersService.accountCheck(p.txtEmail), JsonRequestBehavior.AllowGet);
-        
+
         }
 
         //接收驗證信連結傳進來
         public ActionResult emailValidation(string email, string AuthCode)
         {
             //用ViewData儲存，使用Service進行信箱驗證後的結果訊息
-            ViewData["emailValidation"] = membersService.emailValidation(email,AuthCode);
+            ViewData["emailValidation"] = membersService.emailValidation(email, AuthCode);
             return View();
         }
 
@@ -143,7 +154,7 @@ namespace IIIProject_travel.Controllers
         {
             if (ModelState.IsValid)
             {
-                ViewData["ChangeState"] = membersService.ChangePassword(User.Identity.Name,p.txtPassword,p.txtNewPassword);
+                ViewData["ChangeState"] = membersService.ChangePassword(User.Identity.Name, p.txtPassword, p.txtNewPassword);
             }
             return View();
         }
@@ -166,7 +177,7 @@ namespace IIIProject_travel.Controllers
             bool status = false;
 
             dbJoutaEntities db = new dbJoutaEntities();
-            tMember account = db.tMember.FirstOrDefault(k=>k.f會員電子郵件 == Email);
+            tMember account = db.tMember.FirstOrDefault(k => k.f會員電子郵件 == Email);
             if (account != null)
             {
                 MailMessage user_mail = new MailMessage("Joutagroup445@gmail.com",
