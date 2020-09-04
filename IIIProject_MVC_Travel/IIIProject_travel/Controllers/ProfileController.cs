@@ -1,4 +1,5 @@
-﻿using System;
+﻿using IIIProject_travel.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,7 +9,9 @@ namespace IIIProject_travel.Controllers
 {
     public class ProfileController : Controller
     {
+        dbJoutaEntities db = new dbJoutaEntities();
         // GET: Profile
+        
         public ActionResult ProfileIndex()
         {
             //var article = from t in (new dbJoutaEntities()).tActivity

@@ -26,7 +26,6 @@ namespace IIIProject_travel.Services
             t.f會員帳號 = newMember.txtEmail;
             t.f會員名稱 = newMember.txtNickname;
             t.f會員密碼 = newMember.txtPassword;
-            //t.f會員大頭貼 = newMember.txtFiles;
             t.f驗證碼 = newMember.fActivationCode;
             t.isAdmin = false;
             db.tMember.Add(t);
@@ -46,7 +45,7 @@ namespace IIIProject_travel.Services
                 c.fActivationCode =t.f驗證碼 ;
                 c.isAdmin = Convert.ToBoolean(t.isAdmin);
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 //查無資料
                 c = null;
@@ -74,15 +73,11 @@ namespace IIIProject_travel.Services
                 c.txtEmail = t.f會員電子郵件;
                 c.txtNickname = t.f會員名稱;
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 //查無資料
                 c = null;
             }
-            //finally
-            //{
-            //    conn.Close();
-            //}
             return c;
         }
 
@@ -95,16 +90,10 @@ namespace IIIProject_travel.Services
             string validationStr = string.Empty;
             if (c != null)
             {
-                if (c.fActivationCode == authCode)
-                {
-                    dbJoutaEntities db = new dbJoutaEntities();
-                    tMember t = db.tMember.FirstOrDefault(k=>k.f會員電子郵件 == email&&k.f驗證碼==authCode);
-                    t.f驗證碼 = "";
-                    validationStr = "信箱驗證成功，現在可以登入囉~";
-                }
-                else {
-                    validationStr = "驗證碼錯誤，請重新確認";
-                }
+                dbJoutaEntities db = new dbJoutaEntities();
+                tMember t = db.tMember.FirstOrDefault(k => k.f會員電子郵件 == email && k.f驗證碼 == authCode);
+                t.f驗證碼 = "";
+                validationStr = "信箱驗證成功，現在可以登入囉~";
             }
             return validationStr;
         }
@@ -125,9 +114,9 @@ namespace IIIProject_travel.Services
             //判斷是否有此人
             if (p != null)
             {
-                p.fActivationCode = "";
+                p.fActivationCode = null;
                 //進行信箱密碼驗證
-                    if (passwordCheck(p, password))
+                if (passwordCheck(p, password))
                 {
                     return "";
                 }
@@ -135,23 +124,6 @@ namespace IIIProject_travel.Services
                 {
                     return "密碼輸入錯誤";
                 }
-
-                ////判斷是否經過信箱驗證，有經過驗證驗證碼欄位會被清空
-                //if (string.IsNullOrWhiteSpace(p.fActivationCode))
-                //{
-                //    //進行信箱密碼驗證
-                //    if (passwordCheck(p, password))
-                //    {
-                //        return "";
-                //    }
-                //    else
-                //    {
-                //        return "密碼輸入錯誤";
-                //    }
-                //}
-                //else {
-                //    return "此信箱尚未經過Email驗證，請去收信。";
-                //}
             }
             else
             {

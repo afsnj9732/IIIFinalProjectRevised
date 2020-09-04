@@ -1,7 +1,7 @@
 ﻿@model IIIProject_travel.ViewModel.CData
 @{
     Layout = null;
-    //var x = (tMember)Session["member"];
+    var x = (tMember)Session["member"];
 }
 
 <!DOCTYPE html>
@@ -45,11 +45,10 @@
                         <li class="nav-item">@Html.ActionLink("聯絡我們", "New", "聯絡我們", new { }, new { @class = "nav-link nav-login text-dark" })</li>
 
                         <li class="nav-item">@Html.ActionLink("關於我們", "About", "Home", new { }, new { @class = "nav-link nav-register text-dark" })</li>
-                        @*@if (Session["member"] != null)*@
-                        @if (User.Identity.IsAuthenticated)
+                        @if (Session["member"] != null)
                         {
-                            <li class="nav-item nav-link nav-login text-dark">您好，  @(User.Identity.Name) </li>
-                            @*<li class="nav-item nav-link nav-login text-dark">歡迎  @x.f會員名稱 </li>*@
+
+                            <li class="nav-item nav-link nav-login text-dark">@Html.ActionLink("您好，" + x.f會員名稱, "ProfileIndex", "Profile") </li>
                             @*<li class="nav-item">
                                     <img src="@ViewData["Img"]" alt="img" width="30" height="30" style="border:2px solid green;" />
                                 </li>*@
@@ -108,16 +107,19 @@
                         <div class="form-group col-lg-3 col-md-3 col-sm-12 inner">
                             <label for="location_eat">所在地區:</label>
                             <select class="form-control" id="location_eat">
-                                <option value="1"></option>
+                                <option value="1">北部</option>
+                                <option value="1">中部</option>
+                                <option value="1">東部</option>
+                                <option value="1">南部</option>
                             </select>
                         </div>
                         <div class="form-group col-lg-3 col-md-3 col-sm-12 inner">
                             <label for="time">日期:</label>
-                            <input type="date" class="form-control" id="time">
+                            <input type="date" name="txtDate" class="form-control" id="time">
                         </div>
                         <div class="form-group col-lg-3 col-md-3 col-sm-12 inner">
                             <label for="keyword">關鍵字:</label>
-                            <input type="text" class="form-control" id="keyword">
+                            <input type="text" name="txtKeyword" class="form-control" id="keyword">
                         </div>
                         <div class="form-group col-lg-3 col-md-3 col-sm-12 inner">
                             <button type="submit" class="btn btn-warning">搜尋</button>
@@ -131,16 +133,19 @@
                         <div class="form-group col-lg-3 col-md-3 col-sm-12 inner">
                             <label for="location_travel">所在地區:</label>
                             <select class="form-control" id="location_travel">
-                                <option value="1">非洲</option>
+                                <option value="1">北部</option>
+                                <option value="1">中部</option>
+                                <option value="1">東部</option>
+                                <option value="1">南部</option>
                             </select>
                         </div>
                         <div class="form-group col-lg-3 col-md-3 col-sm-12 inner">
                             <label for="time_travel">日期:</label>
-                            <input type="date" class="form-control" id="time_travel">
+                            <input type="date" name="txtDate" class="form-control" id="time_travel">
                         </div>
                         <div class="form-group col-lg-3 col-md-3 col-sm-12 inner">
                             <label for="keyword_travel">關鍵字:</label>
-                            <input type="text" class="form-control" id="keyword_travel">
+                            <input type="text" name="txtKeyword" class="form-control" id="keyword_travel">
                         </div>
                         <div class="form-group col-lg-3 col-md-3 col-sm-12 inner">
                             <button type="submit" class="btn btn-warning">搜尋</button>
@@ -158,11 +163,11 @@
                         </div>
                         <div class="form-group col-lg-3 col-md-3 col-sm-12 inner">
                             <label for="time_article">日期:</label>
-                            <input type="date" class="form-control" id="time_article">
+                            <input type="date" name="txtDate" class="form-control" id="time_article">
                         </div>
                         <div class="form-group col-lg-3 col-md-3 col-sm-12 inner">
                             <label for="keyword_article">關鍵字:</label>
-                            <input type="text" class="form-control" id="keyword_article">
+                            <input type="text" name="txtKeyword" class="form-control" id="keyword_article">
                         </div>
                         <div class="form-group col-lg-3 col-md-3 col-sm-12 inner">
                             <button type="submit" class="btn btn-warning">搜尋</button>
@@ -189,7 +194,7 @@
                         <div class="container">
                             <div id="member" class="row">
                                 @foreach (tMember t in Model.tMembers)
-                                 {
+                                {
 
                                     <div class="col-lg-4 col-sm-12 block">
                                         <div class="person">
@@ -206,8 +211,8 @@
 
                                         </div>
                                     </div>
-                                        }
-                                    
+                                }
+
                             </div>
                         </div>
                     </div>
@@ -314,31 +319,31 @@
                         <h2>跟我趴趴走</h2>
                     </div>
                 </div>
-                @foreach(tActivity t in Model.tActivities)
+                @foreach (tActivity a in Model.tActivities)
                 {
-                <div class="col-lg-4">
-                    <figure class="traveller">
-                        <div class="image">
-                            <img src="~/Content/images/@t.f活動團圖" alt="@t.tMember.f會員名稱" width="350" height="300" />
-                        </div>
-                        <figcaption>
-                            <h3>@t.f活動標題</h3>
-                            <p class="card-text" style="text-align: left;">
-                                @t.f活動內容
-                            </p>
-                            @Html.ActionLink("我要+1", "TravelIndex", "Travel", new { }, new { @class = "btn btnContent mt-2" })
+                    <div class="col-lg-4">
+                        <figure class="traveller">
+                            <div class="image">
+                                <img src="~/Content/images/@a.f活動團圖" alt="@a.tMember.f會員名稱" width="350" height="300" />
+                            </div>
+                            <figcaption>
+                                <h3>@a.f活動標題</h3>
+                                <p class="card-text" style="text-align: left;">
+                                    @a.f活動內容
+                                </p>
+                                @Html.ActionLink("我要+1", "TravelIndex", "Travel", new { }, new { @class = "btn btnContent mt-2" })
 
-                            <section class="block_footer">
-                                <div class="date">@t.f活動開始時間</div>
-                                <div class="icons">
-                                    <div class="views"><i class="ion-eye"></i>@t.f活動瀏覽次數</div>
-                                    <div class="love"><i class="ion-heart"></i>@t.f活動讚數</div>
-                                </div>
-                            </section>
-                        </figcaption>
-                    </figure>
-                </div>
-                        }
+                                <section class="block_footer">
+                                    <div class="date">@a.f活動開始時間</div>
+                                    <div class="icons">
+                                        <div class="views"><i class="ion-eye"></i>@a.f活動瀏覽次數</div>
+                                        <div class="love"><i class="ion-heart"></i>@a.f活動讚數</div>
+                                    </div>
+                                </section>
+                            </figcaption>
+                        </figure>
+                    </div>
+                }
             </div>
         </div>
 
@@ -443,7 +448,6 @@
     @Scripts.Render("~/Scripts/bootstrap.min.js")
     @Scripts.Render("~/Scripts/IIIProject/slider.js")
     @Scripts.Render("~/Scripts/IIIProject/travel_main.js")
-    @Scripts.Render("~/Scripts/main_Vue.js") <!--專案目錄下查無此檔?-->
 
     <script>
         let vm = new Vue({

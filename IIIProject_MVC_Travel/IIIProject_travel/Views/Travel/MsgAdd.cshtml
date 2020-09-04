@@ -1,0 +1,47 @@
+﻿@{
+    Layout = null;
+    dbJoutaEntities db = new dbJoutaEntities();
+    int exclude = 0;
+    string img;
+    string target = "";
+    string[] Msgs = { };
+    string[] MsgsTime = { };
+    string[] MsgsTimeAndID = { };
+    int targetNumber = Model;
+    var targetAct = db.tActivity.Where(s => s.f活動編號 == targetNumber).FirstOrDefault();
+    if (!string.IsNullOrEmpty(targetAct.f活動留言))
+    {
+        Msgs = targetAct.f活動留言.Split(new string[] { "_^$" }, StringSplitOptions.None);//因包含對話內容，
+                                                                                      //因此利用複數特殊字元做分割
+        MsgsTime = targetAct.f活動留言時間.Split(',');
+    }
+    var targetMsgs = Msgs.Zip(MsgsTime, (n, w) => new { msg = n, time = w });//合併兩陣列
+}
+
+
+@foreach (var Msg in targetMsgs)
+{
+    exclude++;
+    if (exclude == 1)
+    {
+        continue;
+    }
+    MsgsTimeAndID = Msg.time.Split(new string[] { "_^$" }, StringSplitOptions.None);
+    if (MsgsTimeAndID.Length > 1)
+    {
+        target = MsgsTimeAndID[1];
+    }
+    img = db.tMember.Where(t => t.f會員編號.ToString() == target)
+          .Select(t => t.f會員大頭貼).FirstOrDefault();
+
+    <div class="row justify-content-between pl-5 pr-5 mr-5 ml-5">
+        <div>
+            <span><img src="~/Content/images/@img" width="30" height="30"></span>
+            <span>@Msg.msg</span>
+        </div>
+        <div>@MsgsTimeAndID[0]</div>
+    </div>
+    <br />
+
+}
+@{exclude = 0;}

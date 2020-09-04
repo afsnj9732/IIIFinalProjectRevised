@@ -1,9 +1,11 @@
 ﻿
 @{
     Layout = null;
-    //var x = (tMember)Session["member"];
-    tMember x = (new dbJoutaEntities()).tMember.FirstOrDefault(y => y.f會員編號 == 3);
-    Session["member"] = x;
+    var topMember = (new dbJoutaEntities()).tMember.OrderByDescending(n => n.f會員評分).Take(5);//抓評分前五團主
+    var x = (tMember)Session["member"];
+    //tMember x = (new dbJoutaEntities()).tMember.FirstOrDefault(y => y.f會員編號 == 4);
+    //Session["member"] = x;
+
 }
 
 @{
@@ -75,10 +77,10 @@
                         @*<form method="post">*@
                         @*action="./article_AJAX"*@
                         @*<input type="hidden" name="order" value="null" />
-        <input type="hidden" name="border_color" value="null" />*@
+            <input type="hidden" name="border_color" value="null" />*@
                         <input type="text" class="mt-4" style="width:86%;" name="contain" id="contain">
                         <input type="image" src="~/Content/images/18.png" id="contain_pic" />  @*alt="submit"*@
-    @*</form>*@
+                        @*</form>*@
                         <br>
                     </div>
                     <ul class="sort">
@@ -113,11 +115,11 @@
                             </span>
                         </li>
                         @*<li class="m-2 mb-3 row justify-content-between" id="06" style="list-style-type:none;cursor: pointer;">
-                            <span>
-                                <img src="~/Content/images/06.png" order="f活動瀏覽次數"
-                                     alt="">瀏覽次數
-                            </span>
-                        </li>*@
+                <span>
+                    <img src="~/Content/images/06.png" order="f活動瀏覽次數"
+                         alt="">瀏覽次數
+                </span>
+            </li>*@
                         <li class="m-2 mb-3 row justify-content-between" id="07" order="f活動開始時間" style="list-style-type:none;cursor: pointer;">
                             <span>
                                 <img src="~/Content/images/07.png"
@@ -133,20 +135,20 @@
                     </ul>
                     <!-- 各項排序 -->
                     <br />
-                    <!-- 人氣團主 -->
+                    <!-- 優質團主 -->
                     <div class="mb-5">
-                        <p class=" ml-3 " style="text-align: center;width:83.5%;">人氣團主</p>
+                        <p class=" ml-3 " style="text-align: center;width:83.5%;">優質團主</p>
                         <ul class="row    ml-3" style="width:83.5%;">
                             <li class="mx-auto" style="list-style-type:none;cursor: pointer;">
-                                @for (int i = 0; i < 5; i++)
+                                @foreach (var item in topMember)
                                 {
-                                    <img src="~/Content/images/09.png"
-                                         alt="" class="popguys">
+                                    <img src="~/Content/images/@item.f會員大頭貼"
+                                         title="@item.f會員名稱" class="popguys" width="30" height="30">
                                 }
                             </li>
                         </ul>
                     </div>
-                    <!-- 人氣團主 -->
+                    <!-- 優質團主 -->
                 </div>
 
                 <!-- 文章區主體 -->
@@ -176,7 +178,7 @@
 
                                 </select>
                                 &nbsp;&nbsp;
-                                <span>標籤：</span>
+                                <span>總讚數：</span>
                                 <select id="label" style="border: none;">
                                     <option value="全部" selected>&nbsp;全部</option>
                                     <option value="10">讚>10</option>
@@ -196,7 +198,7 @@
                     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
                          aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog change-max-width-1400" role="document">
-                            <div class="modal-content">
+                            <div class="modal-content" style="height:82%">
                                 <div class="modal-header border-main-color">
                                     <h5 class="modal-title" id="exampleModalLabel"><span style="font-weight:bolder;"> 開團</span></h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -211,9 +213,9 @@
                                             <div class="container-fluid">
                                                 <span>標題：<input type="text" name="f活動標題" style="width:90%"></span>
                                                 <div class="row m-0 mb-3 justify-content-around">
-                                                    <span>旅遊開始日期： <input type="date" name="f活動開始時間"></span>
-                                                    <span>旅遊結束日期： <input type="date" name="f活動結束時間"></span>
-                                                    <span>入團截止： <input type="date" name="f活動招募截止時間"></span>
+                                                    <span>旅遊開始日期： <input type="date" min="@DateTime.Now" max="" name="f活動開始時間"></span>
+                                                    <span>旅遊結束日期： <input type="date" min="" max="" name="f活動結束時間"></span>
+                                                    <span>入團截止： <input type="date" min="" max="" name="f活動招募截止時間"></span>
                                                 </div>
                                                 <div class="row mb-4 mx-auto align-items-center justify-content-around">
                                                     <span><img src="~/Content/images/04.png" class="mb-1" alt="">預算：<input type="text" name="f活動預算"></span>
@@ -221,9 +223,9 @@
                                                     <div class="pr-5">
                                                         <img src="~/Content/images/17.png" class="mb-1" alt="">分類：
                                                         <select name="f活動分類" style="">
-                                                            <option style="width:auto;margin:0 auto;" value="所有" selected>
+                                                            @*<option style="width:auto;margin:0 auto;" value="所有" selected>
                                                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;所有
-                                                            </option>
+                                                            </option>*@
                                                             <option value="兩天一夜">兩天一夜</option>
                                                             <option value="三天兩夜">三天兩夜</option>
                                                             <option value="五天四夜">五天四夜</option>
@@ -307,7 +309,7 @@
                 </div>
                 <!-- 文章內容區結束 -->
                 <div class="col-xl-3   col-10 row mx-auto">
-
+        
                 </div>
             </div>
         </div>

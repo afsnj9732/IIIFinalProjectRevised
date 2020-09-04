@@ -37,6 +37,8 @@ namespace IIIProject_travel.Controllers
                 }
                 tMember Member = (tMember)Session["member"];
                 p.f會員編號 = Member.f會員編號;
+                p.f活動類型 = "旅遊";
+                p.f活動參加的會員編號 += ","+Member.f會員編號;
                 dbJoutaEntities db = new dbJoutaEntities();
                 db.tActivity.Add(p);
                 db.SaveChanges();
@@ -44,8 +46,18 @@ namespace IIIProject_travel.Controllers
             return View();
         }
 
-        public void likeIt(string ActivityID)
+        public void ViewCounts(int ActivityID)
         {
+            dbJoutaEntities db = new dbJoutaEntities();
+            var target = db.tActivity.Where(t => t.f活動編號 == ActivityID).FirstOrDefault();
+            target.f活動瀏覽次數 += 1;
+            db.SaveChanges();
+        }
+
+        public string likeIt(string ActivityID)
+        {
+            if (Session["member"] == null)
+                return "0";
             dbJoutaEntities db = new dbJoutaEntities();
             var condition = (tMember)Session["member"];
             var member = db.tMember.Where(x => x.f會員編號 == condition.f會員編號).Select(a => a).FirstOrDefault();
@@ -71,6 +83,7 @@ namespace IIIProject_travel.Controllers
                 member.f會員收藏的活動編號 += "," + ActivityID; //若資料庫完全是空的，則不可能有重複值，直接存入
                 db.SaveChanges();
             }
+            return "1";
         }
 
         public string autoComplete()
@@ -124,24 +137,80 @@ namespace IIIProject_travel.Controllers
             return CountViewList;
         }
 
-
-        public JsonResult CountView(string target, string p)
-        {            
-            if (target != null)
-            {
-                dbJoutaEntities db = new dbJoutaEntities();
-                int select = Convert.ToInt32(target);
-                tActivity theTarget = db.tActivity.FirstOrDefault(x => x.f活動編號 == select);
-                theTarget.f活動瀏覽次數 = (theTarget.f活動瀏覽次數 + 1);
-                db.SaveChanges();
-            }
-
-            var FinalList = AJAXcondition(p)
-                            .Where(a=>a.f活動類型=="旅遊")
-                            .Select(a => a.f活動瀏覽次數);
-
-            return Json(FinalList, JsonRequestBehavior.AllowGet);
+        public ActionResult MsgAdd(int target, string sentMsg)
+        {
+            var NowMember = (tMember)Session["member"];
+            dbJoutaEntities db = new dbJoutaEntities();
+            var ActList = db.tActivity.Where(n => n.f活動編號 == target).FirstOrDefault();
+            //string[] MsgsList = ActList.f活動留言.Split(',');
+            //index = Array.FindIndex(MsgsList,a=>a.StartsWith(NowMember.f會員名稱));  
+            ActList.f活動留言 += "_^$"+NowMember.f會員名稱 + ":" + sentMsg ;
+            ActList.f活動留言時間 += "," + DateTime.Now.ToString("MM/dd HH:mm:ss") + "_^$" + NowMember.f會員編號;
+            db.SaveChanges();
+            return View(target);
         }
+
+        public ActionResult ActAdd(int target , bool isAdd)
+        {
+            var NowMember = (tMember)Session["member"];
+            dbJoutaEntities db = new dbJoutaEntities();
+            var ActList = db.tActivity.Where(n => n.f活動編號 == target).FirstOrDefault();
+            string[] GuysList = { };
+            int index = -1; //若此活動無人參加，則登入中的會員必定無參加
+
+            if (!string.IsNullOrEmpty(ActList.f活動參加的會員編號)) //若此活動有人參加
+            {
+                GuysList = ActList.f活動參加的會員編號.Split(',');
+                index = Array.IndexOf(GuysList, NowMember.f會員編號.ToString());  //尋找登入中的會員是否有參加
+            }                                                                     //注意會員標號是int，陣列內容是str，
+                                                                                  //不轉型index永遠會是-1
+            if (isAdd == true)//點選入團
+            {
+                if (index == -1)//登入中的會員不存在名單則直接加入
+                {
+                    ActList.f活動參加的會員編號 += "," + NowMember.f會員編號;
+                    db.SaveChanges();
+                }
+                else //若存在則要??
+                {
+                    return null;
+                }
+            }
+            else //點選退出
+            {
+                if (index != -1)//登入中的會員存在則讓他退出
+                {
+                    var List = GuysList.ToList();
+                    List.RemoveAt(index);
+                    var FinalList = string.Join(",",List);
+                    ActList.f活動參加的會員編號 = FinalList;
+                    db.SaveChanges();
+                }
+                else //若不存在則要??
+                {
+                    return null;
+                }
+            }                                            
+            return View(target);
+        }
+
+        //public JsonResult CountView(string target, string p)
+        //{            
+        //    if (target != null)
+        //    {
+        //        dbJoutaEntities db = new dbJoutaEntities();
+        //        int select = Convert.ToInt32(target);
+        //        tActivity theTarget = db.tActivity.FirstOrDefault(x => x.f活動編號 == select);
+        //        theTarget.f活動瀏覽次數 = (theTarget.f活動瀏覽次數 + 1);
+        //        db.SaveChanges();
+        //    }
+
+        //    var FinalList = AJAXcondition(p)
+        //                    .Where(a=>a.f活動類型=="旅遊")
+        //                    .Select(a => a.f活動瀏覽次數);
+
+        //    return Json(FinalList, JsonRequestBehavior.AllowGet);
+        //}
         public JsonResult FeelGood(string target, string p)
         {
             
