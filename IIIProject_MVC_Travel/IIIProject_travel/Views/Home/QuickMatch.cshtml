@@ -72,8 +72,8 @@
         <div class="fakecontainer">
             <div class="cols">
                 <div class="col" ontouchstart="this.classList.toggle('hover');">
-                    <div class="container resultTrigger">
-                        <div class="front" id="f1" style="background-image: url(../../Content/images/qm1.jpg)">
+                    <div class="container resultTrigger" id="f1" onclick="tabs(0)">
+                        <div class="front" style="background-image: url(../../Content/images/qm1.jpg)">
                             <div class="inner">
                                 <p>找吃貨</p>
                                 <span>下班之後吃什麼好呢...?</span>
@@ -91,8 +91,8 @@
                     </div>
                 </div>
                 <div class="col" ontouchstart="this.classList.toggle('hover');">
-                    <div class="container resultTrigger">
-                        <div class="front" id="f2" style="background-image: url(../../Content/images/qm2.jpeg)">
+                    <div class="container resultTrigger" id="f2" onclick="tabs(1)">
+                        <div class="front" style="background-image: url(../../Content/images/qm2.jpeg)">
                             <div class="inner">
                                 <p>找旅伴</p>
                                 <span>週末想找朋友出去放鬆心情~</span>
@@ -116,32 +116,30 @@
     <!-- show result -->
     <section class="">
         <div class="container-fluid theBottom">
-                <div class="container">
-                    <div class="d-flex resultbox">
-                        <div id="UserBlock">
-                            <p>失落的帝國</p>
-                            <img src="~/Content/images/memberAvatar.jpg" alt="" class="col-auto ArticlePic">
-                            <p>使用者名稱:怕豹</p>
-                            <p>使用者評分:5</p>
+            <div class="container">
+                <div class="d-flex resultbox">
+                    <div id="UserBlock">
+                        <p id="mAchive">會員稱號</p>
+                        <img src="~/Content/images/memberAvatar.jpg" id="mAvatar" class="col-auto ArticlePic">
+                        <p id="mName">使用者名稱:會員名稱</p>
+                        <p id="mRating">使用者評分:會員評分</p>
+                    </div>
+                    <div class="contentblock">
+                        <p>剩餘時間</p><span>17:02:15</span>
+                        <p class="content">
+                            活動內容
+                            <a href="#">read more</a>
+                        </p>
+                        <div id="share" class="row justify-content-end pr-4">
+                            <button class="btn  btn-warning btn-block" type="submit">更多</button>
+                            <button class="btn  btn-warning btn-block" type="submit">分享</button>
+                            <button class="btn  btn-warning btn-block" type="submit">留言</button>
                         </div>
-                        <div class="contentblock">
-                            <p>剩餘時間</p><span>17:02:15</span>
-                            <p class="content">
-                                三亞亞特蘭蒂斯酒店位於海棠北路，雄踞海棠灣，俯瞰迷人的中國南海，距離國際免稅城約數分鐘車程。
-                                酒店占地面積約30萬平方米，是融合酒店，餐飲，購物，水樂園以及水族館為一體的綜合性娛樂度假目的地。
-                                這裡擁有千餘間寬敞的海景客房及套房...<a href="#">read more</a>
-
-                            </p>
-                            <div id="share" class="row justify-content-end pr-4">
-                                <button class="btn  btn-warning btn-block" type="submit">更多</button>
-                                <button class="btn  btn-warning btn-block" type="submit">分享</button>
-                                <button class="btn  btn-warning btn-block" type="submit">留言</button>
-                            </div>
-                            <br>
-                        </div>
+                        <br>
                     </div>
                 </div>
             </div>
+        </div>
     </section>
 
     <!-- footer -->

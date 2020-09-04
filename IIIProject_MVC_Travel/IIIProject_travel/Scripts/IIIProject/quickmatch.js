@@ -7,11 +7,15 @@
     });
 
     $('#f1').click(function () {
-        alert('f1');
+        $(this).removeClass('clicked');
+        $(this).addClass('clicked');
+        $('#f2').removeClass('clicked');
     });
 
     $('#f2').click(function () {
-        alert('f2');
+        $(this).removeClass('clicked');
+        $(this).addClass('clicked');
+        $('#f1').removeClass('clicked');
     });
 
 })();

@@ -1,6 +1,10 @@
 ﻿var x = document.querySelector(".btnLocation");
-//var currentLat;
-//var currentLng;
+var tabNum;
+var currentLat = null;
+var currentLng = null;
+var tabBtn = document.querySelectorAll(".resultTrigger");
+
+console.log("var: " + currentLat);
 
 //取得定位授權 2
 function getLocation() {
@@ -9,7 +13,6 @@ function getLocation() {
     } else {
         x.innerHTML = "此瀏覽器不支援定位!";
     }
-    console.log("getLocation  " + currentLat);
 }
 
 function showPosition(position) {
@@ -17,7 +20,7 @@ function showPosition(position) {
     currentLng = position.coords.longitude;
     x.innerHTML = "座標 (" + currentLat.toFixed(3) + " , " + currentLng.toFixed(3) + ")";
 
-    var mymap = L.map('mapid').setView([currentLat, currentLng], 15);
+    mymap = L.map('mapid').setView([currentLat, currentLng], 15);
     L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
         attribution: '&copy; Jouta',
         maxZoom: 18,
@@ -36,31 +39,57 @@ function showPosition(position) {
         radius: 1500
     }).addTo(mymap);
     marker.bindPopup("你在這裡!").openPopup();
-
-    //$.ajax({
-    //    type: "GET",
-    //    data: {
-    //        "currentLat": currentLat,
-    //        "currentLng": currentLng
-    //    },
-    //    dataType: "json",
-    //    url: "/Home/QuickMatch",
-    //    async: false,
-    //    cache: true,
-    //    success: function () {
-    //        alert("success!");
-    //    },
-    //    error: function (xhr, status, error) {
-    //        console.log(error);
-    //    }
-    //});
 }
 
+//翻牌給tab
+function tabs(panelIndex) {
+    tabNum = panelIndex;
+    console.log('tabs func: ' + tabNum);
+    return panelIndex;
+}
+tabs(0);
+
+$('.resultTrigger').click(function () {
+
+    console.log('pi: ' + tabNum);
+    console.log("lat: " + currentLat);
+
+    console.log(result);
+
+    $.ajax({
+        url: "/Home/QuickMatch",
+        type: "POST",
+        data: {
+            "curLat": currentLat,
+            "curLng": currentLng,
+            "tabNum": tabNum
+        },
+        dataType: "json",
+        async: false,
+        cache: true,
+        success: function (data) {
+            //alert(data);
+            //JSON Data
+            //$('#mName').text(data);
+        },
+        error: function (xhr, status, error) {
+            console.log(error);
+        }
+    });
+});
 
 
 
 
 
+
+
+
+
+
+
+
+// old shit
 
 
 //取得使用者當前座標 3

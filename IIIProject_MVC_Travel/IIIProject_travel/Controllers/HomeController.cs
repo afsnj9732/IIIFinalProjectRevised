@@ -46,22 +46,51 @@ namespace IIIProject_travel.Controllers
             return View();
         }
 
-        //[HttpPost]
-        //public JsonResult QuickMatch(double lat, double lng)
-        //{
-        //    dbJoutaEntities db = new dbJoutaEntities();
+        [HttpPost]
+        public ActionResult QuickMatch(int tabNum, double? curLat, double? curLng)
+        {
+            //return Content("Hello" + tabNum + "," + curLat + "," + curLng);
+            dbJoutaEntities db = new dbJoutaEntities();
+            var rand = new Random();
 
-        //    if (db.tActivity.)
-        //        var x = from t in db.tActivity
-        //                where (t.f活動類型 == "飯局")
-        //                select t;
-        //    return Json(x);
-        //}
+            if (curLat != null && curLng != null)
+            {
+                if (tabNum == 0)
+                {
+                    var x = from t in db.tActivity
+                            where (t.f活動類型 == "飯局") && (t.f活動經度 < curLng - 0.02) && (t.f活動經度 > curLng + 0.02) && (t.f活動緯度 < curLat - 0.02) && (t.f活動緯度 < curLat + 0.02)
+                            select t;
+                    var result = x.OrderBy(e => rand.Next()).Take(1);
+                    return Json(result, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    var y = from t in db.tActivity
+                            where (t.f活動類型 == "旅遊") && (t.f活動經度 < curLng - 0.02) && (t.f活動經度 > curLng + 0.02) && (t.f活動緯度 < curLat - 0.02) && (t.f活動緯度 < curLat + 0.02)
+                            //orderby t.rand.Next().Take(1)
+                            select t;
+                    var result = y.OrderBy(e => rand.Next()).Take(1);
+                    return Json(result, JsonRequestBehavior.AllowGet);
+                }
+
+            }
+            else
+            {
+                var z = from t in db.tActivity
+                        where (t.f活動類型 == "飯局") || (t.f活動類型 == "旅遊")
+                        select t;
+                var result = z.OrderBy(e => rand.Next()).Take(1);
+                return Json(result, JsonRequestBehavior.AllowGet);
+
+            }
+        }
+
+
 
         public ActionResult Register()
         {
             //判斷使用者是否已經過登入驗證
-            if (User.Identity.IsAuthenticated)
+            //if (User.Identity.IsAuthenticated)
             //若無登入驗證，則導向註冊頁面
             return View();
         }
@@ -152,6 +181,6 @@ namespace IIIProject_travel.Controllers
         {
             return View();
         }
-        
+
     }
 }
