@@ -47,6 +47,7 @@ namespace IIIProject_travel.Controllers
             return View();
         }
 
+
         //[HttpPost]
         //public JsonResult QuickMatch(double lat, double lng)
         //{
