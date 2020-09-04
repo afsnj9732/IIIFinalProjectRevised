@@ -7,13 +7,18 @@ body {
     border-radius: 20px;
 }
 
+.row{
+
+    margin : 0 !important; 
+}
+
 #sidebar {
-    background-color: #fff5f5;
+   
     border-radius: 0 50px 50px 0;
 }
 
 #main-section {
-    background-color: #fff5f5;
+    
     border-radius: 50px 0 0 50px;
 }
 

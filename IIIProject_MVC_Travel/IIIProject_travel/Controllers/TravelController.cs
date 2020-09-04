@@ -37,6 +37,8 @@ namespace IIIProject_travel.Controllers
                 }
                 tMember Member = (tMember)Session["member"];
                 p.f會員編號 = Member.f會員編號;
+                p.f活動類型 = "旅遊";
+                p.f活動參加的會員編號 += ","+Member.f會員編號;
                 dbJoutaEntities db = new dbJoutaEntities();
                 db.tActivity.Add(p);
                 db.SaveChanges();
@@ -52,8 +54,10 @@ namespace IIIProject_travel.Controllers
             db.SaveChanges();
         }
 
-        public void likeIt(string ActivityID)
+        public string likeIt(string ActivityID)
         {
+            if (Session["member"] == null)
+                return "0";
             dbJoutaEntities db = new dbJoutaEntities();
             var condition = (tMember)Session["member"];
             var member = db.tMember.Where(x => x.f會員編號 == condition.f會員編號).Select(a => a).FirstOrDefault();
@@ -79,6 +83,7 @@ namespace IIIProject_travel.Controllers
                 member.f會員收藏的活動編號 += "," + ActivityID; //若資料庫完全是空的，則不可能有重複值，直接存入
                 db.SaveChanges();
             }
+            return "1";
         }
 
         public string autoComplete()
@@ -139,8 +144,8 @@ namespace IIIProject_travel.Controllers
             var ActList = db.tActivity.Where(n => n.f活動編號 == target).FirstOrDefault();
             //string[] MsgsList = ActList.f活動留言.Split(',');
             //index = Array.FindIndex(MsgsList,a=>a.StartsWith(NowMember.f會員名稱));  
-            ActList.f活動留言 += ","+NowMember.f會員名稱 + ":" + sentMsg ;
-            ActList.f活動留言時間 += "," + DateTime.Now.ToString("MM/dd HH:mm:ss");
+            ActList.f活動留言 += "_^$"+NowMember.f會員名稱 + ":" + sentMsg ;
+            ActList.f活動留言時間 += "," + DateTime.Now.ToString("MM/dd HH:mm:ss") + "_^$" + NowMember.f會員編號;
             db.SaveChanges();
             return View(target);
         }

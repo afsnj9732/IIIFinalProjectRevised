@@ -1,0 +1,219 @@
+﻿
+@using PagedList
+@using PagedList.Mvc
+@model IPagedList<IIIProject_travel.tActivity>
+
+@{
+    Layout = null;
+    var x = (tMember)Session["member"];
+}
+
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>文章 | Jouta</title>
+    <link rel="stylesheet" href="~/Content/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/Content/css/style.css">
+    <link rel="stylesheet" href="~/Content/css/blog_style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css">
+    <link href="~/Content/PagedList.css" rel="stylesheet" />
+
+</head>
+
+<body>
+    <div class="container-fluid ">
+        <!-- navbar -->
+        <nav class="navbar navbar-expand-lg navbar-light header" id="main">
+            <div class="container">
+                <a class="navbar-brand" href="main.html">
+                    <img src="~/Content/images/joutalogo_black.png" alt="" width="100">
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
+                    <ul class="nav navbar-nav">
+                        <li class="nav-item">@Html.ActionLink("首頁", "Home", "Home", new { }, new { @class = "nav-link nav-main text-dark" })</li>
+                        <li class="nav-item">@Html.ActionLink("找飯局", "EatIndex", "Eat", new { }, new { @class = "nav-link nav-eat text-dark" })</li>
+                        <li class="nav-item">@Html.ActionLink("找旅遊", "TravelIndex", "Travel", new { }, new { @class = "nav-link nav-travel text-dark" })</li>
+                        <li class="nav-item">@Html.ActionLink("找文章", "Index", "Blog", new { }, new { @class = "nav-link nav-blog text-dark" })</li>
+                    </ul>
+                    <ul class="nav navbar-nav">
+                        @if (Session["member"] != null)
+                        {
+                            <li class="nav-item nav-link nav-login text-dark">觀迎 @x.f會員名稱 </li>
+                            <li class="nav-item">@Html.ActionLink("登出", "Home", "Home", new { id = 0 }, new { @class = "nav-link nav-login text-dark" })</li>
+                        }
+                        else
+                        {
+                            <li class="nav-item">@Html.ActionLink("登入", "LoginIndex", "Login", new { }, new { @class = "nav-link nav-login text-dark" })</li>
+                        }
+                        <li class="nav-item">@Html.ActionLink("註冊", "Register", "Home", new { }, new { @class = "nav-link nav-register text-dark" })</li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+
+
+    <!-- Page Content -->
+    <div class="container">
+
+        <div class="row blogbox">
+            <!-- Blog Entries Column -->
+            <div class="col-md-8" id="main-section">
+
+                <h1 class="my-4">
+                    Suzume的美好豐富集綿
+                </h1>
+
+                <hr size="8" width="100%">
+                @{
+                    foreach (tActivity tArticle in Model)
+                    {
+
+                        <!-- Blog Post -->
+                        <div class="card mb-4">
+                            <img class="card-img-top" src="~/Content/images/@tArticle.f活動團圖" w alt="Card image cap">
+                            <div class="card-body">
+                                <h2 class="card-title">@tArticle.f活動標題</h2>
+                                <p class="card-text">
+                                    @tArticle.f活動內容
+                                </p>
+                                <a class="nav-item">@Html.ActionLink("Read More", "BlogContent", "Blog", new { id = tArticle.f活動編號 }, new { @class = "btn btnContent" })</a>
+                            </div>
+                            <div class="card-footer text-muted">
+
+                                <p class="pDateSection"> Posted on January 1, 2020 by <a href="#">Jouta</a></p>
+
+                            </div>
+                        </div>
+                    }
+                }
+
+
+
+
+                <!-- Pagination -->
+                <ul class="pagination justify-content-center mb-4">
+
+                    @*<button class="ui right floated button" id="btnPrev">Prev</button>*@
+                    @*@Html.ActionLink("Prev", "Index", "Blog", new { @class = "ui right floated button", id = "btnPrev" })
+                        @Html.ActionLink("Next", "Index", "Blog", new { @class = "ui left floated button", id = "btnNext" })*@
+                    @*<button class="ui left floated button" id="btnNext">Next</button>*@
+                    @Html.PagedListPager(Model, Page => Url.Action("Index", new { Page }))
+                </ul>
+            </div>
+            <!-- Sidebar Widgets Column -->
+            <div class="col-md-4" id="sidebar">
+
+
+
+                <section id="achang-intro-2" class="card my-4">
+                    <h2>會員名稱</h2>
+                    <img src="https://picsum.photos/300/300/?random=1">
+                    <p class="content">
+                        Food &amp; Wine Lover, Bilingual Blogger, Marketing Freelancer and Content
+                        Creator
+                        <br>美食與酒類愛好者,行銷創作接案者
+                        <br>
+                        <br>
+                        <i class="fab fa-instagram"></i> Jouta
+                        <br>
+                        <br>
+                        <i class="far fa-envelope"></i> jouta@gmail.com
+                        <br>
+                    </p>
+                </section>
+
+                <!-- Search Widget -->
+                <div class="card my-4">
+                    <h5 class="card-header">Search</h5>
+                    <div class="card-body">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Search for...">
+                            <span class="input-group-append">
+                                <button class="btn btn-secondary" type="button">Go!</button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Categories Widget -->
+                <div class="card my-4">
+                    <h5 class="card-header">分類</h5>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <ul class="list-unstyled mb-0">
+                                    <li>
+                                        <a href="#">美食</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">旅遊</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">美好回憶</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="col-lg-6">
+                                <ul class="list-unstyled mb-0">
+                                    <li>
+                                        <a href="#">大港開唱</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">爵士音樂節</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Side Widget -->
+                <div class="card my-4">
+                    <h5 class="card-header">Side Widget</h5>
+                    <!-- <div class="card-body"> -->
+
+                    <iframe src="https://www.instagram.com/p/CAHMofInFwy/embed/captioned/?cr=1&amp;v=12&amp;wp=956&amp;rd=https%3A%2F%2Fletswritetw.github.io&amp;rp=%2Fletswrite-instagram-embed%2F#%7B%22ci%22%3A0%2C%22os%22%3A54857.92500000389%2C%22ls%22%3A457.45000000169966%2C%22le%22%3A458.2700000028126%7D"
+                            width="340" height="500" style="border:none;overflow:hidden ;height: 500px;" scrolling="no"
+                            frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
+                    <script async src="//www.instagram.com/embed.js"></script>
+                </div>
+                <div class="card my-4">
+                    <!-- <h5 class="card-header">Side Widget</h5> -->
+                    <!-- <div class="card-body"> -->
+                    <iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fnoraneko.nyankichi%2F&tabs=timeline&width=340&height=500&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&appId"
+                            width="340" height="500" style="border:none;overflow:hidden" scrolling="no" frameborder="0"
+                            allowTransparency="true" allow="encrypted-media"></iframe>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <!-- footer -->
+
+
+    <div class="container-fluid footer">
+        <p class="text-center mt-2 mb-2">Copyright © 2020 Jouta All rights reserved</p>
+    </div>
+
+    <!-- script -->
+    <script src="~/Scripts/jquery-3.5.1.js"></script>
+    <script src="~/Scripts/IIIProject/popper.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+
+
+</body>
+
+</html>

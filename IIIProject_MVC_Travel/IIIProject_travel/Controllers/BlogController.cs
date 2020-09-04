@@ -38,6 +38,22 @@ namespace IIIProject_travel.Controllers
 
 
         }
+
+        public ActionResult personalIndex (int page = 1)
+        {
+
+            int currentPage = page < 1 ? 1 : page;
+
+            var article = from t in (new dbJoutaEntities()).tActivity
+                          where t.f活動類型 == "文章"
+                          orderby t.f活動編號
+                          select t;
+            var articleList = article.ToList();
+            var result = articleList.ToPagedList(currentPage, pagesize);
+
+
+            return View(result);
+        }
         public ActionResult BlogContent(int? id)
         {
 
@@ -113,12 +129,11 @@ namespace IIIProject_travel.Controllers
             var img = writer.Write("https://localhost:44380/");
             string FileName = "michelin-guide";
             Bitmap myBitmap = new Bitmap(img);
-            string filepath = string.Format("C:\\Users\\User\\Desktop\\slnprjQRcode\\prjQRcode\\Content\\{0}.bmp", FileName);
-            //string filePath = string.Format("//Content//images//{0}.bmp", FileName);
-            string filePath = Path.Combine(Server.MapPath("~/Content/images/"), FileName + ".bmp");
-            ViewBag.filePath = filePath;
+            string filepath = string.Format(Server.MapPath("~/Content/images/") + "{0}.bmp", FileName);
 
-            myBitmap.Save(filePath, ImageFormat.Bmp);
+            ViewBag.filePath = filepath;
+
+            myBitmap.Save(filepath, ImageFormat.Bmp);
             ViewBag.IMG = myBitmap;
 
             return View();
@@ -127,8 +142,8 @@ namespace IIIProject_travel.Controllers
         public ActionResult PhotoGet()
         {
             string FileName = "michelin-guide";
-            string filepath = string.Format("C:\\Users\\User\\Desktop\\slnprjQRcode\\prjQRcode\\Content\\{0}.bmp", FileName);
-            //string filepath = Path.Combine(Server.MapPath("~/Content/images/"), FileName + ".bmp");
+            string filepath = string.Format(Server.MapPath("~/Content/images/")+"{0}.bmp", FileName);
+            QRcode();
             byte[] filedata = System.IO.File.ReadAllBytes(filepath);
             string contentType = MimeMapping.GetMimeMapping(filepath);
             var cd = new System.Net.Mime.ContentDisposition
