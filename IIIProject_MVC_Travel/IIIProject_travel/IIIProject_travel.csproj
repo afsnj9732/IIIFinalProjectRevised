@@ -2104,6 +2104,8 @@
     <Content Include="Views\Home\ChangePassword.cshtml" />
     <Content Include="Views\Home\forgetPassword.cshtml" />
     <Content Include="Views\DataPresent\Index.cshtml" />
+    <Content Include="Views\Travel\Actadd.cshtml" />
+    <Content Include="Views\Travel\MsgAdd.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

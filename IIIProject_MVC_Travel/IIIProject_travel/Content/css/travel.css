@@ -2,14 +2,35 @@ body {
     background-color: #fffef4;
     padding-right: 0 !important;
 }
+
+
 .combine_readmore {
-     
+    
 }
-.combine_join{
-    z-index: 1051 ;
+/*.modal-backdrop {
+    background-color: red;
+}*/
+.combine_join {
+    z-index: 1051;
+    
 }
 .combine_msg {
-    z-index: 1051 ;
+    z-index: 1051;
+    
+}
+
+
+/*彈出視窗窗格高度設置*/
+.modal-dialog,
+.modal-content {
+    /* 95% of window height */
+    height: 95%;
+}
+
+.modal-body {
+    /* 100% = dialog height, 120px = header + footer */
+    /*max-height: calc(100% - 120px);*/
+    overflow-y: scroll;
 }
 p{
     margin-bottom: 5px;
@@ -50,16 +71,40 @@ p{
     margin: 10px !important;
 }
 
+/*隱藏scroll bar*/
+::-webkit-scrollbar {
+    width: 0px; /* Remove scrollbar space */
+    background: transparent; /* Optional: just make scrollbar invisible */
+}
+/* Optional: show position indicator in red */
+::-webkit-scrollbar-thumb {
+    background: #FF0000;
+}
+
 .change-max-width-550 {
     max-width: 550px;
 }
 
 .change-max-width-1000 {
+    width:1000px;
     max-width: 1000px;
+}
+
+ 
+
+.change-max-width-1000 .textBox {
+    height: 382px;
+    overflow-y: scroll;
 }
 
 .change-max-width-1400 {
     max-width: 1400px;
+}
+
+.change-max-width-1420 {
+    max-width: 1420px;
+    /*height:500px;
+    max-height:500px !important;*/
 }
 
 .Travel_border{
