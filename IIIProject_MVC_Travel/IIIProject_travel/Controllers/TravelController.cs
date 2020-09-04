@@ -37,6 +37,8 @@ namespace IIIProject_travel.Controllers
                 }
                 tMember Member = (tMember)Session["member"];
                 p.f會員編號 = Member.f會員編號;
+                p.f活動類型 = "旅遊";
+                p.f活動參加的會員編號 += ","+Member.f會員編號;
                 dbJoutaEntities db = new dbJoutaEntities();
                 db.tActivity.Add(p);
                 db.SaveChanges();

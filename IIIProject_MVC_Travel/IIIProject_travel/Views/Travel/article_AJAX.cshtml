@@ -3,6 +3,7 @@
     dbJoutaEntities db = new dbJoutaEntities();
     Layout = null;
     int count = 0;
+    int exclude = 0;
     string target = "";
     string img;
     string combine_readmore = "";
@@ -64,6 +65,11 @@
                     <div MsgAdd="@item.f活動編號">
                         @foreach (var Msg in targetMsgs)
                         {
+                            exclude++;
+                            if (exclude == 1)
+                            {
+                                continue;
+                            }
                             MsgsTimeAndID = Msg.time.Split(new string[] { "_^$" }, StringSplitOptions.None);
                             if (MsgsTimeAndID.Length > 1)
                             {
@@ -71,8 +77,7 @@
                             }
                             img = db.tMember.Where(t => t.f會員編號.ToString() == target)
                                   .Select(t => t.f會員大頭貼).FirstOrDefault();
-                            if (!string.IsNullOrEmpty(img))
-                            {
+
                                 <div class="row justify-content-between pl-5 pr-5 mr-5 ml-5">
                                     <div>
                                         <span><img src="~/Content/images/@img" width="30" height="30"></span>
@@ -81,8 +86,9 @@
                                     <div>@MsgsTimeAndID[0]</div>
                                 </div>
                                 <br />
-                            }
+
                         }
+                        @{exclude = 0;}
                     </div>
                 </div>
                 <div class="modal-footer justify-content-between">
