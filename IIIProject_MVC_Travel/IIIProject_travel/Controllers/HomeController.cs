@@ -33,18 +33,10 @@ namespace IIIProject_travel.Controllers
                     select k;
             c.tMembers = x;
             c.tActivities = y;
-            //if (id == 0)
-            //{
-            //    Session.Remove("member");
-            //}
-            //else {
-            //    string displayImg = (string)Session["member"];
-            //    dbJoutaEntities db = new dbJoutaEntities();
-            //    tMember t = db.tMember.FirstOrDefault(k => k.f會員編號 == id);
-            //    Session["member"] = t;
-            //    string v =  t.f會員大頭貼.ToString();
-            //    ViewData["Img"] = v;
-            //}
+            if (id == 0)
+            {
+                Session.Remove("member");
+            }
             return View(c);
         }
 
@@ -70,7 +62,6 @@ namespace IIIProject_travel.Controllers
         {
             //判斷使用者是否已經過登入驗證
             if (User.Identity.IsAuthenticated)
-                return RedirectToAction("Home", "Home");
             //若無登入驗證，則導向註冊頁面
             return View();
         }
@@ -130,14 +121,12 @@ namespace IIIProject_travel.Controllers
         {
             //呼叫service來判斷，並回傳結果
             return Json(membersService.accountCheck(p.txtEmail), JsonRequestBehavior.AllowGet);
-
         }
 
         //接收驗證信連結傳進來
         public ActionResult emailValidation(string email, string AuthCode)
         {
             //用ViewData儲存，使用Service進行信箱驗證後的結果訊息
-            ViewData["emailValidation"] = membersService.emailValidation(email, AuthCode);
             return View();
         }
 
@@ -154,7 +143,6 @@ namespace IIIProject_travel.Controllers
         {
             if (ModelState.IsValid)
             {
-                ViewData["ChangeState"] = membersService.ChangePassword(User.Identity.Name, p.txtPassword, p.txtNewPassword);
             }
             return View();
         }
@@ -164,34 +152,6 @@ namespace IIIProject_travel.Controllers
         {
             return View();
         }
-
-        public ActionResult ForgetPassword()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        public ActionResult ForgetPassword(string Email)
-        {
-            string msg = "";
-            bool status = false;
-
-            dbJoutaEntities db = new dbJoutaEntities();
-            tMember account = db.tMember.FirstOrDefault(k => k.f會員電子郵件 == Email);
-            if (account != null)
-            {
-                MailMessage user_mail = new MailMessage("Joutagroup445@gmail.com",
-                    account.f會員電子郵件, "找回密碼", "您好，您的密碼是:" + account.f會員密碼);
-                SmtpClient mail_client = new SmtpClient("127.0.0.1");
-                //mail_client.Credentials = CredentialCache.DefaultNetworkCredentials;
-                mail_client.Send(user_mail);
-
-            }
-            else
-            {
-                Response.Write("信箱有誤，查無此信箱");
-            }
-            return View();
-        }
+        
     }
 }

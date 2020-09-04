@@ -1,0 +1,52 @@
+﻿@model PagedList.IPagedList<IIIProject_travel.tMember>
+@using PagedList.Mvc
+@using IIIProject_travel.Models;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+@{
+    ViewBag.Title = "Students";
+}
+
+<h2>Students</h2>
+
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+@using (Html.BeginForm("Index", "Student", FormMethod.Get))
+{
+    <p>
+        Find By Name/Gender: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+        <input type="submit" value="Search" />
+    </p>
+}
+<table class="table">
+
+    <tr>
+        <th>
+            @Html.ActionLink("Sort By Name", "Index", new { sortOrder = ViewBag.名稱排序, currentFilter = ViewBag.CurrentFilter })
+        </th>
+        <th>
+            @Html.ActionLink("Sort By Enrollment Date", "Index", new { sortOrder = ViewBag.帳號排序, currentFilter = ViewBag.CurrentFilter })
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(mt => item.f會員名稱)
+            </td>
+            <td>
+                @Html.DisplayFor(mt => item.f會員帳號)
+            </td>
+        </tr>
+    }
+</table>
+<br />
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Index",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
