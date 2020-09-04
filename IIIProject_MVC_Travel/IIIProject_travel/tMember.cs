@@ -44,6 +44,7 @@ namespace IIIProject_travel
         public bool isAdmin { get; set; }
         public string f會員收藏的活動編號 { get; set; }
         public Nullable<int> f會員評分人數 { get; set; }
+        public Nullable<int> f會員總分 { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tActivity> tActivity { get; set; }

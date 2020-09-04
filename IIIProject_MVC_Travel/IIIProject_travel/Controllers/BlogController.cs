@@ -113,7 +113,7 @@ namespace IIIProject_travel.Controllers
             var img = writer.Write("https://localhost:44380/");
             string FileName = "michelin-guide";
             Bitmap myBitmap = new Bitmap(img);
-            string filepath = string.Format("C:\\Users\\蔡旻哲\\Documents\\GitHub\\JoutaMVC\\IIIProject_MVC_Travel\\IIIProject_travel\\Content\\images\\O}.bmp", FileName);
+            string filepath = string.Format(Server.MapPath("~/Content/images/") + "{0}.bmp", FileName);
 
             ViewBag.filePath = filepath;
 
@@ -126,8 +126,8 @@ namespace IIIProject_travel.Controllers
         public ActionResult PhotoGet()
         {
             string FileName = "michelin-guide";
-            string filepath = string.Format("C:\\Users\\蔡旻哲\\Documents\\GitHub\\JoutaMVC\\IIIProject_MVC_Travel\\IIIProject_travel\\Content\\images\\{O}.bmp", FileName);
-            
+            string filepath = string.Format(Server.MapPath("~/Content/images/")+"{0}.bmp", FileName);
+            QRcode();
             byte[] filedata = System.IO.File.ReadAllBytes(filepath);
             string contentType = MimeMapping.GetMimeMapping(filepath);
             var cd = new System.Net.Mime.ContentDisposition
