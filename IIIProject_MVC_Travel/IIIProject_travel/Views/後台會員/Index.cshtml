@@ -5,7 +5,13 @@
 }
 
 <h2>Index</h2>
-
+@using (Html.BeginForm())
+{
+    <p>
+        Find By Name/Gerder: @Html.TextBox("SearchString")
+        <input type="submit" value="Search" />
+    </p>
+}
 
 <table class="table">
     <tr>
@@ -26,17 +32,17 @@
 
     @foreach (var item in Model)
     {
-    <tr>
-        <td>
-            @Html.DisplayFor(mt => item.f會員名稱)
-        </td>
-        <td>
-            @Html.DisplayFor(mt => item.f會員電子郵件)
-        </td>
-        <td>
-            @Html.DisplayFor(mt => item.f會員電子郵件)
-        </td>
+        <tr>
+            <td>
+                @Html.DisplayFor(mt => item.f會員名稱)
+            </td>
+            <td>
+                @Html.DisplayFor(mt => item.f會員電子郵件)
+            </td>
+            <td>
+                @Html.DisplayFor(mt => item.f會員手機)
+            </td>
 
-    </tr>
+        </tr>
     }
 </table>
