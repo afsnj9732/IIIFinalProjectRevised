@@ -1,4 +1,4 @@
-﻿@*@model IIIProject_travel.ViewModel.CData*@
+﻿@model IEnumerable<tActivity>
 @{
     Layout = null;
     var x = (tMember)Session["member"];
@@ -179,7 +179,7 @@
 
                             <h6 class="profiletag">自我介紹</h6>
                             <textarea id="intro" rows="5" cols="50" name="introduction">@x.f會員自我介紹</textarea><br>
-                            <button type="submit" class="btn btn-warning">繳交</button>
+                            <button type="submit" class="btn btn-warning">修改資料</button>
                         </form>
                     </div>
                     <div class="profile-posts tab_info">
