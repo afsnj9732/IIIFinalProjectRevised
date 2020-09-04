@@ -1,15 +1,18 @@
 ﻿@model IEnumerable<tActivity>
 @{
+    dbJoutaEntities db = new dbJoutaEntities();
     Layout = null;
     int count = 0;
+    string target = "";
+    string img;
     string combine_readmore = "";
     string combine_join = "";
     string combine_msg = "";
     var NowMember = (tMember)Session["member"]; //注意Session抓到的資料，其資料內容為取得該Session當下的資料內容，
                                                 //因此若有修改過資料庫的資料，就要改藉由Session的會員編號
                                                 //去抓取現在資料庫的資料，否則會一直撈到不變的Session資料
-    tMember targetMember = (new dbJoutaEntities()).tMember.FirstOrDefault(x => x.f會員編號 == NowMember.f會員編號);
-    var totalMember = from x in (new dbJoutaEntities()).tMember
+    tMember targetMember = db.tMember.FirstOrDefault(x => x.f會員編號 == NowMember.f會員編號);
+    var totalMember = from x in db.tMember
                       select x;
 }
 
@@ -18,9 +21,11 @@
 {
     string[] MsgsTime = { };
     string[] Msgs = { };
+    string[] MsgsTimeAndID = { };
     if (!string.IsNullOrEmpty(item.f活動留言))
     {
-        Msgs = item.f活動留言.Split(',');
+        Msgs = item.f活動留言.Split(new string[] { "_^$" }, StringSplitOptions.None);//因包含對話內容，
+                                                                                 //因此利用複數特殊字元做分割
         MsgsTime = item.f活動留言時間.Split(',');
     }
 
@@ -46,73 +51,85 @@
             iflikeit = "14.png";
         }
     }
-<div class="modal fade combine_msg" id="@combine_msg" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog change-max-width-1420" role="document" style="padding-right: 17px !important;">
-        <div class="modal-content" >
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">@item.f活動標題 留言區</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div MsgAdd="@item.f活動編號">
-                    @foreach (var Msg in targetMsgs)
-                    {
-                    <div class="row justify-content-between pl-5 pr-5 mr-5 ml-5">
-                        <div>@Msg.msg</div>
-
-                        <div>@Msg.time</div>
-                    </div>
-                        <br />
-                    }
+    <div class="modal fade combine_msg" id="@combine_msg" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog change-max-width-1420" role="document" style="padding-right: 17px !important;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">@item.f活動標題 留言區</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
-            </div>
-            <div class="modal-footer justify-content-between">
-                <input type="text" class="ml-4" sentMsg="@item.f活動編號" style="width:80%"/>
-                <span>
-                    <button type="button" class="btn btn-warning leaveMsg" leaveMsg="@item.f活動編號">送出</button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
-                </span>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="modal fade combine_join" id="@combine_join" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog change-max-width-1420" role="document" style="padding-right: 17px !important;">
-        <div class="modal-content" >
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">@item.f活動標題 團員名單</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div ActAdd="@item.f活動編號" >
-                    @foreach (string guy in attendGuys) //先直接撈原本的資料，若有變動針對此處做AJAX修改
-                    {
-                        var theGuy = totalMember.Where(x => x.f會員編號.ToString() == guy);
-                        var theGuyName = theGuy.Select(a => a.f會員名稱).FirstOrDefault();
-                        if (!string.IsNullOrEmpty(theGuyName))
+                <div class="modal-body">
+                    <div MsgAdd="@item.f活動編號">
+                        @foreach (var Msg in targetMsgs)
                         {
-                            <div>
-                                <img width="100" height="100" src="~/Content/images/@theGuy.Select(a => a.f會員大頭貼).FirstOrDefault()" />
-                                <span>@theGuyName</span>
-                            </div>
-                            <br />
+                            MsgsTimeAndID = Msg.time.Split(new string[] { "_^$" }, StringSplitOptions.None);
+                            if (MsgsTimeAndID.Length > 1)
+                            {
+                                target = MsgsTimeAndID[1];
+                            }
+                            img = db.tMember.Where(t => t.f會員編號.ToString() == target)
+                                  .Select(t => t.f會員大頭貼).FirstOrDefault();
+                            if (!string.IsNullOrEmpty(img))
+                            {
+                                <div class="row justify-content-between pl-5 pr-5 mr-5 ml-5">
+                                    <div>
+                                        <span><img src="~/Content/images/@img" width="30" height="30"></span>
+                                        <span>@Msg.msg</span>
+                                    </div>
+                                    <div>@MsgsTimeAndID[0]</div>
+                                </div>
+                                <br />
+                            }
                         }
-                    }
+                    </div>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-warning joinAct" joinAct="@item.f活動編號" >我要入團</button>
-                <button type="button" class="btn btn-secondary leaveAct" leaveAct="@item.f活動編號">我要退團</button>
-                @*<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>*@
+                <div class="modal-footer justify-content-between">
+                    <input type="text" class="ml-4" sentMsg="@item.f活動編號" style="width:80%" />
+                    <span>
+                        <button type="button" class="btn btn-warning leaveMsg" leaveMsg="@item.f活動編號">送出</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
+                    </span>
+                </div>
             </div>
         </div>
     </div>
-</div>
+
+    <div class="modal fade combine_join" id="@combine_join" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog change-max-width-1420" role="document" style="padding-right: 17px !important;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">@item.f活動標題 團員名單</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div ActAdd="@item.f活動編號">
+                        @foreach (string guy in attendGuys) //先直接撈原本的資料，若有變動針對此處做AJAX修改
+                        {
+                            var theGuy = totalMember.Where(x => x.f會員編號.ToString() == guy);
+                            var theGuyName = theGuy.Select(a => a.f會員名稱).FirstOrDefault();
+                            if (!string.IsNullOrEmpty(theGuyName))
+                            {
+                                <div>
+                                    <img width="100" height="100" src="~/Content/images/@theGuy.Select(a => a.f會員大頭貼).FirstOrDefault()" />
+                                    <span>@theGuyName</span>
+                                </div>
+                                <br />
+                            }
+                        }
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-warning joinAct" joinAct="@item.f活動編號">我要入團</button>
+                    <button type="button" class="btn btn-secondary leaveAct" leaveAct="@item.f活動編號">我要退團</button>
+                    @*<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>*@
+                </div>
+            </div>
+        </div>
+    </div>
 
 
     <div class="modal fade combine_readmore" id="@combine_readmore" tabindex="-1" role="dialog"
@@ -158,7 +175,7 @@
                             <div class="change-max-width-1000 ml-4">
                                 <div class="row align-items-center m-0 ml-2 textBox">
                                     @item.f活動內容
-                                </div>                            
+                                </div>
                             </div>
                         </div>
                         <br />
@@ -258,10 +275,10 @@
                     <img src="~/Content/images/17.png" alt="">@item.f活動分類
                     <img src="~/Content/images/03.png" alt="">@item.f活動地區
                     <img src="~/Content/images/04.png" alt="">@item.f活動預算
-                    
-                        <img src="~/Content/images/06.png" class="" alt=""><span  ToUpdateVC="@item.f活動編號">@item.f活動瀏覽次數</span>
-                            <img src="~/Content/images/05.png" class="updateGoodCounts" alt="">@*@item.f活動讚數*@
-</div>
+
+                    <img src="~/Content/images/06.png" class="" alt=""><span ToUpdateVC="@item.f活動編號">@item.f活動瀏覽次數</span>
+                    <img src="~/Content/images/05.png" class="updateGoodCounts" alt="">@*@item.f活動讚數*@
+                </div>
                 <div style="cursor: pointer;">
                     <img src="~/Content/images/12.png" alt="">留言
                 </div>
