@@ -29,8 +29,9 @@ namespace IIIProject_travel.Controllers
                     where m.f會員編號 > 8 && m.f會員編號 < 13
                     select m;
             var y = from k in (new dbJoutaEntities()).tActivity
-                    where k.f會員編號 > 12 && k.f會員編號 < 17
+                    where !string.IsNullOrEmpty(k.f活動團圖)                    
                     select k;
+            y = y.Take(3);
             c.tMembers = x;
             c.tActivities = y;
             if (id == 0)
