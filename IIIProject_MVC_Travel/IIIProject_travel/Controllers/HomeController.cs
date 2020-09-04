@@ -61,7 +61,8 @@ namespace IIIProject_travel.Controllers
         public ActionResult Register()
         {
             //判斷使用者是否已經過登入驗證
-            if (User.Identity.IsAuthenticated)
+            //if (User.Identity.IsAuthenticated)
+            //    return View("Home","Home");
             //若無登入驗證，則導向註冊頁面
             return View();
         }
@@ -131,21 +132,21 @@ namespace IIIProject_travel.Controllers
         }
 
         //修改密碼
-        [Authorize]
-        public ActionResult ChangePassword()
-        {
-            return View();
-        }
+        //[Authorize]
+        //public ActionResult ChangePassword()
+        //{
+        //    return View();
+        //}
 
-        [Authorize]
-        [HttpPost]
-        public ActionResult ChangePassword(CChangePassword p)
-        {
-            if (ModelState.IsValid)
-            {
-            }
-            return View();
-        }
+        //[Authorize]
+        //[HttpPost]
+        //public ActionResult ChangePassword(CChangePassword p)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //    }
+        //    return View();
+        //}
 
         [AllowAnonymous]
         public ActionResult About()
