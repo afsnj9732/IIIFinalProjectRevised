@@ -198,7 +198,7 @@
                     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
                          aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog change-max-width-1400" role="document">
-                            <div class="modal-content" style="height:82%">
+                            <div class="modal-content" @*style="height:82%"*@>
                                 <div class="modal-header border-main-color">
                                     <h5 class="modal-title" id="exampleModalLabel"><span style="font-weight:bolder;"> 開團</span></h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -212,14 +212,14 @@
                                 <div class="modal-body">
                                     <form enctype="multipart/form-data" method="post">
                                         <div class="container-fluid">
-                                            <span>標題：<input type="text" name="f活動標題" style="width:90%"></span>
+                                            <span>標題：<input type="text" name="f活動標題" style="width:90%"><p id="NeedAT" style="color:red">活動標題請至少填滿8個字</p></span>
                                             <div class="row m-0 mb-3 justify-content-around">
-                                                <span>旅遊開始日期： <input type="date" min="@DateTime.Now.AddDays(1.0).ToString("yyyy-MM-dd")" max="" id="ActivityStart" name="f活動開始時間"></span>
-                                                <span>旅遊結束日期： <input type="date" min="@DateTime.Now.AddDays(2.0).ToString("yyyy-MM-dd")" max="" id="ActivityEnd" disabled name="f活動結束時間"></span>
-                                                <span>入團截止： <input type="date" min="@DateTime.Now.ToString("yyyy-MM-dd")" max="" id="ActivityFindEnd" disabled name="f活動招募截止時間"></span>
+                                                <span>旅遊開始日期： <input type="date" min="@DateTime.Now.AddDays(1.0).ToString("yyyy-MM-dd")" max="" id="ActivityStart" name="f活動開始時間"><p  id="NeedAST" style="color:red">活動開始時間必填</p></span>
+                                                <span>旅遊結束日期： <input type="date" min="@DateTime.Now.AddDays(2.0).ToString("yyyy-MM-dd")" max="" id="ActivityEnd" disabled name="f活動結束時間"><p  id="NeedAET" style="color:red">活動結束時間必填</p></span>
+                                                <span>入團截止： <input type="date" min="@DateTime.Now.ToString("yyyy-MM-dd")" max="" id="ActivityFindEnd" disabled name="f活動招募截止時間"><p  id="NeedAFT" style="color:red">招募截止時間必填</p></span>
                                             </div>
                                             <div class="row mb-4 mx-auto align-items-center justify-content-around">
-                                                <span><img src="~/Content/images/04.png" class="mb-1" alt="">預算：<input type="text" name="f活動預算"></span>
+                                                <span><img src="~/Content/images/04.png" class="mb-1" alt="">預算：<input type="text" name="f活動預算"><span  id="NeedAC" style="color:red">活動預算必填</span></span>
 
                                                 <div class="pr-5">
                                                     <img src="~/Content/images/17.png" class="mb-1" alt="">分類：
@@ -250,7 +250,7 @@
                     </span>*@
                                             </div>
                                             <div class="row mb-4 mx-auto align-items-center justify-content-around">
-                                                <span>團圖：<input type="file" name="PicFile"></span>
+                                                <span class="row  align-items-center">團圖：<input type="file" name="PicFile"><span class="mr-5"  id="NeedAP" style="color:red">活動團圖必填</span></span>
 
                                                 <span class=" ">
                                                     <img src="~/Content/images/03.png" class="mb-1" alt="">
@@ -267,6 +267,7 @@
                                             <div class="row align-items-center">
                                                 <div class="mx-auto mb-3">
                                                     內容：<textarea name="f活動內容" style="width:1000px;height:220px;vertical-align:top;"></textarea>
+                                                     <p  id="NeedAL" style="color:red">活動內容請至少填滿100字</p>
                                                 </div>
                                             </div>
                                         </div>
