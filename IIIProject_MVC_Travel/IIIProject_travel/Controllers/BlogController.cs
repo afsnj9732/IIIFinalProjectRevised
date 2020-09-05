@@ -22,7 +22,7 @@ namespace IIIProject_travel.Controllers
         // GET: Blog
 
 
-        public ActionResult Index(int page = 1)
+        public ActionResult Index(string sortOder,string txtKey, int page = 1)
         {
             int currentPage = page < 1 ? 1 : page;
 
