@@ -301,9 +301,13 @@
                     <img src="~/Content/images/06.png" class="" alt=""><span ToUpdateVC="@item.f活動編號">@item.f活動瀏覽次數</span>
                     <img src="~/Content/images/05.png" class="updateGoodCounts" alt="">@*@item.f活動讚數*@
                 </div>
-                <div style="cursor: pointer;">
-                    <img src="~/Content/images/12.png" alt="">留言
-                </div>
+                @if (Session["member"] != null)
+                {
+                    <div style="cursor: pointer;" data-toggle="modal" data-target="#@combine_msg">
+                        <img src="~/Content/images/12.png" alt="">留言
+                    </div>
+                }
+
             </div>
         </div>
     </div>

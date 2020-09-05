@@ -205,87 +205,91 @@
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
-                                <div class="modal-body">
+                                
                                     <!-- 揪團內容頭 -->
                                     @if (Session["member"] != null)
                                     {
-                                        <form enctype="multipart/form-data" method="post">
-                                            <div class="container-fluid">
-                                                <span>標題：<input type="text" name="f活動標題" style="width:90%"></span>
-                                                <div class="row m-0 mb-3 justify-content-around">
-                                                    <span>旅遊開始日期： <input type="date" min="@DateTime.Now" max="" name="f活動開始時間"></span>
-                                                    <span>旅遊結束日期： <input type="date" min="" max="" name="f活動結束時間"></span>
-                                                    <span>入團截止： <input type="date" min="" max="" name="f活動招募截止時間"></span>
+                                <div class="modal-body">
+                                    <form enctype="multipart/form-data" method="post">
+                                        <div class="container-fluid">
+                                            <span>標題：<input type="text" name="f活動標題" style="width:90%"></span>
+                                            <div class="row m-0 mb-3 justify-content-around">
+                                                <span>旅遊開始日期： <input type="date" min="@DateTime.Now" max="" name="f活動開始時間"></span>
+                                                <span>旅遊結束日期： <input type="date" min="" max="" name="f活動結束時間"></span>
+                                                <span>入團截止： <input type="date" min="" max="" name="f活動招募截止時間"></span>
+                                            </div>
+                                            <div class="row mb-4 mx-auto align-items-center justify-content-around">
+                                                <span><img src="~/Content/images/04.png" class="mb-1" alt="">預算：<input type="text" name="f活動預算"></span>
+
+                                                <div class="pr-5">
+                                                    <img src="~/Content/images/17.png" class="mb-1" alt="">分類：
+                                                    <select name="f活動分類" style="">
+                                                        @*<option style="width:auto;margin:0 auto;" value="所有" selected>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;所有
+                            </option>*@
+                                                        <option value="兩天一夜">兩天一夜</option>
+                                                        <option value="三天兩夜">三天兩夜</option>
+                                                        <option value="五天四夜">五天四夜</option>
+                                                        <option value="七天六夜">七天六夜</option>
+                                                        <option style="text-align:center;" value="其他">
+                                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;其他
+                                                        </option>
+
+                                                    </select>
                                                 </div>
-                                                <div class="row mb-4 mx-auto align-items-center justify-content-around">
-                                                    <span><img src="~/Content/images/04.png" class="mb-1" alt="">預算：<input type="text" name="f活動預算"></span>
+                                                @*&nbsp;&nbsp;*@
+                                                @*<span class="pr-4">
+                        <img src="~/Content/images/13.png" class="mb-1" alt="">標籤：
+                        <select name="f活動標籤" style="">
+                            <option value="全部" selected>&nbsp;全部</option>
+                            <option value="10">讚>10</option>
+                            <option value="30">讚>30</option>
+                            <option value="50">讚>50</option>
+                            <option value="100">讚>100</option>
+                        </select>
+                    </span>*@
+                                            </div>
+                                            <div class="row mb-4 mx-auto align-items-center justify-content-around">
+                                                <span>團圖：<input type="file" name="PicFile"></span>
 
-                                                    <div class="pr-5">
-                                                        <img src="~/Content/images/17.png" class="mb-1" alt="">分類：
-                                                        <select name="f活動分類" style="">
-                                                            @*<option style="width:auto;margin:0 auto;" value="所有" selected>
-                                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;所有
-                                                            </option>*@
-                                                            <option value="兩天一夜">兩天一夜</option>
-                                                            <option value="三天兩夜">三天兩夜</option>
-                                                            <option value="五天四夜">五天四夜</option>
-                                                            <option value="七天六夜">七天六夜</option>
-                                                            <option style="text-align:center;" value="其他">
-                                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;其他
-                                                            </option>
+                                                <span class=" ">
+                                                    <img src="~/Content/images/03.png" class="mb-1" alt="">
+                                                    地區：
+                                                    <select name="f活動地區">
+                                                        <option value="北部">北部</option>
+                                                        <option value="中部">中部</option>
+                                                        <option value="南部">南部</option>
+                                                        <option value="東部">東部</option>
+                                                    </select>
+                                                </span>
+                                            </div>
 
-                                                        </select>
-                                                    </div>
-                                                    @*&nbsp;&nbsp;*@
-                                                    @*<span class="pr-4">
-                                                        <img src="~/Content/images/13.png" class="mb-1" alt="">標籤：
-                                                        <select name="f活動標籤" style="">
-                                                            <option value="全部" selected>&nbsp;全部</option>
-                                                            <option value="10">讚>10</option>
-                                                            <option value="30">讚>30</option>
-                                                            <option value="50">讚>50</option>
-                                                            <option value="100">讚>100</option>
-                                                        </select>
-                                                    </span>*@
-                                                </div>
-                                                <div class="row mb-4 mx-auto align-items-center justify-content-around">
-                                                    <span>團圖：<input type="file" name="PicFile"></span>
-
-                                                    <span class=" ">
-                                                        <img src="~/Content/images/03.png" class="mb-1" alt="">
-                                                        地區：
-                                                        <select name="f活動地區">
-                                                            <option value="北部">北部</option>
-                                                            <option value="中部">中部</option>
-                                                            <option value="南部">南部</option>
-                                                            <option value="東部">東部</option>
-                                                        </select>
-                                                    </span>
-                                                </div>
-
-                                                <div class="row align-items-center">
-                                                    <div class="mx-auto mb-3">
-                                                        內容：<textarea name="f活動內容" style="width:1000px;height:220px;vertical-align:top;"></textarea>
-                                                    </div>
+                                            <div class="row align-items-center">
+                                                <div class="mx-auto mb-3">
+                                                    內容：<textarea name="f活動內容" style="width:1000px;height:220px;vertical-align:top;"></textarea>
                                                 </div>
                                             </div>
-                                            <!-- 揪團內容尾 -->
-                                            <div class="modal-footer  mt-2 border-main-color">
-                                                <input type="submit" class="btn" style="background-color:#FFE0B2" value="送出" />
-                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
-                                            </div>
-                                            <!-- 揪團隱藏不顯示項目 -->
-                                            <input type="hidden" name="f活動讚數" value="0">
-                                            <input type="hidden" name="f活動瀏覽次數" value="0">
-                                            <input type="hidden" name="f活動發起日期" value="@DateTime.Now.ToString("yyyy-MM-dd  HH:mm:ss")">
-                                            <input type="hidden" name="f活動類型">
-                                        </form>
+                                        </div>
+                                        <!-- 揪團內容尾 -->
+                                        <div class="modal-footer  mt-2 border-main-color">
+                                            <input type="submit" class="btn" style="background-color:#FFE0B2" value="送出" />
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
+                                        </div>
+                                        <!-- 揪團隱藏不顯示項目 -->
+                                        <input type="hidden" name="f活動讚數" value="0">
+                                        <input type="hidden" name="f活動瀏覽次數" value="0">
+                                        <input type="hidden" name="f活動發起日期" value="@DateTime.Now.ToString("yyyy-MM-dd  HH:mm:ss")">
+                                        <input type="hidden" name="f活動類型">
+                                    </form>
+                                </div>
                                     }
                                     else
                                     {
-                                        <p>先登入才能揪團</p>
-                                    }
-                                </div>
+                                        <div class="modal-body row align-items-center mx-auto">
+                                            <p>先登入才能揪團</p>
+                                        </div>
+                                            }
+                                        
 
                             </div>
                         </div>
