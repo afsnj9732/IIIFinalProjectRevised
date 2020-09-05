@@ -214,9 +214,9 @@
                                         <div class="container-fluid">
                                             <span>標題：<input type="text" name="f活動標題" style="width:90%"></span>
                                             <div class="row m-0 mb-3 justify-content-around">
-                                                <span>旅遊開始日期： <input type="date" min="@DateTime.Now" max="" name="f活動開始時間"></span>
-                                                <span>旅遊結束日期： <input type="date" min="" max="" name="f活動結束時間"></span>
-                                                <span>入團截止： <input type="date" min="" max="" name="f活動招募截止時間"></span>
+                                                <span>旅遊開始日期： <input type="date" min="@DateTime.Now.AddDays(1.0).ToString("yyyy-MM-dd")" max="" id="ActivityStart" name="f活動開始時間"></span>
+                                                <span>旅遊結束日期： <input type="date" min="@DateTime.Now.AddDays(2.0).ToString("yyyy-MM-dd")" max="" id="ActivityEnd" disabled name="f活動結束時間"></span>
+                                                <span>入團截止： <input type="date" min="@DateTime.Now.ToString("yyyy-MM-dd")" max="" id="ActivityFindEnd" disabled name="f活動招募截止時間"></span>
                                             </div>
                                             <div class="row mb-4 mx-auto align-items-center justify-content-around">
                                                 <span><img src="~/Content/images/04.png" class="mb-1" alt="">預算：<input type="text" name="f活動預算"></span>
@@ -272,7 +272,7 @@
                                         </div>
                                         <!-- 揪團內容尾 -->
                                         <div class="modal-footer  mt-2 border-main-color">
-                                            <input type="submit" class="btn" style="background-color:#FFE0B2" value="送出" />
+                                            <input type="submit" class="btn" style="background-color:#FFE0B2" id="JoutaSend" value="送出" />
                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
                                         </div>
                                         <!-- 揪團隱藏不顯示項目 -->
