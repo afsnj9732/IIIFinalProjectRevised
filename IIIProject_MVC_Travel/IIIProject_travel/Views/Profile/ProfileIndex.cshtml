@@ -157,14 +157,12 @@
                             <button type="button" class="btn btn-warning">編輯資料</button>
                             <h6 class="profiletag">會員編號</h6>
                             <input type="text" size="50" placeholder="@x.f會員編號" name="account" disabled>
-                            <h6 class="profiletag">帳號</h6>
+                            <h6 class="profiletag">信箱</h6>
                             <input type="text" size="50" placeholder="@x.f會員帳號" name="passward" disabled>
                             <h6 class="profiletag">密碼</h6>
                             <input type="text" size="50" placeholder="@x.f會員密碼" name="nickname" disabled>
-                            <h6 class="profiletag" id="nickname">會員名稱</h6>
-                            <input type="text" size="50" name="age" placeholder="@x.f會員名稱">
-                            <h6 class="profiletag">年紀</h6>
-                            <input type="text" size="50" name="birth">
+                            <h6 class="profiletag" id="nickname">暱稱</h6>
+                            <input type="text" size="50" name="nick" placeholder="@x.f會員暱稱">
                             <h6 class="profiletag">生日</h6>
                             <input type="text" size="50" name="interest" placeholder="@x.f會員生日">
                             <h6 class="profiletag">興趣</h6>
@@ -180,22 +178,22 @@
                     @foreach (tActivity t in Model.tActivities)
                     {
 
-                    <!-- Blog Post -->
-                    <div class="card mb-4">
-                        <img class="card-img-top" src="~/Content/images/@t.f活動團圖" alt="Card image cap">
-                        <div class="card-body">
-                            <h2 class="card-title">@t.f活動標題</h2>
-                            <p class="card-text">
-                                @t.f活動內容
-                            </p>
-                            <a class="nav-item">@Html.ActionLink("Read More", "BlogContent", "Blog", new { }, new { @class = "btn btnContent  btn-warning" })</a>
-                        </div>
-                        <div class="card-footer text-muted">
+                        <!-- Blog Post -->
+                        <div class="card mb-4">
+                            <img class="card-img-top" src="~/Content/images/@t.f活動團圖" alt="Card image cap">
+                            <div class="card-body">
+                                <h2 class="card-title">@t.f活動標題</h2>
+                                <p class="card-text">
+                                    @t.f活動內容
+                                </p>
+                                <a class="nav-item">@Html.ActionLink("Read More", "BlogContent", "Blog", new { }, new { @class = "btn btnContent  btn-warning" })</a>
+                            </div>
+                            <div class="card-footer text-muted">
 
-                            <p class="pDateSection"> Posted on @t.f活動發起日期 </p>
+                                <p class="pDateSection"> Posted on @t.f活動發起日期 </p>
 
+                            </div>
                         </div>
-                    </div>
                     }
 
                     <div class="profile-event tab_info" id="myActivity">
@@ -215,11 +213,11 @@
                             </div>
                         }
 
-                            <div class="profile-follow tab_info" id="myFollow">
-                                <h1>關注活動</h1>
-                                @foreach (tActivity t in Model.tActivities)
-                                {
-
+                        <div class="profile-follow tab_info" id="myFollow">
+                            <h1>關注活動</h1>
+                            @foreach (tActivity t in Model.tActivities)
+                            {
+                                
                                     <!-- Blog Post -->
                                     <div class="card mb-4">
                                         <img class="card-img-top" src="~/Content/images/@t.f活動團圖" w alt="Card image cap">
@@ -240,8 +238,10 @@
                                         </div>
                                     </div>
                                 }
-                                <div class="profile-follower tab_info" id="Follower">
-                                    <h1>追蹤團主</h1>
+                            <div class="profile-follower tab_info" id="Follower">
+                                <h1>追蹤團主</h1>
+                                @foreach (tActivity t in Model.tActivities)
+                                {
                                     <div class="containerr">
                                         <img src="images/6.jpg" class="followpic" alt="Peipei 吳佩佩" width="350" height="250">
                                         <div class="roww">
@@ -253,149 +253,26 @@
                                             <a href="profile.html" class="btn btn-warning">了解一下</a>
                                         </div>
                                     </div>
-                                    <div class="containerr">
-                                        <img src="images/6.jpg" class="followpic" alt="Peipei 吳佩佩" width="350" height="250">
-                                        <div class="roww">
-                                            <h5 class="followname">Peipei 吳佩佩</h5>
-                                            <p class="folllowdis">
-                                                是一個兒童職能治療師，因為擁有對生活的熱情，又不想被上下班打卡綁架，
-                                                因此工作變得有些斜槓，目前擁有正職，但仍然經營...
-                                            </p>
-                                            <a href="profile.html" class="btn btn-warning">了解一下</a>
+                                }
+                            <div class="profile-history tab_info" id="history">
+                                <h1>歷史紀錄</h1>
+                                @foreach (tActivity t in Model.tActivities)
+                                {
+                                    <div class="row pl-3">
+                                        <div class="content mb-3" style="cursor: pointer;width:70%;height: 150px;"
+                                             data-toggle="modal" data-target="#exampleModal2">
+                                            <span style="font-weight:bolder;"> @t.f活動標題</span>
+                                            <br>
+                                            <span id="togglecontent" style="font-size: 13px;">
+                                                @t.f活動內容
+                                            </span>
                                         </div>
+                                        <img src="~/Content/images/@t.f活動團圖" id="imgdisplay" alt="" class="col-auto" style="display:none; width: 30%;height: 150px;">
                                     </div>
-                                    <div class="containerr">
-                                        <img src="images/6.jpg" class="followpic" alt="Peipei 吳佩佩" width="350" height="250">
-                                        <div class="roww">
-                                            <h5 class="followname">Peipei 吳佩佩</h5>
-                                            <p class="folllowdis">
-                                                是一個兒童職能治療師，因為擁有對生活的熱情，又不想被上下班打卡綁架，
-                                                因此工作變得有些斜槓，目前擁有正職，但仍然經營...
-                                            </p>
-                                            <a href="profile.html" class="btn btn-warning">了解一下</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="profile-history tab_info" id="history">
-                                    <h1>歷史紀錄</h1>
-                                    <div class="row  Travel_border align-items-center p-3">
-                                        <div class="container-fluid">
-                                            <div class="row m-0 mb-3   justify-content-between" style="font-size: 16px;">
-                                                <div class="pl-1">
-                                                    <img src="~/Content/images/09.png" alt="">
-                                                    <span>揪團者 :  <span style="cursor: pointer;">大衛哥</span></span>
-                                                    <span>&nbsp; &nbsp;</span>
-                                                    <span>揪團日期： <span>2020/08/01</span></span>
-                                                    <span>&nbsp; &nbsp;</span>
-                                                    <span>活動日期： <span>2020/09/01</span></span>
-                                                    <span>&nbsp; &nbsp;</span>
-                                                    <span>入團截止： <span>17:02:15</span></span>
-                                                    <span>&nbsp; &nbsp;</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row pl-3">
-                                            <div class="content mb-3" style="cursor: pointer;width:70%;height: 150px;"
-                                                 data-toggle="modal" data-target="#exampleModal2">
-                                                <span style="font-weight:bolder;"> 龜山步道。墾丁私房景點｜不到半小時即攻頂。全方位飽覽恆春山海景</span>
-                                                <br>
-                                                <span id="togglecontent" style="font-size: 13px;"></span>
-                                                <label id="togglebutton" onclick="toggleText()">詳文</label>
-
-                                            </div>
-                                            <img src="images/7.jpg" id="imgdisplay" alt="" class="col-auto" style="display:none; width: 30%;height: 150px;">
-                                        </div>
-                                    </div>
-                                    <div class="row  Travel_border align-items-center p-3">
-                                        <div class="container-fluid">
-                                            <div class="row m-0 mb-3   justify-content-between" style="font-size: 16px;">
-                                                <div class="pl-1">
-                                                    <img src="~/Content/images/09.png" alt="">
-                                                    <span>揪團者 :  <span style="cursor: pointer;">大衛哥</span></span>
-                                                    <span>&nbsp; &nbsp;</span>
-                                                    <span>揪團日期： <span>2020/08/01</span></span>
-                                                    <span>&nbsp; &nbsp;</span>
-                                                    <span>活動日期： <span>2020/09/01</span></span>
-                                                    <span>&nbsp; &nbsp;</span>
-                                                    <span>入團截止： <span>17:02:15</span></span>
-                                                    <span>&nbsp; &nbsp;</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row pl-3">
-                                            <div class="content mb-3" style="cursor: pointer;width:70%;height: 150px;"
-                                                 data-toggle="modal" data-target="#exampleModal2">
-                                                <span style="font-weight:bolder;"> 龜山步道。墾丁私房景點｜不到半小時即攻頂。全方位飽覽恆春山海景</span>
-                                                <br>
-                                                <span id="togglecontent" style="font-size: 13px;"></span>
-                                                <label id="togglebutton" onclick="toggleText()">詳文</label>
-
-                                            </div>
-                                            <img src="images/7.jpg" id="imgdisplay" alt="" class="col-auto" style="display:none; width: 30%;height: 150px;">
-                                        </div>
-                                    </div>
-                                    <div class="row  Travel_border align-items-center p-3">
-                                        <div class="container-fluid">
-                                            <div class="" style="font-size: 16px;">
-                                                <div class="">
-                                                    <img src="~/Content/images/09.png" alt="">
-                                                    <span>&nbsp; &nbsp;</span>
-                                                    <span>揪團者 :  <span style="cursor: pointer;">大衛哥</span></span>
-                                                    <span>&nbsp; &nbsp;</span>
-                                                    <span>揪團日期： <span>2020/08/01</span></span>
-                                                    <span>&nbsp; &nbsp;</span>
-                                                    <span>活動日期： <span>2020/09/01</span></span>
-                                                    <br />
-                                                    <span>&nbsp; &nbsp;</span>
-                                                    <span>入團截止： <span>17:02:16</span></span>
-                                                    <span>&nbsp; &nbsp;</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row pl-3">
-                                            <div class="content mb-3" style="cursor: pointer;width:70%;height: 150px;"
-                                                 data-toggle="modal" data-target="#exampleModal2">
-                                                <span style="font-weight:bolder;"> 龜山步道。墾丁私房景點｜不到半小時即攻頂。全方位飽覽恆春山海景</span>
-                                                <br>
-                                                <span id="togglecontent" style="font-size: 13px;"></span>
-                                                <label id="togglebutton" onclick="toggleText()">詳文</label>
-
-                                            </div>
-                                            <img src="images/7.jpg" id="imgdisplay" alt="" class="col-auto" style="display:none; width: 30%;height: 150px;">
-                                        </div>
-                                    </div>
-                                </div>
+                                }
                             </div>
-                    </div>
-                    <div class="profile-follow tab_info">
-                        <h1>關注活動</h1>
-                        <p>
-                            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aperiam animi alias doloribus,
-                            dolor
-                            necessitatibus reiciendis, magni molestias ut perferendis corrupti assumenda nobis,
-                            veritatis
-                            eos fugiat nisi quas rem repudiandae neque?
-                        </p>
-                    </div>
-                    <div class="profile-follower tab_info">
-                        <h1>追蹤團主</h1>
-                        <p>
-                            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aperiam animi alias doloribus,
-                            dolor
-                            necessitatibus reiciendis, magni molestias ut perferendis corrupti assumenda nobis,
-                            veritatis
-                            eos fugiat nisi quas rem repudiandae neque?
-                        </p>
-                    </div>
-                    <div class="profile-history tab_info">
-                        <h1>歷史紀錄</h1>
-                        <p>
-                            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aperiam animi alias doloribus,
-                            dolor
-                            necessitatibus reiciendis, magni molestias ut perferendis corrupti assumenda nobis,
-                            veritatis
-                            eos fugiat nisi quas rem repudiandae neque?
-                        </p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
