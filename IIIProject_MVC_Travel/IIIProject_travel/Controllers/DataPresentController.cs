@@ -10,12 +10,12 @@ namespace IIIProject_travel.Controllers
     public class DataPresentController : Controller
     {
         // GET: DataPresent
-        public ActionResult Index()
+        public ActionResult ShowLineChart()
         {
             return View();
         }
 
-        public ActionResult GetData()
+        public ActionResult GetLineChartData()
         {
             dbJoutaEntities context = new dbJoutaEntities();
             var query = from t in context.tActivity
@@ -27,6 +27,43 @@ namespace IIIProject_travel.Controllers
             
 
         }
+
+        public ActionResult ShowPieChart()
+        {
+
+            return View();
+        }
+
+        public ActionResult GetPieChartData()
+        {
+            dbJoutaEntities context = new dbJoutaEntities();
+
+            var north = context.tActivity.Where(x => x.f活動地區 == "北部").Count();
+            var south = context.tActivity.Where(x => x.f活動地區 == "南部").Count();
+            var east = context.tActivity.Where(x => x.f活動地區 == "東部").Count();
+
+            Ratio obj = new Ratio();
+            obj.North = north;
+            obj.South = south;
+            obj.East = east;
+
+
+            return Json(obj, JsonRequestBehavior.AllowGet);
+
+        }
+
+        public class Ratio
+        {
+            public int North { get; set; }
+            public int South { get; set; }
+            public int East { get; set; }
+
+
+
+        }
+
+
+
 
 
     }
