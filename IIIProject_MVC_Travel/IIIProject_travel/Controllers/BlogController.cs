@@ -22,8 +22,63 @@ namespace IIIProject_travel.Controllers
         // GET: Blog
 
 
-        public ActionResult Index(string sortOder,string txtKey, int page = 1)
+        public ActionResult Index(string sortOder,string txtKey, string currentfilter, int page = 1)
         {
+            IQueryable<tActivity> tarticle = null;
+            if (txtKey != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                txtKey = currentfilter;
+            }
+
+            if (string.IsNullOrEmpty(txtKey))
+                tarticle = from torder in (new dbJoutaEntities()).tActivity
+                           select torder;
+            else
+                tarticle = from torder in (new dbJoutaEntities()).tActivity
+                           where torder.f活動標題.Contains(txtKey)
+                           select torder;
+
+            ViewBag.Sernow = txtKey;
+            ViewBag.keyName = string.IsNullOrEmpty(sortOder) ? "NameDown" : "";
+            ViewBag.dateOrder = sortOder == "dateUp" ? "dateDown" : "dateUp";
+            ViewBag.preViewOrder = sortOder == "preViewUp" ? "preViewDown" : "preViewUp";
+            ViewBag.LikeOrder = sortOder == "LikeUp" ? "LikeDown" : "LikeUp";
+            //ViewBag.Pointorder = sortOder == "帳號升冪" ? "帳號降冪" : "帳號升冪";
+
+
+
+            switch (sortOder)
+            {
+                case "NameDown":
+                    tarticle = tarticle.OrderByDescending(s => s.f活動標題);
+                    break;
+
+                case "dateUp":
+                    tarticle = tarticle.OrderBy(s => s.f活動發起日期);
+                    break;
+                case "dateDown":
+                    tarticle = tarticle.OrderByDescending(s => s.f活動發起日期);
+                    break;
+                case "preViewUp":
+                    tarticle = tarticle.OrderBy(s => s.f活動瀏覽次數);
+                    break;
+                case "preViewDown":
+                    tarticle = tarticle.OrderByDescending(s => s.f活動瀏覽次數);
+                    break;
+                case "LikeUp":
+                    tarticle = tarticle.OrderBy(s => s.f活動讚數);
+                    break;
+                case "LikeDown":
+                    tarticle = tarticle.OrderByDescending(s => s.f活動讚數);
+                    break;
+            }
+
+
+
             int currentPage = page < 1 ? 1 : page;
 
             var article = from t in (new dbJoutaEntities()).tActivity

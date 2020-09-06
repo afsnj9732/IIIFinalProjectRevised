@@ -72,11 +72,12 @@
                     排序與搜尋列
                 </h3>
 
-                <div> <button type="button" class="btn btn-outline-primary" style="width:100% ; margin-top:5px">依日期遠近</button>  </div>
+ 
+                <div> <button type="button" style="width:100% ; margin-top:5px">@Html.ActionLink("依日期遠近", "Index" , new { sortOder = ViewBag.dateOrder , currentfilter = ViewBag.Sernow }, new { @class = "btn btn-outline-primary" })</button>  </div>
 
-                <div> <button type="button" class="btn btn-outline-success" style="width:100% ; margin-top:5px">依按讚人數</button> </div>
+                <div> <button type="button"  style="width:100% ; margin-top:5px">@Html.ActionLink("依按讚人數", "Index", new { sortOder = ViewBag.LikeOrder, currentfilter = ViewBag.Sernow }, new { @class = "btn btn-outline-primary" })</button> </div>
 
-                <div> <button type="button" class="btn btn-outline-warning" style="width:100% ; margin-top:5px">依瀏覽次數</button> </div>
+                <div> <button type="button"  style="width:100% ; margin-top:5px">@Html.ActionLink("依瀏覽次數", "Index", new { sortOder = ViewBag.preViewOrder, currentfilter = ViewBag.Sernow }, new { @class = "btn btn-outline-primary" })</button> </div>
 
 
 
@@ -85,10 +86,10 @@
                     <h5 class="card-header">標題搜尋</h5>
                     <div class="card-body">
                         <div class="input-group">
-                            <input type="text" class="form-control" placeholder="輸入">
+                            <input type="text" class="form-control" name="txtKey" placeholder="輸入">
                             <span class="input-group-append">
                                 <button class="btn btn-secondary"
-                                        type="button">
+                                        type="submit">
                                     Go!
                                 </button>
                             </span>
