@@ -154,12 +154,14 @@
             $(combine).attr("src", "/Content/images/11.png");           
             $.ajax({
                 url: "/Travel/likeIt",
+                type: "POST",
                 data: { "ActivityID": ActivityID }
             });
         } else {
             $(combine).attr("src", "/Content/images/14.png");
             $.ajax({
                 url: "/Travel/likeIt",
+                type: "POST",
                 data: { "ActivityID": ActivityID }
             });
         }
@@ -171,6 +173,7 @@
         let target = $(this).attr("joinAct");
         $.ajax({
             url: "/Travel/ActAdd",
+            type: "POST",
             data: { "target": target,"isAdd":true},
             success: function (data) {
                 if (data === "") {
@@ -186,6 +189,7 @@
         let target = $(this).attr("leaveAct");
         $.ajax({
             url: "/Travel/ActAdd",
+            type: "POST",
             data: { "target": target, "isAdd": false},
             success: function (data) {
                 if (data === "") {
@@ -200,9 +204,10 @@
     function leaveMsg() {
         let target = $(this).attr("leaveMsg");
         let sentMsg = $("[sentMsg=" + target + "]").val();
-        console.log(sentMsg);
+        //console.log(sentMsg);
         $.ajax({
             url: "/Travel/MsgAdd",
+            type: "POST",
             data: { "target": target, "sentMsg": sentMsg},
             success: function (data) {
                 $("[MsgAdd=" + target + "]").html(data); 
@@ -214,25 +219,19 @@
 
 
     //增加讚
-    function getGoodCounts() {
-        var g = 0;
+    function getGoodCounts() {         
         let target = $(this).attr("target");
+        let FeelGood = $("[ToUpdateGC =" + target + "]").html();
         $.ajax({
             url: "/Travel/FeelGood",
-            type: 'POST',
-            data: { "target": target, "p": p },
+            type: "POST",
+            data: { "target": target},
             success: function (data) {
                 if (data === "0") {
                     window.confirm("這篇文章你按過讚囉!");
                 }
                 else {
-                    $(".GoodCountTemp").remove();//刪除html原有資料
-                    for (let l of data) {
-                        $(".updateGoodCounts").eq(g).after("<span class='GoodCountTemp'>" + l + "</span>");
-                        g++;
-                        $(".updateGoodCounts").eq(g).after("<span class='GoodCountTemp'>" + l + "</span>");
-                        g++;
-                    }
+                    $("[ToUpdateGC =" + target + "]").html(parseInt(FeelGood)+1);
                 }
             }
         });
@@ -246,6 +245,7 @@
         $(combine).html(getCounts);
         $.ajax({
             url: "/Travel/ViewCounts",
+            type: "POST",
             data: { "ActivityID": target}
             }
         );
@@ -277,7 +277,7 @@
  
         $.ajax({
             url: "/Travel/article_AJAX",
-            type: 'POST',
+            type: "POST",
             data: { "p": p },
             success: function (data) {
                 $("#article_ajax").html(data);
@@ -285,7 +285,7 @@
                 //$("#article_ajax").append(data);
                 Travel_RWD();
                 //getViewCounts();
-                getGoodCounts();
+                //getGoodCounts();
             }
         });
     }
@@ -299,6 +299,7 @@
     $("#contain").on('keyup', function () { 
         $.ajax({
             url: "/Travel/autoComplete",
+            type: "POST",
             success: function (data) {
                 var getautoComplete = data.split(',');
                 $("#contain").autocomplete({

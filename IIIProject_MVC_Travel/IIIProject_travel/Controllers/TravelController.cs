@@ -212,9 +212,8 @@ namespace IIIProject_travel.Controllers
             return View(target);
         }
 
-        public JsonResult FeelGood(string target, string p)
-        {
-            
+        public /*JsonResult*/ string FeelGood(string target)
+        {           
             if (target != null&& Session["member"]!=null)
             {
                 var temp = (tMember)Session["member"];                             
@@ -238,15 +237,11 @@ namespace IIIProject_travel.Controllers
                 }
                 else
                 {
-                    return Json("0", JsonRequestBehavior.AllowGet);
+                    return "0"; /*Json("0", JsonRequestBehavior.AllowGet);*/
                 }
             }
- 
-            var FinalList = AJAXcondition(p)
-                            .Where(a => a.f活動類型 == "旅遊")
-                            .Select(a => a.f活動讚數);
 
-            return Json(FinalList, JsonRequestBehavior.AllowGet);
+            return "1"; /*Json(FinalList, JsonRequestBehavior.AllowGet)*/;
         }
 
 
