@@ -9,6 +9,7 @@ using System.Net;
 using System.Net.Mail;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Script.Serialization;
 using System.Web.UI.Design;
 
 namespace IIIProject_travel.Controllers
@@ -29,7 +30,7 @@ namespace IIIProject_travel.Controllers
                     where m.f會員編號 > 8 && m.f會員編號 < 13
                     select m;
             var y = from k in (new dbJoutaEntities()).tActivity
-                    where !string.IsNullOrEmpty(k.f活動團圖)                    
+                    where !string.IsNullOrEmpty(k.f活動團圖)
                     select k;
             y = y.Take(3);
             c.tMembers = x;
@@ -50,40 +51,69 @@ namespace IIIProject_travel.Controllers
         [HttpPost]
         public ActionResult QuickMatch(int tabNum, double? curLat, double? curLng)
         {
+
             //return Content("Hello" + tabNum + "," + curLat + "," + curLng);
             dbJoutaEntities db = new dbJoutaEntities();
             var rand = new Random();
 
-            if (curLat != null && curLng != null)
-            {
-                if (tabNum == 0)
-                {
-                    var x = from t in db.tActivity
-                            where (t.f活動類型 == "飯局") && (t.f活動經度 < curLng - 0.02) && (t.f活動經度 > curLng + 0.02) && (t.f活動緯度 < curLat - 0.02) && (t.f活動緯度 < curLat + 0.02)
-                            select t;
-                    var result = x.OrderBy(e => rand.Next()).Take(1);
-                    return Json(result, JsonRequestBehavior.AllowGet);
-                }
-                else
-                {
-                    var y = from t in db.tActivity
-                            where (t.f活動類型 == "旅遊") && (t.f活動經度 < curLng - 0.02) && (t.f活動經度 > curLng + 0.02) && (t.f活動緯度 < curLat - 0.02) && (t.f活動緯度 < curLat + 0.02)
-                            //orderby t.rand.Next().Take(1)
-                            select t;
-                    var result = y.OrderBy(e => rand.Next()).Take(1);
-                    return Json(result, JsonRequestBehavior.AllowGet);
-                }
+            //test 
 
-            }
-            else
-            {
-                var z = from t in db.tActivity
-                        where (t.f活動類型 == "飯局") || (t.f活動類型 == "旅遊")
-                        select t;
-                var result = z.OrderBy(e => rand.Next()).Take(1);
-                return Json(result, JsonRequestBehavior.AllowGet);
+            var z = (from t in db.tActivity
+                     where t.f活動類型 == "飯局"
+                     select new
+                     {
+                         mAchieve = t.tMember.f會員稱號,
+                         mAvatar = t.tMember.f會員大頭貼,
+                         mName = t.tMember.f會員名稱,
+                         mRating = t.tMember.f會員評分,
+                         content = t.f活動內容
+                     })
+                      .OrderBy(t => Guid.NewGuid()).Take(1);
 
-            }
+            return Json(z, JsonRequestBehavior.AllowGet);
+
+
+            //correct one
+
+            //if (tabNum == 0)
+            //{
+            //    var x=from t in db.tActivity
+            //          where
+            //}
+
+
+            //fixing
+
+            //if (curLat != null && curLng != null)
+            //{
+            //    if (tabNum == 0)
+            //    {
+            //        var x = from t in db.tActivity
+            //                where (t.f活動類型 == "飯局") && (t.f活動經度 < curLng - 0.02) && (t.f活動經度 > curLng + 0.02) && (t.f活動緯度 < curLat - 0.02) && (t.f活動緯度 < curLat + 0.02)
+            //                select t;
+            //        var result = x.OrderBy(e => rand.Next()).Take(1);
+            //        return Json(result, JsonRequestBehavior.AllowGet);
+            //    }
+            //    else
+            //    {
+            //        var y = from t in db.tActivity
+            //                where (t.f活動類型 == "旅遊") && (t.f活動經度 < curLng - 0.02) && (t.f活動經度 > curLng + 0.02) && (t.f活動緯度 < curLat - 0.02) && (t.f活動緯度 < curLat + 0.02)
+            //                //orderby t.rand.Next().Take(1)
+            //                select t;
+            //        var result = y.OrderBy(e => rand.Next()).Take(1);
+            //        return Json(result, JsonRequestBehavior.AllowGet);
+            //    }
+
+            //}
+            //else
+            //{
+            //    var z = from t in db.tActivity
+            //            where (t.f活動類型 == "飯局") || (t.f活動類型 == "旅遊")
+            //            select t;
+            //    var result = z.OrderBy(e => rand.Next()).Take(1);
+            //    return Json(result, JsonRequestBehavior.AllowGet);
+
+            //}
         }
 
 

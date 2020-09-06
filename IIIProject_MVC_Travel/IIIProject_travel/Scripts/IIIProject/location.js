@@ -65,7 +65,9 @@ $('.resultTrigger').click(function () {
         async: false,
         cache: true,
         success: function (data) {
-            alert(data);
+            //alert(data);
+            console.log(data);
+            console.log(z);
             //JSON Data
             //$('#mName').text(data);
         },
