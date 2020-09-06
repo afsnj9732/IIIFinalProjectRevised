@@ -14,7 +14,26 @@ namespace IIIProject_travel.Controllers
     {
         public ActionResult article_AJAX(string p)
         {
-            return View(AJAXcondition(p).Where(a => a.f活動類型 == "旅遊").Select(a => a));
+            JavaScriptSerializer serializer = new JavaScriptSerializer();
+            CSelect obj = serializer.Deserialize<CSelect>(p);
+            var FinalList = AJAXcondition(p).Where(a => a.f活動類型 == "旅遊").Select(a => a);
+            CTravel List = new CTravel();
+            if (FinalList.Count() % 4 == 0 && FinalList.Count()!=0)
+            {
+                List.TotalPage = FinalList.Count() / 4;
+            }
+            else
+            {
+                List.TotalPage = (FinalList.Count() - FinalList.Count() % 4) / 4 + 1;
+            }   
+            List.NowPage = obj.page;
+            if (obj.page == 0 || obj.page>List.TotalPage)
+            {
+                List.NowPage = 1;  
+            }
+            
+            List.FinalList = FinalList.Skip(4 * (List.NowPage - 1)).Take(4);
+            return View(List);
         }
         // GET: Travel
         public ActionResult TravelIndex()
@@ -133,7 +152,6 @@ namespace IIIProject_travel.Controllers
                                     .Where(b => b.f活動讚數 > Convert.ToInt32(obj.label))
                                     .Select(a => a);
             }
-
             return CountViewList;
         }
 
@@ -194,26 +212,8 @@ namespace IIIProject_travel.Controllers
             return View(target);
         }
 
-        //public JsonResult CountView(string target, string p)
-        //{            
-        //    if (target != null)
-        //    {
-        //        dbJoutaEntities db = new dbJoutaEntities();
-        //        int select = Convert.ToInt32(target);
-        //        tActivity theTarget = db.tActivity.FirstOrDefault(x => x.f活動編號 == select);
-        //        theTarget.f活動瀏覽次數 = (theTarget.f活動瀏覽次數 + 1);
-        //        db.SaveChanges();
-        //    }
-
-        //    var FinalList = AJAXcondition(p)
-        //                    .Where(a=>a.f活動類型=="旅遊")
-        //                    .Select(a => a.f活動瀏覽次數);
-
-        //    return Json(FinalList, JsonRequestBehavior.AllowGet);
-        //}
-        public JsonResult FeelGood(string target, string p)
-        {
-            
+        public /*JsonResult*/ string FeelGood(string target)
+        {           
             if (target != null&& Session["member"]!=null)
             {
                 var temp = (tMember)Session["member"];                             
@@ -237,15 +237,11 @@ namespace IIIProject_travel.Controllers
                 }
                 else
                 {
-                    return Json("0", JsonRequestBehavior.AllowGet);
+                    return "0"; /*Json("0", JsonRequestBehavior.AllowGet);*/
                 }
             }
- 
-            var FinalList = AJAXcondition(p)
-                            .Where(a => a.f活動類型 == "旅遊")
-                            .Select(a => a.f活動讚數);
 
-            return Json(FinalList, JsonRequestBehavior.AllowGet);
+            return "1"; /*Json(FinalList, JsonRequestBehavior.AllowGet)*/;
         }
 
 

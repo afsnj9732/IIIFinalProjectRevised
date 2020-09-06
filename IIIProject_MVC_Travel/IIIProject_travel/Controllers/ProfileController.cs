@@ -22,6 +22,10 @@ namespace IIIProject_travel.Controllers
             return View(c);
         }
 
+        public ActionResult Chat()
+        {
 
+            return View();
+        }
     }
 }

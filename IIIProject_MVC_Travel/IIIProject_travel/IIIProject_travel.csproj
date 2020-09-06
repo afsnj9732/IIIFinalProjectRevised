@@ -54,7 +54,25 @@
     <Reference Include="jose-jwt, Version=2.4.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\jose-jwt.2.5.0\lib\net461\jose-jwt.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.Core, Version=2.4.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.Core.2.4.1\lib\net45\Microsoft.AspNet.SignalR.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.SystemWeb, Version=2.4.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.SystemWeb.2.4.1\lib\net45\Microsoft.AspNet.SignalR.SystemWeb.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Owin, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.2.1.0\lib\net45\Microsoft.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.2.1.0\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.2.1.0\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+    </Reference>
     <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
       <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
     </Reference>
@@ -157,7 +175,6 @@
     <Compile Include="Controllers\後台會員Controller.cs" />
     <Compile Include="Controllers\後台飯局Controller.cs" />
     <Compile Include="Controllers\聯絡我們Controller.cs" />
-    <Compile Include="C驗證.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -182,6 +199,8 @@
     <Compile Include="Security\JwtService.cs" />
     <Compile Include="Services\MailService.cs" />
     <Compile Include="Services\MembersService.cs" />
+    <Compile Include="signalr\hubs\ChatHub.cs" />
+    <Compile Include="Startup.cs" />
     <Compile Include="sysdiagrams.cs">
       <DependentUpon>JoutaEntities.tt</DependentUpon>
     </Compile>
@@ -198,6 +217,7 @@
     <Compile Include="ViewModel\CMember.cs" />
     <Compile Include="ViewModel\CRegisterModel.cs" />
     <Compile Include="ViewModel\CSelect.cs" />
+    <Compile Include="ViewModel\CTravel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Start\proheadshot.jpg" />
@@ -218,6 +238,7 @@
     <Content Include="Content\css\travel_main.css" />
     <Content Include="Content\images\14876883363_94995b4f88_o.jpg" />
     <Content Include="Content\images\20190105141437_100.jpg" />
+    <Content Include="Content\images\BlogUploadSample.png" />
     <Content Include="Content\images\f899c3a6-45ba-4d37-ba05-8f4e031b0a63.jpg" />
     <Content Include="Content\images\McDonalds.png" />
     <Content Include="Content\images\mume.jpg" />
@@ -1903,7 +1924,7 @@
     <Content Include="Content\images\7.png" />
     <Content Include="Content\images\8.png" />
     <Content Include="Content\images\9.png" />
-    <Content Include="Content\images\blogPost.jpg" />
+    <Content Include="Content\images\wilddonkey.jpg" />
     <Content Include="Content\images\carousel01.jpg" />
     <Content Include="Content\images\carousel02.jpg" />
     <Content Include="Content\images\carousel03.jpg" />
@@ -2054,6 +2075,8 @@
     <Content Include="Scripts\IIIProject\quickmatch.js" />
     <Content Include="Scripts\IIIProject\travel.js" />
     <Content Include="Scripts\jquery-3.5.1.js" />
+    <Content Include="Scripts\jquery.signalR-2.4.1.js" />
+    <Content Include="Scripts\jquery.signalR-2.4.1.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -2111,6 +2134,7 @@
     <Content Include="Views\Travel\MsgAdd.cshtml" />
     <Content Include="Views\Blog\personalIndex.cshtml" />
     <Content Include="Views\DataPresent\ShowPieChart.cshtml" />
+    <Content Include="Views\Profile\Chat.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
