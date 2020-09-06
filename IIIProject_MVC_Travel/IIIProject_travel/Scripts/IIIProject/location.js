@@ -52,6 +52,7 @@ $('.resultTrigger').click(function () {
 
     console.log('pi: ' + tabNum);
     console.log("lat: " + currentLat);
+    console.log(typeof (currentLat));
 
     $.ajax({
         url: "/Home/QuickMatch",
@@ -67,7 +68,6 @@ $('.resultTrigger').click(function () {
         success: function (data) {
             //alert(data);
             console.log(data);
-            console.log(z);
             //JSON Data
             //$('#mName').text(data);
         },
