@@ -1,5 +1,5 @@
 (function () {
-    var order, background_color, contain, category, label, p;
+    var order, background_color, contain, category, label,page ,p;
     //Bootstrap Modal 關閉觸發事件
     $(document).on('hidden.bs.modal', '.modal', function () {
         $('.modal:visible').length && $(document.body).addClass('modal-open'); //疊加互動視窗 Scroll Debug
@@ -163,7 +163,7 @@
                 data: { "ActivityID": ActivityID }
             });
         }
-        console.log("現在src "+$(combine).attr("src"));
+        //console.log("現在src "+$(combine).attr("src"));
     });
 
     //入團
@@ -257,7 +257,11 @@
     $("body").on('click', ".leaveAct", leaveAct);
     $("body").on('click', ".leaveMsg", leaveMsg);
 
-
+    $("body").on('click', ".page", function () {
+        $(this).addClass("NowPage")
+        $(this).siblings().removeClass("NowPage");
+        getAJAX();
+    });
     function getAJAX() {
         //console.log("我是AJAX，拿到的背景顏色是" + background_color);
         order = $(".using").attr("order");
@@ -265,9 +269,10 @@
         contain = $("#contain").val();
         category = $("#category").val();
         label = $("#label").val();
+        page = $(".NowPage").attr("page");
         p = JSON.stringify({
             "order": order, "background_color": background_color, "contain": contain
-            , "category": category, "label": label
+            , "category": category, "label": label , "page":page
         });
  
         $.ajax({
@@ -305,13 +310,22 @@
 
     //點選搜尋
     $("#contain_pic").on('click', function () {
+        page = 1;
+        $(".page").eq(0).addClass("NowPage")
+        $(".page").eq(0).siblings().removeClass("NowPage");//回彈到第一頁
         getAJAX();
     });
 
     $("#category").on('change', function () {
+        page = 1;
+        $(".page").eq(0).addClass("NowPage")
+        $(".page").eq(0).siblings().removeClass("NowPage");
         getAJAX();
     });
     $("#label").on('change', function () {
+        page = 1;
+        $(".page").eq(0).addClass("NowPage")
+        $(".page").eq(0).siblings().removeClass("NowPage");
         getAJAX();
     });
 
@@ -367,7 +381,10 @@
         //$(this).css()抓出來的有點問題，與項目實際情形不符，待查證
         $(this).css('border-color', 'rgb(250, 224, 110)');
         $(this).siblings().css('background-color', 'transparent');    //剔除未選取排序   
-        $(this).siblings().css('border-color', 'transparent');    //剔除未選取排序         
+        $(this).siblings().css('border-color', 'transparent');    //剔除未選取排序    
+        page = 1;
+        $(".page").eq(0).addClass("NowPage")
+        $(".page").eq(0).siblings().removeClass("NowPage");//回彈到第一頁
         getAJAX();
         //this.childNodes[1].childNodes[1].click();//連動點擊圖片觸發排序和ajax
         //注意，子元素特定事件觸發會連帶觸發所有父元素的該事件       

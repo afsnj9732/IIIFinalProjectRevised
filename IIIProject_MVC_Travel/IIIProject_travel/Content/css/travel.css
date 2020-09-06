@@ -2,11 +2,15 @@ body {
     background-color: #fffef4;
     padding-right: 0 !important;
 }
+.NowPage{ 
+    /*現在頁數樣式*/
+    background-color:yellow;
+}
 
-#labelTop{
-    position:fixed;
-    right:5%;
-    bottom:5%;
+#labelTop {
+    position: fixed;
+    right: 5%;
+    bottom: 5%;
 }
 
 .combine_readmore {
