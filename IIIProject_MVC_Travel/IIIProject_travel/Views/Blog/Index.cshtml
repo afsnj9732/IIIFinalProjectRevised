@@ -65,7 +65,36 @@
 
         <div class="row blogbox">
 
-            <div class="col-md-2">
+
+
+            <div class="col-md-3" id="sidebar" style="padding-top:60px">
+                <h3 class="my-4">
+                    排序與搜尋列
+                </h3>
+
+                <div> <button type="button" class="btn btn-outline-primary" style="width:100% ; margin-top:5px">依日期遠近</button>  </div>
+
+                <div> <button type="button" class="btn btn-outline-success" style="width:100% ; margin-top:5px">依按讚人數</button> </div>
+
+                <div> <button type="button" class="btn btn-outline-warning" style="width:100% ; margin-top:5px">依瀏覽次數</button> </div>
+
+
+
+
+                <div class="card my-4">
+                    <h5 class="card-header">標題搜尋</h5>
+                    <div class="card-body">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="輸入">
+                            <span class="input-group-append">
+                                <button class="btn btn-secondary"
+                                        type="button">
+                                    Go!
+                                </button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
 
 
             </div>
@@ -73,11 +102,11 @@
 
 
             <!-- Blog Entries Column -->
-            <div class="col-md-10" id="main-section">
+            <div class="col-md-9" id="main-section">
 
-                <h1 class="my-4">
-                    Suzume的美好豐富集綿
-                </h1>
+                <h2 class="my-4" style="text-align:center">
+                    Jouta的精選文章
+                </h2>
 
                 <hr size="8" width="100%">
                 @{
@@ -86,20 +115,20 @@
 
                         <!-- Blog Post -->
                         <div class="card mb-4">
-                            <img class="card-img-top" src="~/Content/images/@tArticle.f活動團圖" >
+                            <img class="card-img-top" src="~/Content/images/@tArticle.f活動團圖">
                             <div class="card-body">
                                 <h2 class="card-title">@tArticle.f活動標題</h2>
-                                <p class="a-ellipsis" >
+                                <p class="a-ellipsis">
                                     @tArticle.f活動內容
                                 </p>
                                 <a class="nav-item">@Html.ActionLink("Read More", "BlogContent", "Blog", new { id = tArticle.f活動編號 }, new { @class = "btn btnContent" })</a>
                             </div>
-                            <div class="card-footer text-muted row" >
+                            <div class="card-footer text-muted row">
 
 
 
                                 <p class="pDateSection"> Posted on January 1, 2020 by</p> <p style="margin-left:10px">@Html.ActionLink("Jouta", "personalIndex", "Blog", new { }, new { @class = "" })</p>
-                                
+
 
                             </div>
                         </div>
@@ -112,17 +141,14 @@
                 <!-- Pagination -->
                 <ul class="pagination justify-content-center mb-4">
 
-                    @*<button class="ui right floated button" id="btnPrev">Prev</button>*@
-                    @*@Html.ActionLink("Prev", "Index", "Blog", new { @class = "ui right floated button", id = "btnPrev" })
-                    @Html.ActionLink("Next", "Index", "Blog", new { @class = "ui left floated button", id = "btnNext" })*@
-                    @*<button class="ui left floated button" id="btnNext">Next</button>*@
-                    @Html.PagedListPager(Model, Page => Url.Action("Index",new { Page}))
+                    @Html.PagedListPager(Model, Page => Url.Action("Index", new { Page }))
                 </ul>
             </div>
 
 
-        
-    </div>
+            </div>
+
+        </div>
 
     <!-- footer -->
 
