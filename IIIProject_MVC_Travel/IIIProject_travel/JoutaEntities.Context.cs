@@ -9,24 +9,30 @@
 
 namespace IIIProject_travel
 {
+    using Newtonsoft.Json;
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
-    
+
     public partial class dbJoutaEntities : DbContext
     {
         public dbJoutaEntities()
             : base("name=dbJoutaEntities")
         {
         }
-    
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             throw new UnintentionalCodeFirstException();
         }
-    
+
+        [JsonIgnore]
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
+
+        [JsonIgnore]
         public virtual DbSet<tActivity> tActivity { get; set; }
+
+        [JsonIgnore]
         public virtual DbSet<tMember> tMember { get; set; }
     }
 }

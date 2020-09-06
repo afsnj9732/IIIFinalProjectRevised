@@ -23,6 +23,7 @@ namespace IIIProject_travel
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+
         }
         //權限管理-設定角色
         protected void Application_OnPostAuthenticateRequest(object sender, EventArgs e)
