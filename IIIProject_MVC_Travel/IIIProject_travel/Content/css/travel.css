@@ -3,6 +3,11 @@ body {
     padding-right: 0 !important;
 }
 
+#labelTop{
+    position:fixed;
+    right:5%;
+    bottom:5%;
+}
 
 .combine_readmore {
     

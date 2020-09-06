@@ -13,8 +13,14 @@
         $('.modal-backdrop').eq(1).css('background-color', 'white'); 
     });
 
-    //揪團時間限制
-    
+    //書籤回最上
+    $("#labelTop").on("click", function (e) {
+        e.preventDefault();
+        window.document.body.scrollTop = 0;
+        window.document.documentElement.scrollTop = 0;
+    })
+
+    //揪團時間限制   
     $("#ActivityStart").on("change", function () {
         //$("#ActivityStart").attr("disabled","");
         $("#ActivityStartTo").attr("hidden", "");
