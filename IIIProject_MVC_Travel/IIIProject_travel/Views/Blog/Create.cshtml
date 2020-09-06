@@ -74,8 +74,9 @@
                         <p>預覽檔案</p>
                         <!--預覽區塊-->
                         <div class="st1">
-                            <div class=" x">
-                                <img id="demo" class="" src="https://picsum.photos/900/600/?random=1" width="900" height="600" />
+                            <div class="x">
+
+                                <img id="demo" class="" src="~/Content/images/BlogUploadSample.png" />
                             </div>
 
 
@@ -91,34 +92,36 @@
 
                     <!-- 文章輸入項 -->
 
-                    <div class="input-group" style="padding-bottom: 20px; width:80%;">
+                    <div class="input-group" style="padding-bottom: 20px; width:90%;">
                         <div class="input-group-prepend">
                             <p id="pTitle">標題 :</p>
                         </div>
                         <input type="text" aria-label="First name" class="form-control" name="txtTitle">
 
-                        <div class="ui form">
-                            <div class="inline fields d-flex">
-                                <label>　選擇類型　</label>
-                                <div class="field">
-                                    <div class="ui radio checkbox">
-                                        <input type="radio" name="fruit" tabindex="0" class="hidden">
-                                        <label>飯局　</label>
-                                    </div>
-                                </div>
-                                <div class="field">
-                                    <div class="ui radio checkbox">
-                                        <input type="radio" name="fruit" tabindex="0" class="hidden">
-                                        <label>旅遊　</label>
-                                    </div>
-                                </div>
+
+                        <div class="dropdown" style="padding-left:20px; color:wheat">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                區域選擇
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" href="#">北區</a>
+                                <a class="dropdown-item" href="#">南區</a>
+                                <a class="dropdown-item" href="#">東區</a>
                             </div>
                         </div>
+
                     </div>
 
                     <div class="input-group" style="padding-bottom: 20px; width:60%;">
                         <div class="input-group-prepend">
                             <p id="pTitle">地點 :</p>
+                        </div>
+                        <input type="text" aria-label="First name" class="form-control">
+                    </div>
+
+                    <div class="input-group" style="padding-bottom: 20px; width:60%;">
+                        <div class="input-group-prepend">
+                            <p id="pTitle">網址轉QRcode :</p>
                         </div>
                         <input type="text" aria-label="First name" class="form-control">
                     </div>
@@ -131,7 +134,7 @@
                             <div class="form-group">
                                 <textarea class="form-control" rows="3" id="post-content" name="txtContent"></textarea>
                             </div>
-                            
+
 
                             <button type="submit" class="btn btn-primary">提交</button>
 

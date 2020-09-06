@@ -1,6 +1,7 @@
 ﻿@model IEnumerable<tActivity>
 
 @{
+    dbJoutaEntities db = new dbJoutaEntities();
     Layout = null;
     var x = (tMember)Session["member"];
 
@@ -65,22 +66,13 @@
             <div class="col-lg-8">
 
                 <!-- Title -->
-
-
                 @{
-
                     foreach (tActivity tArticle in Model)
                     {
-
-
                         <h1 class="mt-4">
                             @tArticle.f活動標題
                         </h1>
-
-
                     }
-
-
                 }
 
 
@@ -96,12 +88,23 @@
 
                 <hr>
                 <!-- Date/Time -->
-                <p class="pDateSection">Posted on January 1, 2019 at 12:00 PM <span align="Right"> <img src="@Url.Action("PhotoGet","Blog")" width="50" /> </span> </p>
+                <p class="pDateSection">Posted on January 1, 2019 at 12:00 PM </p>
 
                 <hr>
 
                 <!-- Preview Image -->
-                <img class="img-fluid rounded" src="~/Content/images/blogPost.jpg" alt="">
+
+                @{
+                    foreach (var item in Model)
+                    {
+                        <img class="img-fluid rounded" src="~/Content/images/@item.f活動團圖" alt="">
+                    }
+
+
+                }
+
+
+                @*<img class="img-fluid rounded" src="~/Content/images/blogPost.jpg" alt="">*@
 
 
 
@@ -110,34 +113,26 @@
                 <!-- Post Content -->
 
                 @{
-
-
-
-
                     foreach (tActivity tArticle in Model)
                     {
-
-
                         <p>
                             @tArticle.f活動內容
                         </p>
-
                     }
-
-
                 }
 
 
-
-
-
-                <div class="con">
+                <div class="con" style="text-align:end">
                     <i class="fas fa-star" id="s1"></i>
                     <i class="fas fa-star" id="s2"></i>
                     <i class="fas fa-star" id="s3"></i>
                     <i class="fas fa-star" id="s4"></i>
                     <i class="fas fa-star" id="s5"></i>
+
+                    <span> <img src="@Url.Action("PhotoGet","Blog")" width="100" /> </span>
                 </div>
+
+
 
                 <hr>
 
@@ -185,17 +180,40 @@
 
 
                 <section id="achang-intro-2" class="card my-4">
-                    <h3>會員名稱</h3>
-                    <img src="https://picsum.photos/300/300/?random=1">
+
+                    @foreach (var item in Model)
+                    {
+                       
+                       <h3>@item.tMember.f會員名稱</h3>
+
+                    }
+
+
+
+
+
+
+                    @*<img src="https://picsum.photos/300/300/?random=1">*@
                     <p class="content">
-                        Food &amp; Wine Lover, Bilingual Blogger, Marketing Freelancer and Content Creator
-                        <br>美食與酒類愛好者,行銷創作接案者
-                        <br>
-                        <br><i class="fab fa-instagram"></i> Jouta
-                        <br>
-                        <br><i class="far fa-envelope"></i> jouta@gmail.com
-                        <br>
-                        
+
+                        @foreach (var item in Model)
+                        {
+
+
+                            <img src="~/Content/images/@item.tMember.f會員大頭貼" style="width:300px; height:300px">
+                            <br>
+                            @item.tMember.f會員自我介紹
+                            <br>
+                            <i class="fab fa-instagram"></i>@item.tMember.f會員名稱
+                            <br>
+                            <i class="far fa-envelope"></i>@item.tMember.f會員電子郵件
+
+
+                        }
+
+
+
+
                     </p>
                 </section>
 
