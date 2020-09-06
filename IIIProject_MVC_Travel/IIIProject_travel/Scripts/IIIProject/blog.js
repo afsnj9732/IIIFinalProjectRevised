@@ -24,6 +24,8 @@
       .checkbox();
   });
 })();
+
+
 (function(){
   $('#file').change(function() {
     var file = $('#file')[0].files[0];
@@ -34,3 +36,11 @@
     reader.readAsDataURL(file);
   });
 })();
+
+
+$(function () {
+
+    $("body").on("mouseenter", ".a-ellipsis", function () {
+        if (!this.title) this.title = $(this).text();
+    });
+});

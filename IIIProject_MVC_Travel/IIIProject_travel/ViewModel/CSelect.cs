@@ -12,5 +12,6 @@ namespace IIIProject_travel.ViewModel
         public string contain { get; set; }
         public string category { get; set; }
         public string label { get; set; }
+        public int page { get; set; }
     }
 }

@@ -75,8 +75,9 @@
             <div class="profile-nav-info">
                 <h3 class="user-name">@x.f會員名稱</h3>
                 <div class="address">
-                    <p class="state">New York,</p>
-                    <span class="country">USA.</span>
+                    <span class="country">暱稱:&nbsp;&nbsp;</span>
+                    <p class="state">@x.f會員暱稱</p>
+
                 </div>
             </div>
             <div class="profile-option">
@@ -161,8 +162,8 @@
                             <input type="text" size="50" placeholder="@x.f會員密碼" name="nickname" disabled>
                             <h6 class="profiletag" id="nickname">會員名稱</h6>
                             <input type="text" size="50" name="age" placeholder="@x.f會員名稱">
-                            <h6 class="profiletag">年紀</h6>
-                            <input type="text" size="50" name="birth">
+                            <h6 class="profiletag">暱稱</h6>
+                            <input type="text" size="50" name="birth" placeholder="@x.f會員暱稱">
                             <h6 class="profiletag">生日</h6>
                             <input type="text" size="50" name="interest" placeholder="@x.f會員生日">
                             <h6 class="profiletag">興趣</h6>
@@ -201,13 +202,21 @@
                         <div class="row pl-3">
                             <div class="content mb-3" style="cursor: pointer;width:70%;height: 150px;"
                                  data-toggle="modal" data-target="#exampleModal2">
-                                <span style="font-weight:bolder;"> @t.f活動標題</span>
+                                <h3 style="font-weight:bolder;"> @t.f活動標題</h3>
                                 <br>
-                                <span id="togglecontent" style="font-size: 13px;">
+                                <p id="togglecontent" style="font-size: 13px;">
                                     @t.f活動內容
-                                </span>
+                                </p>
+                                <span>揪團者 :  <span style="cursor: pointer;">@x.f會員名稱</span></span>
+                                <span>&nbsp; &nbsp;</span>
+                                <span>活動開始時間： <span>@t.f活動開始時間</span></span>
+                                <span>&nbsp; &nbsp;</span>
+                                <span>活動結束時間： <span>@t.f活動結束時間</span></span>
+                                <span>&nbsp; &nbsp;</span>
+                                <span>時間倒數： <span></span></span>
+                                <span>&nbsp; &nbsp;</span>
                             </div>
-                            <img src="~/Content/images/@t.f活動團圖" id="imgdisplay" alt="" class="col-auto" style="display:none; width: 30%;height: 150px;">
+                            <img src="~/Content/images/@t.f活動團圖" id="imgdisplay" alt="" class="col-auto" style=" width: 30%;height: 150px;">
                         </div>
                     }
                 </div>
@@ -215,23 +224,19 @@
                     <h1>關注活動</h1>
                     @foreach (tActivity t in Model.tActivities)
                     {
-                        <div class="card mb-4">
-                            <img class="card-img-top" src="~/Content/images/@t.f活動團圖" w alt="Card image cap">
-                            <div class="card-body">
-                                <h2 class="card-title">@t.f活動標題</h2>
-                                <p class="card-text">
+                        <div class="row pl-3">
+                            <div class="content mb-3" style="cursor: pointer;width:70%;height: 150px;"
+                                 data-toggle="modal" data-target="#exampleModal2">
+                                <h3 style="font-weight:bolder;"> @t.f活動標題</h3>
+                                <br>
+                                <p id="togglecontent" style="font-size: 13px;">
                                     @t.f活動內容
                                 </p>
-                                <a class="nav-item">@Html.ActionLink("Read More", "BlogContent", "Blog", new { }, new { @class = "btn btnContent  btn-warning" })</a>
                             </div>
-                            <div class="card-footer text-muted">
-
-                                <p class="pDateSection">
-                                    Posted on @t.f活動發起日期 by
-                                    @Html.ActionLink(t.tMember.f會員名稱, "ProfileIndex", "Profile")
-                                </p>
-
+                            <div>
+                                <img src="~/Content/images/@t.f活動團圖" id="imgdisplay" alt="" class="col-auto" style=" width: 30%;height: 150px;">
                             </div>
+                           
                         </div>
                     }
                 </div>
@@ -261,13 +266,13 @@
                                 <div class="row m-0 mb-3   justify-content-between" style="font-size: 16px;">
                                     <div class="pl-1">
                                         <img src="~/Content/images/09.png" alt="">
-                                        <span>揪團者 :  <span style="cursor: pointer;">大衛哥</span></span>
+                                        <span>揪團者 :  <span style="cursor: pointer;">@x.f會員名稱</span></span>
                                         <span>&nbsp; &nbsp;</span>
-                                        <span>揪團日期： <span>2020/08/01</span></span>
+                                        <span>揪團日： <span>@t.f活動發起日期</span></span>
                                         <span>&nbsp; &nbsp;</span>
-                                        <span>活動日期： <span>2020/09/01</span></span>
+                                        <span>活動開始時間： <span>@t.f活動開始時間</span></span>
                                         <span>&nbsp; &nbsp;</span>
-                                        <span>入團截止： <span>17:02:15</span></span>
+                                        <span>活動結束時間： <span>@t.f活動結束時間</span></span>
                                         <span>&nbsp; &nbsp;</span>
                                     </div>
                                 </div>
@@ -278,7 +283,6 @@
                                     <span style="font-weight:bolder;"> 龜山步道。墾丁私房景點｜不到半小時即攻頂。全方位飽覽恆春山海景</span>
                                     <br>
                                     <span id="togglecontent" style="font-size: 13px;"></span>
-                                    <label id="togglebutton" onclick="toggleText()">詳文</label>
 
                                 </div>
                                 <img src="images/7.jpg" id="imgdisplay" alt="" class="col-auto" style="display:none; width: 30%;height: 150px;">
