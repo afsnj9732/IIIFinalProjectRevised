@@ -44,7 +44,6 @@ function showPosition(position) {
 //翻牌給tab
 function tabs(panelIndex) {
     tabNum = panelIndex;
-    console.log('tabs func: ' + tabNum);
     return panelIndex;
 }
 tabs(0);
@@ -53,8 +52,6 @@ $('.resultTrigger').click(function () {
 
     console.log('pi: ' + tabNum);
     console.log("lat: " + currentLat);
-
-    console.log(result);
 
     $.ajax({
         url: "/Home/QuickMatch",
@@ -68,7 +65,7 @@ $('.resultTrigger').click(function () {
         async: false,
         cache: true,
         success: function (data) {
-            //alert(data);
+            alert(data);
             //JSON Data
             //$('#mName').text(data);
         },
