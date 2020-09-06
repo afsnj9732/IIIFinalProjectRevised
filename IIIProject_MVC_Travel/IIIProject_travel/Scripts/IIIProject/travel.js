@@ -32,6 +32,37 @@
         $("#ActivityFindEnd").attr("max", $("#ActivityStart").val());       
     })
 
+    //星星評分頭
+    $("body").on('mouseover', '#Score img' ,function () {
+        let amount = this.id.charAt(5);        
+        for (var i = 0; i < amount; i++) {
+            $("#Score img").eq(i).attr('src', '/Content/images/ChangeStar.png');
+        }
+        //$('#label').html("打分中..." + i);
+    })
+
+    $("body").on('mouseout', '#Score img', function () {
+        let amount = this.id.charAt(5);
+        for (var i = 0; i < amount; i++) {
+            $("#Score img").eq(i).attr('src', '/Content/images/Star.png');
+        }
+        //$('#label').html("");
+    })
+
+    $("body").on('click', '#Score img',function () {
+        //let amount = this.id.charAt(5);
+        console.log("Hi")
+        for (let i = 0; i < 5; i++) {
+            $("#Score img").eq(i).off('mouseover');
+            $("#Score img").eq(i).off('mouseout');
+            $("#Score img").eq(i).off('click');
+        }
+        //$('#label').html("您給" + amount + "顆星");
+
+    })
+    //星星評分尾
+
+
 
     var theMonth, theDay;
     $("#ActivityEnd").on("change", function () {

@@ -9,7 +9,6 @@
 
 namespace IIIProject_travel
 {
-    using Newtonsoft.Json;
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
@@ -26,13 +25,8 @@ namespace IIIProject_travel
             throw new UnintentionalCodeFirstException();
         }
 
-        [JsonIgnore]
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
-
-        [JsonIgnore]
         public virtual DbSet<tActivity> tActivity { get; set; }
-
-        [JsonIgnore]
         public virtual DbSet<tMember> tMember { get; set; }
     }
 }
