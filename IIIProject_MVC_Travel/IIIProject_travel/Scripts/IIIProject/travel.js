@@ -1,6 +1,5 @@
 (function () {
     var order, background_color, contain, category, label, p;
-    var i = 2;
     //Bootstrap Modal 關閉觸發事件
     $(document).on('hidden.bs.modal', '.modal', function () {
         $('.modal:visible').length && $(document.body).addClass('modal-open'); //疊加互動視窗 Scroll Debug
@@ -13,6 +12,93 @@
         }          
         $('.modal-backdrop').eq(1).css('background-color', 'white'); 
     });
+
+    //書籤回最上
+    $("#labelTop").on("click", function (e) {
+        e.preventDefault();
+        window.document.body.scrollTop = 0;
+        window.document.documentElement.scrollTop = 0;
+    })
+
+    //揪團時間限制   
+    $("#ActivityStart").on("change", function () {
+        //$("#ActivityStart").attr("disabled","");
+        $("#ActivityStartTo").attr("hidden", "");
+        $("#ActivityEnd").val("");
+        $("#ActivityFindEnd").val("");
+        $("#ActivityEnd").removeAttr("disabled");
+        $("#ActivityFindEnd").removeAttr("disabled");
+        $("#ActivityEnd").attr("min", $("#ActivityStart").val());
+        $("#ActivityFindEnd").attr("max", $("#ActivityStart").val());       
+    })
+
+
+    var theMonth, theDay;
+    $("#ActivityEnd").on("change", function () {
+        $("#ActivityEndTo").attr("hidden", "");
+        //let d = new Date($("#ActivityEnd").val());
+        //date = new Date(d.setDate(d.getDate() - 1));
+        nowdate = new Date(Date.now());
+        //theMonth = date.getMonth() + 1;
+        //theDay = date.getDate();
+        //FormatTime();
+        //$("#ActivityStart").attr("max", date.getFullYear() + "-" + theMonth + "-" + theDay);
+        theMonth = nowdate.getMonth() + 1;
+        theDay = nowdate.getDate();
+        FormatTime();
+        $("#ActivityStart").attr("min", nowdate.getFullYear() + "-" + theMonth + "-" + theDay);
+    })
+    //時間格式轉換
+    function FormatTime() {
+        if (theMonth.toString().length < 2) {
+            theMonth = "0" + theMonth;
+        }
+        if (theDay.toString().length < 2) {
+            theDay = "0" + theDay;
+        }
+    }
+    //揪團欄位限制
+    $("#NeedAT").on("change", function () {
+        $("#NeedATTo").attr("hidden","");
+    })
+    $("#ActivityFindEnd").on("change", function () {
+        $("#ActivityFindEndTo").attr("hidden", "");
+    })
+    $("#NeedAC").on("change", function () {
+        $("#NeedACTo").attr("hidden", "");
+    })
+    $("#NeedAP").on("change", function () {
+        $("#NeedAPTo").attr("hidden", "");
+    })
+    $("#NeedAL").on("change", function () {
+        $("#NeedALTo").attr("hidden", "");
+    })
+    //揪團欄位限制
+    $("#JoutaSend").on("click", function (e) {
+        if ($("#NeedAT").val().length < 8) {
+            e.preventDefault();
+            $("#NeedATTo").removeAttr("hidden");
+        } else if ($("#ActivityStart").val() =="") {
+            e.preventDefault();
+            $("#ActivityStartTo").removeAttr("hidden");
+        } else if ($("#ActivityEnd").val() == "") {
+            e.preventDefault();
+            $("#ActivityEndTo").removeAttr("hidden");
+        } else if ($("#ActivityFindEnd").val() == "") {
+            e.preventDefault();
+            $("#ActivityFindEndTo").removeAttr("hidden");
+        } else if ($("#NeedAC").val() == "") {
+            e.preventDefault();
+            $("#NeedACTo").removeAttr("hidden");
+        } else if ($("#NeedAP").val() == "") {
+            e.preventDefault();
+            $("#NeedAPTo").removeAttr("hidden");
+        } else if ($("#NeedAL").val().length <100) {
+            e.preventDefault();
+            $("#NeedALTo").removeAttr("hidden");
+        }
+    })
+
 
 
     // 排序固定   

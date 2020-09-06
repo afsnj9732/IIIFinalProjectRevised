@@ -2048,6 +2048,8 @@
     <Content Include="Scripts\IIIProject\dashboard.js" />
     <Content Include="Scripts\IIIProject\debounce.js" />
     <Content Include="Scripts\IIIProject\eat.js" />
+    <Content Include="Scripts\IIIProject\exporting.js" />
+    <Content Include="Scripts\IIIProject\highcharts.js" />
     <Content Include="Scripts\IIIProject\profile.js" />
     <Content Include="Scripts\IIIProject\quickmatch.js" />
     <Content Include="Scripts\IIIProject\travel.js" />
@@ -2104,10 +2106,11 @@
     <Content Include="Views\Home\emailValidation.cshtml" />
     <Content Include="Views\Home\ChangePassword.cshtml" />
     <Content Include="Views\Home\forgetPassword.cshtml" />
-    <Content Include="Views\DataPresent\Index.cshtml" />
+    <Content Include="Views\DataPresent\ShowLineChart.cshtml" />
     <Content Include="Views\Travel\Actadd.cshtml" />
     <Content Include="Views\Travel\MsgAdd.cshtml" />
     <Content Include="Views\Blog\personalIndex.cshtml" />
+    <Content Include="Views\DataPresent\ShowPieChart.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

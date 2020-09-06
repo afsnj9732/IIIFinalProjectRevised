@@ -13,10 +13,7 @@
 
 <figure class="highcharts-figure">
     <div id="container"></div>
-    <p class="highcharts-description">
-        This chart shows how data labels can be added to the data series. This
-        can increase readability and comprehension for small datasets.
-    </p>
+
 </figure>
 
 
@@ -24,7 +21,7 @@
 
     $(document).ready(function () {
         console.log("333")
-        $.getJSON("/DataPresent/GetData", function (data) {
+        $.getJSON("/DataPresent/GetLineChartData", function (data) {
             var Names = []
             var Qts = []
             for (var i = 0; i < data.length; i++) {
