@@ -115,10 +115,8 @@
                         </p>
                     </div>
                     <div class="profile-btn">
-                        <button class="chatbtn">
-                            <i class="fa fa-comment"></i>
-                            Chat
-                        </button>
+                        
+                        <button class="chatbtn"><i class="fa fa-comment">@Html.ActionLink("Chat","Chat","Profile",new { },new { @class = "fa fa-plus temp"  })</i></button>
                         <button class="createbtn">
                             <i>@Html.ActionLink("Create", "Create", "Blog", new { }, new { @class = "fa fa-plus temp" })</i>
                         </button>
@@ -292,36 +290,6 @@
 
             </div>
         </div>
-        @*<div class="profile-follow tab_info">
-            <h1>關注活動</h1>
-            <p>
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aperiam animi alias doloribus,
-                dolor
-                necessitatibus reiciendis, magni molestias ut perferendis corrupti assumenda nobis,
-                veritatis
-                eos fugiat nisi quas rem repudiandae neque?
-            </p>
-        </div>
-        <div class="profile-follower tab_info">
-            <h1>追蹤團主</h1>
-            <p>
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aperiam animi alias doloribus,
-                dolor
-                necessitatibus reiciendis, magni molestias ut perferendis corrupti assumenda nobis,
-                veritatis
-                eos fugiat nisi quas rem repudiandae neque?
-            </p>
-        </div>
-        <div class="profile-history tab_info">
-            <h1>歷史紀錄</h1>
-            <p>
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aperiam animi alias doloribus,
-                dolor
-                necessitatibus reiciendis, magni molestias ut perferendis corrupti assumenda nobis,
-                veritatis
-                eos fugiat nisi quas rem repudiandae neque?
-            </p>
-        </div>*@
     </div>
 
 
