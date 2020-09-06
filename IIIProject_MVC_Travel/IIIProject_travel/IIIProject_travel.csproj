@@ -239,6 +239,7 @@
     <Content Include="Content\images\14876883363_94995b4f88_o.jpg" />
     <Content Include="Content\images\20190105141437_100.jpg" />
     <Content Include="Content\images\BlogUploadSample.png" />
+    <Content Include="Content\images\ChangeStar.png" />
     <Content Include="Content\images\f899c3a6-45ba-4d37-ba05-8f4e031b0a63.jpg" />
     <Content Include="Content\images\McDonalds.png" />
     <Content Include="Content\images\mume.jpg" />
@@ -1924,6 +1925,7 @@
     <Content Include="Content\images\7.png" />
     <Content Include="Content\images\8.png" />
     <Content Include="Content\images\9.png" />
+    <Content Include="Content\images\Star.png" />
     <Content Include="Content\images\wilddonkey.jpg" />
     <Content Include="Content\images\carousel01.jpg" />
     <Content Include="Content\images\carousel02.jpg" />

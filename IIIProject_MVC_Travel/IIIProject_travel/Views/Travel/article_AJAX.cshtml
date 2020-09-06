@@ -9,6 +9,7 @@
     string combine_readmore = "";
     string combine_join = "";
     string combine_msg = "";
+    string combine_score = "";
     var NowMember = (tMember)Session["member"]; //注意Session抓到的資料，其資料內容為取得該Session當下的資料內容，
                                                 //因此若有修改過資料庫的資料，就要改藉由Session的會員編號
                                                 //去抓取現在資料庫的資料，否則會一直撈到不變的Session資料
@@ -47,6 +48,7 @@
         combine_readmore = "exampleModal" + count;
         combine_join = "Join" + count;
         combine_msg = "Msg" + count;
+        combine_score = "Score" + count;
         string iflikeit = "11.png";
         int pos = -1;
         if (Session["member"] != null)
@@ -61,6 +63,35 @@
                 }
             }
         }
+        <div class="modal fade combine_score" id="@combine_score" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog change-max-width-1420" role="document" style="padding-right: 17px !important;">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">@item.f活動標題 評分區</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div ScoreAdd="@item.f活動編號" id="Score">
+                            @for (int i = 0; i < 5; i++)
+                            {
+                                string idimg = "idimg" + (i+1);
+                                <img id="@idimg" src="~/Content/images/ChangeStar.png" />
+                            }
+                        </div>
+                    </div>
+                    <div class="modal-footer justify-content-between">          
+                        <span>
+                            <button type="button" class="btn btn-warning leaveScore" leaveScore="@item.f活動編號">送出</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
 
         <div class="modal fade combine_msg" id="@combine_msg" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog change-max-width-1420" role="document" style="padding-right: 17px !important;">
@@ -208,7 +239,7 @@
                                         <button class="btn btn-block mr-1  p-1" data-toggle="modal" data-target="#@combine_join" style="background-color:#FFE0B2 ;">
                                             <img src="~/Content/images/10.png" class="pb-1" alt="">想加入
                                         </button>
-                                        <button class="btn btn-block mr-1  p-1" data-toggle="modal" data-target="#@combine_join" style="background-color:#FFE0B2 ;">
+                                        <button class="btn btn-block mr-1  p-1" data-toggle="modal" data-target="#@combine_score" style="background-color:#FFE0B2 ;">
                                             <img src="~/Content/images/10.png" class="pb-1" alt="">給分數
                                         </button>
                                         <div style="cursor: pointer;">
@@ -315,18 +346,18 @@
         </div>
         <!-- -------------文章分割線-------------- -->
     }
-        <div style="color:red">
-            @for (int i = 1; i < Model.TotalPage + 1; i++)
+    <div style="color:red">
+        @for (int i = 1; i < Model.TotalPage + 1; i++)
+        {
+            if (i == Model.NowPage)
             {
-                if (i == Model.NowPage)
-                {
-                    <button class="page NowPage" page="@i">@i</button>
-                }
-                else
-                {
-                    <button class="page" page="@i">@i</button>
-                }
-
+                <button class="page NowPage" page="@i">@i</button>
             }
-        </div>
+            else
+            {
+                <button class="page" page="@i">@i</button>
+            }
+
+        }
+    </div>
 }
