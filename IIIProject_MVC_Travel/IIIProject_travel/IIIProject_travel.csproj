@@ -169,6 +169,7 @@
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Controllers\TravelController.cs" />
+    <Compile Include="Controllers\優惠發送Controller.cs" />
     <Compile Include="Controllers\後台HomeController.cs" />
     <Compile Include="Controllers\後台文章Controller.cs" />
     <Compile Include="Controllers\後台旅遊Controller.cs" />
@@ -2137,6 +2138,7 @@
     <Content Include="Views\Blog\personalIndex.cshtml" />
     <Content Include="Views\DataPresent\ShowPieChart.cshtml" />
     <Content Include="Views\Profile\Chat.cshtml" />
+    <Content Include="Views\優惠發送\List.cshtml" />
     <Content Include="Views\Profile\otherprofile.cshtml" />
   </ItemGroup>
   <ItemGroup>

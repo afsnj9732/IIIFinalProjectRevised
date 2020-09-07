@@ -195,21 +195,21 @@
                     <h1>我的發文</h1>
                     @foreach (tActivity t in post)
                     {
-                        <div class="card mb-4">
-                            <img class="card-img-top" src="~/Content/images/@t.f活動團圖" alt="Card image cap">
-                            <div class="card-body">
-                                <h2 class="card-title">@t.f活動標題</h2>
-                                <p class="card-text">
-                                    @t.f活動內容
-                                </p>
-                                <a class="nav-item">@Html.ActionLink("Read More", "BlogContent", "Blog", new { }, new { @class = "btn btnContent  btn-warning" })</a>
-                            </div>
-                            <div class="card-footer text-muted">
-
-                                <p class="pDateSection"> Posted on @t.f活動發起日期 </p>
-
+                        <div class="card mb-3" style="max-width: 540px;">
+                            <div class="row no-gutters">
+                                <div class="col-md-4">
+                                    <img src="~/Content/images/@t.f活動團圖" class="card-img" alt="...">
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="card-body">
+                                        <h5 class="card-title">@t.f活動標題</h5>
+                                        <p class="card-text">@t.f活動內容</p>
+                                        <p class="card-text"><small class="text-muted">Posted on @t.f活動發起日期</small></p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
+                        
                     }
                 </div>
                 <div class="profile-event tab_info" id="myActivity">
