@@ -6,7 +6,7 @@
     <edmx:Diagrams>
       <Diagram DiagramId="3390df349848473bb90ce1b4f1221f03" Name="Diagram1" ZoomLevel="97">
         <EntityTypeShape EntityType="joutaModel.sysdiagrams" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="joutaModel.tActivity" Width="1.5" PointX="3" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="joutaModel.tActivity" Width="1.5" PointX="4.125" PointY="1.625" IsExpanded="true" />
         <EntityTypeShape EntityType="joutaModel.tMember" Width="1.5" PointX="0.75" PointY="1.125" IsExpanded="true" />
         <AssociationConnector Association="joutaModel.FK_tActivity_tMember" ManuallyRouted="false" />
       </Diagram>

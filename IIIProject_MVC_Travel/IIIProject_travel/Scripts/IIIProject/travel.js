@@ -18,7 +18,7 @@
         e.preventDefault();
         window.document.body.scrollTop = 0;
         window.document.documentElement.scrollTop = 0;
-    })
+    });
 
     //揪團時間限制   
     $("#ActivityStart").on("change", function () {
@@ -29,37 +29,67 @@
         $("#ActivityEnd").removeAttr("disabled");
         $("#ActivityFindEnd").removeAttr("disabled");
         $("#ActivityEnd").attr("min", $("#ActivityStart").val());
-        $("#ActivityFindEnd").attr("max", $("#ActivityStart").val());       
-    })
+        $("#ActivityFindEnd").attr("max", $("#ActivityStart").val());
+    });
 
     //星星評分頭
-    $("body").on('mouseover', '#Score img' ,function () {
-        let amount = this.id.charAt(5);        
-        for (var i = 0; i < amount; i++) {
-            $("#Score img").eq(i).attr('src', '/Content/images/ChangeStar.png');
+     
+    $("body").on('mouseover', '.Score img', function () {
+        let amount = $(this).attr("ScoreID");
+        let target = $(this).attr("ScoreTarget");
+        if ($("[ScoreTarget =" + target + "]").attr("isclick") === "false") {
+            for (let i = 0; i < amount; i++) {
+                $("[ScoreTarget =" + target + "]").eq(i).attr('src', '/Content/images/ChangeStar.png');
+            }
         }
-        //$('#label').html("打分中..." + i);
-    })
+    });
 
-    $("body").on('mouseout', '#Score img', function () {
-        let amount = this.id.charAt(5);
-        for (var i = 0; i < amount; i++) {
-            $("#Score img").eq(i).attr('src', '/Content/images/Star.png');
+    $("body").on('mouseout', '.Score img', function () {
+        let amount = $(this).attr("ScoreID");
+        let target = $(this).attr("ScoreTarget");
+        if ($("[ScoreTarget =" + target + "]").attr("isclick") === "false") {
+            for (let i = 0; i < amount; i++) {
+                $("[ScoreTarget =" + target + "]").eq(i).attr('src', '/Content/images/Star.png');
+            }
         }
-        //$('#label').html("");
-    })
 
-    $("body").on('click', '#Score img',function () {
-        //let amount = this.id.charAt(5);
-        console.log("Hi")
+    });
+
+    $("body").on('click', '.Score img', function () {   
+        let target = $(this).attr("ScoreTarget");
+        $(this).addClass("GetScore");
         for (let i = 0; i < 5; i++) {
-            $("#Score img").eq(i).off('mouseover');
-            $("#Score img").eq(i).off('mouseout');
-            $("#Score img").eq(i).off('click');
+            $("[ScoreTarget =" + target + "]").eq(i).attr('isclick', 'true');
         }
-        //$('#label').html("您給" + amount + "顆星");
+    });
+    $("body").on('click', '.resetScore', function () {  
+        let target = $(this).attr("resetScore");
 
-    })
+        for (let i = 0; i < 5; i++) {
+            $("[ScoreTarget =" + target + "]").eq(i).attr('isclick', 'false');
+            $("[ScoreTarget =" + target + "]").eq(i).attr('src', '/Content/images/Star.png');
+            $("[ScoreTarget =" + target + "]").removeClass("GetScore");
+        }
+    });
+    
+    $("body").on('click', '.leaveScore', function () { //送出評分
+        let target = $(this).attr("leaveScore");
+        let Score = $(".GetScore").attr("ScoreID");
+        $.ajax({
+            url: "/Travel/ScoreAdd",
+            type: "POST",
+            data: { "target": target , "Score":Score},
+            success: function (data) {
+                if (data === "0") {
+                    window.confirm("有參加的會員且須於活動結束以後才可評分");
+                } else if (data === "1") {
+                    window.confirm("你已經評分過了哦!");
+                } else {
+                    window.confirm("評分成功!");
+                }
+            }
+        });
+    });
     //星星評分尾
 
 
@@ -78,7 +108,7 @@
         theDay = nowdate.getDate();
         FormatTime();
         $("#ActivityStart").attr("min", nowdate.getFullYear() + "-" + theMonth + "-" + theDay);
-    })
+    });
     //時間格式轉換
     function FormatTime() {
         if (theMonth.toString().length < 2) {
@@ -90,26 +120,26 @@
     }
     //揪團欄位限制
     $("#NeedAT").on("change", function () {
-        $("#NeedATTo").attr("hidden","");
-    })
+        $("#NeedATTo").attr("hidden", "");
+    });
     $("#ActivityFindEnd").on("change", function () {
         $("#ActivityFindEndTo").attr("hidden", "");
-    })
+    });
     $("#NeedAC").on("change", function () {
         $("#NeedACTo").attr("hidden", "");
-    })
+    });
     $("#NeedAP").on("change", function () {
         $("#NeedAPTo").attr("hidden", "");
-    })
+    });
     $("#NeedAL").on("change", function () {
         $("#NeedALTo").attr("hidden", "");
-    })
+    });
     //揪團欄位限制
     $("#JoutaSend").on("click", function (e) {
         if ($("#NeedAT").val().length < 8) {
             e.preventDefault();
             $("#NeedATTo").removeAttr("hidden");
-        } else if ($("#ActivityStart").val() =="") {
+        } else if ($("#ActivityStart").val() == "") {
             e.preventDefault();
             $("#ActivityStartTo").removeAttr("hidden");
         } else if ($("#ActivityEnd").val() == "") {
@@ -124,11 +154,11 @@
         } else if ($("#NeedAP").val() == "") {
             e.preventDefault();
             $("#NeedAPTo").removeAttr("hidden");
-        } else if ($("#NeedAL").val().length <100) {
+        } else if ($("#NeedAL").val().length < 100) {
             e.preventDefault();
             $("#NeedALTo").removeAttr("hidden");
         }
-    })
+    });
 
 
 

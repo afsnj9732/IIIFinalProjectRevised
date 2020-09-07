@@ -65,6 +65,62 @@ namespace IIIProject_travel.Controllers
             return View();
         }
 
+        public string ScoreAdd(int target,int Score)
+        {
+            dbJoutaEntities db = new dbJoutaEntities();
+            var NowMember = (tMember)Session["member"];
+            var theActivity = db.tActivity.Where(x => x.f活動編號 == target)
+                              .Select(a => a);
+            string[] isExist = theActivity.Select(a => a.f活動參加的會員編號)
+                               .FirstOrDefault().Split(',');
+            int pos = Array.IndexOf(isExist, NowMember.f會員編號.ToString());
+            int yyyy = Convert.ToInt32(theActivity.FirstOrDefault().f活動結束時間.Substring(0 , 4));
+            int MM = Convert.ToInt32(theActivity.FirstOrDefault().f活動結束時間.Substring(5, 2));
+            int dd = Convert.ToInt32(theActivity.FirstOrDefault().f活動結束時間.Substring(8, 2));
+            var TimeNow = DateTime.Now.ToString("yyyy,MM,dd");
+            int Nyyyy = Convert.ToInt32(TimeNow.Substring(0, 4));
+            int NMM = Convert.ToInt32(TimeNow.Substring(5, 2));
+            int Ndd = Convert.ToInt32(TimeNow.Substring(8, 2));
+            int result = DateTime.Compare((new DateTime(yyyy,MM,dd)), (new DateTime(Nyyyy,NMM,Ndd)));
+            if (pos == -1 || result > 0) //先找有沒有參加本次活動，或是本次活動結束了沒
+            { 
+                return "0";//沒參加 或是 活動尚未結束
+            }
+
+            if (!string.IsNullOrEmpty(theActivity.Select(a => a.f活動評分過的會員編號).FirstOrDefault()))
+            {   //若有曾經評分過的會員編號
+                isExist = theActivity.Select(a => a.f活動評分過的會員編號).FirstOrDefault().Split(',');
+                pos = Array.IndexOf(isExist, NowMember.f會員編號.ToString());//再找現在登入會員有沒有評分過
+                if (pos != -1) 
+                {
+                    return "1"; //有評分過
+                }
+            }
+            //若無曾經評分過的會員編號則直接往下
+
+            //若通過上面判定則進行評分
+            var SaveData = theActivity.FirstOrDefault();            
+            SaveData.f活動評分過的會員編號 += "," + NowMember.f會員編號;
+            if(SaveData.tMember.f會員評分人數 == null)
+            {
+                SaveData.tMember.f會員評分人數 = 0;
+            }
+            SaveData.tMember.f會員評分人數 += 1;
+            if (SaveData.tMember.f會員總分 == null)
+            {
+                SaveData.tMember.f會員總分 = 0;
+            }
+            SaveData.tMember.f會員總分 += Score;
+            if (SaveData.tMember.f會員評分 == null)
+            {
+                SaveData.tMember.f會員評分 = 0;
+            }
+            SaveData.tMember.f會員評分 = 
+                Math.Round(Convert.ToDouble(SaveData.tMember.f會員總分 / SaveData.tMember.f會員評分人數), 1);
+            db.SaveChanges();
+            return "2";
+        }
+
         public void ViewCounts(int ActivityID)
         {
             dbJoutaEntities db = new dbJoutaEntities();
@@ -181,30 +237,44 @@ namespace IIIProject_travel.Controllers
                 GuysList = ActList.f活動參加的會員編號.Split(',');
                 index = Array.IndexOf(GuysList, NowMember.f會員編號.ToString());  //尋找登入中的會員是否有參加
             }                                                                     //注意會員標號是int，陣列內容是str，
-                                                                                  //不轉型index永遠會是-1
+
+
+            var Member = db.tMember.Where(t => t.f會員編號 == NowMember.f會員編號)
+                         .Select(a => a).FirstOrDefault();  
+            //不轉型index永遠會是-1            
             if (isAdd == true)//點選入團
             {
-                if (index == -1)//登入中的會員不存在名單則直接加入
+                //判別活動時段是否已占用
+
+
+                if (index == -1)//活動時段未占用且登入中的會員不存在名單則加入
                 {
+                    //添加占用時間
+                    //Member.f會員已占用時間;
+                    
+                    //添加占用時間
                     ActList.f活動參加的會員編號 += "," + NowMember.f會員編號;
                     db.SaveChanges();
                 }
-                else //若存在則要??
+                else //若存在則...
                 {
                     return null;
                 }
             }
             else //點選退出
             {
-                if (index != -1)//登入中的會員存在則讓他退出
+                if (index != -1)//登入中的會員存在則讓他退出並更動占用時間
                 {
+                    //移除占用時間((未完成
+
+                    //移除占用時間
                     var List = GuysList.ToList();
                     List.RemoveAt(index);
                     var FinalList = string.Join(",",List);
                     ActList.f活動參加的會員編號 = FinalList;
                     db.SaveChanges();
                 }
-                else //若不存在則要??
+                else //若不存在則...
                 {
                     return null;
                 }

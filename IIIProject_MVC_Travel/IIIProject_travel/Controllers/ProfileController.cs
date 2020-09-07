@@ -16,6 +16,7 @@ namespace IIIProject_travel.Controllers
         {
             CMember c = new CMember();
             var travel = from t in (new dbJoutaEntities()).tActivity
+                         
                          select t;  //從資料表抓資料
             c.tActivities = travel;
             c.tMembers = (tMember)Session["member"];
@@ -24,7 +25,6 @@ namespace IIIProject_travel.Controllers
 
         public ActionResult Chat()
         {
-
             return View();
         }
         public ActionResult otherprofile(int id)
