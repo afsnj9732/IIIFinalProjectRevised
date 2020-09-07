@@ -49,7 +49,7 @@
                         @if (Session["member"] != null)
                         {
 
-                            <li class="nav-item nav-link nav-login text-dark">@Html.ActionLink("您好，"@*+ x.f會員名稱*@, "ProfileIndex", "Profile")</li>
+                            <li class="nav-item nav-link nav-login text-dark">@Html.ActionLink("您好，"+ x.f會員名稱, "ProfileIndex", "Profile")</li>
                             @*<li class="nav-item">
                                     <img src="@ViewData["Img"]" alt="img" width="30" height="30" style="border:2px solid green;" />
                                 </li>*@
@@ -80,7 +80,7 @@
         </div>
         <div class="panel-footer">
             <div class="input-group ">
-                <input id="message" type="type" name="message" class="form-control input-sm" placeholder="請輸入訊息..." />
+                <input id="message" type="text" name="message" class="form-control input-sm" placeholder="請輸入訊息..." />
                 <span class="input-group-btn">
                     <input type="button" class="btn btn-warning btn-sm" id="sendmessage" value="送出" />
                 </span>
@@ -104,10 +104,10 @@
 
             chat.client.addNewMessageToPage = function (name, message) {
 
-                if (name == ) {
+                if (name == "@x.f會員名稱") {
                     $("#discussion").append('<p style="color:green;text-align:left;width:500px;">' +
                         '<strong> <img src="https://www.phplivesupport.com/pics/icons/avatars/public/avatar_71.png">' + htmlEncode(name) + '</strong>' + htmlEncode(message) + '</p>')
-                } else if(name != "Atir") {
+                } else if(name != "@x.f會員名稱") {
                     $("#discussion").append('<p style="color:blue;text-alignright;">' +
                         '<strong> <img src="https://www.phplivesupport.com/pics/icons/avatars/public/avatar_71.png">' + htmlEncode(name)  + '</strong>' + htmlEncode(message) + '</p>')
                 }
