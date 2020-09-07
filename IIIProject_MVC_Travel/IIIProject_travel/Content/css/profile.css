@@ -339,5 +339,8 @@ input[type="text"]:focus{
             width: 200px;
             display: flex;
         }
+        .col-md-4 {
+            margin: auto 0;
+        }
     }
 }
