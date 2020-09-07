@@ -12,8 +12,12 @@ namespace IIIProject_travel.Controllers
         // GET: 後台飯局
         public ActionResult List(string sortOrder, string txt關鍵字, string currentFilter, int page = 1)
         {
+
             //搜尋
-            IQueryable<tActivity> 飯局 = null;
+            //IQueryable<tActivity> 飯局 = null;
+            var 飯局 = from m in (new dbJoutaEntities()).tActivity
+                     where m.f活動類型 == "飯局"
+                     select m;
 
             if (txt關鍵字 != null)
             {
@@ -26,17 +30,19 @@ namespace IIIProject_travel.Controllers
 
             if (string.IsNullOrEmpty(txt關鍵字))
                 飯局 = from m in (new dbJoutaEntities()).tActivity
+                     where m.f活動類型 == "飯局"
                      select m;
             else
-                飯局 = from m in (new dbJoutaEntities()).tActivity
-                     where m.f活動編號.ToString().Contains(txt關鍵字) || m.f活動標題.Contains(txt關鍵字) ||
+                飯局 = from m in 飯局
+                     where m.f活動類型.Contains("飯局") &&
+                           m.f活動編號.ToString().Contains(txt關鍵字) || m.f活動標題.Contains(txt關鍵字) ||
                            m.f活動標籤.Contains(txt關鍵字) || m.f活動內容.Contains(txt關鍵字) ||
-                           m.f活動團圖.Contains(txt關鍵字)|| m.f活動地區.Contains(txt關鍵字)||
-                           m.f活動地點.Contains(txt關鍵字)|| m.f活動所屬.Contains(txt關鍵字) ||
+                           m.f活動團圖.Contains(txt關鍵字) || m.f活動地區.Contains(txt關鍵字) ||
+                           m.f活動地點.Contains(txt關鍵字) || m.f活動所屬.Contains(txt關鍵字) ||
                            m.f活動招募截止時間.Contains(txt關鍵字) || m.f活動分類.Contains(txt關鍵字) ||
-                           m.f活動留言.Contains(txt關鍵字)|| m.f活動留言時間.Contains(txt關鍵字)||
-                           m.f活動發起日期.Contains(txt關鍵字)|| m.f活動結束時間.Contains(txt關鍵字)||
-                           m.f活動開始時間.Contains(txt關鍵字)|| m.f活動類型.Contains(txt關鍵字)
+                           m.f活動留言.Contains(txt關鍵字) || m.f活動留言時間.Contains(txt關鍵字) ||
+                           m.f活動發起日期.Contains(txt關鍵字) || m.f活動結束時間.Contains(txt關鍵字) ||
+                           m.f活動開始時間.Contains(txt關鍵字)
                      select m;
 
 
@@ -165,13 +171,34 @@ namespace IIIProject_travel.Controllers
         }
         public ActionResult v查看(int? id)
         {
-
             if (id == null)
                 RedirectToAction("List");
 
             dbJoutaEntities db = new dbJoutaEntities();
-            tMember x = new tMember();
-            x = db.tMember.FirstOrDefault(m => m.f會員編號 == id);
+            tActivity x = new tActivity();
+            x = db.tActivity.FirstOrDefault(m => m.f活動編號 == id);
+
+            return View(x);
+
+        }
+        [HttpPost]
+        public ActionResult v查看(tActivity p)
+        {
+            dbJoutaEntities db = new dbJoutaEntities();
+            tActivity A = db.tActivity.FirstOrDefault(m => m.f活動編號 == p.f活動編號);
+            if (A != null)
+            {
+                A.f活動標題 = p.f活動標題;
+                A.f會員編號 = p.f會員編號;
+                A.f活動讚數 = p.f活動讚數;
+                A.f活動發起日期 = p.f活動發起日期;
+                A.f活動招募截止時間 = p.f活動招募截止時間;
+                A.f活動開始時間 = p.f活動開始時間;
+                A.f活動結束時間 = p.f活動結束時間;
+                A.f活動內容 = p.f活動內容;
+                db.SaveChanges();
+
+            }
 
             return RedirectToAction("List");
 

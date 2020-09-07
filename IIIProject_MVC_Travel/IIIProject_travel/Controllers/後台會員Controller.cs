@@ -172,33 +172,6 @@ namespace IIIProject_travel.Controllers
             return View(x);
 
         }
-        [HttpPost]
-        public ActionResult e修改(tMember p)
-        {
-            dbJoutaEntities db = new dbJoutaEntities();
-            tMember A = db.tMember.FirstOrDefault(m => m.f會員編號 == p.f會員編號);
-            if (A != null)
-            {
-                A.f會員名稱 = p.f會員名稱;
-                A.f會員評分 = p.f會員評分;
-                A.f會員稱號 = p.f會員稱號;
-                A.f會員大頭貼 = p.f會員大頭貼;
-                A.f會員帳號 = p.f會員帳號;
-                A.f會員密碼 = p.f會員密碼;
-                A.f會員電子郵件 = p.f會員電子郵件;
-                A.f會員手機 = p.f會員手機;
-                A.f會員電話 = p.f會員電話;
-                A.f會員生日 = p.f會員生日;
-                A.f會員自我介紹 = p.f會員自我介紹;
-                A.f會員暱稱 = p.f會員暱稱;
-                A.f會員性別 = p.f會員性別;
-                A.f會員興趣 = p.f會員興趣;
-                db.SaveChanges();
-            }
-
-            return RedirectToAction("List");
-
-        }
 
     }
 }
