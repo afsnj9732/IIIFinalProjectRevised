@@ -14,6 +14,7 @@ namespace IIIProject_travel.Controllers
             var 旅遊 = from t in (new dbJoutaEntities()).tActivity
                      where t.f活動類型 == "旅遊"
                      select t;
+
             return View(旅遊);
         }
 
