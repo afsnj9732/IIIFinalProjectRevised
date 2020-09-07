@@ -75,8 +75,16 @@
             <div class="profile-nav-info">
                 <h3 class="user-name">@x.f會員名稱</h3>
                 <div class="address">
-                    <span class="country">暱稱:&nbsp;&nbsp;</span>
-                    <p class="state">@x.f會員暱稱</p>
+                    <span class="country">身分:&nbsp;&nbsp;</span>
+                    @if (x.isAdmin == false)
+                    {
+                        <p class="state">使用者</p>
+                    }
+                    else
+                    {
+                        <p class="state">管理員</p>
+                    }
+
 
                 </div>
             </div>
