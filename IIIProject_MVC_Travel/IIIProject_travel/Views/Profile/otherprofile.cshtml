@@ -2,14 +2,6 @@
 @{
     Layout = null;
     var x = (tMember)Session["member"];
-    dbJoutaEntities db = new dbJoutaEntities();
-    var post = from t in db.tActivity
-               where t.f活動類型 == "文章"&&t.f會員編號 == x.f會員編號
-               select t;
-    //var join = from t
-    var attention = from t in db.tActivity.AsEnumerable()
-                    where x.f會員收藏的活動編號.Split(',').Contains(t.f活動編號.ToString())
-                    select t;
 }
 
 
@@ -78,22 +70,25 @@
     <div class="container">
         <div class="profile-header">
             <div class="profile-img">
-                <img src="~/Content/images/@x.f會員大頭貼" alt="" class="">
+                <img src="~/Content/images/@Model.tMembers.f會員大頭貼" alt="" class="">
             </div>
             <div class="profile-nav-info">
-                <h3 class="user-name">@x.f會員名稱</h3>
-                <div class="address">
-                    <span class="country">身分:&nbsp;&nbsp;</span>
-                    @if (x.isAdmin == false)
-                    {
-                        <p class="state">使用者</p>
-                    }
-                    else
-                    {
-                        <p class="state">管理員</p>
-                    }
-
-
+                <h3 class="user-name">@Model.tMembers.f會員名稱</h3>
+                <div id="limit" >
+                    <div id="isadmin">
+                        <span class="country">身分:&nbsp;&nbsp;</span>
+                        @if (Model.tMembers.isAdmin == false)
+                        {
+                            <p class="state">使用者</p>
+                        }
+                        else
+                        {
+                            <p class="state">管理員</p>
+                        }
+                    </div>
+                    
+                    <div>  <button type="button" id="followbtn" class="btn btn-primary btn-sm">追蹤</button></div>
+                   
                 </div>
             </div>
             <div class="profile-option">
@@ -113,33 +108,30 @@
             <div class="col-lg-3 left-side">
                 <div class="profile-side">
                     <p class="mobile-no">
-                        @if (x.f會員手機 == null)
+                        @if (Model.tMembers.f會員手機 == null)
                         {
                             <i class="fa fa-phone"></i> @:09-xxxxxxxx
                         }
                         else
                         {
-                            <i class="fa fa-phone"></i>@x.f會員手機
+                            <i class="fa fa-phone"></i>@Model.tMembers.f會員手機
                         }
                     </p>
                     <p class="user-mail">
                         <i class="fa fa-envelope">
-                        </i>@x.f會員電子郵件
+                        </i>@Model.tMembers.f會員電子郵件
                     </p>
                     <div class="user-bio">
                         <p class="bio">
-                            @x.f會員自我介紹
+                            @Model.tMembers.f會員自我介紹
                         </p>
                     </div>
                     <div class="profile-btn">
-                        
-                        <button class="chatbtn"><i class="fa fa-comment">@Html.ActionLink("Chat","Chat","Profile",new { },new { @class = "fa fa-plus temp"  })</i></button>
-                        <button class="createbtn">
-                            <i>@Html.ActionLink("Create", "Create", "Blog", new { }, new { @class = "fa fa-plus temp" })</i>
-                        </button>
+
+                        <button class="chatbtn"><i class="fa fa-comment">@Html.ActionLink("Chat", "Chat", "Profile", new { })</i></button>
                     </div>
                     <div class="user-rating">
-                        <h3 class="rating">@x.f會員評分</h3>
+                        <h3 class="rating">@Model.tMembers.f會員評分</h3>
                         <div class="rate">
                             <div class="stars">
                                 <i class="fa fa-star"></i>
@@ -162,53 +154,52 @@
                         <li class="user" onclick="tabs(2)">參加活動</li>
                         <li class="user" onclick="tabs(3)">關注活動</li>
                         <li class="user" onclick="tabs(4)">追蹤團主</li>
-                        <li class="user" onclick="tabs(5)">歷史紀錄</li>
+                        <li class="user" onclick="tabs(5)">我的開團</li>
+                        <li class="user" onclick="tabs(6)">歷史紀錄</li>
                     </ul>
                 </div>
                 <div class="profile-body">
                     <div class="profile-detail tab_info">
                         <h1 id="title">個人檔案</h1>
                         <form method="post" action="Profile">
-                            <button type="button" class="btn btn-warning">編輯資料</button>
                             <h6 class="profiletag">會員編號</h6>
-                            <input type="text" size="50" placeholder="@x.f會員編號" name="account" disabled>
+                            <input type="text" size="50" placeholder="@Model.tMembers.f會員編號" name="account" disabled>
                             <h6 class="profiletag">帳號</h6>
-                            <input type="text" size="50" placeholder="@x.f會員帳號" name="passward" disabled>
+                            <input type="text" size="50" placeholder="@Model.tMembers.f會員帳號" name="passward" disabled>
                             <h6 class="profiletag">密碼</h6>
-                            <input type="text" size="50" placeholder="@x.f會員密碼" name="nickname" disabled>
+                            <input type="text" size="50" placeholder="@Model.tMembers.f會員密碼" name="nickname" disabled>
                             <h6 class="profiletag" id="nickname">會員名稱</h6>
-                            <input type="text" size="50" name="age" placeholder="@x.f會員名稱">
+                            <input type="text" size="50" name="age" placeholder="@Model.tMembers.f會員名稱" disabled>
                             <h6 class="profiletag">暱稱</h6>
-                            <input type="text" size="50" name="birth" placeholder="@x.f會員暱稱">
+                            <input type="text" size="50" name="birth" placeholder="@Model.tMembers.f會員暱稱" disabled>
                             <h6 class="profiletag">生日</h6>
-                            <input type="text" size="50" name="interest" placeholder="@x.f會員生日">
+                            <input type="text" size="50" name="interest" placeholder="@Model.tMembers.f會員生日" disabled>
                             <h6 class="profiletag">興趣</h6>
-                            <input type="text" size="50" name="location" placeholder="@x.f會員興趣">
+                            <input type="text" size="50" name="location" placeholder="@Model.tMembers.f會員興趣" disabled>
                             <h6 class="profiletag">自我介紹</h6>
-                            <textarea id="intro" rows="5" cols="50" name="introduction">@x.f會員自我介紹</textarea><br>
-                            <button type="button" class="btn btn-warning">繳交</button>
+                            <textarea id="intro" rows="5" cols="50" name="introduction" disabled>@Model.tMembers.f會員自我介紹</textarea><br>
                         </form>
                     </div>
                 </div>
                 <div class="profile-posts tab_info" id="myPost">
-                    <h1>我的發文</h1>
-                    @foreach (tActivity t in post)
+                    <h1>@Model.tMembers.f會員名稱 的發文</h1>
+                    @foreach (tActivity t in Model.tActivities)
                     {
-                        <div class="card mb-3" style="max-width: 540px;">
-                            <div class="row no-gutters">
-                                <div class="col-md-4">
-                                    <img src="~/Content/images/@t.f活動團圖" class="card-img" alt="...">
-                                </div>
-                                <div class="col-md-8">
-                                    <div class="card-body">
-                                        <h5 class="card-title">@t.f活動標題</h5>
-                                        <p class="card-text">@t.f活動內容</p>
-                                        <p class="card-text"><small class="text-muted">Posted on @t.f活動發起日期</small></p>
-                                    </div>
-                                </div>
+                        <div class="card mb-4">
+                            <img class="card-img-top" src="~/Content/images/@t.f活動團圖" alt="Card image cap">
+                            <div class="card-body">
+                                <h2 class="card-title">@t.f活動標題</h2>
+                                <p class="card-text">
+                                    @t.f活動內容
+                                </p>
+                                <a class="nav-item">@Html.ActionLink("Read More", "BlogContent", "Blog", new {id=t.f活動編號 }, new { @class = "btn btnContent  btn-warning" })</a>
+                            </div>
+                            <div class="card-footer text-muted">
+
+                                <p class="pDateSection"> Posted on @t.f活動發起日期 </p>
+
                             </div>
                         </div>
-                        
                     }
                 </div>
                 <div class="profile-event tab_info" id="myActivity">
@@ -223,7 +214,7 @@
                                 <p id="togglecontent" style="font-size: 13px;">
                                     @t.f活動內容
                                 </p>
-                                <span>揪團者 :  <span style="cursor: pointer;">@x.f會員名稱</span></span>
+                                <span>揪團者 :  <span style="cursor: pointer;">"@Model.tMembers.f會員名稱</span></span>
                                 <span>&nbsp; &nbsp;</span>
                                 <span>活動開始時間： <span>@t.f活動開始時間</span></span>
                                 <span>&nbsp; &nbsp;</span>
@@ -238,7 +229,7 @@
                 </div>
                 <div class="profile-follow tab_info" id="myFollow">
                     <h1>關注活動</h1>
-                    @foreach (tActivity t in attention)
+                    @foreach (tActivity t in Model.tActivities)
                     {
                         <div class="row pl-3">
                             <div class="content mb-3" style="cursor: pointer;width:70%;height: 150px;"
@@ -252,7 +243,7 @@
                             <div>
                                 <img src="~/Content/images/@t.f活動團圖" id="imgdisplay" alt="" class="col-auto" style=" width: 30%;height: 150px;">
                             </div>
-                           
+
                         </div>
                     }
                 </div>
@@ -273,6 +264,40 @@
                         </div>
                     }
                 </div>
+                <div class="profile-mygroup tab_info" id="mygroup">
+                    <h1>@Model.tMembers.f會員名稱 的開團</h1>
+                    @foreach (tActivity t in Model.tActivities)
+                    {
+                        <div class="row  Travel_border align-items-center p-3">
+                            <div class="container-fluid">
+                                <div class="row m-0 mb-3   justify-content-between" style="font-size: 16px;">
+                                    <div class="pl-1">
+                                        <img src="~/Content/images/@t.f活動團圖" alt="">
+                                        <span>揪團者 :  <span style="cursor: pointer;" target="@x.f會員編號">@x.f會員名稱</span></span>
+                                        <span>&nbsp; &nbsp;</span>
+                                        <span>揪團日： <span>@t.f活動發起日期</span></span>
+                                        <span>&nbsp; &nbsp;</span>
+                                        <span>活動開始時間： <span>@t.f活動開始時間</span></span>
+                                        <span>&nbsp; &nbsp;</span>
+                                        <span>活動結束時間： <span>@t.f活動結束時間</span></span>
+                                        <span>&nbsp; &nbsp;</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row pl-3">
+                                <div class="content mb-3" style="cursor: pointer;width:70%;height: 150px;"
+                                     data-toggle="modal" data-target="#exampleModal2">
+                                    <span style="font-weight:bolder;"> 龜山步道。墾丁私房景點｜不到半小時即攻頂。全方位飽覽恆春山海景</span>
+                                    <br>
+                                    <span id="togglecontent" style="font-size: 13px;"></span>
+
+                                </div>
+                                <img src="images/7.jpg" id="imgdisplay" alt="" class="col-auto" style="display:none; width: 30%;height: 150px;">
+                            </div>
+                        </div>
+                    }
+
+                </div>
                 <div class="profile-history tab_info" id="history">
                     <h1>歷史紀錄</h1>
                     @foreach (tActivity t in Model.tActivities)
@@ -281,7 +306,7 @@
                             <div class="container-fluid">
                                 <div class="row m-0 mb-3   justify-content-between" style="font-size: 16px;">
                                     <div class="pl-1">
-                                        <img src="~/Content/images/09.png" alt="">
+                                        <img src="~/Content/images/@t.f活動團圖" alt="">
                                         <span>揪團者 :  <span style="cursor: pointer;">@x.f會員名稱</span></span>
                                         <span>&nbsp; &nbsp;</span>
                                         <span>揪團日： <span>@t.f活動發起日期</span></span>

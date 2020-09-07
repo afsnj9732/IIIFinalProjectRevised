@@ -237,30 +237,44 @@ namespace IIIProject_travel.Controllers
                 GuysList = ActList.f活動參加的會員編號.Split(',');
                 index = Array.IndexOf(GuysList, NowMember.f會員編號.ToString());  //尋找登入中的會員是否有參加
             }                                                                     //注意會員標號是int，陣列內容是str，
-                                                                                  //不轉型index永遠會是-1
+
+
+            var Member = db.tMember.Where(t => t.f會員編號 == NowMember.f會員編號)
+                         .Select(a => a).FirstOrDefault();  
+            //不轉型index永遠會是-1            
             if (isAdd == true)//點選入團
             {
-                if (index == -1)//登入中的會員不存在名單則直接加入
+                //判別活動時段是否已占用
+
+
+                if (index == -1)//活動時段未占用且登入中的會員不存在名單則加入
                 {
+                    //添加占用時間
+                    //Member.f會員已占用時間;
+                    
+                    //添加占用時間
                     ActList.f活動參加的會員編號 += "," + NowMember.f會員編號;
                     db.SaveChanges();
                 }
-                else //若存在則要??
+                else //若存在則...
                 {
                     return null;
                 }
             }
             else //點選退出
             {
-                if (index != -1)//登入中的會員存在則讓他退出
+                if (index != -1)//登入中的會員存在則讓他退出並更動占用時間
                 {
+                    //移除占用時間((未完成
+
+                    //移除占用時間
                     var List = GuysList.ToList();
                     List.RemoveAt(index);
                     var FinalList = string.Join(",",List);
                     ActList.f活動參加的會員編號 = FinalList;
                     db.SaveChanges();
                 }
-                else //若不存在則要??
+                else //若不存在則...
                 {
                     return null;
                 }
