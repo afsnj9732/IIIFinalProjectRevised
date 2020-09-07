@@ -24,7 +24,12 @@ namespace IIIProject_travel.Controllers
 
         public ActionResult Index(string sortOder,string txtKey, string currentfilter, int page = 1)
         {
+            var article = from t in (new dbJoutaEntities()).tActivity
+                          where t.f活動類型 == "文章"
+                          orderby t.f活動編號
+                          select t;
             IQueryable<tActivity> tarticle = null;
+
             if (txtKey != null)
             {
                 page = 1;
@@ -36,9 +41,11 @@ namespace IIIProject_travel.Controllers
 
             if (string.IsNullOrEmpty(txtKey))
                 tarticle = from torder in (new dbJoutaEntities()).tActivity
+                           where torder.f活動類型 =="文章"
                            select torder;
             else
                 tarticle = from torder in (new dbJoutaEntities()).tActivity
+                           where torder.f活動類型 == "文章"
                            where torder.f活動標題.Contains(txtKey)
                            select torder;
 
@@ -54,26 +61,29 @@ namespace IIIProject_travel.Controllers
             switch (sortOder)
             {
                 case "NameDown":
-                    tarticle = tarticle.OrderByDescending(s => s.f活動標題);
+                    article = article.OrderByDescending(s => s.f活動標題);
                     break;
 
                 case "dateUp":
-                    tarticle = tarticle.OrderBy(s => s.f活動發起日期);
+                    article = article.OrderBy(s => s.f活動發起日期);
                     break;
                 case "dateDown":
-                    tarticle = tarticle.OrderByDescending(s => s.f活動發起日期);
+                    article = article.OrderByDescending(s => s.f活動發起日期);
                     break;
                 case "preViewUp":
-                    tarticle = tarticle.OrderBy(s => s.f活動瀏覽次數);
+                    article = article.OrderBy(s => s.f活動瀏覽次數);
                     break;
                 case "preViewDown":
-                    tarticle = tarticle.OrderByDescending(s => s.f活動瀏覽次數);
+                    article = article.OrderByDescending(s => s.f活動瀏覽次數);
                     break;
                 case "LikeUp":
-                    tarticle = tarticle.OrderBy(s => s.f活動讚數);
+                    article = article.OrderBy(s => s.f活動讚數);
                     break;
                 case "LikeDown":
-                    tarticle = tarticle.OrderByDescending(s => s.f活動讚數);
+                    article = article.OrderByDescending(s => s.f活動讚數);
+                    break;
+                default:
+                    article = article.OrderBy(s => s.f活動標題);
                     break;
             }
 
@@ -81,12 +91,9 @@ namespace IIIProject_travel.Controllers
 
             int currentPage = page < 1 ? 1 : page;
 
-            var article = from t in (new dbJoutaEntities()).tActivity
-                          where t.f活動類型 == "文章"
-                          orderby t.f活動編號
-                          select t;
-            var articleList = article.ToList();
-            var result = articleList.ToPagedList(currentPage, pagesize);
+           
+            //var articleList = article.ToList();
+            var result = article.ToPagedList(currentPage, pagesize);
 
 
             return View(result);
