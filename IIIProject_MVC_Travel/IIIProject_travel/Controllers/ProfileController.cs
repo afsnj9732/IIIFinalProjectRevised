@@ -27,5 +27,16 @@ namespace IIIProject_travel.Controllers
 
             return View();
         }
+        public ActionResult otherprofile(int id)
+        {
+            CMember c = new CMember();
+            var travel = from t in (new dbJoutaEntities()).tActivity
+                         where t.f會員編號 == id
+                         select t;  //從資料表抓資料
+            var member = (new dbJoutaEntities()).tMember.Where(x => x.f會員編號 == id).FirstOrDefault();
+            c.tActivities = travel;
+            c.tMembers = member;
+            return View(c);
+        }
     }
 }
