@@ -73,17 +73,17 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <div ScoreAdd="@item.f活動編號" id="Score">
-                            @for (int i = 0; i < 5; i++)
-                            {
-                                string idimg = "idimg" + (i+1);
-                                <img id="@idimg" src="~/Content/images/ChangeStar.png" />
+                        <div AddScore="@item.f活動編號" class="Score">
+                            @for (int i = 1; i <= 5; i++)
+                            {                                 
+                                <img ScoreID="@i" isclick="false"  ScoreTarget="@item.f活動編號"  src="~/Content/images/Star.png" />
                             }
                         </div>
                     </div>
                     <div class="modal-footer justify-content-between">          
                         <span>
                             <button type="button" class="btn btn-warning leaveScore" leaveScore="@item.f活動編號">送出</button>
+                            <button type="button" class="btn btn-secondary resetScore" resetScore="@item.f活動編號" >重設</button>
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
                         </span>
                     </div>
