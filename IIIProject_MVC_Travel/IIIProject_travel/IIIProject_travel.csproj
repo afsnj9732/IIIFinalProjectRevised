@@ -2069,6 +2069,7 @@
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\IIIProject\blog.js" />
     <Content Include="Scripts\IIIProject\check.js" />
+    <Content Include="Scripts\IIIProject\coupon.js" />
     <Content Include="Scripts\IIIProject\dashboard.js" />
     <Content Include="Scripts\IIIProject\debounce.js" />
     <Content Include="Scripts\IIIProject\eat.js" />

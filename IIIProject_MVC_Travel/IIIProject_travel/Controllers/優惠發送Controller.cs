@@ -12,24 +12,16 @@ namespace IIIProject_travel.Controllers
         // GET: 優惠發送
         public ActionResult List()
         {
-            var x = from t in (new dbJoutaEntities()).tActivity
-                    where t.f活動類型 == "優惠"
-                    select t;
-            return View(x);
+            //var x = from t in (new dbJoutaEntities()).tActivity
+            //        select t;
+            //return View(x);
+            return View();
         }
 
-        public ActionResult Delete(int? id)
+        [HttpPost]
+        public ActionResult List(string location)
         {
-            if (id == null)
-                RedirectToAction("List");
-
-            tActivity x = new tActivity();
-            dbJoutaEntities db = new dbJoutaEntities();
-            x = db.tActivity.FirstOrDefault(m => m.f活動編號 == id);
-            db.tActivity.Remove(x);
-            db.SaveChanges();
-
-            return RedirectToAction("List");
+            return View();
         }
     }
 }
