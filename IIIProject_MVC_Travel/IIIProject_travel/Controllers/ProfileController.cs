@@ -15,6 +15,8 @@ namespace IIIProject_travel.Controllers
         public ActionResult ProfileIndex()
         {
             CMember c = new CMember();
+            DateTime date = DateTime.Now;
+            ViewBag.Date = date;
             var travel = from t in (new dbJoutaEntities()).tActivity
                          
                          select t;  //從資料表抓資料
@@ -27,7 +29,7 @@ namespace IIIProject_travel.Controllers
         {
             return View();
         }
-        public ActionResult otherprofile(int id)
+        public ActionResult otherprofile(int? id)
         {
             CMember c = new CMember();
             var travel = from t in (new dbJoutaEntities()).tActivity

@@ -1,7 +1,9 @@
-﻿@{
+﻿﻿@using PagedList
+@using PagedList.Mvc
+@{
     Layout = null;
 }
-@model IEnumerable<tActivity>
+@model IPagedList<IIIProject_travel.tActivity>
 
 <!doctype html>
 <html lang="en">
@@ -12,7 +14,7 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Jekyll v3.8.5">
-    <title>Dashboard Template · Bootstrap 4 繁體中文手冊 [六角學院譯]</title>
+    <title>Jouta</title>
 
     <!-- Bootstrap core CSS -->
     <link href="~/Content/css/bootstrap.min.css" rel="stylesheet" />
@@ -28,17 +30,20 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
-        <a class="navbar-brand col-sm-3 col-md-2 mr-0">Jouta後台</a>
-        <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
-        <ul class="navbar-nav px-3">
-            <li class="nav-item text-nowrap">
-                <a>
-                    @Html.ActionLink("Sign out", "Home", "Home", new { id = 0 }, new { @class = "nav-link" })
-                </a>
-            </li>
-        </ul>
-    </nav>
+    <form action="/後台飯局/List" method="GET">
+        <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
+            <a class="navbar-brand col-sm-3 col-md-2 mr-0">Jouta後台</a>
+            <input type="text" placeholder="關鍵字" aria-label="Search" name="txt關鍵字" class="form-control form-control-dark w-100">
+            <input type="submit" value="搜尋" class=" btn btn-dark" />
+            <ul class="navbar-nav px-3">
+                <li class="nav-item text-nowrap">
+                    <a>
+                        @Html.ActionLink("Sign out", "Home", "Home", new { id = 0 }, new { @class = "nav-link" })
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </form>
 
     <div class="container-fluid">
         <div class="row">
@@ -103,17 +108,20 @@
                         <thead>
                             <tr>
                                 <td>筆數</td>
-                                <td>飯局編號</td>
-                                <td>帳號</td>
+                                <td>@Html.ActionLink("編號", "List", new { sortOrder = ViewBag.編號排序, currentFilter = ViewBag.當前搜尋 })</td>
+                                <td>@Html.ActionLink("標題", "List", new { sortOrder = ViewBag.標題排序, currentFilter = ViewBag.當前搜尋 })</td>
+                                <td>@Html.ActionLink("帳號", "List", new { sortOrder = ViewBag.帳號排序, currentFilter = ViewBag.當前搜尋 })</td>
                                 <td>團圖</td>
-                                <td>內容</td>
-                                <td>點讚次數</td>
-                                <td>建立時間</td>
-                                <td>開團標題</td>
-                                <td>活動開始時間</td>
-                                <td>地點</td>
-                                <td>預算</td>
-                                <td>分類</td>
+                                <td>@Html.ActionLink("內容", "List", new { sortOrder = ViewBag.內容排序, currentFilter = ViewBag.當前搜尋 })</td>
+                                <td>@Html.ActionLink("點讚", "List", new { sortOrder = ViewBag.點讚排序, currentFilter = ViewBag.當前搜尋 })</td>
+                                <td>@Html.ActionLink("建立時間", "List", new { sortOrder = ViewBag.建立時間排序, currentFilter = ViewBag.當前搜尋 })</td>
+                                <td>@Html.ActionLink("招募截止時間", "List", new { sortOrder = ViewBag.招募截止時間排序, currentFilter = ViewBag.當前搜尋 })</td>
+                                <td>@Html.ActionLink("開始時間", "List", new { sortOrder = ViewBag.開始時間排序, currentFilter = ViewBag.當前搜尋 })</td>
+                                <td>@Html.ActionLink("結束時間", "List", new { sortOrder = ViewBag.結束時間排序, currentFilter = ViewBag.當前搜尋 })</td>
+                                <td>@Html.ActionLink("地點", "List", new { sortOrder = ViewBag.地點排序, currentFilter = ViewBag.當前搜尋 })</td>
+                                <td>@Html.ActionLink("地區", "List", new { sortOrder = ViewBag.地區排序, currentFilter = ViewBag.當前搜尋 })</td>
+                                <td>@Html.ActionLink("預算", "List", new { sortOrder = ViewBag.預算排序, currentFilter = ViewBag.當前搜尋 })</td>
+                                <td>@Html.ActionLink("分類", "List", new { sortOrder = ViewBag.分類排序, currentFilter = ViewBag.當前搜尋 })</td>
                                 <td>按鈕</td>
                                 <td>按鈕</td>
 
@@ -124,28 +132,31 @@
 
                             @{
                                 int c筆數 = 0;
-                                foreach (tActivity t in Model)
+                                foreach (var item in Model)
                                 {
                                     c筆數++;
                                     <tr>
                                         <td>@c筆數.ToString()</td>
-                                        <td>@t.f活動編號</td>
-                                        <td>@t.f會員編號</td>
-                                        <td>@t.f活動團圖</td>
-                                        <td>@t.f活動內容</td>
-                                        <td>@t.f活動讚數</td>
-                                        <td>@t.f活動發起日期</td>
-                                        <td>@t.f活動標題</td>
-                                        <td>@t.f活動開始時間</td>
-                                        <td>@t.f活動地點</td>
-                                        <td>@t.f活動預算</td>
-                                        <td>@t.f活動分類</td>
+                                        <td>@Html.DisplayFor(modelItem => item.f活動編號)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.f活動標題)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.f會員編號)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.f活動團圖)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.f活動內容)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.f活動讚數)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.f活動發起日期)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.f活動招募截止時間)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.f活動開始時間)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.f活動結束時間)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.f活動地點)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.f活動地區)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.f活動預算)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.f活動分類)</td>
                                         <td>
-                                            @Html.ActionLink("查看", "v查看", "後台飯局", new { id = t.f活動編號 }, new { Class = "btn btn-info" })
+                                            @Html.ActionLink("查看", "v查看", "後台飯局", new { id = item.f活動編號 }, new { Class = "btn btn-info" })
                                         </td>
                                         <td>
-                                            @Html.ActionLink("刪除", "d刪除", "後台飯局", new { id = t.f活動編號 },
-                                            new { OnClick = "return confirm('確定要刪除嗎?')", Class = "btn btn-danger" })
+                                            @Html.ActionLink("刪除", "d刪除", "後台飯局", new { id = item.f活動編號 },
+                                           new { OnClick = "return confirm('確定要刪除嗎?')", Class = "btn btn-danger" })
                                         </td>
                                     </tr>
                                 }
@@ -154,6 +165,7 @@
 
                         </tbody>
                     </table>
+                    @Html.PagedListPager(Model, page => Url.Action("List", new { page }))
                 </div>
             </main>
         </div>
