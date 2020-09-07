@@ -217,6 +217,7 @@
     <Compile Include="ViewModel\CLogin.cs" />
     <Compile Include="ViewModel\CMember.cs" />
     <Compile Include="ViewModel\CRegisterModel.cs" />
+    <Compile Include="ViewModel\CReset.cs" />
     <Compile Include="ViewModel\CSelect.cs" />
     <Compile Include="ViewModel\CTravel.cs" />
   </ItemGroup>

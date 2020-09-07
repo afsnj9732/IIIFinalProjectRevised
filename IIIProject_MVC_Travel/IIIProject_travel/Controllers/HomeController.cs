@@ -8,6 +8,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Mail;
 using System.Web;
+using System.Web.Helpers;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
 using System.Web.UI.Design;
@@ -209,27 +210,125 @@ namespace IIIProject_travel.Controllers
             return View();
         }
 
-        //修改密碼
-        //[Authorize]
-        //public ActionResult ChangePassword()
-        //{
-        //    return View();
-        //}
+        //忘記密碼
+        public ActionResult ForgetPassword()
+        {
+            return View();
+        }
 
-        //[Authorize]
-        //[HttpPost]
-        //public ActionResult ChangePassword(CChangePassword p)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //    }
-        //    return View();
-        //}
+        [HttpPost]
+        public ActionResult ForgetPassword(string Email)
+        {
+            string message = "";
+            bool status = false;
+            using (dbJoutaEntities db = new dbJoutaEntities())
+            {
+                var account = db.tMember.Where(a => a.f會員電子郵件 == Email).FirstOrDefault();
+                if (account != null)
+                {
+                    string resetCode = Guid.NewGuid().ToString();
+                    sendResetPasswordMail(account.f會員電子郵件, resetCode);
+                    account.f重置驗證碼 = resetCode;
+                    db.Configuration.ValidateOnSaveEnabled = false;
+                    db.SaveChanges();
+                    message = "重置密碼連結已經發送至您指定信箱，請前往設置!";
+                }
+                else
+                {
+                    message = "該信箱不存在!!";
+                }
+            }
+            ViewBag.Msg = message;
+            return View();
+        }
+
+        public ActionResult ResetPassword(string id)
+        {
+            using (dbJoutaEntities db = new dbJoutaEntities())
+            {
+                var user = db.tMember.Where(a => a.f重置驗證碼 == id).FirstOrDefault();
+                if (user != null)
+                {
+                    CReset c = new CReset();
+                    c.resetCode = id;
+                    return View(c);
+                }
+                else
+                {
+                    return HttpNotFound();
+                }
+            }
+
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ResetPassword(CReset c)
+        {
+            var message = "";
+            if (ModelState.IsValid)
+            {
+                using (dbJoutaEntities db = new dbJoutaEntities())
+                {
+                    var user = db.tMember.Where(a => a.f重置驗證碼 == c.resetCode).FirstOrDefault();
+                    if (user != null)
+                    {
+                        user.f會員密碼 = Crypto.Hash(c.newPassword);
+                        user.f重置驗證碼 = "";
+                        db.Configuration.ValidateOnSaveEnabled = false;
+                        db.SaveChanges();
+                        message = "新密碼重置成功!";
+                    }
+                }
+            }
+            else
+            {
+                message = "格式錯誤";
+            }
+            ViewBag.Message = message;
+            return View(c);
+        }
 
         [AllowAnonymous]
         public ActionResult About()
         {
             return View();
+        }
+
+        [NonAction]
+        public void sendResetPasswordMail(string Email, string activationCode)
+        {
+            //Jouta官方帳號
+            string gmail_account = "Joutagroup445@gmail.com";
+            string gmail_password = "admin123admin";
+            string gmail_mail = "Joutagroup445@gmail.com";     //gmail信箱
+
+            var verifyUrl = "/Home/ForgetPassword/" + activationCode;
+            var link = Request.Url.AbsoluteUri.Replace(Request.Url.PathAndQuery, verifyUrl);
+
+            var fromEmail = new MailAddress(gmail_mail, "Jouta服務團隊");
+            var toEmail = new MailAddress(Email);
+            string body = "您好，<br/><br/>已收到您重置密碼的需求，請點擊以下連結重置密碼" +
+            "<br/><br/><a href=" + link + ">重置密碼連結</a>";
+
+            SmtpClient smtpServer = new SmtpClient("smtp.gmail.com");
+            smtpServer.Port = 587;
+            smtpServer.Credentials = new System.Net.NetworkCredential(gmail_account, gmail_password);
+            //開啟SSL
+            smtpServer.EnableSsl = true;
+
+            MailMessage mail = new MailMessage();
+            //設定來源信箱
+            mail.From = new MailAddress(gmail_mail);
+            //設定收信者信箱
+            mail.To.Add(toEmail);
+            //主旨
+            mail.Subject = "重置密碼確認信";
+            //內容
+            mail.Body = body;
+            //設定信箱內容為HTML格式
+            mail.IsBodyHtml = true;
+            smtpServer.Send(mail);
         }
 
     }

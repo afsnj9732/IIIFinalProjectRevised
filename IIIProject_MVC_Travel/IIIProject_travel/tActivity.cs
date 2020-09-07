@@ -11,8 +11,7 @@ namespace IIIProject_travel
 {
     using System;
     using System.Collections.Generic;
-    using System.Web;
-
+    
     public partial class tActivity
     {
         public int f活動編號 { get; set; }
@@ -40,8 +39,7 @@ namespace IIIProject_travel
         public string f活動留言 { get; set; }
         public string f活動留言時間 { get; set; }
         public string f活動評分過的會員編號 { get; set; }
-        public HttpPostedFileBase fImgTemp { get; set; }
-
+    
         public virtual tMember tMember { get; set; }
     }
 }

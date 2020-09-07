@@ -17,7 +17,6 @@ namespace IIIProject_travel.ViewModel
         [DisplayName("新密碼")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "請輸入密碼")]
         [DataType(DataType.Password)]
-        [RegularExpression(@"/[a-zA-Z]|\d{6,}/", ErrorMessage = "密碼須包含英文，數字且字數6位以上")]
         [MinLength(6, ErrorMessage = "密碼長度至少6位")]
         public string txtNewPassword { get; set; }
 

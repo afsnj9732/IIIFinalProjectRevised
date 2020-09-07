@@ -65,7 +65,9 @@
                         <div class="form-group">
                             <div class="col-md-offset-1 col-md-12 d-flex">
                                 <input class="btn btn-link col-5 mr-1" type="submit" name="signup_submit" value="登入" onclick="btnLogin()" />
-                                @Html.ActionLink("註冊", "Register", "", new { @class = "btn btn-primary col-5 ml-1" })
+                                <a class="btn btn-primary col-5 ml-1" href="~/Home/Register">註冊</a>
+                                <a class="btn btn-primary col-5 ml-1" href="~/Home/ForgetPassword">忘記密碼</a>
+                                @*@Html.ActionLink("註冊", "Register", "", new { @class = "btn btn-primary col-5 ml-1" })*@
 
                             </div>
                         </div>
