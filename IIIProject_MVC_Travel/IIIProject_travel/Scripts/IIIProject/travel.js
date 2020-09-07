@@ -57,20 +57,38 @@
 
     $("body").on('click', '.Score img', function () {   
         let target = $(this).attr("ScoreTarget");
+        $(this).addClass("GetScore");
         for (let i = 0; i < 5; i++) {
             $("[ScoreTarget =" + target + "]").eq(i).attr('isclick', 'true');
         }
     });
     $("body").on('click', '.resetScore', function () {  
         let target = $(this).attr("resetScore");
+
         for (let i = 0; i < 5; i++) {
             $("[ScoreTarget =" + target + "]").eq(i).attr('isclick', 'false');
             $("[ScoreTarget =" + target + "]").eq(i).attr('src', '/Content/images/Star.png');
+            $("[ScoreTarget =" + target + "]").removeClass("GetScore");
         }
     });
     
     $("body").on('click', '.leaveScore', function () { //送出評分
-
+        let target = $(this).attr("leaveScore");
+        let Score = $(".GetScore").attr("ScoreID");
+        $.ajax({
+            url: "/Travel/ScoreAdd",
+            type: "POST",
+            data: { "target": target , "Score":Score},
+            success: function (data) {
+                if (data === "0") {
+                    window.confirm("有參加的會員且須於活動結束以後才可評分");
+                } else if (data === "1") {
+                    window.confirm("你已經評分過了哦!");
+                } else {
+                    window.confirm("評分成功!");
+                }
+            }
+        });
     });
     //星星評分尾
 
