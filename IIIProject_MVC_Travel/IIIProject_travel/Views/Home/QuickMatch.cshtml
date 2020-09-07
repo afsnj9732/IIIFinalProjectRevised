@@ -44,7 +44,7 @@
                     <ul class="nav navbar-nav">
                         @if (Session["member"] != null)
                         {
-                            <li class="nav-item nav-link nav-login text-dark">觀迎 @x.f會員名稱 </li>
+                            <li class="nav-item nav-link nav-login text-dark">@Html.ActionLink("您好，" + x.f會員名稱, "ProfileIndex", "Profile")  </li>
                             <li class="nav-item">@Html.ActionLink("登出", "Home", "Home", new { id = 0 }, new { @class = "nav-link nav-login text-dark" })</li>
                         }
                         else

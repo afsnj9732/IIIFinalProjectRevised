@@ -134,9 +134,9 @@
                             <label for="location_travel">所在地區:</label>
                             <select class="form-control" id="location_travel">
                                 <option value="1">北部</option>
-                                <option value="1">中部</option>
-                                <option value="1">東部</option>
-                                <option value="1">南部</option>
+                                <option value="2">中部</option>
+                                <option value="3">東部</option>
+                                <option value="4">南部</option>
                             </select>
                         </div>
                         <div class="form-group col-lg-3 col-md-3 col-sm-12 inner">
@@ -330,7 +330,7 @@
                                 <p class="card-text" style="text-align: left;">
                                     @a.f活動內容
                                 </p>
-                                @Html.ActionLink("我要+1", "TravelIndex", "Travel", new { }, new { @class = "btn btnContent mt-2" })
+                                @Html.ActionLink("我要+1", "TravelIndex", "Travel", new {id=a.f活動編號 }, new { @class = "btn btnContent mt-2" })
 
                                 <section class="block_footer">
                                     <div class="date">@a.f活動開始時間</div>

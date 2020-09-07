@@ -11,17 +11,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>聊天室 | Jouta</title>
     <link rel="stylesheet" href="~/Content/css/bootstrap.min.css">
-    <link rel="stylesheet" href="~/Content/css/style.css">
+    <link rel="stylesheet" href="~/Content/sass/style.css">
+    <link href="~/Content/fontawesome/css/all.css" rel="stylesheet" />
     <style>
         div.panel-body {
-            overflow:scroll;
+            overflow: scroll;
             background: url('http://subtlepatterns.com/patterns/geometry2.png');
         }
     </style>
 </head>
 
 <body>
-    <div class="container-fluid topbanner">
+    <div class="container-fluid">
         <!-- navbar -->
         <nav class="navbar navbar-expand-lg navbar-fixed-top">
             <div class="container">
@@ -49,7 +50,7 @@
                         @if (Session["member"] != null)
                         {
 
-                            <li class="nav-item nav-link nav-login text-dark">@Html.ActionLink("您好，"+ x.f會員名稱, "ProfileIndex", "Profile")</li>
+                            <li class="nav-item nav-link nav-login text-dark">@Html.ActionLink("您好，" + x.f會員名稱, "ProfileIndex", "Profile")</li>
                             @*<li class="nav-item">
                                     <img src="@ViewData["Img"]" alt="img" width="30" height="30" style="border:2px solid green;" />
                                 </li>*@
@@ -67,26 +68,30 @@
             </div>
         </nav>
     </div>
-
-    <h2>聊天室</h2>
-    <div class="chat-panel panel panel-default">
-        <div class="panel-heading">
-            ChatBox using SignalR
-            <i class="fa fa-paper-plane fa-fw"></i> 
-        </div>
-        <div class="panel-body" id="chat" style="height:250px;">
-            <input type="hidden" id="displayname"/>
-            <p id="discussion"></p>
-        </div>
-        <div class="panel-footer">
-            <div class="input-group ">
-                <input id="message" type="text" name="message" class="form-control input-sm" placeholder="請輸入訊息..." />
-                <span class="input-group-btn">
-                    <input type="button" class="btn btn-warning btn-sm" id="sendmessage" value="送出" />
-                </span>
+    <div class="container">
+        <div class="row">
+            <h2>聊天室</h2>
+            <div class="chat-panel panel panel-default">
+                <div class="panel-heading">
+                    ChatBox using SignalR
+                    <i class="fa fa-paper-plane fa-fw"></i>
+                </div>
+                <div class="panel-body" id="chat" style="height:250px;">
+                    <input type="hidden" id="displayname" />
+                    <p id="discussion"></p>
+                </div>
+                <div class="panel-footer">
+                    <div class="input-group ">
+                        <input id="message" type="text" name="message" class="form-control input-sm" placeholder="請輸入訊息..." />
+                        <span class="input-group-btn">
+                            <input type="button" class="btn btn-warning btn-sm" id="sendmessage" value="送出" />
+                        </span>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
+
 
     <!--    footer  -->
     <div class="container-fluid footer">

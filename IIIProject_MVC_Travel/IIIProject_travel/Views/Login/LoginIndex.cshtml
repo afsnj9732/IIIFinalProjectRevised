@@ -10,8 +10,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>登入 | Jouta</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
-          integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="~/Content/css/bootstrap.min.css">
     <link rel="stylesheet" href="~/Content/css/style.css">
     <link rel="stylesheet" href="~/Content/css/login.css">
     <link rel="shortcut icon" href="favicon.ico" />
@@ -97,33 +96,10 @@
     <script src="~/Scripts/IIIProject/popper.min.js"></script>
     <script src="~/Scripts/bootstrap.min.js"></script>
     <script src="~/Scripts/IIIProject/navbar.js"></script>
-    @*<script>
-        function btnlogin() {
-            $.get("/login/loginindex", {
-                email: $("#txtemail").val(),
-                password: $("#txtpassword").val(),
-                ck: $("#txtrember").prop("checked")
-            }, function (data, status) {
-                if (status = "success") {
-                    if (data > 0) {
-                        alert("登錄成功");
-                        window.location.href = "/home/home";
-                    }
-                    else {
-                        alert("用戶名或密碼錯誤");
-                    }
-                }
-            });
-        }
-
-    </script>*@
     @*匯入驗證用的js*@
     @section Scripts{
         @Scripts.Render("~/bundles/jqueryval")
     }
-    @*<script>
-            document.querySelector("#login_show").click();
-        </script>*@
 </body>
 
 </html>

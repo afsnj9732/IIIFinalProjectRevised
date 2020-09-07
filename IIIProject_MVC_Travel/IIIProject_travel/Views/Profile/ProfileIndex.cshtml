@@ -15,18 +15,18 @@
 
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-hant">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profile</title>
+    <title>@x.f會員名稱 資料頁面 | Jouta</title>
     <link rel="stylesheet" href="~/Content/css/bootstrap.min.css">
     <link rel="stylesheet" href="~/Content/css/style.css">
     <link rel="stylesheet" href="~/Content/css/profile.css">
     <link href="~/Content/fontawesome/css/all.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-          integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    @*<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+          integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">*@
 </head>
 
 <body>
@@ -93,8 +93,6 @@
                     {
                         <p class="state">管理員</p>
                     }
-
-
                 </div>
             </div>
             <div class="profile-option">
@@ -124,16 +122,12 @@
                         }
                     </p>
                     <p class="user-mail">
-                        <i class="fa fa-envelope">
-                        </i>@x.f會員電子郵件
+                        <i class="fa fa-envelope"></i>@x.f會員電子郵件
                     </p>
                     <div class="user-bio">
-                        <p class="bio">
-                            @x.f會員自我介紹
-                        </p>
+                        <p class="bio"> @x.f會員自我介紹</p>
                     </div>
                     <div class="profile-btn">
-
                         <button class="chatbtn"><i class="fa fa-comment">@Html.ActionLink("Chat", "Chat", "Profile", new { }, new { @class = "fa fa-plus temp" })</i></button>
                         <button class="createbtn">
                             <i>@Html.ActionLink("Create", "Create", "Blog", new { }, new { @class = "fa fa-plus temp" })</i>
@@ -149,7 +143,7 @@
                                 <i class="fa fa-star"></i>
                                 <i class="fa fa-star"></i>
                             </div>
-                            <span class="no-user"><span>123</span>&nbsp;&nbsp;reviews</span>
+                            <span class="no-user"><span>@x.f會員評分人數</span>&nbsp;&nbsp;reviews</span>
                         </div>
                     </div>
                 </div>
@@ -169,26 +163,29 @@
                 <div class="profile-body">
                     <div class="profile-detail tab_info">
                         <h1 id="title">個人檔案</h1>
-                        <form method="post" action="Profile">
-                            <button type="button" class="btn btn-warning">編輯資料</button>
-                            <h6 class="profiletag">會員編號</h6>
-                            <input type="text" size="50" placeholder="@x.f會員編號" name="account" disabled>
-                            <h6 class="profiletag">帳號</h6>
-                            <input type="text" size="50" placeholder="@x.f會員帳號" name="passward" disabled>
-                            <h6 class="profiletag">密碼</h6>
-                            <input type="text" size="50" placeholder="@x.f會員密碼" name="nickname" disabled>
-                            <h6 class="profiletag" id="nickname">會員名稱</h6>
-                            <input type="text" size="50" name="age" placeholder="@x.f會員名稱">
-                            <h6 class="profiletag">暱稱</h6>
-                            <input type="text" size="50" name="birth" placeholder="@x.f會員暱稱">
-                            <h6 class="profiletag">生日</h6>
-                            <input type="text" size="50" name="interest" placeholder="@x.f會員生日">
-                            <h6 class="profiletag">興趣</h6>
-                            <input type="text" size="50" name="location" placeholder="@x.f會員興趣">
-                            <h6 class="profiletag">自我介紹</h6>
-                            <textarea id="intro" rows="5" cols="50" name="introduction">@x.f會員自我介紹</textarea><br>
-                            <button type="button" class="btn btn-warning">繳交</button>
-                        </form>
+                        @Html.BeginForm()
+                        {
+                    <form method="post" action="~/Profile/ProfileIndex">
+                        <button type="button" class="btn btn-warning">編輯資料</button>
+                        <h6 class="profiletag">會員編號</h6>
+                        <input type="text" size="50" placeholder="@x.f會員編號" name="account" disabled>
+                        <h6 class="profiletag">帳號</h6>
+                        <input type="text" size="50" placeholder="@x.f會員帳號" name="passward" disabled>
+                        <h6 class="profiletag">密碼</h6>
+                        <input type="text" size="50" placeholder="@x.f會員密碼" name="nickname" disabled>
+                        <h6 class="profiletag" id="nickname">會員名稱</h6>
+                        <input type="text" size="50" name="age" placeholder="@x.f會員名稱">
+                        <h6 class="profiletag">暱稱</h6>
+                        <input type="text" size="50" name="birth" placeholder="@x.f會員暱稱">
+                        <h6 class="profiletag">生日</h6>
+                        <input type="text" size="50" name="interest" placeholder="@x.f會員生日">
+                        <h6 class="profiletag">興趣</h6>
+                        <input type="text" size="50" name="location" placeholder="@x.f會員興趣">
+                        <h6 class="profiletag">自我介紹</h6>
+                        <textarea id="intro" rows="5" cols="50" name="introduction">@x.f會員自我介紹</textarea><br>
+                        <button type="submit" class="btn btn-warning">繳交</button>
+                    </form>
+                        }
                     </div>
                 </div>
                 <div class="profile-posts tab_info" id="myPost">
@@ -198,7 +195,7 @@
                         <div class="card mb-3" style="max-width: 540px;">
                             <div class="row no-gutters">
                                 <div class="col-md-4">
-                                    <img src="~/Content/images/@t.f活動團圖" class="card-img" alt="...">
+                                    <img src="~/Content/images/@t.f活動團圖" class="card-img" alt="@t.f活動編號">
                                 </div>
                                 <div class="col-md-8">
                                     <div class="card-body">
@@ -209,17 +206,14 @@
                                 </div>
                             </div>
                         </div>
-                        
                     }
                 </div>
                 <div class="profile-event tab_info" id="myActivity">
                     <h1>參加活動</h1>
                     @foreach (tActivity t in Model.tActivities)
                     {
-
                         <div class="card mb-3" style="max-width: 800px;">
                             <div class="row no-gutters">
-
                                 <div class="col-md-8">
                                     <div class="card-body">
                                         <h5 class="card-title"> @t.f活動標題</h5>
@@ -228,9 +222,9 @@
                                         <p class="card-text">
                                             <small class="text-muted">@t.f活動開始時間</small>
                                         </p>
-                                        <a class="nav-item">@Html.ActionLink("Read More", "TravelIndex", "Travel", new { }, new { @class = "btn btnContent  btn-warning" })</a>
+                                        <a class="nav-item">@Html.ActionLink("Read More", "TravelIndex", "Travel", new {id=t.f活動編號 }, new { @class = "btn btnContent  btn-warning" })</a>
                                     </div>
-                                    <div class="col-md-4">  <img src="~/Content/images/@t.f活動團圖" class="card-img" alt="..."></div>
+                                    <div class="col-md-4">  <img src="~/Content/images/@t.f活動團圖" class="card-img" alt="@t.f活動編號"></div>
                                 </div>       
                             </div>
                         </div>
@@ -243,7 +237,7 @@
                         <div class="card mb-3" style="max-width: 800px;">
                             <div class="row no-gutters">
                                 <div class="col-md-4">
-                                    <img src="~/Content/images/@t.f活動團圖" class="card-img" alt="...">
+                                    <img src="~/Content/images/@t.f活動團圖" class="card-img" alt="@t.f活動編號">
                                 </div>
                                 <div class="col-md-8">
                                     <div class="card-body">
@@ -252,13 +246,11 @@
                                         <p class="card-text">
                                             <small class="text-muted">@t.f活動結束時間</small>
                                         </p>
-                                        <a class="nav-item">@Html.ActionLink("Read More", "TravelIndex", "Travel", new { }, new { @class = "btn btnContent  btn-warning" })</a>
+                                        <a class="nav-item">@Html.ActionLink("Read More", "TravelIndex", "Travel", new {id=t.f活動編號 }, new { @class = "btn btnContent  btn-warning" })</a>
                                     </div>
                                 </div>
                             </div>
                         </div>
-
-
 
                     }
                 </div>
@@ -269,13 +261,12 @@
                         <div class="card mb-3" style="max-width: 800px;">
                             <div class="row no-gutters">
                                 <div class="col-md-4">
-                                    <img src="~/Content/images/@x.f會員大頭貼" class="card-img" alt="...">
+                                    <img src="~/Content/images/@x.f會員大頭貼" class="card-img" alt="@x.f會員名稱">
                                 </div>
                                 <div class="col-md-8">
                                     <div class="card-body">
                                         <h5 class="card-title">@x.f會員名稱</h5>
                                         <p class="card-text">@x.f會員自我介紹</p>
-                                        <p class="card-text"></p>
                                         <a class="nav-item">@Html.ActionLink("來去看看", "otherprofile", "Profile", new { id = t.f活動編號 }, new { @class = "btn btnContent  btn-warning" })</a>
                                     </div>
                                 </div>
@@ -287,12 +278,10 @@
                     <h1>歷史紀錄</h1>
                     @foreach (tActivity t in Model.tActivities)
                     {
-
-
                         <div class="card mb-3" style="max-width: 800px;">
                             <div class="row no-gutters">
                                 <div class="col-md-4">
-                                    <img src="~/Content/images/@t.f活動團圖" class="card-img" alt="...">
+                                    <img src="~/Content/images/@t.f活動團圖" class="card-img" alt="@t.f活動編號">
                                 </div>
                                 <div class="col-md-8">
                                     <div class="card-body">
@@ -305,13 +294,8 @@
                                 </div>
                             </div>
                         </div>
-
-
-
                     }
-
                 </div>
-
             </div>
         </div>
     </div>
@@ -321,9 +305,10 @@
         <p class="text-center mt-2 mb-2">Copyright © 2020 Jouta All rights reserved</p>
     </div>
     <script src="~/Scripts/jquery-3.5.1.js"></script>
+    <script src="~/Scripts/IIIProject/popper.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
     <script src="~/Scripts/IIIProject/profile.js"></script>
     <script src="~/Scripts/IIIProject/navbar.js"></script>
-    <script src="~/Scripts/bootstrap.min.js"></script>
 
 </body>
 
