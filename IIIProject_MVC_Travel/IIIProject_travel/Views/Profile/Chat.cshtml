@@ -106,10 +106,10 @@
 
                 if (name == "@x.f會員名稱") {
                     $("#discussion").append('<p style="color:green;text-align:left;width:500px;">' +
-                        '<strong> <img src="~/Content/images/@x.f會員大頭貼">' + htmlEncode(name) + '</strong>' + htmlEncode(message) + '</p>')
+                        '<strong> <img src="~/Content/images/@x.f會員大頭貼">' + htmlEncode(name) + '</strong>: ' + htmlEncode(message) + '</p>')
                 } else if(name != "@x.f會員名稱") {
                     $("#discussion").append('<p style="color:blue;text-alignright;">' +
-                        '<strong> <img src="~/Content/images/15.png">' + htmlEncode(name)  + '</strong>' + htmlEncode(message) + '</p>')
+                        '<strong> <img src="~/Content/images/15.png">' + htmlEncode(name)  + '</strong>: ' + htmlEncode(message) + '</p>')
                 }
             };
 

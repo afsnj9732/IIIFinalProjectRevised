@@ -2139,6 +2139,7 @@
     <Content Include="Views\DataPresent\ShowPieChart.cshtml" />
     <Content Include="Views\Profile\Chat.cshtml" />
     <Content Include="Views\優惠發送\List.cshtml" />
+    <Content Include="Views\Profile\otherprofile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
