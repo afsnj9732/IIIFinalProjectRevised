@@ -66,10 +66,25 @@ $('.resultTrigger').click(function () {
         async: false,
         cache: true,
         success: function (data) {
-            //alert(data);
-            console.log(data);
-            //JSON Data
-            //$('#mName').text(data);
+            if (data.length !== 0) {
+                console.log(data);
+                $('#mAchieve').text(data[0].mAchieve);
+                $('#mAvatar').html('<img src="/Content/images/' + data[0].mAvatar + '" id="mAvatar" class="col-auto ArticlePic">');
+                $('#mName').text('使用者名稱:' + data[0].mName);
+                $('#mRating').text('使用者評分:' + data[0].mRating);
+                //$('#mTimeleft').text(''); //controller待修改
+                $('.content').text(data[0].content);
+                $('#share').attr('hidden', false);
+            }
+            else {
+                $('#mAchieve').text('');
+                $('#mAvatar').html('');
+                $('#mName').text('');
+                $('#mRating').text('');
+                $('#mTimeleft').text('');
+                $('.content').text('找不到符合條件的結果');
+                $('#share').attr('hidden',true);
+            }
         },
         error: function (xhr, status, error) {
             console.log(error);
