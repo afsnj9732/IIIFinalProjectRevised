@@ -2,6 +2,14 @@
 @{
     Layout = null;
     var x = (tMember)Session["member"];
+    dbJoutaEntities db = new dbJoutaEntities();
+    var post = from t in db.tActivity
+               where t.f活動類型 == "文章"&&t.f會員編號 == x.f會員編號
+               select t;
+    //var join = from t
+    var attention = from t in db.tActivity.AsEnumerable()
+                    where x.f會員收藏的活動編號.Split(',').Contains(t.f活動編號.ToString())
+                    select t;
 }
 
 
@@ -184,7 +192,7 @@
                 </div>
                 <div class="profile-posts tab_info" id="myPost">
                     <h1>我的發文</h1>
-                    @foreach (tActivity t in Model.tActivities)
+                    @foreach (tActivity t in post)
                     {
                         <div class="card mb-4">
                             <img class="card-img-top" src="~/Content/images/@t.f活動團圖" alt="Card image cap">
@@ -230,7 +238,7 @@
                 </div>
                 <div class="profile-follow tab_info" id="myFollow">
                     <h1>關注活動</h1>
-                    @foreach (tActivity t in Model.tActivities)
+                    @foreach (tActivity t in attention)
                     {
                         <div class="row pl-3">
                             <div class="content mb-3" style="cursor: pointer;width:70%;height: 150px;"
