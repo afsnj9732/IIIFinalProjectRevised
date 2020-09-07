@@ -195,13 +195,12 @@
                             <div id="member" class="row">
                                 @foreach (tMember t in Model.tMembers)
                                 {
-
                                     <div class="col-lg-4 col-sm-12 block">
                                         <div class="person">
                                             <div class="card" style="width: 18rem;">
                                                 <img src="~/Content/images/@t.f會員大頭貼" class="card-img-top" alt="" width="350" height="250">
                                                 <div class="card-body">
-                                                    <h5 class="card-title">@t.f會員名稱</h5>
+                                                    <h5 class="card-title">@t.f會員編號 @t.f會員名稱</h5>
                                                     <p class="card-text">
                                                         @t.f會員自我介紹
                                                     </p>
