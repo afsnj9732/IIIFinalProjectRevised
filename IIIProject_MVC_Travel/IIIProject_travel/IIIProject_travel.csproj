@@ -2068,6 +2068,7 @@
       <DependentUpon>JoutaEntities.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\IIIProject\adminchart.js" />
     <Content Include="Scripts\IIIProject\blog.js" />
     <Content Include="Scripts\IIIProject\check.js" />
     <Content Include="Scripts\IIIProject\coupon.js" />
