@@ -1,7 +1,8 @@
 ﻿@{
     Layout = null;
 }
-@model IEnumerable<tActivity>
+@model IIIProject_travel.tActivity
+
 
 <!doctype html>
 <html lang="en">
@@ -29,7 +30,7 @@
 
 <body>
     <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
-        <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="@Url.Action("Home","後台Home")">Jouta後台</a>
+        <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="@Url.Action("List","後台Home")">Jouta後台</a>
         <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
         <ul class="navbar-nav px-3">
             <li class="nav-item text-nowrap">
@@ -97,53 +98,41 @@
             <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
 
 
-                <h2>文章列表</h2>
+                <h2>查看文章</h2>
                 <div class="table-responsive">
-                    <table class="table table-striped table-sm">
-                        <thead>
-                            <tr>
-                                <td>筆數</td>
-                                <td>@Html.ActionLink("編號", "List", new { sortOrder = ViewBag.編號排序, currentFilter = ViewBag.當前搜尋 })</td>
-                                <td>@Html.ActionLink("會員", "List", new { sortOrder = ViewBag.會員排序, currentFilter = ViewBag.當前搜尋 })</td>
-                                <td>@Html.ActionLink("標題", "List", new { sortOrder = ViewBag.標題排序, currentFilter = ViewBag.當前搜尋 })</td>
-                                <td>@Html.ActionLink("地區", "List", new { sortOrder = ViewBag.地區排序, currentFilter = ViewBag.當前搜尋 })</td>
-                                <td>@Html.ActionLink("建立時間", "List", new { sortOrder = ViewBag.建立時間排序, currentFilter = ViewBag.當前搜尋 })</td>
-                                <td>@Html.ActionLink("內容", "List", new { sortOrder = ViewBag.內容排序, currentFilter = ViewBag.當前搜尋 })</td>
-                                <td>按鈕</td>
-                                <td>按鈕</td>
-                            </tr>
-                        </thead>
 
-                        <tbody>
+                    <form method="post">
 
-                            @{
-                                int c筆數 = 0;
-                                foreach (var item in Model)
-                                {
-                                    c筆數++;
-                            <tr>
-                                <td>@c筆數.ToString()</td>
-                                <td>@Html.DisplayFor(modelItem => item.f活動編號)</td>
-                                <td>@Html.DisplayFor(modelItem => item.f會員編號)</td>
-                                <td>@Html.DisplayFor(modelItem => item.f活動標題)</td>
-                                <td>@Html.DisplayFor(modelItem => item.f活動地區)</td>
-                                <td>@Html.DisplayFor(modelItem => item.f活動發起日期)</td>
-                                <td>@Html.DisplayFor(modelItem => item.f活動內容)</td>
-
-                                <td>
-                                    @Html.ActionLink("查看", "v查看", "後台文章", new { id = item.f活動編號 }, new { Class = "btn btn-info" })
-                                </td>
-                                <td>
-                                    @Html.ActionLink("刪除", "d刪除", "後台文章", new { id = item.f活動編號 },
-                                    new { OnClick = "return confirm('確定要刪除嗎?')", Class = "btn btn-danger" })
-                                </td>
-                            </tr>
-                                }
-                            }
+                        <input type="hidden" name="f活動編號" value="@Model.f活動編號" />
+                        <div class="row">
+                            <div class="col">
+                                <p>
+                                    標題<br />
+                                    <input type="text" name="f活動標題" value="@Model.f活動標題" />
+                                </p>
+                                <p>
+                                    帳號<br />
+                                    <input type="text" name="f會員編號" value="@Model.f會員編號" />
+                                </p>
+                                <p>
+                                    建立時間<br />
+                                    <input type="text" name="f活動發起日期" value="@Model.f活動發起日期" />
+                                </p>
+                                <p>
+                                    地區<br />
+                                    <input type="text" name="ff活動地區" value="@Model.f活動地區" />
+                                </p>
+                                <p>
+                                    內容<br />
+                                    <input type="text" name="f活動內容" value="@Model.f活動內容" style="width:300px;height:100px" readonly />
+                                </p>
 
 
-                        </tbody>
-                    </table>
+                            </div>
+
+                        </div>
+                    </form>
+
                 </div>
             </main>
         </div>
