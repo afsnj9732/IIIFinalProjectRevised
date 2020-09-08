@@ -140,7 +140,7 @@
                                 var 圖片 = item.f會員大頭貼;
                                 if(圖片==null)
                                 {
-                                    圖片 = "../Content/images/nullhead.jpg";
+                                    圖片 = "nullhead.jpg";
                                 }
                                 <tr>
                                     <td>
@@ -156,7 +156,7 @@
                                         @Html.DisplayFor(modelItem => item.f會員稱號)
                                     </td>
                                     <td>
-                                        <img src="@圖片" style="width:50px;height:50px"/>
+                                        <img src="~/Content/images/@圖片" style="width:100px;height:100px"/>
                                     </td>
                                     <td>
                                         @Html.DisplayFor(modelItem => item.f會員帳號)
