@@ -237,7 +237,10 @@
             type: "POST",
             data: { "target": target,"isAdd":true},
             success: function (data) {
-                if (data === "") {
+                if (data === "1") {
+                    window.confirm("已是團主不用入團");
+                }
+                else if (data === "") {
                     window.confirm("你已經入團了哦!");
                 } else {
                     $("[ActAdd=" + target + "]").html(data);
@@ -253,7 +256,10 @@
             type: "POST",
             data: { "target": target, "isAdd": false},
             success: function (data) {
-                if (data === "") {
+                if (data === "1") {
+                    window.confirm("團主不可退團");
+                }
+                else if (data === "") {
                     window.confirm("你沒有入團哦!");                    
                 } else {
                     $("[ActAdd=" + target + "]").html(data);
