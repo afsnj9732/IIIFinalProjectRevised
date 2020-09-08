@@ -19,9 +19,22 @@ namespace IIIProject_travel.Controllers
         }
 
         [HttpPost]
-        public ActionResult List(string location)
+        public ActionResult List(string randLocation)
         {
-            return View();
+            dbJoutaEntities db = new dbJoutaEntities();
+
+            var x = (from t in db.tMember
+                     where t.f會員評分 >= 4
+                     select new
+                     {
+                         mMemberNum = t.f會員編號,
+                         mAccount = t.f會員帳號,
+                         mName = t.f會員名稱,
+                         mRating = t.f會員評分
+                     })
+                .OrderBy(t => Guid.NewGuid()).Take(3);
+
+            return Json(x, JsonRequestBehavior.AllowGet);
         }
     }
 }
