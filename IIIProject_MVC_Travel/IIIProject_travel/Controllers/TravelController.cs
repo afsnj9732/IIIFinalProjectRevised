@@ -105,6 +105,81 @@ namespace IIIProject_travel.Controllers
             return RedirectToAction("TravelIndex");
         }
 
+        public dynamic ActAdd(int target, bool isAdd) //退團或入團
+        {
+            var LoginMember = (tMember)Session["member"];
+            dbJoutaEntities db = new dbJoutaEntities();
+            var ActList = db.tActivity.Where(t => t.f活動編號 == target).FirstOrDefault();
+
+            //檢查登入會員是否為本活動團主，團主不可入團退團
+            int index = -1; //先假設不是
+            if (!string.IsNullOrEmpty(LoginMember.f會員發起的活動編號)) //若登入會員有開團紀錄
+            {
+                string[] LeaderList = LoginMember.f會員發起的活動編號.Split(',');
+                index = Array.IndexOf(LeaderList, target.ToString());
+                if (index != -1)//若找到，表示是團主
+                {
+                    return "1";
+                }
+            }
+
+            //if (!string.IsNullOrEmpty(ActList.f活動參加的會員編號)) 因為有團主，活動必定有人參加            
+            string[] GuysList = ActList.f活動參加的會員編號.Split(',');
+            index = Array.IndexOf(GuysList, LoginMember.f會員編號.ToString());  //尋找登入中的會員是否有參加
+                                                                            //注意會員標號是int，陣列內容是str，
+                                                                            //不轉型index永遠會是-1 
+
+            var NowMember = db.tMember.Where(t => t.f會員編號 == LoginMember.f會員編號)
+                         .Select(a => a).FirstOrDefault();//因Session存取的資料沒有和資料庫內部做綁定
+                                                          //所以不能存取，要用Session登入會員的會員編號
+                                                          //撈出目前會員的資料
+
+            if (isAdd == true)//點選入團
+            {
+                //判別活動時段是否已占用((未完成
+
+
+                if (index == -1)//活動時段未占用且登入中的會員不存在名單則加入
+                {
+                    //添加占用時間((未完成
+                    
+
+
+                    //增加會員資料參加的會員編號
+                    NowMember.f會員參加的活動編號 += "," + ActList.f活動編號;
+                    ActList.f活動參加的會員編號 += "," + LoginMember.f會員編號;
+                    db.SaveChanges();
+                }
+                else //若會員已存在
+                {
+                    return "";
+                }
+            }
+            else //點選退出
+            {
+                if (index != -1)//登入中的會員存在則讓他退出並更動占用時間
+                {
+                    //移除占用時間((未完成
+
+
+
+
+                    //移除會員資料參加的會員編號
+                    string[] NewList = NowMember.f會員參加的活動編號.Split(',');
+                    NowMember.f會員參加的活動編號 =
+                        string.Join(",", NewList.Where(t => t != ActList.f活動編號.ToString()));
+                    ActList.f活動參加的會員編號 =
+                        string.Join(",", GuysList.Where(t => t != NowMember.f會員編號.ToString()));
+                    db.SaveChanges();
+                }
+                else //若會員不存在
+                {
+                    return "";
+                }
+            }
+            return View(target);
+        }
+
         public object ScoreAdd(int target,int Score)
         {
             dbJoutaEntities db = new dbJoutaEntities();
@@ -278,80 +353,7 @@ namespace IIIProject_travel.Controllers
             return View(target);
         }
 
-        public dynamic ActAdd(int target , bool isAdd) //退團或入團
-        {
-            var LoginMember = (tMember)Session["member"];
-            dbJoutaEntities db = new dbJoutaEntities();
-            var ActList = db.tActivity.Where(t => t.f活動編號 == target).FirstOrDefault();
 
-            //檢查登入會員是否為本活動團主，團主不可入團退團
-            int index = -1; //先假設不是
-            if (!string.IsNullOrEmpty(LoginMember.f會員發起的活動編號)) //若登入會員有開團紀錄
-            {
-                string[] LeaderList = LoginMember.f會員發起的活動編號.Split(',');
-                index = Array.IndexOf(LeaderList, target.ToString());
-                if (index != -1)//若找到，表示是團主
-                {
-                    return "1";
-                }
-            }
-
-            //if (!string.IsNullOrEmpty(ActList.f活動參加的會員編號)) 因為有團主，活動必定有人參加            
-            string[] GuysList = ActList.f活動參加的會員編號.Split(',');
-            index = Array.IndexOf(GuysList, LoginMember.f會員編號.ToString());  //尋找登入中的會員是否有參加
-                                                                                //注意會員標號是int，陣列內容是str，
-                                                                                //不轉型index永遠會是-1 
-
-            var NowMember = db.tMember.Where(t => t.f會員編號 == LoginMember.f會員編號)
-                         .Select(a => a).FirstOrDefault();//因Session存取的資料沒有和資料庫內部做綁定
-                                                          //所以不能存取，要用Session登入會員的會員編號
-                                                          //撈出目前會員的資料
-                       
-            if (isAdd == true)//點選入團
-            {
-                //判別活動時段是否已占用((未完成
-
-
-                if (index == -1)//活動時段未占用且登入中的會員不存在名單則加入
-                {
-                    //添加占用時間((未完成
-
-
-
-                    //增加會員資料參加的會員編號
-                    NowMember.f會員參加的活動編號 += "," + ActList.f活動編號;
-                    ActList.f活動參加的會員編號 += "," + LoginMember.f會員編號;
-                    db.SaveChanges();
-                }
-                else //若會員已存在
-                {
-                    return "";
-                }
-            }
-            else //點選退出
-            {
-                if (index != -1)//登入中的會員存在則讓他退出並更動占用時間
-                {
-                    //移除占用時間((未完成
-
-                    
-
-
-                    //移除會員資料參加的會員編號
-                    string[] NewList = NowMember.f會員參加的活動編號.Split(',');
-                    NowMember.f會員參加的活動編號 =
-                        string.Join(",", NewList.Where(t => t != ActList.f活動編號.ToString()));                
-                    ActList.f活動參加的會員編號 = 
-                        string.Join(",", GuysList.Where(t => t != NowMember.f會員編號.ToString()));
-                    db.SaveChanges();
-                }
-                else //若會員不存在
-                {
-                    return "";
-                }
-            }                                            
-            return View(target);
-        }
 
         public /*JsonResult*/ string FeelGood(string target)
         {           
