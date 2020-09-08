@@ -46,14 +46,11 @@ namespace IIIProject_travel.Controllers
         {
             if (Session["member"] != null && p.f活動標題 != null)  //揪團驗證，待改良
             {
-                HttpPostedFileBase PicFile = Request.Files["PicFile"];
-                if (PicFile != null)
-                {
-                    var NewFileName = Guid.NewGuid() + Path.GetExtension(PicFile.FileName);
-                    var NewFilePath = Path.Combine(Server.MapPath("~/Content/images/"), NewFileName);
-                    PicFile.SaveAs(NewFilePath);
-                    p.f活動團圖 = NewFileName;
-                }
+                //判別登入會員其活動時段是否已占用((未完成
+
+                //添加占用時間((未完成
+
+
                 tMember Member = (tMember)Session["member"];
                 dbJoutaEntities db = new dbJoutaEntities();                         
                 p.f會員編號 = Member.f會員編號;
@@ -65,12 +62,50 @@ namespace IIIProject_travel.Controllers
                 tMember NowMember = db.tMember.Where(t => t.f會員編號 == Member.f會員編號).FirstOrDefault();
                 NowMember.f會員發起的活動編號 += "," + ID;
                 NowMember.f會員參加的活動編號 += "," + ID;
+                HttpPostedFileBase PicFile = Request.Files["PicFile"];
+                if (PicFile != null)
+                {
+                    var NewFileName = Guid.NewGuid() + Path.GetExtension(PicFile.FileName);
+                    var NewFilePath = Path.Combine(Server.MapPath("~/Content/images/"), NewFileName);
+                    PicFile.SaveAs(NewFilePath);
+                    p.f活動團圖 = NewFileName;
+                }
                 db.SaveChanges();
             }
             return View();
         }
 
-        public string ScoreAdd(int target,int Score)
+        public ActionResult Delete(int? id)
+        {
+            tMember LoginMember = (tMember)Session["member"];
+            dbJoutaEntities db = new dbJoutaEntities();
+            var target = db.tActivity.Where(t => t.f活動編號 == id).FirstOrDefault();
+            var NowMember = db.tMember.Where(t => t.f會員編號 == LoginMember.f會員編號).FirstOrDefault();
+            NowMember.f會員發起的活動編號 =
+                string.Join(",", NowMember.f會員發起的活動編號.Split(',').Where(t => t != id.ToString()));
+            //撈出所有參加會員的編號，並讓他們退團
+            if (!string.IsNullOrEmpty(target.f活動參加的會員編號))
+            {
+                string[] DeleteList = target.f活動參加的會員編號.Split(',');
+                foreach (var item in DeleteList)
+                {
+                    if (!string.IsNullOrEmpty(item))
+                    {
+                        //移除占用時間((未完成
+
+                        //移除活動編號
+                        tMember Delete = db.tMember.Where(t => t.f會員編號.ToString() == item).FirstOrDefault();
+                        Delete.f會員參加的活動編號 =
+                            string.Join(",", Delete.f會員參加的活動編號.Split(',').Where(t => t != id.ToString()));
+                    }
+                }
+            }
+            db.tActivity.Remove(target);
+            db.SaveChanges();          
+            return RedirectToAction("TravelIndex");
+        }
+
+        public object ScoreAdd(int target,int Score)
         {
             dbJoutaEntities db = new dbJoutaEntities();
             var NowMember = (tMember)Session["member"];
@@ -78,18 +113,32 @@ namespace IIIProject_travel.Controllers
                               .Select(a => a);
             string[] isExist = theActivity.Select(a => a.f活動參加的會員編號)
                                .FirstOrDefault().Split(',');
-            int pos = Array.IndexOf(isExist, NowMember.f會員編號.ToString());
-            int yyyy = Convert.ToInt32(theActivity.FirstOrDefault().f活動結束時間.Substring(0 , 4));
-            int MM = Convert.ToInt32(theActivity.FirstOrDefault().f活動結束時間.Substring(5, 2));
-            int dd = Convert.ToInt32(theActivity.FirstOrDefault().f活動結束時間.Substring(8, 2));
-            var TimeNow = DateTime.Now.ToString("yyyy,MM,dd");
-            int Nyyyy = Convert.ToInt32(TimeNow.Substring(0, 4));
-            int NMM = Convert.ToInt32(TimeNow.Substring(5, 2));
-            int Ndd = Convert.ToInt32(TimeNow.Substring(8, 2));
-            int result = DateTime.Compare((new DateTime(yyyy,MM,dd)), (new DateTime(Nyyyy,NMM,Ndd)));
-            if (pos == -1 || result > 0) //先找有沒有參加本次活動，或是本次活動結束了沒
+            var Member = db.tMember.Where(t => t.f會員編號 == NowMember.f會員編號).FirstOrDefault()
+                .f會員發起的活動編號.Split(',');
+            int pos = Array.IndexOf(Member, target.ToString());
+            //int yyyy = Convert.ToInt32(theActivity.FirstOrDefault().f活動結束時間.Substring(0 , 4));
+            //int MM = Convert.ToInt32(theActivity.FirstOrDefault().f活動結束時間.Substring(5, 2));
+            //int dd = Convert.ToInt32(theActivity.FirstOrDefault().f活動結束時間.Substring(8, 2));
+            //var TimeNow = DateTime.Now.ToString("yyyy,MM,dd");
+            //int Nyyyy = Convert.ToInt32(TimeNow.Substring(0, 4));
+            //int NMM = Convert.ToInt32(TimeNow.Substring(5, 2));
+            //int Ndd = Convert.ToInt32(TimeNow.Substring(8, 2));
+            //int result = DateTime.Compare((new DateTime(yyyy,MM,dd)), (new DateTime(Nyyyy,NMM,Ndd)));
+            if (pos != -1)//團主不可自行評分
+            {
+                return "5";
+            }
+
+            var result = string.Compare(DateTime.Now.ToString("yyyy,MM,dd"), theActivity.FirstOrDefault().f活動結束時間);           
+            if (result < 0)  //result=1 活動已結束 ， result=-1 活動尚未結束
+            {
+                return "3"; //活動尚未結束
+            }
+
+            pos = Array.IndexOf(isExist, NowMember.f會員編號.ToString());
+            if (pos == -1 ) //先找有沒有參加本次活動
             { 
-                return "0";//沒參加 或是 活動尚未結束
+                return "0";//沒參加
             }
 
             if (!string.IsNullOrEmpty(theActivity.Select(a => a.f活動評分過的會員編號).FirstOrDefault()))

@@ -170,9 +170,15 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-warning joinAct" joinAct="@item.f活動編號">我要入團</button>
-                        <button type="button" class="btn btn-secondary leaveAct" leaveAct="@item.f活動編號">我要退團</button>
-                        @*<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>*@
+                        @if (string.Compare(DateTime.Now.ToString("yyyy-MM-dd"), item.f活動招募截止時間) > 0)
+                        {  //招募已結束 
+                           <button type="button" class="btn btn-secondary leaveAct" leaveAct="@item.f活動編號">我要退團</button>
+                        }
+                        else
+                        {   //招募未結束
+                            <button type="button" class="btn btn-warning joinAct" joinAct="@item.f活動編號">我要入團</button>
+                            <button type="button" class="btn btn-secondary leaveAct" leaveAct="@item.f活動編號">我要退團</button>
+                        }
                     </div>
                 </div>
             </div>
@@ -253,6 +259,12 @@
                         </div>
                         <!-- 互動文章 -->
                         <div class="modal-footer   mt-3  border-main-color">
+                            @if (Session["member"]!=null && NowMember.f會員編號 == item.f會員編號)
+                            {
+                                @*<button type="button" class="btn btn-secondary" data-dismiss="modal">*@
+                                    @Html.ActionLink("刪除","Delete","Travel",new {id = item.f活動編號 },new { @class = "btn btn-secondary" }) 
+                                @*</button>*@
+                            }
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
                         </div>
 
@@ -273,11 +285,11 @@
                         </span>
                     </div>
                     <div class="RWD_1851">
-                        <span>揪團日期： <span>@item.f活動發起日期</span></span>
+                        <span>發文日期： <span>@item.f活動發起日期</span></span>
                         <span>&nbsp; &nbsp;</span>
                         <span>活動日期： <span>@item.f活動開始時間</span></span>
                         <span>&nbsp; &nbsp;</span>
-                        <span>入團截止： <span>@item.f活動結束時間</span></span>
+                        <span>入團截止： <span>@item.f活動招募截止時間</span></span>
                     </div>
                     <div class="row ">
                         <div class="dropdown RWD_1850 pr-3">
@@ -346,18 +358,33 @@
         </div>
         <!-- -------------文章分割線-------------- -->
     }
-    <div style="color:red">
-        @for (int i = 1; i < Model.TotalPage + 1; i++)
-        {
-            if (i == Model.NowPage)
-            {
-                <button class="page NowPage" page="@i">@i</button>
-            }
-            else
-            {
-                <button class="page" page="@i">@i</button>
-            }
+            <nav aria-label="...">
+                <ul class="pagination">
+                    @*<li class="page-item disabled">
+            <span class="page-link">Previous</span>
+        </li>*@
+                    @for (int i = 1; i < Model.TotalPage + 1; i++)
+                    {
+                        if (i == Model.NowPage)
+                        {
+                            <li class="page-item active  MyPage NowPage" page="@i">
+                                <span class="page-link">
+                                    @i
+                                    <span class="sr-only">(current)</span>
+                                </span>
+                            </li>
+                            @*<button class=" page NowPage" page="@i">@i</button>*@
+                        }
+                        else
+                        {
+                            <li class="page-item  MyPage" page="@i"><a class="page-link" style="cursor:pointer">@i</a></li>
+                            @*<button class=" page" page="@i">@i</button>*@
+                        }
 
-        }
-    </div>
+                    }
+                    @*<li class="page-item">
+                <a class="page-link" style="cursor:pointer">Next</a>
+            </li>*@
+                </ul>
+            </nav>
 }

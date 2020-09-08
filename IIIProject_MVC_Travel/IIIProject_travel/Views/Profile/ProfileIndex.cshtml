@@ -214,8 +214,8 @@
                     {
                         <div class="card mb-3" style="max-width: 800px;">
                             <div class="row no-gutters">
-                                <div class="col-md-8">
-                                    <div class="card-body">
+                                <div class="col-md-8 activityadjust">
+                                    <div class="card-body" style="text-align:center">
                                         <h5 class="card-title"> @t.f活動標題</h5>
                                         <p class="card-text">@t.f活動內容</p>
                                         揪團者 :  <span style="cursor: pointer;">@x.f會員名稱</span>
@@ -224,7 +224,7 @@
                                         </p>
                                         <a class="nav-item">@Html.ActionLink("Read More", "TravelIndex", "Travel", new {id=t.f活動編號 }, new { @class = "btn btnContent  btn-warning" })</a>
                                     </div>
-                                    <div class="col-md-4">  <img src="~/Content/images/@t.f活動團圖" class="card-img" alt="@t.f活動編號"></div>
+                                    <div class="col-md-4">  <img src="~/Content/images/@t.f活動團圖" class="card-img activityphoto" alt="@t.f活動編號"></div>
                                 </div>       
                             </div>
                         </div>
