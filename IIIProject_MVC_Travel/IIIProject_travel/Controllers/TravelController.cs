@@ -126,7 +126,7 @@ namespace IIIProject_travel.Controllers
                         Delete.f會員參加的活動編號 =
                             string.Join(",", Delete.f會員參加的活動編號.Split(',').Where(t => t != id.ToString()));
 
-                        //移除占用時間((未檢驗
+                        //移除占用時間
                         string[] usedTime = Delete.f會員已占用時間.Split(',');
                         Delete.f會員已占用時間 =
                             string.Join(",", usedTime.Where(t => t != target.f活動開始時間 + "~" + target.f活動結束時間));
@@ -212,7 +212,7 @@ namespace IIIProject_travel.Controllers
             {
                 if (index != -1)//登入中的會員存在則讓他退出並更動占用時間
                 {
-                    //移除占用時間((未檢驗
+                    //移除占用時間
                     string[] usedTime = NowMember.f會員已占用時間.Split(',');
                     NowMember.f會員已占用時間 =
                         string.Join(",", usedTime.Where(t => t != ActList.f活動開始時間 + "~" + ActList.f活動結束時間));
