@@ -76,8 +76,26 @@ namespace IIIProject_travel.Controllers
 
         public ActionResult Delete(int? id)
         {
+            tMember LoginMember = (tMember)Session["member"];
             dbJoutaEntities db = new dbJoutaEntities();
             var target = db.tActivity.Where(t => t.f活動編號 == id).FirstOrDefault();
+            var NowMember = db.tMember.Where(t => t.f會員編號 == LoginMember.f會員編號).FirstOrDefault();
+            NowMember.f會員發起的活動編號 =
+                string.Join(",", NowMember.f會員發起的活動編號.Split(',').Where(t => t != id.ToString()));
+            //撈出所有參加會員的編號，並讓他們退團
+            if (!string.IsNullOrEmpty(target.f活動參加的會員編號))
+            {
+                string[] DeleteList = target.f活動參加的會員編號.Split(',');
+                foreach (var item in DeleteList)
+                {
+                    //移除占用時間((未完成
+
+                    //移除活動編號
+                    var Delete = db.tMember.Where(t => t.f會員編號.ToString() == item).FirstOrDefault();
+                    Delete.f會員參加的活動編號 =
+                        string.Join(",", Delete.f會員參加的活動編號.Split(',').Where(t => t != id.ToString()));
+                }
+            }
             db.tActivity.Remove(target);
             db.SaveChanges();          
             return RedirectToAction("TravelIndex");
