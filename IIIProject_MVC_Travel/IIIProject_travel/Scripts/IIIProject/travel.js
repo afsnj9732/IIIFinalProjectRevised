@@ -80,8 +80,14 @@
             type: "POST",
             data: { "target": target , "Score":Score},
             success: function (data) {
-                if (data === "0") {
-                    window.confirm("有參加的會員且須於活動結束以後才可評分");
+                if (data === "5") {
+                    window.confirm("團主不可自行評分");
+                }
+                else if (data === "3") {
+                    window.confirm("活動結束後才可評分");
+                }
+                else if (data === "0") {
+                    window.confirm("有參加的會員才可評分");
                 } else if (data === "1") {
                     window.confirm("你已經評分過了哦!");
                 } else {

@@ -105,17 +105,21 @@
 
                     <form class="form-inline table d-flex align-items-end" method="POST" action="~/Eat/EatIndex">
                         <div class="form-group col-lg-3 col-md-3 col-sm-12 inner">
-                            <label for="location_eat">所在地區:</label>
+                            <label for="location_eat">分類:</label>
                             <select class="form-control" id="location_eat">
-                                <option value="1">北部</option>
-                                <option value="1">中部</option>
-                                <option value="1">東部</option>
-                                <option value="1">南部</option>
+                                <option value="素食">素食</option>
+                                <option value="葷食">葷食</option>
                             </select>
                         </div>
-                        <div class="form-group col-lg-3 col-md-3 col-sm-12 inner">
-                            <label for="time">日期:</label>
-                            <input type="date" name="txtDate" class="form-control" id="time">
+                        <div class="form-group col-lg-2 col-md-2 col-sm-12 inner">
+                            <label for="label">總讚數:</label>
+                            <select class="form-control" id="label" style="border: none;">
+                                <option value="全部" selected>&nbsp;全部</option>
+                                <option value="10">讚>10</option>
+                                <option value="30">讚>30</option>
+                                <option value="50">讚>50</option>
+                                <option value="100">讚>100</option>
+                            </select>
                         </div>
                         <div class="form-group col-lg-3 col-md-3 col-sm-12 inner">
                             <label for="keyword">關鍵字:</label>
@@ -131,17 +135,29 @@
                 <div id="tabtwo" class="tab-pane fade">
                     <form class="form-inline table d-flex align-items-end" method="POST" action="~/Travel/TravelIndex">
                         <div class="form-group col-lg-3 col-md-3 col-sm-12 inner">
-                            <label for="location_travel">所在地區:</label>
+                            <label for="location_travel">分類:</label>
                             <select class="form-control" id="location_travel">
-                                <option value="1">北部</option>
-                                <option value="2">中部</option>
-                                <option value="3">東部</option>
-                                <option value="4">南部</option>
+                                <option style="width:auto;margin:0 auto;" value="所有" selected>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;所有
+                                </option>
+                                <option value="兩天一夜">兩天一夜</option>
+                                <option value="三天兩夜">三天兩夜</option>
+                                <option value="五天四夜">五天四夜</option>
+                                <option value="七天六夜">七天六夜</option>
+                                <option style="text-align:center;" value="其他">
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;其他
+                                </option>
                             </select>
                         </div>
-                        <div class="form-group col-lg-3 col-md-3 col-sm-12 inner">
-                            <label for="time_travel">日期:</label>
-                            <input type="date" name="txtDate" class="form-control" id="time_travel">
+                        <div class="form-group col-lg-2 col-md-2 col-sm-12 inner">
+                            <label for="label">總讚數:</label>
+                            <select class="form-control" id="label" style="border: none;">
+                                <option value="全部" selected>&nbsp;全部</option>
+                                <option value="10">讚>10</option>
+                                <option value="30">讚>30</option>
+                                <option value="50">讚>50</option>
+                                <option value="100">讚>100</option>
+                            </select>
                         </div>
                         <div class="form-group col-lg-3 col-md-3 col-sm-12 inner">
                             <label for="keyword_travel">關鍵字:</label>
@@ -154,17 +170,7 @@
                 </div>
                 <div id="tabthree" class="tab-pane fade">
                     <form class="form-inline table d-flex align-items-end" method="POST" action="~/Blog/Index">
-                        <div class="form-group col-lg-3 col-md-3 col-sm-12 inner">
-                            <label for="location_article">類型:</label>
-                            <select class="form-control" id="location_article">
-                                <option value="1">揪旅遊</option>
-                                <option value="2">揪飯局</option>
-                            </select>
-                        </div>
-                        <div class="form-group col-lg-3 col-md-3 col-sm-12 inner">
-                            <label for="time_article">日期:</label>
-                            <input type="date" name="txtDate" class="form-control" id="time_article">
-                        </div>
+                        
                         <div class="form-group col-lg-3 col-md-3 col-sm-12 inner">
                             <label for="keyword_article">關鍵字:</label>
                             <input type="text" name="txtKeyword" class="form-control" id="keyword_article">
