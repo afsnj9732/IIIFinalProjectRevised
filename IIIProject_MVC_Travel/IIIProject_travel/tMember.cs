@@ -37,8 +37,7 @@ namespace IIIProject_travel
         public string f會員興趣 { get; set; }
         public string f會員已占用時間 { get; set; }
         public string f會員自我介紹 { get; set; }
-        public string f會員現在參加的活動編號 { get; set; }
-        public string f會員過去參加的活動編號 { get; set; }
+        public string f會員參加的活動編號 { get; set; }
         public string f會員發起的活動編號 { get; set; }
         public string f驗證碼 { get; set; }
         public bool isAdmin { get; set; }

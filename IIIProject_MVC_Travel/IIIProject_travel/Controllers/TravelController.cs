@@ -55,11 +55,16 @@ namespace IIIProject_travel.Controllers
                     p.f活動團圖 = NewFileName;
                 }
                 tMember Member = (tMember)Session["member"];
+                dbJoutaEntities db = new dbJoutaEntities();                         
                 p.f會員編號 = Member.f會員編號;
                 p.f活動類型 = "旅遊";
-                p.f活動參加的會員編號 += ","+Member.f會員編號;
-                dbJoutaEntities db = new dbJoutaEntities();
+                p.f活動參加的會員編號 += ","+Member.f會員編號;                
                 db.tActivity.Add(p);
+                int ID = db.tActivity.Where(t => t.f會員編號 == Member.f會員編號)
+                         .Select(t => t.f活動編號).FirstOrDefault();
+                tMember NowMember = db.tMember.Where(t => t.f會員編號 == Member.f會員編號).FirstOrDefault();
+                NowMember.f會員發起的活動編號 += "," + ID;
+                NowMember.f會員參加的活動編號 += "," + ID;
                 db.SaveChanges();
             }
             return View();
@@ -224,22 +229,22 @@ namespace IIIProject_travel.Controllers
             return View(target);
         }
 
-        public ActionResult ActAdd(int target , bool isAdd)
+        public ActionResult ActAdd(int target , bool isAdd) //退團或入團
         {
-            var NowMember = (tMember)Session["member"];
+            var LoginMember = (tMember)Session["member"];
             dbJoutaEntities db = new dbJoutaEntities();
-            var ActList = db.tActivity.Where(n => n.f活動編號 == target).FirstOrDefault();
+            var ActList = db.tActivity.Where(t => t.f活動編號 == target).FirstOrDefault();
             string[] GuysList = { };
             int index = -1; //若此活動無人參加，則登入中的會員必定無參加
 
             if (!string.IsNullOrEmpty(ActList.f活動參加的會員編號)) //若此活動有人參加
             {
                 GuysList = ActList.f活動參加的會員編號.Split(',');
-                index = Array.IndexOf(GuysList, NowMember.f會員編號.ToString());  //尋找登入中的會員是否有參加
+                index = Array.IndexOf(GuysList, LoginMember.f會員編號.ToString());  //尋找登入中的會員是否有參加
             }                                                                     //注意會員標號是int，陣列內容是str，
 
 
-            var Member = db.tMember.Where(t => t.f會員編號 == NowMember.f會員編號)
+            var NowMember = db.tMember.Where(t => t.f會員編號 == LoginMember.f會員編號)
                          .Select(a => a).FirstOrDefault();  
             //不轉型index永遠會是-1            
             if (isAdd == true)//點選入團
@@ -251,9 +256,10 @@ namespace IIIProject_travel.Controllers
                 {
                     //添加占用時間
                     //Member.f會員已占用時間;
-                    
+
                     //添加占用時間
-                    ActList.f活動參加的會員編號 += "," + NowMember.f會員編號;
+                    //增加會員資料參加的會員編號
+                    ActList.f活動參加的會員編號 += "," + LoginMember.f會員編號;
                     db.SaveChanges();
                 }
                 else //若存在則...
@@ -263,11 +269,15 @@ namespace IIIProject_travel.Controllers
             }
             else //點選退出
             {
+                //若是發起人則不可退出
+                //if()
+
                 if (index != -1)//登入中的會員存在則讓他退出並更動占用時間
                 {
                     //移除占用時間((未完成
 
                     //移除占用時間
+                    //移除會員資料參加的會員編號
                     var List = GuysList.ToList();
                     List.RemoveAt(index);
                     var FinalList = string.Join(",",List);
