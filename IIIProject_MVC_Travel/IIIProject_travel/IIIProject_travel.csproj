@@ -212,7 +212,6 @@
       <DependentUpon>JoutaEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\CBlog.cs" />
-    <Compile Include="ViewModel\CChangePassword.cs" />
     <Compile Include="ViewModel\CData.cs" />
     <Compile Include="ViewModel\CLogin.cs" />
     <Compile Include="ViewModel\CMember.cs" />
@@ -2143,6 +2142,7 @@
     <Content Include="Views\優惠發送\List.cshtml" />
     <Content Include="Views\Profile\otherprofile.cshtml" />
     <Content Include="Views\後台飯局\v查看.cshtml" />
+    <Content Include="Views\後台旅遊\v查看.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
