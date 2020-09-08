@@ -74,6 +74,15 @@ namespace IIIProject_travel.Controllers
             return View();
         }
 
+        public ActionResult Delete(int? id)
+        {
+            dbJoutaEntities db = new dbJoutaEntities();
+            var target = db.tActivity.Where(t => t.f活動編號 == id).FirstOrDefault();
+            db.tActivity.Remove(target);
+            db.SaveChanges();          
+            return RedirectToAction("TravelIndex");
+        }
+
         public string ScoreAdd(int target,int Score)
         {
             dbJoutaEntities db = new dbJoutaEntities();

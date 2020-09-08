@@ -253,6 +253,12 @@
                         </div>
                         <!-- 互動文章 -->
                         <div class="modal-footer   mt-3  border-main-color">
+                            @if (NowMember.f會員編號 == item.f會員編號)
+                            {
+                                @*<button type="button" class="btn btn-secondary" data-dismiss="modal">*@
+                                    @Html.ActionLink("刪除","Delete","Travel",new {id = item.f活動編號 },new { @class = "btn btn-secondary" }) 
+                                @*</button>*@
+                            }
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
                         </div>
 
@@ -349,8 +355,8 @@
             <nav aria-label="...">
                 <ul class="pagination">
                     @*<li class="page-item disabled">
-                        <span class="page-link">Previous</span>
-                    </li>*@
+            <span class="page-link">Previous</span>
+        </li>*@
                     @for (int i = 1; i < Model.TotalPage + 1; i++)
                     {
                         if (i == Model.NowPage)
@@ -358,21 +364,21 @@
                             <li class="page-item active  MyPage NowPage" page="@i">
                                 <span class="page-link">
                                     @i
-                                <span class="sr-only">(current)</span>
+                                    <span class="sr-only">(current)</span>
                                 </span>
                             </li>
                             @*<button class=" page NowPage" page="@i">@i</button>*@
                         }
                         else
                         {
-                            <li class="page-item  MyPage"  page="@i" ><a class="page-link"style="cursor:pointer">@i</a></li>
+                            <li class="page-item  MyPage" page="@i"><a class="page-link" style="cursor:pointer">@i</a></li>
                             @*<button class=" page" page="@i">@i</button>*@
                         }
 
                     }
                     @*<li class="page-item">
-                        <a class="page-link" href="#">Next</a>
-                    </li>*@
+                <a class="page-link" style="cursor:pointer">Next</a>
+            </li>*@
                 </ul>
             </nav>
 }
