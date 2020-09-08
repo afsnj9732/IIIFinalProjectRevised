@@ -139,19 +139,19 @@
         if ($("#NeedAT").val().length < 8) {
             e.preventDefault();
             $("#NeedATTo").removeAttr("hidden");
-        } else if ($("#ActivityStart").val() == "") {
+        } else if ($("#ActivityStart").val() === "") {
             e.preventDefault();
             $("#ActivityStartTo").removeAttr("hidden");
-        } else if ($("#ActivityEnd").val() == "") {
+        } else if ($("#ActivityEnd").val() === "") {
             e.preventDefault();
             $("#ActivityEndTo").removeAttr("hidden");
-        } else if ($("#ActivityFindEnd").val() == "") {
+        } else if ($("#ActivityFindEnd").val() === "") {
             e.preventDefault();
             $("#ActivityFindEndTo").removeAttr("hidden");
-        } else if ($("#NeedAC").val() == "") {
+        } else if ($("#NeedAC").val() === "") {
             e.preventDefault();
             $("#NeedACTo").removeAttr("hidden");
-        } else if ($("#NeedAP").val() == "") {
+        } else if ($("#NeedAP").val() === "") {
             e.preventDefault();
             $("#NeedAPTo").removeAttr("hidden");
         } else if ($("#NeedAL").val().length < 100) {
