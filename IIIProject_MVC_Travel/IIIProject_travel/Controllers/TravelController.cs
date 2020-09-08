@@ -46,14 +46,10 @@ namespace IIIProject_travel.Controllers
         {
             if (Session["member"] != null && p.f活動標題 != null)  //揪團驗證，待改良
             {
-                HttpPostedFileBase PicFile = Request.Files["PicFile"];
-                if (PicFile != null)
-                {
-                    var NewFileName = Guid.NewGuid() + Path.GetExtension(PicFile.FileName);
-                    var NewFilePath = Path.Combine(Server.MapPath("~/Content/images/"), NewFileName);
-                    PicFile.SaveAs(NewFilePath);
-                    p.f活動團圖 = NewFileName;
-                }
+                //判別登入會員其活動時段是否已占用((未完成
+
+                //添加占用時間((未完成
+
                 tMember Member = (tMember)Session["member"];
                 dbJoutaEntities db = new dbJoutaEntities();                         
                 p.f會員編號 = Member.f會員編號;
@@ -65,6 +61,14 @@ namespace IIIProject_travel.Controllers
                 tMember NowMember = db.tMember.Where(t => t.f會員編號 == Member.f會員編號).FirstOrDefault();
                 NowMember.f會員發起的活動編號 += "," + ID;
                 NowMember.f會員參加的活動編號 += "," + ID;
+                HttpPostedFileBase PicFile = Request.Files["PicFile"];
+                if (PicFile != null)
+                {
+                    var NewFileName = Guid.NewGuid() + Path.GetExtension(PicFile.FileName);
+                    var NewFilePath = Path.Combine(Server.MapPath("~/Content/images/"), NewFileName);
+                    PicFile.SaveAs(NewFilePath);
+                    p.f活動團圖 = NewFileName;
+                }
                 db.SaveChanges();
             }
             return View();

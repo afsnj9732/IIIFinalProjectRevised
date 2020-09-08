@@ -7,6 +7,16 @@ body {
     background-color:yellow;
 }
 
+.pagination > .active > span {
+    color: black !Important;
+    background-color: #fee567 !Important;
+    border: solid 1px #fee567 !Important;
+}
+.pagination > li > a {
+    background-color: white;
+    color: black;
+}
+
 #labelTop {
     position: fixed;
     right: 5%;

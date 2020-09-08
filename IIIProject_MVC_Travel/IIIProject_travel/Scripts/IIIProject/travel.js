@@ -324,8 +324,8 @@
     $("body").on('click', ".leaveAct", leaveAct);
     $("body").on('click', ".leaveMsg", leaveMsg);
 
-    $("body").on('click', ".page", function () {
-        $(this).addClass("NowPage")
+    $("body").on('click', ".MyPage", function () {
+        $(this).addClass("NowPage");
         $(this).siblings().removeClass("NowPage");
         getAJAX();
     });

@@ -346,18 +346,33 @@
         </div>
         <!-- -------------文章分割線-------------- -->
     }
-    <div style="color:red">
-        @for (int i = 1; i < Model.TotalPage + 1; i++)
-        {
-            if (i == Model.NowPage)
-            {
-                <button class="page NowPage" page="@i">@i</button>
-            }
-            else
-            {
-                <button class="page" page="@i">@i</button>
-            }
+            <nav aria-label="...">
+                <ul class="pagination">
+                    @*<li class="page-item disabled">
+                        <span class="page-link">Previous</span>
+                    </li>*@
+                    @for (int i = 1; i < Model.TotalPage + 1; i++)
+                    {
+                        if (i == Model.NowPage)
+                        {
+                            <li class="page-item active  MyPage NowPage" page="@i">
+                                <span class="page-link">
+                                    @i
+                                <span class="sr-only">(current)</span>
+                                </span>
+                            </li>
+                            @*<button class=" page NowPage" page="@i">@i</button>*@
+                        }
+                        else
+                        {
+                            <li class="page-item  MyPage"  page="@i" ><a class="page-link"style="cursor:pointer">@i</a></li>
+                            @*<button class=" page" page="@i">@i</button>*@
+                        }
 
-        }
-    </div>
+                    }
+                    @*<li class="page-item">
+                        <a class="page-link" href="#">Next</a>
+                    </li>*@
+                </ul>
+            </nav>
 }
