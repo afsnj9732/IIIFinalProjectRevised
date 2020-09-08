@@ -113,7 +113,7 @@
                         </div>
                         <div class="form-group col-lg-2 col-md-2 col-sm-12 inner">
                             <label for="label">總讚數:</label>
-                            <select class="form-control" id="label" style="border: none;">
+                            <select class="form-control"  id="label" style="border: none;">
                                 <option value="全部" selected>&nbsp;全部</option>
                                 <option value="10">讚>10</option>
                                 <option value="30">讚>30</option>
@@ -136,7 +136,7 @@
                     <form class="form-inline table d-flex align-items-end" method="POST" action="~/Travel/TravelIndex">
                         <div class="form-group col-lg-3 col-md-3 col-sm-12 inner">
                             <label for="location_travel">分類:</label>
-                            <select class="form-control" id="location_travel">
+                            <select class="form-control" name="txtTravelCategory" id="location_travel">
                                 <option style="width:auto;margin:0 auto;" value="所有" selected>
                                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;所有
                                 </option>
@@ -151,7 +151,7 @@
                         </div>
                         <div class="form-group col-lg-2 col-md-2 col-sm-12 inner">
                             <label for="label">總讚數:</label>
-                            <select class="form-control" id="label" style="border: none;">
+                            <select class="form-control" name="txtTotalGood" id="label" style="border: none;">
                                 <option value="全部" selected>&nbsp;全部</option>
                                 <option value="10">讚>10</option>
                                 <option value="30">讚>30</option>
@@ -161,7 +161,7 @@
                         </div>
                         <div class="form-group col-lg-3 col-md-3 col-sm-12 inner">
                             <label for="keyword_travel">關鍵字:</label>
-                            <input type="text" name="txtKeyword" class="form-control" id="keyword_travel">
+                            <input type="text" name="txtTravelKeyword" class="form-control" id="keyword_travel">
                         </div>
                         <div class="form-group col-lg-3 col-md-3 col-sm-12 inner">
                             <button type="submit" class="btn btn-warning">搜尋</button>

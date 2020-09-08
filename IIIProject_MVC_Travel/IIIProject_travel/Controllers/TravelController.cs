@@ -35,6 +35,7 @@ namespace IIIProject_travel.Controllers
             List.FinalList = FinalList.Skip(4 * (List.NowPage - 1)).Take(4);
             return View(List);
         }
+
         // GET: Travel
         public ActionResult TravelIndex()
         {
@@ -42,37 +43,43 @@ namespace IIIProject_travel.Controllers
         }
 
         [HttpPost]
-        public ActionResult TravelIndex(tActivity p)
+        public ActionResult TravelIndex(int? id)
         {
-            if (Session["member"] != null && p.f活動標題 != null)  //揪團驗證，待改良
-            {
-                //判別登入會員其活動時段是否已占用((未完成
+            var HSCategory = Request.Form["txtTravelCategory"];
+            var HSGood = Request.Form["txtTotalGood"];
+            var HSKey = Request.Form["txtTravelKeyword"];
 
-                //添加占用時間((未完成
-
-
-                tMember Member = (tMember)Session["member"];
-                dbJoutaEntities db = new dbJoutaEntities();                         
-                p.f會員編號 = Member.f會員編號;
-                p.f活動類型 = "旅遊";
-                p.f活動參加的會員編號 += ","+Member.f會員編號;                
-                db.tActivity.Add(p);
-                int ID = db.tActivity.Where(t => t.f會員編號 == Member.f會員編號)
-                         .Select(t => t.f活動編號).FirstOrDefault();
-                tMember NowMember = db.tMember.Where(t => t.f會員編號 == Member.f會員編號).FirstOrDefault();
-                NowMember.f會員發起的活動編號 += "," + ID;
-                NowMember.f會員參加的活動編號 += "," + ID;
-                HttpPostedFileBase PicFile = Request.Files["PicFile"];
-                if (PicFile != null)
-                {
-                    var NewFileName = Guid.NewGuid() + Path.GetExtension(PicFile.FileName);
-                    var NewFilePath = Path.Combine(Server.MapPath("~/Content/images/"), NewFileName);
-                    PicFile.SaveAs(NewFilePath);
-                    p.f活動團圖 = NewFileName;
-                }
-                db.SaveChanges();
-            }
             return View();
+        }
+
+        public ActionResult Add(tActivity p)
+        {
+            //判別登入會員其活動時段是否已占用((未完成
+
+            //添加占用時間((未完成
+
+
+            tMember Member = (tMember)Session["member"];
+            dbJoutaEntities db = new dbJoutaEntities();
+            p.f會員編號 = Member.f會員編號;
+            p.f活動類型 = "旅遊";
+            p.f活動參加的會員編號 += "," + Member.f會員編號;
+            db.tActivity.Add(p);
+            int ID = db.tActivity.Where(t => t.f會員編號 == Member.f會員編號)
+                     .Select(t => t.f活動編號).FirstOrDefault();
+            tMember NowMember = db.tMember.Where(t => t.f會員編號 == Member.f會員編號).FirstOrDefault();
+            NowMember.f會員發起的活動編號 += "," + ID;
+            NowMember.f會員參加的活動編號 += "," + ID;
+            HttpPostedFileBase PicFile = Request.Files["PicFile"];
+            if (PicFile != null)
+            {
+                var NewFileName = Guid.NewGuid() + Path.GetExtension(PicFile.FileName);
+                var NewFilePath = Path.Combine(Server.MapPath("~/Content/images/"), NewFileName);
+                PicFile.SaveAs(NewFilePath);
+                p.f活動團圖 = NewFileName;
+            }
+            db.SaveChanges();            
+            return RedirectToAction("TravelIndex");
         }
 
         public ActionResult Delete(int? id)
