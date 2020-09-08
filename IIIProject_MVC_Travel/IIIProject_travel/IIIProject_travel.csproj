@@ -230,11 +230,13 @@
     <Content Include="Content\css\bootstrap.min.css" />
     <Content Include="Content\css\eat.css" />
     <Content Include="Content\css\login.css" />
+    <Content Include="Content\css\login2.css" />
     <Content Include="Content\css\main.css" />
     <Content Include="Content\css\match.css" />
     <Content Include="Content\css\otherprofile.css" />
     <Content Include="Content\css\profile.css" />
     <Content Include="Content\css\quickmatch.css" />
+    <Content Include="Content\css\resetpassword.css" />
     <Content Include="Content\css\style_n.css" />
     <Content Include="Content\css\travel.css" />
     <Content Include="Content\css\travel_main.css" />
