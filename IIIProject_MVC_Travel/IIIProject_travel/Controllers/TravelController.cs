@@ -43,13 +43,14 @@ namespace IIIProject_travel.Controllers
         }
 
         [HttpPost]
-        public ActionResult TravelIndex(int? id)
+        public ActionResult TravelIndex(int? id) //HomeSearch才用
         {
-            var HSCategory = Request.Form["txtTravelCategory"];
-            var HSGood = Request.Form["txtTotalGood"];
-            var HSKey = Request.Form["txtTravelKeyword"];
+            string HomeSearch = "";
+            HomeSearch += Request.Form["txtTravelKeyword"]; 
+            HomeSearch += ","+ Request.Form["txtTravelCategory"]; 
+            HomeSearch += ","+ Request.Form["txtTotalGood"];
 
-            return View();
+            return View((object)HomeSearch);
         }
 
         public ActionResult Add(tActivity p)
