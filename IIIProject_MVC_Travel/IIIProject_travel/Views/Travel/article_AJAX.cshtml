@@ -253,7 +253,7 @@
                         </div>
                         <!-- 互動文章 -->
                         <div class="modal-footer   mt-3  border-main-color">
-                            @if (NowMember.f會員編號 == item.f會員編號)
+                            @if (Session["member"]!=null && NowMember.f會員編號 == item.f會員編號)
                             {
                                 @*<button type="button" class="btn btn-secondary" data-dismiss="modal">*@
                                     @Html.ActionLink("刪除","Delete","Travel",new {id = item.f活動編號 },new { @class = "btn btn-secondary" }) 
