@@ -15,8 +15,7 @@ namespace IIIProject_travel.ViewModel
         [DataType(DataType.Password)]
         [Compare("newPassword", ErrorMessage = "密碼不一致")]
         public string newPassword_confirm { get; set; }
-
-        [Required]
+        
         public string resetCode { get; set; }
     }
 }

@@ -262,7 +262,6 @@ namespace IIIProject_travel.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public ActionResult ResetPassword(CReset c)
         {
             var message = "";
@@ -273,7 +272,7 @@ namespace IIIProject_travel.Controllers
                     var user = db.tMember.Where(a => a.f重置驗證碼 == c.resetCode).FirstOrDefault();
                     if (user != null)
                     {
-                        user.f會員密碼 = Crypto.Hash(c.newPassword);
+                        user.f會員密碼 = c.newPassword;
                         user.f重置驗證碼 = "";
                         db.Configuration.ValidateOnSaveEnabled = false;
                         db.SaveChanges();
@@ -296,14 +295,14 @@ namespace IIIProject_travel.Controllers
         }
 
         [NonAction]
-        public void sendResetPasswordMail(string Email, string activationCode)
+        public void sendResetPasswordMail(string Email, string resetCode)
         {
             //Jouta官方帳號
             string gmail_account = "Joutagroup445@gmail.com";
             string gmail_password = "admin123admin";
             string gmail_mail = "Joutagroup445@gmail.com";     //gmail信箱
 
-            var verifyUrl = "/Home/ForgetPassword/" + activationCode;
+            var verifyUrl = "/Home/ResetPassword/" + resetCode;
             var link = Request.Url.AbsoluteUri.Replace(Request.Url.PathAndQuery, verifyUrl);
 
             var fromEmail = new MailAddress(gmail_mail, "Jouta服務團隊");
