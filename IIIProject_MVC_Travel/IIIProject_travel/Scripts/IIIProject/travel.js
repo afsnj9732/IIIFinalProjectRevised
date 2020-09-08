@@ -83,6 +83,9 @@
                 if (data === "5") {
                     window.confirm("團主不可自行評分");
                 }
+                else if (data === "6") {
+                    window.confirm("活動時間相衝，同一時段請勿參加兩種活動");
+                }
                 else if (data === "3") {
                     window.confirm("活動結束後才可評分");
                 }
@@ -465,6 +468,14 @@
     });
 
     ////預設最新被選為排序
+    let HSCategory = $("#category").attr("HomeSearch");
+    //console.log($("#category [value=所有]").val());
+    $("#category [value=所有]").removeAttr("selected");
+    $("#category [value=" + HSCategory + "]").attr("selected","");
+
+    let HSLabel = $("#label").attr("HomeSearch");
+    $("#label [value=全部]").removeAttr("selected");
+    $("#label [value=" + HSLabel + "]").attr("selected", "");
     $("#travel_sort .sort li").eq(0).click();                               
 
 

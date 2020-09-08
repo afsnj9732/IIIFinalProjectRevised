@@ -17,7 +17,7 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Jekyll v3.8.5">
-    <title>Dashboard Template · Bootstrap 4 繁體中文手冊 [六角學院譯]</title>
+    <title>Jouta</title>
 
     <!-- Bootstrap core CSS -->
     <link href="~/Content/css/bootstrap.min.css" rel="stylesheet" />
@@ -34,7 +34,7 @@
 
 <body>
     <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
-        <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="@Url.Action("List","後台Home")">Company name</a>
+        <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="@Url.Action("Home","後台Home")">Jouta後台</a>
         <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
         <ul class="navbar-nav px-3">
             <li class="nav-item text-nowrap">
@@ -51,7 +51,7 @@
                 <div class="sidebar-sticky">
                     <ul class="nav flex-column">
                         <li class="nav-item">
-                            <a class="nav-link active" href="@Url.Action("List","後台Home")">
+                            <a class="nav-link active" href="@Url.Action("Home","後台Home")">
                                 <span data-feather="home"></span>
                                 首頁 <span class="sr-only">(current)</span>
                             </a>
@@ -84,6 +84,12 @@
                             <a class="nav-link" href="@Url.Action("List","聯絡我們")">
                                 <span data-feather="layers"></span>
                                 意見列表
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="@Url.Action("List","優惠發送")">
+                                <span data-feather="gift"></span>
+                                優惠發送
                             </a>
                         </li>
 
