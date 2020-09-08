@@ -181,27 +181,7 @@ namespace IIIProject_travel.Controllers
             return View(x);
 
         }
-        [HttpPost]
-        public ActionResult v查看(tActivity p)
-        {
-            dbJoutaEntities db = new dbJoutaEntities();
-            tActivity A = db.tActivity.FirstOrDefault(m => m.f活動編號 == p.f活動編號);
-            if (A != null)
-            {
-                A.f活動標題 = p.f活動標題;
-                A.f會員編號 = p.f會員編號;
-                A.f活動讚數 = p.f活動讚數;
-                A.f活動發起日期 = p.f活動發起日期;
-                A.f活動招募截止時間 = p.f活動招募截止時間;
-                A.f活動開始時間 = p.f活動開始時間;
-                A.f活動結束時間 = p.f活動結束時間;
-                A.f活動內容 = p.f活動內容;
-                db.SaveChanges();
 
-            }
-
-            return RedirectToAction("List");
-
-        }
+        
     }
 }

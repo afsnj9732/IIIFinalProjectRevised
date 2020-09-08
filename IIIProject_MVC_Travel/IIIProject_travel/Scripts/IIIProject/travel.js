@@ -139,19 +139,19 @@
         if ($("#NeedAT").val().length < 8) {
             e.preventDefault();
             $("#NeedATTo").removeAttr("hidden");
-        } else if ($("#ActivityStart").val() == "") {
+        } else if ($("#ActivityStart").val() === "") {
             e.preventDefault();
             $("#ActivityStartTo").removeAttr("hidden");
-        } else if ($("#ActivityEnd").val() == "") {
+        } else if ($("#ActivityEnd").val() === "") {
             e.preventDefault();
             $("#ActivityEndTo").removeAttr("hidden");
-        } else if ($("#ActivityFindEnd").val() == "") {
+        } else if ($("#ActivityFindEnd").val() === "") {
             e.preventDefault();
             $("#ActivityFindEndTo").removeAttr("hidden");
-        } else if ($("#NeedAC").val() == "") {
+        } else if ($("#NeedAC").val() === "") {
             e.preventDefault();
             $("#NeedACTo").removeAttr("hidden");
-        } else if ($("#NeedAP").val() == "") {
+        } else if ($("#NeedAP").val() === "") {
             e.preventDefault();
             $("#NeedAPTo").removeAttr("hidden");
         } else if ($("#NeedAL").val().length < 100) {
@@ -237,7 +237,10 @@
             type: "POST",
             data: { "target": target,"isAdd":true},
             success: function (data) {
-                if (data === "") {
+                if (data === "1") {
+                    window.confirm("已是團主不用入團");
+                }
+                else if (data === "") {
                     window.confirm("你已經入團了哦!");
                 } else {
                     $("[ActAdd=" + target + "]").html(data);
@@ -253,7 +256,10 @@
             type: "POST",
             data: { "target": target, "isAdd": false},
             success: function (data) {
-                if (data === "") {
+                if (data === "1") {
+                    window.confirm("團主不可退團");
+                }
+                else if (data === "") {
                     window.confirm("你沒有入團哦!");                    
                 } else {
                     $("[ActAdd=" + target + "]").html(data);
@@ -318,8 +324,8 @@
     $("body").on('click', ".leaveAct", leaveAct);
     $("body").on('click', ".leaveMsg", leaveMsg);
 
-    $("body").on('click', ".page", function () {
-        $(this).addClass("NowPage")
+    $("body").on('click', ".MyPage", function () {
+        $(this).addClass("NowPage");
         $(this).siblings().removeClass("NowPage");
         getAJAX();
     });

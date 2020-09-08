@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="joutaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="joutaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="sysdiagrams">
           <Key>
             <PropertyRef Name="diagram_id" />
@@ -66,10 +66,9 @@
           <Property Name="f會員興趣" Type="nvarchar(max)" />
           <Property Name="f會員已占用時間" Type="nvarchar(max)" />
           <Property Name="f會員自我介紹" Type="nvarchar(max)" />
-          <Property Name="f會員現在參加的活動編號" Type="nvarchar(max)" />
-          <Property Name="f會員過去參加的活動編號" Type="nvarchar(max)" />
+          <Property Name="f會員參加的活動編號" Type="nvarchar(max)" />
           <Property Name="f會員發起的活動編號" Type="nvarchar(max)" />
-          <Property Name="f驗證碼" Type="nvarchar" MaxLength="50" />
+          <Property Name="f驗證碼" Type="nvarchar" MaxLength="100" />
           <Property Name="isAdmin" Type="bit" Nullable="false" />
           <Property Name="f會員收藏的活動編號" Type="nvarchar(max)" />
           <Property Name="f會員評分人數" Type="int" />
@@ -97,7 +96,8 @@
             <End Role="tActivity" EntitySet="tActivity" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="joutaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -136,11 +136,11 @@
           <Property Name="f活動經度" Type="Double" />
           <Property Name="f活動緯度" Type="Double" />
           <Property Name="f活動所屬" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="tMember" Relationship="Self.FK_tActivity_tMember" FromRole="tActivity" ToRole="tMember" />
           <Property Name="f活動參加的會員編號" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="f活動留言" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="f活動留言時間" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="f活動評分過的會員編號" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tMember" Relationship="Self.FK_tActivity_tMember" FromRole="tActivity" ToRole="tMember" />
         </EntityType>
         <EntityType Name="tMember">
           <Key>
@@ -163,16 +163,15 @@
           <Property Name="f會員興趣" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="f會員已占用時間" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="f會員自我介紹" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="f會員現在參加的活動編號" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="f會員過去參加的活動編號" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="f會員參加的活動編號" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="f會員發起的活動編號" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="f驗證碼" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="f驗證碼" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="isAdmin" Type="Boolean" Nullable="false" />
           <Property Name="f會員收藏的活動編號" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="tActivity" Relationship="Self.FK_tActivity_tMember" FromRole="tMember" ToRole="tActivity" />
           <Property Name="f會員評分人數" Type="Int32" />
           <Property Name="f會員總分" Type="Int32" />
           <Property Name="f重置驗證碼" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tActivity" Relationship="Self.FK_tActivity_tMember" FromRole="tMember" ToRole="tActivity" />
         </EntityType>
         <Association Name="FK_tActivity_tMember">
           <End Role="tMember" Type="Self.tMember" Multiplicity="1" />
@@ -215,10 +214,6 @@
           <EntitySetMapping Name="tActivity">
             <EntityTypeMapping TypeName="joutaModel.tActivity">
               <MappingFragment StoreEntitySet="tActivity">
-                <ScalarProperty Name="f活動評分過的會員編號" ColumnName="f活動評分過的會員編號" />
-                <ScalarProperty Name="f活動留言時間" ColumnName="f活動留言時間" />
-                <ScalarProperty Name="f活動留言" ColumnName="f活動留言" />
-                <ScalarProperty Name="f活動參加的會員編號" ColumnName="f活動參加的會員編號" />
                 <ScalarProperty Name="f活動編號" ColumnName="f活動編號" />
                 <ScalarProperty Name="f會員編號" ColumnName="f會員編號" />
                 <ScalarProperty Name="f活動類型" ColumnName="f活動類型" />
@@ -240,15 +235,16 @@
                 <ScalarProperty Name="f活動經度" ColumnName="f活動經度" />
                 <ScalarProperty Name="f活動緯度" ColumnName="f活動緯度" />
                 <ScalarProperty Name="f活動所屬" ColumnName="f活動所屬" />
+                <ScalarProperty Name="f活動參加的會員編號" ColumnName="f活動參加的會員編號" />
+                <ScalarProperty Name="f活動留言" ColumnName="f活動留言" />
+                <ScalarProperty Name="f活動留言時間" ColumnName="f活動留言時間" />
+                <ScalarProperty Name="f活動評分過的會員編號" ColumnName="f活動評分過的會員編號" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tMember">
             <EntityTypeMapping TypeName="joutaModel.tMember">
               <MappingFragment StoreEntitySet="tMember">
-                <ScalarProperty Name="f重置驗證碼" ColumnName="f重置驗證碼" />
-                <ScalarProperty Name="f會員總分" ColumnName="f會員總分" />
-                <ScalarProperty Name="f會員評分人數" ColumnName="f會員評分人數" />
                 <ScalarProperty Name="f會員編號" ColumnName="f會員編號" />
                 <ScalarProperty Name="f會員帳號" ColumnName="f會員帳號" />
                 <ScalarProperty Name="f會員密碼" ColumnName="f會員密碼" />
@@ -266,12 +262,14 @@
                 <ScalarProperty Name="f會員興趣" ColumnName="f會員興趣" />
                 <ScalarProperty Name="f會員已占用時間" ColumnName="f會員已占用時間" />
                 <ScalarProperty Name="f會員自我介紹" ColumnName="f會員自我介紹" />
-                <ScalarProperty Name="f會員現在參加的活動編號" ColumnName="f會員現在參加的活動編號" />
-                <ScalarProperty Name="f會員過去參加的活動編號" ColumnName="f會員過去參加的活動編號" />
+                <ScalarProperty Name="f會員參加的活動編號" ColumnName="f會員參加的活動編號" />
                 <ScalarProperty Name="f會員發起的活動編號" ColumnName="f會員發起的活動編號" />
                 <ScalarProperty Name="f驗證碼" ColumnName="f驗證碼" />
                 <ScalarProperty Name="isAdmin" ColumnName="isAdmin" />
                 <ScalarProperty Name="f會員收藏的活動編號" ColumnName="f會員收藏的活動編號" />
+                <ScalarProperty Name="f會員評分人數" ColumnName="f會員評分人數" />
+                <ScalarProperty Name="f會員總分" ColumnName="f會員總分" />
+                <ScalarProperty Name="f重置驗證碼" ColumnName="f重置驗證碼" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
