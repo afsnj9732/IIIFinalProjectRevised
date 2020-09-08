@@ -1989,6 +1989,7 @@
     <Content Include="Content\css\slider.css" />
     <Content Include="Content\css\style.css" />
     <Content Include="Content\css\聯絡我們.css" />
+    <Content Include="Content\images\nullhead.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
