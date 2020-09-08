@@ -37,9 +37,10 @@ namespace IIIProject_travel.Controllers
         }
 
         // GET: Travel
-        public ActionResult TravelIndex()
+        public ActionResult TravelIndex(string msg)
         {
-            return View();
+            string HomeSearch = ",所有,全部,"+ msg;
+            return View((object)HomeSearch);
         }
 
         [HttpPost]
@@ -49,27 +50,48 @@ namespace IIIProject_travel.Controllers
             HomeSearch += Request.Form["txtTravelKeyword"]; 
             HomeSearch += ","+ Request.Form["txtTravelCategory"]; 
             HomeSearch += ","+ Request.Form["txtTotalGood"];
-
             return View((object)HomeSearch);
         }
 
         public ActionResult Add(tActivity p)
         {
-            //判別登入會員其活動時段是否已占用((未完成
-
-            //添加占用時間((未完成
-
-
             tMember Member = (tMember)Session["member"];
             dbJoutaEntities db = new dbJoutaEntities();
+
+            //判別登入會員其活動時段是否已占用
+            var NowMember = db.tMember.Where(t => t.f會員編號 == Member.f會員編號).FirstOrDefault();
+            if (!string.IsNullOrEmpty(NowMember.f會員已占用時間))
+            {
+                string[] usedTime = NowMember.f會員已占用時間.Split(',');                      
+                string[] used;
+                foreach (var item in usedTime)
+                {
+                    if (!string.IsNullOrEmpty(item))
+                    {
+                    used = item.Split('~');  //used[0] 已佔用的開始時間，used[1] 已佔用的結束時間
+                    if (string.Compare(p.f活動開始時間, used[1]) > 0 || string.Compare(used[0], p.f活動結束時間) > 0)
+                    {
+
+                    }
+                    else
+                    {
+                        return  RedirectToAction("TravelIndex","Travel",new { msg = "錯誤! 新增的活動與既有活動時間相衝" } );
+                    }
+                    }
+
+                }
+            }
+            //添加占用時間
+            NowMember.f會員已占用時間 += "," + p.f活動開始時間 + "~" + p.f活動結束時間;
+
             p.f會員編號 = Member.f會員編號;
             p.f活動類型 = "旅遊";
-            p.f活動參加的會員編號 += "," + Member.f會員編號;
+            p.f活動參加的會員編號 = "," + Member.f會員編號;
             db.tActivity.Add(p);
+            db.SaveChanges();
             int ID = db.tActivity.Where(t => t.f會員編號 == Member.f會員編號)
-                     .Select(t => t.f活動編號).FirstOrDefault();
-            tMember NowMember = db.tMember.Where(t => t.f會員編號 == Member.f會員編號).FirstOrDefault();
-            NowMember.f會員發起的活動編號 += "," + ID;
+                .OrderByDescending(t=>t.f活動發起日期).Select(t => t.f活動編號).FirstOrDefault();
+            NowMember.f會員發起的活動編號 += "," + ID;   
             NowMember.f會員參加的活動編號 += "," + ID;
             HttpPostedFileBase PicFile = Request.Files["PicFile"];
             if (PicFile != null)
@@ -99,12 +121,16 @@ namespace IIIProject_travel.Controllers
                 {
                     if (!string.IsNullOrEmpty(item))
                     {
-                        //移除占用時間((未完成
-
                         //移除活動編號
                         tMember Delete = db.tMember.Where(t => t.f會員編號.ToString() == item).FirstOrDefault();
                         Delete.f會員參加的活動編號 =
                             string.Join(",", Delete.f會員參加的活動編號.Split(',').Where(t => t != id.ToString()));
+
+                        //移除占用時間
+                        string[] usedTime = Delete.f會員已占用時間.Split(',');
+                        Delete.f會員已占用時間 =
+                            string.Join(",", usedTime.Where(t => t != target.f活動開始時間 + "~" + target.f活動結束時間));
+
                     }
                 }
             }
@@ -144,13 +170,32 @@ namespace IIIProject_travel.Controllers
 
             if (isAdd == true)//點選入團
             {
-                //判別活動時段是否已占用((未完成
+                //判別活動時段是否已占用
+                if (!string.IsNullOrEmpty(NowMember.f會員已占用時間))
+                {                
+                    string[] usedTime = NowMember.f會員已占用時間.Split(',');
+                    string[] used;
+                    foreach (var item in usedTime)
+                    {
+                        if (!string.IsNullOrEmpty(item))
+                        {
+                        used = item.Split('~');  //used[0] 已佔用的開始時間，used[1] 已佔用的結束時間
+                        if (string.Compare(ActList.f活動開始時間 , used[1]) > 0 || string.Compare(used[0], ActList.f活動結束時間) > 0)
+                        {
 
+                        }
+                        else
+                        {
+                            return "6";
+                        }
+                        }
 
+                    }
+                }
                 if (index == -1)//活動時段未占用且登入中的會員不存在名單則加入
                 {
-                    //添加占用時間((未完成
-                    
+                    //添加占用時間
+                    NowMember.f會員已占用時間 += "," + ActList.f活動開始時間 + "~" + ActList.f活動結束時間;
 
 
                     //增加會員資料參加的會員編號
@@ -167,8 +212,10 @@ namespace IIIProject_travel.Controllers
             {
                 if (index != -1)//登入中的會員存在則讓他退出並更動占用時間
                 {
-                    //移除占用時間((未完成
-
+                    //移除占用時間
+                    string[] usedTime = NowMember.f會員已占用時間.Split(',');
+                    NowMember.f會員已占用時間 =
+                        string.Join(",", usedTime.Where(t => t != ActList.f活動開始時間 + "~" + ActList.f活動結束時間));
 
 
 

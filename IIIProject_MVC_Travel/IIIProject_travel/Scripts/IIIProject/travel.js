@@ -83,6 +83,9 @@
                 if (data === "5") {
                     window.confirm("團主不可自行評分");
                 }
+                else if (data === "6") {
+                    window.confirm("活動時間相衝，同一時段請勿參加兩種活動");
+                }
                 else if (data === "3") {
                     window.confirm("活動結束後才可評分");
                 }

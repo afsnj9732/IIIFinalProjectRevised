@@ -4,7 +4,7 @@
     var x = (tMember)Session["member"];
     //tMember x = (new dbJoutaEntities()).tMember.FirstOrDefault(y => y.f會員編號 == 4);
     //Session["member"] = x;
-    string[] HomeSearch = { "", "所有", "全部" };
+    string[] HomeSearch = { "", "所有", "全部","" };
     if (!string.IsNullOrEmpty(Model))
     {
         HomeSearch = Model.Split(',');
@@ -338,19 +338,23 @@
         <script src="~/Scripts/IIIProject/navbar.js"></script>
         <script src="~/Scripts/IIIProject/travel.js"></script>
         <script>
-                                    //function a123(){
-                                    //    var vm = new Vue({
-                                    //        el: ".likeIt",
-                                    //        data: {
-                                    //            IflikeIt: false
-                                    //        },
-                                    //        methods: {
-                                    //            likeItClick: function () {
-                                    //                this.IflikeIt = !this.IflikeIt;
-                                    //            }
-                                    //        }
-                                    //    })
-                                    //}
+        @if (!string.IsNullOrEmpty(HomeSearch[3]))
+        {            
+            @:window.confirm("@HomeSearch[3]");
+        }
+        //function a123(){
+        //    var vm = new Vue({
+        //        el: ".likeIt",
+        //        data: {
+        //            IflikeIt: false
+        //        },
+        //        methods: {
+        //            likeItClick: function () {
+        //                this.IflikeIt = !this.IflikeIt;
+        //            }
+        //        }
+        //    })
+        //}
 
         </script>
     </body>
