@@ -232,6 +232,7 @@
     <Content Include="Content\css\login.css" />
     <Content Include="Content\css\main.css" />
     <Content Include="Content\css\match.css" />
+    <Content Include="Content\css\otherprofile.css" />
     <Content Include="Content\css\profile.css" />
     <Content Include="Content\css\quickmatch.css" />
     <Content Include="Content\css\style_n.css" />

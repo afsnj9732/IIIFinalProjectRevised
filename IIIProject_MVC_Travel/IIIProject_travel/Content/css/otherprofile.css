@@ -13,13 +13,14 @@
     width: 200px;
     display: flex;
 }
-.activityadjust {
-    display: flex;
+.activityadjust{
+    display:flex;
 }
 .activityphoto {
     width: 300px;
     height: 200px;
 }
+
 .col-md-4 {
     margin: auto 0;
 }
@@ -348,18 +349,6 @@ input[type="text"]:focus{
             height: 15px;
             width: 15px;
             font-size: .7rem;
-        }
-        #limit {
-            display: flex;
-            width: 500px;
-            justify-content: space-between;
-        }
-        #isadmin {
-            width: 200px;
-            display: flex;
-        }
-        .col-md-4 {
-            margin: auto 0;
         }
     }
 }
