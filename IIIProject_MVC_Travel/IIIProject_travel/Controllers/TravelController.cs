@@ -198,14 +198,6 @@ namespace IIIProject_travel.Controllers
             var Member = db.tMember.Where(t => t.f會員編號 == NowMember.f會員編號).FirstOrDefault()
                 .f會員發起的活動編號.Split(',');
             int pos = Array.IndexOf(Member, target.ToString());
-            //int yyyy = Convert.ToInt32(theActivity.FirstOrDefault().f活動結束時間.Substring(0 , 4));
-            //int MM = Convert.ToInt32(theActivity.FirstOrDefault().f活動結束時間.Substring(5, 2));
-            //int dd = Convert.ToInt32(theActivity.FirstOrDefault().f活動結束時間.Substring(8, 2));
-            //var TimeNow = DateTime.Now.ToString("yyyy,MM,dd");
-            //int Nyyyy = Convert.ToInt32(TimeNow.Substring(0, 4));
-            //int NMM = Convert.ToInt32(TimeNow.Substring(5, 2));
-            //int Ndd = Convert.ToInt32(TimeNow.Substring(8, 2));
-            //int result = DateTime.Compare((new DateTime(yyyy,MM,dd)), (new DateTime(Nyyyy,NMM,Ndd)));
             if (pos != -1)//團主不可自行評分
             {
                 return "5";
@@ -224,7 +216,8 @@ namespace IIIProject_travel.Controllers
             }
 
             if (!string.IsNullOrEmpty(theActivity.Select(a => a.f活動評分過的會員編號).FirstOrDefault()))
-            {   //若有曾經評分過的會員編號
+            {  
+                //若有曾經評分過的會員編號
                 isExist = theActivity.Select(a => a.f活動評分過的會員編號).FirstOrDefault().Split(',');
                 pos = Array.IndexOf(isExist, NowMember.f會員編號.ToString());//再找現在登入會員有沒有評分過
                 if (pos != -1) 
@@ -352,8 +345,6 @@ namespace IIIProject_travel.Controllers
             var NowMember = (tMember)Session["member"];
             dbJoutaEntities db = new dbJoutaEntities();
             var ActList = db.tActivity.Where(n => n.f活動編號 == target).FirstOrDefault();
-            //string[] MsgsList = ActList.f活動留言.Split(',');
-            //index = Array.FindIndex(MsgsList,a=>a.StartsWith(NowMember.f會員名稱));  
             ActList.f活動留言 += "_^$"+NowMember.f會員名稱 + ":" + sentMsg ;
             ActList.f活動留言時間 += "," + DateTime.Now.ToString("MM/dd HH:mm:ss") + "_^$" + NowMember.f會員編號;
             db.SaveChanges();
