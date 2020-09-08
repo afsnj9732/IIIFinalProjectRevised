@@ -212,7 +212,6 @@
       <DependentUpon>JoutaEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\CBlog.cs" />
-    <Compile Include="ViewModel\CChangePassword.cs" />
     <Compile Include="ViewModel\CData.cs" />
     <Compile Include="ViewModel\CLogin.cs" />
     <Compile Include="ViewModel\CMember.cs" />
