@@ -88,12 +88,15 @@ namespace IIIProject_travel.Controllers
                 string[] DeleteList = target.f活動參加的會員編號.Split(',');
                 foreach (var item in DeleteList)
                 {
-                    //移除占用時間((未完成
+                    if (!string.IsNullOrEmpty(item))
+                    {
+                        //移除占用時間((未完成
 
-                    //移除活動編號
-                    var Delete = db.tMember.Where(t => t.f會員編號.ToString() == item).FirstOrDefault();
-                    Delete.f會員參加的活動編號 =
-                        string.Join(",", Delete.f會員參加的活動編號.Split(',').Where(t => t != id.ToString()));
+                        //移除活動編號
+                        tMember Delete = db.tMember.Where(t => t.f會員編號.ToString() == item).FirstOrDefault();
+                        Delete.f會員參加的活動編號 =
+                            string.Join(",", Delete.f會員參加的活動編號.Split(',').Where(t => t != id.ToString()));
+                    }
                 }
             }
             db.tActivity.Remove(target);
