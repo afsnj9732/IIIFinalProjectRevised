@@ -12,7 +12,7 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Jekyll v3.8.5">
-    <title>Dashboard Template · Bootstrap 4 繁體中文手冊 [六角學院譯]</title>
+    <title>Jouta</title>
 
     <!-- Bootstrap core CSS -->
     <link href="~/Content/css/bootstrap.min.css" rel="stylesheet" />
@@ -29,7 +29,7 @@
 
 <body>
     <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
-        <a class="navbar-brand col-sm-3 col-md-2 mr-0">Jouta後台</a>
+        <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="@Url.Action("Home","後台Home")">Jouta後台</a>
         <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
         <ul class="navbar-nav px-3">
             <li class="nav-item text-nowrap">
@@ -103,15 +103,12 @@
                         <thead>
                             <tr>
                                 <td>筆數</td>
-                                <td>文章編號</td>
-                                <td>會員編號</td>
-                                <td>標題</td>
-                                <td>點讚</td>
-                                <td>地點</td>
-                                <td>分類</td>
-                                <td>結束日期</td>
-                                <td>發文日期</td>
-                                <td>發文內容</td>
+                                <td>@Html.ActionLink("編號", "List", new { sortOrder = ViewBag.編號排序, currentFilter = ViewBag.當前搜尋 })</td>
+                                <td>@Html.ActionLink("會員", "List", new { sortOrder = ViewBag.會員排序, currentFilter = ViewBag.當前搜尋 })</td>
+                                <td>@Html.ActionLink("標題", "List", new { sortOrder = ViewBag.標題排序, currentFilter = ViewBag.當前搜尋 })</td>
+                                <td>@Html.ActionLink("地區", "List", new { sortOrder = ViewBag.地區排序, currentFilter = ViewBag.當前搜尋 })</td>
+                                <td>@Html.ActionLink("建立時間", "List", new { sortOrder = ViewBag.建立時間排序, currentFilter = ViewBag.當前搜尋 })</td>
+                                <td>@Html.ActionLink("內容", "List", new { sortOrder = ViewBag.內容排序, currentFilter = ViewBag.當前搜尋 })</td>
                                 <td>按鈕</td>
                                 <td>按鈕</td>
                             </tr>
@@ -121,28 +118,26 @@
 
                             @{
                                 int c筆數 = 0;
-                                foreach (tActivity t in Model)
+                                foreach (var item in Model)
                                 {
                                     c筆數++;
-                                    <tr>
-                                        <td>@c筆數.ToString()</td>
-                                        <td>@t.f活動編號</td>
-                                        <td>@t.f會員編號</td>
-                                        <td>@t.f活動標題</td>
-                                        <td>@t.f活動讚數</td>
-                                        <td>@t.f活動地點</td>
-                                        <td>@t.f活動分類</td>
-                                        <td>@t.f活動結束時間</td>
-                                        <td>@t.f活動發起日期</td>
-                                        <td>@t.f活動內容</td>
-                                        <td>
-                                            @Html.ActionLink("查看", "v查看", "後台文章", new { id = t.f活動編號 }, new { Class = "btn btn-info" })
-                                        </td>
-                                        <td>
-                                            @Html.ActionLink("刪除", "d刪除", "後台文章", new { id = t.f活動編號 },
-                                            new { OnClick = "return confirm('確定要刪除嗎?')", Class = "btn btn-danger" })
-                                        </td>
-                                    </tr>
+                            <tr>
+                                <td>@c筆數.ToString()</td>
+                                <td>@Html.DisplayFor(modelItem => item.f活動編號)</td>
+                                <td>@Html.DisplayFor(modelItem => item.f會員編號)</td>
+                                <td>@Html.DisplayFor(modelItem => item.f活動標題)</td>
+                                <td>@Html.DisplayFor(modelItem => item.f活動地區)</td>
+                                <td>@Html.DisplayFor(modelItem => item.f活動發起日期)</td>
+                                <td>@Html.DisplayFor(modelItem => item.f活動內容)</td>
+
+                                <td>
+                                    @Html.ActionLink("查看", "v查看", "後台文章", new { id = item.f活動編號 }, new { Class = "btn btn-info" })
+                                </td>
+                                <td>
+                                    @Html.ActionLink("刪除", "d刪除", "後台文章", new { id = item.f活動編號 },
+                                    new { OnClick = "return confirm('確定要刪除嗎?')", Class = "btn btn-danger" })
+                                </td>
+                            </tr>
                                 }
                             }
 
