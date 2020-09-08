@@ -9,9 +9,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>信箱驗證 | Jouta </title>
-    <link href="~/Content/css/bootstrap.min.css" rel="stylesheet" />]
+    <link href="~/Content/css/bootstrap.min.css" rel="stylesheet" />
     <link href="~/Content/css/style.css" rel="stylesheet" />
-
+    <link href="~/Content/css/resetpassword.css" rel="stylesheet" />
 </head>
 
 <body>
@@ -50,25 +50,48 @@
             </div>
         </nav>
     </div>
-    <div class="container">
-        <div class="row">
-            <div class="page-header">
-                <h2>信箱驗證</h2>
-            </div>
 
-            <div class="alert alert-info"
-                 @ViewData["emailValidation"]
+
+    <div class="realoutercontainer">
+        <div class="outercontainer">
+            <div class="outercontainer2">
+                <div class="outercontainer3">
+                    <div class="outercontainer4">
+                        <h1>信箱驗證</h1>
+                        <div class="alert alert-info">
+                             @ViewData["emailValidation"]
+                        </div>
+                        <div class="d-flex align-content-center" style="justify-content:space-evenly;">
+                            <a class="btn btn-primary" href="~/Login/LoginIndex">登入去</a>
+                            <a class="btn btn-primary" href="~/Home/Register">再註冊</a>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <br />
-            <div class="d-flex justify-content-between align-content-center">
-                <a class="btn btn-primary" href="~/Login/LoginIndex">登入去</a>
-                <a class="btn btn-primary" href="~/Home/Register">再註冊</a>
+        </div>
+
+        <div class="common-rectangleGrid original">
+            <!-- Background -->
+            <div class="backgroundContainer">
+                <div class="grid">
+                    <div class="background"></div>
+                </div>
             </div>
-            
-            @*@Html.ActionLink("登入去", "LoginIndex", "Login",new { @class="btn btn-primary"})
-            @Html.ActionLink("再註冊", "Register","Home", new { @class = "btn btn-primary" })*@
+            <!-- rectangles -->
+            <div class="rectangleContainer">
+                <div class="grid">
+                    <div class="rectangle"></div>
+                    <div class="rectangle"></div>
+                    <div class="rectangle"></div>
+                    <div class="rectangle"></div>
+                    <div class="rectangle"></div>
+                    <div class="rectangle"></div>
+                    <div class="rectangle"></div>
+                </div>
+            </div>
         </div>
     </div>
+
 
 
     <!-- footer -->
