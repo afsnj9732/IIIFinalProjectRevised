@@ -46,9 +46,11 @@ namespace IIIProject_travel.Controllers
             HttpClient client = new HttpClient();
             client.MaxResponseContentBufferSize = Int32.MaxValue;
             var response = await client.GetStringAsync(targetURI);
+            JavaScriptSerializer serializer = new JavaScriptSerializer();
+            Topendata_T json = serializer.Deserialize<Topendata_T>(response);
+            Topendata[] collection = json.XML_Head.Infos.Info;
 
-           var collection = JsonConvert.DeserializeObject<IEnumerable<Topendata>>(response);
-
+            //var collection = JsonConvert.DeserializeObject<IEnumerable<Topendata>>(response);
             CacheItemPolicy policy = new CacheItemPolicy();
             policy.AbsoluteExpiration = DateTime.Now.AddMinutes(30);
 
