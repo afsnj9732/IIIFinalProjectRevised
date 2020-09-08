@@ -170,9 +170,15 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-warning joinAct" joinAct="@item.f活動編號">我要入團</button>
-                        <button type="button" class="btn btn-secondary leaveAct" leaveAct="@item.f活動編號">我要退團</button>
-                        @*<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>*@
+                        @if (string.Compare(item.f活動結束時間, DateTime.Now.ToString("yyyy-MM-dd")) > 0)
+                        {
+            
+                        }
+                        else
+                        {
+                            <button type="button" class="btn btn-warning joinAct" joinAct="@item.f活動編號">我要入團</button>
+                            <button type="button" class="btn btn-secondary leaveAct" leaveAct="@item.f活動編號">我要退團</button>
+                        }
                     </div>
                 </div>
             </div>

@@ -50,6 +50,7 @@ namespace IIIProject_travel.Controllers
 
                 //添加占用時間((未完成
 
+
                 tMember Member = (tMember)Session["member"];
                 dbJoutaEntities db = new dbJoutaEntities();                         
                 p.f會員編號 = Member.f會員編號;
