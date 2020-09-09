@@ -12,9 +12,6 @@ namespace IIIProject_travel.Controllers
         // GET: 優惠發送
         public ActionResult List()
         {
-            //var x = from t in (new dbJoutaEntities()).tActivity
-            //        select t;
-            //return View(x);
             return View();
         }
 
