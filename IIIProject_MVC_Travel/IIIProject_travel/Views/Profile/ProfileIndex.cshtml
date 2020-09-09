@@ -1,17 +1,28 @@
 ﻿@model IIIProject_travel.ViewModel.CMember
+
 @{
     Layout = null;
     var date = ViewBag.Date;
     var x = (tMember)Session["member"];
     dbJoutaEntities db = new dbJoutaEntities();
-    var post = from t in db.tActivity
-               where t.f活動類型 == "文章" && t.f會員編號 == x.f會員編號
-               select t;
+
+    var  post = from t in db.tActivity
+                where t.f活動類型 == "文章" && t.f會員編號 == x.f會員編號
+                select t;
     //var join = from t
+
     var attention = from t in db.tActivity.AsEnumerable()
-                    where x.f會員收藏的活動編號.Split(',').Contains(t.f活動編號.ToString())
-                    select t;
-}
+                    where !string.IsNullOrEmpty(x.f會員收藏的活動編號) && x.f會員收藏的活動編號.Split(',').Contains(t.f活動編號.ToString())
+                        select t;
+
+    var part = from t in db.tActivity.AsEnumerable()
+               where !string.IsNullOrEmpty(t.f活動開始時間) && DateTime.Parse(t.f活動開始時間) > DateTime.Now && x.f會員參加的活動編號.Split(',').Contains(t.f活動編號.ToString())
+               select t;
+
+    }
+
+
+
 
 
 <!DOCTYPE html>
@@ -165,26 +176,27 @@
                         <h1 id="title">個人檔案</h1>
                         @Html.BeginForm()
                         {
-                    <form method="post" action="~/Profile/ProfileIndex">
-                        <button type="button" class="btn btn-warning">編輯資料</button>
-                        <h6 class="profiletag">會員編號</h6>
-                        <input type="text" size="50" placeholder="@x.f會員編號" name="account" disabled>
-                        <h6 class="profiletag">帳號</h6>
-                        <input type="text" size="50" placeholder="@x.f會員帳號" name="passward" disabled>
-                        <h6 class="profiletag">密碼</h6>
-                        <input type="text" size="50" placeholder="@x.f會員密碼" name="nickname" disabled>
-                        <h6 class="profiletag" id="nickname">會員名稱</h6>
-                        <input type="text" size="50" name="age" placeholder="@x.f會員名稱">
-                        <h6 class="profiletag">暱稱</h6>
-                        <input type="text" size="50" name="birth" placeholder="@x.f會員暱稱">
-                        <h6 class="profiletag">生日</h6>
-                        <input type="text" size="50" name="interest" placeholder="@x.f會員生日">
-                        <h6 class="profiletag">興趣</h6>
-                        <input type="text" size="50" name="location" placeholder="@x.f會員興趣">
-                        <h6 class="profiletag">自我介紹</h6>
-                        <textarea id="intro" rows="5" cols="50" name="introduction">@x.f會員自我介紹</textarea><br>
-                        <button type="submit" class="btn btn-warning">繳交</button>
-                    </form>
+                            <form method="post" action="~/Profile/ProfileIndex">
+                                <button type="button" class="btn btn-warning">編輯資料</button>
+                                <h6 class="profiletag">信箱</h6>
+                                <input type="email" size="50" placeholder="@x.f會員電子郵件" name="txtEmail" disabled>
+
+                                <h6 class="profiletag">密碼</h6>
+                                <input type="password" min="6" max="10" placeholder="@x.f會員密碼" name="txtPassword" disabled>
+
+                                <h6 class="profiletag">會員名稱</h6>
+                                <input type="text" name="txtNickName" placeholder="@x.f會員名稱">
+
+                                <h6 class="profiletag">生日</h6>
+                                <input type="datetime" size="20" name="txtBirth" placeholder="@x.f會員生日">
+
+                                <h6 class="profiletag">興趣</h6>
+                                <input type="text" size="50" name="txtHobby" placeholder="@x.f會員興趣">
+
+                                <h6 class="profiletag">自我介紹</h6>
+                                <textarea id="intro" rows="5" cols="50" name="txtIntro">@x.f會員自我介紹</textarea><br>
+                                <button type="submit" class="btn btn-warning">繳交</button>
+                            </form>
                         }
                     </div>
                 </div>
@@ -210,25 +222,78 @@
                 </div>
                 <div class="profile-event tab_info" id="myActivity">
                     <h1>參加活動</h1>
-                    @foreach (tActivity t in Model.tActivities)
+                    @foreach (tActivity p in part)
                     {
                         <div class="card mb-3" style="max-width: 800px;">
                             <div class="row no-gutters">
                                 <div class="col-md-8 activityadjust">
                                     <div class="card-body" style="text-align:center">
-                                        <h5 class="card-title"> @t.f活動標題</h5>
-                                        <p class="card-text">@t.f活動內容</p>
-                                        揪團者 :  <span style="cursor: pointer;">@x.f會員名稱</span>
+                                        <h5 class="card-title"> @p.f活動標題</h5>
+                                        <p class="card-text">@p.f活動內容</p>
+                                        揪團者 :  <span style="cursor: pointer;">@p.tMember.f會員名稱</span>
                                         <p class="card-text">
-                                            <small class="text-muted">@t.f活動開始時間</small>
+                                            <small class="text-muted">@p.f活動開始時間</small>
                                         </p>
-                                        <a class="nav-item">@Html.ActionLink("Read More", "TravelIndex", "Travel", new {id=t.f活動編號 }, new { @class = "btn btnContent  btn-warning" })</a>
+                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg">來去看看</button>
                                     </div>
-                                    <div class="col-md-4">  <img src="~/Content/images/@t.f活動團圖" class="card-img activityphoto" alt="@t.f活動編號"></div>
-                                </div>       
+                                    <div class="col-md-4">  <img src="~/Content/images/@p.f活動團圖" class="card-img activityphoto" alt="@p.f活動編號"></div>
+                                </div>
                             </div>
                         </div>
                     }
+                    <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <div class=" model-header">
+                                    <h5 class="card-title"></h5>
+                                    <p class="card-text"></p>
+                                    揪團者 :  <span style="cursor: pointer;">@x.f會員名稱</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    @*<div class="modal fade combine_score" id="@combine_score" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog change-max-width-1420" role="document" style="padding-right: 17px !important;">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">@item.f活動標題 評分區</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div AddScore="@item.f活動編號" class="Score">
+                                        @for (int i = 1; i <= 5; i++)
+                                        {
+                                            <img ScoreID="@i" isclick="false" ScoreTarget="@item.f活動編號" src="~/Content/images/Star.png" />
+                                        }
+                                    </div>
+                                </div>
+                                <div class="modal-footer justify-content-between">
+                                    <span>
+                                        <button type="button" class="btn btn-warning leaveScore" leaveScore="@item.f活動編號">送出</button>
+                                        <button type="button" class="btn btn-secondary resetScore" resetScore="@item.f活動編號">重設</button>
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>*@
+
+
+
+
+
+
+
+
+
+
+
+
                 </div>
                 <div class="profile-follow tab_info" id="myFollow">
                     <h1>關注活動</h1>
@@ -243,10 +308,11 @@
                                     <div class="card-body">
                                         <h5 class="card-title"> @t.f活動標題</h5>
                                         <p class="card-text">@t.f活動內容</p>
+                                        <p class="card-text">揪團者: @t.tMember.f會員名稱</p>
                                         <p class="card-text">
                                             <small class="text-muted">@t.f活動結束時間</small>
                                         </p>
-                                        <a class="nav-item">@Html.ActionLink("Read More", "TravelIndex", "Travel", new {id=t.f活動編號 }, new { @class = "btn btnContent  btn-warning" })</a>
+                                        <a class="nav-item">@Html.ActionLink("Read More", "TravelIndex", "Travel", new { id = t.f活動編號 }, new { @class = "btn btnContent  btn-warning" })</a>
                                     </div>
                                 </div>
                             </div>
