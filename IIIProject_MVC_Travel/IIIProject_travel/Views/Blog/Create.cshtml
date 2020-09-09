@@ -1,6 +1,7 @@
 ﻿
 @{
     Layout = null;
+    Session["member"] = (new dbJoutaEntities()).tMember.Where(t => t.f會員編號 == 3).FirstOrDefault();
     var x = (tMember)Session["member"];
 }
 

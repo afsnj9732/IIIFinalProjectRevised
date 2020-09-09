@@ -10,7 +10,7 @@ namespace IIIProject_travel.Controllers
     public class 後台飯局Controller : Controller
     {
         // GET: 後台飯局
-        public ActionResult List(string sortOrder, string txt關鍵字, string currentFilter, int page = 1)
+        public ActionResult List(string date起日, string date迄日, string sortOrder, string txt關鍵字, string currentFilter, int page = 1)
         {
 
             //搜尋
@@ -18,6 +18,7 @@ namespace IIIProject_travel.Controllers
             var 飯局 = from m in (new dbJoutaEntities()).tActivity
                      where m.f活動類型 == "飯局"
                      select m;
+
 
             if (txt關鍵字 != null)
             {
@@ -28,13 +29,24 @@ namespace IIIProject_travel.Controllers
                 txt關鍵字 = currentFilter;
             }
 
+
             if (string.IsNullOrEmpty(txt關鍵字))
+            {
                 飯局 = from m in (new dbJoutaEntities()).tActivity
                      where m.f活動類型 == "飯局"
                      select m;
+                if (!string.IsNullOrEmpty(date起日) && !string.IsNullOrEmpty(date迄日))
+                飯局 = from p in 飯局
+                     where (string.Compare(p.f活動發起日期, date起日) >= 0) && (string.Compare(p.f活動發起日期, date迄日) <= 0)
+                     select p;
+            }
+
             else
+            {
+
                 飯局 = from m in 飯局
                      where m.f活動類型.Contains("飯局") &&
+                           (string.Compare(m.f活動發起日期, date起日) >= 0) && (string.Compare(m.f活動發起日期, date迄日) <= 0) &&
                            m.f活動編號.ToString().Contains(txt關鍵字) || m.f活動標題.Contains(txt關鍵字) ||
                            m.f活動標籤.Contains(txt關鍵字) || m.f活動內容.Contains(txt關鍵字) ||
                            m.f活動團圖.Contains(txt關鍵字) || m.f活動地區.Contains(txt關鍵字) ||
@@ -44,6 +56,8 @@ namespace IIIProject_travel.Controllers
                            m.f活動發起日期.Contains(txt關鍵字) || m.f活動結束時間.Contains(txt關鍵字) ||
                            m.f活動開始時間.Contains(txt關鍵字)
                      select m;
+
+            }
 
 
             //排序 降冪和升冪
@@ -182,6 +196,6 @@ namespace IIIProject_travel.Controllers
 
         }
 
-        
+
     }
 }
