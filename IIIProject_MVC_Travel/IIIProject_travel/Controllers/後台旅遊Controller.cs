@@ -10,7 +10,7 @@ namespace IIIProject_travel.Controllers
     public class 後台旅遊Controller : Controller
     {
         // GET: 後台旅遊
-        public ActionResult List(string sortOrder, string txt關鍵字, string currentFilter, int page = 1)
+        public ActionResult List(string date起日,string date迄日, string sortOrder, string txt關鍵字, string currentFilter, int page = 1)
         {
 
             //搜尋
@@ -29,12 +29,21 @@ namespace IIIProject_travel.Controllers
             }
 
             if (string.IsNullOrEmpty(txt關鍵字))
+            {
                 旅遊 = from m in (new dbJoutaEntities()).tActivity
                      where m.f活動類型 == "旅遊"
                      select m;
+                if (!string.IsNullOrEmpty(date起日) && !string.IsNullOrEmpty(date迄日))
+                    旅遊 = from p in 旅遊
+                         where (string.Compare(p.f活動發起日期, date起日) >= 0) && (string.Compare(p.f活動發起日期, date迄日) <= 0)
+                         select p;
+            }
             else
+            {
+
                 旅遊 = from m in 旅遊
                      where m.f活動類型.Contains("旅遊") &&
+                           (string.Compare(m.f活動發起日期, date起日) >= 0) && (string.Compare(m.f活動發起日期, date迄日) <= 0)&&
                            m.f活動編號.ToString().Contains(txt關鍵字) || m.f活動標題.Contains(txt關鍵字) ||
                            m.f活動標籤.Contains(txt關鍵字) || m.f活動內容.Contains(txt關鍵字) ||
                            m.f活動團圖.Contains(txt關鍵字) || m.f活動地區.Contains(txt關鍵字) ||
@@ -45,6 +54,7 @@ namespace IIIProject_travel.Controllers
                            m.f活動開始時間.Contains(txt關鍵字)
                      select m;
 
+            }
 
             //排序 降冪和升冪
             ViewBag.當前搜尋 = txt關鍵字;
