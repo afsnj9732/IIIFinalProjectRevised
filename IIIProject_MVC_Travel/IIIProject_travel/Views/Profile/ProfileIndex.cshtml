@@ -9,11 +9,12 @@
     var  post = from t in db.tActivity
                 where t.f活動類型 == "文章" && t.f會員編號 == x.f會員編號
                 select t;
-    //var join = from t
+
 
     var attention = from t in db.tActivity.AsEnumerable()
-                    where !string.IsNullOrEmpty(x.f會員收藏的活動編號) && x.f會員收藏的活動編號.Split(',').Contains(t.f活動編號.ToString())
-                        select t;
+                    where x.f會員收藏的活動編號.Split(',').Contains(t.f活動編號.ToString())&& x.f會員收藏的活動編號.Any()
+                    select t;
+}
 
     var part = from t in db.tActivity.AsEnumerable()
                where !string.IsNullOrEmpty(t.f活動開始時間) && DateTime.Parse(t.f活動開始時間) > DateTime.Now && x.f會員參加的活動編號.Split(',').Contains(t.f活動編號.ToString())
