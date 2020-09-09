@@ -1,7 +1,9 @@
-﻿@{
+﻿﻿@using PagedList
+@using PagedList.Mvc
+@{
     Layout = null;
 }
-@model IEnumerable<tActivity>
+@model IPagedList<IIIProject_travel.tActivity>
 
 <!doctype html>
 <html lang="en">
@@ -18,6 +20,7 @@
     <link href="~/Content/css/bootstrap.min.css" rel="stylesheet" />
     <!-- Custom styles for this template -->
     <link href="~/Content/css/dashboard.css" rel="stylesheet" />
+    <link href="~/Content/PagedList.css" rel="stylesheet" />
     <style>
         .bd-placeholder-img {
             font-size: 1.125rem;
@@ -30,17 +33,20 @@
 <body>
 
     @*navbar*@
-    <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
-        <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="@Url.Action("Home","後台Home")">Jouta後台</a>
-        <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
-        <ul class="navbar-nav px-3">
-            <li class="nav-item text-nowrap">
-                <a>
-                    @Html.ActionLink("Sign out", "Home", "Home", new { id = 0 }, new { @class = "nav-link" })
-                </a>
-            </li>
-        </ul>
-    </nav>
+    <form action="/後台文章/List" method="GET">
+        <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
+            <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="@Url.Action("Home","後台Home")">Jouta後台</a>
+            <input type="text" placeholder="關鍵字" aria-label="Search" name="txt關鍵字" class="form-control form-control-dark w-100">
+            <input type="submit" value="搜尋" class=" btn btn-dark" />
+            <ul class="navbar-nav px-3">
+                <li class="nav-item text-nowrap">
+                    <a>
+                        @Html.ActionLink("Sign out", "Home", "Home", new { id = 0 }, new { @class = "nav-link" })
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </form>
 
     @*sidebar*@
     <div class="container-fluid">
@@ -82,7 +88,7 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="@Url.Action("List","聯絡我們")">
-                                <span data-feather="layers"></span>
+                                <span data-feather="message-square"></span>
                                 意見列表
                             </a>
                         </li>
@@ -93,7 +99,6 @@
                             </a>
                         </li>
                     </ul>
-
                 </div>
             </nav>
 
@@ -146,6 +151,8 @@
 
                         </tbody>
                     </table>
+                    @Html.PagedListPager(Model, page => Url.Action("List", new { page }))
+
                 </div>
             </main>
         </div>

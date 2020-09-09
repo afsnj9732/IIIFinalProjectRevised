@@ -1,7 +1,7 @@
 ﻿@{
     Layout = null;
 }
-@model IEnumerable<tMember>
+@*@model IEnumerable<tMember>*@
 
 <!doctype html>
 <html lang="en">
@@ -27,7 +27,6 @@
         #chart-line,#chart-pie{
             min-width:300px;
             height:400px;
-            max-width:600px;
             margin:0 auto;
         }
     </style>
@@ -37,12 +36,12 @@
 <body>
 
     @*圖表js須優先載入*@
+    <script src="~/Scripts/jquery-3.5.1.js"></script>
     <script src="https://code.highcharts.com/highcharts.js"></script>
     <script src="https://code.highcharts.com/modules/exporting.js"></script>
     <script src="https://code.highcharts.com/modules/export-data.js"></script>
     <script src="https://code.highcharts.com/modules/accessibility.js"></script>
     <script src="~/Scripts/IIIProject/adminchart.js"></script>
-    <script src="~/Scripts/jquery-3.5.1.js"></script>
 
     @*navbar*@
     <form action="/後台旅遊/List" method="GET">
@@ -100,7 +99,7 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="@Url.Action("List","聯絡我們")">
-                                <span data-feather="layers"></span>
+                                <span data-feather="message-square"></span>
                                 意見列表
                             </a>
                         </li>
@@ -119,7 +118,7 @@
             @*主內容*@
             <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
                 <figure class="highcharts-figure">
-                    <div class="container">
+                    <div class="container-fluid">
                         <div id="chart-line"></div>
                         <div id="chart-pie"></div>
                     </div>

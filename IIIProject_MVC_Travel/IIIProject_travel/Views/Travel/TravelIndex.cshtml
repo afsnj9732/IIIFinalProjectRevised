@@ -28,7 +28,8 @@
         <link rel="stylesheet" href="~/Content/css/style.css">
         <link rel="stylesheet" href="~/Content/css/travel.css">
         <link rel="shortcut icon" href="favicon.ico" />
-        <link href="~/Content/jquery-ui-1.12.1/jquery-ui.css" rel="stylesheet" />        
+        <link href="~/Content/jquery-ui-1.12.1/jquery-ui.css" rel="stylesheet" />
+        <link href="~/Content/fullcalendar-5.3.2/lib/main.css" rel="stylesheet" />
         <script src="~/Scripts/vue.js"></script>
     </head>
 
@@ -317,8 +318,8 @@
                     </div>
                 </div>
                 <!-- 文章內容區結束 -->
-                <div class="col-xl-3   col-10 row mx-auto">
-
+                <div id="calendar" class="pr-4 pl-4 col-xl-3   col-10 row mx-auto">
+                    
                 </div>
             </div>
         </div>
@@ -337,9 +338,12 @@
         <script src="~/Scripts/bootstrap.min.js"></script>
         <script src="~/Scripts/IIIProject/navbar.js"></script>
         <script src="~/Scripts/IIIProject/travel.js"></script>
+        <script src="~/Scripts/moment.min.js"></script>
+        <script src="~/Content/fullcalendar-5.3.2/lib/main.js"></script>
+        <script src="~/Content/fullcalendar-5.3.2/lib/locales-all.js"></script>
         <script>
         @if (!string.IsNullOrEmpty(HomeSearch[3]))
-        {            
+        {
             @:window.confirm("@HomeSearch[3]");
         }
         //function a123(){

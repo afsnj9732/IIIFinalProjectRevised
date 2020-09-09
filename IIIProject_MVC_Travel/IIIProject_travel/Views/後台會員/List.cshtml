@@ -13,16 +13,15 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
-    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
-    <meta name="generator" content="Jekyll v3.8.5">
-    <title>Jouta</title>
+    <meta name="author" content="">
+    <meta name="generator" content="">
+    <title>會員列表 | Jouta Admin</title>
 
     <!-- Bootstrap core CSS -->
     <link href="~/Content/css/bootstrap.min.css" rel="stylesheet" />
     <!-- Custom styles for this template -->
     <link href="~/Content/css/dashboard.css" rel="stylesheet" />
     <link href="~/Content/PagedList.css" rel="stylesheet" />
-
     <style>
         .bd-placeholder-img {
             font-size: 1.125rem;
@@ -37,7 +36,7 @@
         {*@
     <form action="/後台會員/List" method="GET">
         <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
-            <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="@Url.Action("Home","後台Home")">Jouta後台</a>
+            <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="@Url.Action("Home","後台Home")">Jouta Admin</a>
 
             <input type="text" placeholder="關鍵字" aria-label="Search" name="txt關鍵字" class="form-control form-control-dark w-100">
             <input type="submit" value="搜尋" class=" btn btn-dark" />
@@ -59,9 +58,9 @@
                 <div class="sidebar-sticky">
                     <ul class="nav flex-column">
                         <li class="nav-item">
-                            <a class="nav-link active" href="@Url.Action("Home","後台Home")">
+                            <a class="nav-link" href="@Url.Action("Home","後台Home")">
                                 <span data-feather="home"></span>
-                                首頁 <span class="sr-only">(current)</span>
+                                網站概覽
                             </a>
                         </li>
                         <li class="nav-item">
@@ -92,7 +91,7 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="@Url.Action("List","聯絡我們")">
-                                <span data-feather="layers"></span>
+                                <span data-feather="message-square"></span>
                                 意見列表
                             </a>
                         </li>
@@ -103,12 +102,11 @@
                             </a>
                         </li>
                     </ul>
-
                 </div>
             </nav>
 
+            @*主內容*@
             <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-
 
                 <h2>會員列表</h2>
                 <div class="table-responsive">
