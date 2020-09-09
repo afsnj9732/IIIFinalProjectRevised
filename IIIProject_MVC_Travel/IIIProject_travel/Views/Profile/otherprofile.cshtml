@@ -4,7 +4,7 @@
     var x = (tMember)Session["member"];
     dbJoutaEntities db = new dbJoutaEntities();
     var post = from t in db.tActivity
-               where t.f活動類型 == "文章" && t.f活動編號.ToString() ==x.f會員發起的活動編號
+               where t.f活動類型 == "文章" && t.f活動編號.ToString() == x.f會員發起的活動編號
                select t;
 }
 
@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="~/Content/css/otherprofile.css">
     <link href="~/Content/fontawesome/css/all.css" rel="stylesheet">
     @*<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-          integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">*@
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">*@
 </head>
 
 <body>
@@ -78,7 +78,7 @@
             </div>
             <div class="profile-nav-info">
                 <h3 class="user-name">@Model.tMembers.f會員名稱</h3>
-                <div id="limit" >
+                <div id="limit">
                     <div id="isadmin">
                         <span class="country">身分:&nbsp;&nbsp;</span>
                         @if (Model.tMembers.isAdmin == false)
@@ -90,9 +90,11 @@
                             <p class="state">管理員</p>
                         }
                     </div>
-                    
-                    <div>  <button type="button" id="followbtn" class="btn btn-primary btn-sm">追蹤</button></div>
-                   
+
+                    <div>
+                        <button type="button" id="followbtn" class="btn btn-primary btn-sm">追蹤</button>
+                    </div>
+
                 </div>
             </div>
             <div class="profile-option">
@@ -195,28 +197,7 @@
                 </div>
                 <div class="profile-posts tab_info" id="myPost">
                     <h1>@Model.tMembers.f會員名稱 的發文</h1>
-                    @*@if (post!=null)
-                    {*@
-                        @foreach (tActivity t in Model.tActivities)
-                        {
-                            <div class="card mb-4">
-                                <img class="card-img-top" src="~/Content/images/@t.f活動團圖" alt="Card image cap">
-                                <div class="card-body">
-                                    <h2 class="card-title">@t.f活動標題</h2>
-                                    <p class="card-text">
-                                        @t.f活動內容
-                                    </p>
-                                    <a class="nav-item">@Html.ActionLink("Read More", "BlogContent", "Blog", new { id = t.f活動編號 }, new { @class = "btn btnContent  btn-warning" })</a>
-                                </div>
-                                <div class="card-footer text-muted">
-
-                                    <p class="pDateSection"> Posted on @t.f活動發起日期 </p>
-
-                                </div>
-                            </div>
-                        }
-                    @*}
-                    else
+                    @if (Model.tMembers.f會員發起的活動編號 == null)
                     {
                         <p>無發文紀錄</p>
                     }
@@ -259,13 +240,16 @@
                                         <div class="card-body" style="text-align:center">
                                             <h5 class="card-title"> @t.f活動標題</h5>
                                             <p class="card-text">@t.f活動內容</p>
-                                            揪團者 :  <span style="cursor: pointer;">@t.tMember.f會員名稱</span>
+                                            揪團者 :
+                                            <span style="cursor: pointer;">@t.tMember.f會員名稱</span>
                                             <p class="card-text">
                                                 <small class="text-muted">@t.f活動開始時間</small>
                                             </p>
                                             <a class="nav-item">@Html.ActionLink("Read More", "TravelIndex", "Travel", new { id = t.f活動編號 }, new { @class = "btn btnContent  btn-warning" })</a>
                                         </div>
-                                        <div class="col-md-4">  <img src="~/Content/images/@t.f活動團圖" class="card-img activityphoto" alt="@t.f活動編號"></div>
+                                        <div class="col-md-4">
+                                            <img src="~/Content/images/@t.f活動團圖" class="card-img activityphoto" alt="@t.f活動編號">
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -303,13 +287,7 @@
                 </div>
                 <div class="profile-follower tab_info" id="Follower">
                     <h1>追蹤團主</h1>
-                    @*@if ()
-                    {
 
-                    } else
-                    {
-
-                    }*@
                     @foreach (tActivity t in Model.tActivities)
                     {
                         <div class="container">
@@ -325,7 +303,7 @@
                         </div>
                     }
                 </div>
-                @*<div class="profile-mygroup tab_info" id="mygroup">
+                <div class="profile-mygroup tab_info" id="mygroup">
                     <h1>@Model.tMembers.f會員名稱 的開團</h1>
                     @if (Model.tMembers.f會員發起的活動編號 == null)
                     {
@@ -365,7 +343,7 @@
                         }
                     }
 
-                </div>*@
+                </div>
                 <div class="profile-history tab_info" id="history">
                     <h1>歷史紀錄</h1>
                     @if (Model.tMembers.f會員發起的活動編號 == null || Model.tMembers.f會員參加的活動編號 == null)
@@ -395,12 +373,14 @@
                                 <div class="row pl-3">
                                     <div class="content mb-3" style="cursor: pointer;width:70%;height: 150px;"
                                          data-toggle="modal" data-target="#exampleModal2">
-                                        <span style="font-weight:bolder;"> 龜山步道。墾丁私房景點｜不到半小時即攻頂。全方位飽覽恆春山海景</span>
+                                        <span style="font-weight:bolder;"> @t.f活動標題</span>
                                         <br>
-                                        <span id="togglecontent" style="font-size: 13px;"></span>
+                                        <span id="togglecontent" style="font-size: 13px;">
+                                            @t.f活動內容
+                                        </span>
 
                                     </div>
-                                    <img src="images/7.jpg" id="imgdisplay" alt="" class="col-auto" style="display:none; width: 30%;height: 150px;">
+                                    <img src="~/Content/images/@t.f活動團圖" id="imgdisplay" alt="" class="col-auto" style="display:none; width: 30%;height: 150px;">
                                 </div>
                             </div>
                         }
