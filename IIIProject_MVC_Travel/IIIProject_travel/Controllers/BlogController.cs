@@ -160,6 +160,7 @@ namespace IIIProject_travel.Controllers
             article.f活動地點 = p.txtLocation;
             article.f活動內容 = p.txtContent;
             article.f活動團圖 = p.fImagPath;
+            article.fQRcode網址 = p.QRcode;
             article.f會員編號 = 3;//暫時用，要改成儲存登入會員的編號
 
 

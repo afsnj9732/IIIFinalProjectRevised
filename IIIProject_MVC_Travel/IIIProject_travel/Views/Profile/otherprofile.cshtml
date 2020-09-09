@@ -2,6 +2,10 @@
 @{
     Layout = null;
     var x = (tMember)Session["member"];
+    dbJoutaEntities db = new dbJoutaEntities();
+    var post = from t in db.tActivity
+               where t.f活動類型 == "文章" && t.f活動編號.ToString() ==x.f會員發起的活動編號
+               select t;
 }
 
 
@@ -162,8 +166,7 @@
                         <li class="user" onclick="tabs(2)">參加活動</li>
                         <li class="user" onclick="tabs(3)">關注活動</li>
                         <li class="user" onclick="tabs(4)">追蹤團主</li>
-                        <li class="user" onclick="tabs(5)">我的開團</li>
-                        <li class="user" onclick="tabs(6)">歷史紀錄</li>
+                        <li class="user" onclick="tabs(5)">歷史紀錄</li>
                     </ul>
                 </div>
                 <div class="profile-body">
@@ -192,7 +195,28 @@
                 </div>
                 <div class="profile-posts tab_info" id="myPost">
                     <h1>@Model.tMembers.f會員名稱 的發文</h1>
-                    @if (Model.tMembers.f會員發起的活動編號 == null)
+                    @*@if (post!=null)
+                    {*@
+                        @foreach (tActivity t in Model.tActivities)
+                        {
+                            <div class="card mb-4">
+                                <img class="card-img-top" src="~/Content/images/@t.f活動團圖" alt="Card image cap">
+                                <div class="card-body">
+                                    <h2 class="card-title">@t.f活動標題</h2>
+                                    <p class="card-text">
+                                        @t.f活動內容
+                                    </p>
+                                    <a class="nav-item">@Html.ActionLink("Read More", "BlogContent", "Blog", new { id = t.f活動編號 }, new { @class = "btn btnContent  btn-warning" })</a>
+                                </div>
+                                <div class="card-footer text-muted">
+
+                                    <p class="pDateSection"> Posted on @t.f活動發起日期 </p>
+
+                                </div>
+                            </div>
+                        }
+                    @*}
+                    else
                     {
                         <p>無發文紀錄</p>
                     }
@@ -301,7 +325,7 @@
                         </div>
                     }
                 </div>
-                <div class="profile-mygroup tab_info" id="mygroup">
+                @*<div class="profile-mygroup tab_info" id="mygroup">
                     <h1>@Model.tMembers.f會員名稱 的開團</h1>
                     @if (Model.tMembers.f會員發起的活動編號 == null)
                     {
@@ -341,7 +365,7 @@
                         }
                     }
 
-                </div>
+                </div>*@
                 <div class="profile-history tab_info" id="history">
                     <h1>歷史紀錄</h1>
                     @if (Model.tMembers.f會員發起的活動編號 == null || Model.tMembers.f會員參加的活動編號 == null)

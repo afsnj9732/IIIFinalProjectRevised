@@ -1,10 +1,11 @@
 ﻿var x = document.querySelector(".btnLocation");
+var tabBtn = document.querySelectorAll(".resultTrigger");
+var mymap;
 var tabNum;
 var currentLat = null;
 var currentLng = null;
-var tabBtn = document.querySelectorAll(".resultTrigger");
 
-console.log("var: " + currentLat);
+//console.log("var: " + currentLat);
 
 //取得定位授權
 function getLocation() {
@@ -20,6 +21,12 @@ function showPosition(position) {
     currentLng = position.coords.longitude;
     x.innerHTML = "座標 (" + currentLat.toFixed(3) + " , " + currentLng.toFixed(3) + ")";
 
+    //如果已經有畫地圖就刪掉重畫
+    if (mymap !== undefined) {
+        mymap.remove();
+    }
+
+    //畫出地圖
     mymap = L.map('mapid').setView([currentLat, currentLng], 15);
     L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
         attribution: '&copy; Jouta',
@@ -69,7 +76,7 @@ $('.resultTrigger').click(function () {
         success: function (data) {
             //如果有撈到資料
             if (data.length !== 0) {
-                console.log(data);
+                //console.log(data);
                 $('#mAchieve').text(data[0].mAchieve);
                 $('#mAvatar').html('<img src="/Content/images/' + data[0].mAvatar + '" id="mAvatar" class="col-auto ArticlePic">');
                 $('#mName').text('使用者名稱:' + data[0].mName);
@@ -86,7 +93,7 @@ $('.resultTrigger').click(function () {
                 $('#mRating').text('');
                 $('#mTimeleft').text('');
                 $('.content').text('找不到符合條件的結果');
-                $('#share').attr('hidden',true);
+                $('#share').attr('hidden', true);
             }
         },
         error: function (xhr, status, error) {

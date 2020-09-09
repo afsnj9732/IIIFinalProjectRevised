@@ -15,6 +15,8 @@ namespace IIIProject_travel.ViewModel
 
         public string fImagPath { get; set; }
 
+        public string QRcode { get; set; }
+
         public HttpPostedFileBase blogPhoto { get; set; }
 
         public int id { get; set; }
