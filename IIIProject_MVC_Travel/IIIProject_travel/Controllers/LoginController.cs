@@ -37,9 +37,7 @@ namespace IIIProject_travel.Controllers
                 return RedirectToAction("List", "後台會員");
             tMember target = (new dbJoutaEntities()).tMember
                 .FirstOrDefault(a=>a.f會員電子郵件 == user.txtEmail&&a.f會員密碼==user.txtPassword);
-
             Session["member"] = target;
-            
             return RedirectToAction("Home", "Home");
         }
 
