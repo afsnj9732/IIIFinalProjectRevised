@@ -221,6 +221,7 @@
     <Compile Include="ViewModel\CData.cs" />
     <Compile Include="ViewModel\CLogin.cs" />
     <Compile Include="ViewModel\CMember.cs" />
+    <Compile Include="ViewModel\CProfile.cs" />
     <Compile Include="ViewModel\CRegisterModel.cs" />
     <Compile Include="ViewModel\CReset.cs" />
     <Compile Include="ViewModel\CSelect.cs" />
