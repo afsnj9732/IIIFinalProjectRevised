@@ -27,30 +27,32 @@ namespace IIIProject_travel.Controllers
                     txt關鍵字 = currentFilter;
                 }
 
-                if (string.IsNullOrEmpty(txt關鍵字))
-                    文章 = from m in (new dbJoutaEntities()).tActivity
-                         where m.f活動類型 == "文章"
-                         select m;
-            if (!string.IsNullOrEmpty(date起日) && !string.IsNullOrEmpty(date迄日))
-                文章 = from p in 文章
-                     where (string.Compare(p.f活動發起日期, date起日) >= 0) && (string.Compare(p.f活動發起日期, date迄日) <= 0)
-                     select p;
-
+            if (string.IsNullOrEmpty(txt關鍵字))
+            {
+                文章 = from m in (new dbJoutaEntities()).tActivity
+                     where m.f活動類型 == "文章"
+                     select m;
+                if (!string.IsNullOrEmpty(date起日) && !string.IsNullOrEmpty(date迄日))
+                    文章 = from p in 文章
+                         where (string.Compare(p.f活動發起日期, date起日) >= 0) && (string.Compare(p.f活動發起日期, date迄日) <= 0)
+                         select p;
+            }
 
             else
+            {
                 文章 = from m in 文章
-                         where m.f活動類型.Contains("文章") &&
-                                (string.Compare(m.f活動發起日期, date起日) >= 0) && (string.Compare(m.f活動發起日期, date迄日) <= 0) &&
-                               m.f活動編號.ToString().Contains(txt關鍵字) || m.f活動標題.Contains(txt關鍵字) ||
-                               m.f活動標籤.Contains(txt關鍵字) || m.f活動內容.Contains(txt關鍵字) ||
-                               m.f活動團圖.Contains(txt關鍵字) || m.f活動地區.Contains(txt關鍵字) ||
-                               m.f活動地點.Contains(txt關鍵字) || m.f活動所屬.Contains(txt關鍵字) ||
-                               m.f活動招募截止時間.Contains(txt關鍵字) || m.f活動分類.Contains(txt關鍵字) ||
-                               m.f活動留言.Contains(txt關鍵字) || m.f活動留言時間.Contains(txt關鍵字) ||
-                               m.f活動發起日期.Contains(txt關鍵字) || m.f活動結束時間.Contains(txt關鍵字) ||
-                               m.f活動開始時間.Contains(txt關鍵字)
-                         select m;
-
+                     where m.f活動類型.Contains("文章") &&
+                            (string.Compare(m.f活動發起日期, date起日) >= 0) && (string.Compare(m.f活動發起日期, date迄日) <= 0) &&
+                           m.f活動編號.ToString().Contains(txt關鍵字) || m.f活動標題.Contains(txt關鍵字) ||
+                           m.f活動標籤.Contains(txt關鍵字) || m.f活動內容.Contains(txt關鍵字) ||
+                           m.f活動團圖.Contains(txt關鍵字) || m.f活動地區.Contains(txt關鍵字) ||
+                           m.f活動地點.Contains(txt關鍵字) || m.f活動所屬.Contains(txt關鍵字) ||
+                           m.f活動招募截止時間.Contains(txt關鍵字) || m.f活動分類.Contains(txt關鍵字) ||
+                           m.f活動留言.Contains(txt關鍵字) || m.f活動留言時間.Contains(txt關鍵字) ||
+                           m.f活動發起日期.Contains(txt關鍵字) || m.f活動結束時間.Contains(txt關鍵字) ||
+                           m.f活動開始時間.Contains(txt關鍵字)
+                     select m;
+            }
 
                 //排序 降冪和升冪
                 ViewBag.當前搜尋 = txt關鍵字;

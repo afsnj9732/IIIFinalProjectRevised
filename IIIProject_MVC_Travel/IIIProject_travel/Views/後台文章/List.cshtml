@@ -36,6 +36,8 @@
     <form action="/後台文章/List" method="GET">
         <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
             <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="@Url.Action("Home","後台Home")">Jouta後台</a>
+            <input type="date" name="date起日" />
+            <input type="date" name="date迄日" />
             <input type="text" placeholder="關鍵字" aria-label="Search" name="txt關鍵字" class="form-control form-control-dark w-100">
             <input type="submit" value="搜尋" class=" btn btn-dark" />
             <ul class="navbar-nav px-3">
