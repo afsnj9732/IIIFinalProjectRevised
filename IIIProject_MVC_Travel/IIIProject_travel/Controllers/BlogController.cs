@@ -141,6 +141,7 @@ namespace IIIProject_travel.Controllers
         [HttpPost]
         public ActionResult Create(CBlog p)
         {
+            
             HttpPostedFileBase blogPhoto = Request.Files["blogPhoto"];
             if (p.blogPhoto != null)
             {
@@ -159,8 +160,10 @@ namespace IIIProject_travel.Controllers
             article.f活動標題 = p.txtTitle;
             article.f活動地點 = p.txtLocation;
             article.f活動內容 = p.txtContent;
-            article.f活動團圖 = p.fImagPath;
-            article.f會員編號 = 3;//暫時用，要改成儲存登入會員的編號
+            article.f活動團圖 = p.f活動團圖;
+            article.fQRcode網址 = p.QRcode;
+            var LoginMember = (tMember)Session["member"];
+            article.f會員編號 = LoginMember.f會員編號; 
 
 
             dbJoutaEntities db = new dbJoutaEntities();

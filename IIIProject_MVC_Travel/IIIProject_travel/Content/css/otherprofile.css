@@ -8,7 +8,13 @@
     width: 500px;
     justify-content: space-between;
 }
-
+.bio {
+    display: -webkit-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+}
 #isadmin {
     width: 200px;
     display: flex;

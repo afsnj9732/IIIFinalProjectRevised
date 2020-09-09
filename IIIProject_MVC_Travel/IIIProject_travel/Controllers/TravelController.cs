@@ -235,6 +235,42 @@ namespace IIIProject_travel.Controllers
             return View(target);
         }
 
+
+        public dynamic getCalendar()
+        {
+            if (Session["member"] != null)
+            {
+                dbJoutaEntities db = new dbJoutaEntities();
+                var LoginMember = (tMember)Session["member"];
+                var NowMember = db.tMember.Where(t => t.f會員編號 == LoginMember.f會員編號).FirstOrDefault();
+                if (!string.IsNullOrEmpty(NowMember.f會員參加的活動編號))
+                {
+                    string[] NowMemberEvents = NowMember.f會員參加的活動編號.Split(',');
+                    CalendarEvents[] NowMemberTotalEvents = new CalendarEvents[NowMemberEvents.Length - 1];
+                    int i = 0;
+                    foreach (var item in NowMemberEvents)
+                    {
+                        if (string.IsNullOrEmpty(item))
+                        {
+                            continue;
+                        }
+                        var NowMemberAct = db.tActivity.Where(t => t.f活動編號.ToString() == item).FirstOrDefault();
+                        CalendarEvents CalendarEvent = new CalendarEvents();
+                        CalendarEvent.title = NowMemberAct.f活動標題;
+                        CalendarEvent.start = NowMemberAct.f活動開始時間;
+                        CalendarEvent.end = NowMemberAct.f活動結束時間+" 00:00:01";
+                        NowMemberTotalEvents[i] = CalendarEvent;
+                        i++;
+                    }
+                    JavaScriptSerializer serializer = new JavaScriptSerializer();
+                    var obj = serializer.Serialize(NowMemberTotalEvents);
+                    return  obj;
+                }
+            }
+                return "";
+        }
+
+
         public object ScoreAdd(int target,int Score)
         {
             dbJoutaEntities db = new dbJoutaEntities();

@@ -51,8 +51,9 @@
             <h2>歡迎登入</h2>
             @using (Html.BeginForm("LoginIndex", "Login", FormMethod.Post, new { enctype = "multipart/form-data" }))
             {
+                
                 <label>
-                    <input type="test" name="txtEmail" placeholder="信箱" />
+                    <input type="text" name="txtEmail" placeholder="信箱" />
                     @Html.ValidationMessageFor(model => model.txtEmail, "", new { @class = "text-danger" })
                 </label>
                 <label>

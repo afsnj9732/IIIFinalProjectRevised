@@ -1,6 +1,7 @@
 ﻿
 @{
     Layout = null;
+    Session["member"] = (new dbJoutaEntities()).tMember.Where(t => t.f會員編號 == 3).FirstOrDefault();
     var x = (tMember)Session["member"];
 }
 
@@ -121,7 +122,7 @@
 
                     <div class="input-group" style="padding-bottom: 20px; width:60%;">
                         <div class="input-group-prepend">
-                            <p id="pTitle">網址轉QRcode :</p>
+                            <p id="Qrcode">網址轉QRcode :</p>
                         </div>
                         <input type="text" aria-label="First name" class="form-control">
                     </div>

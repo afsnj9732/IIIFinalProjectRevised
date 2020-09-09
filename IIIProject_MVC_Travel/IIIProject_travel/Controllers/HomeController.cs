@@ -220,7 +220,7 @@ namespace IIIProject_travel.Controllers
         public ActionResult ForgetPassword(string Email)
         {
             string message = "";
-            bool status = false;
+            //bool status = false;
             using (dbJoutaEntities db = new dbJoutaEntities())
             {
                 var account = db.tMember.Where(a => a.f會員電子郵件 == Email).FirstOrDefault();
@@ -285,7 +285,8 @@ namespace IIIProject_travel.Controllers
                 message = "格式錯誤";
             }
             ViewBag.Message = message;
-            return View(c);
+            //return RedirectToAction("Home","Home");
+            return View();
         }
 
         [AllowAnonymous]

@@ -33,14 +33,23 @@ namespace IIIProject_travel.Controllers
         [HttpPost]
         public ActionResult LoginIndex(CLogin user)
         {
+            
             if (user.txtEmail == "admin" && user.txtPassword == "admin")
                 return RedirectToAction("List", "後台會員");
-            tMember target = (new dbJoutaEntities()).tMember
-                .FirstOrDefault(a=>a.f會員電子郵件 == user.txtEmail&&a.f會員密碼==user.txtPassword);
-
-            Session["member"] = target;
-            
-            return RedirectToAction("Home", "Home");
+            string ValidateStr = membersService.LoginCheck(user.txtEmail,user.txtPassword);
+            if (string.IsNullOrEmpty(ValidateStr))
+            {
+                tMember target = (new dbJoutaEntities()).tMember
+                .FirstOrDefault(a => a.f會員電子郵件 == user.txtEmail && a.f會員密碼 == user.txtPassword);
+                Session["member"] = target;
+                return RedirectToAction("Home", "Home");
+            }
+            else
+            {
+                ModelState.AddModelError("txtPassword","密碼輸入錯誤");
+                ModelState.Clear();
+                return View();
+            }
         }
 
         //Logout

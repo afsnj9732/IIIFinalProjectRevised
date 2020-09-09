@@ -17,7 +17,8 @@
     const randStore = Math.floor(Math.random() * store.length);
     //console.log(time[randTime],discount[randDiscount],location[randLocation],store[randStore]);
 
-    $('#content').text(time[randTime] + '在' + location[randLocation] + '方圓三公里範圍內，送' + store[randStore] + discount[randDiscount] + '優惠，收到通知的會員趕快去檢查簡訊領取吧~!');
+    $('#content').text('優惠資訊：' + time[randTime] + '在' + location[randLocation] + '方圓三公里範圍內，送' + store[randStore] + discount[randDiscount] + '優惠，收到通知的會員趕快去檢查簡訊領取吧~!');
+    $('#sendBtn').html(`<button type="button" class="btn btn-primary ml-3 sendBtn" onclick="sendCoupon()">送出優惠券</button>`);
 
     $.ajax({
         url: "/優惠發送/List",
@@ -31,21 +32,18 @@
         success: function (data) {
             //如果有撈到資料
             if (data) {
-                $('#tbody').html('<tr><td>' + data[0].mMemberNum + '</td><br>' +
+                $('#tbody').html('<tr><td id="member1">' + data[0].mMemberNum + '</td><br>' +
                     '<td>' + data[0].mAccount + '</td><br>' +
                     '<td>' + data[0].mName + '</td><br>' +
                     '<td>' + data[0].mRating + '</td><br>' +
-                    '<td><button class="btn-sm btn-primary" id="button1" onclick="sendCoupon()">發送優惠券</button></td></tr><br>' +
-                    '<tr><td>' + data[1].mMemberNum + '</td><br>' +
+                    '<tr><td id="member2">' + data[1].mMemberNum + '</td><br>' +
                     '<td>' + data[1].mAccount + '</td><br>' +
                     '<td>' + data[1].mName + '</td><br>' +
                     '<td>' + data[1].mRating + '</td><br>' +
-                    '<td><button class="btn-sm btn-primary" id="button2" onclick="sendCoupon()">發送優惠券</button></td></tr><br>' +
-                    '<tr><td>' + data[2].mMemberNum + '</td><br>' +
+                    '<tr><td id="member3">' + data[2].mMemberNum + '</td><br>' +
                     '<td>' + data[2].mAccount + '</td><br>' +
                     '<td>' + data[2].mName + '</td><br>' +
-                    '<td>' + data[2].mRating + '</td><br>' +
-                    '<td><button class="btn-sm btn-primary" id="button3" onclick="sendCoupon()">發送優惠券</button></td></tr><br>'
+                    '<td>' + data[2].mRating + '</td><br>'
                 );
             }
         },
@@ -58,7 +56,9 @@
 
 //發送優惠券
 function sendCoupon() {
-    couponText = document.querySelector('#content').innerHTML;
+    //couponText = document.querySelector('#content').innerHTML;
+    $('.sendBtn').attr('disabled', '');
+    $('.sendBtn').attr('onclick', '');
 
     if (!('Notification' in window)) {
         console.log('本瀏覽器不支援推播通知');
@@ -68,8 +68,8 @@ function sendCoupon() {
         let ask = Notification.requestPermission();
         ask.then(permission => {
             if (permission === "granted") {
-                let msg = new Notification("取得優惠", {
-                    body: couponText,
+                let msg = new Notification("發送成功", {
+                    body: "已將優惠資訊成功發送給所有中獎會員!",
                     icon: "../Content/images/joutalogo.png"
                 });
                 msg.addEventListener("click", event => {
