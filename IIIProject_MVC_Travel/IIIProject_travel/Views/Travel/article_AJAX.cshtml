@@ -1,6 +1,6 @@
 ﻿@model IIIProject_travel.ViewModel.CTravel
-@using IIIProject_travel.ViewModel
-@using System.Web.Script.Serialization;
+@*@using IIIProject_travel.ViewModel
+@using System.Web.Script.Serialization;*@
 @{
     dbJoutaEntities db = new dbJoutaEntities();
     Layout = null;
@@ -18,7 +18,7 @@
     var totalMember = from x in db.tMember
                       select x;
 
-    if (NowMember != null)
+    @*if (NowMember != null)
     {
 
         if (!string.IsNullOrEmpty(NowMember.f會員參加的活動編號))
@@ -49,14 +49,14 @@
         locale: 'zh-tw',
         events: @Html.Raw(obj),
         eventClick: function () {
-            @*alert("@NowMember.f會員名稱");*@
+            alert("@NowMember.f會員名稱");
         }
     });
     calendar.render();
 </script>
         }
 
-    }
+    }*@
 
 }
 
