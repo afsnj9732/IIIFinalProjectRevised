@@ -32,15 +32,15 @@
         success: function (data) {
             //如果有撈到資料
             if (data) {
-                $('#tbody').html('<tr><td id="member1">' + data[0].mMemberNum + '</td><br>' +
+                $('#tbody').html('<tr><td id="member">' + data[0].mMemberNum + '</td><br>' +
                     '<td>' + data[0].mAccount + '</td><br>' +
                     '<td>' + data[0].mName + '</td><br>' +
                     '<td>' + data[0].mRating + '</td><br>' +
-                    '<tr><td id="member2">' + data[1].mMemberNum + '</td><br>' +
+                    '<tr><td id="member">' + data[1].mMemberNum + '</td><br>' +
                     '<td>' + data[1].mAccount + '</td><br>' +
                     '<td>' + data[1].mName + '</td><br>' +
                     '<td>' + data[1].mRating + '</td><br>' +
-                    '<tr><td id="member3">' + data[2].mMemberNum + '</td><br>' +
+                    '<tr><td id="member">' + data[2].mMemberNum + '</td><br>' +
                     '<td>' + data[2].mAccount + '</td><br>' +
                     '<td>' + data[2].mName + '</td><br>' +
                     '<td>' + data[2].mRating + '</td><br>'
@@ -55,8 +55,16 @@
 
 
 //發送優惠券
+var targetMember;
+
 function sendCoupon() {
-    //couponText = document.querySelector('#content').innerHTML;
+    for (i = 0; i < 3; i++) {
+        targetMember = document.querySelectorAll('#member')[i].innerHTML;
+        console.log('in '+targetMember);
+    }
+
+    console.log('out ' + targetMember);
+
     $('.sendBtn').attr('disabled', '');
     $('.sendBtn').attr('onclick', '');
 
