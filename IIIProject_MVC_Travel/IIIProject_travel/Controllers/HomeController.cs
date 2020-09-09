@@ -285,7 +285,8 @@ namespace IIIProject_travel.Controllers
                 message = "格式錯誤";
             }
             ViewBag.Message = message;
-            return View(c);
+            //return RedirectToAction("Home","Home");
+            return View();
         }
 
         [AllowAnonymous]

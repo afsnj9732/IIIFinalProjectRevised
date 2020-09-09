@@ -1,14 +1,27 @@
-(function () {
-    document.addEventListener('DOMContentLoaded', function () {
-        var calendarEl = document.getElementById('calendar');
-        var calendar = new FullCalendar.Calendar(calendarEl, {
-            initialView: 'dayGridMonth',
-            locale: 'zh-tw'
+(function () {                 
+    var order, background_color, contain, category, label, page, p;
+    var calendarEl = document.getElementById('calendar');
+
+    function getCalendar() { //效能待優化
+        $.ajax({
+            url: "/Travel/getCalendar",
+            type: "POST",
+            success: function (data) {
+                if (data !== "") {
+                    //行事曆                   
+                    let calendar = new FullCalendar.Calendar(calendarEl, {
+                        initialView: 'dayGridMonth',
+                        locale: 'zh-tw',
+                        events: JSON.parse(data),
+                        eventClick: function () {
+                        }
+                    });
+                    calendar.render();
+                }
+            }
         });
-        calendar.render();
-    });
-        
-    var order, background_color, contain, category, label,page ,p;
+    }
+
     //Bootstrap Modal 關閉觸發事件
     $(document).on('hidden.bs.modal', '.modal', function () {
         $('.modal:visible').length && $(document.body).addClass('modal-open'); //疊加互動視窗 Scroll Debug
@@ -221,7 +234,7 @@
 
     //視窗變化觸發RWD
     window.addEventListener("resize", function () {
-        Travel_RWD();
+        Travel_RWD();        
     });
 
     //收藏按鈕，抓活動編號
@@ -262,6 +275,7 @@
                     window.confirm("你已經入團了哦!");
                 } else {
                     $("[ActAdd=" + target + "]").html(data);
+                    getCalendar();
                 }
             }
         });
@@ -281,6 +295,7 @@
                     window.confirm("你沒有入團哦!");                    
                 } else {
                     $("[ActAdd=" + target + "]").html(data);
+                    getCalendar();
                 }              
             }
         });
@@ -359,7 +374,7 @@
             "order": order, "background_color": background_color, "contain": contain
             , "category": category, "label": label , "page":page
         });
- 
+        
         $.ajax({
             url: "/Travel/article_AJAX",
             type: "POST",
@@ -371,8 +386,10 @@
                 Travel_RWD();
                 //getViewCounts();
                 //getGoodCounts();
+                
             }
         });
+        getCalendar();
     }
 
 
