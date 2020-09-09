@@ -1,7 +1,7 @@
 ﻿//線圖
 $(document).ready(function () {
     console.log("333");
-    $.getJSON("/Home/GetLineChartData", function (data) {
+    $.getJSON("/後台Home/GetLineChartData", function (data) {
         var Names = [];
         var Qts = [];
         for (var i = 0; i < data.length; i++) {
@@ -46,7 +46,7 @@ $(document).ready(function () {
 //圓餅圖
 $(document).ready(function () {
 
-    $.getJSON("/Home/GetPieChartData", function (data) {
+    $.getJSON("/後台Home/GetPieChartData", function (data) {
         Highcharts.chart('chart-pie', {
             chart: {
                 plotBackgroundColor: null,
