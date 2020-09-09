@@ -12,7 +12,7 @@ namespace IIIProject_travel.Controllers
         dbJoutaEntities db = new dbJoutaEntities();
         // GET: Profile
         
-        public ActionResult ProfileIndex()
+        public ActionResult ProfileIndex(string coupon)
         {
             CMember c = new CMember();
             DateTime date = DateTime.Now;
