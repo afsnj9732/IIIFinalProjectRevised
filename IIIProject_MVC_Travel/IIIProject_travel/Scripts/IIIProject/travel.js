@@ -1,4 +1,13 @@
 (function () {
+    document.addEventListener('DOMContentLoaded', function () {
+        var calendarEl = document.getElementById('calendar');
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+            initialView: 'dayGridMonth',
+            locale: 'zh-tw'
+        });
+        calendar.render();
+    });
+        
     var order, background_color, contain, category, label,page ,p;
     //Bootstrap Modal 關閉觸發事件
     $(document).on('hidden.bs.modal', '.modal', function () {
@@ -80,8 +89,17 @@
             type: "POST",
             data: { "target": target , "Score":Score},
             success: function (data) {
-                if (data === "0") {
-                    window.confirm("有參加的會員且須於活動結束以後才可評分");
+                if (data === "5") {
+                    window.confirm("團主不可自行評分");
+                }
+                else if (data === "6") {
+                    window.confirm("活動時間相衝，同一時段請勿參加兩種活動");
+                }
+                else if (data === "3") {
+                    window.confirm("活動結束後才可評分");
+                }
+                else if (data === "0") {
+                    window.confirm("有參加的會員才可評分");
                 } else if (data === "1") {
                     window.confirm("你已經評分過了哦!");
                 } else {
@@ -459,6 +477,14 @@
     });
 
     ////預設最新被選為排序
+    let HSCategory = $("#category").attr("HomeSearch");
+    //console.log($("#category [value=所有]").val());
+    $("#category [value=所有]").removeAttr("selected");
+    $("#category [value=" + HSCategory + "]").attr("selected","");
+
+    let HSLabel = $("#label").attr("HomeSearch");
+    $("#label [value=全部]").removeAttr("selected");
+    $("#label [value=" + HSLabel + "]").attr("selected", "");
     $("#travel_sort .sort li").eq(0).click();                               
 
 

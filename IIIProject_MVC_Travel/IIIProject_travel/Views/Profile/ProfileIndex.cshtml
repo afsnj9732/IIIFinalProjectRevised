@@ -176,26 +176,27 @@
                         <h1 id="title">個人檔案</h1>
                         @Html.BeginForm()
                         {
-                    <form method="post" action="~/Profile/ProfileIndex">
-                        <button type="button" class="btn btn-warning">編輯資料</button>
-                        <h6 class="profiletag">會員編號</h6>
-                        <input type="text" size="50" placeholder="@x.f會員編號" name="account" disabled>
-                        <h6 class="profiletag">帳號</h6>
-                        <input type="text" size="50" placeholder="@x.f會員帳號" name="passward" disabled>
-                        <h6 class="profiletag">密碼</h6>
-                        <input type="text" size="50" placeholder="@x.f會員密碼" name="nickname" disabled>
-                        <h6 class="profiletag" id="nickname">會員名稱</h6>
-                        <input type="text" size="50" name="age" placeholder="@x.f會員名稱">
-                        <h6 class="profiletag">暱稱</h6>
-                        <input type="text" size="50" name="birth" placeholder="@x.f會員暱稱">
-                        <h6 class="profiletag">生日</h6>
-                        <input type="text" size="50" name="interest" placeholder="@x.f會員生日">
-                        <h6 class="profiletag">興趣</h6>
-                        <input type="text" size="50" name="location" placeholder="@x.f會員興趣">
-                        <h6 class="profiletag">自我介紹</h6>
-                        <textarea id="intro" rows="5" cols="50" name="introduction">@x.f會員自我介紹</textarea><br>
-                        <button type="submit" class="btn btn-warning">繳交</button>
-                    </form>
+                            <form method="post" action="~/Profile/ProfileIndex">
+                                <button type="button" class="btn btn-warning">編輯資料</button>
+                                <h6 class="profiletag">信箱</h6>
+                                <input type="email" size="50" placeholder="@x.f會員電子郵件" name="txtEmail" disabled>
+
+                                <h6 class="profiletag">密碼</h6>
+                                <input type="password" min="6" max="10" placeholder="@x.f會員密碼" name="txtPassword" disabled>
+
+                                <h6 class="profiletag">會員名稱</h6>
+                                <input type="text" name="txtNickName" placeholder="@x.f會員名稱">
+
+                                <h6 class="profiletag">生日</h6>
+                                <input type="datetime" size="20" name="txtBirth" placeholder="@x.f會員生日">
+
+                                <h6 class="profiletag">興趣</h6>
+                                <input type="text" size="50" name="txtHobby" placeholder="@x.f會員興趣">
+
+                                <h6 class="profiletag">自我介紹</h6>
+                                <textarea id="intro" rows="5" cols="50" name="txtIntro">@x.f會員自我介紹</textarea><br>
+                                <button type="submit" class="btn btn-warning">繳交</button>
+                            </form>
                         }
                     </div>
                 </div>

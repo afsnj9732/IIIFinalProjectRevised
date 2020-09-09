@@ -1,11 +1,14 @@
-﻿
-@{
+﻿@{
     Layout = null;
     var topMember = (new dbJoutaEntities()).tMember.OrderByDescending(n => n.f會員評分).Take(5);//抓評分前五團主
     var x = (tMember)Session["member"];
     //tMember x = (new dbJoutaEntities()).tMember.FirstOrDefault(y => y.f會員編號 == 4);
     //Session["member"] = x;
-
+    string[] HomeSearch = { "", "所有", "全部","" };
+    if (!string.IsNullOrEmpty(Model))
+    {
+        HomeSearch = Model.Split(',');
+    }
 }
 
 @{
@@ -25,7 +28,8 @@
         <link rel="stylesheet" href="~/Content/css/style.css">
         <link rel="stylesheet" href="~/Content/css/travel.css">
         <link rel="shortcut icon" href="favicon.ico" />
-        <link href="~/Content/jquery-ui-1.12.1/jquery-ui.css" rel="stylesheet" />        
+        <link href="~/Content/jquery-ui-1.12.1/jquery-ui.css" rel="stylesheet" />
+        <link href="~/Content/fullcalendar-5.3.2/lib/main.css" rel="stylesheet" />
         <script src="~/Scripts/vue.js"></script>
     </head>
 
@@ -77,7 +81,7 @@
                         @*action="./article_AJAX"*@
                         @*<input type="hidden" name="order" value="null" />
                         <input type="hidden" name="border_color" value="null" />*@
-                        <input type="text" class="mt-4" style="width:86%;" name="contain" id="contain">
+                        <input type="text" class="mt-4" style="width:86%;" name="contain" id="contain" value="@HomeSearch[0]">
                         <input type="image" src="~/Content/images/18.png" id="contain_pic" />  @*alt="submit"*@
                         @*</form>*@
                         <br>
@@ -165,7 +169,7 @@
                         <div id="new" class="row align-items-center pr-2  ">
                             <form action="" style="font-size:smaller" class="mr-3">
                                 <span>分類：</span>
-                                <select id="category" style="border: none;">
+                                <select id="category" style="border: none;" HomeSearch="@HomeSearch[1]">
                                     <option style="width:auto;margin:0 auto;" value="所有" selected>
                                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;所有
                                     </option>
@@ -180,7 +184,7 @@
                                 </select>
                                 &nbsp;&nbsp;
                                 <span>總讚數：</span>
-                                <select id="label" style="border: none;">
+                                <select id="label" style="border: none;" HomeSearch="@HomeSearch[2]">
                                     <option value="全部" selected>&nbsp;全部</option>
                                     <option value="10">讚>10</option>
                                     <option value="30">讚>30</option>
@@ -188,7 +192,7 @@
                                     <option value="100">讚>100</option>
                                 </select>
                             </form>
-                            <button class="btn btn-block mr-1   p-1" style="background-color:#FFE0B2 ;" type="submit" data-toggle="modal"
+                            <button class="btn btn-block mr-1   p-1" style="background-color:#FFE0B2 ;" @*type="submit"*@ data-toggle="modal"
                                     data-target="#exampleModal">
                                 <img src="~/Content/images/10.png" class="mb-1" alt=""> Jou團去
                             </button>
@@ -211,7 +215,7 @@
                                 @if (Session["member"] != null)
                                 {
                                     <div class="modal-body">
-                                        <form enctype="multipart/form-data" method="post">
+                                        <form enctype="multipart/form-data" action="~/Travel/Add" method="post">
                                             <div class="container-fluid">
                                                 <span>標題：<input type="text" name="f活動標題" style="width:90%" id="NeedAT"><p id="NeedATTo" style="color:red" hidden>活動標題請至少填滿8個字</p></span>
                                                 <div class="row m-0 mb-3 justify-content-around">
@@ -314,8 +318,8 @@
                     </div>
                 </div>
                 <!-- 文章內容區結束 -->
-                <div class="col-xl-3   col-10 row mx-auto">
-
+                <div id="calendar" class="pr-4 pl-4 col-xl-3   col-10 row mx-auto">
+                    
                 </div>
             </div>
         </div>
@@ -334,20 +338,27 @@
         <script src="~/Scripts/bootstrap.min.js"></script>
         <script src="~/Scripts/IIIProject/navbar.js"></script>
         <script src="~/Scripts/IIIProject/travel.js"></script>
+        <script src="~/Scripts/moment.min.js"></script>
+        <script src="~/Content/fullcalendar-5.3.2/lib/main.js"></script>
+        <script src="~/Content/fullcalendar-5.3.2/lib/locales-all.js"></script>
         <script>
-                                    //function a123(){
-                                    //    var vm = new Vue({
-                                    //        el: ".likeIt",
-                                    //        data: {
-                                    //            IflikeIt: false
-                                    //        },
-                                    //        methods: {
-                                    //            likeItClick: function () {
-                                    //                this.IflikeIt = !this.IflikeIt;
-                                    //            }
-                                    //        }
-                                    //    })
-                                    //}
+        @if (!string.IsNullOrEmpty(HomeSearch[3]))
+        {
+            @:window.confirm("@HomeSearch[3]");
+        }
+        //function a123(){
+        //    var vm = new Vue({
+        //        el: ".likeIt",
+        //        data: {
+        //            IflikeIt: false
+        //        },
+        //        methods: {
+        //            likeItClick: function () {
+        //                this.IflikeIt = !this.IflikeIt;
+        //            }
+        //        }
+        //    })
+        //}
 
         </script>
     </body>

@@ -170,12 +170,12 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        @if (string.Compare(item.f活動結束時間, DateTime.Now.ToString("yyyy-MM-dd")) > 0)
-                        {
-            
+                        @if (string.Compare(DateTime.Now.ToString("yyyy-MM-dd"), item.f活動招募截止時間) > 0)
+                        {  //招募已結束 
+                           <button type="button" class="btn btn-secondary leaveAct" leaveAct="@item.f活動編號">我要退團</button>
                         }
                         else
-                        {
+                        {   //招募未結束
                             <button type="button" class="btn btn-warning joinAct" joinAct="@item.f活動編號">我要入團</button>
                             <button type="button" class="btn btn-secondary leaveAct" leaveAct="@item.f活動編號">我要退團</button>
                         }
@@ -285,11 +285,11 @@
                         </span>
                     </div>
                     <div class="RWD_1851">
-                        <span>揪團日期： <span>@item.f活動發起日期</span></span>
+                        <span>發文日期： <span>@item.f活動發起日期</span></span>
                         <span>&nbsp; &nbsp;</span>
                         <span>活動日期： <span>@item.f活動開始時間</span></span>
                         <span>&nbsp; &nbsp;</span>
-                        <span>入團截止： <span>@item.f活動結束時間</span></span>
+                        <span>入團截止： <span>@item.f活動招募截止時間</span></span>
                     </div>
                     <div class="row ">
                         <div class="dropdown RWD_1850 pr-3">

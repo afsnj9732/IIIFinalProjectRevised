@@ -17,7 +17,7 @@
     const randStore = Math.floor(Math.random() * store.length);
     //console.log(time[randTime],discount[randDiscount],location[randLocation],store[randStore]);
 
-    $('#content').text(time[randTime] + '在' + location[randLocation] + '方圓三公里範圍內，送' + store[randStore] + discount[randDiscount] + '優惠，凡定位於此處者皆有機會獲得~!');
+    $('#content').text(time[randTime] + '在' + location[randLocation] + '方圓三公里範圍內，送' + store[randStore] + discount[randDiscount] + '優惠，收到通知的會員趕快去檢查簡訊領取吧~!');
 
     $.ajax({
         url: "/優惠發送/List",
@@ -35,17 +35,17 @@
                     '<td>' + data[0].mAccount + '</td><br>' +
                     '<td>' + data[0].mName + '</td><br>' +
                     '<td>' + data[0].mRating + '</td><br>' +
-                    '<td><button class="btn-sm btn-primary" id="button1">發送優惠券</button></td></tr><br>' +
+                    '<td><button class="btn-sm btn-primary" id="button1" onclick="sendCoupon()">發送優惠券</button></td></tr><br>' +
                     '<tr><td>' + data[1].mMemberNum + '</td><br>' +
                     '<td>' + data[1].mAccount + '</td><br>' +
                     '<td>' + data[1].mName + '</td><br>' +
                     '<td>' + data[1].mRating + '</td><br>' +
-                    '<td><button class="btn-sm btn-primary">發送優惠券</button></td></tr><br>' +
+                    '<td><button class="btn-sm btn-primary" id="button2" onclick="sendCoupon()">發送優惠券</button></td></tr><br>' +
                     '<tr><td>' + data[2].mMemberNum + '</td><br>' +
                     '<td>' + data[2].mAccount + '</td><br>' +
                     '<td>' + data[2].mName + '</td><br>' +
                     '<td>' + data[2].mRating + '</td><br>' +
-                    '<td><button class="btn-sm btn-primary" onclick="sendCoupon()">發送優惠券</button></td></tr><br>'
+                    '<td><button class="btn-sm btn-primary" id="button3" onclick="sendCoupon()">發送優惠券</button></td></tr><br>'
                 );
             }
         },
@@ -56,34 +56,26 @@
 });
 
 
-//function sendCoupon() {
-//    var notification;
+//發送優惠券
+function sendCoupon() {
+    couponText = document.querySelector('#content').innerHTML;
 
-//    //default granted denied
-//    console.log(Notification.permission);
-//    if (Notification.permission === "default") {
-//        //要求權限
-//        getPermission(load);
-//    } else if (Notification.permission === "granted") {
-//        //發出提醒
-//        console.log('發出提醒');
-//        notification = new Notification("HTML5 JS API Class", {
-//            body: '@B302教室',
-//            icon: 'images/3.jpg'
-//        });
-//        notification.addEventListener('show', function () {
-//            setTimeout("notification.close()", 3000);
-//        });
-//    } else {
-//        console.log('使用者拒絕提醒');
-//    }
+    if (!('Notification' in window)) {
+        console.log('本瀏覽器不支援推播通知');
+    }
 
-//    //callback 回呼函式
-//    function getPermission(callback) {
-//        Notification.requestPermission(callback);
-//    }
-//};
-
-
-
-    
+    if ("Notification" in window) {
+        let ask = Notification.requestPermission();
+        ask.then(permission => {
+            if (permission === "granted") {
+                let msg = new Notification("取得優惠", {
+                    body: couponText,
+                    icon: "../Content/images/joutalogo.png"
+                });
+                msg.addEventListener("click", event => {
+                    alert("點擊接受");
+                });
+            }
+        });
+    }
+}

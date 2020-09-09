@@ -4,7 +4,6 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using PagedList;
-using IIIProject_travel.Models;
 
 
 
@@ -143,6 +142,7 @@ namespace IIIProject_travel.Controllers
             int 當前頁面 = page < 1 ? 1 : page;
             var 結果 = 會員.ToPagedList(當前頁面, 筆數);
             
+
             return View(結果);
         }
 
