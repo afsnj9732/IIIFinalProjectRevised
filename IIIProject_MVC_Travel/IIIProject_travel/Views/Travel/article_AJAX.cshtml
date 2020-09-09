@@ -1,4 +1,6 @@
 ﻿@model IIIProject_travel.ViewModel.CTravel
+@using IIIProject_travel.ViewModel
+@using System.Web.Script.Serialization;
 @{
     dbJoutaEntities db = new dbJoutaEntities();
     Layout = null;
@@ -15,6 +17,47 @@
                                                 //去抓取現在資料庫的資料，否則會一直撈到不變的Session資料
     var totalMember = from x in db.tMember
                       select x;
+
+    if (NowMember != null)
+    {
+
+        if (!string.IsNullOrEmpty(NowMember.f會員參加的活動編號))
+        {
+            string[] NowMemberEvents = NowMember.f會員參加的活動編號.Split(',');
+            CalendarEvents[] NowMemberTotalEvents = new CalendarEvents[NowMemberEvents.Length-1];
+            int i = 0;
+            foreach (var item in NowMemberEvents)
+            {
+                if (string.IsNullOrEmpty(item))
+                {
+                    continue;
+                }
+                var NowMemberAct = db.tActivity.Where(t => t.f活動編號.ToString() == item).FirstOrDefault();
+                CalendarEvents CalendarEvent = new CalendarEvents();
+                CalendarEvent.title = NowMemberAct.f活動標題;
+                CalendarEvent.start = NowMemberAct.f活動開始時間;
+                CalendarEvent.end = NowMemberAct.f活動結束時間;
+                NowMemberTotalEvents[i] = CalendarEvent;
+                i++;
+            }
+            JavaScriptSerializer serializer = new JavaScriptSerializer();
+            var obj = serializer.Serialize(NowMemberTotalEvents);
+<script type="text/javascript">
+    var calendarEl = document.getElementById('calendar');
+    var calendar = new FullCalendar.Calendar(calendarEl, {
+        initialView: 'dayGridMonth',
+        locale: 'zh-tw',
+        events: @Html.Raw(obj),
+        eventClick: function () {
+            @*alert("@NowMember.f會員名稱");*@
+        }
+    });
+    calendar.render();
+</script>
+        }
+
+    }
+
 }
 
 <!-- read more視窗控制頭1 -->
@@ -75,15 +118,15 @@
                     <div class="modal-body">
                         <div AddScore="@item.f活動編號" class="Score">
                             @for (int i = 1; i <= 5; i++)
-                            {                                 
-                                <img ScoreID="@i" isclick="false"  ScoreTarget="@item.f活動編號"  src="~/Content/images/Star.png" />
+                            {
+                                <img ScoreID="@i" isclick="false" ScoreTarget="@item.f活動編號" src="~/Content/images/Star.png" />
                             }
                         </div>
                     </div>
-                    <div class="modal-footer justify-content-between">          
+                    <div class="modal-footer justify-content-between">
                         <span>
                             <button type="button" class="btn btn-warning leaveScore" leaveScore="@item.f活動編號">送出</button>
-                            <button type="button" class="btn btn-secondary resetScore" resetScore="@item.f活動編號" >重設</button>
+                            <button type="button" class="btn btn-secondary resetScore" resetScore="@item.f活動編號">重設</button>
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
                         </span>
                     </div>
@@ -171,8 +214,8 @@
                     </div>
                     <div class="modal-footer">
                         @if (string.Compare(DateTime.Now.ToString("yyyy-MM-dd"), item.f活動招募截止時間) > 0)
-                        {  //招募已結束 
-                           <button type="button" class="btn btn-secondary leaveAct" leaveAct="@item.f活動編號">我要退團</button>
+                        {  //招募已結束
+                            <button type="button" class="btn btn-secondary leaveAct" leaveAct="@item.f活動編號">我要退團</button>
                         }
                         else
                         {   //招募未結束
@@ -259,10 +302,10 @@
                         </div>
                         <!-- 互動文章 -->
                         <div class="modal-footer   mt-3  border-main-color">
-                            @if (Session["member"]!=null && NowMember.f會員編號 == item.f會員編號)
+                            @if (Session["member"] != null && NowMember.f會員編號 == item.f會員編號)
                             {
                                 @*<button type="button" class="btn btn-secondary" data-dismiss="modal">*@
-                                    @Html.ActionLink("刪除","Delete","Travel",new {id = item.f活動編號 },new { @class = "btn btn-secondary" }) 
+                                @Html.ActionLink("刪除", "Delete", "Travel", new { id = item.f活動編號 }, new { @class = "btn btn-secondary" })
                                 @*</button>*@
                             }
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
@@ -358,33 +401,37 @@
         </div>
         <!-- -------------文章分割線-------------- -->
     }
-            <nav aria-label="...">
-                <ul class="pagination">
-                    @*<li class="page-item disabled">
-            <span class="page-link">Previous</span>
-        </li>*@
-                    @for (int i = 1; i < Model.TotalPage + 1; i++)
-                    {
-                        if (i == Model.NowPage)
-                        {
-                            <li class="page-item active  MyPage NowPage" page="@i">
-                                <span class="page-link">
-                                    @i
-                                    <span class="sr-only">(current)</span>
-                                </span>
-                            </li>
-                            @*<button class=" page NowPage" page="@i">@i</button>*@
-                        }
-                        else
-                        {
-                            <li class="page-item  MyPage" page="@i"><a class="page-link" style="cursor:pointer">@i</a></li>
-                            @*<button class=" page" page="@i">@i</button>*@
-                        }
+    <nav aria-label="...">
+        <ul class="pagination">
+            @*<li class="page-item disabled">
+                    <span class="page-link">Previous</span>
+                </li>*@
+            @for (int i = 1; i < Model.TotalPage + 1; i++)
+            {
+                if (i == Model.NowPage)
+                {
+                    <li class="page-item active  MyPage NowPage" page="@i">
+                        <span class="page-link">
+                            @i
+                            <span class="sr-only">(current)</span>
+                        </span>
+                    </li>
+                    @*<button class=" page NowPage" page="@i">@i</button>*@
+                }
+                else
+                {
+                    <li class="page-item  MyPage" page="@i"><a class="page-link" style="cursor:pointer">@i</a></li>
+                    @*<button class=" page" page="@i">@i</button>*@
+                }
 
-                    }
-                    @*<li class="page-item">
-                <a class="page-link" style="cursor:pointer">Next</a>
-            </li>*@
-                </ul>
-            </nav>
+            }
+            @*<li class="page-item">
+                    <a class="page-link" style="cursor:pointer">Next</a>
+                </li>*@
+        </ul>
+    </nav>
 }
+@*@if (NowMember != null)
+    {
+
+    }*@

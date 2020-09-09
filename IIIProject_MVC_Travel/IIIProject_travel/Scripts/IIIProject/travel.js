@@ -1,13 +1,4 @@
-(function () {
-    document.addEventListener('DOMContentLoaded', function () {
-        var calendarEl = document.getElementById('calendar');
-        var calendar = new FullCalendar.Calendar(calendarEl, {
-            initialView: 'dayGridMonth',
-            locale: 'zh-tw'
-        });
-        calendar.render();
-    });
-        
+(function () {                 
     var order, background_color, contain, category, label,page ,p;
     //Bootstrap Modal 關閉觸發事件
     $(document).on('hidden.bs.modal', '.modal', function () {
@@ -221,7 +212,7 @@
 
     //視窗變化觸發RWD
     window.addEventListener("resize", function () {
-        Travel_RWD();
+        Travel_RWD();        
     });
 
     //收藏按鈕，抓活動編號
@@ -371,6 +362,7 @@
                 Travel_RWD();
                 //getViewCounts();
                 //getGoodCounts();
+                
             }
         });
     }
