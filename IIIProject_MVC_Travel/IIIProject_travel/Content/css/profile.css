@@ -3,6 +3,13 @@
 }
 @import url('https://fonts.googleapis.com/css?family=Poopins&display=swap');
 @import url('https://fonts.googleapis.com/css?family=Bree+Serif&display=swap');
+.bio {
+    display: -webkit-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+}
 #limit {
     display: flex;
     width: 500px;

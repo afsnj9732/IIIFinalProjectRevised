@@ -10,16 +10,28 @@ using System.Web.Mvc;
 using System.Runtime.Caching;
 using System.Security.AccessControl;
 using System.Web.Script.Serialization;
+using PagedList;
 
 namespace IIIProject_travel.Controllers
 {
     public class OpenDataConnectController : Controller
     {
-        public async Task<ActionResult> TravelOpenDataIndex()
+
+        int pagesize = 20;
+
+
+        public async Task<ActionResult> TravelOpenDataIndex(int page = 1)
         {
+            int currentPage = page < 1 ? 1 : page;
+
             var travelOpenDataSource = await this.GetHotSpotData();
             ViewData.Model = travelOpenDataSource;
-            return View();
+
+            var dataList = travelOpenDataSource.ToList();
+            var result = dataList.ToPagedList(currentPage, pagesize);
+
+            return View(result);
+            
         }
 
         private async Task<IEnumerable<Topendata>> GetHotSpotData()
@@ -52,7 +64,7 @@ namespace IIIProject_travel.Controllers
 
             //var collection = JsonConvert.DeserializeObject<IEnumerable<Topendata>>(response);
             CacheItemPolicy policy = new CacheItemPolicy();
-            policy.AbsoluteExpiration = DateTime.Now.AddMinutes(30);
+            policy.AbsoluteExpiration = DateTime.Now.AddMinutes(10);
 
             ObjectCache cacheItem = MemoryCache.Default;
             cacheItem.Add(cacheName, collection, policy);
