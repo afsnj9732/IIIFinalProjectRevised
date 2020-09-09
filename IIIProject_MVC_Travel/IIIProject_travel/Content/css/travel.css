@@ -6,6 +6,9 @@ body {
     /*現在頁數樣式*/
     background-color:yellow;
 }
+.fc-event-main-frame{ /*行事曆樣式*/
+    cursor:pointer;
+}
 
 .pagination > .active > span {
     color: black !Important;
