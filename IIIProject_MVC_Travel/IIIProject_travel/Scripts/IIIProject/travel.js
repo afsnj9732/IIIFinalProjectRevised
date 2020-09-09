@@ -1,4 +1,13 @@
 (function () {
+    document.addEventListener('DOMContentLoaded', function () {
+        var calendarEl = document.getElementById('calendar');
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+            initialView: 'dayGridMonth',
+            locale: 'zh-tw'
+        });
+        calendar.render();
+    });
+        
     var order, background_color, contain, category, label,page ,p;
     //Bootstrap Modal 關閉觸發事件
     $(document).on('hidden.bs.modal', '.modal', function () {

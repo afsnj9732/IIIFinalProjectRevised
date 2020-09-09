@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="joutaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="joutaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="sysdiagrams">
           <Key>
             <PropertyRef Name="diagram_id" />
@@ -74,6 +74,7 @@
           <Property Name="f會員評分人數" Type="int" />
           <Property Name="f會員總分" Type="int" />
           <Property Name="f重置驗證碼" Type="nvarchar" MaxLength="100" />
+          <Property Name="f會員擁有的優惠券" Type="nvarchar(max)" />
         </EntityType>
         <Association Name="FK_tActivity_tMember">
           <End Role="tMember" Type="Self.tMember" Multiplicity="1" />
@@ -96,8 +97,7 @@
             <End Role="tActivity" EntitySet="tActivity" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="joutaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -172,6 +172,7 @@
           <Property Name="f會員總分" Type="Int32" />
           <Property Name="f重置驗證碼" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="tActivity" Relationship="Self.FK_tActivity_tMember" FromRole="tMember" ToRole="tActivity" />
+          <Property Name="f會員擁有的優惠券" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK_tActivity_tMember">
           <End Role="tMember" Type="Self.tMember" Multiplicity="1" />
@@ -245,6 +246,7 @@
           <EntitySetMapping Name="tMember">
             <EntityTypeMapping TypeName="joutaModel.tMember">
               <MappingFragment StoreEntitySet="tMember">
+                <ScalarProperty Name="f會員擁有的優惠券" ColumnName="f會員擁有的優惠券" />
                 <ScalarProperty Name="f會員編號" ColumnName="f會員編號" />
                 <ScalarProperty Name="f會員帳號" ColumnName="f會員帳號" />
                 <ScalarProperty Name="f會員密碼" ColumnName="f會員密碼" />
