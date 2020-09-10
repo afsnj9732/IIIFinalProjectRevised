@@ -143,8 +143,8 @@
 
 
     var theMonth, theDay;
-    $("body").on("change", "#ActivityEnd", function () {
-        $("#ActivityEndTo").attr("hidden", "");
+    $("body").on("change", ".ActivityEnd", function () {
+        $(".ActivityEndTo").attr("hidden", "");
         //let d = new Date($("#ActivityEnd").val());
         //date = new Date(d.setDate(d.getDate() - 1));
         nowdate = new Date(Date.now());
@@ -155,7 +155,7 @@
         theMonth = nowdate.getMonth() + 1;
         theDay = nowdate.getDate();
         FormatTime();
-        $("#ActivityStart").attr("min", nowdate.getFullYear() + "-" + theMonth + "-" + theDay);
+        $(".ActivityStart").attr("min", nowdate.getFullYear() + "-" + theMonth + "-" + theDay);
     });
     //時間格式轉換
     function FormatTime() {
@@ -188,6 +188,8 @@
         $(".ActivityStartTo").attr("hidden", "");
         $(".ActivityEndTo").attr("hidden", "");
         $(".ActivityFindEndTo").attr("hidden", "");
+        $(".ActivityEnd").attr("min", "");
+        $(".ActivityFindEnd").attr("max", "");
         $(".NeedACTo").attr("hidden", "");
         $(".NeedAPTo").attr("hidden", "");
         $(".NeedALTo").attr("hidden", "");
