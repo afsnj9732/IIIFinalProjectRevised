@@ -19,6 +19,10 @@ namespace IIIProject_travel.ViewModel
 
         public string QRcodeImage { get; set; }
 
+        public string txtTime { get; set; }
+
+        public string txtComment { get; set; }
+
         public HttpPostedFileBase blogPhoto { get; set; }
 
         public int id { get; set; }
