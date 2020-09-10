@@ -44,8 +44,9 @@
           <Property Name="f活動留言" Type="nvarchar(max)" />
           <Property Name="f活動留言時間" Type="nvarchar(max)" />
           <Property Name="f活動評分過的會員編號" Type="nvarchar(max)" />
-          <Property Name="fQRcode網址" Type="nvarchar" MaxLength="50" />
+          <Property Name="fQRcode網址" Type="nvarchar" MaxLength="200" />
           <Property Name="fQRcodeImage" Type="nvarchar" MaxLength="50" />
+          <Property Name="f有收藏活動的會員編號" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="tMember">
           <Key>
@@ -77,6 +78,7 @@
           <Property Name="f會員總分" Type="int" />
           <Property Name="f重置驗證碼" Type="nvarchar" MaxLength="100" />
           <Property Name="f會員擁有的優惠券" Type="nvarchar(max)" />
+          <Property Name="f會員黑名單" Type="nvarchar(max)" />
         </EntityType>
         <Association Name="FK_tActivity_tMember">
           <End Role="tMember" Type="Self.tMember" Multiplicity="1" />
@@ -143,8 +145,9 @@
           <Property Name="f活動留言時間" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="f活動評分過的會員編號" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="tMember" Relationship="Self.FK_tActivity_tMember" FromRole="tActivity" ToRole="tMember" />
-          <Property Name="fQRcode網址" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="fQRcode網址" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="fQRcodeImage" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="f有收藏活動的會員編號" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="tMember">
           <Key>
@@ -177,6 +180,7 @@
           <Property Name="f重置驗證碼" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="tActivity" Relationship="Self.FK_tActivity_tMember" FromRole="tMember" ToRole="tActivity" />
           <Property Name="f會員擁有的優惠券" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="f會員黑名單" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK_tActivity_tMember">
           <End Role="tMember" Type="Self.tMember" Multiplicity="1" />
@@ -219,6 +223,7 @@
           <EntitySetMapping Name="tActivity">
             <EntityTypeMapping TypeName="joutaModel.tActivity">
               <MappingFragment StoreEntitySet="tActivity">
+                <ScalarProperty Name="f有收藏活動的會員編號" ColumnName="f有收藏活動的會員編號" />
                 <ScalarProperty Name="fQRcodeImage" ColumnName="fQRcodeImage" />
                 <ScalarProperty Name="fQRcode網址" ColumnName="fQRcode網址" />
                 <ScalarProperty Name="f活動編號" ColumnName="f活動編號" />
@@ -252,6 +257,7 @@
           <EntitySetMapping Name="tMember">
             <EntityTypeMapping TypeName="joutaModel.tMember">
               <MappingFragment StoreEntitySet="tMember">
+                <ScalarProperty Name="f會員黑名單" ColumnName="f會員黑名單" />
                 <ScalarProperty Name="f會員擁有的優惠券" ColumnName="f會員擁有的優惠券" />
                 <ScalarProperty Name="f會員編號" ColumnName="f會員編號" />
                 <ScalarProperty Name="f會員帳號" ColumnName="f會員帳號" />

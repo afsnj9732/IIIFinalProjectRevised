@@ -17,8 +17,10 @@
     const randStore = Math.floor(Math.random() * store.length);
     //console.log(time[randTime],discount[randDiscount],location[randLocation],store[randStore]);
 
-    $('#content').text(time[randTime] + '在' + location[randLocation] + '方圓三公里範圍內，送' + store[randStore] + discount[randDiscount] + '優惠，收到通知的會員趕快去檢查簡訊領取吧~!');
-    $('#sendBtn').html(`<input type="submit" class="btn btn-primary ml-3 sendBtn" onclick="sendCoupon()" value="送出優惠券">`);
+    $('#content').text(time[randTime] + '在' + location[randLocation] + '方圓三公里範圍內，將送出' + store[randStore] + discount[randDiscount] + '優惠券!');
+    $('#hidcontent').text(store[randStore]+"-"+discount[randDiscount]+"優惠券");
+    $('#sendBtn').html(`<button type="submit" class="btn btn-primary ml-3 sendBtn" onclick="sendCoupon()">送出優惠券</button>`);
+    //$('#sendBtn').html(`<a class="btn btn-primary ml-3 sendBtn" onclick="sendCoupon()" value="送出優惠券"></a>`);
 
     $.ajax({
         url: "/優惠發送/List",
@@ -32,18 +34,22 @@
         success: function (data) {
             //如果有撈到資料
             if (data) {
-                $('#tbody').html('<tr><td id="member" name="memberId">' + data[0].mMemberNum + '</td><br>' +
+                $('#tbody').html(
+                    '<tr><td id="member">' + data[0].mMemberNum + '</td><br>' +
                     '<td>' + data[0].mAccount + '</td><br>' +
                     '<td>' + data[0].mName + '</td><br>' +
                     '<td>' + data[0].mRating + '</td><br>' +
-                    '<tr><td id="member" name="memberId">' + data[1].mMemberNum + '</td><br>' +
+                    '<input type="hidden" class="form-control" id="memberId1" name="memberId1" /><br>' +
+                    '<tr><td id="member">' + data[1].mMemberNum + '</td><br>' +
                     '<td>' + data[1].mAccount + '</td><br>' +
                     '<td>' + data[1].mName + '</td><br>' +
                     '<td>' + data[1].mRating + '</td><br>' +
-                    '<tr><td id="member" name="memberId">' + data[2].mMemberNum + '</td><br>' +
+                    '<input type="hidden" class="form-control" id="memberId2" name="memberId2" /><br>' +
+                    '<tr><td id="member">' + data[2].mMemberNum + '</td><br>' +
                     '<td>' + data[2].mAccount + '</td><br>' +
                     '<td>' + data[2].mName + '</td><br>' +
-                    '<td>' + data[2].mRating + '</td><br>'
+                    '<td>' + data[2].mRating + '</td><br>' +
+                    '<input type="hidden" class="form-control" id="memberId3" name="memberId3" /><br>'
                 );
             }
         },
@@ -54,21 +60,42 @@
 });
 
 
-//發送優惠券
-var targetMember;
-
+//發送優惠券+跳通知
 function sendCoupon() {
-    for (i = 0; i < 3; i++) {
-        targetMember = document.querySelectorAll('#member')[i].innerHTML;
-        console.log('in ' + targetMember);
-    }
-
-    console.log('out ' + targetMember);
-
     $('.sendBtn').attr('disabled', '');
     $('.sendBtn').attr('onclick', '');
 
-    console.log($("input[name='txtCouponInfo']."));
+    var txtCouponInfo = document.querySelector('#txtCouponInfo').value;
+    hidcontent = document.querySelector('#hidcontent').innerHTML;
+    txtCouponInfo = hidcontent;
+
+    //var memberId1 = document.querySelector('#memberId1').value;
+    //member1 = document.querySelector('#member1').innerHTML;
+    //memberId1 = member1;
+
+    //var memberId2 = document.querySelector('#memberId2').value;
+    //member2 = document.querySelector('#member2').innerHTML;
+    //memberId2 = member2;
+
+    //var memberId3 = document.querySelector('#memberId3').value;
+    //member3 = document.querySelector('#member3').innerHTML;
+    //memberId3 = member3;
+
+    member = document.querySelector('#member').innerHTML;
+
+    console.log('txtCouponInfo= ' + txtCouponInfo);
+    console.log('hidcontent= ' + hidcontent);
+
+    console.log('member= ' + member);
+    
+    //sendout = document.querySelector('.sendBtn');
+    //sendout.onclick = function () {
+    //    document.querySelector('#form1').submit();
+    //};
+
+
+    //console.log($("input[name='txtCouponInfo'].innerHTML"));
+
     //if (!('Notification' in window)) {
     //    console.log('本瀏覽器不支援推播通知');
     //}
