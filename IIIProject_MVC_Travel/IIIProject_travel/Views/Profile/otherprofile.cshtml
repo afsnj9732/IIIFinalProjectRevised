@@ -4,7 +4,7 @@
     var x = (tMember)Session["member"];
     dbJoutaEntities db = new dbJoutaEntities();
     var post = from t in db.tActivity
-               where t.f活動類型 == "文章" && t.f活動編號.ToString() == x.f會員發起的活動編號
+               where t.f活動類型 == "文章" && t.f活動編號.ToString() == x.f會員發起的活動編號.ToString()
                select t;
 }
 
@@ -197,13 +197,13 @@
                 </div>
                 <div class="profile-posts tab_info" id="myPost">
                     <h1>@Model.tMembers.f會員名稱 的發文</h1>
-                    @if (Model.tMembers.f會員發起的活動編號 == null)
+                    @*@if (Model.tMembers.f會員發起的活動編號 == null)
                     {
                         <p>無發文紀錄</p>
                     }
                     else
-                    {
-                        foreach (tActivity t in Model.tActivities)
+                    {*@
+                        @foreach (tActivity t in post)
                         {
                             <div class="card mb-4">
                                 <img class="card-img-top" src="~/Content/images/@t.f活動團圖" alt="@t.f會員編號">
@@ -221,7 +221,7 @@
                                 </div>
                             </div>
                         }
-                    }
+                    @*}*@
 
                 </div>
                 <div class="profile-event tab_info" id="myActivity">
