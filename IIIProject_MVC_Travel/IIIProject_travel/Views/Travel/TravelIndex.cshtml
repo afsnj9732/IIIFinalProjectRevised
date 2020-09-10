@@ -86,7 +86,7 @@
                         @*<form method="post">*@
                         @*action="./article_AJAX"*@
                         @*<input type="hidden" name="order" value="null" />
-                            <input type="hidden" name="border_color" value="null" />*@
+                        <input type="hidden" name="border_color" value="null" />*@
                         <input type="text" class="mt-4" style="width:86%;" name="contain" id="contain" value="@HomeSearch[0]">
                         <input type="image" src="~/Content/images/18.png" id="contain_pic" />  @*alt="submit"*@
                         @*</form>*@
@@ -125,11 +125,11 @@
                             </span>
                         </li>
                         @*<li class="m-2 mb-3 row justify-content-between" id="06" style="list-style-type:none;cursor: pointer;">
-                                <span>
-                                    <img src="~/Content/images/06.png" order="f活動瀏覽次數"
-                                         alt="">瀏覽次數
-                                </span>
-                            </li>*@
+                            <span>
+                                <img src="~/Content/images/06.png" order="f活動瀏覽次數"
+                                     alt="">瀏覽次數
+                            </span>
+                        </li>*@
                         <li class="m-2 mb-3 row justify-content-between" id="07" order="f活動開始時間" style="list-style-type:none;cursor: pointer;">
                             <span>
                                 <img src="~/Content/images/07.png"
@@ -249,7 +249,7 @@
 
                                                 </div>
                                                 <div class="row mb-4 mx-auto align-items-center justify-content-around">
-                                                    <span class="row  align-items-center">團圖：<input type="file" name="PicFile" class="NeedAP"><span class="mr-5 NeedAPTo"   style="color:red" hidden>活動團圖必填</span></span>
+                                                    <span class="row  align-items-center">團圖：<input type="file" name="PicFile" class="NeedAP"><span class="mr-5 NeedAPTo" style="color:red" hidden>活動團圖必填</span></span>
 
                                                     <span class=" ">
                                                         <img src="~/Content/images/03.png" class="mb-1" alt="">
@@ -263,7 +263,7 @@
                                                     </span>
                                                 </div>
 
-                                                
+
                                                 <div class="mb-4 mx-auto align-items-center justify-content-around">
                                                     <span class="mb-1">點選一個地點：</span>
                                                     <div id="mapid">
@@ -274,14 +274,14 @@
 
                                                 <div class="row align-items-center">
                                                     <div class="mx-auto mb-3">
-                                                        內容：<textarea name="f活動內容" style="width:1000px;height:220px;vertical-align:top;" class="NeedAL"></textarea>
+                                                        內容：<textarea name="f活動內容" id="AddAct" @*style="width:1000px;height:220px;vertical-align:top;"*@ class="NeedAL"></textarea>
                                                         <p class="NeedALTo" style="color:red" hidden>活動內容請至少填滿100字</p>
                                                     </div>
                                                 </div>
                                             </div>
                                             <!-- 揪團內容尾 -->
                                             <div class="modal-footer  mt-2 border-main-color">
-                                                <input type="submit" class="btn JoutaSend" style="background-color:#FFE0B2"   value="送出" />
+                                                <input type="submit" class="btn JoutaSend" style="background-color:#FFE0B2" value="送出" />
                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
                                             </div>
                                             <!-- 揪團隱藏不顯示項目 -->
@@ -307,12 +307,12 @@
                     <div id="article">
                         <div id="article_ajax"></div>
                         @*<button id="showCharts">顯示統計圖表</button>
-                            <img src="~/Views/Travel/Chart"/>
-                            <div id="showChartsTag"></div>*@
+                        <img src="~/Views/Travel/Chart"/>
+                        <div id="showChartsTag"></div>*@
                         <div class="mt-3">
                             @*<button class="btn btn-block mr-1  p-1 row mx-auto" style="background-color:#FFE0B2 ;">
-                                    <img src="~/Content/images/10.png" alt="" class="pb-1">讀取更多
-                                </button>*@
+                                <img src="~/Content/images/10.png" alt="" class="pb-1">讀取更多
+                            </button>*@
                         </div>
                         <div class="mb-5"></div> <!--底部墊高-->
 
@@ -345,6 +345,7 @@
         <script src="~/Scripts/IIIProject/popper.min.js"></script>
         <script src="~/Scripts/bootstrap.min.js"></script>
         <script src="~/Scripts/IIIProject/navbar.js"></script>
+        <script src="https://cdn.ckeditor.com/4.15.0/standard/ckeditor.js"></script>
         <script src="~/Scripts/moment.min.js"></script>
         <script src="~/Content/fullcalendar-5.3.2/lib/main.js"></script>
         <script src="~/Content/fullcalendar-5.3.2/lib/locales-all.js"></script>

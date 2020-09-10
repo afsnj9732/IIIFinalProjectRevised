@@ -1,4 +1,5 @@
-(function () {                 
+(function () {       
+
     var order, background_color, contain, category, label, page, p;
     var calendarEl = document.getElementById('calendar');
     $("body").on("click", ".CalendarEvent", function () {
@@ -182,7 +183,7 @@
         $(".NeedALTo").attr("hidden", "");
     });
     $("body").on("click", ".JoutaEdit", function () {
-        console.log("why");
+        CKEDITOR.replace('f活動內容2');
         $(".NeedATTo").attr("hidden", "");
         $(".ActivityStartTo").attr("hidden", "");
         $(".ActivityEndTo").attr("hidden", "");
@@ -192,8 +193,16 @@
         $(".NeedALTo").attr("hidden", "");
     });
 
+    //文字編輯器
+    CKEDITOR.replace('f活動內容');
+
     //揪團欄位限制
-    $(".JoutaSend").on("click", function (e) {
+    $(".JoutaSend").on("click", function (e) {              
+        let data = CKEDITOR.instances.AddAct.getData();
+        $('#AddAct').val(data);
+        let data2 = CKEDITOR.instances.EditAct.getData(); 
+        $('#EditAct').val(data2);
+       
         if ($(".NeedAT").val().length < 8) {
             e.preventDefault();
             $(".NeedATTo").removeAttr("hidden");
