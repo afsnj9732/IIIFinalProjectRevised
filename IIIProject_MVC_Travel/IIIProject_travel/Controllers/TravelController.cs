@@ -267,13 +267,14 @@ namespace IIIProject_travel.Controllers
                         CalendarEvent.title = NowMemberAct.f活動標題;
                         CalendarEvent.start = NowMemberAct.f活動開始時間;
                         CalendarEvent.end = NowMemberAct.f活動結束時間+" 00:00:01";
-                        ActID += ","+NowMemberAct.f活動編號;
+                        CalendarEvent.classNames = "CalendarEvent"+" "+ "EventActID"+NowMemberAct.f活動編號;
+                        //ActID += ","+NowMemberAct.f活動編號;
                         NowMemberTotalEvents[i] = CalendarEvent;
                         i++;
                     }
                     JavaScriptSerializer serializer = new JavaScriptSerializer();
                     var obj = serializer.Serialize(NowMemberTotalEvents);
-                    return  obj+"%"+ ActID;
+                    return  obj/*+"%"+ ActID*/;
                 }
             }
                 return "";
