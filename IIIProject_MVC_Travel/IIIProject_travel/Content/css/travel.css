@@ -26,6 +26,7 @@ body {
     bottom: 5%;
 }
 
+
 .combine_readmore {
     
 }
@@ -41,6 +42,9 @@ body {
     
 }
 .combine_score {
+    z-index: 1051;
+}
+.combine_edit {
     z-index: 1051;
 }
 

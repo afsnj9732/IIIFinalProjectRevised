@@ -46,6 +46,7 @@ namespace IIIProject_travel
         public Nullable<int> f會員總分 { get; set; }
         public string f重置驗證碼 { get; set; }
         public string f會員擁有的優惠券 { get; set; }
+        public string f會員黑名單 { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tActivity> tActivity { get; set; }
