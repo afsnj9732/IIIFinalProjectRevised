@@ -78,6 +78,7 @@
           <Property Name="f會員總分" Type="int" />
           <Property Name="f重置驗證碼" Type="nvarchar" MaxLength="100" />
           <Property Name="f會員擁有的優惠券" Type="nvarchar(max)" />
+          <Property Name="f會員黑名單" Type="nvarchar(max)" />
         </EntityType>
         <Association Name="FK_tActivity_tMember">
           <End Role="tMember" Type="Self.tMember" Multiplicity="1" />
@@ -179,6 +180,7 @@
           <Property Name="f重置驗證碼" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="tActivity" Relationship="Self.FK_tActivity_tMember" FromRole="tMember" ToRole="tActivity" />
           <Property Name="f會員擁有的優惠券" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="f會員黑名單" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK_tActivity_tMember">
           <End Role="tMember" Type="Self.tMember" Multiplicity="1" />
@@ -255,6 +257,7 @@
           <EntitySetMapping Name="tMember">
             <EntityTypeMapping TypeName="joutaModel.tMember">
               <MappingFragment StoreEntitySet="tMember">
+                <ScalarProperty Name="f會員黑名單" ColumnName="f會員黑名單" />
                 <ScalarProperty Name="f會員擁有的優惠券" ColumnName="f會員擁有的優惠券" />
                 <ScalarProperty Name="f會員編號" ColumnName="f會員編號" />
                 <ScalarProperty Name="f會員帳號" ColumnName="f會員帳號" />
