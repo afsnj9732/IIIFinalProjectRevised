@@ -200,16 +200,21 @@ namespace IIIProject_travel.Controllers
 
 
         [HttpPost]
-        public ActionResult Comment (CBlog p)
+        public ActionResult AddComment (CBlog p )
         {
+
+            var currentTime = DateTime.Now;
 
             tActivity article = new tActivity();
 
-            article.f活動留言 = p.txtComment;
+            article.f活動留言 = p.content;
+            article.f活動留言時間 = currentTime.ToString();
 
+            dbJoutaEntities db = new dbJoutaEntities();
+            db.tActivity.Add(article);
+            db.SaveChanges();
 
-
-            return RedirectToAction("index");
+            return RedirectToAction("indBlogContentex", new { id = p.id});
 
 
         }

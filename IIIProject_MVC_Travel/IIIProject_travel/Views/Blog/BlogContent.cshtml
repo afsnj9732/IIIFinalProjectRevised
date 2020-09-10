@@ -5,6 +5,13 @@
     Layout = null;
     var x = (tMember)Session["member"];
 
+    var commentList = new List<tActivity>();
+
+
+    commentList = (from t in db.tActivity
+                   where t.f活動編號 == t.f活動編號
+                   select t).ToList();
+
 }
 
 <!DOCTYPE html>
@@ -136,12 +143,11 @@
                 <div class="card my-4">
                     <h5 class="card-header">留下您的留言：</h5>
                     <div class="card-body">
-                        <form  action="~/Blog/Comment" method="post" enctype="multipart/form-data">
-                            <div class="form-group">
-                                <textarea class="form-control" rows="3" name="txtComment" id="txtComment"></textarea>
-                            </div>
-                            @*<button type="submit" class="btn btn-primary" id="btnComment">提交</button>*@
-                        </form>
+                        @using (Html.BeginForm("AddComment", "Blog", FormMethod.Post, new { }))
+                        {
+                            @Html.TextBox("content")
+                            <button type="submit" value="留言" class="btn btn-primary" id="btnComment">提交</button>
+                        }
                     </div>
                 </div>
                 
@@ -149,23 +155,23 @@
                 <div class="media mb-4">
                     
                     <div class="media-body">
-                        @*@{
-                            foreach (var item in Model.f活動留言)
+                        @{
+                            foreach (var commemt in commentList)
                             {
 
-                                
+
 
                                 <div class="media mb-4">
                                     <img class="d-flex mr-3 rounded-circle" src="https://picsum.photos/50/50/?random=1" alt="">
                                     <div class="media-body">
                                         <h5 class="mt-0">Commenter Name</h5>
-                                        @Model.f活動留言
+                                        @commemt.f活動留言 (@commemt.f活動留言時間)
                                     </div>
                                 </div>
 
-                            }
+                                }
 
-                        }*@
+                        }
 
                     </div>
                 </div>

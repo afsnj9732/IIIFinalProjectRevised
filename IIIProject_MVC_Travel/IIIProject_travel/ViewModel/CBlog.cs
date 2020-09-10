@@ -27,7 +27,13 @@ namespace IIIProject_travel.ViewModel
 
         public int id { get; set; }
 
-        
+        public string content { get; set; }
+
+        public string CreateDate { get; set; }
+
+
+
+
 
 
     }
