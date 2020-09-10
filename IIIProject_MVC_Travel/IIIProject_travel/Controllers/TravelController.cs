@@ -173,7 +173,6 @@ namespace IIIProject_travel.Controllers
             }
             //添加占用時間
             NowMember.f會員已占用時間 += "," + p.f活動開始時間 + "~" + p.f活動結束時間;
-
             p.f會員編號 = Member.f會員編號;
             p.f活動類型 = "旅遊";
             p.f活動參加的會員編號 = "," + Member.f會員編號;

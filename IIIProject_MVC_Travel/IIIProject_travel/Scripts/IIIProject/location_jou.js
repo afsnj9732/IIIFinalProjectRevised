@@ -1,11 +1,6 @@
 ﻿(function () {
     var mymap;
     var theMarker = {};
-    var evtLat = $('#evtLat').val();
-    var evtLng = $('#evtLng').val();
-
-    console.log('lat out ' + evtLat);
-    console.log('lng out ' + evtLng);
 
     //如果已經有畫地圖就刪掉重畫
     if (mymap !== undefined) {
@@ -23,18 +18,21 @@
         accessToken: 'pk.eyJ1IjoiZGV5byIsImEiOiJja2VqY3JheTQyM3JsMndzNDBsODF2b214In0.1f7T-kY2Uz1F5FZ_WsLpaA'
     }).addTo(mymap);
 
-    //點擊顯示icon
+    //點擊顯示marker
     mymap.on('click', function (e) {
         lat = e.latlng.lat;
         lng = e.latlng.lng;
+        var evtLat = $('#evtLat').val(lat);
+        var evtLng = $('#evtLng').val(lng);
+
+        //如果地圖上已經有marker就刪掉重畫
         if (theMarker !== undefined) {
             mymap.removeLayer(theMarker);
+            evtLat = null;
+            evtLng = null;
         }
         theMarker = L.marker([lat, lng]).addTo(mymap);
         //console.log("Lat, Lon : " + lat + ", " + lng);
-        evtLat = lat;
-        evtLng = lng;
-        console.log('lat in ' + evtLat);
-        console.log('lng in ' + evtLng);
+        console.log($('#evtLng').val());
     });
 })();
