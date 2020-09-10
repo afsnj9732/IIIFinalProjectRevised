@@ -1,4 +1,5 @@
-﻿using System;
+﻿using IIIProject_travel.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -32,6 +33,24 @@ namespace IIIProject_travel.Controllers
                 .OrderBy(t => Guid.NewGuid()).Take(3);
 
             return Json(x, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public ActionResult Save(CCoupon p)
+        {
+            tMember x = new tMember();
+
+            if (x.f會員編號 == p.memberId)
+            {
+                string couponName = new Guid(p.txtCouponInfo).ToString();
+                x.f會員擁有的優惠券 = couponName;
+            }
+
+            dbJoutaEntities db = new dbJoutaEntities();
+            db.tMember.Add(x);
+            db.SaveChanges();
+
+            return RedirectToAction("List");
         }
     }
 }

@@ -47,7 +47,6 @@ namespace IIIProject_travel.Controllers
             else
             {
                 ModelState.AddModelError("txtPassword","密碼輸入錯誤");
-                ModelState.Clear();
                 return View();
             }
         }
