@@ -2259,6 +2259,8 @@
     <Content Include="Views\後台旅遊\v查看.cshtml" />
     <Content Include="Views\OpenDataConnect\TravelOpenDataIndex.cshtml" />
     <Content Include="Views\Travel\getCalendarEvent.cshtml" />
+    <Content Include="Views\後台文章\v查看.cshtml" />
+    <Content Include="Views\聯絡我們\r回覆.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

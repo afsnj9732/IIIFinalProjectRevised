@@ -1,7 +1,7 @@
 ﻿@model IIIProject_travel.tActivity
 
 @{
-    ViewBag.Title = "v查看";
+    ViewBag.Title = "r回覆";
 }
 @{
     Layout = null;
@@ -102,7 +102,7 @@
             <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
 
 
-                <h2>查看文章</h2>
+                <h2>查看意見</h2>
                 <div class="table-responsive">
 
                     <form method="post">
@@ -123,14 +123,20 @@
                                     <input type="text" name="f活動發起日期" value="@Model.f活動發起日期" />
                                 </p>
                                 <p>
-                                    地區<br />
-                                    <input type="text" name="f活動地區" value="@Model.f活動地區" />
-                                </p>
-                                <p>
                                     內容<br />
                                     <input type="text" name="f活動內容" value="@Model.f活動內容" style="width:300px;height:100px" readonly />
                                 </p>
-
+                                <p>
+                                    分類<br />
+                                    <input type="text" name="f活動分類" value="@Model.f活動分類" />
+                                </p>
+                                <p>
+                                    回覆內容<br />
+                                    <input type="text" name="" value="" style="width:300px;height:100px" />
+                                </p>
+                                <p>
+                                    <input type="submit" value="送出"/>
+                                </p>
 
                             </div>
 
