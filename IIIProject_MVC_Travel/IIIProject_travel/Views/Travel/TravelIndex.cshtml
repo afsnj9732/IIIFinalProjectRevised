@@ -80,7 +80,7 @@
                         @*<form method="post">*@
                         @*action="./article_AJAX"*@
                         @*<input type="hidden" name="order" value="null" />
-                        <input type="hidden" name="border_color" value="null" />*@
+                <input type="hidden" name="border_color" value="null" />*@
                         <input type="text" class="mt-4" style="width:86%;" name="contain" id="contain" value="@HomeSearch[0]">
                         <input type="image" src="~/Content/images/18.png" id="contain_pic" />  @*alt="submit"*@
                         @*</form>*@
@@ -119,11 +119,11 @@
                             </span>
                         </li>
                         @*<li class="m-2 mb-3 row justify-content-between" id="06" style="list-style-type:none;cursor: pointer;">
-                            <span>
-                                <img src="~/Content/images/06.png" order="f活動瀏覽次數"
-                                     alt="">瀏覽次數
-                            </span>
-                        </li>*@
+                    <span>
+                        <img src="~/Content/images/06.png" order="f活動瀏覽次數"
+                             alt="">瀏覽次數
+                    </span>
+                </li>*@
                         <li class="m-2 mb-3 row justify-content-between" id="07" order="f活動開始時間" style="list-style-type:none;cursor: pointer;">
                             <span>
                                 <img src="~/Content/images/07.png"
@@ -157,7 +157,7 @@
 
                 <!-- 文章區主體 -->
 
-                <div class="col-xl-6 col-lg-7 col-10 mt-1 mx-auto">
+                <div class="col-xl-6 col-lg-7 col-10 mt-1 mx-auto pr-2 pl-2">
                     <div class="button row justify-content-between pt-1 pb-2 align-items-center">
                         <!-- 現在排序頭 -->
                         <div id="row">
@@ -230,8 +230,8 @@
                                                         <img src="~/Content/images/17.png" class="mb-1" alt="">分類：
                                                         <select name="f活動分類" style="">
                                                             @*<option style="width:auto;margin:0 auto;" value="所有" selected>
-                                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;所有
-                                                            </option>*@
+                                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;所有
+                                                    </option>*@
                                                             <option value="兩天一夜">兩天一夜</option>
                                                             <option value="三天兩夜">三天兩夜</option>
                                                             <option value="五天四夜">五天四夜</option>
@@ -244,15 +244,15 @@
                                                     </div>
                                                     @*&nbsp;&nbsp;*@
                                                     @*<span class="pr-4">
-                                                        <img src="~/Content/images/13.png" class="mb-1" alt="">標籤：
-                                                        <select name="f活動標籤" style="">
-                                                            <option value="全部" selected>&nbsp;全部</option>
-                                                            <option value="10">讚>10</option>
-                                                            <option value="30">讚>30</option>
-                                                            <option value="50">讚>50</option>
-                                                            <option value="100">讚>100</option>
-                                                        </select>
-                                                    </span>*@
+                                                <img src="~/Content/images/13.png" class="mb-1" alt="">標籤：
+                                                <select name="f活動標籤" style="">
+                                                    <option value="全部" selected>&nbsp;全部</option>
+                                                    <option value="10">讚>10</option>
+                                                    <option value="30">讚>30</option>
+                                                    <option value="50">讚>50</option>
+                                                    <option value="100">讚>100</option>
+                                                </select>
+                                            </span>*@
                                                 </div>
                                                 <div class="row mb-4 mx-auto align-items-center justify-content-around">
                                                     <span class="row  align-items-center">團圖：<input type="file" name="PicFile" id="NeedAP"><span class="mr-5" id="NeedAPTo" style="color:red" hidden>活動團圖必填</span></span>
@@ -305,12 +305,12 @@
                     <div id="article">
                         <div id="article_ajax"></div>
                         @*<button id="showCharts">顯示統計圖表</button>
-                        <img src="~/Views/Travel/Chart"/>
-                        <div id="showChartsTag"></div>*@
+                <img src="~/Views/Travel/Chart"/>
+                <div id="showChartsTag"></div>*@
                         <div class="mt-3">
                             @*<button class="btn btn-block mr-1  p-1 row mx-auto" style="background-color:#FFE0B2 ;">
-                                <img src="~/Content/images/10.png" alt="" class="pb-1">讀取更多
-                            </button>*@
+                        <img src="~/Content/images/10.png" alt="" class="pb-1">讀取更多
+                    </button>*@
                         </div>
                         <div class="mb-5"></div> <!--底部墊高-->
 
@@ -318,8 +318,14 @@
                     </div>
                 </div>
                 <!-- 文章內容區結束 -->
+                @*行事曆*@
                 <div id="calendar" class="pr-4 pl-4 col-xl-3   col-10 row mx-auto">
-                    
+
+                </div>
+                @*行事曆事件*@
+                <div>
+                    <button hidden type="button" id="calendarEventGo" class="btn btn-primary" data-toggle="modal" data-target="#calendarEventShow"></button>
+                    <div id="calendarEventTarget"></div>
                 </div>
             </div>
         </div>

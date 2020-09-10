@@ -8,12 +8,26 @@
             type: "POST",
             success: function (data) {
                 if (data !== "") {
+                    var NewData = data.split('%');
                     //行事曆                   
                     let calendar = new FullCalendar.Calendar(calendarEl, {
                         initialView: 'dayGridMonth',
                         locale: 'zh-tw',
-                        events: JSON.parse(data),
+                        height:750,
+                        events: JSON.parse(NewData[0]),
                         eventClick: function () {
+                            $.ajax({
+                                url: "/Travel/getCalendarEvent",
+                                type: "POST",
+                                data: { "target":NewData[1]},
+                                success: function (data) {
+                                    if (data === "")
+                                        return;
+                                    $("#calendarEventTarget").html(data); //有時間加入同步效果
+                                    console.log("111");
+                                    $("#calendarEventGo").click();
+                                }
+                            });                            
                         }
                     });
                     calendar.render();
