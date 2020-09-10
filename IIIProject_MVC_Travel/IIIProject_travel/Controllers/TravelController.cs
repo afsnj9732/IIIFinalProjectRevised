@@ -203,7 +203,7 @@ namespace IIIProject_travel.Controllers
             var NowMember = db.tMember.Where(t => t.f會員編號 == LoginMember.f會員編號).FirstOrDefault();
             NowMember.f會員發起的活動編號 =
                 string.Join(",", NowMember.f會員發起的活動編號.Split(',').Where(t => t != id.ToString()));
-            //撈出所有參加會員的編號，並讓他們退團
+            //撈出所有參加會員的編號，並讓他們退團並退收藏
             if (!string.IsNullOrEmpty(target.f活動參加的會員編號))
             {
                 string[] DeleteList = target.f活動參加的會員編號.Split(',');
@@ -221,6 +221,13 @@ namespace IIIProject_travel.Controllers
                         Delete.f會員已占用時間 =
                             string.Join(",", usedTime.Where(t => t != target.f活動開始時間 + "~" + target.f活動結束時間));
 
+                        //移除收藏
+                        if (!string.IsNullOrEmpty(Delete.f會員收藏的活動編號))
+                        {
+                            Delete.f會員收藏的活動編號 = string.Join(",",
+                                  Delete.f會員收藏的活動編號.Split(',').Where(t => t != id.ToString())
+                                );
+                        }
                     }
                 }
             }
@@ -440,12 +447,13 @@ namespace IIIProject_travel.Controllers
             db.SaveChanges();
         }
 
-        public string likeIt(string ActivityID)
+        public string likeIt(string ActivityID)  
         {
             if (Session["member"] == null)
                 return "0";
             dbJoutaEntities db = new dbJoutaEntities();
             var condition = (tMember)Session["member"];
+            var targetAct = db.tActivity.Where(t => t.f活動編號.ToString() == ActivityID).FirstOrDefault();
             var member = db.tMember.Where(x => x.f會員編號 == condition.f會員編號).Select(a => a).FirstOrDefault();
             if (!string.IsNullOrEmpty(member.f會員收藏的活動編號))
             {
@@ -453,6 +461,7 @@ namespace IIIProject_travel.Controllers
                 int pos = Array.IndexOf(isExist, ActivityID);
                 if (pos < 0)   //若沒找到，存入資料庫，正確
                 {
+                    targetAct.f有收藏活動的會員編號 += "," + member.f會員編號;
                     member.f會員收藏的活動編號 += "," + ActivityID;
                     db.SaveChanges();
                 }
@@ -460,12 +469,15 @@ namespace IIIProject_travel.Controllers
                 {                     
                     var FinalList = isExist.ToList();
                     FinalList.RemoveAt(pos);  //移除
-                    member.f會員收藏的活動編號 = string.Join(",", FinalList); 
+                    member.f會員收藏的活動編號 = string.Join(",", FinalList);
+                    targetAct.f有收藏活動的會員編號 = string.Join(",",
+                        targetAct.f有收藏活動的會員編號.Split(',').Where(t => t != member.f會員編號.ToString()));
                     db.SaveChanges();
                 }
             }
             else
             {
+                targetAct.f有收藏活動的會員編號 += "," + member.f會員編號;
                 member.f會員收藏的活動編號 += "," + ActivityID; //若資料庫完全是空的，則不可能有重複值，直接存入
                 db.SaveChanges();
             }
