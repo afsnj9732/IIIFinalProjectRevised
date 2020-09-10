@@ -195,7 +195,7 @@
 
     //文字編輯器
     CKEDITOR.replace('f活動內容', { height: 400,width:1100 });
- 
+    CKEDITOR.replace('f活動內容2', { height: 400, width: 1100 });
     //揪團欄位限制
     $(".JoutaSend").on("click", function (e) {              
         let data = CKEDITOR.instances.AddAct.getData();
