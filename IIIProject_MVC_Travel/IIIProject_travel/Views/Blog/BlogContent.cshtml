@@ -1,4 +1,4 @@
-﻿@model IEnumerable<tActivity>
+﻿@model  tActivity
 
 @{
     dbJoutaEntities db = new dbJoutaEntities();
@@ -66,14 +66,11 @@
             <div class="col-lg-8">
 
                 <!-- Title -->
-                @{
-                    foreach (tActivity tArticle in Model)
-                    {
                         <h1 class="mt-4">
-                            @tArticle.f活動標題
+                            @Model.f活動標題
                         </h1>
-                    }
-                }
+                    
+                
 
 
                 <!-- Author -->
@@ -94,11 +91,9 @@
 
                 <!-- Preview Image -->
 
-                @{
-                    foreach (var item in Model)
-                    {
-                        <img class="img-fluid rounded" src="~/Content/images/@item.f活動團圖" alt="">
-                    }
+
+                        <img class="img-fluid rounded" src="~/Content/images/@Model.f活動團圖" alt="">
+                    
 
 
                 }
@@ -112,14 +107,11 @@
 
                 <!-- Post Content -->
 
-                @{
-                    foreach (tActivity tArticle in Model)
-                    {
                         <p>
-                            @tArticle.f活動內容
+                            @Model.f活動內容
                         </p>
-                    }
-                }
+                    
+                
 
 
                 <div class="con" style="text-align:end">
@@ -127,9 +119,8 @@
                     <i class="fas fa-star" id="s2"></i>
                     <i class="fas fa-star" id="s3"></i>
                     <i class="fas fa-star" id="s4"></i>
-                    <i class="fas fa-star" id="s5"></i>
-
-                    <span> <img src="@Url.Action("PhotoGet","Blog")" width="100" /> </span>
+                    <i class="fas fa-star" id="s5"></i>                   
+                    <span> <img src="@Url.Action("PhotoGet","Blog",new { id = Model.f活動編號 })" width="100" /> </span>
                 </div>
 
 
@@ -181,12 +172,11 @@
 
                 <section id="achang-intro-2" class="card my-4">
 
-                    @foreach (var item in Model)
-                    {
-                       
-                       <h3>@item.tMember.f會員名稱</h3>
 
-                    }
+                       
+                       <h3>@Model.tMember.f會員名稱</h3>
+
+                    
 
 
 
@@ -196,20 +186,19 @@
                     @*<img src="https://picsum.photos/300/300/?random=1">*@
                     <p class="content">
 
-                        @foreach (var item in Model)
-                        {
 
 
-                            <img src="~/Content/images/@item.tMember.f會員大頭貼" style="width:300px; height:300px">
+
+                            <img src="~/Content/images/@Model.tMember.f會員大頭貼" style="width:300px; height:300px">
                             <br>
-                            @item.tMember.f會員自我介紹
+                            @Model.tMember.f會員自我介紹
                             <br>
-                            <i class="fab fa-instagram"></i>@item.tMember.f會員名稱
+                            <i class="fab fa-instagram"></i>@Model.tMember.f會員名稱
                             <br>
-                            <i class="far fa-envelope"></i>@item.tMember.f會員電子郵件
+                            <i class="far fa-envelope"></i>@Model.tMember.f會員電子郵件
 
 
-                        }
+                        
 
 
 

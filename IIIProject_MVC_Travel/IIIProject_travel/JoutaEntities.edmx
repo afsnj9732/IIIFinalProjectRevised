@@ -44,7 +44,7 @@
           <Property Name="f活動留言" Type="nvarchar(max)" />
           <Property Name="f活動留言時間" Type="nvarchar(max)" />
           <Property Name="f活動評分過的會員編號" Type="nvarchar(max)" />
-          <Property Name="fQRcode網址" Type="nvarchar" MaxLength="50" />
+          <Property Name="fQRcode網址" Type="nvarchar" MaxLength="200" />
           <Property Name="fQRcodeImage" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="tMember">
@@ -143,7 +143,7 @@
           <Property Name="f活動留言時間" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="f活動評分過的會員編號" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="tMember" Relationship="Self.FK_tActivity_tMember" FromRole="tActivity" ToRole="tMember" />
-          <Property Name="fQRcode網址" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="fQRcode網址" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="fQRcodeImage" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="tMember">

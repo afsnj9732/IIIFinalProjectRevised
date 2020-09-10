@@ -234,7 +234,14 @@ namespace IIIProject_travel.Controllers
             }
             return View(target);
         }
-
+        public dynamic getCalendarEvent(int target)
+        {
+            if (Session["member"] == null)
+                return "";
+            dbJoutaEntities db = new dbJoutaEntities();
+            tActivity Act = db.tActivity.Where(t => t.f活動編號 == target).FirstOrDefault();
+            return View(Act);
+        }
 
         public dynamic getCalendar()
         {
@@ -245,6 +252,7 @@ namespace IIIProject_travel.Controllers
                 var NowMember = db.tMember.Where(t => t.f會員編號 == LoginMember.f會員編號).FirstOrDefault();
                 if (!string.IsNullOrEmpty(NowMember.f會員參加的活動編號))
                 {
+                    string ActID = "";
                     string[] NowMemberEvents = NowMember.f會員參加的活動編號.Split(',');
                     CalendarEvents[] NowMemberTotalEvents = new CalendarEvents[NowMemberEvents.Length - 1];
                     int i = 0;
@@ -259,12 +267,14 @@ namespace IIIProject_travel.Controllers
                         CalendarEvent.title = NowMemberAct.f活動標題;
                         CalendarEvent.start = NowMemberAct.f活動開始時間;
                         CalendarEvent.end = NowMemberAct.f活動結束時間+" 00:00:01";
+                        CalendarEvent.classNames = "CalendarEvent"+" "+ "EventActID"+NowMemberAct.f活動編號;
+                        //ActID += ","+NowMemberAct.f活動編號;
                         NowMemberTotalEvents[i] = CalendarEvent;
                         i++;
                     }
                     JavaScriptSerializer serializer = new JavaScriptSerializer();
                     var obj = serializer.Serialize(NowMemberTotalEvents);
-                    return  obj;
+                    return  obj/*+"%"+ ActID*/;
                 }
             }
                 return "";
