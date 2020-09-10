@@ -234,7 +234,14 @@ namespace IIIProject_travel.Controllers
             }
             return View(target);
         }
-
+        public dynamic getCalendarEvent(int target)
+        {
+            if (Session["member"] == null)
+                return "";
+            dbJoutaEntities db = new dbJoutaEntities();
+            tActivity Act = db.tActivity.Where(t => t.f活動編號 == target).FirstOrDefault();
+            return View(Act);
+        }
 
         public dynamic getCalendar()
         {
@@ -264,7 +271,7 @@ namespace IIIProject_travel.Controllers
                     }
                     JavaScriptSerializer serializer = new JavaScriptSerializer();
                     var obj = serializer.Serialize(NowMemberTotalEvents);
-                    return  obj;
+                    return  obj+"%"+ LoginMember.f會員編號;
                 }
             }
                 return "";
