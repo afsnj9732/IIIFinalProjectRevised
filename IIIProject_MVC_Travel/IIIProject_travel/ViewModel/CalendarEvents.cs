@@ -8,7 +8,6 @@ namespace IIIProject_travel.ViewModel
     public class CalendarEvents
     {
         public string title { get; set; }
-        //public string url { get; set; }
         public string start { get; set; }
         public string end { get; set; }
         public string classNames { get; set; }
