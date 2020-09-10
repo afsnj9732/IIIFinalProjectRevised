@@ -259,3 +259,9 @@ input[type="text"] {
 	  border-bottom-left-radius: 0;
 	  border-bottom-right-radius: 0;
 }
+
+#mapid {
+    height: 280px;
+    margin: 0 0 1rem 0;
+    width:100%
+}

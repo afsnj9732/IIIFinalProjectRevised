@@ -2084,6 +2084,7 @@
     <Content Include="Content\jquery-ui-1.12.1\jquery-ui.theme.min.css" />
     <Content Include="Content\jquery-ui-1.12.1\LICENSE.txt" />
     <Content Include="Content\PagedList.css" />
+    <Content Include="Content\quickmatch.css" />
     <Content Include="Content\sass\main.css" />
     <Content Include="Content\sass\slider.css" />
     <Content Include="Content\sass\style.css" />
@@ -2187,6 +2188,7 @@
     <Content Include="Scripts\IIIProject\eat.js" />
     <Content Include="Scripts\IIIProject\exporting.js" />
     <Content Include="Scripts\IIIProject\highcharts.js" />
+    <Content Include="Scripts\IIIProject\location_jou.js" />
     <Content Include="Scripts\IIIProject\profile.js" />
     <Content Include="Scripts\IIIProject\quickmatch.js" />
     <Content Include="Scripts\IIIProject\travel.js" />
