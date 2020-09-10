@@ -339,9 +339,13 @@
                                     <div class="modal-footer   mt-3  border-main-color">
                                         @if (Session["member"] != null && NowMember.f會員編號 == item.f會員編號)
                                         {
-                                            <button class="btn btn-block mr-1  p-1 JoutaEdit" data-toggle="modal" data-target="#@combine_edit" style="background-color:#FFE0B2 ;">
-                                                編輯
-                                            </button>
+                                            if (string.Compare(DateTime.Now.ToString("yyyy-MM-dd"), item.f活動招募截止時間) > 0)
+                                            {  //招募已結束，不可編輯
+                                                <button class="btn btn-block mr-1  p-1 JoutaEdit" data-toggle="modal" data-target="#@combine_edit" style="background-color:#FFE0B2 ;">
+                                                    編輯
+                                                </button>
+                                            }
+
                                             @Html.ActionLink("刪除", "Delete", "Travel", new { id = item.f活動編號 }, new { @class = "btn btn-secondary" })
                                         }
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
