@@ -53,6 +53,7 @@ namespace IIIProject_travel.Controllers
             return View((object)HomeSearch);
         }
 
+        [ValidateInput(false)]
         public ActionResult Edit(tActivity p)
         {
             tMember Member = (tMember)Session["member"];
@@ -113,7 +114,8 @@ namespace IIIProject_travel.Controllers
             //使用刪除舊活動過後的占用時間加上新的活動時間
             NowMember.f會員已占用時間 = string.Join(",", usedTime) + "," + p.f活動開始時間 + "~" + p.f活動結束時間;
             NowMember.f會員參加的活動編號 += "," + targetAct.f活動編號; //因為被剔除了，所以重新添加
-            targetAct.f活動內容 = p.f活動內容;
+            tActivity Temp = new tActivity();
+            targetAct.f活動內容 = Request.Form["f活動內容2"]; //配合文字編輯器，待改良;
             targetAct.f活動參加的會員編號 = NowMember.f會員編號.ToString();
             targetAct.f活動地區 = p.f活動地區;
             targetAct.f活動招募截止時間 = p.f活動招募截止時間;
@@ -142,7 +144,7 @@ namespace IIIProject_travel.Controllers
             db.SaveChanges();
             return RedirectToAction("TravelIndex");
         }
-
+        [ValidateInput(false)]
         public ActionResult Add(tActivity p)
         {
             tMember Member = (tMember)Session["member"];
