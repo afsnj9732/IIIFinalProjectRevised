@@ -124,7 +124,7 @@ namespace IIIProject_travel.Controllers
                           select t;
 
 
-            return View(article);
+            return View(article.FirstOrDefault());
 
 
         }
@@ -183,7 +183,6 @@ namespace IIIProject_travel.Controllers
             var article = from t in (new dbJoutaEntities()).tActivity
                           where t.f活動類型 == "文章" && t.f活動編號 == id
                           select t;
-
             var writer = new BarcodeWriter
             {
                 Format = BarcodeFormat.QR_CODE,
@@ -218,7 +217,7 @@ namespace IIIProject_travel.Controllers
 
             string FileName = article.Select(t => t.fQRcodeImage).FirstOrDefault(); 
             string filepath = string.Format(Server.MapPath("~/Content/images/")+"{0}.bmp", FileName);
-            QRcode(1);
+            QRcode(id);
             byte[] filedata = System.IO.File.ReadAllBytes(filepath);
             string contentType = MimeMapping.GetMimeMapping(filepath);
             var cd = new System.Net.Mime.ContentDisposition

@@ -19,7 +19,7 @@
                             $.ajax({
                                 url: "/Travel/getCalendarEvent",
                                 type: "POST",
-                                data: { "target":NewData[1]},
+                                data: { "target":NewData[1]},  //要有點擊項目的活動編號
                                 success: function (data) {
                                     if (data === "")
                                         return;
