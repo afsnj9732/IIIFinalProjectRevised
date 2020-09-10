@@ -104,11 +104,12 @@
                             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 區域選擇
                             </button>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" href="#">北區</a>
-                                <a class="dropdown-item" href="#">南區</a>
-                                <a class="dropdown-item" href="#">東區</a>
-                            </div>
+                            <select class="dropdown-menu" aria-labelledby="dropdownMenuButton" name="f活動地區">
+                                <option class="dropdown-item" value="北部">北區</option>
+                                <option class="dropdown-item" value="中部">中部</option>
+                                <option class="dropdown-item" value="南部">南部</option>
+                                <option class="dropdown-item" value="東部">東區</option>
+                            </select>
                         </div>
 
                     </div>
@@ -142,6 +143,8 @@
                             <div class="form-group">
                                 <textarea class="form-control" rows="3" id="post-content" name="txtContent"></textarea>
                             </div>
+
+                            <div class="hidden" name="txtTime">@DateTime.Now</div>
 
 
                             <button type="submit" class="btn btn-primary">提交</button>
