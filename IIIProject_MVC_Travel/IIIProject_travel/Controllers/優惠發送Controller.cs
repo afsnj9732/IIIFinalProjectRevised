@@ -40,15 +40,35 @@ namespace IIIProject_travel.Controllers
         {
             tMember x = new tMember();
 
-            if (x.f會員編號 == p.memberId)
+            if (x.f會員編號 == p.memberId1)
             {
-                string couponName = new Guid(p.txtCouponInfo).ToString();
-                x.f會員擁有的優惠券 = couponName;
+                string couponName = p.txtCouponInfo + ":" + Guid.NewGuid().ToString();
+                x.f會員擁有的優惠券 = couponName + ", ";
+
+                dbJoutaEntities db = new dbJoutaEntities();
+                db.tMember.Add(x);
+                db.SaveChanges();
             }
 
-            dbJoutaEntities db = new dbJoutaEntities();
-            db.tMember.Add(x);
-            db.SaveChanges();
+            if (x.f會員編號 == p.memberId2)
+            {
+                string couponName = p.txtCouponInfo + ":" + Guid.NewGuid().ToString();
+                x.f會員擁有的優惠券 = couponName + ", ";
+
+                dbJoutaEntities db = new dbJoutaEntities();
+                db.tMember.Add(x);
+                db.SaveChanges();
+            }
+
+            if (x.f會員編號 == p.memberId3)
+            {
+                string couponName = p.txtCouponInfo + ":" + Guid.NewGuid().ToString();
+                x.f會員擁有的優惠券 = couponName + ", ";
+
+                dbJoutaEntities db = new dbJoutaEntities();
+                db.tMember.Add(x);
+                db.SaveChanges();
+            }
 
             return RedirectToAction("List");
         }
