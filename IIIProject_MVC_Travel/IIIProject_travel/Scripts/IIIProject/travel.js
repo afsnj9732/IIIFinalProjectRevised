@@ -296,7 +296,10 @@
             data: { "target": target,"isAdd":true},
             success: function (data) {
                 if (data === "1") {
-                    window.confirm("已是團主不用入團");
+                    window.confirm("已是團主不用入團");            
+                }
+                else if (data === "6") {
+                    window.confirm("時間衝突");
                 }
                 else if (data === "") {
                     window.confirm("你已經入團了哦!");

@@ -61,8 +61,10 @@ namespace IIIProject_travel.Controllers
 
 
             var NowMember = db.tMember.Where(t => t.f會員編號 == Member.f會員編號).FirstOrDefault();
-
-            string[] usedTime = NowMember.f會員已占用時間.Split(',');
+            string[] usedTime = { };
+            if (!string.IsNullOrEmpty(NowMember.f會員已占用時間))
+            {           
+            usedTime = NowMember.f會員已占用時間.Split(',');
                 //先移除登入會員原本這筆活動的活動時段
                 usedTime = usedTime.Where(t => t != targetAct.f活動開始時間 + "~" + targetAct.f活動結束時間).ToArray();
                 //再判別修改的活動時段是否已占用 
@@ -83,7 +85,7 @@ namespace IIIProject_travel.Controllers
                     }
 
                 }
-
+}
             //時間過關
             //因為活動時段變更所以要剔除所有參加者(不是每個人都想參加新時段)
             //撈出所有參加會員的編號，並讓他們退團
@@ -135,7 +137,7 @@ namespace IIIProject_travel.Controllers
                 var NewFileName = Guid.NewGuid() + Path.GetExtension(PicFile.FileName);
                 var NewFilePath = Path.Combine(Server.MapPath("~/Content/images/"), NewFileName);
                 PicFile.SaveAs(NewFilePath);
-                p.f活動團圖 = NewFileName;
+                targetAct.f活動團圖 = NewFileName;
             }
             db.SaveChanges();
             return RedirectToAction("TravelIndex");
