@@ -18,11 +18,25 @@ namespace IIIProject_travel.Controllers
             DateTime date = DateTime.Now;
             ViewBag.Date = date;
             var travel = from t in (new dbJoutaEntities()).tActivity
-                         
                          select t;  //從資料表抓資料
             c.tActivities = travel;
-            c.tMembers = (tMember)Session["member"];
+            var x = (tMember)Session["member"];
+            c.tMembers = db.tMember.Where(a=>a.f會員編號 == x.f會員編號).FirstOrDefault();
             return View(c);
+        }
+
+        public ActionResult Save()
+        {
+            tMember y = (tMember)Session["member"];
+            var x = db.tMember.Where(a=>a.f會員編號 == y.f會員編號).FirstOrDefault();
+            x.f會員名稱 = Request.Form["txtNickName"];
+            x.f會員生日 = Request.Form["txtBirth"];
+            x.f會員興趣 = Request.Form["txtHobby"];
+            x.f會員自我介紹 = Request.Form["txtIntro"];
+            
+            db.SaveChanges();
+            ViewBag.msg = "資料修改成功";
+            return RedirectToAction("ProfileIndex");
         }
 
         public ActionResult Chat()

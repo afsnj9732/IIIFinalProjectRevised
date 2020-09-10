@@ -2,7 +2,7 @@
     var order, background_color, contain, category, label, page, p;
     var calendarEl = document.getElementById('calendar');
     $("body").on("click", ".CalendarEvent", function () {
-        let targetclass = this.classList.item(8);
+        let targetclass = this.classList.item(this.classList.length-1);
         let target = targetclass.substring(10, targetclass.length);
         $.ajax({
             url: "/Travel/getCalendarEvent",

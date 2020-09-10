@@ -1,12 +1,17 @@
-﻿<!DOCTYPE html>
+﻿@{
+    var x = (tMember)Session["member"];
+
+ }
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - Jouta</title>
-    @Styles.Render("~/Content/css/bootstrap.min.css")
-    @*@Styles.Render("~/Content/css/style.css")*@
+    <link href="~/Content/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/css/style.css" rel="stylesheet" />
 </head>
 <body>
     <div class="navbar navbar-expand-lg navbar-fixed-top">
@@ -31,13 +36,12 @@
                 <ul class="nav navbar-nav">
                     @if (Request.IsAuthenticated)
                     {
-                        <li style="color:white">您好，@(User.Identity.Name)</li>
-                        <li class="nav-item">@Html.ActionLink("變更密碼", "ChangePassword", "Home", new { @class = "nav-link nav-login text-dark" })</li>
+                        <li style="color:white">您好，@x.f會員名稱</li>
                         <li class="nav-item">@Html.ActionLink("登出", "Logout", "Login", new { @class = "nav-link nav-login text-dark" })</li>
                     }
                     else
                     {
-                        <li class="nav-item">@Html.ActionLink("登入", "Login", "Home", new { @class = "nav-link nav-login text-dark" })</li>
+                        <li class="nav-item">@Html.ActionLink("登入", "LoginIndex", "Login", new { @class = "nav-link nav-login text-dark" })</li>
                         <li class="nav-item">@Html.ActionLink("註冊", "Register", "Home", new { @class = "nav-link nav-register text-dark" })</li>
                     }
 
@@ -53,8 +57,9 @@
     <div class="container-fluid footer">
         <p class="text-center mt-2 mb-2">&copy; @DateTime.Now.Year Jouta All rights reserved</p>
     </div>
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
+    <script src="~/Scripts/jquery-3.5.1.js"></script>
+    <script src="~/Scripts/IIIProject/popper.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
     @RenderSection("scripts", required: false)
 </body>
 </html>
