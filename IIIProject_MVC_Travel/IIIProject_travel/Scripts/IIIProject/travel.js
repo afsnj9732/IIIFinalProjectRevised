@@ -1,6 +1,21 @@
 (function () {                 
     var order, background_color, contain, category, label, page, p;
     var calendarEl = document.getElementById('calendar');
+    $("body").on("click", ".CalendarEvent", function () {
+        let targetclass = this.classList.item(8);
+        let target = targetclass.substring(10, targetclass.length);
+        $.ajax({
+            url: "/Travel/getCalendarEvent",
+            type: "POST",
+            data: { "target": target },   
+            success: function (data) {
+                if (data === "")
+                    return;
+                $("#calendarEventTarget").html(data); //有時間加入同步效果
+                $("#calendarEventGo").click();
+            }
+        });  
+    });
 
     function getCalendar() { //效能待優化
         $.ajax({
@@ -12,8 +27,9 @@
                     let calendar = new FullCalendar.Calendar(calendarEl, {
                         initialView: 'dayGridMonth',
                         locale: 'zh-tw',
+                        height:750,
                         events: JSON.parse(data),
-                        eventClick: function () {
+                        eventClick: function () {                           
                         }
                     });
                     calendar.render();
