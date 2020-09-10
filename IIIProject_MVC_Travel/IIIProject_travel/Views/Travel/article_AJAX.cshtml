@@ -1,6 +1,4 @@
 ﻿@model IIIProject_travel.ViewModel.CTravel
-@*@using IIIProject_travel.ViewModel
-@using System.Web.Script.Serialization;*@
 @{
     dbJoutaEntities db = new dbJoutaEntities();
     Layout = null;
@@ -12,54 +10,13 @@
     string combine_join = "";
     string combine_msg = "";
     string combine_score = "";
+    string combine_edit = "";
     var NowMember = (tMember)Session["member"]; //注意Session抓到的資料，其資料內容為取得該Session當下的資料內容，
                                                 //因此若有修改過資料庫的資料，就要改藉由Session的會員編號
                                                 //去抓取現在資料庫的資料，否則會一直撈到不變的Session資料
     var totalMember = from x in db.tMember
                       select x;
-
-    @*if (NowMember != null)
-    {
-
-        if (!string.IsNullOrEmpty(NowMember.f會員參加的活動編號))
-        {
-            string[] NowMemberEvents = NowMember.f會員參加的活動編號.Split(',');
-            CalendarEvents[] NowMemberTotalEvents = new CalendarEvents[NowMemberEvents.Length-1];
-            int i = 0;
-            foreach (var item in NowMemberEvents)
-            {
-                if (string.IsNullOrEmpty(item))
-                {
-                    continue;
-                }
-                var NowMemberAct = db.tActivity.Where(t => t.f活動編號.ToString() == item).FirstOrDefault();
-                CalendarEvents CalendarEvent = new CalendarEvents();
-                CalendarEvent.title = NowMemberAct.f活動標題;
-                CalendarEvent.start = NowMemberAct.f活動開始時間;
-                CalendarEvent.end = NowMemberAct.f活動結束時間;
-                NowMemberTotalEvents[i] = CalendarEvent;
-                i++;
-            }
-            JavaScriptSerializer serializer = new JavaScriptSerializer();
-            var obj = serializer.Serialize(NowMemberTotalEvents);
-<script type="text/javascript">
-    var calendarEl = document.getElementById('calendar');
-    var calendar = new FullCalendar.Calendar(calendarEl, {
-        initialView: 'dayGridMonth',
-        locale: 'zh-tw',
-        events: @Html.Raw(obj),
-        eventClick: function () {
-            alert("@NowMember.f會員名稱");
-        }
-    });
-    calendar.render();
-</script>
-        }
-
-    }*@
-
 }
-
 <!-- read more視窗控制頭1 -->
 @{
     tMember targetMember = null;
@@ -92,6 +49,7 @@
         combine_join = "Join" + count;
         combine_msg = "Msg" + count;
         combine_score = "Score" + count;
+        combine_edit = "Edit" + count;
         string iflikeit = "11.png";
         int pos = -1;
         if (Session["member"] != null)
@@ -106,332 +64,409 @@
                 }
             }
         }
-        <div class="modal fade combine_score" id="@combine_score" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog change-max-width-1420" role="document" style="padding-right: 17px !important;">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">@item.f活動標題 評分區</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" >
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <div AddScore="@item.f活動編號" class="Score">
-                            @for (int i = 1; i <= 5; i++)
-                            {
-                                <img ScoreID="@i" isclick="false" ScoreTarget="@item.f活動編號" src="~/Content/images/Star.png" />
-                            }
-                        </div>
-                    </div>
-                    <div class="modal-footer justify-content-between">
-                        <span>
-                            <button type="button" class="btn btn-warning leaveScore" leaveScore="@item.f活動編號">送出</button>
-                            <button type="button" class="btn btn-secondary resetScore" resetScore="@item.f活動編號">重設</button>
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
-                        </span>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-
-        <div class="modal fade combine_msg" id="@combine_msg" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog change-max-width-1420" role="document" style="padding-right: 17px !important;">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">@item.f活動標題 留言區</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <div MsgAdd="@item.f活動編號">
-                            @foreach (var Msg in targetMsgs)
-                            {
-                                exclude++;
-                                if (exclude == 1)
-                                {
-                                    continue;
-                                }
-                                MsgsTimeAndID = Msg.time.Split(new string[] { "_^$" }, StringSplitOptions.None);
-                                if (MsgsTimeAndID.Length > 1)
-                                {
-                                    target = MsgsTimeAndID[1];
-                                }
-                                img = db.tMember.Where(t => t.f會員編號.ToString() == target)
-                                      .Select(t => t.f會員大頭貼).FirstOrDefault();
-
-                                <div class="row justify-content-between pl-5 pr-5 mr-5 ml-5">
-                                    <div>
-                                        <span><img src="~/Content/images/@img" width="30" height="30"></span>
-                                        <span>@Msg.msg</span>
-                                    </div>
-                                    <div>@MsgsTimeAndID[0]</div>
-                                </div>
-                                <br />
-
-                            }
-                            @{exclude = 0;}
-                        </div>
-                    </div>
-                    <div class="modal-footer justify-content-between">
-                        <input type="text" class="ml-4" sentMsg="@item.f活動編號" style="width:80%" />
-                        <span>
-                            <button type="button" class="btn btn-warning leaveMsg" leaveMsg="@item.f活動編號">送出</button>
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
-                        </span>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="modal fade combine_join" id="@combine_join" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog change-max-width-1420" role="document" style="padding-right: 17px !important;">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">@item.f活動標題 團員名單</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <div ActAdd="@item.f活動編號" class="row">
-                            @foreach (string guy in attendGuys) //先直接撈原本的資料，若有變動針對此處做AJAX修改
-                            {
-                                var theGuy = totalMember.Where(x => x.f會員編號.ToString() == guy);
-                                var theGuyName = theGuy.Select(a => a.f會員名稱).FirstOrDefault();
-                                if (!string.IsNullOrEmpty(theGuyName))
-                                {
-                                    <div class="m-3">
-                                        <img width="100" height="100" src="~/Content/images/@theGuy.Select(a => a.f會員大頭貼).FirstOrDefault()" />
-                                        <span>@theGuyName</span>
-                                    </div>
-                                    @*<br />*@
-                                }
-                            }
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        @if (string.Compare(DateTime.Now.ToString("yyyy-MM-dd"), item.f活動招募截止時間) > 0)
-                        {  //招募已結束
-                            <button type="button" class="btn btn-secondary leaveAct" leaveAct="@item.f活動編號">我要退團</button>
-                        }
-                        else
-                        {   //招募未結束
-                            <button type="button" class="btn btn-warning joinAct" joinAct="@item.f活動編號">我要入團</button>
-                            <button type="button" class="btn btn-secondary leaveAct" leaveAct="@item.f活動編號">我要退團</button>
-                        }
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-        <div class="modal fade combine_readmore" id="@combine_readmore" tabindex="-1" role="dialog"
+        <!-- 揪團視窗頭  boostrap為方便滾輪出現會多出padding-right 17px之屬性-->
+        <div class="modal fade combine_edit" id="@combine_edit" tabindex="-1" role="dialog"
              aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog change-max-width-1400" role="document">
-                <div class="modal-content">
-                    <div class="modal-header  border-main-color">
-                        <h5 class="modal-title" id="exampleModalLabel"><span style="font-weight:bolder;"> @item.f活動標題</span></h5>
+                <div class="modal-content" style="height:85%">
+                    <div class="modal-header border-main-color">
+                        <h5 class="modal-title" id="exampleModalLabel"><span style="font-weight:bolder;">@item.f活動標題 編輯</span></h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
+                    <!-- edit頭 -->
                     <div class="modal-body">
-                        <!-- 互動文章 -->
-                        <div class="container-fluid">
-                            <div class="row m-0 mb-3 justify-content-around">
-                                <span>活動日期： <span>@item.f活動開始時間</span></span>
-                                <span>結束日期： <span>@item.f活動結束時間</span></span>
-                                <span>入團截止： <span>@item.f活動招募截止時間</span></span>
-                                <span><img src="~/Content/images/17.png" alt="">@item.f活動分類</span>
-                                <span><img src="~/Content/images/03.png" alt="">@item.f活動地區</span>
-                                <span><img src="~/Content/images/04.png" alt="">@item.f活動預算</span>
-                                <span><img src="~/Content/images/06.png" class="" alt=""><span ToUpdateVC="@item.f活動編號">@item.f活動瀏覽次數</span></span>
-                                <span><img src="~/Content/images/05.png" class="" alt=""><span ToUpdateGC="@item.f活動編號">@item.f活動讚數</span></span>
-                                @if (Session["member"] != null)
-                                {
-                                    <span class="col-auto"><img style="cursor: pointer;" class="likeIt" likeIndex="@item.f活動編號" src="~/Content/images/@iflikeit" alt=""></span>
-                                }
-                            </div>
-                            @*<hr />*@
-                            <div class="row">
-                                <img src="~/Content/images/@item.f活動團圖" alt="" class="mx-auto" style="width: 60%;margin: auto;">
-                            </div>
-                            <br />
-                            <hr />
-                            <br />
-
-                            <div class="row align-items-center">
-                                <div id="UserBlock">
-                                    <p><img src="~/Content/images/16.png" class="pb-1" alt="">@item.tMember.f會員稱號</p>
-                                    <img src="~/Content/images/@item.tMember.f會員大頭貼" alt="" class="col-auto" style="width: 300px;">
-                                    <p>@item.tMember.f會員名稱</p>
-                                    <p>團主評分:@item.tMember.f會員評分 </p>
+                        <form enctype="multipart/form-data" action="~/Travel/Edit" method="post">
+                            <div class="container-fluid">
+                                <span>標題：<input type="text" name="f活動標題" style="width:90%" class="NeedAT" value="@item.f活動標題"><p class="NeedATTo" style="color:red" hidden>活動標題請至少填滿8個字</p></span>
+                                <div class="row m-0 mb-3 justify-content-around">
+                                    <span>旅遊開始日期： <input type="date" min="@DateTime.Now.AddDays(1.0).ToString("yyyy-MM-dd")" max="" class="ActivityStart" name="f活動開始時間" value="@item.f活動開始時間"><p class="ActivityStartTo" style="color:red" hidden>活動開始時間必填</p></span>
+                                    <span>旅遊結束日期： <input type="date" min="@DateTime.Now.AddDays(2.0).ToString("yyyy-MM-dd")" max="" class="ActivityEnd" disabled name="f活動結束時間" value="@item.f活動結束時間"><p class="ActivityEndTo" style="color:red" hidden>活動結束時間必填</p></span>
+                                    <span>入團截止： <input type="date" min="@DateTime.Now.ToString("yyyy-MM-dd")" max="" class="ActivityFindEnd" disabled name="f活動招募截止時間" value="@item.f活動招募截止時間"><p class="ActivityFindEndTo" style="color:red" hidden>招募截止時間必填</p></span>
                                 </div>
-                                <div class="change-max-width-1000 ml-4">
-                                    <div class="row align-items-center m-0 ml-2 textBox">
-                                        @item.f活動內容
+                                <div class="row mb-4 mx-auto align-items-center justify-content-around">
+                                    <span><img src="~/Content/images/04.png" class="mb-1" alt="">預算：<input type="text" name="f活動預算" class="NeedAC" value="@item.f活動預算"><span class="NeedACTo" style="color:red" hidden>活動預算必填</span></span>
+
+                                    <div class="pr-5">
+                                        <img src="~/Content/images/17.png" class="mb-1" alt="">分類：
+                                        <select name="f活動分類" style="">
+                                            <option value="兩天一夜">兩天一夜</option>
+                                            <option value="三天兩夜">三天兩夜</option>
+                                            <option value="五天四夜">五天四夜</option>
+                                            <option value="七天六夜">七天六夜</option>
+                                            <option style="text-align:center;" value="其他">
+                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;其他
+                                            </option>
+
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row mb-4 mx-auto align-items-center justify-content-around">
+                                    <span class="row  align-items-center">團圖：<input type="file" name="PicFile2" class="NeedAP"><span class="mr-5 NeedAPTo" style="color:red" hidden>活動團圖必填</span></span>
+
+                                    <span class=" ">
+                                        <img src="~/Content/images/03.png" class="mb-1" alt="">
+                                        地區：
+                                        <select name="f活動地區">
+                                            <option value="北部">北部</option>
+                                            <option value="中部">中部</option>
+                                            <option value="南部">南部</option>
+                                            <option value="東部">東部</option>
+                                        </select>
+                                    </span>
+                                </div>
+
+                                <div class="row align-items-center">
+                                    <div class="mx-auto mb-3">
+                                        內容：<textarea name="f活動內容" style="width:1000px;height:220px;vertical-align:top;" class="NeedAL">@item.f活動內容</textarea>
+                                        <p class="NeedALTo" style="color:red" hidden>活動內容請至少填滿100字</p>
                                     </div>
                                 </div>
                             </div>
-                            <br />
+                            <!-- 揪團隱藏不顯示項目 -->
+                            <input type="hidden" name="f活動編號" value="@item.f活動編號">
+                            <!-- 揪團內容尾 -->
+                            <div class="modal-footer  mt-2 border-main-color">
+                                <input type="submit" class="btn JoutaSend" style="background-color:#FFE0B2" value="送出" />
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+                            </div>
+                        </form>
+                    </div>
+                    }
+                    <!-- eidt尾 -->
+                    </div>
+                </div>
+            </div>
 
-                            @if (Session["member"] != null)
-                            {
-                                <div class="container">
-                                    <div class="row   justify-content-around">
-                                        <button class="btn btn-block mr-1  p-1 FeelGood" style="background-color:#FFE0B2;" target="@item.f活動編號">
-                                            <img src="~/Content/images/05.png" class="pb-1 ">覺得讚
+
+
+                    <div class="modal fade combine_score" id="@combine_score" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog change-max-width-1420" role="document" style="padding-right: 17px !important;">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">@item.f活動標題 評分區</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div AddScore="@item.f活動編號" class="Score">
+                                        @for (int i = 1; i <= 5; i++)
+                                        {
+                                            <img ScoreID="@i" isclick="false" ScoreTarget="@item.f活動編號" src="~/Content/images/Star.png" />
+                                        }
+                                    </div>
+                                </div>
+                                <div class="modal-footer justify-content-between">
+                                    <span>
+                                        <button type="button" class="btn btn-warning leaveScore" leaveScore="@item.f活動編號">送出</button>
+                                        <button type="button" class="btn btn-secondary resetScore" resetScore="@item.f活動編號">重設</button>
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <div class="modal fade combine_msg" id="@combine_msg" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog change-max-width-1420" role="document" style="padding-right: 17px !important;">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">@item.f活動標題 留言區</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div MsgAdd="@item.f活動編號">
+                                        @foreach (var Msg in targetMsgs)
+                                        {
+                                            exclude++;
+                                            if (exclude == 1)
+                                            {
+                                                continue;
+                                            }
+                                            MsgsTimeAndID = Msg.time.Split(new string[] { "_^$" }, StringSplitOptions.None);
+                                            if (MsgsTimeAndID.Length > 1)
+                                            {
+                                                target = MsgsTimeAndID[1];
+                                            }
+                                            img = db.tMember.Where(t => t.f會員編號.ToString() == target)
+                                                  .Select(t => t.f會員大頭貼).FirstOrDefault();
+
+                                            <div class="row justify-content-between pl-5 pr-5 mr-5 ml-5">
+                                                <div>
+                                                    <span><img src="~/Content/images/@img" width="30" height="30"></span>
+                                                    <span>@Msg.msg</span>
+                                                </div>
+                                                <div>@MsgsTimeAndID[0]</div>
+                                            </div>
+                                            <br />
+
+                                        }
+                                        @{exclude = 0;}
+                                    </div>
+                                </div>
+                                <div class="modal-footer justify-content-between">
+                                    <input type="text" class="ml-4" sentMsg="@item.f活動編號" style="width:80%" />
+                                    <span>
+                                        <button type="button" class="btn btn-warning leaveMsg" leaveMsg="@item.f活動編號">送出</button>
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal fade combine_join" id="@combine_join" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog change-max-width-1420" role="document" style="padding-right: 17px !important;">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">@item.f活動標題 團員名單</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div ActAdd="@item.f活動編號" class="row">
+                                        @foreach (string guy in attendGuys) //先直接撈原本的資料，若有變動針對此處做AJAX修改
+                                        {
+                                            var theGuy = totalMember.Where(x => x.f會員編號.ToString() == guy);
+                                            var theGuyName = theGuy.Select(a => a.f會員名稱).FirstOrDefault();
+                                            if (!string.IsNullOrEmpty(theGuyName))
+                                            {
+                                                <div class="m-3">
+                                                    <img width="100" height="100" src="~/Content/images/@theGuy.Select(a => a.f會員大頭貼).FirstOrDefault()" />
+                                                    <span>@theGuyName</span>
+                                                </div>
+                                                @*<br />*@
+                                            }
+                                        }
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    @if (string.Compare(DateTime.Now.ToString("yyyy-MM-dd"), item.f活動招募截止時間) > 0)
+                                    {  //招募已結束
+                                        <button type="button" class="btn btn-secondary leaveAct" leaveAct="@item.f活動編號">我要退團</button>
+                                    }
+                                    else
+                                    {   //招募未結束
+                                        <button type="button" class="btn btn-warning joinAct" joinAct="@item.f活動編號">我要入團</button>
+                                        <button type="button" class="btn btn-secondary leaveAct" leaveAct="@item.f活動編號">我要退團</button>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="modal fade combine_readmore" id="@combine_readmore" tabindex="-1" role="dialog"
+                         aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog change-max-width-1400" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header  border-main-color">
+                                    <h5 class="modal-title" id="exampleModalLabel"><span style="font-weight:bolder;"> @item.f活動標題</span></h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <!-- 互動文章 -->
+                                    <div class="container-fluid">
+                                        <div class="row m-0 mb-3 justify-content-around">
+                                            <span>活動日期： <span>@item.f活動開始時間</span></span>
+                                            <span>結束日期： <span>@item.f活動結束時間</span></span>
+                                            <span>入團截止： <span>@item.f活動招募截止時間</span></span>
+                                            <span><img src="~/Content/images/17.png" alt="">@item.f活動分類</span>
+                                            <span><img src="~/Content/images/03.png" alt="">@item.f活動地區</span>
+                                            <span><img src="~/Content/images/04.png" alt="">@item.f活動預算</span>
+                                            <span><img src="~/Content/images/06.png" class="" alt=""><span ToUpdateVC="@item.f活動編號">@item.f活動瀏覽次數</span></span>
+                                            <span><img src="~/Content/images/05.png" class="" alt=""><span ToUpdateGC="@item.f活動編號">@item.f活動讚數</span></span>
+                                            @if (Session["member"] != null)
+                                            {
+                                                <span class="col-auto"><img style="cursor: pointer;" class="likeIt" likeIndex="@item.f活動編號" src="~/Content/images/@iflikeit" alt=""></span>
+                                            }
+                                        </div>
+                                        @*<hr />*@
+                                        <div class="row">
+                                            <img src="~/Content/images/@item.f活動團圖" alt="" class="mx-auto" style="width: 60%;margin: auto;">
+                                        </div>
+                                        <br />
+                                        <hr />
+                                        <br />
+
+                                        <div class="row align-items-center">
+                                            <div id="UserBlock">
+                                                <p><img src="~/Content/images/16.png" class="pb-1" alt="">@item.tMember.f會員稱號</p>
+                                                <img src="~/Content/images/@item.tMember.f會員大頭貼" alt="" class="col-auto" style="width: 300px;">
+                                                <p>@item.tMember.f會員名稱</p>
+                                                <p>團主評分:@item.tMember.f會員評分 </p>
+                                            </div>
+                                            <div class="change-max-width-1000 ml-4">
+                                                <div class="row align-items-center m-0 ml-2 textBox">
+                                                    @item.f活動內容
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <br />
+
+                                        @if (Session["member"] != null)
+                                        {
+                                            <div class="container">
+                                                <div class="row   justify-content-around">
+                                                    <button class="btn btn-block mr-1  p-1 FeelGood" style="background-color:#FFE0B2;" target="@item.f活動編號">
+                                                        <img src="~/Content/images/05.png" class="pb-1 ">覺得讚
+                                                    </button>
+                                                    <button class="btn btn-block mr-1  p-1" data-toggle="modal" data-target="#@combine_join" style="background-color:#FFE0B2 ;">
+                                                        <img src="~/Content/images/10.png" class="pb-1" alt="">想加入
+                                                    </button>
+                                                    <button class="btn btn-block mr-1  p-1" data-toggle="modal" data-target="#@combine_score" style="background-color:#FFE0B2 ;">
+                                                        <img src="~/Content/images/10.png" class="pb-1" alt="">給分數
+                                                    </button>
+                                                    <div style="cursor: pointer;">
+                                                        <button class="btn btn-block mr-1  p-1" data-toggle="modal" data-target="#@combine_msg" style="background-color:#FFE0B2 ;">
+                                                            <img src="~/Content/images/12.png" alt="">留言區
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        }
+                                    </div>
+                                    <!-- 互動文章 -->
+                                    <div class="modal-footer   mt-3  border-main-color">
+                                        @if (Session["member"] != null && NowMember.f會員編號 == item.f會員編號)
+                                        {
+                                            <button class="btn btn-block mr-1  p-1 JoutaEdit" data-toggle="modal" data-target="#@combine_edit" style="background-color:#FFE0B2 ;">
+                                                編輯
+                                            </button>
+                                            @Html.ActionLink("刪除", "Delete", "Travel", new { id = item.f活動編號 }, new { @class = "btn btn-secondary" })
+                                        }
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <!-- read more視窗控制尾 -->
+                    <!-- -------------文章區頭-------------- -->
+                    <div class="row Travel_border align-items-center p-3 pl-4">
+                        <div class="container-fluid">
+                            <div class="row m-0 mb-4   justify-content-between">
+                                <div class="pl-1">
+                                    <span style="cursor: pointer;">
+                                        <img src="~/Content/images/09.png" alt="">@item.tMember.f會員名稱
+                                    </span>
+                                </div>
+                                <div class="RWD_1851">
+                                    <span>發文日期： <span>@item.f活動發起日期</span></span>
+                                    <span>&nbsp; &nbsp;</span>
+                                    <span>活動日期： <span>@item.f活動開始時間</span></span>
+                                    <span>&nbsp; &nbsp;</span>
+                                    <span>入團截止： <span>@item.f活動招募截止時間</span></span>
+                                </div>
+                                <div class="row ">
+                                    <div class="dropdown RWD_1850 pr-3">
+                                        <button class="btn btn-secondary dropdown-toggle RWD_1850 border-0 p-0 pl-2 pr-2" style="height:30px!important;" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            More
                                         </button>
-                                        <button class="btn btn-block mr-1  p-1" data-toggle="modal" data-target="#@combine_join" style="background-color:#FFE0B2 ;">
-                                            <img src="~/Content/images/10.png" class="pb-1" alt="">想加入
-                                        </button>
-                                        <button class="btn btn-block mr-1  p-1" data-toggle="modal" data-target="#@combine_score" style="background-color:#FFE0B2 ;">
-                                            <img src="~/Content/images/10.png" class="pb-1" alt="">給分數
-                                        </button>
-                                        <div style="cursor: pointer;">
-                                            <button class="btn btn-block mr-1  p-1" data-toggle="modal" data-target="#@combine_msg" style="background-color:#FFE0B2 ;">
-                                                <img src="~/Content/images/12.png" alt="">留言區
+                                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu2">
+                                            <button class="dropdown-item drop-site1" style="cursor: pointer;" type="button">
+                                                <span>揪團日期： <span>@item.f活動發起日期</span></span>
+                                            </button>
+                                            <div class="dropdown-divider"></div>
+                                            <button class="dropdown-item drop-site2" style="cursor: pointer;" type="button">
+                                                <span>活動日期： <span>@item.f活動開始時間</span></span>
+                                            </button>
+                                            <div class="dropdown-divider"></div>
+                                            <button class="dropdown-item drop-site3" style="cursor: pointer;" type="button">
+                                                <span>入團截止： <span>@item.f活動招募截止時間</span></span>
                                             </button>
                                         </div>
                                     </div>
+                                    <div class="p-0 pr-2">
+                                        @if (Session["member"] != null)
+                                        {
+                                            <img style="cursor: pointer;" class="pb-1 likeIt" likeIndex="@item.f活動編號" src="~/Content/images/@iflikeit" alt="">
+                                        }
+                                    </div>
                                 </div>
-                            }
-                        </div>
-                        <!-- 互動文章 -->
-                        <div class="modal-footer   mt-3  border-main-color">
-                            @if (Session["member"] != null && NowMember.f會員編號 == item.f會員編號)
-                            {
-                                @*<button type="button" class="btn btn-secondary" data-dismiss="modal">*@
-                                @Html.ActionLink("刪除", "Delete", "Travel", new { id = item.f活動編號 }, new { @class = "btn btn-secondary" })
-                                @*</button>*@
-                            }
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
-                        </div>
-
-                    </div>
-
-                </div>
-            </div>
-        </div>
-        <!-- read more視窗控制尾 -->
-
-        <!-- -------------文章區頭-------------- -->
-        <div class="row Travel_border align-items-center p-3 pl-4">
-            <div class="container-fluid">
-                <div class="row m-0 mb-4   justify-content-between">
-                    <div class="pl-1">
-                        <span style="cursor: pointer;">
-                            <img src="~/Content/images/09.png" alt="">@item.tMember.f會員名稱
-                        </span>
-                    </div>
-                    <div class="RWD_1851">
-                        <span>發文日期： <span>@item.f活動發起日期</span></span>
-                        <span>&nbsp; &nbsp;</span>
-                        <span>活動日期： <span>@item.f活動開始時間</span></span>
-                        <span>&nbsp; &nbsp;</span>
-                        <span>入團截止： <span>@item.f活動招募截止時間</span></span>
-                    </div>
-                    <div class="row ">
-                        <div class="dropdown RWD_1850 pr-3">
-                            <button class="btn btn-secondary dropdown-toggle RWD_1850 border-0 p-0 pl-2 pr-2" style="height:30px!important;" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                More
-                            </button>
-                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu2">
-                                <button class="dropdown-item drop-site1" style="cursor: pointer;" type="button">
-                                    <span>揪團日期： <span>@item.f活動發起日期</span></span>
-                                </button>
-                                <div class="dropdown-divider"></div>
-                                <button class="dropdown-item drop-site2" style="cursor: pointer;" type="button">
-                                    <span>活動日期： <span>@item.f活動開始時間</span></span>
-                                </button>
-                                <div class="dropdown-divider"></div>
-                                <button class="dropdown-item drop-site3" style="cursor: pointer;" type="button">
-                                    <span>入團截止： <span>@item.f活動招募截止時間</span></span>
-                                </button>
+                                @*<div class="col-12"><hr /></div>*@
                             </div>
                         </div>
-                        <div class="p-0 pr-2">
-                            @if (Session["member"] != null)
-                            {
-                                <img style="cursor: pointer;" class="pb-1 likeIt" likeIndex="@item.f活動編號" src="~/Content/images/@iflikeit" alt="">
-                            }
+
+
+                        <div class="row pl-2 flex-wrap-reverse mt-2" style="width:100%;">
+
+                            <div class="mb-3 pl-4 pr-4 mx-auto  ViewCounts" updateVC="@item.f活動編號" style="cursor: pointer;width:66%;" data-toggle="modal" data-target="#@combine_readmore">
+                                <div class="" style="font-weight:bolder;"> <p class="mb-4   content-title">@item.f活動標題</p></div>
+
+                                <span class="content" style="font-size: 16px;line-height:1.8;">
+                                    @item.f活動內容
+                                </span>
+
+                            </div>
+
+                            <img src="~/Content/images/@item.f活動團圖" alt="" class="col-xl-auto col-6    mx-auto" style="width: 30%;">
+
+                        </div>
+                        <div class="container mt-2">
+                            <div class="row   justify-content-between  mt-2">
+                                <div>
+                                    <img src="~/Content/images/17.png" alt="">@item.f活動分類
+                                    <img src="~/Content/images/03.png" alt="">@item.f活動地區
+                                    <img src="~/Content/images/04.png" alt="">@item.f活動預算
+
+                                    <img src="~/Content/images/06.png" class="" alt=""><span ToUpdateVC="@item.f活動編號">@item.f活動瀏覽次數</span>
+                                    <img src="~/Content/images/05.png" class="" alt=""><span ToUpdateGC="@item.f活動編號">@item.f活動讚數</span>
+                                </div>
+                                @if (Session["member"] != null)
+                                {
+                                    <div style="cursor: pointer;" data-toggle="modal" data-target="#@combine_msg">
+                                        <img src="~/Content/images/12.png" alt="">留言
+                                    </div>
+                                }
+
+                            </div>
                         </div>
                     </div>
-                    @*<div class="col-12"><hr /></div>*@
-                </div>
-            </div>
-
-
-            <div class="row pl-2 flex-wrap-reverse mt-2" style="width:100%;">
-
-                <div class="mb-3 pl-4 pr-4 mx-auto  ViewCounts" updateVC="@item.f活動編號" style="cursor: pointer;width:66%;" data-toggle="modal" data-target="#@combine_readmore">
-                    <div class="" style="font-weight:bolder;"> <p class="mb-4   content-title">@item.f活動標題</p></div>
-
-                    <span class="content" style="font-size: 16px;line-height:1.8;">
-                        @item.f活動內容
-                    </span>
-
-                </div>
-
-                <img src="~/Content/images/@item.f活動團圖" alt="" class="col-xl-auto col-6    mx-auto" style="width: 30%;">
-
-            </div>
-            <div class="container mt-2">
-                <div class="row   justify-content-between  mt-2">
-                    <div>
-                        <img src="~/Content/images/17.png" alt="">@item.f活動分類
-                        <img src="~/Content/images/03.png" alt="">@item.f活動地區
-                        <img src="~/Content/images/04.png" alt="">@item.f活動預算
-
-                        <img src="~/Content/images/06.png" class="" alt=""><span ToUpdateVC="@item.f活動編號">@item.f活動瀏覽次數</span>
-                        <img src="~/Content/images/05.png" class="" alt=""><span ToUpdateGC="@item.f活動編號">@item.f活動讚數</span>
-                    </div>
-                    @if (Session["member"] != null)
-                    {
-                        <div style="cursor: pointer;" data-toggle="modal" data-target="#@combine_msg">
-                            <img src="~/Content/images/12.png" alt="">留言
-                        </div>
+                    <!-- -------------文章分割線-------------- -->
                     }
+                    <nav aria-label="...">
+                        <ul class="pagination">
+                            @*<li class="page-item disabled">
+                                    <span class="page-link">Previous</span>
+                                </li>*@
+                            @for (int i = 1; i < Model.TotalPage + 1; i++)
+                            {
+                                if (i == Model.NowPage)
+                                {
+                                    <li class="page-item active  MyPage NowPage" page="@i">
+                                        <span class="page-link">
+                                            @i
+                                            <span class="sr-only">(current)</span>
+                                        </span>
+                                    </li>
+                                    @*<button class=" page NowPage" page="@i">@i</button>*@
+                                }
+                                else
+                                {
+                                    <li class="page-item  MyPage" page="@i"><a class="page-link" style="cursor:pointer">@i</a></li>
+                                    @*<button class=" page" page="@i">@i</button>*@
+                                }
 
-                </div>
-            </div>
-        </div>
-        <!-- -------------文章分割線-------------- -->
-    }
-    <nav aria-label="...">
-        <ul class="pagination">
-            @*<li class="page-item disabled">
-                    <span class="page-link">Previous</span>
-                </li>*@
-            @for (int i = 1; i < Model.TotalPage + 1; i++)
-            {
-                if (i == Model.NowPage)
-                {
-                    <li class="page-item active  MyPage NowPage" page="@i">
-                        <span class="page-link">
-                            @i
-                            <span class="sr-only">(current)</span>
-                        </span>
-                    </li>
-                    @*<button class=" page NowPage" page="@i">@i</button>*@
-                }
-                else
-                {
-                    <li class="page-item  MyPage" page="@i"><a class="page-link" style="cursor:pointer">@i</a></li>
-                    @*<button class=" page" page="@i">@i</button>*@
-                }
+                            }
+                            @*<li class="page-item">
+                                    <a class="page-link" style="cursor:pointer">Next</a>
+                                </li>*@
+                        </ul>
+                    </nav>
+                    }
+                    @*@if (NowMember != null)
+                        {
 
-            }
-            @*<li class="page-item">
-                    <a class="page-link" style="cursor:pointer">Next</a>
-                </li>*@
-        </ul>
-    </nav>
-}
-@*@if (NowMember != null)
-    {
-
-    }*@
+                        }*@

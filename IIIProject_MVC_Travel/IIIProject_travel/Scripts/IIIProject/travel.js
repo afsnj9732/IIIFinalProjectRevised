@@ -11,7 +11,7 @@
             success: function (data) {
                 if (data === "")
                     return;
-                $("#calendarEventTarget").html(data); //有時間加入同步效果
+                $("#calendarEventTarget").html(data);  
                 $("#calendarEventGo").click();
             }
         });  
@@ -59,15 +59,15 @@
     });
 
     //揪團時間限制   
-    $("#ActivityStart").on("change", function () {
+    $("body").on("change", ".ActivityStart",function () {
         //$("#ActivityStart").attr("disabled","");
-        $("#ActivityStartTo").attr("hidden", "");
-        $("#ActivityEnd").val("");
-        $("#ActivityFindEnd").val("");
-        $("#ActivityEnd").removeAttr("disabled");
-        $("#ActivityFindEnd").removeAttr("disabled");
-        $("#ActivityEnd").attr("min", $("#ActivityStart").val());
-        $("#ActivityFindEnd").attr("max", $("#ActivityStart").val());
+        $(".ActivityStartTo").attr("hidden", "");
+        $(".ActivityEnd").val("");
+        $(".ActivityFindEnd").val("");
+        $(".ActivityEnd").removeAttr("disabled");
+        $(".ActivityFindEnd").removeAttr("disabled");
+        $(".ActivityEnd").attr("min", $(".ActivityStart").val());
+        $(".ActivityFindEnd").attr("max", $(".ActivityStart").val());
     });
 
     //星星評分頭
@@ -142,7 +142,7 @@
 
 
     var theMonth, theDay;
-    $("#ActivityEnd").on("change", function () {
+    $("body").on("change", "#ActivityEnd", function () {
         $("#ActivityEndTo").attr("hidden", "");
         //let d = new Date($("#ActivityEnd").val());
         //date = new Date(d.setDate(d.getDate() - 1));
@@ -166,44 +166,55 @@
         }
     }
     //揪團欄位限制
-    $("#NeedAT").on("change", function () {
-        $("#NeedATTo").attr("hidden", "");
+    $("body").on("change", ".NeedAT", function () {
+        $(".NeedATTo").attr("hidden", "");
     });
-    $("#ActivityFindEnd").on("change", function () {
-        $("#ActivityFindEndTo").attr("hidden", "");
+    $(".ActivityFindEnd").on("change", function () {
+        $(".ActivityFindEndTo").attr("hidden", "");
     });
-    $("#NeedAC").on("change", function () {
-        $("#NeedACTo").attr("hidden", "");
+    $(".NeedAC").on("change", function () {
+        $(".NeedACTo").attr("hidden", "");
     });
-    $("#NeedAP").on("change", function () {
-        $("#NeedAPTo").attr("hidden", "");
+    $(".NeedAP").on("change", function () {
+        $(".NeedAPTo").attr("hidden", "");
     });
-    $("#NeedAL").on("change", function () {
-        $("#NeedALTo").attr("hidden", "");
+    $(".NeedAL").on("change", function () {
+        $(".NeedALTo").attr("hidden", "");
     });
+    $("body").on("click", ".JoutaEdit", function () {
+        console.log("why");
+        $(".NeedATTo").attr("hidden", "");
+        $(".ActivityStartTo").attr("hidden", "");
+        $(".ActivityEndTo").attr("hidden", "");
+        $(".ActivityFindEndTo").attr("hidden", "");
+        $(".NeedACTo").attr("hidden", "");
+        $(".NeedAPTo").attr("hidden", "");
+        $(".NeedALTo").attr("hidden", "");
+    });
+
     //揪團欄位限制
-    $("#JoutaSend").on("click", function (e) {
-        if ($("#NeedAT").val().length < 8) {
+    $(".JoutaSend").on("click", function (e) {
+        if ($(".NeedAT").val().length < 8) {
             e.preventDefault();
-            $("#NeedATTo").removeAttr("hidden");
-        } else if ($("#ActivityStart").val() === "") {
+            $(".NeedATTo").removeAttr("hidden");
+        } else if ($(".ActivityStart").val() === "") {
             e.preventDefault();
-            $("#ActivityStartTo").removeAttr("hidden");
-        } else if ($("#ActivityEnd").val() === "") {
+            $(".ActivityStartTo").removeAttr("hidden");
+        } else if ($(".ActivityEnd").val() === "") {
             e.preventDefault();
-            $("#ActivityEndTo").removeAttr("hidden");
-        } else if ($("#ActivityFindEnd").val() === "") {
+            $(".ActivityEndTo").removeAttr("hidden");
+        } else if ($(".ActivityFindEnd").val() === "") {
             e.preventDefault();
-            $("#ActivityFindEndTo").removeAttr("hidden");
-        } else if ($("#NeedAC").val() === "") {
+            $(".ActivityFindEndTo").removeAttr("hidden");
+        } else if ($(".NeedAC").val() === "") {
             e.preventDefault();
-            $("#NeedACTo").removeAttr("hidden");
-        } else if ($("#NeedAP").val() === "") {
+            $(".NeedACTo").removeAttr("hidden");
+        } else if ($(".NeedAP").val() === "") {
             e.preventDefault();
-            $("#NeedAPTo").removeAttr("hidden");
-        } else if ($("#NeedAL").val().length < 100) {
+            $(".NeedAPTo").removeAttr("hidden");
+        } else if ($(".NeedAL").val().length < 100) {
             e.preventDefault();
-            $("#NeedALTo").removeAttr("hidden");
+            $(".NeedALTo").removeAttr("hidden");
         }
     });
 
