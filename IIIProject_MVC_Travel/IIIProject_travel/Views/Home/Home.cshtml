@@ -44,9 +44,10 @@
                     <ul class="nav navbar-nav">
 
                         <li class="nav-item">@Html.ActionLink("關於我們", "About", "Home", new { }, new { @class = "nav-link nav-register text-dark" })</li>
+                        <li class="nav-item">@Html.ActionLink("聯絡我們", "New", "聯絡我們", new { }, new { @class = "nav-link nav-login text-dark" })</li>
                         @if (Session["member"] != null)
                         {
-                            <li class="nav-item">@Html.ActionLink("聯絡我們", "New", "聯絡我們", new { }, new { @class = "nav-link nav-login text-dark" })</li>
+
 
                             <li class="nav-item nav-link nav-login text-dark">@Html.ActionLink("您好，" + x.f會員名稱, "ProfileIndex", "Profile") </li>
                             @*<li class="nav-item">
@@ -206,7 +207,7 @@
                                             <div class="card" style="width: 18rem;">
                                                 <img src="~/Content/images/@t.f會員大頭貼" class="card-img-top" alt="" width="350" height="250">
                                                 <div class="card-body">
-                                                    <h5 class="card-title">@t.f會員編號 @t.f會員名稱</h5>
+                                                    <h5 class="card-title">@t.f會員名稱</h5>
                                                     <p class="card-text">
                                                         @t.f會員自我介紹
                                                     </p>
