@@ -81,7 +81,7 @@
     <div class="container">
         <div class="profile-header">
             <div class="profile-img">
-                @if (x.f會員大頭貼 != null)
+                @if(x.f會員大頭貼 != null || x.f會員大頭貼 == "")
                 {
                     <img src="~/Content/images/@x.f會員大頭貼" alt="" class="">
                 }
@@ -103,12 +103,6 @@
                     {
                         <p class="state">管理員</p>
                     }
-                </div>
-            </div>
-            <div class="profile-option">
-                <div class="notification">
-                    <i class="fas fa-bell"></i>
-                    <span class="alert-message"></span>
                 </div>
             </div>
         </div>
@@ -138,7 +132,7 @@
                         <p class="bio"> @x.f會員自我介紹</p>
                     </div>
                     <div class="profile-btn">
-                        <button class="chatbtn"><i class="fa fa-comment">@Html.ActionLink("Chat", "Chat", "Profile", new { }, new { @class = "fa fa-plus temp" })</i></button>
+                        <button class="chatbtn"><i class="fa fa-comment"></i>@Html.ActionLink("Chat", "Chat", "Profile", new {@style="color:#fff;" })</button>
                         <button class="createbtn">
                             <i>@Html.ActionLink("Create", "Create", "Blog", new { }, new { @class = "fa fa-plus temp" })</i>
                         </button>

@@ -1,8 +1,4 @@
-:root{
-    --color:#e40046;
-}
-@import url('https://fonts.googleapis.com/css?family=Poopins&display=swap');
-@import url('https://fonts.googleapis.com/css?family=Bree+Serif&display=swap');
+
 #limit {
     display: flex;
     width: 500px;
@@ -286,51 +282,61 @@ input[type="text"]:focus{
         top: 50px;
     }
 }
-@media(max-width: 900px){
-    body{
+@media(max-width: 900px) {
+    body {
         margin: 0 20px;
     }
-    .profile-header{
+
+    .profile-header {
         display: flex;
         height: 100%;
         flex-direction: column;
         text-align: center;
         padding-bottom: 20px;
     }
-    .profile-img{
+
+    .profile-img {
         float: left;
         width: 100%;
         height: 200px;
     }
-    .profile-img img{
-        position: relative;
-        left: 0;
-    }
-    .profile-nav-info{
+
+        .profile-img img {
+            position: relative;
+            left: 0;
+        }
+
+    .profile-nav-info {
         text-align: center;
     }
-    .profile-nav-info .address{
-        justify-content: center;
-    }
-    .profile-option{
+
+        .profile-nav-info .address {
+            justify-content: center;
+        }
+
+    .profile-option {
         right: 20px;
         top: 75%;
         transform: translateY(50%);
     }
-    .main-bd{
+
+    .main-bd {
         flex-direction: column;
         padding-right: 0px;
     }
-    .profile-side{
+
+    .profile-side {
         width: 100%;
         text-align: center;
         padding: 20px;
         margin: 5px 0;
     }
-    .user-rating{
+
+    .user-rating {
         justify-content: center;
     }
-    @media(max-width:400px){
+}
+    @media screen and (max-width:400px){
         body{
             margin: 5px;
         }
@@ -357,4 +363,18 @@ input[type="text"]:focus{
             font-size: .7rem;
         }
     }
+
+
+.backgroundBlock {
+    background-color: #fff;
+    width: 700px;
+    height: 30px;
+}
+
+.backgroundBlock_in {
+    background-color: #fff;
+    width: 700px;
+    height: 100px;
+    overflow-x: hidden;
+    overflow-y: scroll;
 }
