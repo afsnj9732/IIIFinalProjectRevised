@@ -58,6 +58,7 @@
                         else
                         {
 
+
                             <li class="nav-item">@Html.ActionLink("登入", "LoginIndex", "Login", new { }, new { @class = "nav-link nav-login text-dark" })</li>
 
                             <li class="nav-item">@Html.ActionLink("註冊", "Register", "Home", new { }, new { @class = "nav-link nav-register text-dark" })</li>
@@ -73,7 +74,8 @@
                 <div class="slogan">
                     <h2 class="slogan2">{{slogan2}}</h2>
                     <p class="mt-3">
-                        {{ slogan1}}<br>
+                        {{ slogan1}}
+                        <br>
                         {{ slogan3}}
                     </p>
                 </div>
@@ -114,7 +116,7 @@
                         </div>
                         <div class="form-group col-lg-2 col-md-2 col-sm-12 inner">
                             <label for="label">總讚數:</label>
-                            <select class="form-control"  id="label" style="border: none;">
+                            <select class="form-control" id="label" style="border: none;">
                                 <option value="全部" selected>&nbsp;全部</option>
                                 <option value="10">讚>10</option>
                                 <option value="30">讚>30</option>
@@ -171,7 +173,7 @@
                 </div>
                 <div id="tabthree" class="tab-pane fade">
                     <form class="form-inline table d-flex align-items-end" method="POST" action="~/Blog/Index">
-                        
+
                         <div class="form-group col-lg-3 col-md-3 col-sm-12 inner">
                             <label for="keyword_article">關鍵字:</label>
                             <input type="text" name="txtKeyword" class="form-control" id="keyword_article">
@@ -211,7 +213,7 @@
                                                     <p class="card-text">
                                                         @t.f會員自我介紹
                                                     </p>
-                                                    @Html.ActionLink("了解一下", "otherProfile", "Profile", new { id=t.f會員編號}, new { @class = "btn btnContent" })                                                @*<a href="profile.html" class="btn btnContent">Go somewhere</a>*@
+                                                    @Html.ActionLink("了解一下", "otherProfile", "Profile", new { id = t.f會員編號 }, new { @class = "btn btnContent" })                                                @*<a href="profile.html" class="btn btnContent">Go somewhere</a>*@
                                                 </div>
                                             </div>
 
@@ -337,13 +339,17 @@
                                 <p class="card-text" style="text-align: left;">
                                     @a.f活動內容
                                 </p>
-                                @Html.ActionLink("我要+1", "TravelIndex", "Travel", new {id=a.f活動編號 }, new { @class = "btn btnContent mt-2" })
+                                @Html.ActionLink("我要+1", "TravelIndex", "Travel", new { id = a.f活動編號 }, new { @class = "btn btnContent mt-2" })
 
                                 <section class="block_footer">
                                     <div class="date">@a.f活動開始時間</div>
                                     <div class="icons">
-                                        <div class="views"><i class="ion-eye"></i>@a.f活動瀏覽次數</div>
-                                        <div class="love"><i class="ion-heart"></i>@a.f活動讚數</div>
+                                        <div class="views">
+                                            <i class="ion-eye"></i>@a.f活動瀏覽次數
+                                        </div>
+                                        <div class="love">
+                                            <i class="ion-heart"></i>@a.f活動讚數
+                                        </div>
                                     </div>
                                 </section>
                             </figcaption>

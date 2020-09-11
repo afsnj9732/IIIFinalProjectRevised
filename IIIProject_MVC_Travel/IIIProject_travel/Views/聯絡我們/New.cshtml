@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="~/Content/css/style.css">
     <link rel="stylesheet" href="~/Content/css/聯絡我們.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css">
+    <script src="~/Scripts/IIIProject/聯絡我們New.js"></script>
 
 
 </head>
@@ -53,7 +54,7 @@
     <div>
         <h2 style="text-align:center">聯絡我們</h2>
     </div>
-    <form method="post" action="~/聯絡我們/s儲存">
+    <form method="post" action="~/聯絡我們/Save">
         <p style="text-align: center">我們十分重視您的寶貴意見與問題，我們將竭誠儘速為您服務</p>
 
 
@@ -62,77 +63,71 @@
             <fieldset>
                 <legend><img src="~/Content/images/letter.jpg" class="imgLetter" alt="" width="100"></legend>
                 <div class="st1">
+
+                    <div class="op" style="text-align: center;">
+                        <select name="txt意見類型">
+                            <option value="">請選擇</option>
+                            <option value="旅遊意見">旅遊意見</option>
+                            <option value="飯局意見">飯局意見</option>
+                            <option value="文章意見">文章意見</option>
+                            <option value="其他意見">其他意見</option>
+                        </select>
+                    </div>
+
+
                     <div class="form-group col-md-6" style="text-align: center ;margin: 20px auto;">
-                        <label for="exampleInputEmail1">Email address</label>
-                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="輸入信箱" name="txtMail" size="12">
-                       </div>
+                        <label for="">名稱</label>
+                        <input type="text" class="form-control" id="name" placeholder="輸入名稱" name="txt名稱" size="8">
+                    </div>
 
 
-                        <div class="op">
-                            <select name="txt意見類型">
-                                <option value="">請選擇</option>
-                                <option>旅遊意見</option>
-                                <option>飯局意見</option>
-                                <option>文章意見</option>
-                                <option>其他意見</option>
-                            </select>
-                        </div>
 
-                        <div class="st1">
-                            <div class="st2">
-                                <label for="" class="t1">會員帳號：</label>
-                                <input id="帳號" name="txt會員帳號" size="40" autofocus onblur="c檢查帳號()">
-                                <span id="idac"></span>
-                            </div>
-                        </div>
+                    <div class="form-group col-md-6" style="text-align: center ;margin: 20px auto;">
+                        <label for="exampleInputEmail1">信箱</label>
+                        <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="輸入信箱" name="txtMail" size="12" >
+                    </div>
 
-                        <div>
-                            <div class="st1">
-                                <div class="st2">
-                                    <label class="t1" for="account1">聯絡人：</label>
-                                    <input id="聯絡人" name="txt聯絡人" size="20" width="" onblur="c檢查聯絡人()">
 
-                                    <input type="radio" name="gender">
-                                    <label>先生</label>
-                                    <label>
-                                        <input type="radio" name="gender">女士
-                                    </label>
-                                    <span id="idcp"></span>
-                                </div>
 
-                            </div>
-
-                        </div>
-                        <div class="st1">
-                            <div class="st2">
-                                <label for="" class="t1">電子郵件：</label>
-                                <input id="mail" type="email" name="txt電子郵件" size="40" onblur="c檢查mail">
-                                <span id="idmail"></span>
-                            </div>
-                        </div>
-                        <div class="st1">
-                            <div class="st2">
-                                <label for="" class="t1">電話：</label>
-                                <input id="電話" name="txt電話" size="40" onblur="c檢查電話()">
-                                <span id="idtal"></span>
-
-                            </div>
-
-                        </div>
-
-                        <div class="st1">
-                            <div class="st2">
-                                <label class="t1" for="comment1">意見：</label>
-                                <textarea id="意見" cols="40" rows="5" name="txt意見" onblur="c檢查意見()"></textarea>
-                                <span id="idop"></span>
-                            </div>
-                        </div>
-                        <div class="sub">
-                            <input type="submit" value="送出">
-                            <input type="reset" value="清除">
+                    <div class="form-group col-md-6" style="text-align: center ;margin: 20px auto;">
+                        <label for="">聯絡人</label>
+                        <input type="text" class="form-control" id="post聯絡人" aria-describedby="emailHelp" placeholder="輸入聯絡人名稱" name="txt聯絡人" size="9">
+                    </div>
+                    <div style="text-align: center;">
+                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                            <label class="btn  btn-outline-success">
+                                <input type="radio" name="gender" id="sexbtn1" autocomplete="off" value="男性"> 先生
+                            </label>
+                            <label class="btn  btn-outline-success">
+                                <input type="radio" name="gender" id="sexbtn2" autocomplete="off" value="女性"> 女士
+                            </label>
                         </div>
                     </div>
-</fieldset>
+
+
+                    <div class="form-group col-md-6" style="text-align: center ;margin: 20px auto;">
+                        <label>電話</label>
+                        <input type="text" class="form-control" id="phone" placeholder="輸入電話" name="txt電話" size="12" pattern="^09\d{8}$">
+                    </div>
+
+
+                    <div style="text-align:center;">
+                        <div class="form-group w-50 " style="  margin: 0 auto;">
+                            <label for="exampleFormControlTextarea1">意見</label>
+                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="txt意見"></textarea>
+                        </div>
+                    </div>
+
+
+                    <div class="sub">
+                        <button type="submit" class="btn btn-success">送出</button>
+                        <button type="reset" class="btn btn-success">取消</button>
+                    </div>
+
+                </div>
+            </fieldset>
+        </div>
+        <div>
             <p class="pb">本信箱的郵件處理時間為一般工作日上午 8 點 30 分至下午 5 點 30 分</p>
         </div>
 
