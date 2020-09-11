@@ -19,7 +19,7 @@
 
     $('#content').text(time[randTime] + '在' + location[randLocation] + '方圓三公里範圍內，將送出' + store[randStore] + discount[randDiscount] + '優惠券!');
     $('#hidcontent').text(store[randStore] + "-" + discount[randDiscount] + "優惠券");
-    $('#sendBtn').html(`<button type="submit" class="btn btn-primary ml-3 sendBtn" onclick="sendCoupon()">送出優惠券</button>`);
+    //$('#sendBtn').html(`<button type="submit" class="btn btn-primary ml-3 sendBtn" onclick="sendCoupon()">送出優惠券</button>`);
     //$('#sendBtn').html(`<a class="btn btn-primary ml-3 sendBtn" onclick="sendCoupon()" value="送出優惠券"></a>`);
 
     $.ajax({
@@ -34,23 +34,20 @@
         success: function (data) {
             //如果有撈到資料
             if (data) {
-                $('#tbody').html(
-                    '<tr><td id="member1">' + data[0].mMemberNum + '</td><br>' +
-                    '<td>' + data[0].mAccount + '</td><br>' +
-                    '<td>' + data[0].mName + '</td><br>' +
-                    '<td>' + data[0].mRating + '</td><br>' +
-                    '<input type="hidden" class="form-control" id="memberId1" name="memberId1" value=""/><br>'
-                    //'<tr><td id="member2">' + data[1].mMemberNum + '</td><br>' +
-                    //'<td>' + data[1].mAccount + '</td><br>' +
-                    //'<td>' + data[1].mName + '</td><br>' +
-                    //'<td>' + data[1].mRating + '</td><br>' +
-                    //'<input type="hidden" class="form-control" id="memberId2" name="memberId2" value=""/><br>' +
-                    //'<tr><td id="member3">' + data[2].mMemberNum + '</td><br>' +
-                    //'<td>' + data[2].mAccount + '</td><br>' +
-                    //'<td>' + data[2].mName + '</td><br>' +
-                    //'<td>' + data[2].mRating + '</td><br>' +
-                    //'<input type="hidden" class="form-control" id="memberId3" name="memberId3" value=""/><br>'
-                );
+                $('#mMemberNum1').text(data[0].mMemberNum);
+                $('#mEmail1').text(data[0].mEmail);
+                $('#mName1').text(data[0].mName);
+                $('#mRating1').text(data[0].mRating);
+                //'<tr><td id="member2">' + data[1].mMemberNum + '</td><br>' +
+                //'<td>' + data[1].mAccount + '</td><br>' +
+                //'<td>' + data[1].mName + '</td><br>' +
+                //'<td>' + data[1].mRating + '</td><br>' +
+                //'<input type="hidden" class="form-control" id="memberId2" name="memberId2" value=""/><br>' +
+                //'<tr><td id="member3">' + data[2].mMemberNum + '</td><br>' +
+                //'<td>' + data[2].mAccount + '</td><br>' +
+                //'<td>' + data[2].mName + '</td><br>' +
+                //'<td>' + data[2].mRating + '</td><br>' +
+                //'<input type="hidden" class="form-control" id="memberId3" name="memberId3" value=""/><br>'
             }
         },
         error: function (xhr, status, error) {
@@ -61,19 +58,22 @@
 
 
 //發送優惠券+跳通知
-function sendCoupon() {
+$('.sendBtn').click(function () {
     $('.sendBtn').attr('disabled', '');
     $('.sendBtn').attr('onclick', '');
 
     hidcontent = document.querySelector('#hidcontent').innerHTML;
-    var txtCouponInfo = $('#txtCouponInfo').val();
+    var txtCouponInfo = $('#txtCouponInfo').val(hidcontent);
     txtCouponInfo = hidcontent;
     console.log(txtCouponInfo);
 
-    member1 = document.querySelector('#member1').innerHTML;
-    var memberId1 = $('#memberId1').value;
+    member1 = document.querySelector('#mMemberNum1').innerHTML;
+    var memberId1 = $('#memberId1').val(member1);
     memberId1 = member1;
     console.log(memberId1);
+
+    form = document.querySelector('#form1');
+    form.submit();
 
     //member2 = document.querySelector('#member2').innerHTML;
     //var memberId2 = $('#memberId2').value;
@@ -118,5 +118,4 @@ function sendCoupon() {
             }
         });
     }
-
-}
+});

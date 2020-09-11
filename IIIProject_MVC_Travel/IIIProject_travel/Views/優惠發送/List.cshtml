@@ -90,31 +90,41 @@
             @*主內容*@
             <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
                 <h2>優惠發送</h2>
-                <form action="~/優惠發送/Save" method="post" id="form1">
+                <form action="~/優惠發送/SendMail" method="post" id="form1">
+                    @*@using (Html.BeginForm())
+                        {*@
                     <div class="row">
                         <button type="button" class="btn btn-primary randCoupon ml-3">抽選現有優惠資訊及中獎者</button>
-                        <div id="sendBtn"></div>
+                        @*<div id="sendBtn"></div>*@
+                        <button type="submit" class="btn btn-primary ml-3 sendBtn">送出優惠券</button>
                     </div>
                     <hr />
                     <div id="content">-</div>
                     <div id="hidcontent" hidden></div>
-                    <input type="hidden" class="form-control" id="txtCouponInfo" name="txtCouponInfo" value=""/>
+                    <input type="hidden" class="form-control" id="txtCouponInfo" name="txtCouponInfo" value="" />
                     <hr />
                     <div class="table-responsive">
                         <table class="table table-striped table-sm">
                             <thead>
                                 <tr>
                                     <td>中獎會員</td>
-                                    <td>會員帳號</td>
+                                    <td>會員信箱</td>
                                     <td>會員名稱</td>
                                     <td>會員評分</td>
                                 </tr>
                             </thead>
                             <tbody id="tbody">
-                                @*ajax result*@
+                                <tr>
+                                    <td id="mMemberNum1">@*ajax result*@</td>
+                                    <td id="mEmail1">@*ajax result*@</td>
+                                    <td id="mName1">@*ajax result*@</td>
+                                    <td id="mRating1">@*ajax result*@</td>
+                                </tr>
                             </tbody>
                         </table>
+                        <input type="hidden" class="form-control" id="memberId1" name="memberId1" value="" /><br>
                     </div>
+                    @*}*@
                 </form>
             </main>
         </div>

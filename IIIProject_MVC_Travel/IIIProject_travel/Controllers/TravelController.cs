@@ -50,6 +50,7 @@ namespace IIIProject_travel.Controllers
             HomeSearch += Request.Form["txtTravelKeyword"]; 
             HomeSearch += ","+ Request.Form["txtTravelCategory"]; 
             HomeSearch += ","+ Request.Form["txtTotalGood"];
+            HomeSearch += ",";
             return View((object)HomeSearch);
         }
 

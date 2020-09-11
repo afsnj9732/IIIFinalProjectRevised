@@ -248,6 +248,7 @@
     <Content Include="Content\css\otherprofile.css" />
     <Content Include="Content\css\profile.css" />
     <Content Include="Content\css\quickmatch.css" />
+    <Content Include="Content\css\register.css" />
     <Content Include="Content\css\style_n.css" />
     <Content Include="Content\css\travel.css" />
     <Content Include="Content\css\travel_main.css" />
@@ -351,8 +352,13 @@
     <Content Include="Content\fullcalendar-5.3.2\LICENSE.txt" />
     <Content Include="Content\images\14876883363_94995b4f88_o.jpg" />
     <Content Include="Content\images\20190105141437_100.jpg" />
+    <Content Include="Content\images\26喝咖啡.jpg" />
+    <Content Include="Content\images\26變電箱.jpg" />
+    <Content Include="Content\images\29吃飯.jpg" />
+    <Content Include="Content\images\29文章.jpg" />
     <Content Include="Content\images\BlogUploadSample.png" />
     <Content Include="Content\images\ChangeStar.png" />
+    <Content Include="Content\images\default.jpg" />
     <Content Include="Content\images\f899c3a6-45ba-4d37-ba05-8f4e031b0a63.jpg" />
     <Content Include="Content\images\McDonalds.png" />
     <Content Include="Content\images\mume.jpg" />
@@ -2069,6 +2075,9 @@
     <Content Include="Content\images\travel.png" />
     <Content Include="Content\images\video.mp4" />
     <Content Include="Content\images\video.webm" />
+    <Content Include="Content\images\噴水.jpg" />
+    <Content Include="Content\images\皮卡丘.jpg" />
+    <Content Include="Content\images\肌肉水箭龜.jpg" />
     <Content Include="Content\jquery-ui-1.12.1\AUTHORS.txt" />
     <Content Include="Content\jquery-ui-1.12.1\external\jquery\jquery.js" />
     <Content Include="Content\jquery-ui-1.12.1\images\ui-icons_444444_256x240.png" />

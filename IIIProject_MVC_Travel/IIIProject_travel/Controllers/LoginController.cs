@@ -22,9 +22,6 @@ namespace IIIProject_travel.Controllers
         [AllowAnonymous]    //是人皆可進
         public ActionResult LoginIndex()
         {
-            //判斷使用者是否通過登入驗證
-            //if (User.Identity.IsAuthenticated)
-            //    return RedirectToAction("Home","Home");     //已登入則重新導向
             CLogin c = new CLogin();
             c.txtRememberMe = "記住我";
             return View(c);

@@ -20,29 +20,29 @@ namespace IIIProject_travel.Controllers
         [HttpPost]
         public ActionResult List(string randLocation)
         {
-            dbJoutaEntities db = new dbJoutaEntities();
 
+            dbJoutaEntities db = new dbJoutaEntities();
             var x = (from t in db.tMember
                      where t.f會員評分 >= 4
                      select new
                      {
                          mMemberNum = t.f會員編號,
-                         mAccount = t.f會員帳號,
+                         mEmail = t.f會員電子郵件,
                          mName = t.f會員名稱,
                          mRating = t.f會員評分
                      })
-                .OrderBy(t => Guid.NewGuid()).Take(1);
+                    .OrderBy(t => Guid.NewGuid()).Take(1);
 
             return Json(x, JsonRequestBehavior.AllowGet);
         }
 
-        [NonAction]
-        public void Save(string txtCouponInfo, int memberId1)
+        [HttpPost]
+        public ActionResult SendMail(string txtCouponInfo, int memberId1)
         {
 
             dbJoutaEntities db = new dbJoutaEntities();
             var x = db.tMember.Where(a => a.f會員編號 == memberId1).FirstOrDefault();
-            
+
             string randCode = Guid.NewGuid().ToString();
 
             //Jouta官方帳號
@@ -50,13 +50,13 @@ namespace IIIProject_travel.Controllers
             string gmail_password = "admin123admin";
             string gmail_mail = "Joutagroup445@gmail.com";     //gmail信箱
 
-            var verifyUrl = "/Home/ResetPassword/" + randCode;
-            var link = Request.Url.AbsoluteUri.Replace(Request.Url.PathAndQuery, verifyUrl);
+            //var verifyUrl = "/Home/ResetPassword/" + randCode;
+            //var link = Request.Url.AbsoluteUri.Replace(Request.Url.PathAndQuery, verifyUrl);
 
             var fromEmail = new MailAddress(gmail_mail, "Jouta服務團隊");
             var toEmail = new MailAddress(x.f會員電子郵件);
-            string body = "您好，<br/><br/>恭喜您抽到" +txtCouponInfo+
-            "<br/><br/>"+ randCode + "，使用期限至9/30，請盡速使用!</a>";
+            string body = "您好，<br/><br/>恭喜您抽到：" + txtCouponInfo +
+            "<br/><br/>優惠代碼請至該店家網站或其門市兌換使用：" + randCode + "，使用期限至9/30，請盡速使用!</a>";
 
             SmtpClient smtpServer = new SmtpClient("smtp.gmail.com");
             smtpServer.Port = 587;
@@ -70,12 +70,14 @@ namespace IIIProject_travel.Controllers
             //設定收信者信箱
             mail.To.Add(toEmail);
             //主旨
-            mail.Subject = "重置密碼確認信";
+            mail.Subject = "Jouta 優惠好禮 !";
             //內容
             mail.Body = body;
             //設定信箱內容為HTML格式
             mail.IsBodyHtml = true;
             smtpServer.Send(mail);
+
+            return RedirectToAction("List");
         }
     }
 }

@@ -81,7 +81,15 @@
     <div class="container">
         <div class="profile-header">
             <div class="profile-img">
-                <img src="~/Content/images/@x.f會員大頭貼" alt="" class="">
+                @if (x.f會員大頭貼 != null)
+                {
+                    <img src="~/Content/images/@x.f會員大頭貼" alt="" class="">
+                }
+                else
+                {
+                    <img src="~/Content/images/default.jpg" alt="" class="">
+                }
+
             </div>
             <div class="profile-nav-info">
                 <h3 class="user-name">@x.f會員名稱</h3>

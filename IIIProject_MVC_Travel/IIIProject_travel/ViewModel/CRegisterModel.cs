@@ -21,6 +21,7 @@ namespace IIIProject_travel.ViewModel
 
         [Required(AllowEmptyStrings = false, ErrorMessage = "會員密碼不可空白")]
         [DataType(DataType.Password)]
+        [RegularExpression(@"^.*(?=.{6,})(?=.*\d)(?=.*[a-zA-Z]).*$", ErrorMessage = "密碼須包含英文，數字且字數6位以上")]
         [MinLength(6, ErrorMessage = "密碼長度至少6位")]
         public string txtPassword { get; set; }
 
