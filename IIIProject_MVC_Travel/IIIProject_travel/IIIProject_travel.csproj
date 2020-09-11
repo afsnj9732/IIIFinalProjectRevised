@@ -228,6 +228,7 @@
     <Compile Include="ViewModel\CReset.cs" />
     <Compile Include="ViewModel\CSelect.cs" />
     <Compile Include="ViewModel\CTravel.cs" />
+    <Compile Include="ViewModel\PData.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Start\proheadshot.jpg" />
@@ -2257,6 +2258,8 @@
     <Content Include="Views\後台旅遊\v查看.cshtml" />
     <Content Include="Views\OpenDataConnect\TravelOpenDataIndex.cshtml" />
     <Content Include="Views\Travel\getCalendarEvent.cshtml" />
+    <Content Include="Views\聯絡我們 - 複製\List.cshtml" />
+    <Content Include="Views\聯絡我們 - 複製\New.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

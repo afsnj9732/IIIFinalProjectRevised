@@ -1,4 +1,5 @@
-﻿using System;
+﻿using IIIProject_travel.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -20,22 +21,24 @@ namespace IIIProject_travel.Controllers
         {
             return View();
         }
-        //public ActionResult s儲存()
-        //{
-        //    tActivity x = new tActivity();
-        //    x.f帳號 = Request.Form["txt會員帳號"];
-        //    x.f聯絡人 = Request.Form["txt聯絡人"];
-        //    x.f電子郵件 = Request.Form["txt電子郵件"];
-        //    x.f電話 = Request.Form["txt電話"];
-        //    x.f意見類型 = Request.Form["txt意見類型"];
-        //    x.f意見 = Request.Form["txt意見"];
+        [HttpPost]
+        public ActionResult New(PData p)
+        {
+            tMember x = new tMember();
+            x.f會員性別 = p.gender;
+            x.f會員電子郵件 = p.txt電子郵件;
+            x.f會員電話 = p.txt電話;
+            tActivity y = new tActivity();
+            y.f活動內容 = p.txt意見;
+            y.f活動類型 = "意見";
 
-        //    dbJoutaEntities db = new dbJoutaEntities();
-        //    db.tActivity.Add(x);
-        //    db.SaveChanges();
+            dbJoutaEntities db = new dbJoutaEntities();
+            db.tActivity.Add(y);
+            db.tMember.Add(x);
+            db.SaveChanges();
 
-        //    return RedirectToAction("New");
-        //}
+            return RedirectToAction("New");
+        }
 
-}
+    }
 }

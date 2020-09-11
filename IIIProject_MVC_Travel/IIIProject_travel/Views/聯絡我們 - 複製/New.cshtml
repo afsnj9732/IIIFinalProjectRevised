@@ -2,7 +2,6 @@
 
 @{
     Layout = null;
-    var x = (tMember)Session["member"];
 }
 
 <!DOCTYPE html>
@@ -50,9 +49,7 @@
 
     <!-- Page Content -->
     <div class="mt-5"></div>
-    <div>
-        <h2 style="text-align:center">聯絡我們</h2>
-    </div>
+    <h2>聯絡我們</h2>
     <form method="post" action="~/聯絡我們/s儲存">
         <p style="text-align: center">我們十分重視您的寶貴意見與問題，我們將竭誠儘速為您服務</p>
 
@@ -62,77 +59,69 @@
             <fieldset>
                 <legend><img src="~/Content/images/letter.jpg" class="imgLetter" alt="" width="100"></legend>
                 <div class="st1">
-                    <div class="form-group col-md-6" style="text-align: center ;margin: 20px auto;">
-                        <label for="exampleInputEmail1">Email address</label>
-                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="輸入信箱" name="txtMail" size="12">
-                       </div>
+                    <div class="op">
+                        <select name="txt意見類型">
+                            <option value="">請選擇</option>
+                            <option>旅遊意見</option>
+                            <option>飯局意見</option>
+                            <option>文章意見</option>
+                            <option>其他意見</option>
+                        </select>
+                    </div>
 
-
-                        <div class="op">
-                            <select name="txt意見類型">
-                                <option value="">請選擇</option>
-                                <option>旅遊意見</option>
-                                <option>飯局意見</option>
-                                <option>文章意見</option>
-                                <option>其他意見</option>
-                            </select>
-                        </div>
-
-                        <div class="st1">
-                            <div class="st2">
-                                <label for="" class="t1">會員帳號：</label>
-                                <input id="帳號" name="txt會員帳號" size="40" autofocus onblur="c檢查帳號()">
-                                <span id="idac"></span>
-                            </div>
-                        </div>
-
-                        <div>
-                            <div class="st1">
-                                <div class="st2">
-                                    <label class="t1" for="account1">聯絡人：</label>
-                                    <input id="聯絡人" name="txt聯絡人" size="20" width="" onblur="c檢查聯絡人()">
-
-                                    <input type="radio" name="gender">
-                                    <label>先生</label>
-                                    <label>
-                                        <input type="radio" name="gender">女士
-                                    </label>
-                                    <span id="idcp"></span>
-                                </div>
-
-                            </div>
-
-                        </div>
-                        <div class="st1">
-                            <div class="st2">
-                                <label for="" class="t1">電子郵件：</label>
-                                <input id="mail" type="email" name="txt電子郵件" size="40" onblur="c檢查mail">
-                                <span id="idmail"></span>
-                            </div>
-                        </div>
-                        <div class="st1">
-                            <div class="st2">
-                                <label for="" class="t1">電話：</label>
-                                <input id="電話" name="txt電話" size="40" onblur="c檢查電話()">
-                                <span id="idtal"></span>
-
-                            </div>
-
-                        </div>
-
-                        <div class="st1">
-                            <div class="st2">
-                                <label class="t1" for="comment1">意見：</label>
-                                <textarea id="意見" cols="40" rows="5" name="txt意見" onblur="c檢查意見()"></textarea>
-                                <span id="idop"></span>
-                            </div>
-                        </div>
-                        <div class="sub">
-                            <input type="submit" value="送出">
-                            <input type="reset" value="清除">
+                    <div class="st1">
+                        <div class="st2">
+                            <label for="" class="t1">會員帳號：</label>
+                            <input id="帳號" name="txt會員帳號" size="40" autofocus onblur="c檢查帳號()">
+                            <span id="idac"></span>
                         </div>
                     </div>
-</fieldset>
+
+                    <div>
+                        <div class="st1">
+                            <div class="st2">
+                                <label class="t1" for="account1">聯絡人：</label>
+                                <input id="聯絡人" name="txt聯絡人" size="20" width="" onblur="c檢查聯絡人()">
+
+                                <input type="radio" name="gender"><label>先生</label>
+                                <label>
+                                    <input type="radio" name="gender">女士
+                                </label>
+                                <span id="idcp"></span>
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <div class="st1">
+                        <div class="st2">
+                            <label for="" class="t1">電子郵件：</label>
+                            <input id="mail" type="email" name="txt電子郵件" size="40" onblur="c檢查mail">
+                            <span id="idmail"></span>
+                        </div>
+                    </div>
+                    <div class="st1">
+                        <div class="st2">
+                            <label for="" class="t1">電話：</label>
+                            <input id="電話" name="txt電話" size="40" onblur="c檢查電話()">
+                            <span id="idtal"></span>
+
+                        </div>
+
+                    </div>
+
+                    <div class="st1">
+                        <div class="st2">
+                            <label class="t1" for="comment1">意見：</label>
+                            <textarea id="意見" cols="40" rows="5" name="txt意見" onblur="c檢查意見()"></textarea>
+                            <span id="idop"></span>
+                        </div>
+                    </div>
+                    <div class="sub">
+                        <input type="submit" value="送出">
+                        <input type="reset" value="清除">
+                    </div>
+            </fieldset>
             <p class="pb">本信箱的郵件處理時間為一般工作日上午 8 點 30 分至下午 5 點 30 分</p>
         </div>
 

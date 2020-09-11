@@ -16,9 +16,6 @@
                     select t;
 
 
-    var part = from t in db.tActivity.AsEnumerable()
-               where !string.IsNullOrEmpty(t.f活動開始時間) && DateTime.Parse(t.f活動開始時間) > DateTime.Now && x.f會員參加的活動編號.Split(',').Contains(t.f活動編號.ToString())
-               select t;
 
 }
 <!DOCTYPE html>
@@ -218,7 +215,7 @@
                 </div>
                 <div class="profile-event tab_info" id="myActivity">
                     <h1>參加活動</h1>
-                    @foreach (tActivity p in part)
+                    @foreach (tActivity p in Model.tActivities)
                     {
                         <div class="card mb-3" style="max-width: 800px;">
                             <div class="row no-gutters">
