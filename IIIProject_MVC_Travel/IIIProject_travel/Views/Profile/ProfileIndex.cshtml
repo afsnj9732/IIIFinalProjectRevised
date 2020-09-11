@@ -2,7 +2,6 @@
 
 @{
     Layout = null;
-    var date = ViewBag.Date;
     var x = (tMember)Session["member"];
     dbJoutaEntities db = new dbJoutaEntities();
 
@@ -15,6 +14,9 @@
                     where x.f會員收藏的活動編號.Split(',').Contains(t.f活動編號.ToString()) && x.f會員收藏的活動編號.Any()
                     select t;
 
+    var part = from t in db.tActivity.AsEnumerable()
+               where x.f會員參加的活動編號.Split(',').Contains(t.f活動編號.ToString()) && x.f會員參加的活動編號.Any()
+               select t;
 
 
 }
@@ -29,8 +31,6 @@
     <link rel="stylesheet" href="~/Content/css/style.css">
     <link rel="stylesheet" href="~/Content/css/profile.css">
     <link href="~/Content/fontawesome/css/all.css" rel="stylesheet">
-    @*<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">*@
 </head>
 
 <body>
@@ -63,9 +63,7 @@
                         {
 
                             <li class="nav-item nav-link nav-login text-dark">@Html.ActionLink("您好，" + x.f會員名稱, "ProfileIndex", "Profile")</li>
-                            @*<li class="nav-item">
-                                    <img src="@ViewData["Img"]" alt="img" width="30" height="30" style="border:2px solid green;" />
-                                </li>*@
+                            
                             <li class="nav-item">@Html.ActionLink("登出", "Home", "Home", new { id = 0 }, new { @class = "nav-link nav-login text-dark" })</li>
                         }
                         else
@@ -167,30 +165,35 @@
                 <div class="profile-body">
                     <div class="profile-detail tab_info">
                         <h1 id="title">個人檔案</h1>
-                        @Html.BeginForm()
-                        {
-                        <form method="post" action="~/Profile/ProfileIndex">
-                            <button type="button" class="btn btn-warning">編輯資料</button>
+                        <form method="post" action="~/Profile/Save">
+                            <button id="btn" type="button" class="btn btn-warning">編輯資料</button>
+                            @if (ViewBag.msg == "資料修改成功")
+                            {
+                                <div class="alert alert-success">
+                                    @ViewBag.msg
+                                </div>
+                            }
                             <h6 class="profiletag">信箱</h6>
-                            <input type="email" size="50" placeholder="@x.f會員電子郵件" name="txtEmail" disabled>
+                            <input type="email" size="50" value="@Model.tMembers.f會員電子郵件" name="txtEmail" disabled>
 
                             <h6 class="profiletag">密碼</h6>
-                            <input type="password" min="6" max="10" placeholder="@x.f會員密碼" name="txtPassword" disabled>
+                            <input type="password" size="50" value="@Model.tMembers.f會員密碼" name="txtPassword" disabled>
 
                             <h6 class="profiletag">會員名稱</h6>
-                            <input type="text" name="txtNickName" placeholder="@x.f會員名稱">
+                            <input type="text" name="txtNickName" size="50" value="@Model.tMembers.f會員名稱">
 
                             <h6 class="profiletag">生日</h6>
-                            <input type="datetime" size="20" name="txtBirth" placeholder="@x.f會員生日">
+                            <input type="datetime" size="50" name="txtBirth" value="@Model.tMembers.f會員生日">
 
                             <h6 class="profiletag">興趣</h6>
-                            <input type="text" size="50" name="txtHobby" placeholder="@x.f會員興趣">
+                            <input type="text" size="50" name="txtHobby" value="@Model.tMembers.f會員興趣">
 
                             <h6 class="profiletag">自我介紹</h6>
-                            <textarea id="intro" rows="5" cols="50" name="txtIntro">@x.f會員自我介紹</textarea><br>
-                            <button type="submit" class="btn btn-warning">繳交</button>
+                            <textarea id="intro" rows="5" cols="50" name="txtIntro">@Model.tMembers.f會員自我介紹</textarea><br>
+                            <div id="sth"></div>
+                            
                         </form>
-                        }
+
                     </div>
                 </div>
                 <div class="profile-posts tab_info" id="myPost">
@@ -234,59 +237,6 @@
                             </div>
                         </div>
                     }
-                    <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-                        <div class="modal-dialog modal-lg">
-                            <div class="modal-content">
-                                <div class=" model-header">
-                                    <h5 class="card-title"></h5>
-                                    <p class="card-text"></p>
-                                    揪團者 :  <span style="cursor: pointer;">@x.f會員名稱</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-
-
-                    @*<div class="modal fade combine_score" id="@combine_score" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog change-max-width-1420" role="document" style="padding-right: 17px !important;">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">@item.f活動標題 評分區</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <div AddScore="@item.f活動編號" class="Score">
-                                            @for (int i = 1; i <= 5; i++)
-                                            {
-                                                <img ScoreID="@i" isclick="false" ScoreTarget="@item.f活動編號" src="~/Content/images/Star.png" />
-                                            }
-                                        </div>
-                                    </div>
-                                    <div class="modal-footer justify-content-between">
-                                        <span>
-                                            <button type="button" class="btn btn-warning leaveScore" leaveScore="@item.f活動編號">送出</button>
-                                            <button type="button" class="btn btn-secondary resetScore" resetScore="@item.f活動編號">重設</button>
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>*@
-
-
-
-
-
-
-
-
-
-
-
-
                 </div>
                 <div class="profile-follow tab_info" id="myFollow">
                     <h1>關注活動</h1>
@@ -368,7 +318,19 @@
     <script src="~/Scripts/bootstrap.min.js"></script>
     <script src="~/Scripts/IIIProject/profile.js"></script>
     <script src="~/Scripts/IIIProject/navbar.js"></script>
-
+    <script>
+        $(document).ready(function () {
+            $("#btn").click(function () {
+                if ($("#sth").innerHeight() == 0) {
+                    $("#sth").append(`
+                        <button type="submit" class="btn btn-primary">送出</button>
+                        <button type="reset" class="btn btn-warning">取消</button>
+                    `);
+                }
+                
+            });
+        });
+    </script>
 </body>
 
 </html>

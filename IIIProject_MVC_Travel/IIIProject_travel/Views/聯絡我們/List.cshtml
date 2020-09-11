@@ -1,7 +1,9 @@
-﻿@{
+﻿﻿@using PagedList
+@using PagedList.Mvc
+@{
     Layout = null;
 }
-@model IEnumerable<t聯絡我們>
+@model IPagedList<IIIProject_travel.tActivity>
 
 <!doctype html>
 <html lang="en">
@@ -18,6 +20,7 @@
     <link href="~/Content/css/bootstrap.min.css" rel="stylesheet" />
     <!-- Custom styles for this template -->
     <link href="~/Content/css/dashboard.css" rel="stylesheet" />
+    <link href="~/Content/PagedList.css" rel="stylesheet" />
     <style>
         .bd-placeholder-img {
             font-size: 1.125rem;
@@ -30,15 +33,22 @@
 <body>
 
     @*navbar*@
-    <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
-        <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Company name</a>
-        <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
-        <ul class="navbar-nav px-3">
-            <li class="nav-item text-nowrap">
-                <a class="nav-link" href="#">Sign out</a>
-            </li>
-        </ul>
-    </nav>
+    <form action="/聯絡我們/List" method="GET">
+        <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
+            <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="@Url.Action("Home","後台Home")">Jouta後台</a>
+            <input type="date" name="date起日" />
+            <input type="date" name="date迄日" />
+            <input type="text" placeholder="關鍵字" aria-label="Search" name="txt關鍵字" class="form-control form-control-dark w-100">
+            <input type="submit" value="搜尋" class=" btn btn-dark" />
+            <ul class="navbar-nav px-3">
+                <li class="nav-item text-nowrap">
+                    <a>
+                        @Html.ActionLink("Sign out", "Home", "Home", new { id = 0 }, new { @class = "nav-link" })
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </form>
 
     @*sidebar*@
     <div class="container-fluid">
@@ -91,7 +101,6 @@
                             </a>
                         </li>
                     </ul>
-
                 </div>
             </nav>
 
@@ -103,43 +112,49 @@
                         <thead>
                             <tr>
                                 <td>筆數</td>
-                                <td>會員編號</td>
-                                <td>帳號</td>
-                                <td>聯絡人</td>
-                                <td>電子郵件</td>
-                                <td>電話</td>
-                                <td>意見類型</td>
-                                <td>意見</td>
+                                <td>@Html.ActionLink("編號", "List", new { sortOrder = ViewBag.編號排序, dateStartFilter = ViewBag.當前起日, dateEndFiler = ViewBag.當前迄日, currentFilter = ViewBag.當前搜尋 })</td>
+                                <td>@Html.ActionLink("會員", "List", new { sortOrder = ViewBag.會員排序, dateStartFilter = ViewBag.當前起日, dateEndFiler = ViewBag.當前迄日, currentFilter = ViewBag.當前搜尋 })</td>
+                                <td>@Html.ActionLink("標題", "List", new { sortOrder = ViewBag.標題排序, dateStartFilter = ViewBag.當前起日, dateEndFiler = ViewBag.當前迄日, currentFilter = ViewBag.當前搜尋 })</td>
+                                <td>@Html.ActionLink("建立時間", "List", new { sortOrder = ViewBag.建立時間排序, dateStartFilter = ViewBag.當前起日, dateEndFiler = ViewBag.當前迄日, currentFilter = ViewBag.當前搜尋 })</td>
+                                <td>@Html.ActionLink("內容", "List", new { sortOrder = ViewBag.內容排序, dateStartFilter = ViewBag.當前起日, dateEndFiler = ViewBag.當前迄日, currentFilter = ViewBag.當前搜尋 })</td>
+                                <td>@Html.ActionLink("分類", "List", new { sortOrder = ViewBag.分類排序, dateStartFilter = ViewBag.當前起日, dateEndFiler = ViewBag.當前迄日, currentFilter = ViewBag.當前搜尋 })</td>
+                                <td>按鈕</td>
                                 <td>按鈕</td>
                             </tr>
                         </thead>
+
                         <tbody>
+
                             @{
                                 int c筆數 = 0;
-                                foreach (t聯絡我們 t in Model)
+                                foreach (var item in Model)
                                 {
                                     c筆數++;
-                                    <tr>
-                                        <td>@c筆數.ToString()</td>
-                                        <td>@t.f會員編號</td>
-                                        <td>@t.f帳號</td>
-                                        <td>@t.f聯絡人</td>
-                                        <td>@t.f電子郵件</td>
-                                        <td>@t.f電話</td>
-                                        <td>@t.f意見類型</td>
-                                        <td>@t.f意見</td>
-                                        <td>
-                                            @Html.ActionLink("回覆", "r回覆", "聯絡我們", new { id = t.f會員編號 }, new { Class = "btn btn-info" })
-                                        </td>
+                                                        <tr>
+                                                            <td>@c筆數.ToString()</td>
+                                                            <td>@Html.DisplayFor(modelItem => item.f活動編號)</td>
+                                                            <td>@Html.DisplayFor(modelItem => item.f會員編號)</td>
+                                                            <td>@Html.DisplayFor(modelItem => item.f活動標題)</td>
+                                                            <td>@Html.DisplayFor(modelItem => item.f活動發起日期)</td>
+                                                            <td>@Html.DisplayFor(modelItem => item.f活動內容)</td>
+                                                            <td>@Html.DisplayFor(modelItem => item.f活動分類)</td>
 
-                                    </tr>
+                                                            <td>
+                                                                @Html.ActionLink("回覆", "r回覆", "聯絡我們", new { id = item.f活動編號 }, new { Class = "btn btn-info" })
+                                                            </td>
+                                                            <td>
+                                                                @Html.ActionLink("刪除", "d刪除", "聯絡我們", new { id = item.f活動編號 },
+                                                                new { OnClick = "return confirm('確定要刪除嗎?')", Class = "btn btn-danger" })
+                                                            </td>
+                                                        </tr>
                                 }
                             }
 
 
                         </tbody>
-
                     </table>
+                    @Html.PagedListPager(Model, page => Url.Action("List", new { page }))
+
                 </div>
             </main>
         </div>

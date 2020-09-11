@@ -129,9 +129,11 @@
 
 
 
-                                <p class="pDateSection"> Posted on January 1, 2020 by</p> <p style="margin-left:10px">@Html.ActionLink("Jouta", "personalIndex", "Blog", new { }, new { @class = "" })</p>
+                                <p class="pDateSection"> Posted on @tArticle.f活動發起日期 by</p> <p style="margin-left:10px">@Html.ActionLink("Jouta", "personalIndex", "Blog", new { }, new { @class = "" })</p>
 
+                                <p style="padding-left:200px">瀏覽次數: @tArticle.f活動瀏覽次數</p>
 
+                                <p style="padding-left:10px">按讚次數: @tArticle.f活動讚數</p>
                             </div>
                         </div>
                     }

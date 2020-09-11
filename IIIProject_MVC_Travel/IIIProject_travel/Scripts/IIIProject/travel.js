@@ -1,8 +1,9 @@
-(function () {                 
+(function () {       
+
     var order, background_color, contain, category, label, page, p;
     var calendarEl = document.getElementById('calendar');
     $("body").on("click", ".CalendarEvent", function () {
-        let targetclass = this.classList.item(8);
+        let targetclass = this.classList.item(this.classList.length-1);
         let target = targetclass.substring(10, targetclass.length);
         $.ajax({
             url: "/Travel/getCalendarEvent",
@@ -11,7 +12,7 @@
             success: function (data) {
                 if (data === "")
                     return;
-                $("#calendarEventTarget").html(data); //有時間加入同步效果
+                $("#calendarEventTarget").html(data);  
                 $("#calendarEventGo").click();
             }
         });  
@@ -59,15 +60,15 @@
     });
 
     //揪團時間限制   
-    $("#ActivityStart").on("change", function () {
+    $("body").on("change", ".ActivityStart",function () {
         //$("#ActivityStart").attr("disabled","");
-        $("#ActivityStartTo").attr("hidden", "");
-        $("#ActivityEnd").val("");
-        $("#ActivityFindEnd").val("");
-        $("#ActivityEnd").removeAttr("disabled");
-        $("#ActivityFindEnd").removeAttr("disabled");
-        $("#ActivityEnd").attr("min", $("#ActivityStart").val());
-        $("#ActivityFindEnd").attr("max", $("#ActivityStart").val());
+        $(".ActivityStartTo").attr("hidden", "");
+        $(".ActivityEnd").val("");
+        $(".ActivityFindEnd").val("");
+        $(".ActivityEnd").removeAttr("disabled");
+        $(".ActivityFindEnd").removeAttr("disabled");
+        $(".ActivityEnd").attr("min", $(".ActivityStart").val());
+        $(".ActivityFindEnd").attr("max", $(".ActivityStart").val());
     });
 
     //星星評分頭
@@ -142,8 +143,8 @@
 
 
     var theMonth, theDay;
-    $("#ActivityEnd").on("change", function () {
-        $("#ActivityEndTo").attr("hidden", "");
+    $("body").on("change", ".ActivityEnd", function () {
+        $(".ActivityEndTo").attr("hidden", "");
         //let d = new Date($("#ActivityEnd").val());
         //date = new Date(d.setDate(d.getDate() - 1));
         nowdate = new Date(Date.now());
@@ -154,7 +155,7 @@
         theMonth = nowdate.getMonth() + 1;
         theDay = nowdate.getDate();
         FormatTime();
-        $("#ActivityStart").attr("min", nowdate.getFullYear() + "-" + theMonth + "-" + theDay);
+        $(".ActivityStart").attr("min", nowdate.getFullYear() + "-" + theMonth + "-" + theDay);
     });
     //時間格式轉換
     function FormatTime() {
@@ -166,44 +167,65 @@
         }
     }
     //揪團欄位限制
-    $("#NeedAT").on("change", function () {
-        $("#NeedATTo").attr("hidden", "");
+    $("body").on("change", ".NeedAT", function () {
+        $(".NeedATTo").attr("hidden", "");
     });
-    $("#ActivityFindEnd").on("change", function () {
-        $("#ActivityFindEndTo").attr("hidden", "");
+    $(".ActivityFindEnd").on("change", function () {
+        $(".ActivityFindEndTo").attr("hidden", "");
     });
-    $("#NeedAC").on("change", function () {
-        $("#NeedACTo").attr("hidden", "");
+    $(".NeedAC").on("change", function () {
+        $(".NeedACTo").attr("hidden", "");
     });
-    $("#NeedAP").on("change", function () {
-        $("#NeedAPTo").attr("hidden", "");
+    $(".NeedAP").on("change", function () {
+        $(".NeedAPTo").attr("hidden", "");
     });
-    $("#NeedAL").on("change", function () {
-        $("#NeedALTo").attr("hidden", "");
+    $(".NeedAL").on("change", function () {
+        $(".NeedALTo").attr("hidden", "");
     });
+    $("body").on("click", ".JoutaEdit", function () {
+        CKEDITOR.replace('f活動內容2', { height: 400, width:1100 });
+        $(".NeedATTo").attr("hidden", "");
+        $(".ActivityStartTo").attr("hidden", "");
+        $(".ActivityEndTo").attr("hidden", "");
+        $(".ActivityFindEndTo").attr("hidden", "");
+        $(".ActivityEnd").attr("min", "");
+        $(".ActivityFindEnd").attr("max", "");
+        $(".NeedACTo").attr("hidden", "");
+        $(".NeedAPTo").attr("hidden", "");
+        $(".NeedALTo").attr("hidden", "");
+    });
+
+    //文字編輯器
+    CKEDITOR.replace('f活動內容', { height: 400,width:1100 });
+    CKEDITOR.replace('f活動內容2', { height: 400, width: 1100 });
     //揪團欄位限制
-    $("#JoutaSend").on("click", function (e) {
-        if ($("#NeedAT").val().length < 8) {
+    $(".JoutaSend").on("click", function (e) {              
+        let data = CKEDITOR.instances.AddAct.getData();
+        $('#AddAct').val(data);
+        let data2 = CKEDITOR.instances.EditAct.getData(); 
+        $('#EditAct').val(data2);
+       
+        if ($(".NeedAT").val().length < 8) {
             e.preventDefault();
-            $("#NeedATTo").removeAttr("hidden");
-        } else if ($("#ActivityStart").val() === "") {
+            $(".NeedATTo").removeAttr("hidden");
+        } else if ($(".ActivityStart").val() === "") {
             e.preventDefault();
-            $("#ActivityStartTo").removeAttr("hidden");
-        } else if ($("#ActivityEnd").val() === "") {
+            $(".ActivityStartTo").removeAttr("hidden");
+        } else if ($(".ActivityEnd").val() === "") {
             e.preventDefault();
-            $("#ActivityEndTo").removeAttr("hidden");
-        } else if ($("#ActivityFindEnd").val() === "") {
+            $(".ActivityEndTo").removeAttr("hidden");
+        } else if ($(".ActivityFindEnd").val() === "") {
             e.preventDefault();
-            $("#ActivityFindEndTo").removeAttr("hidden");
-        } else if ($("#NeedAC").val() === "") {
+            $(".ActivityFindEndTo").removeAttr("hidden");
+        } else if ($(".NeedAC").val() === "") {
             e.preventDefault();
-            $("#NeedACTo").removeAttr("hidden");
-        } else if ($("#NeedAP").val() === "") {
+            $(".NeedACTo").removeAttr("hidden");
+        } else if ($(".NeedAP").val() === "") {
             e.preventDefault();
-            $("#NeedAPTo").removeAttr("hidden");
-        } else if ($("#NeedAL").val().length < 100) {
+            $(".NeedAPTo").removeAttr("hidden");
+        } else if ($(".NeedAL").val().length < 100) {
             e.preventDefault();
-            $("#NeedALTo").removeAttr("hidden");
+            $(".NeedALTo").removeAttr("hidden");
         }
     });
 
@@ -285,7 +307,10 @@
             data: { "target": target,"isAdd":true},
             success: function (data) {
                 if (data === "1") {
-                    window.confirm("已是團主不用入團");
+                    window.confirm("已是團主不用入團");            
+                }
+                else if (data === "6") {
+                    window.confirm("時間衝突");
                 }
                 else if (data === "") {
                     window.confirm("你已經入團了哦!");

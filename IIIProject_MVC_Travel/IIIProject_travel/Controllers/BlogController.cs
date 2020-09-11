@@ -124,9 +124,29 @@ namespace IIIProject_travel.Controllers
                           select t;
 
 
+            dbJoutaEntities db = new dbJoutaEntities();
+            var target = db.tActivity.Where(t => t.f活動編號 == id).FirstOrDefault();
+            target.f活動瀏覽次數 += 1;
+            db.SaveChanges();
+
+
             return View(article.FirstOrDefault());
 
 
+        }
+
+        public ActionResult LikeIt(int? id)
+        {
+            var article = from t in (new dbJoutaEntities()).tActivity
+                          where t.f活動類型 == "文章" && t.f活動編號 == id
+                          select t;
+
+            dbJoutaEntities db = new dbJoutaEntities();
+            var target = db.tActivity.Where(t => t.f活動編號 == id).FirstOrDefault();
+            target.f活動讚數 += 1;
+            db.SaveChanges();
+
+            return RedirectToAction("BlogContent",new { id = id }) ;
         }
 
 
@@ -163,6 +183,8 @@ namespace IIIProject_travel.Controllers
             article.f活動團圖 = p.f活動團圖;
             article.fQRcode網址 = p.QRcode;
             article.fQRcodeImage = p.QRcodeImage;
+            article.f活動發起日期 = p.txtTime;
+            article.f活動地區 = p.f活動地區;
 
             var LoginMember = (tMember)Session["member"];
             article.f會員編號 = LoginMember.f會員編號; 
@@ -175,6 +197,30 @@ namespace IIIProject_travel.Controllers
             return RedirectToAction("index");
 
         }
+
+
+        [HttpPost]
+        public ActionResult AddComment (CBlog p )
+        {
+
+            var currentTime = DateTime.Now;
+
+            tActivity article = new tActivity();
+
+            article.f活動類型 = "文章";
+            article.f活動編號 = p.f活動編號;
+            article.f活動留言 = p.content;
+            article.f活動留言時間 = currentTime.ToString();
+
+            dbJoutaEntities db = new dbJoutaEntities();
+            db.tActivity.Add(article);
+            db.SaveChanges();
+
+            return RedirectToAction("indBlogContentex", new { id = p.id});
+
+
+        }
+
 
 
 
