@@ -18,7 +18,7 @@
     //console.log(time[randTime],discount[randDiscount],location[randLocation],store[randStore]);
 
     $('#content').text(time[randTime] + '在' + location[randLocation] + '方圓三公里範圍內，將送出' + store[randStore] + discount[randDiscount] + '優惠券!');
-    $('#hidcontent').text(store[randStore]+"-"+discount[randDiscount]+"優惠券");
+    $('#hidcontent').text(store[randStore] + "-" + discount[randDiscount] + "優惠券");
     $('#sendBtn').html(`<button type="submit" class="btn btn-primary ml-3 sendBtn" onclick="sendCoupon()">送出優惠券</button>`);
     //$('#sendBtn').html(`<a class="btn btn-primary ml-3 sendBtn" onclick="sendCoupon()" value="送出優惠券"></a>`);
 
@@ -35,21 +35,21 @@
             //如果有撈到資料
             if (data) {
                 $('#tbody').html(
-                    '<tr><td id="member">' + data[0].mMemberNum + '</td><br>' +
+                    '<tr><td id="member1">' + data[0].mMemberNum + '</td><br>' +
                     '<td>' + data[0].mAccount + '</td><br>' +
                     '<td>' + data[0].mName + '</td><br>' +
                     '<td>' + data[0].mRating + '</td><br>' +
-                    '<input type="hidden" class="form-control" id="memberId1" name="memberId1" /><br>' +
-                    '<tr><td id="member">' + data[1].mMemberNum + '</td><br>' +
-                    '<td>' + data[1].mAccount + '</td><br>' +
-                    '<td>' + data[1].mName + '</td><br>' +
-                    '<td>' + data[1].mRating + '</td><br>' +
-                    '<input type="hidden" class="form-control" id="memberId2" name="memberId2" /><br>' +
-                    '<tr><td id="member">' + data[2].mMemberNum + '</td><br>' +
-                    '<td>' + data[2].mAccount + '</td><br>' +
-                    '<td>' + data[2].mName + '</td><br>' +
-                    '<td>' + data[2].mRating + '</td><br>' +
-                    '<input type="hidden" class="form-control" id="memberId3" name="memberId3" /><br>'
+                    '<input type="hidden" class="form-control" id="memberId1" name="memberId1" value=""/><br>'
+                    //'<tr><td id="member2">' + data[1].mMemberNum + '</td><br>' +
+                    //'<td>' + data[1].mAccount + '</td><br>' +
+                    //'<td>' + data[1].mName + '</td><br>' +
+                    //'<td>' + data[1].mRating + '</td><br>' +
+                    //'<input type="hidden" class="form-control" id="memberId2" name="memberId2" value=""/><br>' +
+                    //'<tr><td id="member3">' + data[2].mMemberNum + '</td><br>' +
+                    //'<td>' + data[2].mAccount + '</td><br>' +
+                    //'<td>' + data[2].mName + '</td><br>' +
+                    //'<td>' + data[2].mRating + '</td><br>' +
+                    //'<input type="hidden" class="form-control" id="memberId3" name="memberId3" value=""/><br>'
                 );
             }
         },
@@ -65,29 +65,33 @@ function sendCoupon() {
     $('.sendBtn').attr('disabled', '');
     $('.sendBtn').attr('onclick', '');
 
-    var txtCouponInfo = document.querySelector('#txtCouponInfo').value;
     hidcontent = document.querySelector('#hidcontent').innerHTML;
+    var txtCouponInfo = $('#txtCouponInfo').val();
     txtCouponInfo = hidcontent;
+    console.log(txtCouponInfo);
 
-    //var memberId1 = document.querySelector('#memberId1').value;
-    //member1 = document.querySelector('#member1').innerHTML;
-    //memberId1 = member1;
+    member1 = document.querySelector('#member1').innerHTML;
+    var memberId1 = $('#memberId1').value;
+    memberId1 = member1;
+    console.log(memberId1);
 
-    //var memberId2 = document.querySelector('#memberId2').value;
     //member2 = document.querySelector('#member2').innerHTML;
+    //var memberId2 = $('#memberId2').value;
     //memberId2 = member2;
+    //console.log(memberId2);
 
-    //var memberId3 = document.querySelector('#memberId3').value;
     //member3 = document.querySelector('#member3').innerHTML;
+    //var memberId3 = $('#memberId3').value;
     //memberId3 = member3;
+    //console.log(memberId3);
 
-    member = document.querySelector('#member').innerHTML;
+    //member = document.querySelector('#member').innerHTML;
 
-    console.log('txtCouponInfo= ' + txtCouponInfo);
-    console.log('hidcontent= ' + hidcontent);
+    //console.log('txtCouponInfo= ' + txtCouponInfo);
+    //console.log('hidcontent= ' + hidcontent);
 
-    console.log('member= ' + member);
-    
+    //console.log('member= ' + member);
+
     //sendout = document.querySelector('.sendBtn');
     //sendout.onclick = function () {
     //    document.querySelector('#form1').submit();
@@ -96,53 +100,23 @@ function sendCoupon() {
 
     //console.log($("input[name='txtCouponInfo'].innerHTML"));
 
-    //if (!('Notification' in window)) {
-    //    console.log('本瀏覽器不支援推播通知');
-    //}
+    if (!('Notification' in window)) {
+        console.log('本瀏覽器不支援推播通知');
+    }
 
-    //if ("Notification" in window) {
-    //    let ask = Notification.requestPermission();
-    //    ask.then(permission => {
-    //        if (permission === "granted") {
-    //            let msg = new Notification("發送成功", {
-    //                body: "已將優惠資訊成功發送給所有中獎會員!",
-    //                icon: "../Content/images/joutalogo.png"
-    //            });
-    //            msg.addEventListener("click", event => {
-    //                alert("點擊接受");
-    //            });
-    //        }
-    //    });
-    //}
+    if ("Notification" in window) {
+        let ask = Notification.requestPermission();
+        ask.then(permission => {
+            if (permission === "granted") {
+                let msg = new Notification("發送成功", {
+                    body: "已將優惠資訊成功發送至所有中獎會員信箱!",
+                    icon: "../Content/images/joutalogo.png"
+                });
+                msg.addEventListener("click", event => {
+                    alert("點擊接受");
+                });
+            }
+        });
+    }
 
-    //$.ajax({
-    //    url: "/優惠發送/List",
-    //    type: "POST",
-    //    data: {
-    //        "randLocation": randLocation
-    //    },
-    //    dataType: "json",
-    //    async: false,
-    //    cache: true,
-    //    success: function (data) {
-    //        //如果有撈到資料
-    //        if (data) {
-    //            $('#tbody').html('<tr><td id="member">' + data[0].mMemberNum + '</td><br>' +
-    //                '<td>' + data[0].mAccount + '</td><br>' +
-    //                '<td>' + data[0].mName + '</td><br>' +
-    //                '<td>' + data[0].mRating + '</td><br>' +
-    //                '<tr><td id="member">' + data[1].mMemberNum + '</td><br>' +
-    //                '<td>' + data[1].mAccount + '</td><br>' +
-    //                '<td>' + data[1].mName + '</td><br>' +
-    //                '<td>' + data[1].mRating + '</td><br>' +
-    //                '<tr><td id="member">' + data[2].mMemberNum + '</td><br>' +
-    //                '<td>' + data[2].mAccount + '</td><br>' +
-    //                '<td>' + data[2].mName + '</td><br>' +
-    //                '<td>' + data[2].mRating + '</td><br>'
-    //            );
-    //        }
-    //    },
-    //    error: function (xhr, status, error) {
-    //        console.log(error);
-    //    }
 }

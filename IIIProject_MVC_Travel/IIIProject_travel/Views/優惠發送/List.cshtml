@@ -90,7 +90,7 @@
             @*主內容*@
             <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
                 <h2>優惠發送</h2>
-                <form action="~/優惠發送/Save" method="post" enctype="multipart/form-data" id="form1">
+                <form action="~/優惠發送/Save" method="post" id="form1">
                     <div class="row">
                         <button type="button" class="btn btn-primary randCoupon ml-3">抽選現有優惠資訊及中獎者</button>
                         <div id="sendBtn"></div>
@@ -98,7 +98,7 @@
                     <hr />
                     <div id="content">-</div>
                     <div id="hidcontent" hidden></div>
-                    <input type="hidden" class="form-control" id="txtCouponInfo" name="txtCouponInfo" />
+                    <input type="hidden" class="form-control" id="txtCouponInfo" name="txtCouponInfo" value=""/>
                     <hr />
                     <div class="table-responsive">
                         <table class="table table-striped table-sm">
