@@ -235,7 +235,10 @@ namespace IIIProject_travel.Controllers
                 }
                 else
                 {
-                    message = "該信箱不存在!!";
+                    if (Email == "")
+                        message = "請填入信箱";
+                    else
+                        message = "該信箱不存在!!";
                 }
             }
             ViewBag.Msg = message;
@@ -282,7 +285,12 @@ namespace IIIProject_travel.Controllers
             }
             else
             {
-                message = "格式錯誤";
+                if (c.newPassword == null)
+                {
+                    message = "內容必填";
+                }
+                else
+                    message = "格式錯誤";
             }
             ViewBag.Message = message;
             return View();

@@ -244,6 +244,7 @@
     <Content Include="Content\css\otherprofile.css" />
     <Content Include="Content\css\profile.css" />
     <Content Include="Content\css\quickmatch.css" />
+    <Content Include="Content\css\register.css" />
     <Content Include="Content\css\style_n.css" />
     <Content Include="Content\css\travel.css" />
     <Content Include="Content\css\travel_main.css" />

@@ -57,7 +57,7 @@
             <div class="col-md-12 offset=md-1">
                 <div class="row">
                     <div class="col-sm-7 col-md-5 register-left">
-                        <a href="main.html"><img src="~/Content/images/joutalogo_white_noborder.png"></a>
+                        <a href="@Url.Action("Home", "Home")"><img src="~/Content/images/joutalogo_white_noborder.png"></a>
                         <h3>立即加入</h3>
                         <p>Join Us</p>
                     </div>
@@ -80,15 +80,19 @@
                                 </div>
                                 <div class="form-group">
                                     <input type="password" name="txtPassword" class="form-control" placeholder="密碼">
+
+                                    <span style="color:	#BEBEBE;">*請輸入6位以上包含英文與數字的密碼</span><br />
                                     @Html.ValidationMessageFor(model => model.txtPassword, "", new { @class = "text-danger" })
                                 </div>
                                 <div class="form-group">
                                     <input type="password" name="txtPassword_confirm" class="form-control" placeholder="再次輸入密碼">
                                     @Html.ValidationMessageFor(model => model.txtPassword_confirm, "", new { @class = "text-danger" })
                                 </div>
-
-                                <button type="reset" class="btn btn-primary">清除</button>
-                                <button type="submit" class="btn btn-primary">註冊</button>
+                                <div class="d-flex justify-content-between">
+                                    <button type="submit" class="btn btn-primary">註冊</button>
+                                    <button type="reset" class="btn btn-warning">清除</button>
+                                </div>
+                               
                             </div>
 
                         }

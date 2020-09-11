@@ -37,13 +37,13 @@ body{
     padding: 30px;
 }
 
-.register-right .btn-primary{
+.register-right .btn{
     border-radius: 1.5rem;
     border: none;
     width: 120px;
-    background:#ff9800;
+    /*background:#ff9800;*/
     font-weight: 600;
-    color: #555;
+    color: #fff;
     margin-top: 20px;
     padding: 10px;
     float: right;
