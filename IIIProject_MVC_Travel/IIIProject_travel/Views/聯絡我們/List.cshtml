@@ -3,7 +3,7 @@
 @{
     Layout = null;
 }
-@model IPagedList<IIIProject_travel.tActivity>
+@model IPagedList<IIIProject_travel.tComment>
 
 <!doctype html>
 <html lang="en">
@@ -113,11 +113,14 @@
                             <tr>
                                 <td>筆數</td>
                                 <td>@Html.ActionLink("編號", "List", new { sortOrder = ViewBag.編號排序, dateStartFilter = ViewBag.當前起日, dateEndFiler = ViewBag.當前迄日, currentFilter = ViewBag.當前搜尋 })</td>
-                                <td>@Html.ActionLink("會員", "List", new { sortOrder = ViewBag.會員排序, dateStartFilter = ViewBag.當前起日, dateEndFiler = ViewBag.當前迄日, currentFilter = ViewBag.當前搜尋 })</td>
-                                <td>@Html.ActionLink("標題", "List", new { sortOrder = ViewBag.標題排序, dateStartFilter = ViewBag.當前起日, dateEndFiler = ViewBag.當前迄日, currentFilter = ViewBag.當前搜尋 })</td>
+                                <td>@Html.ActionLink("名稱", "List", new { sortOrder = ViewBag.名稱排序, dateStartFilter = ViewBag.當前起日, dateEndFiler = ViewBag.當前迄日, currentFilter = ViewBag.當前搜尋 })</td>
+                                <td>@Html.ActionLink("聯絡人", "List", new { sortOrder = ViewBag.聯絡人排序, dateStartFilter = ViewBag.當前起日, dateEndFiler = ViewBag.當前迄日, currentFilter = ViewBag.當前搜尋 })</td>
                                 <td>@Html.ActionLink("建立時間", "List", new { sortOrder = ViewBag.建立時間排序, dateStartFilter = ViewBag.當前起日, dateEndFiler = ViewBag.當前迄日, currentFilter = ViewBag.當前搜尋 })</td>
-                                <td>@Html.ActionLink("內容", "List", new { sortOrder = ViewBag.內容排序, dateStartFilter = ViewBag.當前起日, dateEndFiler = ViewBag.當前迄日, currentFilter = ViewBag.當前搜尋 })</td>
+                                <td>@Html.ActionLink("性別", "List", new { sortOrder = ViewBag.性別排序, dateStartFilter = ViewBag.當前起日, dateEndFiler = ViewBag.當前迄日, currentFilter = ViewBag.當前搜尋 })</td>
+                                <td>@Html.ActionLink("電子郵件", "List", new { sortOrder = ViewBag.電子郵件排序, dateStartFilter = ViewBag.當前起日, dateEndFiler = ViewBag.當前迄日, currentFilter = ViewBag.當前搜尋 })</td>
+                                <td>@Html.ActionLink("電話", "List", new { sortOrder = ViewBag.電話排序, dateStartFilter = ViewBag.當前起日, dateEndFiler = ViewBag.當前迄日, currentFilter = ViewBag.當前搜尋 })</td>
                                 <td>@Html.ActionLink("分類", "List", new { sortOrder = ViewBag.分類排序, dateStartFilter = ViewBag.當前起日, dateEndFiler = ViewBag.當前迄日, currentFilter = ViewBag.當前搜尋 })</td>
+                                <td>@Html.ActionLink("內容", "List", new { sortOrder = ViewBag.內容排序, dateStartFilter = ViewBag.當前起日, dateEndFiler = ViewBag.當前迄日, currentFilter = ViewBag.當前搜尋 })</td>
                                 <td>按鈕</td>
                                 <td>按鈕</td>
                             </tr>
@@ -132,18 +135,20 @@
                                     c筆數++;
                                                         <tr>
                                                             <td>@c筆數.ToString()</td>
-                                                            <td>@Html.DisplayFor(modelItem => item.f活動編號)</td>
-                                                            <td>@Html.DisplayFor(modelItem => item.f會員編號)</td>
-                                                            <td>@Html.DisplayFor(modelItem => item.f活動標題)</td>
-                                                            <td>@Html.DisplayFor(modelItem => item.f活動發起日期)</td>
-                                                            <td>@Html.DisplayFor(modelItem => item.f活動內容)</td>
-                                                            <td>@Html.DisplayFor(modelItem => item.f活動分類)</td>
-
+                                                            <td>@Html.DisplayFor(modelItem => item.fID)</td>
+                                                            <td>@Html.DisplayFor(modelItem => item.f名稱)</td>
+                                                            <td>@Html.DisplayFor(modelItem => item.f聯絡人)</td>
+                                                            <td>@Html.DisplayFor(modelItem => item.f意見時間)</td>
+                                                            <td>@Html.DisplayFor(modelItem => item.f性別)</td>
+                                                            <td>@Html.DisplayFor(modelItem => item.f電子郵件)</td>
+                                                            <td>@Html.DisplayFor(modelItem => item.f電話)</td>
+                                                            <td>@Html.DisplayFor(modelItem => item.f意見類型)</td>
+                                                            <td>@Html.DisplayFor(modelItem => item.f意見)</td>
                                                             <td>
-                                                                @Html.ActionLink("回覆", "r回覆", "聯絡我們", new { id = item.f活動編號 }, new { Class = "btn btn-info" })
+                                                                @Html.ActionLink("回覆", "r回覆", "聯絡我們", new { id = item.fID }, new { Class = "btn btn-info" })
                                                             </td>
                                                             <td>
-                                                                @Html.ActionLink("刪除", "d刪除", "聯絡我們", new { id = item.f活動編號 },
+                                                                @Html.ActionLink("刪除", "d刪除", "聯絡我們", new { id = item.fID },
                                                                 new { OnClick = "return confirm('確定要刪除嗎?')", Class = "btn btn-danger" })
                                                             </td>
                                                         </tr>

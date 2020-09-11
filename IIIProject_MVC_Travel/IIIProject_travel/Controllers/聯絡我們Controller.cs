@@ -13,8 +13,7 @@ namespace IIIProject_travel.Controllers
         //GET: 聯絡我們
         public ActionResult List(string date起日, string dateStartFilter, string date迄日, string dateEndFiler, string sortOrder, string txt關鍵字, string currentFilter, int page = 1)
         {
-            var 意見 = from m in (new dbJoutaEntities()).tActivity
-                     where m.f活動類型 == "意見"
+            var 意見 = from m in (new dbJoutaEntities()).tComment
                      select m;
 
             if (txt關鍵字 != null && date起日 != null && date迄日 != null)
@@ -30,30 +29,24 @@ namespace IIIProject_travel.Controllers
 
             if (string.IsNullOrEmpty(txt關鍵字))
             {
-                意見 = from m in (new dbJoutaEntities()).tActivity
-                     where m.f活動類型 == "意見"
+                意見 = from m in (new dbJoutaEntities()).tComment
                      select m;
                 if (!string.IsNullOrEmpty(date起日) && !string.IsNullOrEmpty(date迄日))
                     意見 = from p in 意見
-                         where (string.Compare(p.f活動發起日期.Substring(0, 10), date起日) >= 0) &&
-                               (string.Compare(p.f活動發起日期.Substring(0, 10), date迄日) <= 0)
+                         where (string.Compare(p.f意見時間.Substring(0, 10), date起日) >= 0) &&
+                               (string.Compare(p.f意見時間.Substring(0, 10), date迄日) <= 0)
                          select p;
             }
 
             else
             {
                 意見 = from m in 意見
-                     where m.f活動類型.Contains("意見") &&
-                            (string.Compare(m.f活動發起日期.Substring(0, 10), date起日) >= 0) &&
-                            (string.Compare(m.f活動發起日期.Substring(0, 10), date迄日) <= 0) &&
-                           m.f活動編號.ToString().Contains(txt關鍵字) || m.f活動標題.Contains(txt關鍵字) ||
-                           m.f活動標籤.Contains(txt關鍵字) || m.f活動內容.Contains(txt關鍵字) ||
-                           m.f活動團圖.Contains(txt關鍵字) || m.f活動地區.Contains(txt關鍵字) ||
-                           m.f活動地點.Contains(txt關鍵字) || m.f活動所屬.Contains(txt關鍵字) ||
-                           m.f活動招募截止時間.Contains(txt關鍵字) || m.f活動分類.Contains(txt關鍵字) ||
-                           m.f活動留言.Contains(txt關鍵字) || m.f活動留言時間.Contains(txt關鍵字) ||
-                           m.f活動發起日期.Contains(txt關鍵字) || m.f活動結束時間.Contains(txt關鍵字) ||
-                           m.f活動開始時間.Contains(txt關鍵字)
+                     where  (string.Compare(m.f意見時間.Substring(0, 10), date起日) >= 0) &&
+                            (string.Compare(m.f意見時間.Substring(0, 10), date迄日) <= 0) &&
+                           m.fID.ToString().Contains(txt關鍵字) || m.f名稱.Contains(txt關鍵字) ||
+                           m.f性別.Contains(txt關鍵字) || m.f意見.Contains(txt關鍵字) ||
+                           m.f意見類型.Contains(txt關鍵字) || m.f聯絡人.Contains(txt關鍵字) ||
+                           m.f電子郵件.Contains(txt關鍵字) || m.f電話.Contains(txt關鍵字)
                      select m;
             }
 
@@ -61,51 +54,73 @@ namespace IIIProject_travel.Controllers
             ViewBag.當前搜尋 = txt關鍵字;
             ViewBag.當前起日 = date起日;
             ViewBag.當前迄日 = date迄日;
-            ViewBag.標題排序 = string.IsNullOrEmpty(sortOrder) ? "標題降冪" : "";
+            ViewBag.名稱排序 = string.IsNullOrEmpty(sortOrder) ? "名稱降冪" : "";
             ViewBag.編號排序 = sortOrder == "編號升冪" ? "編號降冪" : "編號升冪";
-            ViewBag.帳號排序 = sortOrder == "帳號升冪" ? "帳號降冪" : "帳號升冪";
+            ViewBag.聯絡人排序 = sortOrder == "聯絡人升冪" ? "聯絡人降冪" : "聯絡人升冪";
             ViewBag.內容排序 = sortOrder == "內容升冪" ? "內容降冪" : "內容升冪";
             ViewBag.建立時間排序 = sortOrder == "建立時間升冪" ? "建立時間降冪" : "建立時間升冪";
             ViewBag.分類排序 = sortOrder == "分類升冪" ? "分類降冪" : "分類升冪";
+            ViewBag.性別排序 = sortOrder == "性別升冪" ? "性別降冪" : "性別升冪";
+            ViewBag.電子郵件排序 = sortOrder == "電子郵件升冪" ? "電子郵件降冪" : "電子郵件升冪";
+            ViewBag.電話排序 = sortOrder == "電話升冪" ? "電話降冪" : "電話升冪";
+
 
             switch (sortOrder)
             {
-                case "標題降冪":
-                    意見 = 意見.OrderByDescending(s => s.f活動標題);
+                case "名稱降冪":
+                    意見 = 意見.OrderByDescending(s => s.f名稱);
                     break;
                 case "編號降冪":
-                    意見 = 意見.OrderByDescending(s => s.f活動編號);
+                    意見 = 意見.OrderByDescending(s => s.fID);
                     break;
                 case "編號升冪":
-                    意見 = 意見.OrderBy(s => s.f活動編號);
+                    意見 = 意見.OrderBy(s => s.fID);
                     break;
-                case "帳號降冪":
-                    意見 = 意見.OrderByDescending(s => s.f會員編號);
+                case "聯絡人降冪":
+                    意見 = 意見.OrderByDescending(s => s.f聯絡人);
                     break;
-                case "帳號升冪":
-                    意見 = 意見.OrderBy(s => s.f會員編號);
+                case "聯絡人升冪":
+                    意見 = 意見.OrderBy(s => s.f聯絡人);
                     break;
                 case "內容降冪":
-                    意見 = 意見.OrderByDescending(s => s.f活動內容);
+                    意見 = 意見.OrderByDescending(s => s.f意見);
                     break;
                 case "內容升冪":
-                    意見 = 意見.OrderBy(s => s.f活動內容);
+                    意見 = 意見.OrderBy(s => s.f意見);
                     break;
                 case "建立時間降冪":
-                    意見 = 意見.OrderByDescending(s => s.f活動發起日期);
+                    意見 = 意見.OrderByDescending(s => s.f意見時間);
                     break;
                 case "建立時間升冪":
-                    意見 = 意見.OrderBy(s => s.f活動發起日期);
+                    意見 = 意見.OrderBy(s => s.f意見時間);
                     break;
                 case "分類降冪":
-                    意見 = 意見.OrderByDescending(s => s.f活動分類);
+                    意見 = 意見.OrderByDescending(s => s.f意見類型);
                     break;
                 case "分類升冪":
-                    意見 = 意見.OrderBy(s => s.f活動分類);
+                    意見 = 意見.OrderBy(s => s.f意見類型);
+                    break;
+                case "性別降冪":
+                    意見 = 意見.OrderByDescending(s => s.f性別);
+                    break;
+                case "性別升冪":
+                    意見 = 意見.OrderBy(s => s.f性別);
+                    break;
+                case "電子郵件降冪":
+                    意見 = 意見.OrderByDescending(s => s.f電子郵件);
+                    break;
+                case "電子郵件升冪":
+                    意見 = 意見.OrderBy(s => s.f電子郵件);
+                    break;
+                case "電話降冪":
+                    意見 = 意見.OrderByDescending(s => s.f電話);
+                    break;
+                case "電話升冪":
+                    意見 = 意見.OrderBy(s => s.f電話);
                     break;
 
                 default:
-                    意見 = 意見.OrderBy(s => s.f活動標題);
+                    意見 = 意見.OrderBy(s => s.f名稱);
                     break;
             }
 
@@ -122,10 +137,10 @@ namespace IIIProject_travel.Controllers
             if (id == null)
                 RedirectToAction("List");
 
-            tActivity x = new tActivity();
+            tComment x = new tComment();
             dbJoutaEntities db = new dbJoutaEntities();
-            x = db.tActivity.FirstOrDefault(m => m.f活動編號 == id);
-            db.tActivity.Remove(x);
+            x = db.tComment.FirstOrDefault(m => m.fID == id);
+            db.tComment.Remove(x);
             db.SaveChanges();
 
             return RedirectToAction("List");
@@ -137,8 +152,8 @@ namespace IIIProject_travel.Controllers
                 RedirectToAction("List");
 
             dbJoutaEntities db = new dbJoutaEntities();
-            tActivity x = new tActivity();
-            x = db.tActivity.FirstOrDefault(m => m.f活動編號 == id);
+            tComment x = new tComment();
+            x = db.tComment.FirstOrDefault(m => m.fID == id);
 
             return View(x);
         }
