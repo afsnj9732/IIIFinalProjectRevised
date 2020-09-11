@@ -223,7 +223,7 @@
                                     <div class="modal-body">
                                         <form enctype="multipart/form-data" action="~/Travel/Add" method="post">
                                             <div class="container-fluid">
-                                                <span>標題：<input type="text" name="f活動標題" style="width:90%" class="NeedAT"><p class="NeedATTo" style="color:red" hidden>活動標題請至少填滿8個字</p></span>
+                                                <span>標題：<input type="text" name="f活動標題" style="width:90%" class="NeedAT" placeholder="活動標題至少8個字"><p class="NeedATTo" style="color:red" hidden>活動標題請至少填滿8個字</p></span>
                                                 <div class="row m-0 mb-3 justify-content-around">
                                                     <span>旅遊開始日期： <input type="date" min="@DateTime.Now.ToString("yyyy-MM-dd")" max="" class="ActivityStart"   name="f活動開始時間"><p class="ActivityStartTo" style="color:red" hidden>活動開始時間必填</p></span>
                                                     <span>旅遊結束日期： <input type="date" min="@DateTime.Now.ToString("yyyy-MM-dd")" max="" class="ActivityEnd"   disabled name="f活動結束時間"><p class="ActivityEndTo" style="color:red" hidden>活動結束時間必填</p></span>
@@ -274,7 +274,7 @@
 
                                                 <div class="row align-items-center">
                                                     <div class="mx-auto mb-3">
-                                                        內容：<textarea name="f活動內容" id="AddAct" @*style="width:1000px;height:220px;vertical-align:top;"*@ class="NeedAL"></textarea>
+                                                        內容：<textarea name="f活動內容"   id="AddAct" @*style="width:1000px;height:220px;vertical-align:top;"*@ class="NeedAL"></textarea>
                                                         <p class="NeedALTo" style="color:red" hidden>活動內容請至少填滿100字</p>
                                                     </div>
                                                 </div>
