@@ -332,7 +332,7 @@
                         if (string.Compare(Model.f活動招募截止時間, DateTime.Now.ToString("yyyy-MM-dd")) > 0)
                         {
                             //招募未結束才可編輯
-                            <button class="btn btn-block mr-1  p-1 JoutaEdit" data-toggle="modal" data-target="#ajax_edit" style="background-color:#FFE0B2 ;">
+                            <button class="btn btn-block mr-1  p-1 JoutaEdit" limitNumber="1" data-toggle="modal" data-target="#ajax_edit" style="background-color:#FFE0B2 ;">
                                 編輯
                             </button>
                         }

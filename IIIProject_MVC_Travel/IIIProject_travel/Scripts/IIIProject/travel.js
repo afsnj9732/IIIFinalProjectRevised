@@ -1,8 +1,7 @@
 (function () {  
     var order, background_color, contain, category, label, page, condition, readmore_target;
     var calendarEl = document.getElementById('calendar');
-    //Index文字編輯器
-    CKEDITOR.replace('f活動內容', { height: 400, width: 1100 });
+
 
     //排序固定   
     let header = document.querySelector(".header");
@@ -136,6 +135,7 @@
         $('.modal-backdrop').eq(1).css('background-color', 'white'); 
     });
 
+
     //書籤回最上
     $("#labelTop").on("click", function (e) {
         e.preventDefault();
@@ -195,10 +195,27 @@
         $(".NeedALTo").attr("hidden", "");
     });
 
+
+    //文字編輯器因套件與bootsrap modal設計上有衝突，因此編輯器有關對話框的功能會無法使用
+                                                  //但其他功能可以正常運作
     //按下開團/編輯的按鈕，進入開團/編輯頁面，重置所有欄位的驗證
     $("body").on("click", ".JoutaEdit", function () {
-        //文字編輯器，因為由ajax動態產生因此重新生成
-        CKEDITOR.replace('f活動內容2', { height: 400, width:1100 });
+        //文字編輯器重置
+        if (CKEDITOR.instances.AddAct) {   
+            CKEDITOR.instances.AddAct.destroy();
+        }
+        if (CKEDITOR.instances.EditAct) {
+            CKEDITOR.instances.EditAct.destroy();
+        }
+        let target = $(this).attr("limitNumber");
+        if (target == "0") {
+            //文字編輯器
+            CKEDITOR.replace('f活動內容', { height: 400, width: 1100 });
+        } else {
+            //文字編輯器
+            CKEDITOR.replace('f活動內容2', { height: 400, width: 1100 });
+        }
+        
         $(".NeedATTo").attr("hidden", "");
         $(".ActivityStartTo").attr("hidden", "");
         $(".ActivityEndTo").attr("hidden", "");
@@ -224,7 +241,6 @@
     //取得文字編輯器值+欄位檢驗
     $("body").on("click", ".JoutaSend", function (e) {
         let target = $(this).attr("limitNumber");
-
         if (target == "0") {
             let data = CKEDITOR.instances.AddAct.getData();
             $('#AddAct').val(data);
@@ -232,7 +248,7 @@
             let data2 = CKEDITOR.instances.EditAct.getData();
             $('#EditAct').val(data2);
         }       
-     
+        
         if ($(".NeedAT").eq(target).val().length < 8) {
             e.preventDefault();
             $(".NeedATTo").eq(target).removeAttr("hidden");

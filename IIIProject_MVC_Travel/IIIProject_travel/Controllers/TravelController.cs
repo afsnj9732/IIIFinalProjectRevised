@@ -287,11 +287,15 @@ namespace IIIProject_travel.Controllers
             var LoginMember = (tMember)Session["member"];
             var ActList = db.tActivity.Where(t => t.f活動編號 == target).FirstOrDefault();
 
-            //檢查登入會員是否為本活動團主，團主不可入團退團
+            var NowMember = db.tMember.Where(t => t.f會員編號 == LoginMember.f會員編號)
+                         .FirstOrDefault();//因Session存取的資料沒有和資料庫內部做綁定
+                                                          //所以不能存取，要用Session登入會員的會員編號
+                                                          //撈出目前會員的資料
+                                                          //檢查登入會員是否為本活動團主，團主不可入團退團
             int index = -1; //先假設不是
-            if (!string.IsNullOrEmpty(LoginMember.f會員發起的活動編號)) //若登入會員有開團紀錄
+            if (!string.IsNullOrEmpty(NowMember.f會員發起的活動編號)) //若登入會員有開團紀錄
             {
-                string[] LeaderList = LoginMember.f會員發起的活動編號.Split(',');
+                string[] LeaderList = NowMember.f會員發起的活動編號.Split(',');
                 index = Array.IndexOf(LeaderList, target.ToString());
                 if (index != -1)//若找到，表示是團主
                 {
@@ -305,10 +309,6 @@ namespace IIIProject_travel.Controllers
                                                                             //注意會員標號是int，陣列內容是str，
                                                                             //不轉型index永遠會是-1 
 
-            var NowMember = db.tMember.Where(t => t.f會員編號 == LoginMember.f會員編號)
-                         .Select(a => a).FirstOrDefault();//因Session存取的資料沒有和資料庫內部做綁定
-                                                          //所以不能存取，要用Session登入會員的會員編號
-                                                          //撈出目前會員的資料
 
             if (isAdd == true)//點選入團
             {
