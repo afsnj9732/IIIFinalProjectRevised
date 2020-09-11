@@ -196,6 +196,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>JoutaEntities.edmx</DependentUpon>
     </Compile>
+    <Compile Include="tComment.cs">
+      <DependentUpon>JoutaEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="ViewModel\CalendarEvents.cs" />
     <Compile Include="Models\CDictionary.cs" />
     <Compile Include="Models\Topendata.cs" />

@@ -9,6 +9,7 @@
         <EntityTypeShape EntityType="joutaModel.tActivity" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
         <EntityTypeShape EntityType="joutaModel.tMember" Width="1.5" PointX="0.75" PointY="1.125" IsExpanded="true" />
         <AssociationConnector Association="joutaModel.FK_tActivity_tMember" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="joutaModel.tComment" Width="1.5" PointX="5.375" PointY="3.75" IsExpanded="true" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
