@@ -1,41 +1,45 @@
-﻿@model IEnumerable<tActivity>
-@{
+﻿@{
     Layout = null;
 }
+@model IEnumerable<t聯絡我們>
+
 <!doctype html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
     <meta name="generator" content="">
-    <title>優惠發送 | Jouta Admin</title>
+    <title>意見列表 | Jouta Admin</title>
+
     <!-- Bootstrap core CSS -->
     <link href="~/Content/css/bootstrap.min.css" rel="stylesheet" />
     <!-- Custom styles for this template -->
     <link href="~/Content/css/dashboard.css" rel="stylesheet" />
     <style>
-
         .bd-placeholder-img {
             font-size: 1.125rem;
             text-anchor: middle;
         }
     </style>
+
 </head>
+
 <body>
+
     @*navbar*@
     <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
-        <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="@Url.Action("Home","後台Home")">Jouta後台</a>
+        <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Company name</a>
         <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
         <ul class="navbar-nav px-3">
             <li class="nav-item text-nowrap">
-                <a>
-                    @Html.ActionLink("Sign out", "Home", "Home", new { id = 0 }, new { @class = "nav-link" })
-                </a>
+                <a class="nav-link" href="#">Sign out</a>
             </li>
         </ul>
     </nav>
+
     @*sidebar*@
     <div class="container-fluid">
         <div class="row">
@@ -54,12 +58,14 @@
                                 會員列表
                             </a>
                         </li>
+
                         <li class="nav-item">
                             <a class="nav-link" href="@Url.Action("List","後台旅遊")">
                                 <span data-feather="file"></span>
                                 旅遊列表
                             </a>
                         </li>
+
                         <li class="nav-item">
                             <a class="nav-link" href="@Url.Action("List","後台飯局")">
                                 <span data-feather="bar-chart-2"></span>
@@ -85,69 +91,67 @@
                             </a>
                         </li>
                     </ul>
+
                 </div>
             </nav>
+
             @*主內容*@
             <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-                <h2>優惠發送</h2>
-                <form action="~/優惠發送/SendMail" method="post" id="form1">
-                    @*@using (Html.BeginForm())
-                        {*@
-                    <div class="row">
-                        <button type="button" class="btn btn-primary randCoupon ml-3">抽選現有優惠資訊及中獎者</button>
-                        @*<div id="sendBtn"></div>*@
-                        <button type="submit" class="btn btn-primary ml-3 sendBtn">送出優惠券</button>
-                    </div>
-                    <hr />
-                    <div id="content">-</div>
-                    <div id="hidcontent" hidden></div>
-                    <input type="hidden" class="form-control" id="txtCouponInfo" name="txtCouponInfo" value="" />
-                    <hr />
-                    <div class="table-responsive">
-                        <table class="table table-striped table-sm">
-                            <thead>
-                                <tr>
-                                    <td>中獎會員</td>
-                                    <td>會員信箱</td>
-                                    <td>會員名稱</td>
-                                    <td>會員評分</td>
-                                </tr>
-                            </thead>
-                            <tbody id="tbody">
-                                <tr>
-                                    <td id="mMemberNum1">@*ajax result*@</td>
-                                    <td id="mEmail1">@*ajax result*@</td>
-                                    <td id="mName1">@*ajax result*@</td>
-                                    <td id="mRating1">@*ajax result*@</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <input type="hidden" class="form-control" id="memberId1" name="memberId1" value="" /><br>
-                    </div>
-                    @*}*@
-                </form>
+                <h2>意見列表</h2>
+                <div class="table-responsive">
+                    <table class="table table-striped table-sm">
+                        <thead>
+                            <tr>
+                                <td>筆數</td>
+                                <td>會員編號</td>
+                                <td>帳號</td>
+                                <td>聯絡人</td>
+                                <td>電子郵件</td>
+                                <td>電話</td>
+                                <td>意見類型</td>
+                                <td>意見</td>
+                                <td>按鈕</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{
+                                int c筆數 = 0;
+                                foreach (t聯絡我們 t in Model)
+                                {
+                                    c筆數++;
+                                    <tr>
+                                        <td>@c筆數.ToString()</td>
+                                        <td>@t.f會員編號</td>
+                                        <td>@t.f帳號</td>
+                                        <td>@t.f聯絡人</td>
+                                        <td>@t.f電子郵件</td>
+                                        <td>@t.f電話</td>
+                                        <td>@t.f意見類型</td>
+                                        <td>@t.f意見</td>
+                                        <td>
+                                            @Html.ActionLink("回覆", "r回覆", "聯絡我們", new { id = t.f會員編號 }, new { Class = "btn btn-info" })
+                                        </td>
+
+                                    </tr>
+                                }
+                            }
+
+
+                        </tbody>
+
+                    </table>
+                </div>
             </main>
         </div>
     </div>
-
-    @*script*@
-    @*<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-                integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-                crossorigin="anonymous"></script>
-        <script>window.jQuery || document.write('<script src="~/Scripts/jquery-slim.min.js"><\/script>')</script>
-        <script src="~/Content/bootstrap-4.5.2-dist/js/bootstrap.bundle.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.9.0/feather.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
-        <script src="~/Scripts/IIIProject/dashboard.js"></script>
-        <script src="~/Scripts/IIIProject/coupon.js"></script>*@
-    @Scripts.Render("~/Scripts/jquery-3.5.1.js")
-    @Scripts.Render("~/Scripts/IIIProject/popper.min.js")
-    @Scripts.Render("~/Scripts/bootstrap.min.js")
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+    <script>window.jQuery || document.write('<script src="~/Scripts/jquery-slim.min.js"><\/script>')</script>
+    <script src="~/Content/bootstrap-4.5.2-dist/js/bootstrap.bundle.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.9.0/feather.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
     <script src="~/Scripts/IIIProject/dashboard.js"></script>
-    @Scripts.Render("~/Scripts/IIIProject/dashboard.js")
-    @Scripts.Render("~/Scripts/IIIProject/coupon.js")
-
 </body>
+
 </html>
