@@ -225,8 +225,8 @@
                                             <div class="container-fluid">
                                                 <span>標題：<input type="text" name="f活動標題" style="width:90%" class="NeedAT"><p class="NeedATTo" style="color:red" hidden>活動標題請至少填滿8個字</p></span>
                                                 <div class="row m-0 mb-3 justify-content-around">
-                                                    <span>旅遊開始日期： <input type="date" min="@DateTime.Now.AddDays(1.0).ToString("yyyy-MM-dd")" max="" class="ActivityStart" name="f活動開始時間"><p class="ActivityStartTo" style="color:red" hidden>活動開始時間必填</p></span>
-                                                    <span>旅遊結束日期： <input type="date" min="@DateTime.Now.AddDays(2.0).ToString("yyyy-MM-dd")" max="" class="ActivityEnd" disabled name="f活動結束時間"><p class="ActivityEndTo" style="color:red" hidden>活動結束時間必填</p></span>
+                                                    <span>旅遊開始日期： <input type="date" min="@DateTime.Now.ToString("yyyy-MM-dd")" max="" class="ActivityStart"   name="f活動開始時間"><p class="ActivityStartTo" style="color:red" hidden>活動開始時間必填</p></span>
+                                                    <span>旅遊結束日期： <input type="date" min="@DateTime.Now.ToString("yyyy-MM-dd")" max="" class="ActivityEnd"   disabled name="f活動結束時間"><p class="ActivityEndTo" style="color:red" hidden>活動結束時間必填</p></span>
                                                     <span>入團截止： <input type="date" min="@DateTime.Now.ToString("yyyy-MM-dd")" max="" class="ActivityFindEnd" disabled name="f活動招募截止時間"><p class="ActivityFindEndTo" style="color:red" hidden>招募截止時間必填</p></span>
                                                 </div>
                                                 <div class="row mb-4 mx-auto align-items-center justify-content-around">
@@ -281,7 +281,7 @@
                                             </div>
                                             <!-- 揪團內容尾 -->
                                             <div class="modal-footer  mt-2 border-main-color">
-                                                <input type="submit" class="btn JoutaSend" style="background-color:#FFE0B2" value="送出" />
+                                                <input type="submit" class="btn JoutaSend" limitNumber="0" style="background-color:#FFE0B2" value="送出" />
                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
                                             </div>
                                             <!-- 揪團隱藏不顯示項目 -->
@@ -324,10 +324,10 @@
                 <div id="calendar" class="pr-4 pl-4 col-xl-3   col-10 row mx-auto">
 
                 </div>
-                @*行事曆事件*@
+                @*readmore事件，含行事曆*@
                 <div>
-                    <button hidden type="button" id="calendarEventGo" class="btn btn-primary" data-toggle="modal" data-target="#calendarEventShow"></button>
-                    <div id="calendarEventTarget"></div>
+                    <button hidden type="button" id="calendarEventGo" class="btn btn-primary" data-toggle="modal" act_id="" data-target="#ajax_readmore"></button>
+                    <div id="add_ajax_readmore"></div>
                 </div>
             </div>
         </div>
