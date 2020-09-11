@@ -9,48 +9,29 @@
         tab.forEach(function (node) {
             node.style.display ="none";
         });
-        tab[panelIndex].style.display="block";
+        tab[panelIndex].style.display = "block";
+        //tabNum = panelIndex;
+        //return panelIndex;
     }
     tabs(0);
 
-
-
-//$(document).ready(function () {
-
-//    // get yourid parameter
-//    var contractId = '@Model.Item2.ContractID';
-//    var params = { id: contractId };
-
-//    // just change these based on the tab....
-//    var url = '';
-//    var target = '';
-
-//    // capture the on tab click and see which tab you are showing
-//    $('a[data-toggle="tab"]').on('shown.bs.tab',
-//        function (e) {
-//            var tabId = $(e.target).attr("href");
-//            switch (tabId) {
-//                case "#myProfile":
-//                    var url = '/Profile/ProfileIndex';
-//                    var target = 'oneContent';
-//                    break;
-//                case "#myPost":
-//                    var url = '/Profile/myPost/';
-//                    var target = 'twoContent';
-//                    break;
-//                case "#myActivity":
-//                    var url = '/Profile/index/';
-//                    var target = 'threeContent';
-//                    break;
-//                case "#myFollow":
-//                    var url = '/invoices/index/';
-//                    var target = 'fourContent';
-//                    break;
-//            }
-//            //    e.target; // newly activated tab
-//            //   e.relatedTarget // previous active tab
-//        });
-
-//    //now get the view and load it to the tab content id that you named above
-//    getView(url, params, target);
-//});
+$("#p1").click(function () {
+    console.log(this.id);
+    $.ajax({
+        url: "/Profile/otherprofile",
+        type: "POST",
+        data: {
+            "tabId": this.id
+        },
+        dataType: "json",
+        cache: true,
+        success: function (data) {
+            if (data) {
+                $("#post_img").html("<img class='card-img-top' src='../../Content/images/" + data[0].memberImg + "' alt='@t.f會員編號'>");
+            }
+        },
+        error: function (xhr, status, error) {
+            console.log(error);
+        }
+    });
+});

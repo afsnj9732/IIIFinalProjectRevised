@@ -149,24 +149,41 @@ namespace IIIProject_travel.Controllers
         {
             return View();
         }
-        [HttpPost]
-        public ActionResult New(PData p)
-        {
-            tMember x = new tMember();
-            x.f會員性別 = p.gender;
-            x.f會員電子郵件 = p.txt電子郵件;
-            x.f會員電話 = p.txt電話;
-            tActivity y = new tActivity();
-            y.f活動內容 = p.txt意見;
-            y.f活動類型 = "意見";
+        public ActionResult Save()
+        {  dbJoutaEntities db = new dbJoutaEntities();
+            tComment  x = new tComment();
+            x.f名稱 = Request.Form["txt名稱"];
+            x.f意見 = Request.Form["txt意見"];
+            x.f性別 = Request.Form["gender"];
+            x.f意見類型 = Request.Form["txt意見類型"];
+            x.f聯絡人 = Request.Form["txt聯絡人"];
+            x.f電子郵件 = Request.Form["txtMail"];
+            x.f電話 = Request.Form["txt電話"];
 
-            dbJoutaEntities db = new dbJoutaEntities();
-            db.tActivity.Add(y);
-            db.tMember.Add(x);
+            db.tComment.Add(x);
             db.SaveChanges();
-
             return RedirectToAction("New");
         }
+
+        //[HttpPost]
+        //public ActionResult New( p)
+        //{
+        //    tMember xx = new tMember();
+        //    xx.f會員名稱 = Request.Form[txt名稱];
+        //    xx.f會員性別 = p.gender;
+        //    xx.f會員電子郵件 = p.txt電子郵件;
+        //    xx.f會員電話 = p.txt電話;
+        //    tActivity yy = new tActivity();
+        //    yy.f活動內容 = p.txt意見;
+        //    yy.f活動類型 = "意見";
+
+        //    dbJoutaEntities db = new dbJoutaEntities();
+        //    db.tActivity.Add(yy);
+        //    db.tMember.Add(xx);
+        //    ViewBag.msg = "成功";
+        //    db.SaveChanges();
+        //return RedirectToAction("New");
+        //}
 
     }
 }

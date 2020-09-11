@@ -48,6 +48,19 @@
           <Property Name="fQRcodeImage" Type="nvarchar" MaxLength="50" />
           <Property Name="f有收藏活動的會員編號" Type="nvarchar(max)" />
         </EntityType>
+        <EntityType Name="tComment">
+          <Key>
+            <PropertyRef Name="fID" />
+          </Key>
+          <Property Name="fID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="f電子郵件" Type="nvarchar" MaxLength="100" />
+          <Property Name="f電話" Type="nvarchar" MaxLength="100" />
+          <Property Name="f名稱" Type="nvarchar" MaxLength="100" />
+          <Property Name="f意見" Type="nvarchar" MaxLength="100" />
+          <Property Name="f性別" Type="nvarchar" MaxLength="100" />
+          <Property Name="f聯絡人" Type="nvarchar" MaxLength="100" />
+          <Property Name="f意見類型" Type="nvarchar" MaxLength="100" />
+        </EntityType>
         <EntityType Name="tMember">
           <Key>
             <PropertyRef Name="f會員編號" />
@@ -95,6 +108,7 @@
         <EntityContainer Name="joutaModelStoreContainer">
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tActivity" EntityType="Self.tActivity" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tComment" EntityType="Self.tComment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tMember" EntityType="Self.tMember" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_tActivity_tMember" Association="Self.FK_tActivity_tMember">
             <End Role="tMember" EntitySet="tMember" />
@@ -202,7 +216,21 @@
             <End Role="tMember" EntitySet="tMember" />
             <End Role="tActivity" EntitySet="tActivity" />
           </AssociationSet>
+          <EntitySet Name="tComment" EntityType="joutaModel.tComment" />
         </EntityContainer>
+        <EntityType Name="tComment">
+          <Key>
+            <PropertyRef Name="fID" />
+          </Key>
+          <Property Name="fID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="f電子郵件" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="f電話" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="f名稱" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="f意見" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="f性別" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="f聯絡人" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="f意見類型" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -284,6 +312,20 @@
                 <ScalarProperty Name="f會員評分人數" ColumnName="f會員評分人數" />
                 <ScalarProperty Name="f會員總分" ColumnName="f會員總分" />
                 <ScalarProperty Name="f重置驗證碼" ColumnName="f重置驗證碼" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tComment">
+            <EntityTypeMapping TypeName="joutaModel.tComment">
+              <MappingFragment StoreEntitySet="tComment">
+                <ScalarProperty Name="f意見類型" ColumnName="f意見類型" />
+                <ScalarProperty Name="f聯絡人" ColumnName="f聯絡人" />
+                <ScalarProperty Name="f性別" ColumnName="f性別" />
+                <ScalarProperty Name="f意見" ColumnName="f意見" />
+                <ScalarProperty Name="f名稱" ColumnName="f名稱" />
+                <ScalarProperty Name="f電話" ColumnName="f電話" />
+                <ScalarProperty Name="f電子郵件" ColumnName="f電子郵件" />
+                <ScalarProperty Name="fID" ColumnName="fID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

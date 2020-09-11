@@ -196,6 +196,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>JoutaEntities.edmx</DependentUpon>
     </Compile>
+    <Compile Include="tComment.cs">
+      <DependentUpon>JoutaEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="ViewModel\CalendarEvents.cs" />
     <Compile Include="Models\CDictionary.cs" />
     <Compile Include="Models\Topendata.cs" />
@@ -2204,6 +2207,7 @@
     <Content Include="Scripts\IIIProject\profile.js" />
     <Content Include="Scripts\IIIProject\quickmatch.js" />
     <Content Include="Scripts\IIIProject\travel.js" />
+    <Content Include="Scripts\IIIProject\聯絡我們New.js" />
     <Content Include="Scripts\jquery-3.5.1.js" />
     <Content Include="Scripts\jquery.signalR-2.4.1.js" />
     <Content Include="Scripts\jquery.signalR-2.4.1.min.js" />
