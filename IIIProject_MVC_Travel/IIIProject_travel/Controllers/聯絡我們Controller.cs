@@ -152,6 +152,7 @@ namespace IIIProject_travel.Controllers
         public ActionResult Save()
         {  dbJoutaEntities db = new dbJoutaEntities();
             tComment  x = new tComment();
+            x.f名稱 = Request.Form["txt名稱"];
             x.f意見 = Request.Form["txt意見"];
             x.f性別 = Request.Form["gender"];
             x.f意見類型 = Request.Form["txt意見類型"];

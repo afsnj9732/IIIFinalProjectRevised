@@ -48,8 +48,6 @@
           <Property Name="fQRcodeImage" Type="nvarchar" MaxLength="50" />
           <Property Name="f有收藏活動的會員編號" Type="nvarchar(max)" />
         </EntityType>
-        <!--產生期間發現錯誤:
-警告 6002: 資料表/檢視 'jouta.dbo.tComment' 未定義主索引鍵。已推斷此索引鍵，並將定義建立成唯讀的資料表/檢視。-->
         <EntityType Name="tComment">
           <Key>
             <PropertyRef Name="fID" />
@@ -110,19 +108,8 @@
         <EntityContainer Name="joutaModelStoreContainer">
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tActivity" EntityType="Self.tActivity" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tComment" EntityType="Self.tComment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tMember" EntityType="Self.tMember" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="tComment" EntityType="Self.tComment" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [tComment].[fID] AS [fID], 
-    [tComment].[f電子郵件] AS [f電子郵件], 
-    [tComment].[f電話] AS [f電話], 
-    [tComment].[f名稱] AS [f名稱], 
-    [tComment].[f意見] AS [f意見], 
-    [tComment].[f性別] AS [f性別], 
-    [tComment].[f聯絡人] AS [f聯絡人], 
-    [tComment].[f意見類型] AS [f意見類型]
-    FROM [dbo].[tComment] AS [tComment]</DefiningQuery>
-          </EntitySet>
           <AssociationSet Name="FK_tActivity_tMember" Association="Self.FK_tActivity_tMember">
             <End Role="tMember" EntitySet="tMember" />
             <End Role="tActivity" EntitySet="tActivity" />
