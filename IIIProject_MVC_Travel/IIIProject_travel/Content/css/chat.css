@@ -1,0 +1,48 @@
+﻿html, body {
+    height: 100%
+}
+
+body {
+    background: linear-gradient(rgba(255,255,230,0.5),rgba(255,255,230,0.51)), url('http://subtlepatterns.com/patterns/geometry2.png');
+}
+
+div.panel-body {
+    overflow-y: scroll;
+}
+
+.panel {
+    margin: 50px 0;
+}
+
+#chat {
+    height: 72vh;
+}
+
+#sendmessage {
+    height: 100%
+}
+
+#userAva {
+    height: 30px;
+    width: 30px;
+    border: 2px solid #f5be2e;
+    border-radius: 50%;
+}
+
+#userName {
+    color: #ff8000;
+    font-size:20px;
+}
+
+#otherUserName {
+    color: #000;
+    font-size:20px
+}
+
+#discussion {
+    margin: 0 20px;
+}
+
+p{
+    font-size:20px;
+}

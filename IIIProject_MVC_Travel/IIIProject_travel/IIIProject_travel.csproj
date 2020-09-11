@@ -238,6 +238,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\css\blog_style.css" />
     <Content Include="Content\css\bootstrap.min.css" />
+    <Content Include="Content\css\chat.css" />
     <Content Include="Content\css\eat.css" />
     <Content Include="Content\css\login.css" />
     <Content Include="Content\css\main.css" />
@@ -355,6 +356,7 @@
     <Content Include="Content\images\29文章.jpg" />
     <Content Include="Content\images\BlogUploadSample.png" />
     <Content Include="Content\images\ChangeStar.png" />
+    <Content Include="Content\images\chatbg.jpg" />
     <Content Include="Content\images\default.jpg" />
     <Content Include="Content\images\f899c3a6-45ba-4d37-ba05-8f4e031b0a63.jpg" />
     <Content Include="Content\images\McDonalds.png" />

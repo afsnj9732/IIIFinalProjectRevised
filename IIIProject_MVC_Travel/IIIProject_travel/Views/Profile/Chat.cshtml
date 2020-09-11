@@ -12,13 +12,8 @@
     <title>聊天室 | Jouta</title>
     <link rel="stylesheet" href="~/Content/css/bootstrap.min.css">
     <link rel="stylesheet" href="~/Content/sass/style.css">
-    <link href="~/Content/fontawesome/css/all.css" rel="stylesheet" />
-    <style>
-        div.panel-body {
-            overflow: scroll;
-            background: url('http://subtlepatterns.com/patterns/geometry2.png');
-        }
-    </style>
+    <link rel="stylesheet" href="~/Content/css/chat.css">
+    <link rel="stylesheet" href="~/Content/fontawesome/css/all.css">
 </head>
 
 <body>
@@ -69,29 +64,26 @@
         </nav>
     </div>
     <div class="container">
-        <div class="row">
-            <h2>聊天室</h2>
-            <div class="chat-panel panel panel-default">
-                <div class="panel-heading">
-                    ChatBox using SignalR
-                    <i class="fa fa-paper-plane fa-fw"></i>
-                </div>
-                <div class="panel-body" id="chat" style="height:250px;">
-                    <input type="hidden" id="displayname" />
-                    <p id="discussion"></p>
-                </div>
-                <div class="panel-footer">
-                    <div class="input-group ">
-                        <input id="message" type="text" name="message" class="form-control input-sm" placeholder="請輸入訊息..." />
-                        <span class="input-group-btn">
-                            <input type="button" class="btn btn-warning btn-sm" id="sendmessage" value="送出" />
-                        </span>
-                    </div>
+        @*<h2>聊天室</h2>*@
+        <div class="chat-panel panel panel-default">
+            <div class="panel-heading" hidden>
+                ChatBox using SignalR
+                <i class="fa fa-paper-plane fa-fw"></i>
+            </div>
+            <div class="panel-body" id="chat">
+                <input type="hidden" id="displayname" />
+                <p id="discussion"></p>
+            </div>
+            <div class="panel-footer">
+                <div class="input-group ">
+                    <input id="message" type="text" name="message" class="form-control input-sm" placeholder="請輸入訊息..." />
+                    <span class="input-group-btn">
+                        <input type="button" class="btn btn-warning btn-sm" id="sendmessage" value="送出" />
+                    </span>
                 </div>
             </div>
         </div>
     </div>
-
 
     <!--    footer  -->
     <div class="container-fluid footer">
@@ -102,7 +94,6 @@
     <script src="~/signalr/hubs"></script>
     <script src="~/Scripts/bootstrap.min.js"></script>
 
-
     <script>
         $(function () {
             var chat = $.connection.chatHub;
@@ -110,11 +101,11 @@
             chat.client.addNewMessageToPage = function (name, message) {
 
                 if (name == "@x.f會員名稱") {
-                    $("#discussion").append('<p style="color:green;text-align:left;width:500px;">' +
-                        '<strong> <img src="~/Content/images/@x.f會員大頭貼">' + htmlEncode(name) + '</strong>: ' + htmlEncode(message) + '</p>')
+                    $("#discussion").append('<p style="text-align:right; display: -webkit-box; overflow: inherit; text-overflow: ellipsis; -webkit-box-orient: vertical;">' +
+                        '<strong style="margin-bottom:10px"><img src="../Content/images/@x.f會員大頭貼" style="margin-right:3px" id="userAva"><span id="userName">' + htmlEncode(name) + '<br></span></strong> ' + htmlEncode(message) + '</p>')
                 } else if(name != "@x.f會員名稱") {
-                    $("#discussion").append('<p style="color:blue;text-alignright;">' +
-                        '<strong> <img src="~/Content/images/15.png">' + htmlEncode(name)  + '</strong>: ' + htmlEncode(message) + '</p>')
+                    $("#discussion").append('<p style="text-align:left; display: -webkit-box; overflow: inherit; text-overflow: ellipsis; -webkit-box-orient: vertical;">' +
+                        '<strong style="margin-bottom:10px"><img src="../Content/images/15.png" style="margin-right:3px" id="userAva"></div><span id="otherUserName">' + htmlEncode(name)  + '<br></span></strong>' + htmlEncode(message) + '</p>')
                 }
             };
 
