@@ -207,6 +207,8 @@ namespace IIIProject_travel.Controllers
 
             tActivity article = new tActivity();
 
+            article.f活動類型 = "文章";
+            article.f活動編號 = p.f活動編號;
             article.f活動留言 = p.content;
             article.f活動留言時間 = currentTime.ToString();
 

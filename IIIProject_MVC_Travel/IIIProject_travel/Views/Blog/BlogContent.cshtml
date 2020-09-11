@@ -9,6 +9,7 @@
 
 
     commentList = (from t in db.tActivity
+                   where t.f活動類型 == "文章"
                    where t.f活動編號 == t.f活動編號
                    select t).ToList();
 
@@ -145,7 +146,7 @@
                     <div class="card-body">
                         @using (Html.BeginForm("AddComment", "Blog", FormMethod.Post, new { }))
                         {
-                            @Html.TextBox("content")
+                            <input type="text" aria-label="First name" class="form-control" name="content">
                             <button type="submit" value="留言" class="btn btn-primary" id="btnComment">提交</button>
                         }
                     </div>
