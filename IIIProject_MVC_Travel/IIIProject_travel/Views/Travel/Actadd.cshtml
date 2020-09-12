@@ -1,5 +1,6 @@
 ﻿
 @{
+    var NowMember = (tMember)Session["member"];
     Layout = null;
     dbJoutaEntities db = new dbJoutaEntities();
     int targetNumber = Model;
@@ -19,10 +20,16 @@
     var theGuyName = theGuy.Select(a => a.f會員名稱).FirstOrDefault();
     if (!string.IsNullOrEmpty(theGuyName))
     {
-        <div class="m-3">
-            <img width="100" height="100" src="~/Content/images/@theGuy.Select(a => a.f會員大頭貼).FirstOrDefault()" />
-            <span>@theGuyName</span>
-        </div>
-        <br />
+<div class="m-3" style="width:180px;">
+    <a href="@Url.Action("otherprofile","Profile",new { id= theGuy.FirstOrDefault().f會員編號 })">
+        <img width="103" height="103" src="~/Content/images/@theGuy.Select(a => a.f會員大頭貼).FirstOrDefault()" />
+    </a>
+    <span>@theGuyName</span>
+    <button class="button btn-secondary jouta_black_list" act_id="@theGuy.FirstOrDefault().f會員編號">加入黑名單</button>
+    @if (Session["member"] != null && targetAct.f會員編號 == NowMember.f會員編號)
+    {
+        <button class="button btn-danger jouta_kick" act_id="@theGuy.FirstOrDefault().f會員編號">踢他</button>
+    }
+    </div>
     }
 }

@@ -36,7 +36,9 @@
 
     <div class="row justify-content-between pl-5 pr-5 mr-5 ml-5">
         <div>
-            <span><img src="~/Content/images/@img" width="30" height="30"></span>
+            <a href="@Url.Action("otherprofile","Profile",new { id= target })">
+                <img src="~/Content/images/@img" width="30" height="30">
+            </a>
             <span>@Msg.msg</span>
         </div>
         <div>@MsgsTimeAndID[0]</div>

@@ -122,18 +122,18 @@
 
 
 
-    //Bootstrap Modal 關閉觸發事件
-    $(document).on('hidden.bs.modal', '.modal', function () {
-        $('.modal:visible').length && $(document.body).addClass('modal-open'); //疊加互動視窗 Scroll Debug
-        $(".combine_readmore").addClass("show"); //顯示隱藏的第一個視窗
-    });
+    //Bootstrap Modal 關閉觸發事件 
+    //$(document).on('hidden.bs.modal', '.modal', function () {
+    //    $('.modal:visible').length && $(document.body).addClass('modal-open'); //疊加互動視窗 Scroll Debug
+    //    $(".combine_readmore").addClass("show"); //顯示隱藏的第一個視窗
+    //});
 
-    $(document).on('click', '[data-toggle = modal]', function () {
-        if ($('.modal-backdrop').eq(0).css('background-color') !== null) {
-            $(".combine_readmore").removeClass("show"); //隱藏第一個視窗
-        }          
-        $('.modal-backdrop').eq(1).css('background-color', 'white'); 
-    });
+    //$(document).on('click', '[data-toggle = modal]', function () {
+    //    if ($('.modal-backdrop').eq(0).css('background-color') !== null) {
+    //        $(".combine_readmore").removeClass("show"); //隱藏第一個視窗
+    //    }          
+    //    $('.modal-backdrop').eq(1).css('background-color', 'white'); 
+    //});
 
 
     //書籤回最上
@@ -365,8 +365,25 @@
 
 
 
-
-
+    //踢人
+    function kickAct() {
+        let target = $(this).attr("member_id");
+        let id = $(this).attr("act_id");
+        $.ajax({
+            url: "/Travel/ActKick",
+            type: "POST",
+            data: { "target_member": target,"act_id":id },
+            success: function (data) {
+                if (data === "") {
+                    window.confirm("不可以踢自己!")
+                } else {
+                    $("[ActAdd=" + id + "]").html(data);
+                //getCalendar(); 踢人行事曆不用動
+                }
+            }
+        });
+        }    
+    $("body").on('click', ".jouta_kick", kickAct);
 
     //入團
     function joinAct() {
@@ -491,6 +508,10 @@
             success: function (data) {
                 $("#article_ajax").html(data); 
                 travel_RWD(); 
+                readmore_target = $('.ViewCounts').eq(0).attr("act_id");
+                if (readmore_target !== undefined) {
+                    get_ajax_readmore();
+                }
             }
         });
 
@@ -594,7 +615,6 @@
     $("#travel_sort .sort li").eq(0).click(); 
     //進入旅遊業面預設呼叫第一次行事曆
     getCalendar();
-    //進入旅遊業面預設判斷第一次RWD
-    
 
+    
 })(); 
