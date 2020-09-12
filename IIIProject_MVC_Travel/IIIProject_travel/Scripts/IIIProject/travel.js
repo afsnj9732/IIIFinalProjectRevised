@@ -2,7 +2,6 @@
     var order, background_color, contain, category, label, page, condition, readmore_target;
     var calendarEl = document.getElementById('calendar');
 
-
     //排序固定   
     let header = document.querySelector(".header");
     let travel_sort = document.querySelector("#travel_sort");
@@ -122,7 +121,7 @@
 
 
 
-    //Bootstrap Modal 關閉觸發事件
+    //Bootstrap Modal 關閉觸發事件 
     $(document).on('hidden.bs.modal', '.modal', function () {
         $('.modal:visible').length && $(document.body).addClass('modal-open'); //疊加互動視窗 Scroll Debug
         $(".combine_readmore").addClass("show"); //顯示隱藏的第一個視窗
@@ -211,6 +210,7 @@
         if (target == "0") {
             //文字編輯器
             CKEDITOR.replace('f活動內容', { height: 400, width: 1100 });
+
         } else {
             //文字編輯器
             CKEDITOR.replace('f活動內容2', { height: 400, width: 1100 });
@@ -222,13 +222,15 @@
         $(".ActivityFindEndTo").attr("hidden", "");
         nowdate = new Date(Date.now());
         theMonth = nowdate.getMonth()+1; //js時間月份是索引值，所以現在月份要+1
-        theDay = nowdate.getDate();
+        theDay = nowdate.getDate()+1;
         FormatTime();
         $(".ActivityStart").attr("min", nowdate.getFullYear() + "-" + theMonth + "-" + theDay);        
         $(".ActivityFindEnd").attr("max", "");
-        $(".ActivityStart").val("");
-        $(".ActivityEnd").val("");
-        $(".ActivityFindEnd").val("");
+        if (target === "0") {
+            $(".ActivityStart").val("");
+            $(".ActivityEnd").val("");
+            $(".ActivityFindEnd").val("");
+        }
         $(".ActivityEnd").attr("disabled","");
         $(".ActivityFindEnd").attr("disabled","");
         $(".NeedACTo").attr("hidden", "");
@@ -361,10 +363,72 @@
         }
     });
 
+    //黑名單人
+    function addBlackList() {
+        let target = $(this).attr("member_id");
+        let id = $(this).attr("act_id");
+        let act_target = $(this).attr("act_target");
+        $.ajax({
+            url: "/Travel/addBlackList",
+            type: "POST",
+            data: { "target_member": target, "act_id": id, "act_target": act_target},
+            success: function (data) {
+                if (data === "0") {
+                    window.confirm("不可以自己黑單自己")
+                    return;
+                } else if (data === "1") {
+                    window.confirm("對象已經在黑名單內")
+                    return;
+                }
 
+                if (act_target === "msg") {
+                    $("[MsgAdd=" + id + "]").html(data);
+                    window.confirm("黑單成功!")
+                } else {
+                    $("[ActAdd=" + id + "]").html(data);
+                    window.confirm("黑單成功!")
+                }                                             
+            }
+        });
+    }
+    $("body").on('click', ".jouta_black_list", addBlackList);
 
+    //留言
+    function leaveMsg() {
+        let target = $(this).attr("leaveMsg");
+        let sentMsg = $("[sentMsg=" + target + "]").val();
+        $.ajax({
+            url: "/Travel/MsgAdd",
+            type: "POST",
+            data: { "target": target, "sentMsg": sentMsg },
+            success: function (data) {
+                $("[MsgAdd=" + target + "]").html(data);
+                $("[sentMsg=" + target + "]").val("");
+            }
+        });
 
+    }
+    $("body").on('click', ".leaveMsg", leaveMsg);
 
+    //踢人
+    function kickAct() {
+        let target = $(this).attr("member_id");
+        let id = $(this).attr("act_id");
+        $.ajax({
+            url: "/Travel/ActKick",
+            type: "POST",
+            data: { "target_member": target,"act_id":id },
+            success: function (data) {
+                if (data === "") {
+                    window.confirm("不可以踢自己!")
+                } else {
+                    $("[ActAdd=" + id + "]").html(data);
+                //getCalendar(); 踢人行事曆不用動
+                }
+            }
+        });
+        }    
+    $("body").on('click', ".jouta_kick", kickAct);
 
     //入團
     function joinAct() {
@@ -376,6 +440,9 @@
             success: function (data) {
                 if (data === "1") {
                     window.confirm("已是團主不用入團");            
+                }
+                else if (data === "7") {
+                    window.confirm("慘遭團主黑單，不予入團!");
                 }
                 else if (data === "0") {
                     window.confirm("你已經入團了哦!");
@@ -413,22 +480,7 @@
     }
     $("body").on('click', ".leaveAct", leaveAct);    
 
-    //留言
-    function leaveMsg() {
-        let target = $(this).attr("leaveMsg");
-        let sentMsg = $("[sentMsg=" + target + "]").val();
-        $.ajax({
-            url: "/Travel/MsgAdd",
-            type: "POST",
-            data: { "target": target, "sentMsg": sentMsg },
-            success: function (data) {
-                $("[MsgAdd=" + target + "]").html(data);
-                $("[sentMsg=" + target + "]").val("");
-            }
-        });
 
-    }
-    $("body").on('click', ".leaveMsg", leaveMsg);
 
     //增加讚
     function getGoodCounts() {
@@ -489,6 +541,10 @@
             success: function (data) {
                 $("#article_ajax").html(data); 
                 travel_RWD(); 
+                readmore_target = $('.ViewCounts').eq(0).attr("act_id");
+                if (readmore_target !== undefined) {
+                    get_ajax_readmore();
+                }
             }
         });
 
@@ -592,7 +648,6 @@
     $("#travel_sort .sort li").eq(0).click(); 
     //進入旅遊業面預設呼叫第一次行事曆
     getCalendar();
-    //進入旅遊業面預設判斷第一次RWD
-    
 
+    
 })(); 

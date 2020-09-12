@@ -20,6 +20,7 @@
     }
 
 
+
     //join
     var totalMember = from x in db.tMember
                       select x;
@@ -28,6 +29,7 @@
     {
         attendGuys = Model.f活動參加的會員編號.Split(',');
     }
+
 
     //msg
     string target = "";
@@ -43,6 +45,18 @@
     }
     var targetMsgs = msgs.Zip(msgsTime, (n, w) => new { msg = n, time = w });//合併兩陣列
 
+    //black_list
+    string[] black_list = { };
+    if (Session["member"] != null)
+    {
+        var nowRealMember = db.tMember.Where(t => t.f會員編號 == NowMember.f會員編號).FirstOrDefault();
+        if (!string.IsNullOrEmpty(nowRealMember.f會員黑名單))
+        {
+            black_list = nowRealMember.f會員黑名單.Split(',');
+        }
+    }
+
+
     //score
     //none
 
@@ -51,7 +65,7 @@
 }
 
 @*edit start*@
-<div class="modal fade combine_edit" id="ajax_edit" tabindex="-1" role="dialog"
+<div class="modal fade combine_edit" id="ajax_edit"  role="dialog"
      aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog change-max-width-1400" role="document">
         <div class="modal-content" style="height:85%">
@@ -67,9 +81,9 @@
                     <div class="container-fluid">
                         <span>標題：<input type="text" name="f活動標題" style="width:90%" class="NeedAT" value="@Model.f活動標題"><p class="NeedATTo" style="color:red" hidden>活動標題請至少填滿8個字</p></span>
                         <div class="row m-0 mb-3 justify-content-around">
-                            <span>旅遊開始日期： <input type="date" min="@DateTime.Now.AddDays(1.0).ToString("yyyy-MM-dd")" max="" class="ActivityStart" name="f活動開始時間"><p class="ActivityStartTo" style="color:red" hidden>活動開始時間必填</p></span>
-                            <span>旅遊結束日期： <input type="date" min="@DateTime.Now.AddDays(2.0).ToString("yyyy-MM-dd")" max="" class="ActivityEnd" disabled name="f活動結束時間"><p class="ActivityEndTo" style="color:red" hidden>活動結束時間必填</p></span>
-                            <span>入團截止： <input type="date" min="@DateTime.Now.ToString("yyyy-MM-dd")" max="" class="ActivityFindEnd" disabled name="f活動招募截止時間"><p class="ActivityFindEndTo" style="color:red" hidden>招募截止時間必填</p></span>
+                            <span>旅遊開始日期： <input type="date" min="@DateTime.Now.AddDays(1.0).ToString("yyyy-MM-dd")" max="" class="ActivityStart" name="f活動開始時間" value="@Model.f活動開始時間"><p class="ActivityStartTo" style="color:red" hidden>活動開始時間必填</p></span>
+                            <span>旅遊結束日期： <input type="date" min="@DateTime.Now.AddDays(2.0).ToString("yyyy-MM-dd")" max="" class="ActivityEnd" disabled name="f活動結束時間" value="@Model.f活動結束時間"><p class="ActivityEndTo" style="color:red" hidden>活動結束時間必填</p></span>
+                            <span>入團截止： <input type="date" min="@DateTime.Now.ToString("yyyy-MM-dd")" max="" class="ActivityFindEnd" disabled name="f活動招募截止時間" value="@Model.f活動招募截止時間"><p class="ActivityFindEndTo" style="color:red" hidden>招募截止時間必填</p></span>
                         </div>
                         <div class="row mb-4 mx-auto align-items-center justify-content-around">
                             <span><img src="~/Content/images/04.png" class="mb-1" alt="">預算：<input type="text" name="f活動預算" class="NeedAC" value="@Model.f活動預算"><span class="NeedACTo" style="color:red" hidden>活動預算必填</span></span>
@@ -126,7 +140,7 @@
 
 
 @*score start*@
-<div class="modal fade combine_score" id="ajax_score" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade combine_score" id="ajax_score"  role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog change-max-width-1420" role="document" style="padding-right: 17px !important;">
         <div class="modal-content">
             <div class="modal-header">
@@ -156,7 +170,7 @@
 @*score end*@
 
 @*msg start*@
-<div class="modal fade combine_msg" id="ajax_msg" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade combine_msg" id="ajax_msg"  role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog change-max-width-1420" role="document" style="padding-right: 17px !important;">
         <div class="modal-content">
             <div class="modal-header">
@@ -180,12 +194,21 @@
                             {
                                 target = msgsTimeAndID[1];
                             }
+                            if (black_list.Length > 1) {
+                                if (Array.IndexOf(black_list, target) > -1)
+                                {
+                                    continue;
+                                }
+                            }
                             img = db.tMember.Where(t => t.f會員編號.ToString() == target)
-                                  .Select(t => t.f會員大頭貼).FirstOrDefault();
-                        
-                        <div class="row justify-content-between pl-5 pr-5 mr-5 ml-5">
+                                          .Select(t => t.f會員大頭貼).FirstOrDefault();
+
+                        <div class="row justify-content-between   pr-5 mr-5 ml-5">
                             <div>
-                                <span><img src="~/Content/images/@img" width="30" height="30"></span>
+                                <button class="button btn-secondary jouta_black_list" member_id="@target" act_target="msg"  act_id="@Model.f活動編號">加入黑名單</button>                                
+                                    <a href="@Url.Action("otherprofile","Profile",new { id= target })">
+                                        <img src="~/Content/images/@img" width="30" height="30">
+                                    </a>                                
                                 <span>@Msg.msg</span>
                             </div>
                             <div>@msgsTimeAndID[0]</div>
@@ -208,7 +231,7 @@
 @*msg end*@
 
 @*join start*@
-<div class="modal fade combine_join" id="ajax_join" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade combine_join" id="ajax_join"  role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog change-max-width-1420" role="document" style="padding-right: 17px !important;">
         <div class="modal-content">
             <div class="modal-header">
@@ -225,11 +248,38 @@
                         var theGuyName = theGuy.Select(a => a.f會員名稱).FirstOrDefault();
                         if (!string.IsNullOrEmpty(theGuyName))
                         {
-                            <div class="m-3">
-                                <img width="100" height="100" src="~/Content/images/@theGuy.Select(a => a.f會員大頭貼).FirstOrDefault()" />
-                                <span>@theGuyName</span>
-                            </div>
-                            @*<br />*@
+
+                    <div class="m-3 row  align-items-center   " style="width:210px;">
+
+                        <a href="@Url.Action("otherprofile","Profile",new { id= theGuy.FirstOrDefault().f會員編號 })">
+                            <img width="114" height="114" src="~/Content/images/@theGuy.Select(a => a.f會員大頭貼).FirstOrDefault()" />
+                        </a>
+                        <div class="d-flex flex-column bd-highlight align-items-center">
+                            @if (black_list.Length > 1 && Array.IndexOf(black_list, theGuy.FirstOrDefault().f會員編號.ToString()) > -1)
+                            {
+                                    <span class="mx-auto" style="width:40px;">
+                                        <img width="40" height="40" src="~/Content/images/30.png" />
+                                    </span>                               
+                            }
+                            else
+                            {
+                                <span class="mx-auto" style="width:40px;">
+                                    <img width="40" height="40" src="~/Content/images/29.png" />
+                                </span>
+
+                            }
+                            <span class="mx-auto">@theGuyName</span>
+                        </div>
+
+                        <button class="button btn-secondary jouta_black_list pr-1 pl-1" member_id="@theGuy.FirstOrDefault().f會員編號" act_target="join" act_id="@Model.f活動編號">加入黑名單</button>
+                        @if (Session["member"] != null && Model.f會員編號 == NowMember.f會員編號)
+                        {
+                            <button class="button btn-danger jouta_kick pr-1 pl-1" member_id="@theGuy.FirstOrDefault().f會員編號" act_id="@Model.f活動編號">踢他</button>
+                        }
+
+
+                    </div>
+                             
                         }
                     }
                 </div>
@@ -253,12 +303,12 @@
 @*join end*@
 
 @*readmore start*@
-<div class="modal fade combine_readmore" id="ajax_readmore" tabindex="-1" role="dialog"
+<div class="modal fade combine_readmore" id="ajax_readmore"  role="dialog"
      aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog change-max-width-1400" role="document">
         <div class="modal-content">
             <div class="modal-header  border-main-color">
-                <h5 class="modal-title" id="exampleModalLabel"><span style="font-weight:bolder;"> @Model.f活動標題</span></h5>
+                <h5 class="modal-title"  id="exampleModalLabel"><span style="font-weight:bolder;"> @Model.f活動標題</span></h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -291,7 +341,9 @@
                     <div class="row align-items-center">
                         <div id="UserBlock">
                             <p><img src="~/Content/images/16.png" class="pb-1" alt="">@Model.tMember.f會員稱號</p>
-                            <img src="~/Content/images/@Model.tMember.f會員大頭貼" alt="" class="col-auto" style="width: 300px;">
+                            <a href="@Url.Action("otherprofile","Profile",new { id= Model.f會員編號 })">
+                                <img src="~/Content/images/@Model.tMember.f會員大頭貼" alt="" class="col-auto" style="width: 300px;">
+                            </a>
                             <p>@Model.tMember.f會員名稱</p>
                             <p>團主評分:@Model.tMember.f會員評分 </p>
                         </div>

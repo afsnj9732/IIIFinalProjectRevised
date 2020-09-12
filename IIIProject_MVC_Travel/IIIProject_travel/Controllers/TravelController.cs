@@ -14,6 +14,7 @@ namespace IIIProject_travel.Controllers
     {
         dbJoutaEntities db = new dbJoutaEntities();
 
+
         public dynamic getCalendar()
         {
             if (Session["member"] != null)
@@ -282,17 +283,85 @@ namespace IIIProject_travel.Controllers
             return RedirectToAction("TravelIndex");
         }
 
-        public dynamic ActAdd(int target, bool isAdd) //退團或入團
+        public dynamic addBlackList(int target_member, int act_id, string act_target)
+        {
+
+            var loginMember = (tMember)Session["member"];
+            if (target_member == loginMember.f會員編號)
+            {
+                return "0";
+            }
+
+            
+            var nowRealMember = db.tMember.Where(t => t.f會員編號 == loginMember.f會員編號).FirstOrDefault();
+            if (!string.IsNullOrEmpty(nowRealMember.f會員黑名單))
+            {
+                var black_list = nowRealMember.f會員黑名單.Split(',');
+                if (Array.IndexOf(black_list,target_member.ToString())>-1) //已經加入黑單
+                {
+                    return "1";
+                }
+            }
+
+            nowRealMember.f會員黑名單 += "," + target_member;
+            db.SaveChanges();
+            if (act_target == "msg")
+            {
+                return View("MsgAdd", act_id);
+            }
+            else
+            {
+                return View("Actadd", act_id);
+            }
+        }
+
+        public dynamic ActKick(int target_member,int act_id)
+        {
+            var loginMember = (tMember)Session["member"];
+            if (target_member == loginMember.f會員編號) //不可以黑自己
+            {
+                return "";
+            }
+            var ActList = db.tActivity.Where(t => t.f活動編號 == act_id).FirstOrDefault();
+            var kick_member = db.tMember.Where(t => t.f會員編號 == target_member).FirstOrDefault();
+
+
+            //if (!string.IsNullOrEmpty(ActList.f活動參加的會員編號)) 因為有團主，活動必定有人參加            
+            string[] GuysList = ActList.f活動參加的會員編號.Split(',');
+
+            //移除占用時間
+            string[] usedTime = kick_member.f會員已占用時間.Split(',');
+            kick_member.f會員已占用時間 =
+                string.Join(",", usedTime.Where(t => t != ActList.f活動開始時間 + "~" + ActList.f活動結束時間));
+
+            //移除會員資料參加的會員參加的活動編號
+            string[] NewList = kick_member.f會員參加的活動編號.Split(',');
+            kick_member.f會員參加的活動編號 =
+                string.Join(",", NewList.Where(t => t != ActList.f活動編號.ToString()));
+            //移除活動紀錄的會員編號
+            ActList.f活動參加的會員編號 =
+                string.Join(",", GuysList.Where(t => t != kick_member.f會員編號.ToString()));
+            db.SaveChanges();
+
+            return View("Actadd", act_id);
+        }
+
+        public dynamic Actadd(int target, bool isAdd) //退團或入團
         {
             var LoginMember = (tMember)Session["member"];
             var ActList = db.tActivity.Where(t => t.f活動編號 == target).FirstOrDefault();
-
+            string[] black_list = { };
+            if (ActList.tMember.f會員黑名單!=null)
+            {
+                black_list = ActList.tMember.f會員黑名單.Split(',');
+            }
+            
             var NowMember = db.tMember.Where(t => t.f會員編號 == LoginMember.f會員編號)
                          .FirstOrDefault();//因Session存取的資料沒有和資料庫內部做綁定
                                                           //所以不能存取，要用Session登入會員的會員編號
                                                           //撈出目前會員的資料
                                                           //檢查登入會員是否為本活動團主，團主不可入團退團
-            int index = -1; //先假設不是
+            int index = -1; //先假設不是團主
             if (!string.IsNullOrEmpty(NowMember.f會員發起的活動編號)) //若登入會員有開團紀錄
             {
                 string[] LeaderList = NowMember.f會員發起的活動編號.Split(',');
@@ -312,6 +381,13 @@ namespace IIIProject_travel.Controllers
 
             if (isAdd == true)//點選入團
             {
+                if (black_list.Length > 1)
+                {
+                    if (Array.IndexOf(black_list,LoginMember.f會員編號.ToString())>-1)
+                    {
+                        return "7";
+                    }
+                }
 
                 if (index == -1)//登入中的會員不存在名單
                 {
@@ -341,7 +417,7 @@ namespace IIIProject_travel.Controllers
                     NowMember.f會員已占用時間 += "," + ActList.f活動開始時間 + "~" + ActList.f活動結束時間;
 
 
-                    //增加會員資料參加的會員編號
+                     
                     NowMember.f會員參加的活動編號 += "," + ActList.f活動編號;
                     ActList.f活動參加的會員編號 += "," + LoginMember.f會員編號;
                     db.SaveChanges();
@@ -362,10 +438,11 @@ namespace IIIProject_travel.Controllers
 
 
 
-                    //移除會員資料參加的會員編號
+                    //移除會員資料參加的會員參加的活動編號
                     string[] NewList = NowMember.f會員參加的活動編號.Split(',');
                     NowMember.f會員參加的活動編號 =
                         string.Join(",", NewList.Where(t => t != ActList.f活動編號.ToString()));
+                    //移除活動紀錄的會員編號
                     ActList.f活動參加的會員編號 =
                         string.Join(",", GuysList.Where(t => t != NowMember.f會員編號.ToString()));
                     db.SaveChanges();
@@ -529,6 +606,7 @@ namespace IIIProject_travel.Controllers
             }
             return CountViewList;
         }
+
 
         public ActionResult MsgAdd(int target, string sentMsg)
         {

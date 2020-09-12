@@ -1,7 +1,15 @@
 ﻿
 @{
+    var NowMember = (tMember)Session["member"];
+
     Layout = null;
     dbJoutaEntities db = new dbJoutaEntities();
+    var nowRealMember = db.tMember.Where(t => t.f會員編號 == NowMember.f會員編號).FirstOrDefault();
+    string[] black_list = { };
+    if (!string.IsNullOrEmpty(nowRealMember.f會員黑名單))
+    {
+        black_list = nowRealMember.f會員黑名單.Split(',');
+    }
     int targetNumber = Model;
     var totalMember = from x in db.tMember
                       select x;
@@ -17,12 +25,38 @@
 {
     var theGuy = totalMember.Where(x => x.f會員編號.ToString() == guy);
     var theGuyName = theGuy.Select(a => a.f會員名稱).FirstOrDefault();
+
     if (!string.IsNullOrEmpty(theGuyName))
     {
-        <div class="m-3">
-            <img width="100" height="100" src="~/Content/images/@theGuy.Select(a => a.f會員大頭貼).FirstOrDefault()" />
-            <span>@theGuyName</span>
-        </div>
-        <br />
+<div class="m-3 row align-items-center" style="width:210px;">
+
+    <a href="@Url.Action("otherprofile","Profile",new { id= theGuy.FirstOrDefault().f會員編號 })">
+        <img width="114" height="114" src="~/Content/images/@theGuy.Select(a => a.f會員大頭貼).FirstOrDefault()" />
+    </a>
+    <div class="d-flex flex-column bd-highlight align-items-center">
+        @if (black_list.Length > 1 && Array.IndexOf(black_list, theGuy.FirstOrDefault().f會員編號.ToString()) > -1)
+        {
+                <span class="mx-auto" style="width:40px;">
+                    <img width="40" height="40" src="~/Content/images/30.png" />
+                </span>
+            
+        }
+        else
+        {
+            <span class="mx-auto" style="width:40px;">
+                <img width="40" height="40" src="~/Content/images/29.png" />
+            </span>
+
+        }
+        <span class="mx-auto">@theGuyName</span>
+    </div>
+
+    <button class="button btn-secondary jouta_black_list pl-1 pr-1" member_id="@theGuy.FirstOrDefault().f會員編號" act_target="join" act_id="@theGuy.FirstOrDefault().f會員編號">加入黑名單</button>
+    @if (Session["member"] != null && targetAct.f會員編號 == NowMember.f會員編號)
+    {
+        <button class="button btn-danger jouta_kick pl-1 pr-1" member_id="@theGuy.FirstOrDefault().f會員編號" act_id="@theGuy.FirstOrDefault().f會員編號">踢他</button>
+    }
+
+</div>
     }
 }
