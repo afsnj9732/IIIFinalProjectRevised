@@ -152,10 +152,10 @@
                             <li class="mx-auto" style="list-style-type:none;cursor: pointer;">
                                 @foreach (var item in topMember)
                                 {
-                                <a href="@Url.Action("otherprofile","Profile",new { id= item.f會員編號 })">
-                                    <img src="~/Content/images/@item.f會員大頭貼"
-                                         title="@item.f會員名稱" class="popguys" width="30" height="30">
-                                </a>
+                                    <a href="@Url.Action("otherprofile","Profile",new { id= item.f會員編號 })">
+                                        <img src="~/Content/images/@item.f會員大頭貼"
+                                             title="@item.f會員名稱" class="popguys" width="30" height="30">
+                                    </a>
                                 }
                             </li>
                         </ul>
@@ -208,12 +208,12 @@
                         <!-- 開團按鈕尾 -->
                     </div>
                     <!-- 揪團視窗頭  boostrap為方便滾輪出現會多出padding-right 17px之屬性-->
-                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                    <div class="modal fade" id="exampleModal"   role="dialog"
                          aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog change-max-width-1400" role="document">
                             <div class="modal-content" style="height:85%">
                                 <div class="modal-header border-main-color">
-                                    <h5 class="modal-title" id="exampleModalLabel"><span style="font-weight:bolder;"> 開團</span></h5>
+                                    <h5 class="modal-title"   id="exampleModalLabel"><span style="font-weight:bolder;"> 開團</span></h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
@@ -343,28 +343,25 @@
         </div>
         <!--    script      -->
         <script src="~/Scripts/jquery-3.5.1.js"></script>
+        <script src="~/Scripts/bootstrap.min.js"></script>
         <script src="~/Content/jquery-ui-1.12.1/jquery-ui.js"></script>
         <script src="~/Scripts/IIIProject/popper.min.js"></script>
-        <script src="~/Scripts/bootstrap.min.js"></script>
-        <script>
+        <script src="~/Scripts/IIIProject/navbar.js"></script>
+        <script src="//cdn.ckeditor.com/4.15.0/full/ckeditor.js"></script>
+        @*<script>
             $(document).ready(
-            $.fn.modal.Constructor.prototype.enforceFocus = function () {
-                var $modalElement = this.$element;
-                $(document).on('focusin.modal',
-                    function (e) {
-                        var $parent = $(e.target.parentNode);
-                        if ($modalElement[0] !== e.target &&
-                            !$modalElement.has(e.target).length &&
-                            !$parent.hasClass('cke_dialog_ui_input_select') &&
-                            !$parent.hasClass('cke_dialog_ui_input_text')) {
+                $.fn.modal.Constructor.prototype._enforceFocus = function () {
+                    var $modalElement = this.$element;
+                    $(document).on('focusin.modal', function (e) {
+                        if ($modalElement[0] !== e.target
+                            && !$modalElement.has(e.target).length
+                            && $(e.target).parentsUntil('*[role="dialog"]').length === 0) {
                             $modalElement.focus();
                         }
                     });
                 }
             )
-        </script>
-        <script src="~/Scripts/IIIProject/navbar.js"></script>
-        <script src="//cdn.ckeditor.com/4.15.0/full/ckeditor.js"></script>
+        </script>*@
         <script src="~/Scripts/moment.min.js"></script>
         <script src="~/Content/fullcalendar-5.3.2/lib/main.js"></script>
         <script src="~/Content/fullcalendar-5.3.2/lib/locales-all.js"></script>

@@ -2,7 +2,6 @@
     var order, background_color, contain, category, label, page, condition, readmore_target;
     var calendarEl = document.getElementById('calendar');
 
-
     //排序固定   
     let header = document.querySelector(".header");
     let travel_sort = document.querySelector("#travel_sort");
@@ -123,17 +122,17 @@
 
 
     //Bootstrap Modal 關閉觸發事件 
-    //$(document).on('hidden.bs.modal', '.modal', function () {
-    //    $('.modal:visible').length && $(document.body).addClass('modal-open'); //疊加互動視窗 Scroll Debug
-    //    $(".combine_readmore").addClass("show"); //顯示隱藏的第一個視窗
-    //});
+    $(document).on('hidden.bs.modal', '.modal', function () {
+        $('.modal:visible').length && $(document.body).addClass('modal-open'); //疊加互動視窗 Scroll Debug
+        $(".combine_readmore").addClass("show"); //顯示隱藏的第一個視窗
+    });
 
-    //$(document).on('click', '[data-toggle = modal]', function () {
-    //    if ($('.modal-backdrop').eq(0).css('background-color') !== null) {
-    //        $(".combine_readmore").removeClass("show"); //隱藏第一個視窗
-    //    }          
-    //    $('.modal-backdrop').eq(1).css('background-color', 'white'); 
-    //});
+    $(document).on('click', '[data-toggle = modal]', function () {
+        if ($('.modal-backdrop').eq(0).css('background-color') !== null) {
+            $(".combine_readmore").removeClass("show"); //隱藏第一個視窗
+        }          
+        $('.modal-backdrop').eq(1).css('background-color', 'white'); 
+    });
 
 
     //書籤回最上
@@ -211,6 +210,7 @@
         if (target == "0") {
             //文字編輯器
             CKEDITOR.replace('f活動內容', { height: 400, width: 1100 });
+
         } else {
             //文字編輯器
             CKEDITOR.replace('f活動內容2', { height: 400, width: 1100 });
