@@ -254,7 +254,7 @@
                         <a href="@Url.Action("otherprofile","Profile",new { id= theGuy.FirstOrDefault().f會員編號 })">
                             <img width="114" height="114" src="~/Content/images/@theGuy.Select(a => a.f會員大頭貼).FirstOrDefault()" />
                         </a>
-                        <div class="d-flex flex-column bd-highlight">
+                        <div class="d-flex flex-column bd-highlight align-items-center">
                             @if (black_list.Length > 1 && Array.IndexOf(black_list, theGuy.FirstOrDefault().f會員編號.ToString()) > -1)
                             {
                                     <span class="mx-auto" style="width:40px;">
