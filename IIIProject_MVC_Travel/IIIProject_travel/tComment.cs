@@ -22,5 +22,6 @@ namespace IIIProject_travel
         public string f性別 { get; set; }
         public string f聯絡人 { get; set; }
         public string f意見類型 { get; set; }
+        public string f意見時間 { get; set; }
     }
 }

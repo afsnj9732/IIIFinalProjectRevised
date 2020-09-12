@@ -1,4 +1,4 @@
-﻿@model IIIProject_travel.tActivity
+﻿@model IIIProject_travel.tComment
 
 @{
     ViewBag.Title = "r回覆";
@@ -107,35 +107,53 @@
 
                     <form method="post">
 
-                        <input type="hidden" name="f活動編號" value="@Model.f活動編號" />
+                        <input type="hidden" name="fID" value="@Model.fID" />
                         <div class="row">
                             <div class="col">
                                 <p>
                                     標題<br />
-                                    <input type="text" name="f活動標題" value="@Model.f活動標題" />
+                                    <input type="text" name="f名稱" value="@Model.f名稱" />
                                 </p>
                                 <p>
                                     帳號<br />
-                                    <input type="text" name="f會員編號" value="@Model.f會員編號" />
+                                    <input type="text" name="f聯絡人" value="@Model.f聯絡人" />
                                 </p>
                                 <p>
                                     建立時間<br />
-                                    <input type="text" name="f活動發起日期" value="@Model.f活動發起日期" />
+                                    <input type="text" name="f意見時間" value="@Model.f意見時間" />
                                 </p>
                                 <p>
                                     內容<br />
-                                    <input type="text" name="f活動內容" value="@Model.f活動內容" style="width:300px;height:100px" readonly />
+                                    <input type="text" name="f性別" value="@Model.f性別"  />
                                 </p>
                                 <p>
                                     分類<br />
-                                    <input type="text" name="f活動分類" value="@Model.f活動分類" />
+                                    <input type="text" name="f電子郵件" value="@Model.f電子郵件" />
                                 </p>
+                                <p>
+                                    分類<br />
+                                    <input type="text" name="f電子郵件" value="@Model.f電子郵件" />
+                                </p>
+                                <p>
+                                    分類<br />
+                                    <input type="text" name="f電話" value="@Model.f電話" />
+                                </p>
+                                <p>
+                                    分類<br />
+                                    <input type="text" name="f意見類型" value="@Model.f意見類型" />
+                                </p>
+                                <p>
+                                    分類<br />
+                                    <input type="text" name="f意見" value="@Model.f意見" style="width:300px;height:100px" readonly/>
+                                </p>
+
+
                                 <p>
                                     回覆內容<br />
                                     <input type="text" name="" value="" style="width:300px;height:100px" />
                                 </p>
                                 <p>
-                                    <input type="submit" value="送出"/>
+                                    <input type="submit" value="送出" />
                                 </p>
 
                             </div>
