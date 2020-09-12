@@ -152,8 +152,10 @@
                             <li class="mx-auto" style="list-style-type:none;cursor: pointer;">
                                 @foreach (var item in topMember)
                                 {
+                                <a href="@Url.Action("otherprofile","Profile",new { id= item.f會員編號 })">
                                     <img src="~/Content/images/@item.f會員大頭貼"
                                          title="@item.f會員名稱" class="popguys" width="30" height="30">
+                                </a>
                                 }
                             </li>
                         </ul>
