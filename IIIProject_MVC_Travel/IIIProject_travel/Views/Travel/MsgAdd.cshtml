@@ -1,6 +1,13 @@
 ﻿@{
     Layout = null;
+    var loginMember = (tMember)Session["member"];
     dbJoutaEntities db = new dbJoutaEntities();
+    var nowRealMember = db.tMember.Where(t => t.f會員編號 == loginMember.f會員編號).FirstOrDefault();
+    string[] black_list = { };
+    if (!string.IsNullOrEmpty(nowRealMember.f會員黑名單))
+    {
+        black_list = nowRealMember.f會員黑名單.Split(',');
+    }
     int exclude = 0;
     string img;
     string target = "";
@@ -31,11 +38,20 @@
     {
         target = MsgsTimeAndID[1];
     }
+    if (black_list.Length > 1)
+    {
+        if (Array.IndexOf(black_list, target) > -1)
+        {
+            continue;
+        }
+    }
+
     img = db.tMember.Where(t => t.f會員編號.ToString() == target)
           .Select(t => t.f會員大頭貼).FirstOrDefault();
 
-    <div class="row justify-content-between pl-5 pr-5 mr-5 ml-5">
+    <div class="row justify-content-between   pr-5 mr-5 ml-5">
         <div>
+            <button class="button btn-secondary jouta_black_list" member_id="@target" act_target="msg" act_id="@Model">加入黑名單</button>
             <a href="@Url.Action("otherprofile","Profile",new { id= target })">
                 <img src="~/Content/images/@img" width="30" height="30">
             </a>

@@ -283,14 +283,46 @@ namespace IIIProject_travel.Controllers
             return RedirectToAction("TravelIndex");
         }
 
-        public dynamic ActKick(int target_member,int act_id)
+        public dynamic addBlackList(int target_member, int act_id, string act_target)
         {
+
             var loginMember = (tMember)Session["member"];
             if (target_member == loginMember.f會員編號)
             {
+                return "0";
+            }
+
+            
+            var nowRealMember = db.tMember.Where(t => t.f會員編號 == loginMember.f會員編號).FirstOrDefault();
+            if (!string.IsNullOrEmpty(nowRealMember.f會員黑名單))
+            {
+                var black_list = nowRealMember.f會員黑名單.Split(',');
+                if (Array.IndexOf(black_list,target_member.ToString())>-1) //已經加入黑單
+                {
+                    return "1";
+                }
+            }
+
+            nowRealMember.f會員黑名單 += "," + target_member;
+            db.SaveChanges();
+            if (act_target == "msg")
+            {
+                return View("MsgAdd", act_id);
+            }
+            else
+            {
+                return View("Actadd", act_id);
+            }
+        }
+
+        public dynamic ActKick(int target_member,int act_id)
+        {
+            var loginMember = (tMember)Session["member"];
+            if (target_member == loginMember.f會員編號) //不可以黑自己
+            {
                 return "";
             }
-                var ActList = db.tActivity.Where(t => t.f活動編號 == act_id).FirstOrDefault();
+            var ActList = db.tActivity.Where(t => t.f活動編號 == act_id).FirstOrDefault();
             var kick_member = db.tMember.Where(t => t.f會員編號 == target_member).FirstOrDefault();
 
 
@@ -318,7 +350,12 @@ namespace IIIProject_travel.Controllers
         {
             var LoginMember = (tMember)Session["member"];
             var ActList = db.tActivity.Where(t => t.f活動編號 == target).FirstOrDefault();
-
+            string[] black_list = { };
+            if (ActList.tMember.f會員黑名單!=null)
+            {
+                black_list = ActList.tMember.f會員黑名單.Split(',');
+            }
+            
             var NowMember = db.tMember.Where(t => t.f會員編號 == LoginMember.f會員編號)
                          .FirstOrDefault();//因Session存取的資料沒有和資料庫內部做綁定
                                                           //所以不能存取，要用Session登入會員的會員編號
@@ -344,6 +381,13 @@ namespace IIIProject_travel.Controllers
 
             if (isAdd == true)//點選入團
             {
+                if (black_list.Length > 1)
+                {
+                    if (Array.IndexOf(black_list,LoginMember.f會員編號.ToString())>-1)
+                    {
+                        return "7";
+                    }
+                }
 
                 if (index == -1)//登入中的會員不存在名單
                 {
@@ -562,6 +606,7 @@ namespace IIIProject_travel.Controllers
             }
             return CountViewList;
         }
+
 
         public ActionResult MsgAdd(int target, string sentMsg)
         {

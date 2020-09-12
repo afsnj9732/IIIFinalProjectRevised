@@ -363,7 +363,52 @@
         }
     });
 
+    //黑名單人
+    function addBlackList() {
+        let target = $(this).attr("member_id");
+        let id = $(this).attr("act_id");
+        let act_target = $(this).attr("act_target");
+        $.ajax({
+            url: "/Travel/addBlackList",
+            type: "POST",
+            data: { "target_member": target, "act_id": id, "act_target": act_target},
+            success: function (data) {
+                if (data === "0") {
+                    window.confirm("不可以自己黑單自己")
+                    return;
+                } else if (data === "1") {
+                    window.confirm("對象已經在黑名單內")
+                    return;
+                }
 
+                if (act_target === "msg") {
+                    $("[MsgAdd=" + id + "]").html(data);
+                    window.confirm("黑單成功!")
+                } else {
+                    $("[ActAdd=" + id + "]").html(data);
+                    window.confirm("黑單成功!")
+                }                                             
+            }
+        });
+    }
+    $("body").on('click', ".jouta_black_list", addBlackList);
+
+    //留言
+    function leaveMsg() {
+        let target = $(this).attr("leaveMsg");
+        let sentMsg = $("[sentMsg=" + target + "]").val();
+        $.ajax({
+            url: "/Travel/MsgAdd",
+            type: "POST",
+            data: { "target": target, "sentMsg": sentMsg },
+            success: function (data) {
+                $("[MsgAdd=" + target + "]").html(data);
+                $("[sentMsg=" + target + "]").val("");
+            }
+        });
+
+    }
+    $("body").on('click', ".leaveMsg", leaveMsg);
 
     //踢人
     function kickAct() {
@@ -395,6 +440,9 @@
             success: function (data) {
                 if (data === "1") {
                     window.confirm("已是團主不用入團");            
+                }
+                else if (data === "7") {
+                    window.confirm("慘遭團主黑單，不予入團!");
                 }
                 else if (data === "0") {
                     window.confirm("你已經入團了哦!");
@@ -432,22 +480,7 @@
     }
     $("body").on('click', ".leaveAct", leaveAct);    
 
-    //留言
-    function leaveMsg() {
-        let target = $(this).attr("leaveMsg");
-        let sentMsg = $("[sentMsg=" + target + "]").val();
-        $.ajax({
-            url: "/Travel/MsgAdd",
-            type: "POST",
-            data: { "target": target, "sentMsg": sentMsg },
-            success: function (data) {
-                $("[MsgAdd=" + target + "]").html(data);
-                $("[sentMsg=" + target + "]").val("");
-            }
-        });
 
-    }
-    $("body").on('click', ".leaveMsg", leaveMsg);
 
     //增加讚
     function getGoodCounts() {
