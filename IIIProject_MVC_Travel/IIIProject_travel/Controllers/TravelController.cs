@@ -45,8 +45,15 @@ namespace IIIProject_travel.Controllers
                     var obj = serializer.Serialize(NowMemberTotalEvents);
                     return obj;  //序列化後已是Json字串，傳到前端用JSON.parse即可轉成js物件
                 }
+                else
+                {
+                    return "";
+                }
             }
-            return "";
+            else
+            {
+                return "1";
+            }           
         }
 
         public ActionResult get_ajax_readmore(int act_id)
@@ -170,16 +177,7 @@ namespace IIIProject_travel.Controllers
             targetAct.f活動開始時間 = p.f活動開始時間;
             targetAct.f活動預算 = p.f活動預算;
 
-            //p.f會員編號 = Member.f會員編號;
-            //p.f活動類型 = "旅遊";
-            //p.f活動參加的會員編號 = "," + Member.f會員編號;
-            //db.tActivity.Add(p);
-            //db.SaveChanges();            
-            //int ID = db.tActivity.Where(t => t.f會員編號 == Member.f會員編號)
-            //    .OrderByDescending(t => t.f活動發起日期).Select(t => t.f活動編號).FirstOrDefault();
-            //NowMember.f會員發起的活動編號 += "," + ID;
-            //NowMember.f會員參加的活動編號 += "," + ID;
-            HttpPostedFileBase PicFile = Request.Files["PicFile2"]; //不確定會不會有問題((未驗證
+            HttpPostedFileBase PicFile = Request.Files["PicFile2"]; 
             if (PicFile != null)
             {
                 var NewFileName = Guid.NewGuid() + Path.GetExtension(PicFile.FileName);
@@ -413,13 +411,18 @@ namespace IIIProject_travel.Controllers
 
                         }
                     }
-                    //添加占用時間
-                    NowMember.f會員已占用時間 += "," + ActList.f活動開始時間 + "~" + ActList.f活動結束時間;
-
-
-                     
-                    NowMember.f會員參加的活動編號 += "," + ActList.f活動編號;
-                    ActList.f活動參加的會員編號 += "," + LoginMember.f會員編號;
+                    //判別目前登入對象是否已在審核
+                    string[] isAgreeList;
+                    if (!string.IsNullOrEmpty(ActList.f活動審核名單))
+                    {
+                        isAgreeList = ActList.f活動審核名單.Split(',');
+                        if (Array.IndexOf(isAgreeList, LoginMember.f會員編號.ToString()) > -1)
+                        {
+                            return "8";
+                        }
+                    }                    
+                    //進入審核
+                    ActList.f活動審核名單 += "," + NowMember.f會員編號;
                     db.SaveChanges();
                 }
                 else //若會員已存在
@@ -429,7 +432,22 @@ namespace IIIProject_travel.Controllers
             }
             else //點選退出
             {
-                if (index != -1)//登入中的會員存在則讓他退出並更動占用時間
+                //若只是審核中的團員
+                //判別目前登入對象是否已在審核
+                string[] isAgreeList;
+                if (!string.IsNullOrEmpty(ActList.f活動審核名單))
+                {
+                    isAgreeList = ActList.f活動審核名單.Split(',');
+                    if (Array.IndexOf(isAgreeList, LoginMember.f會員編號.ToString()) > -1)
+                    {
+                        ActList.f活動審核名單 = string.Join(",",
+                             ActList.f活動審核名單.Split(',').Where(t => t != NowMember.f會員編號.ToString()));
+                        db.SaveChanges();
+                        return View(target);
+                    }
+                }
+
+                if (index != -1)//登入中的會員存在參加名單則讓他退出並更動占用時間
                 {
                     //移除占用時間
                     string[] usedTime = NowMember.f會員已占用時間.Split(',');
@@ -455,6 +473,46 @@ namespace IIIProject_travel.Controllers
             return View(target);
         }
 
+        public dynamic agree_add(int target_member , int act_id , string act)
+        {
+            var ActList = db.tActivity.Where(t => t.f活動編號 == act_id).FirstOrDefault();
+            var targetMember = db.tMember.Where(t => t.f會員編號 == target_member).FirstOrDefault();
+            if (act == "agree") //點允許入團
+            {
+                //判斷欲允許的審核對象在審核期間是否成功加入了其他活動
+                if (!string.IsNullOrEmpty(targetMember.f會員已占用時間))
+                {
+                    string[] usedTime = targetMember.f會員已占用時間.Split(',');
+                    string[] used;
+                    foreach (var item in usedTime)
+                    {
+                        if (!string.IsNullOrEmpty(item))
+                        {
+                            used = item.Split('~');  //used[0] 已佔用的開始時間，used[1] 已佔用的結束時間
+                            if (string.Compare(ActList.f活動開始時間, used[1]) > 0 || string.Compare(used[0], ActList.f活動結束時間) > 0)
+                            {
+
+                            }
+                            else
+                            {
+                                return "6";
+                            }
+                        }
+
+                    }
+                }
+                //加入會員占用時間
+                targetMember.f會員已占用時間 += "," + ActList.f活動開始時間 + "~" + ActList.f活動結束時間;
+
+                targetMember.f會員參加的活動編號 += "," + ActList.f活動編號;
+                ActList.f活動參加的會員編號 += "," + targetMember.f會員編號;
+                
+            }
+            ActList.f活動審核名單 = string.Join(",",
+                ActList.f活動審核名單.Split(',').Where(t => t != targetMember.f會員編號.ToString()));
+            db.SaveChanges();
+            return View("Actadd",act_id);
+        }
 
 
 
@@ -465,14 +523,16 @@ namespace IIIProject_travel.Controllers
                               .Select(a => a);
             string[] isExist = theActivity.Select(a => a.f活動參加的會員編號)
                                .FirstOrDefault().Split(',');
-            var Member = db.tMember.Where(t => t.f會員編號 == NowMember.f會員編號).FirstOrDefault()
-                .f會員發起的活動編號.Split(',');
-            int pos = Array.IndexOf(Member, target.ToString());
-            if (pos != -1)//團主不可自行評分
-            {
-                return "5";
+            int pos;
+            var nowRealMember = db.tMember.Where(t => t.f會員編號 == NowMember.f會員編號).FirstOrDefault();
+            if (!string.IsNullOrEmpty(nowRealMember.f會員發起的活動編號))
+            { 
+                pos = Array.IndexOf(nowRealMember.f會員發起的活動編號.Split(','), target.ToString());
+                if (pos != -1)//團主不可自行評分
+                {
+                    return "5";
+                }
             }
-
             var result = string.Compare(DateTime.Now.ToString("yyyy,MM,dd"), theActivity.FirstOrDefault().f活動結束時間);           
             if (result < 0)  //result=1 活動已結束 ， result=-1 活動尚未結束
             {

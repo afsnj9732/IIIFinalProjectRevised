@@ -41,7 +41,7 @@ namespace IIIProject_travel.Controllers
             else
             {
                 意見 = from m in 意見
-                     where  (string.Compare(m.f意見時間.Substring(0, 10), date起日) >= 0) &&
+                     where (string.Compare(m.f意見時間.Substring(0, 10), date起日) >= 0) &&
                             (string.Compare(m.f意見時間.Substring(0, 10), date迄日) <= 0) &&
                            m.fID.ToString().Contains(txt關鍵字) || m.f名稱.Contains(txt關鍵字) ||
                            m.f性別.Contains(txt關鍵字) || m.f意見.Contains(txt關鍵字) ||
@@ -165,8 +165,9 @@ namespace IIIProject_travel.Controllers
             return View();
         }
         public ActionResult Save()
-        {  dbJoutaEntities db = new dbJoutaEntities();
-            tComment  x = new tComment();
+        {
+            dbJoutaEntities db = new dbJoutaEntities();
+            tComment x = new tComment();
             x.f名稱 = Request.Form["txt名稱"];
             x.f意見 = Request.Form["txt意見"];
             x.f性別 = Request.Form["gender"];

@@ -47,6 +47,7 @@
           <Property Name="fQRcode網址" Type="nvarchar" MaxLength="200" />
           <Property Name="fQRcodeImage" Type="nvarchar" MaxLength="50" />
           <Property Name="f有收藏活動的會員編號" Type="nvarchar(max)" />
+          <Property Name="f活動審核名單" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="tComment">
           <Key>
@@ -60,7 +61,7 @@
           <Property Name="f性別" Type="nvarchar" MaxLength="100" />
           <Property Name="f聯絡人" Type="nvarchar" MaxLength="100" />
           <Property Name="f意見類型" Type="nvarchar" MaxLength="100" />
-          <Property Name="f意見時間" Type="nvarchar" MaxLength="50" />
+          <Property Name="f意見時間" Type="nvarchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="tMember">
           <Key>
@@ -163,6 +164,7 @@
           <Property Name="fQRcode網址" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="fQRcodeImage" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="f有收藏活動的會員編號" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="f活動審核名單" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="tMember">
           <Key>
@@ -231,7 +233,7 @@
           <Property Name="f性別" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="f聯絡人" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="f意見類型" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="f意見時間" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="f意見時間" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -253,6 +255,7 @@
           <EntitySetMapping Name="tActivity">
             <EntityTypeMapping TypeName="joutaModel.tActivity">
               <MappingFragment StoreEntitySet="tActivity">
+                <ScalarProperty Name="f活動審核名單" ColumnName="f活動審核名單" />
                 <ScalarProperty Name="f有收藏活動的會員編號" ColumnName="f有收藏活動的會員編號" />
                 <ScalarProperty Name="fQRcodeImage" ColumnName="fQRcodeImage" />
                 <ScalarProperty Name="fQRcode網址" ColumnName="fQRcode網址" />
