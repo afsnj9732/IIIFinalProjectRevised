@@ -24,16 +24,16 @@
         <!-- navbar -->
         <nav class="navbar navbar-expand-lg navbar-fixed-top">
             <div class="container">
-                <div class="navbar-header" id="main">
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-                            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                </div>
                 <a class="navbar-brand" href="@Url.Action("Home", "Home")">
                     @*改用Url.Action*@
                     <img src="~/Content/images/joutalogo_black.png" alt="" width="100">
                 </a>
+                @*<div class="navbar-header" id="main">*@
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            @*</div>*@
                 <div class="navbar-collapse collapse justify-content-between" id="navbarNav">
                     <ul class="nav navbar-nav">
                         <li class="nav-item active">@Html.ActionLink("首頁", "Home", "Home", new { }, new { @class = "nav-link nav-main text-dark" })</li>
@@ -51,8 +51,8 @@
 
                             <li class="nav-item nav-link nav-login text-dark">@Html.ActionLink("您好，" + x.f會員名稱, "ProfileIndex", "Profile") </li>
                             @*<li class="nav-item">
-                <img src="@ViewData["Img"]" alt="img" width="30" height="30" style="border:2px solid green;" />
-            </li>*@
+                        <img src="@ViewData["Img"]" alt="img" width="30" height="30" style="border:2px solid green;" />
+                    </li>*@
                             <li class="nav-item">@Html.ActionLink("登出", "Home", "Home", new { id = 0 }, new { @class = "nav-link nav-login text-dark" })</li>
                         }
                         else
@@ -110,26 +110,26 @@
                         <div class="form-group col-lg-3 col-md-3 col-sm-12 inner">
                             <label for="location_eat">分類:</label>
                             <select class="form-control" id="location_eat">
-                                <option value="素食">素食</option>
-                                <option value="葷食">葷食</option>
+                                <option value="素食">&nbsp;素食</option>
+                                <option value="葷食">&nbsp;葷食</option>
                             </select>
                         </div>
                         <div class="form-group col-lg-2 col-md-2 col-sm-12 inner">
                             <label for="label">總讚數:</label>
                             <select class="form-control" id="label" style="border: none;">
                                 <option value="全部" selected>&nbsp;全部</option>
-                                <option value="10">讚>10</option>
-                                <option value="30">讚>30</option>
-                                <option value="50">讚>50</option>
-                                <option value="100">讚>100</option>
+                                <option value="10">&nbsp;讚>10</option>
+                                <option value="30">&nbsp;讚>30</option>
+                                <option value="50">&nbsp;讚>50</option>
+                                <option value="100">&nbsp;讚>100</option>
                             </select>
                         </div>
                         <div class="form-group col-lg-3 col-md-3 col-sm-12 inner">
                             <label for="keyword">關鍵字:</label>
                             <input type="text" name="txtKeyword" class="form-control" id="keyword">
                         </div>
-                        <div class="form-group col-lg-3 col-md-3 col-sm-12 inner">
-                            <button type="submit" class="btn btn-warning">搜尋</button>
+                        <div class="form-group col-lg-3 col-md-3 col-sm-12 inner mb-0">
+                            <button type="submit" class="btn btn-warning">Go!</button>
                         </div>
 
                     </form>
@@ -141,14 +141,14 @@
                             <label for="location_travel">分類:</label>
                             <select class="form-control" name="txtTravelCategory" id="location_travel">
                                 <option style="width:auto;margin:0 auto;" value="所有" selected>
-                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;所有
+                                    &nbsp;所有
                                 </option>
-                                <option value="兩天一夜">兩天一夜</option>
-                                <option value="三天兩夜">三天兩夜</option>
-                                <option value="五天四夜">五天四夜</option>
-                                <option value="七天六夜">七天六夜</option>
+                                <option value="兩天一夜">&nbsp;兩天一夜</option>
+                                <option value="三天兩夜">&nbsp;三天兩夜</option>
+                                <option value="五天四夜">&nbsp;五天四夜</option>
+                                <option value="七天六夜">&nbsp;七天六夜</option>
                                 <option style="text-align:center;" value="其他">
-                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;其他
+                                    &nbsp;其他
                                 </option>
                             </select>
                         </div>
@@ -156,10 +156,10 @@
                             <label for="label">總讚數:</label>
                             <select class="form-control" name="txtTotalGood" id="label" style="border: none;">
                                 <option value="全部" selected>&nbsp;全部</option>
-                                <option value="10">讚>10</option>
-                                <option value="30">讚>30</option>
-                                <option value="50">讚>50</option>
-                                <option value="100">讚>100</option>
+                                <option value="10">&nbsp;讚>10</option>
+                                <option value="30">&nbsp;讚>30</option>
+                                <option value="50">&nbsp;讚>50</option>
+                                <option value="100">&nbsp;讚>100</option>
                             </select>
                         </div>
                         <div class="form-group col-lg-3 col-md-3 col-sm-12 inner">
@@ -167,7 +167,7 @@
                             <input type="text" name="txtTravelKeyword" class="form-control" id="keyword_travel">
                         </div>
                         <div class="form-group col-lg-3 col-md-3 col-sm-12 inner">
-                            <button type="submit" class="btn btn-warning">搜尋</button>
+                            <button type="submit" class="btn btn-warning">Go!</button>
                         </div>
                     </form>
                 </div>
@@ -179,7 +179,7 @@
                             <input type="text" name="txtKeyword" class="form-control" id="keyword_article">
                         </div>
                         <div class="form-group col-lg-3 col-md-3 col-sm-12 inner">
-                            <button type="submit" class="btn btn-warning">搜尋</button>
+                            <button type="submit" class="btn btn-warning">Go!</button>
                         </div>
                     </form>
                 </div>
@@ -206,7 +206,7 @@
                                 {
                                     <div class="col-lg-4 col-sm-12 block">
                                         <div class="person">
-                                            <div class="card" style="width: 18rem;">
+                                            <div class="card" @*style="width: 18rem;"*@>
                                                 <img src="~/Content/images/@t.f會員大頭貼" class="card-img-top" alt="" width="350" height="250">
                                                 <div class="card-body">
                                                     <h5 class="card-title">@t.f會員名稱</h5>
@@ -317,7 +317,7 @@
 
     <!-- 跟我趴趴走 -->
     <section class="gowhere">
-        <div class="container">
+        <div class="container mt-3">
             <div class="row">
                 <div class="member_content">
                     <div class="member_icon">
@@ -332,9 +332,9 @@
                     <div class="col-lg-4">
                         <figure class="traveller">
                             <div class="image">
-                                <img src="~/Content/images/@a.f活動團圖" alt="@a.tMember.f會員名稱" width="350" height="300" />
+                                <img src="~/Content/images/@a.f活動團圖" alt="@a.tMember.f會員名稱" width="350" height="300" style="border-radius:5px 5px 0 0;" />
                             </div>
-                            <figcaption>
+                            <figcaption style="border-radius:0 0 5px 5px;">
                                 <h3>@a.f活動標題</h3>
                                 <p class="card-text" style="text-align: left;">
                                     @a.f活動內容
@@ -419,14 +419,14 @@
             </div>
             <div class="footer-bottom">
                 <div class="container">
-                    <div class="row">
-                        <div class="col-md-7">
+                    <div class="row justify-content-between">
+                        <div class="col">
                             <div class="footer-site-info">
-                                &copy; @DateTime.Now.Year Jouta All rights reserved
+                                &copy; @DateTime.Now.Year Jouta
                             </div>
                         </div>
 
-                        <div class="col-md-5">
+                        <div class="col">
                             <div id="footer-socials">
                                 <div>
                                     <a href="#" target="_blank" title="Facebook" class="socials-item">
