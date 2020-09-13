@@ -1,12 +1,42 @@
 (function () {  
     var order, background_color, contain, category, label, page, condition, readmore_target;
     var calendarEl = document.getElementById('calendar');
-
+    //動態生成行事曆
+    function getCalendar() {
+        $.ajax({
+            url: "/Travel/getCalendar",
+            type: "POST",
+            success: function (data) {
+                if (data === "") {
+                    //行事曆                   
+                    let calendar = new FullCalendar.Calendar(calendarEl, {
+                        initialView: 'dayGridMonth',
+                        locale: 'zh-tw',
+                        height: 750,
+                    });
+                    calendar.render();
+                } else if (data !== "1") {
+                    let calendar = new FullCalendar.Calendar(calendarEl, {
+                        initialView: 'dayGridMonth',
+                        locale: 'zh-tw',
+                        height: 750,
+                        events: JSON.parse(data),
+                        eventClick: function () {
+                        }
+                    });
+                    calendar.render();
+                }
+            }
+        });
+    }
+    getCalendar();
     //排序固定   
     let header = document.querySelector(".header");
     let travel_sort = document.querySelector("#travel_sort");
     function travel_sort_scrollHandler() {
         travel_sort.classList.add("fix");
+        calendarEl.classList.remove("calendar_relative");
+        calendarEl.classList.add("calendar_fix");
         travel_sort.style.top = header.offsetHeight + "px";
         document.querySelector("#replace").classList.add("col-3");
         travel_sort.classList.remove("col-3");
@@ -35,6 +65,8 @@
             travel_sort_scrollHandler();
         } else {
             travel_sort.classList.remove("fix");
+            calendarEl.classList.remove("calendar_fix");
+            calendarEl.classList.add("calendar_relative");            
             travel_sort.style.top = 0 + "px";
             document.querySelector("#replace").classList.remove("col-3");
             travel_sort.classList.add("col-3");
@@ -97,34 +129,6 @@
 
 
 
-    //動態生成行事曆
-    function getCalendar() { //效能待優化
-        $.ajax({
-            url: "/Travel/getCalendar",
-            type: "POST",
-            success: function (data) {
-                if (data === "") {
-                    //行事曆                   
-                    let calendar = new FullCalendar.Calendar(calendarEl, {
-                        initialView: 'dayGridMonth',
-                        locale: 'zh-tw',
-                        height: 750
-                    });
-                    calendar.render();
-                } else if (data !== "1") {
-                    let calendar = new FullCalendar.Calendar(calendarEl, {
-                        initialView: 'dayGridMonth',
-                        locale: 'zh-tw',
-                        height: 750,
-                        events: JSON.parse(data),
-                        eventClick: function () {
-                        }
-                    });
-                    calendar.render();
-                }
-            }
-        });
-    }
 
 
 
@@ -133,6 +137,8 @@
         $('.modal:visible').length && $(document.body).addClass('modal-open'); //疊加互動視窗 Scroll Debug
         $(".combine_readmore").addClass("show"); //顯示隱藏的第一個視窗
     });
+
+
 
     $(document).on('click', '[data-toggle = modal]', function () {
         if ($('.modal-backdrop').eq(0).css('background-color') !== null) {
@@ -162,7 +168,12 @@
             theDay = "0" + theDay;
         }
     }
-
+    //刪除
+    $("body").on("click", ".delete_act", function (e) {       
+        if (!window.confirm("確定要刪除?")) {
+            e.preventDefault();
+        }
+    })
     //揪團時間限制   
     $("body").on("change", ".ActivityStart", function () {
         $(".ActivityStartTo").attr("hidden", "");
@@ -238,8 +249,8 @@
             $(".ActivityEnd").val("");
             $(".ActivityFindEnd").val("");
         }
-        $(".ActivityEnd").attr("disabled","");
-        $(".ActivityFindEnd").attr("disabled","");
+        $(".ActivityEnd").eq(0).attr("disabled","");
+        $(".ActivityFindEnd").eq(0).attr("disabled","");
         $(".NeedACTo").attr("hidden", "");
         $(".NeedAPTo").attr("hidden", "");
         $(".NeedALTo").attr("hidden", "");
@@ -280,9 +291,16 @@
             e.preventDefault();
             $(".NeedALTo").eq(target).removeAttr("hidden");
         }
+        $(".modal-body").scrollTop(0);//回彈最上方
     });
 
-      //---------------------------------------------上方問題區塊
+    //modal進入自動回彈
+    $('body').on('shown',".modal", function () {
+        $(".modal-body").scrollTop(0);
+    });
+
+
+    
 
     //星星評分頭    
     $("body").on('mouseover', '.Score img', function () {
@@ -678,7 +696,7 @@
     //進入旅遊業面預設最新被選為排序
     $("#travel_sort .sort li").eq(0).click(); 
 
-    getCalendar();
+    
 
     
 })(); 

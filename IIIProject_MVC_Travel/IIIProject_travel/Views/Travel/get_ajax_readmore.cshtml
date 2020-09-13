@@ -87,8 +87,8 @@
                         <span>標題：<input type="text" name="f活動標題" style="width:90%" class="NeedAT" value="@Model.f活動標題"><p class="NeedATTo" style="color:red" hidden>活動標題請至少填滿8個字</p></span>
                         <div class="row m-0 mb-3 justify-content-around">
                             <span>旅遊開始日期： <input type="date" min="@DateTime.Now.AddDays(1.0).ToString("yyyy-MM-dd")" max="" class="ActivityStart" name="f活動開始時間" value="@Model.f活動開始時間"><p class="ActivityStartTo" style="color:red" hidden>活動開始時間必填</p></span>
-                            <span>旅遊結束日期： <input type="date" min="@DateTime.Now.AddDays(2.0).ToString("yyyy-MM-dd")" max="" class="ActivityEnd" disabled name="f活動結束時間" value="@Model.f活動結束時間"><p class="ActivityEndTo" style="color:red" hidden>活動結束時間必填</p></span>
-                            <span>入團截止： <input type="date" min="@DateTime.Now.ToString("yyyy-MM-dd")" max="" class="ActivityFindEnd" disabled name="f活動招募截止時間" value="@Model.f活動招募截止時間"><p class="ActivityFindEndTo" style="color:red" hidden>招募截止時間必填</p></span>
+                            <span>旅遊結束日期： <input type="date" min="@DateTime.Now.AddDays(2.0).ToString("yyyy-MM-dd")" max="" class="ActivityEnd"   name="f活動結束時間" value="@Model.f活動結束時間"><p class="ActivityEndTo" style="color:red" hidden>活動結束時間必填</p></span>
+                            <span>入團截止： <input type="date" min="@DateTime.Now.ToString("yyyy-MM-dd")" max="" class="ActivityFindEnd"   name="f活動招募截止時間" value="@Model.f活動招募截止時間"><p class="ActivityFindEndTo" style="color:red" hidden>招募截止時間必填</p></span>
                         </div>
                         <div class="row mb-4 mx-auto align-items-center justify-content-around">
                             <span><img src="~/Content/images/04.png" class="mb-1" alt="">預算：<input type="text" name="f活動預算" class="NeedAC" value="@Model.f活動預算"><span class="NeedACTo" style="color:red" hidden>活動預算必填</span></span>
@@ -154,15 +154,15 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
-                <div AddScore="@Model.f活動編號" class="Score">
+            <div class="modal-body row align-items-center ">
+                <div AddScore="@Model.f活動編號" class="Score   mx-auto">
                     @for (int i = 1; i <= 5; i++)
                     {
                         <img ScoreID="@i" isclick="false" ScoreTarget="@Model.f活動編號" src="~/Content/images/Star.png" />
                     }
                 </div>
             </div>
-            <div class="modal-footer justify-content-between">
+            <div class="modal-footer justify-content-end">
                 <span>
                     <button type="button" class="btn btn-warning leaveScore" leaveScore="@Model.f活動編號">送出</button>
                     <button type="button" class="btn btn-secondary resetScore" resetScore="@Model.f活動編號">重設</button>
@@ -186,49 +186,58 @@
             </div>
             <div class="modal-body">
                 <div MsgAdd="@Model.f活動編號">
-                    @foreach (var Msg in targetMsgs)
+                    @if (string.IsNullOrEmpty(Model.f活動留言))
                     {
-                        if (string.IsNullOrEmpty(Msg.time))
+                        <h2 class="mx-auto ml-2">暫無留言</h2>
+                    }
+                    else
+                    {
+                        foreach (var Msg in targetMsgs)
                         {
-                            continue;
-                        }
-                        else
-                        {
-                            msgsTimeAndID = Msg.time.Split(new string[] { "_^$" }, StringSplitOptions.None);
-                            if (msgsTimeAndID.Length > 1)
+                            if (string.IsNullOrEmpty(Msg.time))
                             {
-                                target = msgsTimeAndID[1];
+                                continue;
                             }
-                            if (black_list.Length > 1) {
-                                if (Array.IndexOf(black_list, target) > -1)
+                            else
+                            {
+                                msgsTimeAndID = Msg.time.Split(new string[] { "_^$" }, StringSplitOptions.None);
+                                if (msgsTimeAndID.Length > 1)
                                 {
-                                    continue;
+                                    target = msgsTimeAndID[1];
                                 }
-                            }
-                            img = db.tMember.Where(t => t.f會員編號.ToString() == target)
-                                          .Select(t => t.f會員大頭貼).FirstOrDefault();
+                                if (black_list.Length > 1)
+                                {
+                                    if (Array.IndexOf(black_list, target) > -1)
+                                    {
+                                        continue;
+                                    }
+                                }
+                                img = db.tMember.Where(t => t.f會員編號.ToString() == target)
+                                              .Select(t => t.f會員大頭貼).FirstOrDefault();
 
-                        <div class="row justify-content-between   pr-5 mr-5 ml-5">
-                            <div>
-                                <button class="button btn-secondary jouta_black_list" member_id="@target" act_target="msg"  act_id="@Model.f活動編號">加入黑名單</button>                                
-                                    <a href="@Url.Action("otherprofile","Profile",new { id= target })">
-                                        <img src="~/Content/images/@img" width="30" height="30">
-                                    </a>                                
-                                <span>@Msg.msg</span>
-                            </div>
-                            <div>@msgsTimeAndID[0]</div>
-                        </div>
-                        <br />
+                                <div class="row justify-content-between   mr-1 ml-4">
+                                    <div class="row the_msg_block">
+                                        <button class="button btn-secondary jouta_black_list" member_id="@target" act_target="msg" act_id="@Model.f活動編號">加入黑名單</button>
+                                        <a href="@Url.Action("otherprofile","Profile",new { id= target })">
+                                            <img src="~/Content/images/@img" width="34" height="34">
+                                        </a>
+                                        <div class="m-0 the_msgs">@Msg.msg</div>
+                                    </div>
+                                    <div class="pr-5 mr-2">@msgsTimeAndID[0]</div>
+                                </div>
+                                <br />
+                            }
                         }
                     }
+
                 </div>
             </div>
-            <div class="modal-footer justify-content-between">
-                <input type="text" class="ml-4" sentMsg="@Model.f活動編號" style="width:80%" />
-                <span>
+            <div class="modal-footer justify-content-between ml-2">
+                <input type="text" class="ml-2  " sentMsg="@Model.f活動編號" style="width:70%" />
+                <div class="mr-3">
                     <button type="button" class="btn btn-warning leaveMsg" leaveMsg="@Model.f活動編號">送出</button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
-                </span>
+                    <button type="button" class="mr-5 btn btn-secondary" data-dismiss="modal">關閉</button>
+                </div>
             </div>
         </div>
     </div>
@@ -281,8 +290,8 @@
                             <button class="button btn-secondary jouta_black_list pr-1 pl-1" member_id="@theGuy.f會員編號" act_target="join" act_id="@Model.f活動編號">加入黑名單</button>
                             @if (Session["member"] != null && Model.f會員編號 == NowMember.f會員編號)
                             {
-                                <button class="button btn-danger jouta_agree pr-1 pl-1" member_id="@theGuy.f會員編號" act_target="agree" act_id="@Model.f活動編號">入團</button>
-                                <button class="button btn-danger jouta_agree pr-1 pl-1" member_id="@theGuy.f會員編號" act_target="refuse" act_id="@Model.f活動編號">拒絕入團</button>
+                                <button class="button btn-info jouta_agree pr-1 pl-1" member_id="@theGuy.f會員編號" act_target="agree" act_id="@Model.f活動編號">入團</button>
+                                <button class="button btn-danger jouta_agree pr-1 pl-1" style="width:168px;" member_id="@theGuy.f會員編號" act_target="refuse" act_id="@Model.f活動編號">拒絕入團</button>
                             }
 
 
@@ -384,14 +393,14 @@
                     </div>
                     @*<hr />*@
                     <div class="row">
-                        <img src="~/Content/images/@Model.f活動團圖" alt="" class="mx-auto" style="width: 60%;margin: auto;">
+                        <img src="~/Content/images/@Model.f活動團圖" alt="" class="mx-auto" style="width: 60%;margin: auto;height:500px">
                     </div>
                     <br />
                     <hr />
                     <br />
 
                     <div class="row align-items-center">
-                        <div id="UserBlock">
+                        <div id="UserBlock" class="mx-auto">
                             <p><img src="~/Content/images/16.png" class="pb-1" alt="">@Model.tMember.f會員稱號</p>
                             <a href="@Url.Action("otherprofile","Profile",new { id= Model.f會員編號 })">
                                 <img src="~/Content/images/@Model.tMember.f會員大頭貼" alt="" class="col-auto" style="width: 300px;">
@@ -400,8 +409,8 @@
                             <p>團主評分:@Model.tMember.f會員評分 </p>
                         </div>
                         <div class="change-max-width-1000 ml-4">
-                            <div class="row align-items-center m-0 ml-2 textBox">
-                                @Html.Raw(Model.f活動內容)
+                            <div class="row align-items-center m-0 ml-2 mr-2 textBox  " >
+                                @Html.Raw(Model.f活動內容) 
                             </div>
                         </div>
                     </div>
@@ -411,17 +420,17 @@
                     {
                         <div class="container">
                             <div class="row   justify-content-around">
-                                <button class="btn btn-block mr-1  p-1 FeelGood" style="background-color:#FFE0B2;" target="@Model.f活動編號">
+                                <button class="btn btn-block mr-1  p-1 pr-2 pl-2 FeelGood" style="background-color:#FFE0B2;" target="@Model.f活動編號">
                                     <img src="~/Content/images/05.png" class="pb-1 ">覺得讚
                                 </button>
-                                <button class="btn btn-block mr-1  p-1" data-toggle="modal" data-target="#ajax_join" style="background-color:#FFE0B2 ;">
+                                <button class="btn btn-block mr-1  p-1 pr-2 pl-2" data-toggle="modal" data-target="#ajax_join" style="background-color:#FFE0B2 ;">
                                     <img src="~/Content/images/10.png" class="pb-1" alt="">想加入
                                 </button>
-                                <button class="btn btn-block mr-1  p-1" data-toggle="modal" data-target="#ajax_score" style="background-color:#FFE0B2 ;">
+                                <button class="btn btn-block mr-1  p-1 pr-2 pl-2" data-toggle="modal" data-target="#ajax_score" style="background-color:#FFE0B2 ;">
                                     <img src="~/Content/images/10.png" class="pb-1" alt="">給分數
                                 </button>
                                 <div style="cursor: pointer;">
-                                    <button class="btn btn-block mr-1  p-1" data-toggle="modal" data-target="#ajax_msg" style="background-color:#FFE0B2 ;">
+                                    <button class="btn btn-block mr-1  p-1 pr-2 pl-2" data-toggle="modal" data-target="#ajax_msg" style="background-color:#FFE0B2 ;">
                                         <img src="~/Content/images/12.png" alt="">留言區
                                     </button>
                                 </div>
@@ -436,18 +445,20 @@
                         if (string.Compare(Model.f活動招募截止時間, DateTime.Now.ToString("yyyy-MM-dd")) > 0)
                         {
                             //招募未結束才可編輯
-                            <button class="btn btn-block mr-1  p-1 JoutaEdit" limitNumber="1" data-toggle="modal" data-target="#ajax_edit" style="background-color:#FFE0B2 ;">
+                            <button class="btn btn-info  JoutaEdit" limitNumber="1" data-toggle="modal" data-target="#ajax_edit"  >
                                 編輯
                             </button>
                         }
+                        else
+                        {
+                            <p>招募結束不可編輯</p>
+                        }
 
-                        @Html.ActionLink("刪除", "Delete", "Travel", new { id = Model.f活動編號 }, new { @class = "btn btn-secondary" })
+                        @Html.ActionLink("刪除", "Delete", "Travel", new { id = Model.f活動編號 }, new { @class = "btn btn-danger delete_act" })
                     }
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
                 </div>
-
             </div>
-
         </div>
     </div>
 </div>

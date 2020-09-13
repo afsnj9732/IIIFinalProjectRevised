@@ -177,16 +177,7 @@ namespace IIIProject_travel.Controllers
             targetAct.f活動開始時間 = p.f活動開始時間;
             targetAct.f活動預算 = p.f活動預算;
 
-            //p.f會員編號 = Member.f會員編號;
-            //p.f活動類型 = "旅遊";
-            //p.f活動參加的會員編號 = "," + Member.f會員編號;
-            //db.tActivity.Add(p);
-            //db.SaveChanges();            
-            //int ID = db.tActivity.Where(t => t.f會員編號 == Member.f會員編號)
-            //    .OrderByDescending(t => t.f活動發起日期).Select(t => t.f活動編號).FirstOrDefault();
-            //NowMember.f會員發起的活動編號 += "," + ID;
-            //NowMember.f會員參加的活動編號 += "," + ID;
-            HttpPostedFileBase PicFile = Request.Files["PicFile2"]; //不確定會不會有問題((未驗證
+            HttpPostedFileBase PicFile = Request.Files["PicFile2"]; 
             if (PicFile != null)
             {
                 var NewFileName = Guid.NewGuid() + Path.GetExtension(PicFile.FileName);

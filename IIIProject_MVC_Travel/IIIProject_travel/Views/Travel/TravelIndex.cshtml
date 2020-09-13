@@ -79,14 +79,14 @@
             <div class="row justify-content-between">
                 <!-- 各項排序 -->
                 <div id="replace"></div>
-                <div class="col-xl-3 col-lg-4 col-9 pt-5 pl-5 mx-auto" id="travel_sort">
+                <div class="col-xl-3 col-lg-3 col-9 pt-5 pl-5 mx-auto" id="travel_sort">
                     <!--左邊欄位-->
                     <div class=" pl-2 " style="cursor: pointer;">
                         <!-- 查詢 搜尋-->
                         @*<form method="post">*@
                         @*action="./article_AJAX"*@
                         @*<input type="hidden" name="order" value="null" />
-                <input type="hidden" name="border_color" value="null" />*@
+                        <input type="hidden" name="border_color" value="null" />*@
                         <input type="text" class="mt-4" style="width:86%;" name="contain" id="contain" value="@HomeSearch[0]">
                         <input type="image" src="~/Content/images/18.png" id="contain_pic" />  @*alt="submit"*@
                         @*</form>*@
@@ -125,11 +125,11 @@
                             </span>
                         </li>
                         @*<li class="m-2 mb-3 row justify-content-between" id="06" style="list-style-type:none;cursor: pointer;">
-                    <span>
-                        <img src="~/Content/images/06.png" order="f活動瀏覽次數"
-                             alt="">瀏覽次數
-                    </span>
-                </li>*@
+                            <span>
+                                <img src="~/Content/images/06.png" order="f活動瀏覽次數"
+                                     alt="">瀏覽次數
+                            </span>
+                        </li>*@
                         <li class="m-2 mb-3 row justify-content-between" id="07" order="f活動開始時間" style="list-style-type:none;cursor: pointer;">
                             <span>
                                 <img src="~/Content/images/07.png"
@@ -165,7 +165,7 @@
 
                 <!-- 文章區主體 -->
 
-                <div class="col-xl-6 col-lg-7 col-10 mt-1 mx-auto pr-2 pl-2">
+                <div class="col-xl-6 col-lg-6 col-10 mt-1 mx-auto pr-2 pl-2">
                     <div class="button row justify-content-between pt-1 pb-2 align-items-center">
                         <!-- 現在排序頭 -->
                         <div id="row">
@@ -309,12 +309,12 @@
                     <div id="article">
                         <div id="article_ajax"></div>
                         @*<button id="showCharts">顯示統計圖表</button>
-                <img src="~/Views/Travel/Chart"/>
-                <div id="showChartsTag"></div>*@
+                        <img src="~/Views/Travel/Chart"/>
+                        <div id="showChartsTag"></div>*@
                         <div class="mt-3">
                             @*<button class="btn btn-block mr-1  p-1 row mx-auto" style="background-color:#FFE0B2 ;">
-                        <img src="~/Content/images/10.png" alt="" class="pb-1">讀取更多
-                    </button>*@
+                                <img src="~/Content/images/10.png" alt="" class="pb-1">讀取更多
+                            </button>*@
                         </div>
                         <div class="mb-5"></div> <!--底部墊高-->
 
@@ -323,7 +323,8 @@
                 </div>
                 <!-- 文章內容區結束 -->
                 @*行事曆*@
-                <div id="calendar" class="pr-4 pl-4 col-xl-3  affix  col-10 row mx-auto">
+                <div class="col-xl-3 col-lg-3   col-10"></div>
+                <div id="calendar" class="pr-4   row mx-auto">
 
                 </div>
                 @*readmore事件，含行事曆*@
@@ -343,9 +344,9 @@
         </div>
         <!--    script      -->
         <script src="~/Scripts/jquery-3.5.1.js"></script>
+        <script src="~/Scripts/IIIProject/popper.min.js"></script>
         <script src="~/Scripts/bootstrap.min.js"></script>
         <script src="~/Content/jquery-ui-1.12.1/jquery-ui.js"></script>
-        <script src="~/Scripts/IIIProject/popper.min.js"></script>
         <script src="~/Scripts/IIIProject/navbar.js"></script>
         <script src="//cdn.ckeditor.com/4.15.0/full/ckeditor.js"></script>
         <script src="~/Scripts/moment.min.js"></script>
