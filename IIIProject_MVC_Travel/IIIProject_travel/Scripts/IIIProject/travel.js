@@ -138,6 +138,8 @@
         $(".combine_readmore").addClass("show"); //顯示隱藏的第一個視窗
     });
 
+
+
     $(document).on('click', '[data-toggle = modal]', function () {
         if ($('.modal-backdrop').eq(0).css('background-color') !== null) {
             $(".combine_readmore").removeClass("show"); //隱藏第一個視窗
@@ -247,8 +249,8 @@
             $(".ActivityEnd").val("");
             $(".ActivityFindEnd").val("");
         }
-        $(".ActivityEnd").attr("disabled","");
-        $(".ActivityFindEnd").attr("disabled","");
+        $(".ActivityEnd").eq(0).attr("disabled","");
+        $(".ActivityFindEnd").eq(0).attr("disabled","");
         $(".NeedACTo").attr("hidden", "");
         $(".NeedAPTo").attr("hidden", "");
         $(".NeedALTo").attr("hidden", "");
@@ -292,7 +294,13 @@
         $(".modal-body").scrollTop(0);//回彈最上方
     });
 
-      //---------------------------------------------上方問題區塊
+    //modal進入自動回彈
+    $('body').on('shown',".modal", function () {
+        $(".modal-body").scrollTop(0);
+    });
+
+
+    
 
     //星星評分頭    
     $("body").on('mouseover', '.Score img', function () {

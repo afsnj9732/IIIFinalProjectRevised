@@ -121,11 +121,23 @@ p{
     width: 0px;  
     background: transparent;  
 }
+/*modal±M¥Îºu½ü*/
+.modal-body::-webkit-scrollbar {
+    width: 10px;    
+}
+.modal-body::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+.modal-body::-webkit-scrollbar-thumb {
+    background: #888;
+}
+.modal-body::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
 /* Optional: show position indicator in red */
 /*::-webkit-scrollbar-thumb {
     background: #FF0000;
 }*/
-
 .change-max-width-550 {
     max-width: 550px;
 }
