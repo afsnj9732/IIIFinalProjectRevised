@@ -30,9 +30,9 @@ body {
 }
 
 
-.combine_readmore {
+/*.combine_readmore {
     
-}
+}*/
 /*.modal-backdrop {
     background-color: red;
 }*/
@@ -109,9 +109,9 @@ p{
     background: transparent; /* Optional: just make scrollbar invisible */
 }
 /* Optional: show position indicator in red */
-::-webkit-scrollbar-thumb {
-    /*background: #FF0000;*/
-}
+/*::-webkit-scrollbar-thumb {
+    background: #FF0000;
+}*/
 
 .change-max-width-550 {
     max-width: 550px;

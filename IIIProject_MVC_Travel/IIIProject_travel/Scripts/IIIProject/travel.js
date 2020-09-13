@@ -430,7 +430,29 @@
         }    
     $("body").on('click', ".jouta_kick", kickAct);
 
-    //入團
+    //入團審核通過
+    function agreeAct() {
+        let target = $(this).attr("member_id");
+        let id = $(this).attr("act_id");
+        let act = $(this).attr("act_target");
+        $.ajax({
+            url: "/Travel/agree_add",
+            type: "POST",
+            data: { "target_member": target, "act_id": id , "act":act },
+            success: function (data) {
+                if (data === "6") {
+                    window.confirm("活動時間與對象既有活動時間衝突!")
+                } else {
+                    $("[ActAdd=" + id + "]").html(data);
+                }
+ 
+            }
+        });
+    }
+    $("body").on('click', ".jouta_agree", agreeAct);
+
+
+    //想要入團
     function joinAct() {
         let target = $(this).attr("joinAct");
         $.ajax({
@@ -443,15 +465,16 @@
                 }
                 else if (data === "7") {
                     window.confirm("慘遭團主黑單，不予入團!");
+                } else if (data === "8") {
+                    window.confirm("團主審核中，請靜待佳音!");
                 }
                 else if (data === "0") {
                     window.confirm("你已經入團了哦!");
                 }
                 else if (data === "6") {
-                    window.confirm("時間衝突");
+                    window.confirm("與既有活動時間衝突!");
                 } else {
                     $("[ActAdd=" + target + "]").html(data);
-                    getCalendar();
                 }
             }
         });
@@ -544,6 +567,7 @@
                 readmore_target = $('.ViewCounts').eq(0).attr("act_id");
                 if (readmore_target !== undefined) {
                     get_ajax_readmore();
+                    getCalendar();
                 }
             }
         });
@@ -646,8 +670,8 @@
 
     //進入旅遊業面預設最新被選為排序
     $("#travel_sort .sort li").eq(0).click(); 
-    //進入旅遊業面預設呼叫第一次行事曆
-    getCalendar();
+
+   
 
     
 })(); 

@@ -42,6 +42,7 @@ namespace IIIProject_travel
         public string fQRcode網址 { get; set; }
         public string fQRcodeImage { get; set; }
         public string f有收藏活動的會員編號 { get; set; }
+        public string f活動審核名單 { get; set; }
     
         public virtual tMember tMember { get; set; }
     }

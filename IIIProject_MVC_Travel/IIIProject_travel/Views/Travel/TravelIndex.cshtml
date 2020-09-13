@@ -86,7 +86,7 @@
                         @*<form method="post">*@
                         @*action="./article_AJAX"*@
                         @*<input type="hidden" name="order" value="null" />
-                        <input type="hidden" name="border_color" value="null" />*@
+                <input type="hidden" name="border_color" value="null" />*@
                         <input type="text" class="mt-4" style="width:86%;" name="contain" id="contain" value="@HomeSearch[0]">
                         <input type="image" src="~/Content/images/18.png" id="contain_pic" />  @*alt="submit"*@
                         @*</form>*@
@@ -125,11 +125,11 @@
                             </span>
                         </li>
                         @*<li class="m-2 mb-3 row justify-content-between" id="06" style="list-style-type:none;cursor: pointer;">
-                            <span>
-                                <img src="~/Content/images/06.png" order="f活動瀏覽次數"
-                                     alt="">瀏覽次數
-                            </span>
-                        </li>*@
+                    <span>
+                        <img src="~/Content/images/06.png" order="f活動瀏覽次數"
+                             alt="">瀏覽次數
+                    </span>
+                </li>*@
                         <li class="m-2 mb-3 row justify-content-between" id="07" order="f活動開始時間" style="list-style-type:none;cursor: pointer;">
                             <span>
                                 <img src="~/Content/images/07.png"
@@ -208,12 +208,12 @@
                         <!-- 開團按鈕尾 -->
                     </div>
                     <!-- 揪團視窗頭  boostrap為方便滾輪出現會多出padding-right 17px之屬性-->
-                    <div class="modal fade" id="exampleModal"   role="dialog"
+                    <div class="modal fade" id="exampleModal" role="dialog"
                          aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog change-max-width-1400" role="document">
                             <div class="modal-content" style="height:85%">
                                 <div class="modal-header border-main-color">
-                                    <h5 class="modal-title"   id="exampleModalLabel"><span style="font-weight:bolder;"> 開團</span></h5>
+                                    <h5 class="modal-title" id="exampleModalLabel"><span style="font-weight:bolder;"> 開團</span></h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
@@ -309,12 +309,12 @@
                     <div id="article">
                         <div id="article_ajax"></div>
                         @*<button id="showCharts">顯示統計圖表</button>
-                        <img src="~/Views/Travel/Chart"/>
-                        <div id="showChartsTag"></div>*@
+                <img src="~/Views/Travel/Chart"/>
+                <div id="showChartsTag"></div>*@
                         <div class="mt-3">
                             @*<button class="btn btn-block mr-1  p-1 row mx-auto" style="background-color:#FFE0B2 ;">
-                                <img src="~/Content/images/10.png" alt="" class="pb-1">讀取更多
-                            </button>*@
+                        <img src="~/Content/images/10.png" alt="" class="pb-1">讀取更多
+                    </button>*@
                         </div>
                         <div class="mb-5"></div> <!--底部墊高-->
 
@@ -323,7 +323,7 @@
                 </div>
                 <!-- 文章內容區結束 -->
                 @*行事曆*@
-                <div id="calendar" class="pr-4 pl-4 col-xl-3   col-10 row mx-auto">
+                <div id="calendar" class="pr-4 pl-4 col-xl-3  affix  col-10 row mx-auto">
 
                 </div>
                 @*readmore事件，含行事曆*@
@@ -348,20 +348,6 @@
         <script src="~/Scripts/IIIProject/popper.min.js"></script>
         <script src="~/Scripts/IIIProject/navbar.js"></script>
         <script src="//cdn.ckeditor.com/4.15.0/full/ckeditor.js"></script>
-        @*<script>
-            $(document).ready(
-                $.fn.modal.Constructor.prototype._enforceFocus = function () {
-                    var $modalElement = this.$element;
-                    $(document).on('focusin.modal', function (e) {
-                        if ($modalElement[0] !== e.target
-                            && !$modalElement.has(e.target).length
-                            && $(e.target).parentsUntil('*[role="dialog"]').length === 0) {
-                            $modalElement.focus();
-                        }
-                    });
-                }
-            )
-        </script>*@
         <script src="~/Scripts/moment.min.js"></script>
         <script src="~/Content/fullcalendar-5.3.2/lib/main.js"></script>
         <script src="~/Content/fullcalendar-5.3.2/lib/locales-all.js"></script>
