@@ -51,16 +51,16 @@
     
     <div class="cont">
         <div class="form sign-in">
-            <h2>歡迎登入</h2>
+            <h2 id="demo">歡迎登入</h2>
             @using (Html.BeginForm("LoginIndex", "Login", FormMethod.Post, new { enctype = "multipart/form-data" }))
             {
                 
                 <label>
-                    <input type="text" name="txtEmail" placeholder="信箱" />
+                    <input id="txtEmail" type="text" name="txtEmail" placeholder="信箱" />
                     @Html.ValidationMessageFor(model => model.txtEmail, "", new { @class = "text-danger" })
                 </label>
                 <label>
-                    <input type="password" name="txtPassword" placeholder="密碼" />
+                    <input id="txtPassword" type="password" name="txtPassword" placeholder="密碼" />
                     @Html.ValidationMessageFor(model => model.txtPassword, "", new { @class = "text-danger" })
                 </label>
                 <p class="forgot-pass">Forgot password?</p>
@@ -71,8 +71,8 @@
         <div class="sub-cont">
             <div class="img">
                 <div class="img__text m--up">
-                    <h2>新面孔?</h2>
-                    <p>還不快速手刀加一個!</p>
+                    <h2 id="demo2">新面孔?</h2>
+                    <p id="demo3">還不快速手刀加一個!</p>
                 </div>
                 <div class="img__btn">
                     <span class="m--up"><a style="z-index:9;color:#fff;text-decoration:none;" href="~/Home/Register">註冊</a></span>
@@ -95,6 +95,20 @@
     @section Scripts{
         @Scripts.Render("~/bundles/jqueryval")
     }
+<script>
+    $("#demo").click(function () {
+        $("#txtEmail").val("peipei@gmail.com");
+        $("#txtPassword").val("peipei33");
+    });
+    $("#demo2").click(function () {
+        $("#txtEmail").val("admin");
+        $("#txtPassword").val("admin");
+    });
+    $("#demo3").click(function () {
+        $("#txtEmail").val("Test@1234");
+        $("#txtPassword").val("a123456");
+    });
+</script>
 </body>
 
 </html>
