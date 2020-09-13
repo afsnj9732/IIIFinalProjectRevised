@@ -390,9 +390,119 @@
                 </div>
 
                 <div class="profile-history tab_info" id="history">
-                    @*沒想好怎麼做*@
                     <h1>歷史紀錄</h1>
-
+                    @{
+                        var history = db.tMember.Where(a => a.f會員編號 == Model.tMembers.f會員編號).Select(b => new
+                        {
+                            post = b.f會員發起的活動編號,
+                            join = b.f會員參加的活動編號
+                        }).FirstOrDefault();
+                        if (!string.IsNullOrEmpty(history.join) && !string.IsNullOrEmpty(history.post))
+                        {
+                            string[] words1 = history.join.Split(',');
+                            string[] words2 = history.post.Split(',');
+                            string[] unit = words1.Union(words2).ToArray();  //合併陣列，並去除相同項目
+                            foreach (var i in unit)
+                            {
+                                if (string.IsNullOrEmpty(i))
+                                {
+                                    continue;
+                                }
+                                else
+                                {
+                                    var history_item = db.tActivity.Where(c => c.f活動編號.ToString() == i).FirstOrDefault();
+                                    <div class="card mb-3" style="max-width: 800px;">
+                                        <div class="row no-gutters">
+                                            <div class="col-md-4">
+                                                <img src="~/Content/images/@history_item.f活動團圖" class="card-img" alt="@history_item.f活動編號">
+                                            </div>
+                                            <div class="col-md-8">
+                                                <div class="card-body">
+                                                    <h5 class="card-title"> @history_item.f活動標題</h5>
+                                                    <p class="card-text">@history_item.f活動內容</p>
+                                                    <p class="card-text">揪團者: @history_item.tMember.f會員名稱</p>
+                                                    <p class="card-text">
+                                                        <small class="text-muted">@history_item.f活動結束時間</small>
+                                                    </p>
+                                                    <a class="nav-item">@Html.ActionLink("Read More", "TravelIndex", "Travel", new { id = history_item.f活動編號 }, new { @class = "btn btnContent  btn-warning" })</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            }
+                        }
+                        else if (string.IsNullOrEmpty(history.join) && !string.IsNullOrEmpty(history.post))
+                        {
+                            string[] words = history.post.Split(',');
+                            foreach (var i in words)
+                            {
+                                if (string.IsNullOrEmpty(i))
+                                {
+                                    continue;
+                                }
+                                else
+                                {
+                                    var unit_item = db.tActivity.Where(c => c.f活動編號.ToString() == i).FirstOrDefault();
+                                    <div class="card mb-3" style="max-width: 800px;">
+                                        <div class="row no-gutters">
+                                            <div class="col-md-4">
+                                                <img src="~/Content/images/@unit_item.f活動團圖" class="card-img" alt="@unit_item.f活動編號">
+                                            </div>
+                                            <div class="col-md-8">
+                                                <div class="card-body">
+                                                    <h5 class="card-title"> @unit_item.f活動標題</h5>
+                                                    <p class="card-text">@unit_item.f活動內容</p>
+                                                    <p class="card-text">揪團者: @unit_item.tMember.f會員名稱</p>
+                                                    <p class="card-text">
+                                                        <small class="text-muted">@unit_item.f活動結束時間</small>
+                                                    </p>
+                                                    <a class="nav-item">@Html.ActionLink("Read More", "TravelIndex", "Travel", new { id = unit_item.f活動編號 }, new { @class = "btn btnContent  btn-warning" })</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            }
+                        }
+                        else if (!string.IsNullOrEmpty(history.join) && string.IsNullOrEmpty(history.post))
+                        {
+                            string[] words = history.join.Split(',');
+                            foreach (var i in words)
+                            {
+                                if (string.IsNullOrEmpty(i))
+                                {
+                                    continue;
+                                }
+                                else
+                                {
+                                    var unit_item = db.tActivity.Where(c => c.f活動編號.ToString() == i).FirstOrDefault();
+                                    <div class="card mb-3" style="max-width: 800px;">
+                                        <div class="row no-gutters">
+                                            <div class="col-md-4">
+                                                <img src="~/Content/images/@unit_item.f活動團圖" class="card-img" alt="@unit_item.f活動編號">
+                                            </div>
+                                            <div class="col-md-8">
+                                                <div class="card-body">
+                                                    <h5 class="card-title"> @unit_item.f活動標題</h5>
+                                                    <p class="card-text">@unit_item.f活動內容</p>
+                                                    <p class="card-text">揪團者: @unit_item.tMember.f會員名稱</p>
+                                                    <p class="card-text">
+                                                        <small class="text-muted">@unit_item.f活動結束時間</small>
+                                                    </p>
+                                                    <a class="nav-item">@Html.ActionLink("Read More", "TravelIndex", "Travel", new { id = unit_item.f活動編號 }, new { @class = "btn btnContent  btn-warning" })</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            }
+                        }
+                        else
+                        {
+                            <p>目前無歷史紀錄</p>
+                        }
+                    }
 
                 </div>
 

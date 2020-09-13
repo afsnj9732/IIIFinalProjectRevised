@@ -56,21 +56,5 @@ namespace IIIProject_travel.Controllers
             return View(c);
         }
 
-        //[HttpPost]
-        //public ActionResult otherprofile(string tabId)
-        //{
-        //    var post = from t in db.tActivity
-        //               where t.f活動類型 == "文章"
-        //               select new
-        //               {
-        //                   memberImg = t.tMember.f會員大頭貼,
-        //                   memberId = t.tMember.f會員編號,
-        //                   activityTitle = t.f活動標題,
-        //                   activityContent = t.f活動內容,
-        //                   activityId = t.f活動編號,
-        //                   activityTime = t.f活動發起日期
-        //               };
-        //    return Json(post, JsonRequestBehavior.AllowGet);
-        //}
     }
 }

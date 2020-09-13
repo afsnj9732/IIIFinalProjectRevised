@@ -12,14 +12,23 @@ namespace IIIProject_travel.Controllers
     public class EatController : Controller
     {
         // GET: Eat
-        public ActionResult EatIndex()
+        public ActionResult EatIndex(string msg)
         {
-            return View();
+            string Search = ",所有,全部," + msg;
+            return View((object)Search);
         }
 
         [HttpPost]
-        public ActionResult EatIndex(tActivity p)
+        public ActionResult EatIndex(tActivity p,int? id)
         {
+            //首頁搜尋
+            string Search = "";
+            Search += Request.Form["txtKeyword"];
+            Search += Request.Form["txtType"];
+            Search += Request.Form["txtArea"];
+            Search += ",";
+
+
             if (Session["member"] != null && p.f活動標題 != null)
             {
                 HttpPostedFileBase PicFile = Request.Files["PicFile"];
@@ -36,7 +45,7 @@ namespace IIIProject_travel.Controllers
                 db.tActivity.Add(p);
                 db.SaveChanges();
             }
-            return View();
+            return View((object)Search);
         }
 
         public IEnumerable<tActivity> AJAXcondition(string p)

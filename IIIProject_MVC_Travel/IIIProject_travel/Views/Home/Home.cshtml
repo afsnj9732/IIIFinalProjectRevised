@@ -109,19 +109,18 @@
                     <form class="form-inline table d-flex align-items-end" method="POST" action="~/Eat/EatIndex">
                         <div class="form-group col-lg-3 col-md-3 col-sm-12 inner">
                             <label for="location_eat">分類:</label>
-                            <select class="form-control" id="location_eat">
+                            <select class="form-control" name="txtType" id="location_eat">
                                 <option value="素食">素食</option>
                                 <option value="葷食">葷食</option>
                             </select>
                         </div>
                         <div class="form-group col-lg-2 col-md-2 col-sm-12 inner">
-                            <label for="label">總讚數:</label>
-                            <select class="form-control" id="label" style="border: none;">
-                                <option value="全部" selected>&nbsp;全部</option>
-                                <option value="10">讚>10</option>
-                                <option value="30">讚>30</option>
-                                <option value="50">讚>50</option>
-                                <option value="100">讚>100</option>
+                            <label for="label">地區:</label>
+                            <select class="form-control" name="txtArea" id="label" style="border: none;">
+                                <option value="北部">北部</option>
+                                <option value="中部">中部</option>
+                                <option value="南部">南部</option>
+                                <option value="東部">東部</option>
                             </select>
                         </div>
                         <div class="form-group col-lg-3 col-md-3 col-sm-12 inner">
