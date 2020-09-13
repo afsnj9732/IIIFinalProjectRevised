@@ -103,14 +103,21 @@
             url: "/Travel/getCalendar",
             type: "POST",
             success: function (data) {
-                if (data !== "") {
+                if (data === "") {
                     //行事曆                   
                     let calendar = new FullCalendar.Calendar(calendarEl, {
                         initialView: 'dayGridMonth',
                         locale: 'zh-tw',
-                        height:750,
+                        height: 750
+                    });
+                    calendar.render();
+                } else if (data !== "1") {
+                    let calendar = new FullCalendar.Calendar(calendarEl, {
+                        initialView: 'dayGridMonth',
+                        locale: 'zh-tw',
+                        height: 750,
                         events: JSON.parse(data),
-                        eventClick: function () {                           
+                        eventClick: function () {
                         }
                     });
                     calendar.render();
@@ -567,7 +574,7 @@
                 readmore_target = $('.ViewCounts').eq(0).attr("act_id");
                 if (readmore_target !== undefined) {
                     get_ajax_readmore();
-                    getCalendar();
+                    
                 }
             }
         });
@@ -671,7 +678,7 @@
     //進入旅遊業面預設最新被選為排序
     $("#travel_sort .sort li").eq(0).click(); 
 
-   
+    getCalendar();
 
     
 })(); 

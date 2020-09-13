@@ -45,8 +45,15 @@ namespace IIIProject_travel.Controllers
                     var obj = serializer.Serialize(NowMemberTotalEvents);
                     return obj;  //序列化後已是Json字串，傳到前端用JSON.parse即可轉成js物件
                 }
+                else
+                {
+                    return "";
+                }
             }
-            return "";
+            else
+            {
+                return "1";
+            }           
         }
 
         public ActionResult get_ajax_readmore(int act_id)
