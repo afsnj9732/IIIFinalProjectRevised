@@ -49,15 +49,15 @@
     img = db.tMember.Where(t => t.f會員編號.ToString() == target)
           .Select(t => t.f會員大頭貼).FirstOrDefault();
 
-    <div class="row justify-content-between   pr-5 mr-5 ml-5">
-        <div>
+    <div class="row justify-content-between   mr-1 ml-5">
+        <div class="row the_msg_block">
             <button class="button btn-secondary jouta_black_list" member_id="@target" act_target="msg" act_id="@Model">加入黑名單</button>
             <a href="@Url.Action("otherprofile","Profile",new { id= target })">
-                <img src="~/Content/images/@img" width="30" height="30">
+                <img src="~/Content/images/@img" width="34" height="34">
             </a>
-            <span>@Msg.msg</span>
+            <div class="m-0 the_msgs">@Msg.msg</div>
         </div>
-        <div>@MsgsTimeAndID[0]</div>
+        <div class="pr-5 mr-3">@MsgsTimeAndID[0]</div>
     </div>
     <br />
 

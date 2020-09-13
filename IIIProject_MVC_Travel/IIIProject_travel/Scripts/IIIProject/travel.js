@@ -7,6 +7,8 @@
     let travel_sort = document.querySelector("#travel_sort");
     function travel_sort_scrollHandler() {
         travel_sort.classList.add("fix");
+        calendarEl.classList.remove("calendar_relative");
+        calendarEl.classList.add("calendar_fix");
         travel_sort.style.top = header.offsetHeight + "px";
         document.querySelector("#replace").classList.add("col-3");
         travel_sort.classList.remove("col-3");
@@ -35,6 +37,8 @@
             travel_sort_scrollHandler();
         } else {
             travel_sort.classList.remove("fix");
+            calendarEl.classList.remove("calendar_fix");
+            calendarEl.classList.add("calendar_relative");            
             travel_sort.style.top = 0 + "px";
             document.querySelector("#replace").classList.remove("col-3");
             travel_sort.classList.add("col-3");
@@ -108,7 +112,7 @@
                     let calendar = new FullCalendar.Calendar(calendarEl, {
                         initialView: 'dayGridMonth',
                         locale: 'zh-tw',
-                        height: 750
+                        height: 750,
                     });
                     calendar.render();
                 } else if (data !== "1") {
@@ -162,7 +166,12 @@
             theDay = "0" + theDay;
         }
     }
-
+    //刪除
+    $("body").on("click", ".delete_act", function (e) {       
+        if (!window.confirm("確定要刪除?")) {
+            e.preventDefault();
+        }
+    })
     //揪團時間限制   
     $("body").on("change", ".ActivityStart", function () {
         $(".ActivityStartTo").attr("hidden", "");
@@ -280,6 +289,7 @@
             e.preventDefault();
             $(".NeedALTo").eq(target).removeAttr("hidden");
         }
+        $(".modal-body").scrollTop(0);//回彈最上方
     });
 
       //---------------------------------------------上方問題區塊

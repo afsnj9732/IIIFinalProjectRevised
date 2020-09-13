@@ -208,26 +208,26 @@
                             img = db.tMember.Where(t => t.f會員編號.ToString() == target)
                                           .Select(t => t.f會員大頭貼).FirstOrDefault();
 
-                        <div class="row justify-content-between   pr-5 mr-5 ml-5">
-                            <div>
-                                <button class="button btn-secondary jouta_black_list" member_id="@target" act_target="msg"  act_id="@Model.f活動編號">加入黑名單</button>                                
-                                    <a href="@Url.Action("otherprofile","Profile",new { id= target })">
-                                        <img src="~/Content/images/@img" width="30" height="30">
-                                    </a>                                
-                                <span>@Msg.msg</span>
-                            </div>
-                            <div>@msgsTimeAndID[0]</div>
-                        </div>
+                    <div class="row justify-content-between   mr-1 ml-5">
+                        <div class="row the_msg_block">
+                            <button class="button btn-secondary jouta_black_list" member_id="@target" act_target="msg" act_id="@Model.f活動編號">加入黑名單</button>
+                            <a href="@Url.Action("otherprofile","Profile",new { id= target })">
+                                <img src="~/Content/images/@img" width="34" height="34">
+                            </a>
+                            <div class="m-0 the_msgs">@Msg.msg</div>
+                        </div>                        
+                        <div class="pr-5 mr-2">@msgsTimeAndID[0]</div>
+                    </div>
                         <br />
                         }
                     }
                 </div>
             </div>
-            <div class="modal-footer justify-content-between">
-                <input type="text" class="ml-4" sentMsg="@Model.f活動編號" style="width:80%" />
+            <div class="modal-footer justify-content-between ml-3">
+                <input type="text" class="ml-4  " sentMsg="@Model.f活動編號" style="width:70%" />
                 <span>
                     <button type="button" class="btn btn-warning leaveMsg" leaveMsg="@Model.f活動編號">送出</button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
+                    <button type="button" class="mr-5 btn btn-secondary" data-dismiss="modal">關閉</button>
                 </span>
             </div>
         </div>
@@ -384,14 +384,14 @@
                     </div>
                     @*<hr />*@
                     <div class="row">
-                        <img src="~/Content/images/@Model.f活動團圖" alt="" class="mx-auto" style="width: 60%;margin: auto;">
+                        <img src="~/Content/images/@Model.f活動團圖" alt="" class="mx-auto" style="width: 60%;margin: auto;height:500px">
                     </div>
                     <br />
                     <hr />
                     <br />
 
                     <div class="row align-items-center">
-                        <div id="UserBlock">
+                        <div id="UserBlock" class="mx-auto">
                             <p><img src="~/Content/images/16.png" class="pb-1" alt="">@Model.tMember.f會員稱號</p>
                             <a href="@Url.Action("otherprofile","Profile",new { id= Model.f會員編號 })">
                                 <img src="~/Content/images/@Model.tMember.f會員大頭貼" alt="" class="col-auto" style="width: 300px;">
@@ -400,8 +400,8 @@
                             <p>團主評分:@Model.tMember.f會員評分 </p>
                         </div>
                         <div class="change-max-width-1000 ml-4">
-                            <div class="row align-items-center m-0 ml-2 textBox">
-                                @Html.Raw(Model.f活動內容)
+                            <div class="row align-items-center m-0 ml-2 mr-2 textBox  " >
+                                @Html.Raw(Model.f活動內容) 
                             </div>
                         </div>
                     </div>
@@ -441,13 +441,11 @@
                             </button>
                         }
 
-                        @Html.ActionLink("刪除", "Delete", "Travel", new { id = Model.f活動編號 }, new { @class = "btn btn-secondary" })
+                        @Html.ActionLink("刪除", "Delete", "Travel", new { id = Model.f活動編號 }, new { @class = "btn btn-secondary delete_act" })
                     }
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
                 </div>
-
             </div>
-
         </div>
     </div>
 </div>
