@@ -115,7 +115,9 @@ p{
 .modal-body input{
     margin: 10px !important;
 }
-
+.modal-header{
+    padding-left:35px;
+}
 /*ÁôÂÃscroll bar*/
 ::-webkit-scrollbar {
     width: 0px;  
