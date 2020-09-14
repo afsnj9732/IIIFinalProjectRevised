@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using PagedList;
+using System.Net.Mail;
 
 namespace IIIProject_travel.Controllers
 {
@@ -43,7 +44,7 @@ namespace IIIProject_travel.Controllers
                 意見 = from m in 意見
                      where (string.Compare(m.f意見時間.Substring(0, 10), date起日) >= 0) &&
                             (string.Compare(m.f意見時間.Substring(0, 10), date迄日) <= 0) &&
-                           m.fID.ToString().Contains(txt關鍵字) || m.f名稱.Contains(txt關鍵字) ||
+                           m.fID.ToString().Contains(txt關鍵字) || m.f標題.Contains(txt關鍵字) ||
                            m.f性別.Contains(txt關鍵字) || m.f意見.Contains(txt關鍵字) ||
                            m.f意見類型.Contains(txt關鍵字) || m.f聯絡人.Contains(txt關鍵字) ||
                            m.f電子郵件.Contains(txt關鍵字) || m.f電話.Contains(txt關鍵字)
@@ -54,7 +55,7 @@ namespace IIIProject_travel.Controllers
             ViewBag.當前搜尋 = txt關鍵字;
             ViewBag.當前起日 = date起日;
             ViewBag.當前迄日 = date迄日;
-            ViewBag.名稱排序 = string.IsNullOrEmpty(sortOrder) ? "名稱降冪" : "";
+            ViewBag.名稱排序 = string.IsNullOrEmpty(sortOrder) ? "標題降冪" : "";
             ViewBag.編號排序 = sortOrder == "編號升冪" ? "編號降冪" : "編號升冪";
             ViewBag.聯絡人排序 = sortOrder == "聯絡人升冪" ? "聯絡人降冪" : "聯絡人升冪";
             ViewBag.內容排序 = sortOrder == "內容升冪" ? "內容降冪" : "內容升冪";
@@ -67,8 +68,8 @@ namespace IIIProject_travel.Controllers
 
             switch (sortOrder)
             {
-                case "名稱降冪":
-                    意見 = 意見.OrderByDescending(s => s.f名稱);
+                case "標題降冪":
+                    意見 = 意見.OrderByDescending(s => s.f標題);
                     break;
                 case "編號降冪":
                     意見 = 意見.OrderByDescending(s => s.fID);
@@ -120,7 +121,7 @@ namespace IIIProject_travel.Controllers
                     break;
 
                 default:
-                    意見 = 意見.OrderBy(s => s.f名稱);
+                    意見 = 意見.OrderBy(s => s.f標題);
                     break;
             }
 
@@ -157,6 +158,49 @@ namespace IIIProject_travel.Controllers
 
             return View(x);
         }
+        [HttpPost]
+        public ActionResult r回覆(C回覆 y)
+        {
+            send(y);
+            ViewBag.kk = "傳送成功";
+            return RedirectToAction("List");
+        }
+
+
+        [NonAction]
+        public void send(C回覆 y)
+        {
+            //Jouta官方帳號
+            string gmail_account = "Joutagroup445@gmail.com";
+            string gmail_password = "admin123admin";
+            string gmail_mail = "Joutagroup445@gmail.com";     
+            var fromEmail = new MailAddress(gmail_mail, "Jouta服務團隊");
+            var toEmail = new MailAddress(y.f電子郵件);
+            string body = "你好"+y.f聯絡人+y.f性別+"已收到您的意見" + "<br/>"+
+                          "您對"+y.f標題+ y.f意見+"的問題"+ "<br/>"+
+                          "在此向您說明"+y.f回覆+"<br/>"+
+                          "如有任何問題，歡迎隨時與我們聯繫，謝謝。";
+
+            SmtpClient smtpServer = new SmtpClient("smtp.gmail.com");
+            smtpServer.Port = 587;
+            smtpServer.Credentials = new System.Net.NetworkCredential(gmail_account, gmail_password);
+            //開啟SSL
+            smtpServer.EnableSsl = true;
+
+            MailMessage mail = new MailMessage();
+            //設定來源信箱
+            mail.From = new MailAddress(gmail_mail);
+            //設定收信者信箱
+            mail.To.Add(toEmail);
+            //主旨
+            mail.Subject = "Jouta意見回覆";
+            //內容
+            mail.Body = body;
+            //設定信箱內容為HTML格式
+            mail.IsBodyHtml = true;
+            smtpServer.Send(mail);
+        }
+
 
 
 
@@ -168,7 +212,7 @@ namespace IIIProject_travel.Controllers
         {
             dbJoutaEntities db = new dbJoutaEntities();
             tComment x = new tComment();
-            x.f名稱 = Request.Form["txt名稱"];
+            x.f標題 = Request.Form["txt名稱"];
             x.f意見 = Request.Form["txt意見"];
             x.f性別 = Request.Form["gender"];
             x.f意見類型 = Request.Form["txt意見類型"];
@@ -181,25 +225,6 @@ namespace IIIProject_travel.Controllers
             return RedirectToAction("New");
         }
 
-        //[HttpPost]
-        //public ActionResult New( p)
-        //{
-        //    tMember xx = new tMember();
-        //    xx.f會員名稱 = Request.Form[txt名稱];
-        //    xx.f會員性別 = p.gender;
-        //    xx.f會員電子郵件 = p.txt電子郵件;
-        //    xx.f會員電話 = p.txt電話;
-        //    tActivity yy = new tActivity();
-        //    yy.f活動內容 = p.txt意見;
-        //    yy.f活動類型 = "意見";
-
-        //    dbJoutaEntities db = new dbJoutaEntities();
-        //    db.tActivity.Add(yy);
-        //    db.tMember.Add(xx);
-        //    ViewBag.msg = "成功";
-        //    db.SaveChanges();
-        //return RedirectToAction("New");
-        //}
 
     }
 }

@@ -1,4 +1,6 @@
-﻿var maintl;
+﻿gsap.registerPlugin(CSSPlugin);
+
+var maintl;
 
 (function () {
 
