@@ -47,6 +47,9 @@ body {
 /*.modal-backdrop {
     background-color: red;
 }*/
+.get_map {
+    z-index: 1051;
+}
 .combine_join {
     z-index: 1051;
     
@@ -149,7 +152,10 @@ p{
     max-width: 1000px;
 }
 
- 
+#need_login{
+    overflow-y: hidden;
+}
+
 
 .change-max-width-1000 .textBox {
     height: 382px;
