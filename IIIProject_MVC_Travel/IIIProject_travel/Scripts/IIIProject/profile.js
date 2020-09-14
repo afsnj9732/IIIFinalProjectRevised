@@ -12,25 +12,3 @@
         tab[panelIndex].style.display = "block";
     }
     tabs(0);
-
-//$("#p1").click(function () {
-//    console.log(this.id);
-//    $.ajax({
-//        url: "/Profile/otherprofile",
-//        type: "POST",
-//        data: {
-//            "tabId": this.id
-//        },
-//        dataType: "json",
-//        cache: true,
-//        success: function (data) {
-//            if (data) {
-//                $("#post_img").html("<img class='card-img-top' src='../../Content/images/" + data[0].memberImg + "' alt='" + data[0].memberId + "' />");
-//                $("#card-title").text(data[0].activityTitle);
-//            }
-//        },
-//        error: function (xhr, status, error) {
-//            console.log(error);
-//        }
-//    });
-//});
