@@ -284,7 +284,7 @@
     //取得文字編輯器值+欄位檢驗
     $("body").on("click", ".JoutaSend", function (e) {
         let target = $(this).attr("limitNumber");
-        if (target == "0") {
+        if (target === "0") {
             let data = CKEDITOR.instances.AddAct.getData();
             $('#AddAct').val(data);
         } else {

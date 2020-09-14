@@ -1,0 +1,143 @@
+﻿@model IIIProject_travel.ViewModel.CEat
+@{
+    dbJoutaEntities db = new dbJoutaEntities();
+    Layout = null;
+    tMember nowRealMember = null;
+    if (Session["member"] != null)
+    {
+        var loginMember = (tMember)Session["member"]; //注意Session抓到的資料，其資料內容為取得該Session當下的資料內容，
+                                                      //因此若有修改過資料庫的資料，就要改藉由Session的會員編號
+                                                      //去抓取現在資料庫的資料，否則會一直撈到不變的Session資料
+        nowRealMember = db.tMember.FirstOrDefault(x => x.f會員編號 == loginMember.f會員編號);
+    }
+}
+
+@{
+
+    foreach (var item in Model.FinalList)
+    {
+        string iflikeit = "11.png";
+        int index = -1;
+        if (Session["member"] != null)
+        {
+            if (!string.IsNullOrEmpty(nowRealMember.f會員收藏的活動編號))
+            {
+                var analyze = nowRealMember.f會員收藏的活動編號.Split(',');
+                index = Array.IndexOf(analyze, item.f活動編號.ToString());
+                if (index > -1)
+                {
+                    iflikeit = "14.png";
+                }
+            }
+        }
+        <!-- -------------文章區頭-------------- -->
+        <div class="row Travel_border align-items-center p-3 pl-4">
+            <div class="container-fluid">
+                <div class="row m-0 mb-4   justify-content-between">
+                    <div class="pl-1">
+                        <div class="row" style="cursor: pointer;">
+                            <img src="~/Content/images/09.png" alt="">
+                            <div class="user_name">@item.tMember.f會員名稱</div>
+                        </div>
+                    </div>
+                    <div class="RWD_1851">
+                        <span>發文日期： <span>@item.f活動發起日期</span></span>
+                        <span>&nbsp; &nbsp;</span>
+                        <span>活動日期： <span>@item.f活動開始時間</span></span>
+                        <span>&nbsp; &nbsp;</span>
+                        <span>入團截止： <span>@item.f活動招募截止時間</span></span>
+                    </div>
+                    <div class="row ">
+                        <div class="dropdown RWD_1850 pr-3">
+                            <button class="btn btn-secondary dropdown-toggle RWD_1850 border-0 p-0 pl-2 pr-2" style="height:30px!important;" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                More
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu2">
+                                <button class="dropdown-item drop-site1" style="cursor: pointer;" type="button">
+                                    <span>揪團日期： <span>@item.f活動發起日期</span></span>
+                                </button>
+                                <div class="dropdown-divider"></div>
+                                <button class="dropdown-item drop-site2" style="cursor: pointer;" type="button">
+                                    <span>活動日期： <span>@item.f活動開始時間</span></span>
+                                </button>
+                                <div class="dropdown-divider"></div>
+                                <button class="dropdown-item drop-site3" style="cursor: pointer;" type="button">
+                                    <span>入團截止： <span>@item.f活動招募截止時間</span></span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="p-0 pr-2">
+                            @if (Session["member"] != null)
+                            {
+                                <img style="cursor: pointer;" class="pb-1 likeIt" likeIndex="@item.f活動編號" src="~/Content/images/@iflikeit" alt="">
+                            }
+                        </div>
+                    </div>
+                    @*<div class="col-12"><hr /></div>*@
+                </div>
+            </div>
+
+
+            <div class="row pl-2 flex-wrap-reverse align-items-start  mt-2 " style="width:100%;">
+
+                <div class="  pl-4 pr-4 mx-auto  ViewCounts" updateVC="@item.f活動編號" style="cursor: pointer;width:66%;" act_id="@item.f活動編號" data-toggle="modal" data-target="#ajax_readmore">
+                    <div class="" style="font-weight:bolder;"> <p class="mb-4   content-title">@item.f活動標題</p></div>
+
+                    <span class="content" style="font-size: 16px;line-height:1.8;overflow-y:scroll;height:220px;">
+                        @Html.Raw(item.f活動內容)
+                    </span>
+
+                </div>
+
+                <img src="~/Content/images/@item.f活動團圖" alt="" class="col-xl-auto col-6    mx-auto" style="width: 30%;overflow-y:scroll; height:220px;">
+
+            </div>
+            <div class="container mt-2">
+                <div class="row   justify-content-between  mt-2">
+                    <div>
+                        <img src="~/Content/images/17.png" alt="">@item.f活動分類
+                        <img src="~/Content/images/03.png" alt="">@item.f活動地區
+                        <img src="~/Content/images/04.png" alt="">@item.f活動預算
+                        <img src="~/Content/images/06.png" class="" alt=""><span ToUpdateVC="@item.f活動編號">@item.f活動瀏覽次數</span>
+                        <img src="~/Content/images/05.png" class="" alt=""><span ToUpdateGC="@item.f活動編號">@item.f活動讚數</span>
+                    </div>
+                    @if (Session["member"] != null)
+                    {
+                        <div style="cursor: pointer;" data-toggle="modal" data-target="#ajax_msg" act_id="@item.f活動編號" class="call_ajax_msg">
+                            <img src="~/Content/images/12.png" alt="">留言
+                        </div>
+                    }
+
+                </div>
+            </div>
+        </div>
+        <!-- -------------文章分割線-------------- -->
+    }
+    <nav aria-label="...">
+        <ul class="pagination">
+            @*<li class="page-item disabled">
+                    <span class="page-link">Previous</span>
+                </li>*@
+            @for (int i = 1; i < Model.TotalPage + 1; i++)
+            {
+                if (i == Model.NowPage)
+                {
+                    <li class="page-item active  MyPage NowPage" page="@i">
+                        <span class="page-link">
+                            @i
+                            <span class="sr-only">(current)</span>
+                        </span>
+                    </li>
+                }
+                else
+                {
+                    <li class="page-item  MyPage" page="@i"><a class="page-link" style="cursor:pointer">@i</a></li>
+                }
+            }
+            @*<li class="page-item">
+                    <a class="page-link" style="cursor:pointer">Next</a>
+                </li>*@
+        </ul>
+    </nav>
+}
+
