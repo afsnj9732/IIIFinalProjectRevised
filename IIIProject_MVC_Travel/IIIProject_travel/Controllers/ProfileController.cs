@@ -65,22 +65,22 @@ namespace IIIProject_travel.Controllers
         {
             CMember c = new CMember();
             var y = (tMember)Session["member"];
-            if (y.f會員編號 == id)
+            if (y != null)      //需先判斷是否有登入資料，否則會報錯
             {
-                return RedirectToAction("ProfileIndex");
+                if (y.f會員編號 == id)
+                {
+                    return RedirectToAction("ProfileIndex");
+                }
             }
-            else
-            {
-                var travel = from t in (new dbJoutaEntities()).tActivity
-                         where t.f會員編號 == id
-                         select t;  //從資料表抓資料
+            
+            var travel = from t in (new dbJoutaEntities()).tActivity
+                             where t.f會員編號 == id
+                             select t;  //從資料表抓資料
                 var member = (new dbJoutaEntities()).tMember.Where(x => x.f會員編號 == id).FirstOrDefault();
 
                 c.tActivities = travel;
                 c.tMembers = member;
-                return View(c);
-            }
-            
+                return View(c);  
         }
 
     }
