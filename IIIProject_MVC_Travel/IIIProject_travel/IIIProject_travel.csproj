@@ -246,6 +246,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Start\proheadshot.jpg" />
+    <Content Include="Content\css\sweetalert2.min.css" />
     <Content Include="Content\images\29.png" />
     <Content Include="Content\images\30.png" />
     <Content Include="Content\bootstrap-theme.css" />
@@ -2220,6 +2221,8 @@
     <Content Include="Scripts\IIIProject\location_jou.js" />
     <Content Include="Scripts\IIIProject\profile.js" />
     <Content Include="Scripts\IIIProject\quickmatch.js" />
+    <Content Include="Scripts\IIIProject\sweetalert2.all.min.js" />
+    <Content Include="Scripts\IIIProject\sweetalert2.min.css" />
     <Content Include="Scripts\IIIProject\travel.js" />
     <Content Include="Scripts\IIIProject\聯絡我們New.js" />
     <Content Include="Scripts\jquery-3.5.1.js" />
