@@ -53,7 +53,7 @@ var maintl;
             points[i].y = height * .5 + variant4 - variant5 + variant6;
             points2[i].y = height * .5 + variant1 - variant2 + variant3;
 
-            if (i == 25) {
+            if (i === 25) {
                 var rotate = 1;
                 if (points[i - 1].y < points[i].y) {
                     rotate = -1;

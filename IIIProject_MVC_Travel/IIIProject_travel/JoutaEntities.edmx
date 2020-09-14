@@ -71,6 +71,7 @@
           <Property Name="f聯絡人" Type="nvarchar" MaxLength="100" />
           <Property Name="f意見類型" Type="nvarchar" MaxLength="100" />
           <Property Name="f意見時間" Type="nvarchar" MaxLength="100" />
+          <Property Name="f意見狀態" Type="nvarchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="tMember">
           <Key>
@@ -327,6 +328,7 @@
           <Property Name="f聯絡人" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="f意見類型" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="f意見時間" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="f意見狀態" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="tBlogComment">
           <Key>
@@ -449,6 +451,7 @@
           <EntitySetMapping Name="tComment">
             <EntityTypeMapping TypeName="joutaModel.tComment">
               <MappingFragment StoreEntitySet="tComment">
+                <ScalarProperty Name="f意見狀態" ColumnName="f意見狀態" />
                 <ScalarProperty Name="f意見時間" ColumnName="f意見時間" />
                 <ScalarProperty Name="f意見類型" ColumnName="f意見類型" />
                 <ScalarProperty Name="f聯絡人" ColumnName="f聯絡人" />
