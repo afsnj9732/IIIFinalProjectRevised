@@ -272,7 +272,8 @@
             $(".ActivityFindEnd").val("");
         }
         $(".ActivityEnd").eq(0).attr("disabled","");
-        $(".ActivityFindEnd").eq(0).attr("disabled","");
+        $(".ActivityFindEnd").eq(0).attr("disabled", "");
+        $(".btn_get_map_msg").html("");
         $(".NeedACTo").attr("hidden", "");
         $(".NeedAPTo").attr("hidden", "");
         $(".NeedALTo").attr("hidden", "");
