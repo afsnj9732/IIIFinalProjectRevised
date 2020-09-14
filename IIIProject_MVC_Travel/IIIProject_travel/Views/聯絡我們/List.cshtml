@@ -113,7 +113,7 @@
                             <tr>
                                 <td>筆數</td>
                                 <td>@Html.ActionLink("編號", "List", new { sortOrder = ViewBag.編號排序, dateStartFilter = ViewBag.當前起日, dateEndFiler = ViewBag.當前迄日, currentFilter = ViewBag.當前搜尋 })</td>
-                                <td>@Html.ActionLink("名稱", "List", new { sortOrder = ViewBag.名稱排序, dateStartFilter = ViewBag.當前起日, dateEndFiler = ViewBag.當前迄日, currentFilter = ViewBag.當前搜尋 })</td>
+                                <td>@Html.ActionLink("標題", "List", new { sortOrder = ViewBag.標題排序, dateStartFilter = ViewBag.當前起日, dateEndFiler = ViewBag.當前迄日, currentFilter = ViewBag.當前搜尋 })</td>
                                 <td>@Html.ActionLink("聯絡人", "List", new { sortOrder = ViewBag.聯絡人排序, dateStartFilter = ViewBag.當前起日, dateEndFiler = ViewBag.當前迄日, currentFilter = ViewBag.當前搜尋 })</td>
                                 <td>@Html.ActionLink("建立時間", "List", new { sortOrder = ViewBag.建立時間排序, dateStartFilter = ViewBag.當前起日, dateEndFiler = ViewBag.當前迄日, currentFilter = ViewBag.當前搜尋 })</td>
                                 <td>@Html.ActionLink("性別", "List", new { sortOrder = ViewBag.性別排序, dateStartFilter = ViewBag.當前起日, dateEndFiler = ViewBag.當前迄日, currentFilter = ViewBag.當前搜尋 })</td>
@@ -136,7 +136,7 @@
                                                         <tr>
                                                             <td>@c筆數.ToString()</td>
                                                             <td>@Html.DisplayFor(modelItem => item.fID)</td>
-                                                            <td>@Html.DisplayFor(modelItem => item.f名稱)</td>
+                                                            <td>@Html.DisplayFor(modelItem => item.f標題)</td>
                                                             <td>@Html.DisplayFor(modelItem => item.f聯絡人)</td>
                                                             <td>@Html.DisplayFor(modelItem => item.f意見時間)</td>
                                                             <td>@Html.DisplayFor(modelItem => item.f性別)</td>
