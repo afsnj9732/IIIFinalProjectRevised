@@ -65,7 +65,7 @@
           <Property Name="fID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="f電子郵件" Type="nvarchar" MaxLength="100" />
           <Property Name="f電話" Type="nvarchar" MaxLength="100" />
-          <Property Name="f名稱" Type="nvarchar" MaxLength="100" />
+          <Property Name="f標題" Type="nvarchar" MaxLength="100" />
           <Property Name="f意見" Type="nvarchar" MaxLength="100" />
           <Property Name="f性別" Type="nvarchar" MaxLength="100" />
           <Property Name="f聯絡人" Type="nvarchar" MaxLength="100" />
@@ -321,7 +321,7 @@
           <Property Name="fID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="f電子郵件" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="f電話" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="f名稱" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="f標題" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="f意見" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="f性別" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="f聯絡人" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
@@ -454,7 +454,7 @@
                 <ScalarProperty Name="f聯絡人" ColumnName="f聯絡人" />
                 <ScalarProperty Name="f性別" ColumnName="f性別" />
                 <ScalarProperty Name="f意見" ColumnName="f意見" />
-                <ScalarProperty Name="f名稱" ColumnName="f名稱" />
+                <ScalarProperty Name="f標題" ColumnName="f標題" />
                 <ScalarProperty Name="f電話" ColumnName="f電話" />
                 <ScalarProperty Name="f電子郵件" ColumnName="f電子郵件" />
                 <ScalarProperty Name="fID" ColumnName="fID" />

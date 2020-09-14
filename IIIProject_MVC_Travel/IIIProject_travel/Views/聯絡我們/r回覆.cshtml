@@ -101,7 +101,8 @@
 
             <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
 
-
+                @using (Html.BeginForm())
+                {
                 <h2>查看意見</h2>
                 <div class="table-responsive">
 
@@ -111,57 +112,50 @@
                         <div class="row">
                             <div class="col">
                                 <p>
-                                    標題<br />
-                                    <input type="text" name="f名稱" value="@Model.f名稱" />
+                                    聯絡人<br />
+                                    <input type="text" name="f聯絡人" value="@Model.f聯絡人" />
                                 </p>
                                 <p>
-                                    帳號<br />
-                                    <input type="text" name="f聯絡人" value="@Model.f聯絡人" />
+                                    標題<br />
+                                    <input type="text" name="f標題" value="@Model.f標題" />
                                 </p>
                                 <p>
                                     建立時間<br />
                                     <input type="text" name="f意見時間" value="@Model.f意見時間" />
                                 </p>
                                 <p>
+                                    電子郵件<br />
+                                    <input type="text" name="f電子郵件" value="@Model.f電子郵件" />
+                                </p>
+                                <p>
+                                    分類<br />
+                                    <input type="text" name="f電子郵件" value="@Model.f意見類型" />
+                                </p>
+                                <p>
+                                    性別<br />
+                                    <input type="text" name="f性別" value="@Model.f性別" />
+                                </p>
+                                <p>
                                     內容<br />
-                                    <input type="text" name="f性別" value="@Model.f性別"  />
+                                    <input type="text" name="f意見" value="@Model.f意見" style="width:300px;height:100px" readonly />
                                 </p>
-                                <p>
-                                    分類<br />
-                                    <input type="text" name="f電子郵件" value="@Model.f電子郵件" />
-                                </p>
-                                <p>
-                                    分類<br />
-                                    <input type="text" name="f電子郵件" value="@Model.f電子郵件" />
-                                </p>
-                                <p>
-                                    分類<br />
-                                    <input type="text" name="f電話" value="@Model.f電話" />
-                                </p>
-                                <p>
-                                    分類<br />
-                                    <input type="text" name="f意見類型" value="@Model.f意見類型" />
-                                </p>
-                                <p>
-                                    分類<br />
-                                    <input type="text" name="f意見" value="@Model.f意見" style="width:300px;height:100px" readonly/>
-                                </p>
-
-
                                 <p>
                                     回覆內容<br />
-                                    <input type="text" name="" value="" style="width:300px;height:100px" />
+                                    <input type="text" name="f回覆" value="" style="width:300px;height:100px" />
                                 </p>
                                 <p>
                                     <input type="submit" value="送出" />
                                 </p>
-
+                                <p>
+                                    @ViewBag.kk
+                                </p>
                             </div>
 
                         </div>
                     </form>
 
                 </div>
+                }
             </main>
         </div>
     </div>

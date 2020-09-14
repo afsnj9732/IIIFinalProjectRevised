@@ -227,6 +227,19 @@ p{
     -webkit-box-orient: vertical;
 }
 
+.user_name {
+    /* margin: 0 auto; */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100px;
+    height: 29px;
+    /* border-color:#fde57a */
+    /* background-color: rgba(20, 80, 220, 0.746); */
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+}
+
 .content-title {
     /* margin: 0 auto; */
     overflow: hidden;

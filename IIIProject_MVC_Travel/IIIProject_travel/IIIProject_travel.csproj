@@ -241,6 +241,7 @@
     <Compile Include="ViewModel\CReset.cs" />
     <Compile Include="ViewModel\CSelect.cs" />
     <Compile Include="ViewModel\CTravel.cs" />
+    <Compile Include="ViewModel\C回覆.cs" />
     <Compile Include="ViewModel\PData.cs" />
   </ItemGroup>
   <ItemGroup>
