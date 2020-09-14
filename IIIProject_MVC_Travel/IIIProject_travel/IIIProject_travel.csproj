@@ -234,6 +234,7 @@
     <Compile Include="ViewModel\CBlogComment.cs" />
     <Compile Include="ViewModel\CCoupon.cs" />
     <Compile Include="ViewModel\CData.cs" />
+    <Compile Include="ViewModel\CEat.cs" />
     <Compile Include="ViewModel\CLogin.cs" />
     <Compile Include="ViewModel\CMember.cs" />
     <Compile Include="ViewModel\CProfile.cs" />
@@ -2277,7 +2278,6 @@
     <Content Include="Views\後台飯局\List.cshtml" />
     <Content Include="Views\後台文章\List.cshtml" />
     <Content Include="Views\後台Home\Home.cshtml" />
-    <Content Include="Views\Eat\eatArticleAjax.cshtml" />
     <Content Include="Views\Home\RegisterResult.cshtml" />
     <Content Include="Views\Home\emailValidation.cshtml" />
     <Content Include="Views\Home\ResetPassword.cshtml" />
@@ -2298,6 +2298,10 @@
     <Content Include="Views\聯絡我們 - 複製\New.cshtml" />
     <Content Include="Views\聯絡我們\r回覆.cshtml" />
     <Content Include="Views\Travel\get_ajax_readmore.cshtml" />
+    <Content Include="Views\Eat\Actadd.cshtml" />
+    <Content Include="Views\Eat\article_AJAX.cshtml" />
+    <Content Include="Views\Eat\get_ajax_readmore.cshtml" />
+    <Content Include="Views\Eat\MsgAdd.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
