@@ -86,9 +86,9 @@
                     <div class="container-fluid">
                         <span>標題：<input type="text" name="f活動標題" style="width:90%" class="NeedAT" value="@Model.f活動標題"><p class="NeedATTo" style="color:red" hidden>活動標題請至少填滿8個字</p></span>
                         <div class="row m-0 mb-3 justify-content-around">
-                            <span>旅遊開始日期： <input type="date" min="@DateTime.Now.AddDays(1.0).ToString("yyyy-MM-dd")" max="" class="ActivityStart" name="f活動開始時間" value="@Model.f活動開始時間"><p class="ActivityStartTo" style="color:red" hidden>活動開始時間必填</p></span>
+                            <span>旅遊開始日期： <input type="date" min="@DateTime.Now.AddDays(2.0).ToString("yyyy-MM-dd")" max="" class="ActivityStart" name="f活動開始時間" value="@Model.f活動開始時間"><p class="ActivityStartTo" style="color:red" hidden>活動開始時間必填</p></span>
                             <span>旅遊結束日期： <input type="date" min="@DateTime.Now.AddDays(2.0).ToString("yyyy-MM-dd")" max="" class="ActivityEnd" name="f活動結束時間" value="@Model.f活動結束時間"><p class="ActivityEndTo" style="color:red" hidden>活動結束時間必填</p></span>
-                            <span>入團截止： <input type="date" min="@DateTime.Now.ToString("yyyy-MM-dd")" max="" class="ActivityFindEnd" name="f活動招募截止時間" value="@Model.f活動招募截止時間"><p class="ActivityFindEndTo" style="color:red" hidden>招募截止時間必填</p></span>
+                            <span>入團截止： <input type="date" min="@DateTime.Now.AddDays(1.0).ToString("yyyy-MM-dd")" max="" class="ActivityFindEnd" name="f活動招募截止時間" value="@Model.f活動招募截止時間"><p class="ActivityFindEndTo" style="color:red" hidden>招募截止時間必填</p></span>
                         </div>
                         <div class="row mb-4 mx-auto align-items-center justify-content-around">
                             <span><img src="~/Content/images/04.png" class="mb-1" alt="">預算：<input type="text" name="f活動預算" class="NeedAC" value="@Model.f活動預算"><span class="NeedACTo" style="color:red" hidden>活動預算必填</span></span>
@@ -110,9 +110,12 @@
                         <div class="row mb-4 mx-auto align-items-center justify-content-around">
                             <span class="row  align-items-center">團圖：<input type="file" name="PicFile2" class="NeedAP"><span class="mr-5 NeedAPTo" style="color:red" hidden>活動團圖必填</span></span>
 
+                            <div class="row align-items-center">
                             <button type="button" class="btn btn-secondary btn_get_map" data-toggle="modal" getMapNumber="1" data-target="#getMap" style="background-color:gray">
                                 設定地點
                             </button>
+                            <span class="btn_get_map_msg "></span>
+                            </div>
                             <input type="hidden" class="evtLng" value="@Model.f活動經度" name="f活動經度">
                             <input type="hidden" class="evtLat" value="@Model.f活動緯度" name="f活動緯度">
 
@@ -276,7 +279,7 @@
                         <div class="m-3 row  align-items-center   " style="width:210px;">
 
                             <a href="@Url.Action("otherprofile","Profile",new { id= theGuy.f會員編號 })">
-                                <img width="114" height="114" src="~/Content/images/@theGuy.f會員大頭貼" />
+                                <img width="114" height="114" src="~/Content/images/@theGuy.f會員大頭貼"  title="@theGuy.f會員名稱" />
                             </a>
                             <div class="d-flex flex-column bd-highlight align-items-center">
                                 @if (black_list.Length > 1 && Array.IndexOf(black_list, theGuy.f會員編號.ToString()) > -1)
@@ -292,7 +295,7 @@
                                     </span>
 
                                 }
-                                <span class="mx-auto">@theGuy.f會員名稱</span>
+                                <div class="mx-auto join_user_name" title="@theGuy.f會員名稱">@theGuy.f會員名稱</div>
                             </div>
 
                             <button class="button btn-secondary jouta_black_list pr-1 pl-1" member_id="@theGuy.f會員編號" act_target="join" act_id="@Model.f活動編號">加入黑名單</button>
@@ -322,7 +325,7 @@
                             <div class="m-3 row  align-items-center   " style="width:210px;">
 
                                 <a href="@Url.Action("otherprofile","Profile",new { id= theGuy.f會員編號 })">
-                                    <img width="114" height="114" src="~/Content/images/@theGuy.f會員大頭貼" />
+                                    <img width="114" height="114" src="~/Content/images/@theGuy.f會員大頭貼" title="@theGuy.f會員名稱" />
                                 </a>
                                 <div class="d-flex flex-column bd-highlight align-items-center">
                                     @if (black_list.Length > 1 && Array.IndexOf(black_list, theGuy.f會員編號.ToString()) > -1)
@@ -338,7 +341,7 @@
                                         </span>
 
                                     }
-                                    <span class="mx-auto">@theGuy.f會員名稱</span>
+                                    <div class="mx-auto join_user_name" title="@theGuy.f會員名稱">@theGuy.f會員名稱</div>
                                 </div>
 
                                 <button class="button btn-secondary jouta_black_list pr-1 pl-1" member_id="@theGuy.f會員編號" act_target="join" act_id="@Model.f活動編號">加入黑名單</button>

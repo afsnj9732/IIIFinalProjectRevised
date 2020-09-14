@@ -262,7 +262,7 @@
         $(".ActivityFindEndTo").attr("hidden", "");
         nowdate = new Date(Date.now());
         theMonth = nowdate.getMonth()+1; //js時間月份是索引值，所以現在月份要+1
-        theDay = nowdate.getDate()+1;
+        theDay = nowdate.getDate()+2;
         FormatTime();
         $(".ActivityStart").attr("min", nowdate.getFullYear() + "-" + theMonth + "-" + theDay);        
         $(".ActivityFindEnd").attr("max", "");
@@ -272,7 +272,8 @@
             $(".ActivityFindEnd").val("");
         }
         $(".ActivityEnd").eq(0).attr("disabled","");
-        $(".ActivityFindEnd").eq(0).attr("disabled","");
+        $(".ActivityFindEnd").eq(0).attr("disabled", "");
+        $(".btn_get_map_msg").html("");
         $(".NeedACTo").attr("hidden", "");
         $(".NeedAPTo").attr("hidden", "");
         $(".NeedALTo").attr("hidden", "");
@@ -467,9 +468,10 @@
             data: { "target_member": target,"act_id":id },
             success: function (data) {
                 if (data === "") {
-                    window.confirm("不可以踢自己!")
+                    window.confirm("不可以踢自己!");
                 } else {
                     $("[ActAdd=" + id + "]").html(data);
+                    window.confirm("踢除成功!");
                 //getCalendar(); 踢人行事曆不用動
                 }
             }
@@ -488,7 +490,7 @@
             data: { "target_member": target, "act_id": id , "act":act },
             success: function (data) {
                 if (data === "6") {
-                    window.confirm("活動時間與對象既有活動時間衝突!")
+                    window.confirm("活動時間與對象既有活動時間衝突!");
                 } else {
                     $("[ActAdd=" + id + "]").html(data);
                 }
