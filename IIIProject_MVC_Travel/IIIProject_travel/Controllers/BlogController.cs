@@ -20,7 +20,19 @@ namespace IIIProject_travel.Controllers
         dbJoutaEntities db = new dbJoutaEntities();
         int pagesize = 3;
         // GET: Blog
-
+        //public actionresult articleindex(string keyword)        //首頁搜尋用
+        //{
+        //    string homesearch = keyword;
+        //    return view((object)homesearch);
+        //}
+        //[httppost]
+        //public actionresult articleindex(int? id)
+        //{
+        //    string homesearch = "";
+        //    homesearch += request.form["txtkeyword"];
+        //    homesearch += ",";
+        //    return view((object)homesearch);
+        //}
 
         public ActionResult Index(string sortOder,string txtKey, string currentfilter, int page = 1)
         {
@@ -108,13 +120,13 @@ namespace IIIProject_travel.Controllers
 
         }
 
-        public ActionResult personalIndex (string txtKey,string currentfilter , int page = 1)
+        public ActionResult personalIndex (int? id, string txtKey, string currentfilter , int page = 1)
         {
 
 
             var article = from t in (new dbJoutaEntities()).tActivity
-                          where t.f活動類型 == "文章"
-                          orderby t.f活動編號
+                          where t.f活動類型 == "文章" && t.f活動編號 == id
+                          orderby t.f會員編號
                           select t;
             if (txtKey != null)
             {
@@ -134,7 +146,7 @@ namespace IIIProject_travel.Controllers
             {
 
                  article = from t in (new dbJoutaEntities()).tActivity
-                              where t.f活動類型 == "文章"
+                              where t.f活動類型 == "文章" && t.f活動編號 == id
                               orderby t.f活動編號
                               select t;
             }
@@ -143,7 +155,7 @@ namespace IIIProject_travel.Controllers
             {
 
                 article = from t in (new dbJoutaEntities()).tActivity
-                          where t.f活動類型 == "文章" && t.f活動標題.Contains(txtKey)
+                          where t.f活動類型 == "文章" && t.f活動編號 == id && t.f活動標題.Contains(txtKey)
                           orderby t.f活動編號
                           select t;
 

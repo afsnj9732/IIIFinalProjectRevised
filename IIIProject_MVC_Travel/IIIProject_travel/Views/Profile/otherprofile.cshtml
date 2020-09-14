@@ -89,11 +89,6 @@
                             <p class="state">管理員</p>
                         }
                     </div>
-
-                    <div>
-                        <button type="button" id="followbtn" class="btn btn-primary btn-sm">追蹤</button>
-                    </div>
-
                 </div>
             </div>
         </div>
@@ -133,11 +128,34 @@
                         <h3 class="rating">@Model.tMembers.f會員評分</h3>
                         <div class="rate">
                             <div class="stars">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
+                                @switch (x.f會員評分)
+                                {
+                                    case 5:
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        break;
+                                    case 4:
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        break;
+                                    case 3:
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        break;
+                                    case 2:
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        break;
+                                    case 1:
+                                        <i class="fa fa-star"></i>
+                                        break;
+                                }
                             </div>
                             @if (Model.tMembers.f會員評分人數 == null)
                             {
@@ -208,40 +226,48 @@
                         else
                         {
                             string[] words = post.Split(',');
-                            foreach (var i in words)
+                            if (words.Length < 2)
                             {
-                                if (string.IsNullOrEmpty(i))
+                                <p>目前無發文紀錄</p>
+                            }
+                            else
+                            {
+                                foreach (var i in words)
                                 {
-                                    continue;
-                                }
-                                else
-                                {
-                                    var post_item = db.tActivity.Where(c => c.f活動編號.ToString() == i && c.f活動類型 == "文章").FirstOrDefault();
-                                    if (post_item == null)
+                                    if (string.IsNullOrEmpty(i))
                                     {
-                                        <p>目前無發文紀錄</p>
+                                        continue;
                                     }
                                     else
                                     {
-                                        <div class="card mb-3" style="max-width: 540px;">
-                                            <div class="row no-gutters">
-                                                <div class="col-md-4">
-                                                    <img src="~/Content/images/@post_item.f活動團圖" class="card-img" alt="@post_item.f活動編號">
-                                                </div>
-                                                <div class="col-md-8">
-                                                    <div class="card-body">
-                                                        <h5 class="card-title">@post_item.f活動標題</h5>
-                                                        <p class="card-text">@Html.Raw(post_item.f活動內容)</p>
-                                                        <p class="card-text">
-                                                            <small class="text-muted">Posted on @post_item.f活動發起日期</small>
-                                                        </p>
+                                        var post_item = db.tActivity.Where(c => c.f活動編號.ToString() == i && c.f活動類型 == "文章").FirstOrDefault();
+                                        if (post_item == null)
+                                        {
+                                            continue;
+                                        }
+                                        else
+                                        {
+                                            <div class="card mb-3" style="max-width: 540px;">
+                                                <div class="row no-gutters">
+                                                    <div class="col-md-4">
+                                                        <img src="~/Content/images/@post_item.f活動團圖" class="card-img" alt="@post_item.f活動編號">
+                                                    </div>
+                                                    <div class="col-md-8">
+                                                        <div class="card-body">
+                                                            <h5 class="card-title">@post_item.f活動標題</h5>
+                                                            <p class="card-text">@Html.Raw(post_item.f活動內容)</p>
+                                                            <p class="card-text">
+                                                                <small class="text-muted">Posted on @post_item.f活動發起日期</small>
+                                                            </p>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        }
                                     }
                                 }
                             }
+
                         }
                     }
                 </div>
@@ -257,37 +283,45 @@
                         else
                         {
                             string[] words = join.Split(',');
-                            foreach (var i in words)
+                            if (words.Length < 2)
                             {
-                                if (string.IsNullOrEmpty(i))
+                                <p>目前無發文紀錄</p>
+                            }
+                            else
+                            {
+                                foreach (var i in words)
                                 {
-                                    continue;
-                                }
-                                else
-                                {
-                                    var join_item = db.tActivity.Where(c => c.f活動編號.ToString() == i).FirstOrDefault();
-                                    <div class="card mb-3" style="max-width: 800px;">
-                                        <div class="row no-gutters">
-                                            <div class="col-md-8 activityadjust">
-                                                <div class="card-body" style="text-align:center">
-                                                    <h5 class="card-title"> @join_item.f活動標題</h5>
-                                                    <p class="card-text">@Html.Raw(join_item.f活動內容)</p>
-                                                    揪團者 :
-                                                    <span style="cursor: pointer;">@join_item.tMember.f會員名稱</span>
-                                                    <p class="card-text">
-                                                        <small class="text-muted">@join_item.f活動開始時間</small>
-                                                    </p>
-                                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg">來去看看</button>
-                                                </div>
-                                                <div class="col-md-4">
-                                                    <img src="~/Content/images/@join_item.f活動團圖" class="card-img activityphoto" alt="@join_item.f活動編號">
+                                    if (string.IsNullOrEmpty(i))
+                                    {
+                                        continue;
+                                    }
+                                    else
+                                    {
+                                        var join_item = db.tActivity.Where(c => c.f活動編號.ToString() == i).FirstOrDefault();
+                                        <div class="card mb-3" style="max-width: 800px;">
+                                            <div class="row no-gutters">
+                                                <div class="col-md-8 activityadjust">
+                                                    <div class="card-body" style="text-align:center">
+                                                        <h5 class="card-title"> @join_item.f活動標題</h5>
+                                                        <p class="card-text">@Html.Raw(join_item.f活動內容)</p>
+                                                        揪團者 :
+                                                        <span style="cursor: pointer;">@join_item.tMember.f會員名稱</span>
+                                                        <p class="card-text">
+                                                            <small class="text-muted">@join_item.f活動開始時間</small>
+                                                        </p>
+                                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg">來去看看</button>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <img src="~/Content/images/@join_item.f活動團圖" class="card-img activityphoto" alt="@join_item.f活動編號">
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
 
+                                    }
                                 }
                             }
+
                         }
                     }
                 </div>
@@ -303,35 +337,43 @@
                         else
                         {
                             string[] words = favorite.Split(',');
-                            foreach (var i in words)
+                            if (words.Length < 2)
                             {
-                                if (string.IsNullOrEmpty(i))
+                                <p>目前無關注活動</p>
+                            }
+                            else
+                            {
+                                foreach (var i in words)
                                 {
-                                    continue;
-                                }
-                                else
-                                {
-                                    var favorite_item = db.tActivity.Where(c => c.f活動編號.ToString() == i).FirstOrDefault();
-                                    <div class="card mb-3" style="max-width: 800px;">
-                                        <div class="row no-gutters">
-                                            <div class="col-md-4">
-                                                <img src="~/Content/images/@favorite_item.f活動團圖" class="card-img" alt="@favorite_item.f活動編號">
-                                            </div>
-                                            <div class="col-md-8">
-                                                <div class="card-body">
-                                                    <h5 class="card-title"> @favorite_item.f活動標題</h5>
-                                                    <p class="card-text">@Html.Raw(favorite_item.f活動內容)</p>
-                                                    <p class="card-text">揪團者: @favorite_item.tMember.f會員名稱</p>
-                                                    <p class="card-text">
-                                                        <small class="text-muted">@favorite_item.f活動結束時間</small>
-                                                    </p>
-                                                    <a class="nav-item">@Html.ActionLink("Read More", "TravelIndex", "Travel", new { id = favorite_item.f活動編號 }, new { @class = "btn btnContent  btn-warning" })</a>
+                                    if (string.IsNullOrEmpty(i))
+                                    {
+                                        continue;
+                                    }
+                                    else
+                                    {
+                                        var favorite_item = db.tActivity.Where(c => c.f活動編號.ToString() == i).FirstOrDefault();
+                                        <div class="card mb-3" style="max-width: 800px;">
+                                            <div class="row no-gutters">
+                                                <div class="col-md-4">
+                                                    <img src="~/Content/images/@favorite_item.f活動團圖" class="card-img" alt="@favorite_item.f活動編號">
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <div class="card-body">
+                                                        <h5 class="card-title"> @favorite_item.f活動標題</h5>
+                                                        <p class="card-text">@Html.Raw(favorite_item.f活動內容)</p>
+                                                        <p class="card-text">揪團者: @favorite_item.tMember.f會員名稱</p>
+                                                        <p class="card-text">
+                                                            <small class="text-muted">@favorite_item.f活動結束時間</small>
+                                                        </p>
+                                                        <a class="nav-item">@Html.ActionLink("Read More", "TravelIndex", "Travel", new { id = favorite_item.f活動編號 }, new { @class = "btn btnContent  btn-warning" })</a>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    }
                                 }
                             }
+
                         }
                     }
                 </div>
@@ -348,40 +390,48 @@
                         else
                         {
                             string[] words = make.Split(',');
-                            foreach (var i in words)
+                            if (words.Length < 2)
                             {
-                                if (string.IsNullOrEmpty(i))
+                                <p>目前無開團紀錄</p>
+                            }
+                            else
+                            {
+                                foreach (var i in words)
                                 {
-                                    continue;
-                                }
-                                else
-                                {
-                                    var make_item = db.tActivity.Where(c => c.f活動編號.ToString() == i && c.f活動類型 != "文章").FirstOrDefault();
-                                    if (make_item == null)
+                                    if (string.IsNullOrEmpty(i))
                                     {
-                                        <p>目前無開團紀錄</p>
+                                        continue;
                                     }
                                     else
                                     {
-                                        <div class="card mb-3" style="max-width: 800px;">
-                                            <div class="row no-gutters">
-                                                <div class="col-md-4">
-                                                    <img src="~/Content/images/@Model.tMembers.f會員大頭貼" class="card-img" alt="@Model.tMembers.f會員名稱">
-                                                </div>
-                                                <div class="col-md-8">
-                                                    <div class="card-body">
-                                                        <h5 class="card-title">@make_item.f活動標題</h5>
-                                                        <p class="card-text">@Html.Raw(make_item.f活動內容)</p>
-                                                        <p class="card-text">
-                                                            <small class="text-muted">Posted on @make_item.f活動發起日期</small>
-                                                        </p>
+                                        var make_item = db.tActivity.Where(c => c.f活動編號.ToString() == i && c.f活動類型 != "文章").FirstOrDefault();
+                                        if (make_item == null)
+                                        {
+                                            <p>目前無開團紀錄</p>
+                                        }
+                                        else
+                                        {
+                                            <div class="card mb-3" style="max-width: 800px;">
+                                                <div class="row no-gutters">
+                                                    <div class="col-md-4">
+                                                        <img src="~/Content/images/@Model.tMembers.f會員大頭貼" class="card-img" alt="@Model.tMembers.f會員名稱">
+                                                    </div>
+                                                    <div class="col-md-8">
+                                                        <div class="card-body">
+                                                            <h5 class="card-title">@make_item.f活動標題</h5>
+                                                            <p class="card-text">@Html.Raw(make_item.f活動內容)</p>
+                                                            <p class="card-text">
+                                                                <small class="text-muted">Posted on @make_item.f活動發起日期</small>
+                                                            </p>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        }
                                     }
                                 }
                             }
+
                         }
                     }
                 </div>

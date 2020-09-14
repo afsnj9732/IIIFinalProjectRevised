@@ -152,10 +152,6 @@
                                     <input type="text" name="f會員生日" value="@Model.f會員生日" />
                                 </p>
                                 <p>
-                                    自我介紹<br />
-                                    <input type="text" name="f會員自我介紹" value="@Model.f會員自我介紹" />
-                                </p>
-                                <p>
                                     暱稱<br />
                                     <input type="text" name="f會員暱稱" value="@Model.f會員暱稱" />
                                 </p>
@@ -167,12 +163,17 @@
                                     興趣<br />
                                     <input type="text" name="f會員興趣" value="@Model.f會員興趣" />
                                 </p>
+                                <p>
+                                    自我介紹<br />
+                                    <textarea name="f會員自我介紹" cols="30" rows="6" >@Model.f會員自我介紹</textarea>
+                                </p>
 
                             </div>
 
                         </div>
                         <p>
-                            <input type="submit" value="送出" />
+                            <input type="submit" value="存檔" />
+                            <input type ="button" onclick="history.back()" value="關閉">
                         </p>
                     </form>
 
