@@ -270,7 +270,7 @@ namespace IIIProject_travel.Controllers
             db.SaveChanges();
 
 
-            return RedirectToAction("indBlogContentex", new { id = p.f活動編號});
+            return RedirectToAction("BlogContent", new { id = p.f活動編號});
 
 
         }
