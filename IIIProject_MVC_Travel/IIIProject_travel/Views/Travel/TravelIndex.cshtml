@@ -208,7 +208,7 @@
                         <!-- 開團按鈕尾 -->
                     </div>
                     <!-- 揪團視窗頭  boostrap為方便滾輪出現會多出padding-right 17px之屬性-->
-                    <div class="modal fade" id="exampleModal" role="dialog"
+                    <div class="modal fade JoutaStart" id="exampleModal" role="dialog"
                          aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog change-max-width-1400" role="document">
                             <div class="modal-content" style="height:85%">
@@ -253,6 +253,12 @@
                                                 <div class="row mb-4 mx-auto align-items-center justify-content-around">
                                                     <span class="row  align-items-center">團圖：<input type="file" name="PicFile" class="NeedAP"><span class="mr-5 NeedAPTo" style="color:red" hidden>活動團圖必填</span></span>
 
+                                                    <button type="button" class="btn btn-secondary btn_get_map" data-toggle="modal" getMapNumber="0" data-target="#getMap" style="background-color:gray">
+                                                        設定地點
+                                                    </button>
+                                                    <input type="hidden" class="evtLng" value="" name="f活動經度">
+                                                    <input type="hidden" class="evtLat" value="" name="f活動緯度">
+
                                                     <span class=" ">
                                                         <img src="~/Content/images/03.png" class="mb-1" alt="">
                                                         地區：
@@ -266,13 +272,7 @@
                                                 </div>
 
 
-                                                <div class="mb-4 mx-auto align-items-center justify-content-around">
-                                                    <span class="mb-1">點選一個地點：</span>
-                                                    <div id="mapid">
-                                                        <input type="hidden" id="evtLng" value="" name="f活動經度">
-                                                        <input type="hidden" id="evtLat" value="" name="f活動緯度">
-                                                    </div>
-                                                </div>
+
 
                                                 <div class="row align-items-center">
                                                     <div class="mx-auto mb-3">
@@ -295,9 +295,11 @@
                                 }
                                 else
                                 {
-                                    <div class="modal-body row align-items-center mx-auto">
-                                        <p>先登入才能揪團</p>
-                                    </div>
+                                     
+                                        <div  class="modal-body row  align-items-center mx-auto" id="need_login">
+                                            <p>先登入才能揪團</p>
+                                        </div>
+
                                 }
 
 
@@ -324,7 +326,7 @@
                 <!-- 文章內容區結束 -->
                 @*行事曆*@
                 <div class="col-xl-3 col-lg-3   col-10"></div>
-                <div id="calendar" class="pr-4   row mx-auto">
+                <div id="calendar" class="pr-4   row mx-auto" >
 
                 </div>
                 @*readmore事件，含行事曆*@
@@ -337,6 +339,33 @@
         <a href="" id="labelTop">
             回最上面
         </a>
+        @*Map設定Modal頭*@
+        <div class="modal fade get_map" id="getMap" role="dialog"
+             aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog change-max-width-1400" role="document">
+                <div class="modal-content" >
+                    <div class="modal-header border-main-color">
+                        <h5 class="modal-title" id="exampleModalLabel"><span style="font-weight:bolder;">地點設定</span></h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body" style="height:100%">
+                        <div class="mb-4 mx-auto align-items-center justify-content-around"> 
+                            <span class="mb-1">點選一個地點：</span>
+                            <div id="mapid" style="height:600px">
+
+                            </div>
+                        </div>
+                        <div class="modal-footer  mt-2 border-main-color">
+                            <button type="button" class="btn btn-info getMapValue" data-dismiss="modal">確定</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @*Map設定Modal尾*@
 
         <!-- footer -->
         <div class="container-fluid footer">

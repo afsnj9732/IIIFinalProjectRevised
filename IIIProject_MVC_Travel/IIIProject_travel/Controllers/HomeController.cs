@@ -28,12 +28,13 @@ namespace IIIProject_travel.Controllers
         {
             CData c = new CData();
             var x = from m in (new dbJoutaEntities()).tMember
-                    where m.f會員編號 > 8 && m.f會員編號 < 13
+                    where !string.IsNullOrEmpty(m.f會員自我介紹)
                     select m;
             var y = from k in (new dbJoutaEntities()).tActivity
                     where !string.IsNullOrEmpty(k.f活動團圖)
                     select k;
             y = y.Take(3);
+            x = x.OrderBy(t=> Guid.NewGuid()).Take(3);
             c.tMembers = x;
             c.tActivities = y;
             if (id == 0)

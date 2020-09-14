@@ -176,6 +176,8 @@ namespace IIIProject_travel.Controllers
             targetAct.f活動結束時間 = p.f活動結束時間;
             targetAct.f活動開始時間 = p.f活動開始時間;
             targetAct.f活動預算 = p.f活動預算;
+            targetAct.f活動經度 = p.f活動經度;
+            targetAct.f活動緯度 = p.f活動緯度;
 
             HttpPostedFileBase PicFile = Request.Files["PicFile2"]; 
             if (PicFile != null)
