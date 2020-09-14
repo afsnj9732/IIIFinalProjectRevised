@@ -229,14 +229,14 @@ p{
 
 .join_user_name {
     overflow: hidden;
-    text-overflow: ellipsis;
-    width: 50px;
+    /*text-overflow: ;*/
+     
     height: 29px;
     /* border-color:#fde57a */
     /* background-color: rgba(20, 80, 220, 0.746); */
-    display: -webkit-box;
+    /*display: -webkit-box;
     -webkit-line-clamp: 1;
-    -webkit-box-orient: vertical;
+    -webkit-box-orient: vertical;*/
 }
 .user_name {
     /* margin: 0 auto; */
