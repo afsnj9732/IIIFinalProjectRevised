@@ -1,6 +1,7 @@
 ﻿using IIIProject_travel.ViewModel;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -24,6 +25,23 @@ namespace IIIProject_travel.Controllers
             c.tMembers = db.tMember.Where(a=>a.f會員編號 == x.f會員編號).FirstOrDefault();
             return View(c);
         }
+        [HttpPost]
+        public ActionResult ProfileIndex(tMember id)
+        {
+            dbJoutaEntities db = new dbJoutaEntities();
+            var x = db.tMember.Where(a => a.f會員編號 == id.f會員編號).FirstOrDefault();
+            HttpPostedFileBase avaPhoto = Request.Files["f會員大頭貼"];
+            if ( avaPhoto != null)
+            {
+                string photName = Guid.NewGuid().ToString() + Path.GetExtension(avaPhoto.FileName);
+
+                var path = Path.Combine(Server.MapPath("~/Content/images/"), photName);
+                avaPhoto.SaveAs(path);
+                x.f會員大頭貼 = photName;
+            }
+            return RedirectToAction("ProfileIndex",id);
+        }
+
 
         public ActionResult Save()
         {
