@@ -80,8 +80,15 @@
                 {
                     <img src="~/Content/images/default.jpg" alt="" class="">
                 }
-
+                    <form action="/Profile/ProfileIndex" method="post">
+                        <i class="fas fa-camera" style="position:absolute;bottom:0;right:0;color:#fff;">
+                            <input type="file" name="f會員大頭貼" onchange="kk()"/>
+                            <input type="hidden" name="f會員編號" value="@x.f會員編號" />
+                        </i>
+                        <button id="btn_submit" type="submit" hidden></button>
+                    </form>
             </div>
+            
             <div class="profile-nav-info">
                 <h3 class="user-name">@x.f會員名稱</h3>
                 <div class="address">
@@ -90,7 +97,6 @@
                     {
                         <p class="state">使用者</p>
                     }
-                    else
                     {
                         <p class="state">管理員</p>
                     }
@@ -98,7 +104,8 @@
             </div>
         </div>
         <div class="main-bd">
-            <div class="col-lg-3 left-side">
+            <div class="col-lg
+                    else-3 left-side">
                 <div class="profile-side">
                     <p class="mobile-no">
                         @if (x.f會員手機 == null)
@@ -879,6 +886,13 @@
                 })
             });
         });
+    </script>
+
+    <script>
+        function kk() {
+            setTimeout(($('#btn_submit').click()), 1000);
+            
+        }
     </script>
 </body>
 
