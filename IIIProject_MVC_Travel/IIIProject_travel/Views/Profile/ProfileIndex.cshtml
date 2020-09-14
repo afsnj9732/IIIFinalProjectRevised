@@ -80,8 +80,15 @@
                 {
                     <img src="~/Content/images/default.jpg" alt="" class="">
                 }
-
+                    <form action="/Profile/ProfileIndex" method="post">
+                        <i class="fas fa-camera" style="position:absolute;bottom:0;right:0;color:#fff;">
+                            <input type="file" name="f會員大頭貼" onchange="kk()"/>
+                            <input type="hidden" name="f會員編號" value="@x.f會員編號" />
+                        </i>
+                        <button id="btn_submit" type="submit" hidden></button>
+                    </form>
             </div>
+            
             <div class="profile-nav-info">
                 <h3 class="user-name">@x.f會員名稱</h3>
                 <div class="address">
@@ -90,7 +97,6 @@
                     {
                         <p class="state">使用者</p>
                     }
-                    else
                     {
                         <p class="state">管理員</p>
                     }
@@ -98,7 +104,8 @@
             </div>
         </div>
         <div class="main-bd">
-            <div class="col-lg-3 left-side">
+            <div class="col-lg
+                    else-3 left-side">
                 <div class="profile-side">
                     <p class="mobile-no">
                         @if (x.f會員手機 == null)
@@ -196,7 +203,7 @@
                             <p id="theTabContent">目前無發文紀錄</p>
 
                             <svg version="1.1" id="wave1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                                 width="1200px" height="200px" viewBox="0 0 1200 200" enable-background="new 0 0 1200 200" xml:space="preserve">
+                                 width="300px" height="200px" viewBox="0 0 1200 200" enable-background="new 0 0 1200 200" xml:space="preserve">
                             <g>
                             <path class="wave" fill="#00779b" d="M0,0" />
 
@@ -209,7 +216,7 @@
                                 </g>
                             </svg>
                             <svg class="duck" version="1.1" id="Selected_Items" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
-                                 y="0px" width="550px" height="700px" viewBox="0 0 550 400" enable-background="new 0 0 550 400" xml:space="preserve">
+                                 y="0px" width="550px" height="200px" viewBox="0 0 550 400" enable-background="new 0 0 550 400" xml:space="preserve">
                             <g>
                             <path fill-rule="evenodd" clip-rule="evenodd" fill="#FEFE00" d="M133.45,136.5c2.033-0.967,3.05-2.633,3.05-5
 		c-0.033-15-4.05-28-12.05-39c0-0.333,0.017-0.667,0.05-1c1.367-9.4-0.983-15.067-7.05-17c0-0.333,0-0.667,0-1
@@ -259,7 +266,7 @@
                                     {
                                         <p>目前無發文紀錄</p>
                                         <svg version="1.1" id="wave1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                                             width="1200px" height="200px" viewBox="0 0 1200 200" enable-background="new 0 0 1200 200" xml:space="preserve">
+                                             width="300px" height="200px" viewBox="0 0 1200 200" enable-background="new 0 0 1200 200" xml:space="preserve">
                                         <g>
                                         <path class="wave" fill="#00779b" d="M0,0" />
 
@@ -272,7 +279,7 @@
                                 </g>
                             </svg>
                                         <svg class="duck" version="1.1" id="Selected_Items" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
-                                             y="0px" width="550px" height="700px" viewBox="0 0 550 400" enable-background="new 0 0 550 400" xml:space="preserve">
+                                             y="0px" width="550px" height="200px" viewBox="0 0 550 400" enable-background="new 0 0 550 400" xml:space="preserve">
                                         <g>
                                         <path fill-rule="evenodd" clip-rule="evenodd" fill="#FEFE00" d="M133.45,136.5c2.033-0.967,3.05-2.633,3.05-5
 		c-0.033-15-4.05-28-12.05-39c0-0.333,0.017-0.667,0.05-1c1.367-9.4-0.983-15.067-7.05-17c0-0.333,0-0.667,0-1
@@ -341,7 +348,7 @@
                         {
                             <p id="theTabContent">目前無參加活動</p>
                             <svg version="1.1" id="wave1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                                 width="1200px" height="200px" viewBox="0 0 1200 200" enable-background="new 0 0 1200 200" xml:space="preserve">
+                                 width="300px" height="200px" viewBox="0 0 1200 200" enable-background="new 0 0 1200 200" xml:space="preserve">
                             <g>
                             <path class="wave" fill="#00779b" d="M0,0" />
 
@@ -354,7 +361,7 @@
                                 </g>
                             </svg>
                             <svg class="duck" version="1.1" id="Selected_Items" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
-                                 y="0px" width="550px" height="700px" viewBox="0 0 550 400" enable-background="new 0 0 550 400" xml:space="preserve">
+                                 y="0px" width="550px" height="200px" viewBox="0 0 550 400" enable-background="new 0 0 550 400" xml:space="preserve">
                             <g>
                             <path fill-rule="evenodd" clip-rule="evenodd" fill="#FEFE00" d="M133.45,136.5c2.033-0.967,3.05-2.633,3.05-5
 		c-0.033-15-4.05-28-12.05-39c0-0.333,0.017-0.667,0.05-1c1.367-9.4-0.983-15.067-7.05-17c0-0.333,0-0.667,0-1
@@ -433,7 +440,7 @@
                         {
                             <p id="theTabContent">目前無關注活動</p>
                             <svg version="1.1" id="wave1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                                 width="1200px" height="200px" viewBox="0 0 1200 200" enable-background="new 0 0 1200 200" xml:space="preserve">
+                                 width="300px" height="200px" viewBox="0 0 1200 200" enable-background="new 0 0 1200 200" xml:space="preserve">
                             <g>
                             <path class="wave" fill="#00779b" d="M0,0" />
 
@@ -446,7 +453,7 @@
                                 </g>
                             </svg>
                             <svg class="duck" version="1.1" id="Selected_Items" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
-                                 y="0px" width="550px" height="700px" viewBox="0 0 550 400" enable-background="new 0 0 550 400" xml:space="preserve">
+                                 y="0px" width="550px" height="200px" viewBox="0 0 550 400" enable-background="new 0 0 550 400" xml:space="preserve">
                             <g>
                             <path fill-rule="evenodd" clip-rule="evenodd" fill="#FEFE00" d="M133.45,136.5c2.033-0.967,3.05-2.633,3.05-5
 		c-0.033-15-4.05-28-12.05-39c0-0.333,0.017-0.667,0.05-1c1.367-9.4-0.983-15.067-7.05-17c0-0.333,0-0.667,0-1
@@ -523,7 +530,7 @@
                         {
                             <p id="theTabContent">目前無開團紀錄</p>
                             <svg version="1.1" id="wave1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                                 width="1200px" height="200px" viewBox="0 0 1200 200" enable-background="new 0 0 1200 200" xml:space="preserve">
+                                 width="300px" height="200px" viewBox="0 0 1200 200" enable-background="new 0 0 1200 200" xml:space="preserve">
                             <g>
                             <path class="wave" fill="#00779b" d="M0,0" />
 
@@ -544,7 +551,7 @@
                                 </g>
                             </svg>
                             <svg class="duck" version="1.1" id="Selected_Items" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
-                                 y="0px" width="550px" height="700px" viewBox="0 0 550 400" enable-background="new 0 0 550 400" xml:space="preserve">
+                                 y="0px" width="550px" height="200px" viewBox="0 0 550 400" enable-background="new 0 0 550 400" xml:space="preserve">
                             <g>
                             <path fill-rule="evenodd" clip-rule="evenodd" fill="#FEFE00" d="M133.45,136.5c2.033-0.967,3.05-2.633,3.05-5
 		c-0.033-15-4.05-28-12.05-39c0-0.333,0.017-0.667,0.05-1c1.367-9.4-0.983-15.067-7.05-17c0-0.333,0-0.667,0-1
@@ -605,7 +612,7 @@
                                     {
                                         <p>目前無開團紀錄</p>
                                         <svg version="1.1" id="wave1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                                             width="1200px" height="200px" viewBox="0 0 1200 200" enable-background="new 0 0 1200 200" xml:space="preserve">
+                                             width="300px" height="200px" viewBox="0 0 1200 200" enable-background="new 0 0 1200 200" xml:space="preserve">
                                         <g>
                                         <path class="wave" fill="#00779b" d="M0,0" />
 
@@ -618,7 +625,7 @@
                                 </g>
                             </svg>
                                         <svg class="duck" version="1.1" id="Selected_Items" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
-                                             y="0px" width="550px" height="700px" viewBox="0 0 550 400" enable-background="new 0 0 550 400" xml:space="preserve">
+                                             y="0px" width="550px" height="200px" viewBox="0 0 550 400" enable-background="new 0 0 550 400" xml:space="preserve">
                                         <g>
                                         <path fill-rule="evenodd" clip-rule="evenodd" fill="#FEFE00" d="M133.45,136.5c2.033-0.967,3.05-2.633,3.05-5
 		c-0.033-15-4.05-28-12.05-39c0-0.333,0.017-0.667,0.05-1c1.367-9.4-0.983-15.067-7.05-17c0-0.333,0-0.667,0-1
@@ -789,7 +796,7 @@
                         {
                             <p id="theTabContent">目前無歷史紀錄</p>
                             <svg version="1.1" id="wave1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                                 width="1200px" height="200px" viewBox="0 0 1200 200" enable-background="new 0 0 1200 200" xml:space="preserve">
+                                 width="300px" height="200px" viewBox="0 0 1200 200" enable-background="new 0 0 1200 200" xml:space="preserve">
                             <g>
                             <path class="wave" fill="#00779b" d="M0,0" />
 
@@ -802,7 +809,7 @@
                                 </g>
                             </svg>
                             <svg class="duck" version="1.1" id="Selected_Items" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
-                                 y="0px" width="550px" height="700px" viewBox="0 0 550 400" enable-background="new 0 0 550 400" xml:space="preserve">
+                                 y="0px" width="550px" height="200px" viewBox="0 0 550 400" enable-background="new 0 0 550 400" xml:space="preserve">
                             <g>
                             <path fill-rule="evenodd" clip-rule="evenodd" fill="#FEFE00" d="M133.45,136.5c2.033-0.967,3.05-2.633,3.05-5
 		c-0.033-15-4.05-28-12.05-39c0-0.333,0.017-0.667,0.05-1c1.367-9.4-0.983-15.067-7.05-17c0-0.333,0-0.667,0-1
@@ -879,6 +886,13 @@
                 })
             });
         });
+    </script>
+
+    <script>
+        function kk() {
+            setTimeout(($('#btn_submit').click()), 1000);
+            
+        }
     </script>
 </body>
 
