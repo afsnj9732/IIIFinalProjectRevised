@@ -196,6 +196,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>JoutaEntities.edmx</DependentUpon>
     </Compile>
+    <Compile Include="sp_helpdiagramdefinition_Result.cs">
+      <DependentUpon>JoutaEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sp_helpdiagrams_Result.cs">
+      <DependentUpon>JoutaEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="tBlogComment.cs">
       <DependentUpon>JoutaEntities.tt</DependentUpon>
     </Compile>
