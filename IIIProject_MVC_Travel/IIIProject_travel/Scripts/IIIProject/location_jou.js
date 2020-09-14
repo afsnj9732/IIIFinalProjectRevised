@@ -48,7 +48,8 @@ function callmap() {
     $("body").on("click", ".getMapValue", function () {
         $('.evtLat').eq(getMapNumber).val(lat);
         $('.evtLng').eq(getMapNumber).val(lng);
-        window.confirm("地點設定成功!");
+        $('.btn_get_map_msg').eq(getMapNumber).html("設定成功");
+        //window.confirm("地點設定成功!");
     });
 
     callmap();

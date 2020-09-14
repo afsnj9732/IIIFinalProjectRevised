@@ -229,8 +229,8 @@ p{
 
 .join_user_name {
     overflow: hidden;
-    text-overflow: ellipsis;
-    width: 50px;
+    text-overflow:ellipsis ;
+    width:50px; 
     height: 29px;
     /* border-color:#fde57a */
     /* background-color: rgba(20, 80, 220, 0.746); */

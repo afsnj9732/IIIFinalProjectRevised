@@ -110,9 +110,12 @@
                         <div class="row mb-4 mx-auto align-items-center justify-content-around">
                             <span class="row  align-items-center">團圖：<input type="file" name="PicFile2" class="NeedAP"><span class="mr-5 NeedAPTo" style="color:red" hidden>活動團圖必填</span></span>
 
+                            <div class="row align-items-center">
                             <button type="button" class="btn btn-secondary btn_get_map" data-toggle="modal" getMapNumber="1" data-target="#getMap" style="background-color:gray">
                                 設定地點
                             </button>
+                            <span class="btn_get_map_msg "></span>
+                            </div>
                             <input type="hidden" class="evtLng" value="@Model.f活動經度" name="f活動經度">
                             <input type="hidden" class="evtLat" value="@Model.f活動緯度" name="f活動緯度">
 
@@ -292,7 +295,7 @@
                                     </span>
 
                                 }
-                                <div class="mx-auto join_user_name">@theGuy.f會員名稱</div>
+                                <div class="mx-auto join_user_name" title="@theGuy.f會員名稱">@theGuy.f會員名稱</div>
                             </div>
 
                             <button class="button btn-secondary jouta_black_list pr-1 pl-1" member_id="@theGuy.f會員編號" act_target="join" act_id="@Model.f活動編號">加入黑名單</button>
@@ -338,7 +341,7 @@
                                         </span>
 
                                     }
-                                    <div class="mx-auto join_user_name">@theGuy.f會員名稱</div>
+                                    <div class="mx-auto join_user_name" title="@theGuy.f會員名稱">@theGuy.f會員名稱</div>
                                 </div>
 
                                 <button class="button btn-secondary jouta_black_list pr-1 pl-1" member_id="@theGuy.f會員編號" act_target="join" act_id="@Model.f活動編號">加入黑名單</button>
