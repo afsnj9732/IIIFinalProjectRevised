@@ -262,7 +262,7 @@
         $(".ActivityFindEndTo").attr("hidden", "");
         nowdate = new Date(Date.now());
         theMonth = nowdate.getMonth()+1; //js時間月份是索引值，所以現在月份要+1
-        theDay = nowdate.getDate()+1;
+        theDay = nowdate.getDate()+2;
         FormatTime();
         $(".ActivityStart").attr("min", nowdate.getFullYear() + "-" + theMonth + "-" + theDay);        
         $(".ActivityFindEnd").attr("max", "");
