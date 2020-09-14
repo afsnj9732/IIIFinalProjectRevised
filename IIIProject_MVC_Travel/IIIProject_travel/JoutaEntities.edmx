@@ -49,6 +49,15 @@
           <Property Name="f有收藏活動的會員編號" Type="nvarchar(max)" />
           <Property Name="f活動審核名單" Type="nvarchar(max)" />
         </EntityType>
+        <EntityType Name="tBlogComment">
+          <Key>
+            <PropertyRef Name="fId" />
+          </Key>
+          <Property Name="fId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="f活動編號" Type="int" />
+          <Property Name="fBlogComment" Type="nvarchar" MaxLength="50" />
+          <Property Name="fCreateDate" Type="nvarchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="tComment">
           <Key>
             <PropertyRef Name="fID" />
@@ -107,14 +116,31 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_tBlogComment_tActivity">
+          <End Role="tActivity" Type="Self.tActivity" Multiplicity="0..1" />
+          <End Role="tBlogComment" Type="Self.tBlogComment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tActivity">
+              <PropertyRef Name="f活動編號" />
+            </Principal>
+            <Dependent Role="tBlogComment">
+              <PropertyRef Name="f活動編號" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="joutaModelStoreContainer">
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tActivity" EntityType="Self.tActivity" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tBlogComment" EntityType="Self.tBlogComment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tComment" EntityType="Self.tComment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tMember" EntityType="Self.tMember" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_tActivity_tMember" Association="Self.FK_tActivity_tMember">
             <End Role="tMember" EntitySet="tMember" />
             <End Role="tActivity" EntitySet="tActivity" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tBlogComment_tActivity" Association="Self.FK_tBlogComment_tActivity">
+            <End Role="tActivity" EntitySet="tActivity" />
+            <End Role="tBlogComment" EntitySet="tBlogComment" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -165,6 +191,7 @@
           <Property Name="fQRcodeImage" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="f有收藏活動的會員編號" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="f活動審核名單" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tBlogComment" Relationship="joutaModel.FK_tBlogComment_tActivity" FromRole="tActivity" ToRole="tBlogComment" />
         </EntityType>
         <EntityType Name="tMember">
           <Key>
@@ -220,6 +247,11 @@
             <End Role="tActivity" EntitySet="tActivity" />
           </AssociationSet>
           <EntitySet Name="tComment" EntityType="joutaModel.tComment" />
+          <EntitySet Name="tBlogComment" EntityType="joutaModel.tBlogComment" />
+          <AssociationSet Name="FK_tBlogComment_tActivity" Association="joutaModel.FK_tBlogComment_tActivity">
+            <End Role="tActivity" EntitySet="tActivity" />
+            <End Role="tBlogComment" EntitySet="tBlogComment" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="tComment">
           <Key>
@@ -235,6 +267,28 @@
           <Property Name="f意見類型" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="f意見時間" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="tBlogComment">
+          <Key>
+            <PropertyRef Name="fId" />
+          </Key>
+          <Property Name="fId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="f活動編號" Type="Int32" />
+          <Property Name="fBlogComment" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="fCreateDate" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tActivity" Relationship="joutaModel.FK_tBlogComment_tActivity" FromRole="tBlogComment" ToRole="tActivity" />
+        </EntityType>
+        <Association Name="FK_tBlogComment_tActivity">
+          <End Type="joutaModel.tActivity" Role="tActivity" Multiplicity="0..1" />
+          <End Type="joutaModel.tBlogComment" Role="tBlogComment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tActivity">
+              <PropertyRef Name="f活動編號" />
+            </Principal>
+            <Dependent Role="tBlogComment">
+              <PropertyRef Name="f活動編號" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -332,6 +386,16 @@
                 <ScalarProperty Name="f電話" ColumnName="f電話" />
                 <ScalarProperty Name="f電子郵件" ColumnName="f電子郵件" />
                 <ScalarProperty Name="fID" ColumnName="fID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tBlogComment">
+            <EntityTypeMapping TypeName="joutaModel.tBlogComment">
+              <MappingFragment StoreEntitySet="tBlogComment">
+                <ScalarProperty Name="fCreateDate" ColumnName="fCreateDate" />
+                <ScalarProperty Name="fBlogComment" ColumnName="fBlogComment" />
+                <ScalarProperty Name="f活動編號" ColumnName="f活動編號" />
+                <ScalarProperty Name="fId" ColumnName="fId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

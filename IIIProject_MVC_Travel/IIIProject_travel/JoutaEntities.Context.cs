@@ -29,5 +29,6 @@ namespace IIIProject_travel
         public virtual DbSet<tActivity> tActivity { get; set; }
         public virtual DbSet<tMember> tMember { get; set; }
         public virtual DbSet<tComment> tComment { get; set; }
+        public virtual DbSet<tBlogComment> tBlogComment { get; set; }
     }
 }

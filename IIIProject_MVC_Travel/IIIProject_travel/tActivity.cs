@@ -14,6 +14,12 @@ namespace IIIProject_travel
     
     public partial class tActivity
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public tActivity()
+        {
+            this.tBlogComment = new HashSet<tBlogComment>();
+        }
+    
         public int f活動編號 { get; set; }
         public int f會員編號 { get; set; }
         public string f活動類型 { get; set; }
@@ -45,5 +51,7 @@ namespace IIIProject_travel
         public string f活動審核名單 { get; set; }
     
         public virtual tMember tMember { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tBlogComment> tBlogComment { get; set; }
     }
 }
