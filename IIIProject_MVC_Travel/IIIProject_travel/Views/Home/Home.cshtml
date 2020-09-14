@@ -108,26 +108,27 @@
                     <form class="form-inline table d-flex align-items-end" method="POST" action="~/Eat/EatIndex">
                         <div class="form-group col-lg-3 col-md-3 col-sm-12 inner">
                             <label for="location_eat">分類:</label>
-                            <select class="form-control" name="txtType" id="location_eat">
+                            <select class="form-control" name="txtEatCategory" id="location_eat">
                                 <option value="素食">&nbsp;素食</option>
                                 <option value="葷食">&nbsp;葷食</option>
                             </select>
                         </div>
                         <div class="form-group col-lg-2 col-md-2 col-sm-12 inner">
-                            <label for="label">地區:</label>
-                            <select class="form-control" name="txtArea" id="label" style="border: none;">
-                                <option value="北部">北部</option>
-                                <option value="中部">中部</option>
-                                <option value="南部">南部</option>
-                                <option value="東部">東部</option>
+                            <label for="label">總讚數:</label>
+                            <select class="form-control" name="txtTotalGood" id="label" style="border: none;">
+                                <option value="全部" selected>&nbsp;全部</option>
+                                <option value="10">讚>10</option>
+                                <option value="30">讚>30</option>
+                                <option value="50">讚>50</option>
+                                <option value="100">讚>100</option>
                             </select>
                         </div>
                         <div class="form-group col-lg-3 col-md-3 col-sm-12 inner">
                             <label for="keyword">關鍵字:</label>
-                            <input type="text" name="txtKeyword" class="form-control" id="keyword">
+                            <input type="text" name="txtEatKeyword" class="form-control" id="keyword">
                         </div>
                         <div class="form-group col-lg-3 col-md-3 col-sm-12 inner mb-0">
-                            <button type="submit" class="btn btn-warning">Go!</button>
+                            <button type="submit" class="btn btn-warning">搜尋去</button>
                         </div>
 
                     </form>
@@ -165,7 +166,7 @@
                             <input type="text" name="txtTravelKeyword" class="form-control" id="keyword_travel">
                         </div>
                         <div class="form-group col-lg-3 col-md-3 col-sm-12 inner mb-0">
-                            <button type="submit" class="btn btn-warning">Go!</button>
+                            <button type="submit" class="btn btn-warning">搜尋去</button>
                         </div>
                     </form>
                 </div>
@@ -177,7 +178,7 @@
                             <input type="text" name="txtKeyword" class="form-control" id="keyword_article">
                         </div>
                         <div class="form-group col-lg-3 col-md-3 col-sm-12 inner mb-0">
-                            <button type="submit" class="btn btn-warning">Go!</button>
+                            <button type="submit" class="btn btn-warning">搜尋去</button>
                         </div>
                     </form>
                 </div>
