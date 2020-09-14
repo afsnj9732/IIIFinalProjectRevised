@@ -87,8 +87,8 @@
                         <span>標題：<input type="text" name="f活動標題" style="width:90%" class="NeedAT" value="@Model.f活動標題"><p class="NeedATTo" style="color:red" hidden>活動標題請至少填滿8個字</p></span>
                         <div class="row m-0 mb-3 justify-content-around">
                             <span>旅遊開始日期： <input type="date" min="@DateTime.Now.AddDays(1.0).ToString("yyyy-MM-dd")" max="" class="ActivityStart" name="f活動開始時間" value="@Model.f活動開始時間"><p class="ActivityStartTo" style="color:red" hidden>活動開始時間必填</p></span>
-                            <span>旅遊結束日期： <input type="date" min="@DateTime.Now.AddDays(2.0).ToString("yyyy-MM-dd")" max="" class="ActivityEnd"   name="f活動結束時間" value="@Model.f活動結束時間"><p class="ActivityEndTo" style="color:red" hidden>活動結束時間必填</p></span>
-                            <span>入團截止： <input type="date" min="@DateTime.Now.ToString("yyyy-MM-dd")" max="" class="ActivityFindEnd"   name="f活動招募截止時間" value="@Model.f活動招募截止時間"><p class="ActivityFindEndTo" style="color:red" hidden>招募截止時間必填</p></span>
+                            <span>旅遊結束日期： <input type="date" min="@DateTime.Now.AddDays(2.0).ToString("yyyy-MM-dd")" max="" class="ActivityEnd" name="f活動結束時間" value="@Model.f活動結束時間"><p class="ActivityEndTo" style="color:red" hidden>活動結束時間必填</p></span>
+                            <span>入團截止： <input type="date" min="@DateTime.Now.ToString("yyyy-MM-dd")" max="" class="ActivityFindEnd" name="f活動招募截止時間" value="@Model.f活動招募截止時間"><p class="ActivityFindEndTo" style="color:red" hidden>招募截止時間必填</p></span>
                         </div>
                         <div class="row mb-4 mx-auto align-items-center justify-content-around">
                             <span><img src="~/Content/images/04.png" class="mb-1" alt="">預算：<input type="text" name="f活動預算" class="NeedAC" value="@Model.f活動預算"><span class="NeedACTo" style="color:red" hidden>活動預算必填</span></span>
@@ -120,6 +120,14 @@
                                     <option value="東部">東部</option>
                                 </select>
                             </span>
+                        </div>
+
+                        <div class="mb-4 mx-auto align-items-center justify-content-around">
+                            <span class="mb-1">點選一個地點：</span>
+                            <div id="mapid">
+                                <input type="hidden" id="evtLng" value="" name="f活動經度">
+                                <input type="hidden" id="evtLat" value="" name="f活動緯度">
+                            </div>
                         </div>
 
                         <div class="row align-items-center">
