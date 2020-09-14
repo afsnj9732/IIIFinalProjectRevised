@@ -11,7 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>快速找團 | Jouta</title>
     @Styles.Render("~/Content/css/bootstrap.min.css")
-    @Styles.Render("~/Content/css/style.css")
+    @Styles.Render("~/Content/sass/style.css")
     @Styles.Render("~/Content/quickmatch.css")
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
           integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
@@ -25,18 +25,21 @@
 <body>
     <div class="container-fluid ">
         <!-- navbar -->
-        <nav class="navbar navbar-expand-lg navbar-light header" id="main">
+        <nav class="navbar navbar-expand-lg navbar-fixed-top">
             <div class="container">
-                <a class="navbar-brand" href="main.html">
+                <a class="navbar-brand" href="@Url.Action("Home", "Home")">
+                    @*改用Url.Action*@
                     <img src="~/Content/images/joutalogo_black.png" alt="" width="100">
                 </a>
+                @*<div class="navbar-header" id="main">*@
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
                         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
+                @*</div>*@
+                <div class="navbar-collapse collapse justify-content-between" id="navbarNav">
                     <ul class="nav navbar-nav">
-                        <li class="nav-item">@Html.ActionLink("首頁", "Home", "Home", new { }, new { @class = "nav-link nav-main text-dark" })</li>
+                        <li class="nav-item active">@Html.ActionLink("首頁", "Home", "Home", new { }, new { @class = "nav-link nav-main text-dark" })</li>
                         <li class="nav-item">@Html.ActionLink("找飯局", "EatIndex", "Eat", new { }, new { @class = "nav-link nav-eat text-dark" })</li>
                         <li class="nav-item">@Html.ActionLink("找旅遊", "TravelIndex", "Travel", new { }, new { @class = "nav-link nav-travel text-dark" })</li>
                         <li class="nav-item">@Html.ActionLink("找文章", "Index", "Blog", new { }, new { @class = "nav-link nav-blog text-dark" })</li>
@@ -44,14 +47,17 @@
                     <ul class="nav navbar-nav">
                         @if (Session["member"] != null)
                         {
-                            <li class="nav-item nav-link nav-login text-dark">@Html.ActionLink("您好，" + x.f會員名稱, "ProfileIndex", "Profile")  </li>
+                            <li class="nav-item nav-link nav-login text-dark">@Html.ActionLink("您好，" + x.f會員名稱, "ProfileIndex", "Profile") </li>
+                            @*<li class="nav-item">
+                                    <img src="@ViewData["Img"]" alt="img" width="30" height="30" style="border:2px solid green;" />
+                                </li>*@
                             <li class="nav-item">@Html.ActionLink("登出", "Home", "Home", new { id = 0 }, new { @class = "nav-link nav-login text-dark" })</li>
                         }
                         else
                         {
                             <li class="nav-item">@Html.ActionLink("登入", "LoginIndex", "Login", new { }, new { @class = "nav-link nav-login text-dark" })</li>
+                            <li class="nav-item">@Html.ActionLink("註冊", "Register", "Home", new { }, new { @class = "nav-link nav-register text-dark" })</li>
                         }
-                        <li class="nav-item">@Html.ActionLink("註冊", "Register", "Home", new { }, new { @class = "nav-link nav-register text-dark" })</li>
                     </ul>
                 </div>
             </div>
@@ -64,7 +70,7 @@
             開啟定位尋找附近的TA
         </button>
         <div class="hint">
-            <span>將以顯示經緯度之方圓三公里作計算，若無定位將隨機抽選活動!</span>
+            <span class="demoLocation">將以顯示經緯度之方圓三公里作計算，若無定位將隨機抽選活動!</span>
         </div>
 
         <div class="fakecontainer">
@@ -103,38 +109,74 @@
                 </div>
             </div>
         </div>
-
+        <!-- show map -->
         <div class="container">
             <div id="mapid"></div>
         </div>
     </div>
 
     <!-- show result -->
-    <section class="">
-        <div class="container-fluid theBottom">
-            <div class="container">
-                <div class="d-flex resultbox">
-                    <div id="UserBlock">
-                        <p id="mAchieve">無稱號</p>
-                        <p id="mAvatar"></p>
-                        <p id="mName">使用者名稱:會員名稱</p>
-                        <p id="mRating">使用者評分:會員評分</p>
-                    </div>
-                    <div class="contentblock">
-                        <p id="mTimeleft">剩餘時間:<span>17:02:15</span></p>
-                        <p class="content"></p>
-                        <div id="share" class="row justify-content-end pr-4">
-                            <button class="btn  btn-warning btn-block" type="submit">更多</button>
-                            <button class="btn  btn-warning btn-block" type="submit">分享</button>
-                            <button class="btn  btn-warning btn-block" type="submit">留言</button>
+    @*success sec*@
+    <section class="secY">
+        <div class="container mb-3">
+            <div class="row resultbox">
+                <div class="col-md-4">
+                    <img src="" class="card-img mImg">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h3 class="card-title mTitle"></h3>
+                        <p class="card-text mContent"></p>
+                        <p class="card-text mName"></p>
+                        <p class="card-text mDeadline"></p>
+                        <div id="btnDiv">
+                            <button class="btn btnContent mt-2" data-toggle="modal" data-target="#randCard">Read More</button>
                         </div>
-                        <br>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- modal -->
+        <div class="modal" id="randCard">
+            <div class="modal-dialog modal-dialog-scrollable">
+                <div class="modal-content">
+
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h2 class="card-title"></h2>
+                        <button type="button" class="close" data-dismiss="modal">×</button>
+                    </div>
+
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        <img src="" class="card-img mImg" />
+                        <p class="card-text mContent"></p>
+                        <div class="container">
+                            <img src="~/Content/images/17.png" id="mSort">
+                            <img src="~/Content/images/03.png" id="mPlace">
+                            <img src="~/Content/images/04.png" id="mEstimate">
+                            <img src="~/Content/images/06.png" id="mView">
+                            <img src="~/Content/images/05.png" id="mLike">
+                        </div>
+                    </div>
+
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-
+    @*fail sec*@
+    <section class="secN">
+        <div class="container mb-3">
+            <div class="row resultbox" style="height:auto; padding:100px;">
+                <h3>沒有符合條件的活動</h3>
+            </div>
+        </div>
+    </section>
     <!-- footer -->
     <div class="container-fluid footer">
         <p class="text-center mt-2 mb-2">Copyright © 2020 Jouta All rights reserved</p>

@@ -1,10 +1,10 @@
 ﻿(function () {
 
-    $('.resultTrigger').click(function () {
-        $('section').removeClass('active');
-        $('section').addClass('active');
-        $('html,body').animate({ scrollTop: $(document).height() }, 1000);
-    });
+    //$('.resultTrigger').click(function () {
+        //$('section').removeClass('active');
+        //$('section').addClass('active');
+        //$('html,body').animate({ scrollTop: $(document).height() }, 1000);
+    //});
 
     $('#f1').click(function () {
         $(this).removeClass('clicked');

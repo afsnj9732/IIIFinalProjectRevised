@@ -207,7 +207,7 @@
                                             <div class="card" @*style="width: 18rem;"*@>
                                                 <img src="~/Content/images/@t.f會員大頭貼" class="card-img-top" alt="" width="350" height="250">
                                                 <div class="card-body">
-                                                    <h5 class="card-title">@t.f會員名稱</h5>
+                                                    <h3 class="card-title">@t.f會員名稱</h3>
                                                     <p class="card-text">
                                                         @t.f會員自我介紹
                                                     </p>
@@ -330,7 +330,7 @@
                     <div class="col-lg-4">
                         <figure class="traveller">
                             <div class="image">
-                                <img src="~/Content/images/@a.f活動團圖" alt="@a.tMember.f會員名稱" @*width="350"*@ height="300" style="border-radius:5px 5px 0 0;" />
+                                <img src="~/Content/images/@a.f活動團圖" alt="@a.tMember.f會員名稱" @*width="350"*@ height="250" style="border-radius:5px 5px 0 0;" />
                             </div>
                             <figcaption style="border-radius:0 0 5px 5px;">
                                 <h3>@a.f活動標題</h3>
@@ -340,10 +340,10 @@
                                 <button class = "btn btnContent mt-2" data-toggle="modal" data-target="#@a.f活動標題">我要+1</button>
                                 @*@Html.ActionLink("我要+1", "TravelIndex", "Travel", new { id = a.f活動編號 }, new { @class = "btn btnContent mt-2" })*@
 
-                                <section class="block_footer">
+                                <section class="block_footer row justify-content-between">
                                     <div class="date">@a.f活動開始時間</div>
-                                    <div class="icons">
-                                        <div class="views">
+                                    <div class="icons row">
+                                        <div class="views mr-2">
                                             <i class="ion-eye"></i>@a.f活動瀏覽次數
                                         </div>
                                         <div class="love">

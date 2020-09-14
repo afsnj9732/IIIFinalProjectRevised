@@ -26,6 +26,8 @@ function showPosition(position) {
         mymap.remove();
     }
 
+
+
     //畫出地圖
     mymap = L.map('mapid').setView([currentLat, currentLng], 15);
     L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
@@ -47,6 +49,37 @@ function showPosition(position) {
     }).addTo(mymap);
     marker.bindPopup("你在這裡!").openPopup();
 }
+
+//demo if needed
+$('.demoLocation').click(function () {
+    currentLat = 25.034012;
+    currentLng = 121.543333;
+    x.innerHTML = "座標 (" + 25.034 + " , " + 121.543 + ")"
+
+    if (mymap !== undefined) {
+        mymap.remove();
+    }
+
+    mymap = L.map('mapid').setView([currentLat, currentLng], 15);
+    L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+        attribution: '&copy; Jouta',
+        maxZoom: 18,
+        id: 'mapbox/streets-v11',
+        tileSize: 512,
+        zoomOffset: -1,
+        accessToken: 'pk.eyJ1IjoiZGV5byIsImEiOiJja2VqY3JheTQyM3JsMndzNDBsODF2b214In0.1f7T-kY2Uz1F5FZ_WsLpaA'
+    }).addTo(mymap);
+
+    //畫出marker和圓圈範圍
+    var marker = L.marker([currentLat, currentLng]).addTo(mymap);
+    var circle = L.circle([currentLat, currentLng], {
+        color: '#0080ff',
+        fillColor: '#c4e1ff',
+        fillOpacity: 0.5,
+        radius: 1500
+    }).addTo(mymap);
+    marker.bindPopup("你在這裡!").openPopup();
+});
 
 //翻牌給tab
 function tabs(panelIndex) {
@@ -76,25 +109,28 @@ $('.resultTrigger').click(function () {
         success: function (data) {
             //如果有撈到資料
             if (data.length !== 0) {
+                $('section').removeClass('active');
                 //console.log(data);
-                $('#mAchieve').text(data[0].mAchieve);
-                $('#mAvatar').html('<img src="/Content/images/' + data[0].mAvatar + '" id="mAvatar" class="col-auto ArticlePic">');
-                $('#mName').text('使用者名稱:' + data[0].mName);
-                $('#mRating').text('使用者評分:' + data[0].mRating);
-                //$('#mTimeleft').text(''); //controller待修改
-                $('.content').text(data[0].content);
-                $('#share').attr('hidden', false);
+                $('.secY').addClass('active');
+
+                $('.mImg').attr('src', '../Content/images/' + data[0].mImg);
+                $('.mContent').text(data[0].mContent);
+                $('.mSort').text(data[0].mSort);
+                $('.mPlace').text(data[0].mPlace);
+                $('.mEstimate').text(data[0].mEstimate);
+                $('.mView').text(data[0].mView);
+                $('.mLike').text(data[0].mLike);
+                $('.mTitle').text(data[0].mTitle);
+                $('.mName').text(data[0].mName);
+                $('.mDeadline').text(data[0].mDeadline);
             }
             //沒撈到資料 (還可調整)
             else {
-                $('#mAchieve').text('');
-                $('#mAvatar').html('');
-                $('#mName').text('');
-                $('#mRating').text('');
-                $('#mTimeleft').text('');
-                $('.content').text('找不到符合條件的結果');
-                $('#share').attr('hidden', true);
+                $('section').removeClass('active');
+                $('.secN').addClass('active');
             }
+            $('html,body').animate({ scrollTop: $(document).height() }, 1000);
+
         },
         error: function (xhr, status, error) {
             console.log(error);

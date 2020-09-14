@@ -11,6 +11,7 @@
 
 body, html {
     font-family: 'Noto Sans TC','微軟正黑體', monospace !important;
+    /*font-family: 'Lato', Arial, sans-serif;*/
     overflow-x: hidden;
     -ms-overflow-style: none;
 }
@@ -34,6 +35,10 @@ a {
 
 .container-fluid {
     padding: 0;
+}
+
+.row{
+    margin:0;
 }
 
 /* banner */

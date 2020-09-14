@@ -69,11 +69,16 @@ namespace IIIProject_travel.Controllers
                              (t.f活動緯度 < curLat + 0.02)
                              select new
                              {
-                                 mAchieve = t.tMember.f會員稱號,
-                                 mAvatar = t.tMember.f會員大頭貼,
+                                 mImg=t.f活動團圖,
+                                 mContent = t.f活動內容,
+                                 mSort=t.f活動分類,
+                                 mPlace=t.f活動地區,
+                                 mEstimate=t.f活動預算,
+                                 mView=t.f活動瀏覽次數,
+                                 mLike=t.f活動讚數,
+                                 mTitle=t.f活動標題,
                                  mName = t.tMember.f會員名稱,
-                                 mRating = t.tMember.f會員評分,
-                                 content = t.f活動內容
+                                 mDeadline=t.f活動招募截止時間
                              })
                       .OrderBy(t => Guid.NewGuid()).Take(1);
 
@@ -85,11 +90,16 @@ namespace IIIProject_travel.Controllers
                              where t.f活動類型 == "飯局"
                              select new
                              {
-                                 mAchieve = t.tMember.f會員稱號,
-                                 mAvatar = t.tMember.f會員大頭貼,
+                                 mImg = t.f活動團圖,
+                                 mContent = t.f活動內容,
+                                 mSort = t.f活動分類,
+                                 mPlace = t.f活動地區,
+                                 mEstimate = t.f活動預算,
+                                 mView = t.f活動瀏覽次數,
+                                 mLike = t.f活動讚數,
+                                 mTitle = t.f活動標題,
                                  mName = t.tMember.f會員名稱,
-                                 mRating = t.tMember.f會員評分,
-                                 content = t.f活動內容
+                                 mDeadline = t.f活動招募截止時間
                              })
                       .OrderBy(t => Guid.NewGuid()).Take(1);
 
@@ -108,11 +118,16 @@ namespace IIIProject_travel.Controllers
                              (t.f活動緯度 < curLat + 0.02)
                              select new
                              {
-                                 mAchieve = t.tMember.f會員稱號,
-                                 mAvatar = t.tMember.f會員大頭貼,
+                                 mImg = t.f活動團圖,
+                                 mContent = t.f活動內容,
+                                 mSort = t.f活動分類,
+                                 mPlace = t.f活動地區,
+                                 mEstimate = t.f活動預算,
+                                 mView = t.f活動瀏覽次數,
+                                 mLike = t.f活動讚數,
+                                 mTitle = t.f活動標題,
                                  mName = t.tMember.f會員名稱,
-                                 mRating = t.tMember.f會員評分,
-                                 content = t.f活動內容
+                                 mDeadline = t.f活動招募截止時間
                              })
                       .OrderBy(t => Guid.NewGuid()).Take(1);
 
@@ -124,11 +139,16 @@ namespace IIIProject_travel.Controllers
                              where t.f活動類型 == "旅遊"
                              select new
                              {
-                                 mAchieve = t.tMember.f會員稱號,
-                                 mAvatar = t.tMember.f會員大頭貼,
+                                 mImg = t.f活動團圖,
+                                 mContent = t.f活動內容,
+                                 mSort = t.f活動分類,
+                                 mPlace = t.f活動地區,
+                                 mEstimate = t.f活動預算,
+                                 mView = t.f活動瀏覽次數,
+                                 mLike = t.f活動讚數,
+                                 mTitle = t.f活動標題,
                                  mName = t.tMember.f會員名稱,
-                                 mRating = t.tMember.f會員評分,
-                                 content = t.f活動內容
+                                 mDeadline = t.f活動招募截止時間
                              })
                       .OrderBy(t => Guid.NewGuid()).Take(1);
 
