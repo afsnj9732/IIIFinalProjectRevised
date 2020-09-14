@@ -1,12 +1,19 @@
-﻿
-@using PagedList
+﻿@using PagedList
 @using PagedList.Mvc
-@model IPagedList<IIIProject_travel.tActivity>
+
+
 
 @{
     Layout = null;
     var x = (tMember)Session["member"];
+    dbJoutaEntities db = new dbJoutaEntities();
+
+    var member = new tMember();
+    member = (from t in db.tMember
+              where t.f會員編號 == t.f會員編號
+              select t).FirstOrDefault();
 }
+@model IPagedList<IIIProject_travel.tActivity>
 
 <!DOCTYPE html>
 <html lang="zh-Hant-TW">
@@ -67,9 +74,9 @@
             <!-- Blog Entries Column -->
             <div class="col-md-8" id="main-section">
 
-                <h1 class="my-4">
-                    Suzume的美好豐富集綿
-                </h1>
+                <h2 class="my-4" style="text-align:center">
+                    Jouta的精選文章
+                </h2>
 
                 <hr size="8" width="100%">
                 @{
@@ -88,7 +95,7 @@
                             </div>
                             <div class="card-footer text-muted">
 
-                                <p class="pDateSection"> Posted on January 1, 2020 by <a href="#">Jouta</a></p>
+                                <p class="pDateSection"> Posted on @tArticle.f活動發起日期 by <a href="#">@tArticle.tMember.f會員名稱</a></p>
 
                             </div>
                         </div>
@@ -112,13 +119,13 @@
             <div class="col-md-4" id="sidebar">
 
 
-                <div class="col-md-4" id="sidebar">
+                
+
 
 
                     <section id="achang-intro-2" class="card my-4">
 
-
-                        <h3>@x.f會員名稱</h3>
+                        <h3>@member.f會員名稱</h3>
 
 
 
@@ -126,14 +133,13 @@
                         <p class="content">
 
 
-                            <img src="~/Content/images/@x.f會員大頭貼" style="width:300px; height:300px">
+                            <img src="~/Content/images/@member.f會員大頭貼" style="width:300px; height:300px">
                             <br>
-                            @x.f會員自我介紹
-
+                            @member.f會員自我介紹
                             <br>
-                            <i class="fab fa-instagram"></i>@x.f會員名稱
+                            <i class="fab fa-instagram"></i>@member.f會員名稱
                             <br>
-                            <i class="far fa-envelope"></i>@x.f會員電子郵件
+                            <i class="far fa-envelope"></i>@member.f會員電子郵件
 
 
 
@@ -175,11 +181,11 @@
 
                     </div>
 
-                </div>
 
-            </div>
-    </div>
+
+                
         </div>
+    </div>
 
     <!-- footer -->
 

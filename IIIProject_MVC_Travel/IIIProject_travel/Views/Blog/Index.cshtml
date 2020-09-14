@@ -130,7 +130,7 @@
 
 
 
-                                <p class="pDateSection"> Posted on @tArticle.f活動發起日期 by</p> <p style="margin-left:10px">@Html.ActionLink("Jouta", "personalIndex", "Blog", new { }, new { @class = "" })</p>
+                                <p class="pDateSection"> Posted on @tArticle.f活動發起日期 by</p> <p style="margin-left:10px">@Html.ActionLink(tArticle.tMember.f會員名稱, "personalIndex", "Blog", new {id = tArticle.f活動編號 }, new { @class = "" })</p>
 
                                 <p style="padding-left:200px">瀏覽次數: @tArticle.f活動瀏覽次數</p>
 
