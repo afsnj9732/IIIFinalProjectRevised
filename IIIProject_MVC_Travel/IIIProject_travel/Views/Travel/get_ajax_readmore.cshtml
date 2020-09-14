@@ -110,9 +110,12 @@
                         <div class="row mb-4 mx-auto align-items-center justify-content-around">
                             <span class="row  align-items-center">團圖：<input type="file" name="PicFile2" class="NeedAP"><span class="mr-5 NeedAPTo" style="color:red" hidden>活動團圖必填</span></span>
 
+                            <div class="row align-items-center">
                             <button type="button" class="btn btn-secondary btn_get_map" data-toggle="modal" getMapNumber="1" data-target="#getMap" style="background-color:gray">
                                 設定地點
                             </button>
+                            <span class="btn_get_map_msg "></span>
+                            </div>
                             <input type="hidden" class="evtLng" value="@Model.f活動經度" name="f活動經度">
                             <input type="hidden" class="evtLat" value="@Model.f活動緯度" name="f活動緯度">
 
