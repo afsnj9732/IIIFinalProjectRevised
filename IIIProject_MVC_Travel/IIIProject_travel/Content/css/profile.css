@@ -339,7 +339,7 @@ svg {
 .duck {
     position: absolute;
     width: 150px;
-    top: -50px;
+    top: 200px;
     left: 45%;
     z-index: 6;
 }
