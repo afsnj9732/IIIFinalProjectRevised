@@ -5,12 +5,11 @@
     Layout = null;
     var x = (tMember)Session["member"];
 
-    var commentList = new List<tActivity>();
+    var commentList = new List<tBlogComment>();
 
 
-    commentList = (from t in db.tActivity
-                   where t.f活動類型 == "文章"
-                   where t.f活動編號 == t.f活動編號
+    commentList = (from t in db.tBlogComment
+                   where Model.f活動編號 == t.f活動編號
                    select t).ToList();
 
 }
@@ -146,8 +145,11 @@
                     <div class="card-body">
                         @using (Html.BeginForm("AddComment", "Blog", FormMethod.Post, new { }))
                         {
-                            <input type="text" aria-label="First name" class="form-control" name="content">
-                            <button type="submit" value="留言" class="btn btn-primary" id="btnComment">提交</button>
+                           @Html.HiddenFor(p => p.f活動編號)
+
+                           @Html.TextBox("Content")
+
+                           <input type="submit" value="留言" class="btn btn-default">
                         }
                     </div>
                 </div>
@@ -166,7 +168,7 @@
                                     <img class="d-flex mr-3 rounded-circle" src="https://picsum.photos/50/50/?random=1" alt="">
                                     <div class="media-body">
                                         <h5 class="mt-0">Commenter Name</h5>
-                                        @commemt.f活動留言 (@commemt.f活動留言時間)
+                                        @commemt.fBlogComment (@commemt.fCreateDate)
                                     </div>
                                 </div>
 

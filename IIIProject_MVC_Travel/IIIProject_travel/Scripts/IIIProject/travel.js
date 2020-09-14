@@ -36,7 +36,7 @@
     function travel_sort_scrollHandler() {
         travel_sort.classList.add("fix");
         calendarEl.classList.remove("calendar_relative");
-        calendarEl.classList.add("calendar_fix");
+        calendarEl.classList.add("calendar_fix");               
         travel_sort.style.top = header.offsetHeight + "px";
         document.querySelector("#replace").classList.add("col-3");
         travel_sort.classList.remove("col-3");
@@ -47,18 +47,28 @@
     function travel_RWD() {
         if (document.body.clientWidth > 1500 || document.body.clientWidth < 970) {
             $(".popguys").attr('class', "mr-2 ml-2 popguys");
+            $("#labelTop").removeAttr("hidden");           
         }
         else {
             $(".popguys").attr('class', "mr-1 ml-1 popguys");
+            $("#labelTop").attr("hidden", "");
+            
+        }
+
+        if (document.body.clientWidth < 970) {
+            $("#labelTop").css("bottom", "0%");
+        } else {
+            $("#labelTop").css("bottom", "5%");
         }
 
         if (document.body.clientWidth < 1850) {
             $(".RWD_1850").css('display', '');
             $(".RWD_1851").css('display', 'none');
-
+            
         } else {
             $(".RWD_1850").css('display', 'none');
             $(".RWD_1851").css('display', '');
+           
         }
 
         if (document.body.clientWidth >= 975) {
@@ -130,22 +140,34 @@
 
 
 
-
-
     //Bootstrap Modal 關閉觸發事件 
     $(document).on('hidden.bs.modal', '.modal', function () {
-        $('.modal:visible').length && $(document.body).addClass('modal-open'); //疊加互動視窗 Scroll Debug
-        $(".combine_readmore").addClass("show"); //顯示隱藏的第一個視窗
+        $('.modal:visible').length && $(document.body).addClass('modal-open'); //疊加互動視窗 Scroll Debug        
+        if ($(".get_map").hasClass("getMap_show")) { //若目前是要關閉設定地區視窗   
+            $(".combine_edit").addClass("show");
+            $(".JoutaStart").addClass("show");
+            $("#getMap").removeClass("getMap_show");
+        } else {             
+            $(".combine_readmore").addClass("show"); //顯示視窗
+            
+        }
     });
 
+    $("body").on('click', '[data-target="#getMap"]', function () {
+        $("#getMap").addClass("getMap_show");
+    });
 
 
     $(document).on('click', '[data-toggle = modal]', function () {
         if ($('.modal-backdrop').eq(0).css('background-color') !== null) {
-            $(".combine_readmore").removeClass("show"); //隱藏第一個視窗
+            $(".JoutaStart").removeClass("show");
+            $(".combine_readmore").removeClass("show"); //隱藏視窗
+            $(".combine_edit").removeClass("show");
         }          
         $('.modal-backdrop').eq(1).css('background-color', 'white'); 
     });
+
+ 
 
 
     //書籤回最上
@@ -225,7 +247,7 @@
             CKEDITOR.instances.EditAct.destroy();
         }
         let target = $(this).attr("limitNumber");
-        if (target == "0") {
+        if (target === "0") {
             //文字編輯器
             CKEDITOR.replace('f活動內容', { height: 400, width: 1100 });
 
