@@ -26,10 +26,10 @@ namespace IIIProject_travel.Controllers
             return View(c);
         }
         [HttpPost]
-        public ActionResult ProfileIndex(tMember id)
+        public ActionResult UploadImg(tMember t)
         {
             dbJoutaEntities db = new dbJoutaEntities();
-            var x = db.tMember.Where(a => a.f會員編號 == id.f會員編號).FirstOrDefault();
+            var x = db.tMember.Where(a => a.f會員編號 == t.f會員編號).FirstOrDefault();
             HttpPostedFileBase avaPhoto = Request.Files["f會員大頭貼"];
             if ( avaPhoto != null)
             {
@@ -39,7 +39,8 @@ namespace IIIProject_travel.Controllers
                 avaPhoto.SaveAs(path);
                 x.f會員大頭貼 = photName;
             }
-            return RedirectToAction("ProfileIndex",id);
+            db.SaveChanges();
+            return RedirectToAction("ProfileIndex");
         }
 
 
