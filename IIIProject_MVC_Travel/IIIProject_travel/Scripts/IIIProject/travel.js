@@ -36,7 +36,7 @@
     function travel_sort_scrollHandler() {
         travel_sort.classList.add("fix");
         calendarEl.classList.remove("calendar_relative");
-        calendarEl.classList.add("calendar_fix");
+        calendarEl.classList.add("calendar_fix");               
         travel_sort.style.top = header.offsetHeight + "px";
         document.querySelector("#replace").classList.add("col-3");
         travel_sort.classList.remove("col-3");
@@ -47,18 +47,28 @@
     function travel_RWD() {
         if (document.body.clientWidth > 1500 || document.body.clientWidth < 970) {
             $(".popguys").attr('class', "mr-2 ml-2 popguys");
+            $("#labelTop").removeAttr("hidden");           
         }
         else {
             $(".popguys").attr('class', "mr-1 ml-1 popguys");
+            $("#labelTop").attr("hidden", "");
+            
+        }
+
+        if (document.body.clientWidth < 970) {
+            $("#labelTop").css("bottom", "0%");
+        } else {
+            $("#labelTop").css("bottom", "5%");
         }
 
         if (document.body.clientWidth < 1850) {
             $(".RWD_1850").css('display', '');
             $(".RWD_1851").css('display', 'none');
-
+            
         } else {
             $(".RWD_1850").css('display', 'none');
             $(".RWD_1851").css('display', '');
+           
         }
 
         if (document.body.clientWidth >= 975) {
