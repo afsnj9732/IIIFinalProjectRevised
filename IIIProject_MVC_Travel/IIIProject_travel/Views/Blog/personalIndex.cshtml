@@ -112,92 +112,74 @@
             <div class="col-md-4" id="sidebar">
 
 
+                <div class="col-md-4" id="sidebar">
 
-                <section id="achang-intro-2" class="card my-4">
-                    <h2>會員名稱</h2>
-                    <img src="https://picsum.photos/300/300/?random=1">
-                    <p class="content">
-                        Food &amp; Wine Lover, Bilingual Blogger, Marketing Freelancer and Content
-                        Creator
-                        <br>美食與酒類愛好者,行銷創作接案者
-                        <br>
-                        <br>
-                        <i class="fab fa-instagram"></i> Jouta
-                        <br>
-                        <br>
-                        <i class="far fa-envelope"></i> jouta@gmail.com
-                        <br>
-                    </p>
-                </section>
 
-                <!-- Search Widget -->
-                <div class="card my-4">
-                    <h5 class="card-header">Search</h5>
-                    <div class="card-body">
-                        <div class="input-group">
-                            <input type="text" class="form-control" placeholder="Search for...">
-                            <span class="input-group-append">
-                                <button class="btn btn-secondary" type="button">Go!</button>
-                            </span>
-                        </div>
-                    </div>
-                </div>
+                    <section id="achang-intro-2" class="card my-4">
 
-                <!-- Categories Widget -->
-                <div class="card my-4">
-                    <h5 class="card-header">分類</h5>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <ul class="list-unstyled mb-0">
-                                    <li>
-                                        <a href="#">美食</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">旅遊</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">美好回憶</a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="col-lg-6">
-                                <ul class="list-unstyled mb-0">
-                                    <li>
-                                        <a href="#">大港開唱</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">爵士音樂節</a>
-                                    </li>
-                                </ul>
+
+                        <h3>@x.f會員名稱</h3>
+
+
+
+                        @*<img src="https://picsum.photos/300/300/?random=1">*@
+                        <p class="content">
+
+
+                            <img src="~/Content/images/@x.f會員大頭貼" style="width:300px; height:300px">
+                            <br>
+                            @x.f會員自我介紹
+
+                            <br>
+                            <i class="fab fa-instagram"></i>@x.f會員名稱
+                            <br>
+                            <i class="far fa-envelope"></i>@x.f會員電子郵件
+
+
+
+                        </p>
+                    </section>
+
+                    <!-- Search Widget -->
+                    <form action="/Blog/personalIndex" method="GET">
+                        <div class="card my-4">
+                            <h5 class="card-header">Search</h5>
+                            <div class="card-body">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" name="txtKey" placeholder="Search for...">
+                                    <span class="input-group-append">
+                                        <button class="btn btn-secondary" type="submit">Go!</button>
+                                    </span>
+                                </div>
                             </div>
                         </div>
+                    </form>
+
+
+                    <!-- Side Widget -->
+                    <div class="card my-4">
+                        <h5 class="card-header">Side Widget</h5>
+                        <!-- <div class="card-body"> -->
+
+                        <iframe src="https://www.instagram.com/p/CAHMofInFwy/embed/captioned/?cr=1&amp;v=12&amp;wp=956&amp;rd=https%3A%2F%2Fletswritetw.github.io&amp;rp=%2Fletswrite-instagram-embed%2F#%7B%22ci%22%3A0%2C%22os%22%3A54857.92500000389%2C%22ls%22%3A457.45000000169966%2C%22le%22%3A458.2700000028126%7D"
+                                width="340" height="500" style="border:none;overflow:hidden ;height: 500px;" scrolling="no"
+                                frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
+                        <script async src="//www.instagram.com/embed.js"></script>
                     </div>
-                </div>
+                    <div class="card my-4">
+                        <!-- <h5 class="card-header">Side Widget</h5> -->
+                        <!-- <div class="card-body"> -->
+                        <iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fnoraneko.nyankichi%2F&tabs=timeline&width=340&height=500&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&appId"
+                                width="340" height="500" style="border:none;overflow:hidden" scrolling="no" frameborder="0"
+                                allowTransparency="true" allow="encrypted-media"></iframe>
 
-                <!-- Side Widget -->
-                <div class="card my-4">
-                    <h5 class="card-header">Side Widget</h5>
-                    <!-- <div class="card-body"> -->
-
-                    <iframe src="https://www.instagram.com/p/CAHMofInFwy/embed/captioned/?cr=1&amp;v=12&amp;wp=956&amp;rd=https%3A%2F%2Fletswritetw.github.io&amp;rp=%2Fletswrite-instagram-embed%2F#%7B%22ci%22%3A0%2C%22os%22%3A54857.92500000389%2C%22ls%22%3A457.45000000169966%2C%22le%22%3A458.2700000028126%7D"
-                            width="340" height="500" style="border:none;overflow:hidden ;height: 500px;" scrolling="no"
-                            frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
-                    <script async src="//www.instagram.com/embed.js"></script>
-                </div>
-                <div class="card my-4">
-                    <!-- <h5 class="card-header">Side Widget</h5> -->
-                    <!-- <div class="card-body"> -->
-                    <iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fnoraneko.nyankichi%2F&tabs=timeline&width=340&height=500&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&appId"
-                            width="340" height="500" style="border:none;overflow:hidden" scrolling="no" frameborder="0"
-                            allowTransparency="true" allow="encrypted-media"></iframe>
+                    </div>
 
                 </div>
 
             </div>
-
-        </div>
     </div>
+        </div>
 
     <!-- footer -->
 
