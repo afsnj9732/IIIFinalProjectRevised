@@ -1,10 +1,19 @@
+.row{
+    margin:0;
+}
+
 body, html {
     font-family: 'Noto Sans TC','·L³n¥¿¶ÂÅé', monospace !important;
 }
 
-body{
-    background-color:#fffef4;
-    height:100vh;
+body {
+    background-color: #fffef4;
+    height: 100vh;
+    -ms-overflow-style:none;
+}
+
+body::-webkit-scrollbar{
+    display:none;
 }
 
 .bio {
@@ -304,10 +313,15 @@ input[type="text"]:focus{
     outline: none;
 }
 
-.profile-detail{
+.tab_info {
     border: solid gainsboro;
     z-index: 1;
 }
+
+/*.profile-detail{
+    border: solid gainsboro;
+    z-index: 1;
+}*/
 
 .tab_info{
     margin-bottom: 50px;

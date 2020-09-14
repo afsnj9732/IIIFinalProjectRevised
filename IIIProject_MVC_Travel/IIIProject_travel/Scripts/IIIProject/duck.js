@@ -1,4 +1,4 @@
-﻿gsap.registerPlugin(CSSPlugin);
+﻿//gsap.registerPlugin(morphSVGPlugin);
 
 var maintl;
 

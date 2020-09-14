@@ -375,6 +375,11 @@
     <Content Include="Content\images\chatbg.jpg" />
     <Content Include="Content\images\default.jpg" />
     <Content Include="Content\images\f899c3a6-45ba-4d37-ba05-8f4e031b0a63.jpg" />
+    <Content Include="Content\images\foodie1.jpg" />
+    <Content Include="Content\images\foodie2.jpg" />
+    <Content Include="Content\images\foodie3.jpg" />
+    <Content Include="Content\images\foodie4.jpg" />
+    <Content Include="Content\images\foodie5.jpg" />
     <Content Include="Content\images\McDonalds.png" />
     <Content Include="Content\images\mume.jpg" />
     <Content Include="Content\images\proheadshot.jpg" />
