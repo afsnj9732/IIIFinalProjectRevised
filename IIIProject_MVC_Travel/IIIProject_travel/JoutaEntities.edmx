@@ -49,6 +49,15 @@
           <Property Name="f有收藏活動的會員編號" Type="nvarchar(max)" />
           <Property Name="f活動審核名單" Type="nvarchar(max)" />
         </EntityType>
+        <EntityType Name="tBlogComment">
+          <Key>
+            <PropertyRef Name="fId" />
+          </Key>
+          <Property Name="fId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="f活動編號" Type="int" />
+          <Property Name="fBlogComment" Type="nvarchar" MaxLength="50" />
+          <Property Name="fCreateDate" Type="nvarchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="tComment">
           <Key>
             <PropertyRef Name="fID" />
@@ -107,14 +116,62 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_tBlogComment_tActivity">
+          <End Role="tActivity" Type="Self.tActivity" Multiplicity="0..1" />
+          <End Role="tBlogComment" Type="Self.tBlogComment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tActivity">
+              <PropertyRef Name="f活動編號" />
+            </Principal>
+            <Dependent Role="tBlogComment">
+              <PropertyRef Name="f活動編號" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="joutaModelStoreContainer">
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tActivity" EntityType="Self.tActivity" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tBlogComment" EntityType="Self.tBlogComment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tComment" EntityType="Self.tComment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tMember" EntityType="Self.tMember" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_tActivity_tMember" Association="Self.FK_tActivity_tMember">
             <End Role="tMember" EntitySet="tMember" />
             <End Role="tActivity" EntitySet="tActivity" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tBlogComment_tActivity" Association="Self.FK_tBlogComment_tActivity">
+            <End Role="tActivity" EntitySet="tActivity" />
+            <End Role="tBlogComment" EntitySet="tBlogComment" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -165,6 +222,7 @@
           <Property Name="fQRcodeImage" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="f有收藏活動的會員編號" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="f活動審核名單" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tBlogComment" Relationship="joutaModel.FK_tBlogComment_tActivity" FromRole="tActivity" ToRole="tBlogComment" />
         </EntityType>
         <EntityType Name="tMember">
           <Key>
@@ -220,6 +278,41 @@
             <End Role="tActivity" EntitySet="tActivity" />
           </AssociationSet>
           <EntitySet Name="tComment" EntityType="joutaModel.tComment" />
+          <EntitySet Name="tBlogComment" EntityType="joutaModel.tBlogComment" />
+          <AssociationSet Name="FK_tBlogComment_tActivity" Association="joutaModel.FK_tBlogComment_tActivity">
+            <End Role="tActivity" EntitySet="tActivity" />
+            <End Role="tBlogComment" EntitySet="tBlogComment" />
+          </AssociationSet>
+          <FunctionImport Name="sp_alterdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_creatediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_dropdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(joutaModel.sp_helpdiagramdefinition_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(joutaModel.sp_helpdiagrams_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_renamediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="new_diagramname" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_upgraddiagrams" />
         </EntityContainer>
         <EntityType Name="tComment">
           <Key>
@@ -235,6 +328,39 @@
           <Property Name="f意見類型" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="f意見時間" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="tBlogComment">
+          <Key>
+            <PropertyRef Name="fId" />
+          </Key>
+          <Property Name="fId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="f活動編號" Type="Int32" />
+          <Property Name="fBlogComment" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="fCreateDate" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tActivity" Relationship="joutaModel.FK_tBlogComment_tActivity" FromRole="tBlogComment" ToRole="tActivity" />
+        </EntityType>
+        <Association Name="FK_tBlogComment_tActivity">
+          <End Type="joutaModel.tActivity" Role="tActivity" Multiplicity="0..1" />
+          <End Type="joutaModel.tBlogComment" Role="tBlogComment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tActivity">
+              <PropertyRef Name="f活動編號" />
+            </Principal>
+            <Dependent Role="tBlogComment">
+              <PropertyRef Name="f活動編號" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="sp_helpdiagramdefinition_Result">
+          <Property Type="Int32" Name="version" Nullable="true" />
+          <Property Type="Binary" Name="definition" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagrams_Result">
+          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="OwnerID" Nullable="false" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -335,6 +461,40 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="tBlogComment">
+            <EntityTypeMapping TypeName="joutaModel.tBlogComment">
+              <MappingFragment StoreEntitySet="tBlogComment">
+                <ScalarProperty Name="fCreateDate" ColumnName="fCreateDate" />
+                <ScalarProperty Name="fBlogComment" ColumnName="fBlogComment" />
+                <ScalarProperty Name="f活動編號" ColumnName="f活動編號" />
+                <ScalarProperty Name="fId" ColumnName="fId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="joutaModel.Store.sp_alterdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="joutaModel.Store.sp_creatediagram" />
+          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="joutaModel.Store.sp_dropdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="joutaModel.Store.sp_helpdiagramdefinition">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="joutaModel.sp_helpdiagramdefinition_Result">
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="joutaModel.Store.sp_helpdiagrams">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="joutaModel.sp_helpdiagrams_Result">
+                <ScalarProperty Name="Database" ColumnName="Database" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
+                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="joutaModel.Store.sp_renamediagram" />
+          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="joutaModel.Store.sp_upgraddiagrams" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
