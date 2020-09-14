@@ -188,9 +188,11 @@
                     <h1>@Model.tMembers.f會員名稱 的發文</h1>
                     @{ //擷取會員發過文章編號，並對應
                         var post = db.tMember.Where(a => a.f會員編號 == Model.tMembers.f會員編號).Select(b => b.f會員發起的活動編號).FirstOrDefault();
+                        
                         if (string.IsNullOrEmpty(post))
                         {
                             <p>目前無發文紀錄</p>
+                            
                         }
                         else
                         {
@@ -207,6 +209,7 @@
                                     if (post_item == null)
                                     {
                                         <p>目前無發文紀錄</p>
+                                        goto label;
                                     }
                                     else
                                     {
@@ -229,6 +232,8 @@
                                     }
                                 }
                             }
+                            label:;
+
                         }
                     }
                 </div>

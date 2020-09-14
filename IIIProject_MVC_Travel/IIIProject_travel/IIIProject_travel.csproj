@@ -196,6 +196,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>JoutaEntities.edmx</DependentUpon>
     </Compile>
+    <Compile Include="tBlogComment.cs">
+      <DependentUpon>JoutaEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="tComment.cs">
       <DependentUpon>JoutaEntities.tt</DependentUpon>
     </Compile>
@@ -222,6 +225,7 @@
       <DependentUpon>JoutaEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\CBlog.cs" />
+    <Compile Include="ViewModel\CBlogComment.cs" />
     <Compile Include="ViewModel\CCoupon.cs" />
     <Compile Include="ViewModel\CData.cs" />
     <Compile Include="ViewModel\CLogin.cs" />

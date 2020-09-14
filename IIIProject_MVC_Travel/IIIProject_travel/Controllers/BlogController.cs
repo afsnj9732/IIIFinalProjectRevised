@@ -26,9 +26,9 @@ namespace IIIProject_travel.Controllers
         {
             var article = from t in (new dbJoutaEntities()).tActivity
                           where t.f活動類型 == "文章"
-                          orderby t.f活動編號
                           select t;
-            IQueryable<tActivity> tarticle = null;
+
+            //IQueryable<tActivity> tarticle = null;
 
             if (txtKey != null)
             {
@@ -40,15 +40,22 @@ namespace IIIProject_travel.Controllers
             }
 
             if (string.IsNullOrEmpty(txtKey))
-                tarticle = from torder in (new dbJoutaEntities()).tActivity
-                           where torder.f活動類型 =="文章"
-                           select torder;
+            {
+                    article = from torder in (new dbJoutaEntities()).tActivity
+                                               where torder.f活動類型 =="文章"
+                                               select torder;
+            }
+                
             else
-                tarticle = from torder in (new dbJoutaEntities()).tActivity
-                           where torder.f活動類型 == "文章"
-                           where torder.f活動標題.Contains(txtKey)
-                           select torder;
+            {
 
+                    article = from m in (new dbJoutaEntities()).tActivity
+                           where m.f活動類型 == "文章" && m.f活動標題.Contains(txtKey)                        
+                           select m;
+
+
+            }
+                
             ViewBag.Sernow = txtKey;
             ViewBag.keyName = string.IsNullOrEmpty(sortOder) ? "NameDown" : "";
             ViewBag.dateOrder = sortOder == "dateUp" ? "dateDown" : "dateUp";
@@ -101,15 +108,51 @@ namespace IIIProject_travel.Controllers
 
         }
 
-        public ActionResult personalIndex (int page = 1)
+        public ActionResult personalIndex (string txtKey,string currentfilter , int page = 1)
         {
 
-            int currentPage = page < 1 ? 1 : page;
 
             var article = from t in (new dbJoutaEntities()).tActivity
                           where t.f活動類型 == "文章"
                           orderby t.f活動編號
                           select t;
+            if (txtKey != null)
+            {
+
+                page = 1;
+
+
+            }
+
+            else
+            {
+                txtKey = currentfilter;
+
+            }
+
+            if (string.IsNullOrEmpty(txtKey))
+            {
+
+                 article = from t in (new dbJoutaEntities()).tActivity
+                              where t.f活動類型 == "文章"
+                              orderby t.f活動編號
+                              select t;
+            }
+
+            else
+            {
+
+                article = from t in (new dbJoutaEntities()).tActivity
+                          where t.f活動類型 == "文章" && t.f活動標題.Contains(txtKey)
+                          orderby t.f活動編號
+                          select t;
+
+            }
+
+
+            int currentPage = page < 1 ? 1 : page;
+
+
             var articleList = article.ToList();
             var result = articleList.ToPagedList(currentPage, pagesize);
 
@@ -134,6 +177,8 @@ namespace IIIProject_travel.Controllers
 
 
         }
+
+
 
         public ActionResult LikeIt(int? id)
         {
@@ -200,23 +245,32 @@ namespace IIIProject_travel.Controllers
 
 
         [HttpPost]
-        public ActionResult AddComment (CBlog p )
+        public ActionResult AddComment (CBlogComment p )
         {
 
-            var currentTime = DateTime.Now;
 
-            tActivity article = new tActivity();
 
-            article.f活動類型 = "文章";
-            article.f活動編號 = p.f活動編號;
-            article.f活動留言 = p.content;
-            article.f活動留言時間 = currentTime.ToString();
+            var ct = DateTime.Now;
 
-            dbJoutaEntities db = new dbJoutaEntities();
-            db.tActivity.Add(article);
+            var CurrentTime = ct.ToString();
+
+
+
+            var coomment = new tBlogComment()
+            {
+
+                f活動編號 = p.f活動編號,
+                fBlogComment = p.Content,
+                fCreateDate = CurrentTime,
+
+            };
+
+
+            db.tBlogComment.Add(coomment);
             db.SaveChanges();
 
-            return RedirectToAction("indBlogContentex", new { id = p.id});
+
+            return RedirectToAction("indBlogContentex", new { id = p.f活動編號});
 
 
         }

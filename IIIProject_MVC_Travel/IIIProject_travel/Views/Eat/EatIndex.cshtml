@@ -1,11 +1,11 @@
 ﻿@{
     Layout = null;
-    //var x = (tMember)Session["member"];
-    tMember x = (new dbJoutaEntities()).tMember.FirstOrDefault(y => y.f會員編號 == 3);
-    Session["member"] = x;
+    var x = (tMember)Session["member"];
+    //tMember x = (new dbJoutaEntities()).tMember.FirstOrDefault(y => y.f會員編號 == 3);
+    //Session["member"] = x;
 
     //HomeSearch
-    string[] Search = { "", "所有", "全部", "" };
+    string[] Search = { "", "所有", "全部", ""};
     if (!string.IsNullOrEmpty(Model))
     {
         Search = Model.Split(",");
