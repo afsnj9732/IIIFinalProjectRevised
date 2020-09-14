@@ -12,6 +12,11 @@
 body, html {
     font-family: 'Noto Sans TC','微軟正黑體', monospace !important;
     overflow-x: hidden;
+    -ms-overflow-style: none;
+}
+
+body::-webkit-scrollbar {
+    display: none;
 }
 
 html {
