@@ -35,8 +35,10 @@ namespace IIIProject_travel.Controllers
                         var NowMemberAct = db.tActivity.Where(t => t.f活動編號.ToString() == item).FirstOrDefault();
                         CalendarEvents CalendarEvent = new CalendarEvents();
                         CalendarEvent.title = NowMemberAct.f活動標題;
+                        
                         CalendarEvent.start = NowMemberAct.f活動開始時間;
-                        CalendarEvent.end = NowMemberAct.f活動結束時間 + " 00:00:01";
+                        CalendarEvent.end = 
+                            NowMemberAct.f活動開始時間 == NowMemberAct.f活動結束時間 ?  NowMemberAct.f活動結束時間 : NowMemberAct.f活動結束時間 + " 23:59:59";
                         CalendarEvent.classNames = "CalendarEvent" + " " + "EventActID" + NowMemberAct.f活動編號;
                         NowMemberTotalEvents[i] = CalendarEvent;
                         i++;
@@ -225,6 +227,26 @@ namespace IIIProject_travel.Controllers
             p.f會員編號 = Member.f會員編號;
             p.f活動類型 = "旅遊";
             p.f活動參加的會員編號 = "," + Member.f會員編號;
+            var theCategory = Convert.ToDateTime(p.f活動結束時間) - Convert.ToDateTime(p.f活動開始時間);
+            int timeCheck = Convert.ToInt32(theCategory.ToString("dd"));
+            switch(timeCheck)//時間判斷
+            {
+                case 1:
+                    p.f活動分類 = "兩天一夜";
+                    break;
+                case 2:
+                    p.f活動分類 = "三天兩夜";
+                    break;
+                case 4:
+                    p.f活動分類 = "五天四夜";
+                    break;
+                case 6:
+                    p.f活動分類 = "七天六夜";
+                    break;
+                default:
+                    p.f活動分類 = "其他";
+                    break;
+            }
             db.tActivity.Add(p);
             db.SaveChanges();
             int ID = db.tActivity.Where(t => t.f會員編號 == Member.f會員編號)
