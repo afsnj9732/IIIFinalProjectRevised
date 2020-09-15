@@ -63,14 +63,14 @@ namespace IIIProject_travel.Controllers
         {
             CMember c = new CMember();
             var z = (tMember)Session["member"];
-            if (z != null)
-            {
-                if (z.f會員編號 == id)
-                {
+            //if (z != null)
+            //{
+            //    if (z.f會員編號 == id)
+            //    {
 
-                }
-            }
-            return View();
+            //    }
+            //}
+            return View(z);
         }
         public ActionResult otherprofile(int? id)
         {

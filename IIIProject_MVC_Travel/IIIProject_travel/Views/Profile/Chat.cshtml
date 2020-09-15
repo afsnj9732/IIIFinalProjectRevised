@@ -103,7 +103,7 @@
                 if (name == @Model.tMembers.f會員名稱 || name == @Model.tMembers.f會員暱稱) {
                     $("#discussion").append('<p style="text-align:right; display: -webkit-box; overflow: inherit; text-overflow: ellipsis; -webkit-box-orient: vertical;">' +
                         '<strong style="margin-bottom:10px"><img src="../Content/images/@Model.tMembers.f會員大頭貼" style="margin-right:3px" id="userAva"><span id="userName">' + htmlEncode(name) + '<br></span></strong> ' + htmlEncode(message) + '</p>')
-                } else if(name != @Model.tMembers.f會員名稱 || name != @Model.tMembers.f會員暱稱) {
+                } else if(name != @xModel.tMembers.f會員名稱 || name != @Model.tMembers.f會員暱稱) {
                     $("#discussion").append('<p style="text-align:left; display: -webkit-box; overflow: inherit; text-overflow: ellipsis; -webkit-box-orient: vertical;">' +
                         '<strong style="margin-bottom:10px"><img src="../Content/images/15.png" style="margin-right:3px" id="userAva"></div><span id="otherUserName">' + htmlEncode(name)  + '<br></span></strong>' + htmlEncode(message) + '</p>')
                 }
