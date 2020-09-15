@@ -104,6 +104,13 @@
         });
     });
 
+    function TheDatePicker(index) {
+        $(".ActivityStart").eq(index).datepicker({ dateFormat: 'yy-mm-dd' });
+        $(".ActivityEnd").eq(index).datepicker({ dateFormat: 'yy-mm-dd' });
+        $(".ActivityFindEnd").eq(index).datepicker({ dateFormat: 'yy-mm-dd' });
+    }
+    
+
     //ajax取得readmore
     function get_ajax_readmore() {
         $.ajax({            
@@ -114,6 +121,7 @@
             success: function (data) {
                 $("#add_ajax_readmore").html(data); //更新readmore項目     
                 //$('#ajax_readmore').modal("show");
+                TheDatePicker(1);
             }
         });  
     }
@@ -733,7 +741,7 @@
     //進入旅遊業面預設最新被選為排序
     $("#travel_sort .sort li").eq(0).click(); 
 
-    
+    TheDatePicker(0);
 
     
 })(); 
