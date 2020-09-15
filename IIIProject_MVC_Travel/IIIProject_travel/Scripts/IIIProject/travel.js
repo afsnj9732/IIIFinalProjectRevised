@@ -1,6 +1,6 @@
 (function () {  
     var order, background_color, contain, category, label, page, condition, readmore_target;
-    var tiemLimit = new Array();
+    var timeLimit = new Array();
     var calendarEl = document.getElementById('calendar');
     //動態生成行事曆
     function getCalendar() {
@@ -114,7 +114,8 @@
             data: { "act_id": dateLimitID },
             success: function (data) {
                 if (data !== "")
-                    tiemLimit = data;
+                    timeLimit = data.split(',');
+                var t = timeLimit;
             }
         });        
 
@@ -123,7 +124,7 @@
                 dateFormat: 'yy-mm-dd',
                 beforeShowDay: function (date) {
                     var string = jQuery.datepicker.formatDate('yy-mm-dd', date);
-                    return [tiemLimit.indexOf(string) === -1];
+                    return [timeLimit.indexOf(string) === -1];
                 },                 
                 minDate: '2',
             }
@@ -133,7 +134,7 @@
                 dateFormat: 'yy-mm-dd',
                 beforeShowDay: function (date) {
                     var string = jQuery.datepicker.formatDate('yy-mm-dd', date);
-                    return [tiemLimit.indexOf(string) === -1];
+                    return [timeLimit.indexOf(string) === -1];
                 },
                 minDate: '2'
             }
@@ -314,14 +315,20 @@
         theDay = NowDate.getDate() - 1;
         FormatTime();
         let deadLine = NowDate.getFullYear() + "-" + theMonth + "-" + theDay;
+        for (let item of tiemLimit) {
+            let itemDate = new Date(Date.parse(item));
+            var x = 3;
+            //if (itemDate > NowDate) {
 
+            //}
+        }
         $(".ActivityEnd").eq(index).datepicker('destroy');//重新建立
         $(".ActivityEnd").eq(index).datepicker(
             {
                 dateFormat: 'yy-mm-dd',
                 beforeShowDay: function (date) {
                     var string = jQuery.datepicker.formatDate('yy-mm-dd', date);
-                    return [tiemLimit.indexOf(string) === -1];
+                    return [timeLimit.indexOf(string) === -1];
                 },
                 minDate: $(this).val(), //因為有當天行程所以允許在同一天
                 //maxDate 找最接近minDate的日期
