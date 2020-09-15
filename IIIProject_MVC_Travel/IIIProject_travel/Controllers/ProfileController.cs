@@ -48,7 +48,8 @@ namespace IIIProject_travel.Controllers
         {
             tMember y = (tMember)Session["member"];
             var x = db.tMember.Where(a=>a.f會員編號 == y.f會員編號).FirstOrDefault();
-            x.f會員名稱 = Request.Form["txtNickName"];
+            x.f會員名稱 = Request.Form["txtName"];
+            x.f會員暱稱 = Request.Form["txtNickName"];
             x.f會員生日 = Request.Form["txtBirth"];
             x.f會員興趣 = Request.Form["txtHobby"];
             x.f會員自我介紹 = Request.Form["txtIntro"];

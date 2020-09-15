@@ -31,7 +31,7 @@ namespace IIIProject_travel.Controllers
                     where !string.IsNullOrEmpty(m.f會員自我介紹)
                     select m;
             var y = from k in (new dbJoutaEntities()).tActivity
-                    where !string.IsNullOrEmpty(k.f活動團圖)
+                    where k.tMember.f會員評分>4
                     select k;
             y = y.Take(3);
             x = x.OrderBy(t=> Guid.NewGuid()).Take(3);
