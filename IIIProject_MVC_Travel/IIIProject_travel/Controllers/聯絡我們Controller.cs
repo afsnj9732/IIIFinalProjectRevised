@@ -168,12 +168,48 @@ namespace IIIProject_travel.Controllers
             return View(x);
         }
         [HttpPost]
-        public ActionResult r回覆(C回覆 y)
+        public ActionResult r回覆(C回覆 y,tComment p)
         {
             send(y);
-            ViewBag.kk = "傳送成功";
-            return RedirectToAction("List");
+            //ViewBag.kk = "傳送成功";
+            dbJoutaEntities db = new dbJoutaEntities();
+            tComment A = db.tComment.FirstOrDefault(m => m.fID == p.fID);
+            if (A != null)
+            {
+                A.f意見狀態 = "已回覆";
+                db.SaveChanges();
+            }
+                return RedirectToAction("List");
         }
+
+
+
+        public ActionResult New()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult New(C回覆 y)
+        {
+            dbJoutaEntities db = new dbJoutaEntities();
+            tComment x = new tComment();
+            x.f標題 = Request.Form["f標題"];
+            x.f意見 = Request.Form["f意見"];
+            x.f性別 = Request.Form["f性別"];
+            x.f意見類型 = Request.Form["f意見類型"];
+            x.f聯絡人 = Request.Form["f聯絡人"];
+            x.f電子郵件 = Request.Form["f電子郵件"];
+            x.f電話 = Request.Form["f電話"];
+            x.f意見時間 = DateTime.Now.ToString();
+            x.f意見狀態 = "未回覆";
+            db.tComment.Add(x);
+            db.SaveChanges();
+            string message = "傳送成功";
+            ViewBag.ll =message;
+            return View ();
+        }
+
 
 
         [NonAction]
@@ -182,13 +218,13 @@ namespace IIIProject_travel.Controllers
             //Jouta官方帳號
             string gmail_account = "Joutagroup445@gmail.com";
             string gmail_password = "admin123admin";
-            string gmail_mail = "Joutagroup445@gmail.com";     
+            string gmail_mail = "Joutagroup445@gmail.com";
             var fromEmail = new MailAddress(gmail_mail, "Jouta服務團隊");
             var toEmail = new MailAddress(y.f電子郵件);
-            string body = "你好"+y.f聯絡人+y.f性別+"已收到您的意見" + "<br/>"+
-                          "您對"+y.f標題+ y.f意見+"的問題"+ "<br/>"+
-                          "在此向您說明"+y.f回覆+"<br/>"+
-                          "如有任何問題，歡迎隨時與我們聯繫，謝謝。";
+            string body = "你好，"+ "&nbsp;" + y.f聯絡人 + "&nbsp;" + "Jouta團隊已收到您的意見:" + "<br/>" +
+                          "<br/>" + y.f標題 + "<br/>"+ "<br/>" + y.f意見 + "<br/>"+"<br/>" +"在此向您說明:" + "<br/>"+ "<br/>"+ y.f回覆 + "<br/>"+ "<br/>"+
+                          "<br/>"+ "<br/>"+"如有任何問題，歡迎隨時與我們聯繫，謝謝";
+                         
 
             SmtpClient smtpServer = new SmtpClient("smtp.gmail.com");
             smtpServer.Port = 587;
@@ -208,30 +244,7 @@ namespace IIIProject_travel.Controllers
             //設定信箱內容為HTML格式
             mail.IsBodyHtml = true;
             smtpServer.Send(mail);
-        }
-
-
-
-
-        public ActionResult New()
-        {
-            return View();
-        }
-        public ActionResult Save()
-        {
-            dbJoutaEntities db = new dbJoutaEntities();
-            tComment x = new tComment();
-            x.f標題 = Request.Form["txt名稱"];
-            x.f意見 = Request.Form["txt意見"];
-            x.f性別 = Request.Form["gender"];
-            x.f意見類型 = Request.Form["txt意見類型"];
-            x.f聯絡人 = Request.Form["txt聯絡人"];
-            x.f電子郵件 = Request.Form["txtMail"];
-            x.f電話 = Request.Form["txt電話"];
-
-            db.tComment.Add(x);
-            db.SaveChanges();
-            return RedirectToAction("New");
+      
         }
 
 
