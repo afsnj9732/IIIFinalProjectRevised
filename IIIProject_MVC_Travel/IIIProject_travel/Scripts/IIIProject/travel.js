@@ -11,6 +11,7 @@
                     //行事曆                   
                     let calendar = new FullCalendar.Calendar(calendarEl, {
                         initialView: 'dayGridMonth',
+                        displayEventTime: false,
                         locale: 'zh-tw',
                         height: 750,
                     });
@@ -18,6 +19,7 @@
                 } else if (data !== "1") {
                     let calendar = new FullCalendar.Calendar(calendarEl, {
                         initialView: 'dayGridMonth',
+                        displayEventTime: false,
                         locale: 'zh-tw',
                         height: 750,
                         events: JSON.parse(data),
