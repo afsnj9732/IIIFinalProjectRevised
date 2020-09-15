@@ -138,7 +138,7 @@ namespace IIIProject_travel.Controllers
             }
 
             //分頁
-            int 筆數 = 20;
+            int 筆數 = 7;
             int 當前頁面 = page < 1 ? 1 : page;
             var 結果 = 會員.ToPagedList(當前頁面, 筆數);
             

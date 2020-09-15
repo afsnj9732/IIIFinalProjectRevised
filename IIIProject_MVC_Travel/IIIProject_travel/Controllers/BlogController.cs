@@ -125,7 +125,7 @@ namespace IIIProject_travel.Controllers
 
 
             var article = from t in (new dbJoutaEntities()).tActivity
-                          where t.f活動類型 == "文章" && t.f活動編號 == id
+                          where t.f活動類型 == "文章" && t.f會員編號 == id
                           orderby t.f會員編號
                           select t;
             if (txtKey != null)
@@ -146,7 +146,7 @@ namespace IIIProject_travel.Controllers
             {
 
                  article = from t in (new dbJoutaEntities()).tActivity
-                              where t.f活動類型 == "文章" && t.f活動編號 == id
+                              where t.f活動類型 == "文章" && t.f會員編號 == id
                               orderby t.f活動編號
                               select t;
             }
@@ -155,7 +155,7 @@ namespace IIIProject_travel.Controllers
             {
 
                 article = from t in (new dbJoutaEntities()).tActivity
-                          where t.f活動類型 == "文章" && t.f活動編號 == id && t.f活動標題.Contains(txtKey)
+                          where t.f活動類型 == "文章" && t.f會員編號 == id && t.f活動標題.Contains(txtKey)
                           orderby t.f活動編號
                           select t;
 

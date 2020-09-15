@@ -19,7 +19,7 @@ namespace IIIProject_travel.Controllers
         {
             dbJoutaEntities context = new dbJoutaEntities();
             var query = from t in context.tActivity
-                        select new  { name = t.f活動地區, count = t.f活動預算 };
+                        select new  { name = t.f活動發起日期, count = t.f活動瀏覽次數 };
             //var query = context.tActivity.Include("f活動預算")
             //.GroupBy(p => p.Product.ProductName)
             //.Select(g => new { name = g.Key, name =  g.Sum(w => w.Quantity) }).ToList();
