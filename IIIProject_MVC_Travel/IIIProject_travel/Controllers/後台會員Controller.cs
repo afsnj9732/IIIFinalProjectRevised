@@ -58,7 +58,6 @@ namespace IIIProject_travel.Controllers
             ViewBag.生日排序 = sortOrder == "生日升冪" ? "生日降冪" : "生日升冪";
             ViewBag.暱稱排序 = sortOrder == "暱稱升冪" ? "暱稱降冪" : "暱稱升冪";
             ViewBag.性別排序 = sortOrder == "性別升冪" ? "性別降冪" : "性別升冪";
-            ViewBag.興趣排序 = sortOrder == "興趣升冪" ? "興趣降冪" : "興趣升冪";
 
             switch (sortOrder)
             {
@@ -124,12 +123,6 @@ namespace IIIProject_travel.Controllers
                     break;
                 case "性別升冪":
                     會員 = 會員.OrderBy(s => s.f會員性別);
-                    break;
-                case "興趣降冪":
-                    會員 = 會員.OrderByDescending(s => s.f會員興趣);
-                    break;
-                case "興趣升冪":
-                    會員 = 會員.OrderBy(s => s.f會員興趣);
                     break;
 
                 default:
