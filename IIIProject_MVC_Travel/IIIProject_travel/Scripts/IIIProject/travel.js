@@ -1,6 +1,6 @@
 (function () {  
     var order, background_color, contain, category, label, page, condition, readmore_target;
-    var tiemLimit = new Array();
+    var timeLimit = new Array();
     var calendarEl = document.getElementById('calendar');
     //動態生成行事曆
     function getCalendar() {
@@ -114,36 +114,78 @@
             data: { "act_id": dateLimitID },
             success: function (data) {
                 if (data !== "")
-                    tiemLimit = data;
+                    timeLimit = data.split(',');
             }
-        });        
-
+        });
         $(".ActivityStart").eq(index).datepicker(
             {
                 dateFormat: 'yy-mm-dd',
                 beforeShowDay: function (date) {
                     var string = jQuery.datepicker.formatDate('yy-mm-dd', date);
-                    return [tiemLimit.indexOf(string) === -1];
-                },                 
+                    return [timeLimit.indexOf(string) === -1];
+                },
                 minDate: '2',
             }
         );
-        $(".ActivityEnd").eq(index).datepicker(
-            {
-                dateFormat: 'yy-mm-dd',
-                beforeShowDay: function (date) {
-                    var string = jQuery.datepicker.formatDate('yy-mm-dd', date);
-                    return [tiemLimit.indexOf(string) === -1];
-                },
-                minDate: '2'
+        if (index === "0") {
+            $(".ActivityEnd").eq(index).datepicker(
+                {
+                    dateFormat: 'yy-mm-dd',
+                    beforeShowDay: function (date) {
+                        var string = jQuery.datepicker.formatDate('yy-mm-dd', date);
+                        return [timeLimit.indexOf(string) === -1];
+                    },
+                    minDate: '2'
+                }
+            );
+            $(".ActivityFindEnd").eq(index).datepicker(
+                {
+                    dateFormat: 'yy-mm-dd',
+                    minDate: '1'
+                }
+            );
+        } else {
+            let NowDate = new Date(Date.parse($(".ActivityStart").eq(index).val()));
+            theMonth = NowDate.getMonth() + 1;
+            theDay = NowDate.getDate() - 1;
+            FormatTime();
+            let deadLine = NowDate.getFullYear() + "-" + theMonth + "-" + theDay;
+
+            let endLimit;
+            let temp1, temp2;
+            let i = 0;
+            for (let item of timeLimit) {
+                let itemDate = new Date(Date.parse(item));
+                if (itemDate > NowDate) {
+                    temp1 = itemDate;
+                    i++;
+                    if (temp2 > temp1 || i === 1) {
+                        temp2 = temp1;
+                    }
+                }
             }
-        );
-        $(".ActivityFindEnd").eq(index).datepicker(
-            {
-                dateFormat: 'yy-mm-dd',
-                minDate: '1'
-            }
-        );
+            endLimit = temp2;
+            $(".ActivityEnd").eq(index).datepicker(
+                {
+                    dateFormat: 'yy-mm-dd',
+                    beforeShowDay: function (date) {
+                        var string = jQuery.datepicker.formatDate('yy-mm-dd', date);
+                        return [timeLimit.indexOf(string) === -1];
+                    },
+                    minDate: $(".ActivityStart").eq(index).val(), //因為有當天行程所以允許在同一天
+                    maxDate: endLimit //maxDate 找最接近minDate的日期
+                }
+            );
+
+            $(".ActivityFindEnd").eq(index).datepicker(
+                {
+                    dateFormat: 'yy-mm-dd',
+                    minDate: '1',
+                    maxDate: deadLine //變為活動開始前一天，要原本的值-1
+                }
+            );
+        }
+
     }
     
 
@@ -315,16 +357,30 @@
         FormatTime();
         let deadLine = NowDate.getFullYear() + "-" + theMonth + "-" + theDay;
 
+        let endLimit;
+        let temp1, temp2;
+        let i = 0;
+        for (let item of timeLimit) {            
+            let itemDate = new Date(Date.parse(item));           
+            if (itemDate > NowDate) {
+                temp1 = itemDate;
+                i++;
+                if (temp2 > temp1 || i === 1) {
+                    temp2 = temp1;
+                }                   
+            }
+        }
+        endLimit = temp2;
         $(".ActivityEnd").eq(index).datepicker('destroy');//重新建立
         $(".ActivityEnd").eq(index).datepicker(
             {
                 dateFormat: 'yy-mm-dd',
                 beforeShowDay: function (date) {
                     var string = jQuery.datepicker.formatDate('yy-mm-dd', date);
-                    return [tiemLimit.indexOf(string) === -1];
+                    return [timeLimit.indexOf(string) === -1];
                 },
                 minDate: $(this).val(), //因為有當天行程所以允許在同一天
-                //maxDate 找最接近minDate的日期
+                maxDate: endLimit //maxDate 找最接近minDate的日期
             }
         );
 
@@ -426,22 +482,28 @@
         if ($(".NeedAT").eq(target).val().length < 8) {
             e.preventDefault();
             $(".NeedATTo").eq(target).removeAttr("hidden");
-        } else if ($(".ActivityStart").eq(target).val() === "") {
+        }
+        if ($(".ActivityStart").eq(target).val() === "") {
             e.preventDefault();
             $(".ActivityStartTo").eq(target).removeAttr("hidden");
-        } else if ($(".ActivityEnd").eq(target).val() === "") {
+        }
+        if ($(".ActivityEnd").eq(target).val() === "") {
             e.preventDefault();
             $(".ActivityEndTo").eq(target).removeAttr("hidden");
-        } else if ($(".ActivityFindEnd").eq(target).val() === "") {
+        }
+        if ($(".ActivityFindEnd").eq(target).val() === "") {
             e.preventDefault();
             $(".ActivityFindEndTo").eq(target).removeAttr("hidden");
-        } else if ($(".NeedAC").eq(target).val() === "") {
+        }
+        if ($(".NeedAC").eq(target).val() === "") {
             e.preventDefault();
             $(".NeedACTo").eq(target).removeAttr("hidden");
-        } else if ($(".NeedAP").eq(target).val() === "") {
+        }
+        if ($(".NeedAP").eq(target).val() === "") {
             e.preventDefault();
             $(".NeedAPTo").eq(target).removeAttr("hidden");
-        } else if ($(".NeedAL").eq(target).val().length < 100) {
+        }
+        if ($(".NeedAL").eq(target).val().length < 100) {
             e.preventDefault();
             $(".NeedALTo").eq(target).removeAttr("hidden");
         }

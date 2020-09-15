@@ -124,21 +124,22 @@ namespace IIIProject_travel.Controllers
                         timeList = timeList.Where(t => t != targetAct.f活動開始時間 + "~" + targetAct.f活動結束時間).ToArray();
                     }
                     //若無，則為一般開團，直接回傳已佔用的時間陣列                    
-                    string totalTime = "[";
+                    //string totalTime = "[";
+                    string totalTime = "";
                     foreach (string item in timeList)
                     {
                         if (string.IsNullOrEmpty(item))
                             continue;
                         string[] timeRange = item.Split('~');
-                        int limit = Convert.ToInt32((Convert.ToDateTime(timeRange[1]) - Convert.ToDateTime(timeRange[0]))
+                        double limit = Convert.ToInt32((Convert.ToDateTime(timeRange[1]) - Convert.ToDateTime(timeRange[0]))
                                 .ToString("dd"));
                         for (double i = 0.0; i <= limit; i++)
                         {
-                            totalTime += "\"" + Convert.ToDateTime(timeRange[0]).AddDays(i).ToString("yyyy-MM-dd") + "\",";
-
+                            totalTime += Convert.ToDateTime(timeRange[0]).AddDays(i).ToString("yyyy-MM-dd") + ",";                           
                         }
                     }
-                    totalTime += "]";
+                    totalTime = totalTime.Substring(0, totalTime.Length - 1);
+                    //totalTime += "]";
                     return totalTime;
                 }
             }
