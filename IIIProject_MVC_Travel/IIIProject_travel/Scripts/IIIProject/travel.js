@@ -13,7 +13,7 @@
                         initialView: 'dayGridMonth',
                         displayEventTime: false,
                         locale: 'zh-tw',
-                        height: 750,
+                        height: 750
                     });
                     calendar.render();
                 } else if (data !== "1") {
@@ -135,8 +135,19 @@
         let targetclass = this.classList.item(this.classList.length-1);
         readmore_target = targetclass.substring(10, targetclass.length);        
         get_ajax_readmore();
+        let target = readmore_target;
+        var combine = "[ToUpdateVC=" + target + "]";
+        var getCounts = parseInt($(combine).html()) + 1;
+        $(combine).html(getCounts);
+        $.ajax({
+            url: "/Travel/ViewCounts",
+            type: "POST",
+            data: { "ActivityID": target }
+        }
+        );
         $("#calendarEventGo").attr("act_id", readmore_target);
         $("#calendarEventGo").click();
+
     });
 
 
@@ -193,11 +204,11 @@
         }
     }
     //刪除
-    $("body").on("click", ".delete_act", function (e) {       
+    $("body").on("click", ".delete_act", function (e) {
         if (!window.confirm("確定要刪除?")) {
             e.preventDefault();
         }
-    })
+    });
     //揪團時間限制   
     $("body").on("change", ".ActivityStart", function () {
         $(".ActivityStartTo").attr("hidden", "");
