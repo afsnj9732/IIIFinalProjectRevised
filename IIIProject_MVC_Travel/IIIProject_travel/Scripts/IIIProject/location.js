@@ -110,7 +110,7 @@ $('.resultTrigger').click(function () {
             //如果有撈到資料
             if (data.length !== 0) {
                 $('section').removeClass('active');
-                //console.log(data);
+                console.log(data);
                 $('.secY').addClass('active');
 
                 $('.mImg').attr('src', '../Content/images/' + data[0].mImg);

@@ -41,6 +41,15 @@ a {
     margin:0;
 }
 
+.modal-body::-webkit-scrollbar{
+    display:none;
+}
+
+.modal-body{
+    overflow-x:hidden;
+    -ms-overflow-style:none;
+}
+
 /* banner */
 .navbar {
     z-index: 99;

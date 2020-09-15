@@ -1,7 +1,9 @@
 ﻿@model IEnumerable<tActivity>
 @{
-    Layout = null;
-    var x = (tMember)Session["member"];
+                /**/
+
+                Layout = null;
+                var x = (tMember)Session["member"];
 }
 <!DOCTYPE html>
 <html lang="zh-Hant-TW">
@@ -136,39 +138,39 @@
                 </div>
             </div>
         </div>
+    </section>
+    <!-- modal -->
+    <div class="modal" id="randCard">
+        <div class="modal-dialog modal-dialog-scrollable">
+            <div class="modal-content">
 
-        <!-- modal -->
-        <div class="modal" id="randCard">
-            <div class="modal-dialog modal-dialog-scrollable">
-                <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h2 class="card-title mTitle"></h2>
+                    <button type="button" class="close" data-dismiss="modal">×</button>
+                </div>
 
-                    <!-- Modal Header -->
-                    <div class="modal-header">
-                        <h2 class="card-title"></h2>
-                        <button type="button" class="close" data-dismiss="modal">×</button>
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <img src="" class="card-img mImg" />
+                    <p class="card-text mContent"></p>
+                    <div class="container">
+                        <img src="~/Content/images/17.png"><span class="mSort"></span>
+                        <img src="~/Content/images/03.png"><span class="mPlace"></span>
+                        <img src="~/Content/images/04.png"><span class="mEstimate"></span>
+                        <img src="~/Content/images/06.png"><span class="mView"></span>
+                        <img src="~/Content/images/05.png"><span class="mLike"></span>
                     </div>
+                </div>
 
-                    <!-- Modal body -->
-                    <div class="modal-body">
-                        <img src="" class="card-img mImg" />
-                        <p class="card-text mContent"></p>
-                        <div class="container">
-                            <img src="~/Content/images/17.png" id="mSort">
-                            <img src="~/Content/images/03.png" id="mPlace">
-                            <img src="~/Content/images/04.png" id="mEstimate">
-                            <img src="~/Content/images/06.png" id="mView">
-                            <img src="~/Content/images/05.png" id="mLike">
-                        </div>
-                    </div>
-
-                    <!-- Modal footer -->
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                    </div>
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+
     @*fail sec*@
     <section class="secN">
         <div class="container mb-3">

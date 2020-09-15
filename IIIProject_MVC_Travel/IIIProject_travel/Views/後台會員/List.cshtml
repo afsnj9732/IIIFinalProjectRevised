@@ -27,6 +27,17 @@
             font-size: 1.125rem;
             text-anchor: middle;
         }
+        #line {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 300px;
+            white-space: nowrap;
+        }
+
+        .table td, .table th {
+            vertical-align: middle;
+        }
+
     </style>
 
 </head>
@@ -122,9 +133,8 @@
                                 <td>密碼</td>
                                 <td>@Html.ActionLink("電子郵件", "List", new { sortOrder = ViewBag.電子郵件排序, currentFilter = ViewBag.當前搜尋 })</td>
                                 <td>@Html.ActionLink("手機", "List", new { sortOrder = ViewBag.手機排序, currentFilter = ViewBag.當前搜尋 })</td>
-                                <td>@Html.ActionLink("電話", "List", new { sortOrder = ViewBag.電話排序, currentFilter = ViewBag.當前搜尋 })</td>
                                 <td>@Html.ActionLink("生日", "List", new { sortOrder = ViewBag.生日排序, currentFilter = ViewBag.當前搜尋 })</td>
-                                <td>自我介紹</td>
+                                <td class="">自我介紹</td>
                                 <td>@Html.ActionLink("暱稱", "List", new { sortOrder = ViewBag.暱稱排序, currentFilter = ViewBag.當前搜尋 })</td>
                                 <td>@Html.ActionLink("性別", "List", new { sortOrder = ViewBag.性別排序, currentFilter = ViewBag.當前搜尋 })</td>
                                 <td>按鈕</td>
@@ -140,7 +150,7 @@
                                     圖片 = "nullhead.jpg";
                                 }
                                 <tr>
-                                    <td>
+                                    <td valign="middle">
                                         @Html.DisplayFor(modelItem => item.f會員編號)
                                     </td>
                                     <td>
@@ -168,12 +178,9 @@
                                         @Html.DisplayFor(modelItem => item.f會員手機)
                                     </td>
                                     <td>
-                                        @Html.DisplayFor(modelItem => item.f會員電話)
-                                    </td>
-                                    <td>
                                         @Html.DisplayFor(modelItem => item.f會員生日)
                                     </td>
-                                    <td>
+                                    <td id="line">
                                         @Html.DisplayFor(modelItem => item.f會員自我介紹)
                                     </td>
                                     <td>
