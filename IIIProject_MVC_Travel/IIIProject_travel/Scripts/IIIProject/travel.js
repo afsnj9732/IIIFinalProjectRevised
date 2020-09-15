@@ -1,5 +1,6 @@
 (function () {  
     var order, background_color, contain, category, label, page, condition, readmore_target;
+    var timeLimit = new Array();
     var calendarEl = document.getElementById('calendar');
     //動態生成行事曆
     function getCalendar() {
@@ -104,51 +105,87 @@
         });
     });
 
-    //for (var d = new Date(startDate); d <= new Date(endDate); d.setDate(d.getDate() + 1)) {
-    //    array.push($.datepicker.formatDate('yy-mm-dd', d));
-    //}
 
     //開團+編輯時間限制
-    function TheDatePicker(index) {
-        //act_id = "";
+    function TheDatePicker(index, dateLimitID) {       
         $.ajax({
             url: "/Travel/GetDateLimit",
             type: "POST",
-            //data: { "act_id": act_id },
+            data: { "act_id": dateLimitID },
             success: function (data) {
-                array = JSON.parse(data);
+                if (data !== "")
+                    timeLimit = data.split(',');
             }
-        });        
+        });
         $(".ActivityStart").eq(index).datepicker(
             {
                 dateFormat: 'yy-mm-dd',
                 beforeShowDay: function (date) {
                     var string = jQuery.datepicker.formatDate('yy-mm-dd', date);
-                    return [array.indexOf(string) === -1];
-                },                 
-                minDate: '2'
-            }
-        );
-        $(".ActivityEnd").eq(index).datepicker(
-            {
-                dateFormat: 'yy-mm-dd',
-                beforeShowDay: function (date) {
-                    var string = jQuery.datepicker.formatDate('yy-mm-dd', date);
-                    return [array.indexOf(string) === -1];
+                    return [timeLimit.indexOf(string) === -1];
                 },
-                minDate: '2'
+                minDate: '2',
             }
         );
-        $(".ActivityFindEnd").eq(index).datepicker(
-            {
-                dateFormat: 'yy-mm-dd',
-                beforeShowDay: function (date) {
-                    var string = jQuery.datepicker.formatDate('yy-mm-dd', date);
-                    return [array.indexOf(string) === -1];
-                },
-                minDate: '1'
+        if (index === "0") {
+            $(".ActivityEnd").eq(index).datepicker(
+                {
+                    dateFormat: 'yy-mm-dd',
+                    beforeShowDay: function (date) {
+                        var string = jQuery.datepicker.formatDate('yy-mm-dd', date);
+                        return [timeLimit.indexOf(string) === -1];
+                    },
+                    minDate: '2'
+                }
+            );
+            $(".ActivityFindEnd").eq(index).datepicker(
+                {
+                    dateFormat: 'yy-mm-dd',
+                    minDate: '1'
+                }
+            );
+        } else {
+            let NowDate = new Date(Date.parse($(".ActivityStart").eq(index).val()));
+            theMonth = NowDate.getMonth() + 1;
+            theDay = NowDate.getDate() - 1;
+            FormatTime();
+            let deadLine = NowDate.getFullYear() + "-" + theMonth + "-" + theDay;
+
+            let endLimit;
+            let temp1, temp2;
+            let i = 0;
+            for (let item of timeLimit) {
+                let itemDate = new Date(Date.parse(item));
+                if (itemDate > NowDate) {
+                    temp1 = itemDate;
+                    i++;
+                    if (temp2 > temp1 || i === 1) {
+                        temp2 = temp1;
+                    }
+                }
             }
-        );
+            endLimit = temp2;
+            $(".ActivityEnd").eq(index).datepicker(
+                {
+                    dateFormat: 'yy-mm-dd',
+                    beforeShowDay: function (date) {
+                        var string = jQuery.datepicker.formatDate('yy-mm-dd', date);
+                        return [timeLimit.indexOf(string) === -1];
+                    },
+                    minDate: $(".ActivityStart").eq(index).val(), //因為有當天行程所以允許在同一天
+                    maxDate: endLimit //maxDate 找最接近minDate的日期
+                }
+            );
+
+            $(".ActivityFindEnd").eq(index).datepicker(
+                {
+                    dateFormat: 'yy-mm-dd',
+                    minDate: '1',
+                    maxDate: deadLine //變為活動開始前一天，要原本的值-1
+                }
+            );
+        }
+
     }
     
 
@@ -162,7 +199,7 @@
             success: function (data) {
                 $("#add_ajax_readmore").html(data); //更新readmore項目     
                 //$('#ajax_readmore').modal("show");
-                TheDatePicker(1);
+                TheDatePicker(1, readmore_target);
             }
         });  
     }
@@ -240,9 +277,9 @@
     });
 
 
-    //---------------------------------------------下方問題區塊
 
-    //時間格式轉換
+
+    ////時間格式轉換
     var theMonth, theDay;
     function FormatTime() {
         if (theMonth.toString().length < 2) {
@@ -258,6 +295,50 @@
             e.preventDefault();
         }
     });
+
+    //function TheDatePicker(index, dateLimitID) {
+    //    $.ajax({
+    //        url: "/Travel/GetDateLimit",
+    //        type: "POST",
+    //        data: { "act_id": dateLimitID },
+    //        success: function (data) {
+    //            if (data !== "")
+    //                tiemLimit = data;
+    //        }
+    //    });
+
+    //    $(".ActivityStart").eq(index).datepicker(
+    //        {
+    //            dateFormat: 'yy-mm-dd',
+    //            beforeShowDay: function (date) {
+    //                var string = jQuery.datepicker.formatDate('yy-mm-dd', date);
+    //                return [tiemLimit.indexOf(string) === -1];
+    //            },
+    //            minDate: '2',
+    //        }
+    //    );
+    //    $(".ActivityEnd").eq(index).datepicker(
+    //        {
+    //            dateFormat: 'yy-mm-dd',
+    //            beforeShowDay: function (date) {
+    //                var string = jQuery.datepicker.formatDate('yy-mm-dd', date);
+    //                return [tiemLimit.indexOf(string) === -1];
+    //            },
+    //            minDate: '2'
+    //        }
+    //    );
+    //    $(".ActivityFindEnd").eq(index).datepicker(
+    //        {
+    //            dateFormat: 'yy-mm-dd',
+    //            beforeShowDay: function (date) {
+    //                var string = jQuery.datepicker.formatDate('yy-mm-dd', date);
+    //                return [tiemLimit.indexOf(string) === -1];
+    //            },
+    //            minDate: '1'
+    //        }
+    //    );
+    //}
+
     //揪團時間限制   
     $("body").on("change", ".ActivityStart", function () {
         $(".ActivityStartTo").attr("hidden", "");
@@ -265,8 +346,52 @@
         $(".ActivityFindEnd").val("");
         $(".ActivityEnd").removeAttr("disabled");
         $(".ActivityFindEnd").removeAttr("disabled");
-        $(".ActivityEnd").attr("min", $(this).val());
-        $(".ActivityFindEnd").attr("max", $(this).val());
+        //$(".ActivityEnd").attr("min", $(this).val());
+        //$(".ActivityFindEnd").attr("max", $(this).val());
+        let index = $(this).attr("listNumber");
+
+        //let themax = new Date(Date.parse($(this).val().replace(/-/g, "/"))); 日期字串dash轉斜線
+        let NowDate = new Date(Date.parse($(this).val()));
+        theMonth = NowDate.getMonth() + 1;
+        theDay = NowDate.getDate() - 1;
+        FormatTime();
+        let deadLine = NowDate.getFullYear() + "-" + theMonth + "-" + theDay;
+
+        let endLimit;
+        let temp1, temp2;
+        let i = 0;
+        for (let item of timeLimit) {            
+            let itemDate = new Date(Date.parse(item));           
+            if (itemDate > NowDate) {
+                temp1 = itemDate;
+                i++;
+                if (temp2 > temp1 || i === 1) {
+                    temp2 = temp1;
+                }                   
+            }
+        }
+        endLimit = temp2;
+        $(".ActivityEnd").eq(index).datepicker('destroy');//重新建立
+        $(".ActivityEnd").eq(index).datepicker(
+            {
+                dateFormat: 'yy-mm-dd',
+                beforeShowDay: function (date) {
+                    var string = jQuery.datepicker.formatDate('yy-mm-dd', date);
+                    return [timeLimit.indexOf(string) === -1];
+                },
+                minDate: $(this).val(), //因為有當天行程所以允許在同一天
+                maxDate: endLimit //maxDate 找最接近minDate的日期
+            }
+        );
+
+        $(".ActivityFindEnd").eq(index).datepicker('destroy');//重新建立
+        $(".ActivityFindEnd").eq(index).datepicker(
+            {
+                dateFormat: 'yy-mm-dd',
+                minDate: '1',
+                maxDate: deadLine //變為活動開始前一天，要原本的值-1
+            }
+        );
     });
 
     //動態活動結束時間限制
@@ -322,12 +447,12 @@
         $(".ActivityStartTo").attr("hidden", "");
         $(".ActivityEndTo").attr("hidden", "");
         $(".ActivityFindEndTo").attr("hidden", "");
-        nowdate = new Date(Date.now());
-        theMonth = nowdate.getMonth()+1; //js時間月份是索引值，所以現在月份要+1
-        theDay = nowdate.getDate()+2;
-        FormatTime();
-        $(".ActivityStart").attr("min", nowdate.getFullYear() + "-" + theMonth + "-" + theDay);        
-        $(".ActivityFindEnd").attr("max", "");
+        //nowdate = new Date(Date.now());
+        //theMonth = nowdate.getMonth()+1; //js時間月份是索引值，所以現在月份要+1
+        //theDay = nowdate.getDate()+2;
+        //FormatTime();
+        //$(".ActivityStart").attr("min", nowdate.getFullYear() + "-" + theMonth + "-" + theDay);        
+        //$(".ActivityFindEnd").attr("max", "");
         if (target === "0") {
             $(".ActivityStart").val("");
             $(".ActivityEnd").val("");
@@ -357,22 +482,28 @@
         if ($(".NeedAT").eq(target).val().length < 8) {
             e.preventDefault();
             $(".NeedATTo").eq(target).removeAttr("hidden");
-        } else if ($(".ActivityStart").eq(target).val() === "") {
+        }
+        if ($(".ActivityStart").eq(target).val() === "") {
             e.preventDefault();
             $(".ActivityStartTo").eq(target).removeAttr("hidden");
-        } else if ($(".ActivityEnd").eq(target).val() === "") {
+        }
+        if ($(".ActivityEnd").eq(target).val() === "") {
             e.preventDefault();
             $(".ActivityEndTo").eq(target).removeAttr("hidden");
-        } else if ($(".ActivityFindEnd").eq(target).val() === "") {
+        }
+        if ($(".ActivityFindEnd").eq(target).val() === "") {
             e.preventDefault();
             $(".ActivityFindEndTo").eq(target).removeAttr("hidden");
-        } else if ($(".NeedAC").eq(target).val() === "") {
+        }
+        if ($(".NeedAC").eq(target).val() === "") {
             e.preventDefault();
             $(".NeedACTo").eq(target).removeAttr("hidden");
-        } else if ($(".NeedAP").eq(target).val() === "") {
+        }
+        if ($(".NeedAP").eq(target).val() === "") {
             e.preventDefault();
             $(".NeedAPTo").eq(target).removeAttr("hidden");
-        } else if ($(".NeedAL").eq(target).val().length < 100) {
+        }
+        if ($(".NeedAL").eq(target).val().length < 100) {
             e.preventDefault();
             $(".NeedALTo").eq(target).removeAttr("hidden");
         }
@@ -782,7 +913,7 @@
     //進入旅遊業面預設最新被選為排序
     $("#travel_sort .sort li").eq(0).click(); 
 
-    TheDatePicker(0);
+    TheDatePicker(0,0);
 
     
 })(); 

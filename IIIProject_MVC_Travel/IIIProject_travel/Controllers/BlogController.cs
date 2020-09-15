@@ -306,8 +306,8 @@ namespace IIIProject_travel.Controllers
                 Format = BarcodeFormat.QR_CODE,
                 Options = new QrCodeEncodingOptions
                 {
-                    Height = 50,
-                    Width = 50,
+                    Height = 100,
+                    Width = 100,
                 }
             };
 
