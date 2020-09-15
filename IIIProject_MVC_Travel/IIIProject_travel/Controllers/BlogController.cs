@@ -249,14 +249,28 @@ namespace IIIProject_travel.Controllers
             article.f活動讚數 = 0;
 
             var LoginMember = (tMember)Session["member"];
-            article.f會員編號 = LoginMember.f會員編號; 
+            article.f會員編號 = LoginMember.f會員編號;
 
+
+            if (article != null)
+            {
 
             dbJoutaEntities db = new dbJoutaEntities();
             db.tActivity.Add(article);
             db.SaveChanges();
 
-            return RedirectToAction("index");
+               return RedirectToAction("index");
+
+            }
+
+            else
+            {
+
+                return RedirectToAction("index");
+
+            }
+ 
+    
 
         }
 
