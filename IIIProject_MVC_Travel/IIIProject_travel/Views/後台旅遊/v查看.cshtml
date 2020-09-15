@@ -34,8 +34,7 @@
 
 <body>
     <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
-        <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="@Url.Action("Home","後台Home")">Jouta後台</a>
-        <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
+        <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="@Url.Action("Home","後台Home")">Jouta Admin</a>
         <ul class="navbar-nav px-3">
             <li class="nav-item text-nowrap">
                 <a>
@@ -51,9 +50,9 @@
                 <div class="sidebar-sticky">
                     <ul class="nav flex-column">
                         <li class="nav-item">
-                            <a class="nav-link active" href="@Url.Action("Home","後台Home")">
+                            <a class="nav-link" href="@Url.Action("Home","後台Home")">
                                 <span data-feather="home"></span>
-                                首頁 <span class="sr-only">(current)</span>
+                                網站概覽
                             </a>
                         </li>
                         <li class="nav-item">
@@ -61,6 +60,8 @@
                                 <span data-feather="users"></span>
                                 會員列表
                             </a>
+                        </li>
+
                         <li class="nav-item">
                             <a class="nav-link" href="@Url.Action("List","後台旅遊")">
                                 <span data-feather="file"></span>
@@ -82,7 +83,7 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="@Url.Action("List","聯絡我們")">
-                                <span data-feather="layers"></span>
+                                <span data-feather="message-square"></span>
                                 意見列表
                             </a>
                         </li>
@@ -93,7 +94,6 @@
                             </a>
                         </li>
                     </ul>
-
                 </div>
             </nav>
 
@@ -108,6 +108,8 @@
                         <input type="hidden" name="f活動編號" value="@Model.f活動編號" />
                         <div class="row">
                             <div class="col">
+                                <img src="~/Content/images/@Model.f活動團圖" style="width:500px;height:500px" />
+
                                 <p>
                                     標題<br />
                                     <input type="text" name="f活動標題" value="@Model.f活動標題" />
@@ -136,10 +138,6 @@
                                     結束時間<br />
                                     <input type="text" name="f活動結束時間" value="@Model.f活動結束時間" />
                                 </p>
-
-
-                            </div>
-                            <div class="col">
                                 <p>
                                     團圖<br />
                                     <input type="text" name="f活動團圖" value="@Model.f活動團圖" />
@@ -162,7 +160,7 @@
                                 </p>
                                 <p>
                                     內容<br />
-                                    <input type="text" name="f活動內容" value="@Model.f活動內容" style="width:300px;height:100px" readonly />
+                                    <textarea name="f活動內容" cols="50" rows="6" readonly>@Model.f活動內容</textarea>
                                 </p>
 
 
