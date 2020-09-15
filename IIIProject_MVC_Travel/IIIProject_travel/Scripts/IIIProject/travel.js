@@ -482,22 +482,28 @@
         if ($(".NeedAT").eq(target).val().length < 8) {
             e.preventDefault();
             $(".NeedATTo").eq(target).removeAttr("hidden");
-        } else if ($(".ActivityStart").eq(target).val() === "") {
+        }
+        if ($(".ActivityStart").eq(target).val() === "") {
             e.preventDefault();
             $(".ActivityStartTo").eq(target).removeAttr("hidden");
-        } else if ($(".ActivityEnd").eq(target).val() === "") {
+        }
+        if ($(".ActivityEnd").eq(target).val() === "") {
             e.preventDefault();
             $(".ActivityEndTo").eq(target).removeAttr("hidden");
-        } else if ($(".ActivityFindEnd").eq(target).val() === "") {
+        }
+        if ($(".ActivityFindEnd").eq(target).val() === "") {
             e.preventDefault();
             $(".ActivityFindEndTo").eq(target).removeAttr("hidden");
-        } else if ($(".NeedAC").eq(target).val() === "") {
+        }
+        if ($(".NeedAC").eq(target).val() === "") {
             e.preventDefault();
             $(".NeedACTo").eq(target).removeAttr("hidden");
-        } else if ($(".NeedAP").eq(target).val() === "") {
+        }
+        if ($(".NeedAP").eq(target).val() === "") {
             e.preventDefault();
             $(".NeedAPTo").eq(target).removeAttr("hidden");
-        } else if ($(".NeedAL").eq(target).val().length < 100) {
+        }
+        if ($(".NeedAL").eq(target).val().length < 100) {
             e.preventDefault();
             $(".NeedALTo").eq(target).removeAttr("hidden");
         }
