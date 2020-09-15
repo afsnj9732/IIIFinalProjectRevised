@@ -242,6 +242,8 @@ namespace IIIProject_travel.Controllers
             article.fQRcodeImage = p.QRcodeImage;
             article.f活動發起日期 = p.txtTime;
             article.f活動地區 = p.f活動地區;
+            article.f活動瀏覽次數 += 1;
+            article.f活動讚數 = 0;
 
             var LoginMember = (tMember)Session["member"];
             article.f會員編號 = LoginMember.f會員編號; 
