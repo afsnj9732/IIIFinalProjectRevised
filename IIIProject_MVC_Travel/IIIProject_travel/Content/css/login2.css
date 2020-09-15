@@ -5,16 +5,21 @@
     padding: 0;
 }
 
+html, body {
+    overflow: hidden;
+}
+
 body {
-    font-family: 'Open Sans', Helvetica, Arial, sans-serif;
-    background: #ededed;
+    /*font-family: 'Open Sans', Helvetica, Arial, sans-serif;*/
+    background: #fffef4;
+    position:relative;
 }
 
 input, button {
     border: none;
     outline: none;
     background: none;
-    font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+    /*font-family: 'Open Sans', Helvetica, Arial, sans-serif;*/
 }
 
 .tip {
@@ -24,33 +29,34 @@ input, button {
 }
 
 .cont {
+    background: linear-gradient(rgba(255,255,230,0.5),rgba(255,255,230,0.51)), url('http://subtlepatterns.com/patterns/geometry2.png');
     overflow: hidden;
     position: relative;
-    width: 900px;
-    height: 550px;
-    margin: 0 auto 100px;
-    background: #fff;
+    width: 100vw;
+    height: 100vh;
+    /*margin: 0 auto 100px;*/
+    /*background: #fffef4;*/
 }
 
 .form {
-    position: relative;
-    width: 640px;
-    height: 100%;
+    /*position: relative;*/
+    width: 70vw;
+    /*height: 100%;*/
     -webkit-transition: -webkit-transform 1.2s ease-in-out;
     transition: -webkit-transform 1.2s ease-in-out;
     transition: transform 1.2s ease-in-out;
     transition: transform 1.2s ease-in-out, -webkit-transform 1.2s ease-in-out;
-    padding: 50px 30px 0;
+    padding: 50px;
 }
 
 .sub-cont {
     overflow: hidden;
-    position: absolute;
-    left: 640px;
+    /*position: absolute;*/
+    right: 0px;
     top: 0;
-    width: 900px;
-    height: 100%;
-    padding-left: 260px;
+    width: 30vw;
+    /*height: 100%;*/
+    /*padding-left: 260px;*/
     background: #fff;
     -webkit-transition: -webkit-transform 1.2s ease-in-out;
     transition: -webkit-transform 1.2s ease-in-out;
@@ -76,11 +82,12 @@ button {
 
 .img {
     overflow: hidden;
-    z-index: 2;
+    z-index: 0;
     position: absolute;
-    left: 0;
+    /*left: 0;*/
     top: 0;
-    width: 260px;
+    right:0;
+    width: 30vw;
     height: 100%;
     padding-top: 360px;
 }
@@ -94,6 +101,7 @@ button {
         height: 100%;
         background-image: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/142996/sections-3.jpg");
         background-size: cover;
+        background-attachment:fixed;
         -webkit-transition: -webkit-transform 1.2s ease-in-out;
         transition: -webkit-transform 1.2s ease-in-out;
         transition: transform 1.2s ease-in-out;
@@ -119,9 +127,9 @@ button {
     z-index: 2;
     position: absolute;
     left: 0;
-    top: 50px;
+    top: 20vh;
     width: 100%;
-    padding: 0 20px;
+    padding: 50px 20px 0 20px;
     text-align: center;
     color: #fff;
     -webkit-transition: -webkit-transform 1.2s ease-in-out;
@@ -155,11 +163,20 @@ button {
     transform: translateX(0);
 }
 
+.btn-link {
+    border: 2px solid #007bff;
+}
+
+.btn-link:hover{
+    text-decoration:none;
+}
+
 .img__btn {
     overflow: hidden;
     z-index: 2;
     position: relative;
     width: 100px;
+    top:8vh;
     height: 36px;
     margin: 0 auto;
     background: transparent;
@@ -239,7 +256,7 @@ label {
 input {
     display: block;
     width: 100%;
-    margin-top: 5px;
+    /*margin-top: 5px;*/
     padding-bottom: 5px;
     font-size: 16px;
     border-bottom: 1px solid rgba(0, 0, 0, 0.4);
@@ -273,6 +290,7 @@ input {
 .sign-in {
     -webkit-transition-timing-function: ease-out;
     transition-timing-function: ease-out;
+    margin:20vh 0;
 }
 
 .cont.s--signup .sign-in {
