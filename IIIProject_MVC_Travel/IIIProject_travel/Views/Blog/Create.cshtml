@@ -67,9 +67,9 @@
             <!-- Page Content -->
             <div class="row">
                 <div class="col-lg-12" id="main-section">
-                    <h1 id="main-title">
-                        Suzume的美好豐富集綿
-                    </h1>
+                    <h2 id="main-title">
+                        Jouta的美好豐富集綿
+                    </h2>
                     <!-- 圖片上傳 -->
                     <div>
                         <p>預覽檔案</p>
@@ -97,11 +97,11 @@
                         <div class="input-group-prepend">
                             <p id="pTitle">標題 :</p>
                         </div>
-                        <input type="text" aria-label="First name" class="form-control" name="txtTitle">
+                        <input type="text" aria-label="First name" class="form-control" name="txtTitle" id="txtTitle">
 
 
                         <span class=" " style="padding-left:10px">
-                            
+
                             地區：
                             <select name="f活動地區">
                                 <option value="北部">北部</option>
@@ -117,21 +117,21 @@
                         <div class="input-group-prepend">
                             <p id="pTitle">地點 :</p>
                         </div>
-                        <input type="text" aria-label="First name" class="form-control">
+                        <input type="text" aria-label="First name" class="form-control" id="locate">
                     </div>
 
                     <div class="input-group" style="padding-bottom: 20px; width:60%;">
                         <div class="input-group-prepend">
                             <p style="margin-right: 10px;">網址轉QRcode :</p>
                         </div>
-                        <input type="text" aria-label="First name" class="form-control" name="QRcode">
+                        <input type="text" aria-label="First name" class="form-control" name="QRcode" id="QRcode">
                     </div>
 
                     <div class="input-group" style="padding-bottom: 20px; width:60%;">
                         <div class="input-group-prepend">
                             <p style="margin-right: 10px;">QRcode名稱 :</p>
                         </div>
-                        <input type="text" aria-label="First name" class="form-control" name="QRcodeImage">
+                        <input type="text" aria-label="First name" class="form-control" name="QRcodeImage" id="QRcodeImage">
                     </div>
 
                     <!-- 文章輸入 -->
@@ -140,7 +140,7 @@
                         <div class="card-body">
 
                             <div class="form-group">
-                                <textarea class="form-control" rows="3" id="post-content" name="txtContent"></textarea>
+                                <textarea class="form-control" rows="3" id="post-content" name="txtContent" ></textarea>
                             </div>
 
                             <div class="hidden" name="txtTime">@DateTime.Now</div>
@@ -168,6 +168,21 @@
     <script src="https://cdn.jsdelivr.net/semantic-ui/2.2.7/semantic.min.js"></script>
     <script src="~/Scripts/IIIProject/navbar.js"></script>
     <script src="~/Scripts/IIIProject/blog.js"></script>
+
+    <script> 
+
+        $("#pTitle").click(function () {
+            $("#txtTitle").val("請客樓");
+            $("#post-content").val("本以俱樂部形式經營的請客樓於2005年才對外開放，簡單的布置說明了餐廳將心思全貫注在食物之上，其手工菜口碑甚佳，廚師擅於將簡單的菜色精緻地呈現，質感及味道均十分出色，特別推薦核桃棗煎餅。以川揚菜為基礎的菜色融合臺灣味道，包括香濃燉湯、麻油雞飯、紅麴豬尾、千層百頁豆腐等。設多間供宴客的包廂 。");
+            $("#locate").val("中正區忠孝東路一段12號17樓 (喜來登大飯店), Taipei, 100, Taiwan");
+            $("#QRcode").val("https://www.sheratongrandtaipei.com/");
+            $("#QRcodeImage").val("請客樓");
+        });
+
+
+
+    </script>
+
 </body>
 
 </html>
