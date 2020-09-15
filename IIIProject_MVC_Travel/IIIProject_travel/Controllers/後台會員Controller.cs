@@ -143,11 +143,14 @@ namespace IIIProject_travel.Controllers
         {
             if (id == null)
                 RedirectToAction("List");
-
             tMember x = new tMember();
             dbJoutaEntities db = new dbJoutaEntities();
+            var y = db.tActivity.Where(m => m.f會員編號 == id).ToList();
+
+            db.tActivity.RemoveRange(y);
             x = db.tMember.FirstOrDefault(m => m.f會員編號 == id);
             db.tMember.Remove(x);
+            
             db.SaveChanges();
 
             return RedirectToAction("List");
