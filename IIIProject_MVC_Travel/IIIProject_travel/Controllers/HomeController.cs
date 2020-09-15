@@ -31,7 +31,7 @@ namespace IIIProject_travel.Controllers
                     where !string.IsNullOrEmpty(m.f會員自我介紹)
                     select m;
             var y = from k in (new dbJoutaEntities()).tActivity
-                    where k.tMember.f會員評分>4
+                    where k.tMember.f會員評分>4&&k.f活動類型=="旅遊"
                     select k;
             y = y.Take(3);
             x = x.OrderBy(t=> Guid.NewGuid()).Take(3);
@@ -44,7 +44,7 @@ namespace IIIProject_travel.Controllers
             return View(c);
         }
 
-        /*[Authorize]*/     //通過驗證才可進入頁面
+        
         public ActionResult QuickMatch()
         {
             return View();

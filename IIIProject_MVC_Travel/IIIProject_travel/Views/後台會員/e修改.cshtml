@@ -34,8 +34,7 @@
 
 <body>
     <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
-        <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="@Url.Action("Home","後台Home")">Jouta後台</a>
-        <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
+        <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="@Url.Action("Home","後台Home")">Jouta Admin</a>
         <ul class="navbar-nav px-3">
             <li class="nav-item text-nowrap">
                 <a>
@@ -51,9 +50,9 @@
                 <div class="sidebar-sticky">
                     <ul class="nav flex-column">
                         <li class="nav-item">
-                            <a class="nav-link active" href="@Url.Action("Home","後台Home")">
+                            <a class="nav-link" href="@Url.Action("Home","後台Home")">
                                 <span data-feather="home"></span>
-                                首頁 <span class="sr-only">(current)</span>
+                                網站概覽
                             </a>
                         </li>
                         <li class="nav-item">
@@ -61,6 +60,8 @@
                                 <span data-feather="users"></span>
                                 會員列表
                             </a>
+                        </li>
+
                         <li class="nav-item">
                             <a class="nav-link" href="@Url.Action("List","後台旅遊")">
                                 <span data-feather="file"></span>
@@ -82,7 +83,7 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="@Url.Action("List","聯絡我們")">
-                                <span data-feather="layers"></span>
+                                <span data-feather="message-square"></span>
                                 意見列表
                             </a>
                         </li>
@@ -92,9 +93,7 @@
                                 優惠發送
                             </a>
                         </li>
-
                     </ul>
-
                 </div>
             </nav>
 
@@ -137,8 +136,6 @@
                                     電子郵件<br />
                                     <input type="text" name="f會員電子郵件" value="@Model.f會員電子郵件" />
                                 </p>
-                            </div>
-                            <div class="col">
                                 <p>
                                     手機<br />
                                     <input type="text" name="f會員手機" value="@Model.f會員手機" />
@@ -165,7 +162,7 @@
                                 </p>
                                 <p>
                                     自我介紹<br />
-                                    <textarea name="f會員自我介紹" cols="30" rows="6" >@Model.f會員自我介紹</textarea>
+                                    <textarea name="f會員自我介紹" cols="50" rows="6">@Model.f會員自我介紹</textarea>
                                 </p>
 
                             </div>
@@ -173,7 +170,7 @@
                         </div>
                         <p>
                             <input type="submit" value="存檔" />
-                            <input type ="button" onclick="history.back()" value="關閉">
+                            <input type="button" onclick="history.back()" value="關閉">
                         </p>
                     </form>
 

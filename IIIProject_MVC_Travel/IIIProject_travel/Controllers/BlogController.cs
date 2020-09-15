@@ -38,6 +38,7 @@ namespace IIIProject_travel.Controllers
         {
             var article = from t in (new dbJoutaEntities()).tActivity
                           where t.f活動類型 == "文章"
+                          orderby t.f活動發起日期 
                           select t;
 
             //IQueryable<tActivity> tarticle = null;
@@ -55,6 +56,7 @@ namespace IIIProject_travel.Controllers
             {
                     article = from torder in (new dbJoutaEntities()).tActivity
                                                where torder.f活動類型 =="文章"
+                                               orderby torder.f活動發起日期 
                                                select torder;
             }
                 
@@ -62,7 +64,8 @@ namespace IIIProject_travel.Controllers
             {
 
                     article = from m in (new dbJoutaEntities()).tActivity
-                           where m.f活動類型 == "文章" && m.f活動標題.Contains(txtKey)                        
+                           where m.f活動類型 == "文章" && m.f活動標題.Contains(txtKey)
+                           orderby m.f活動發起日期 
                            select m;
 
 
@@ -112,7 +115,7 @@ namespace IIIProject_travel.Controllers
 
            
             //var articleList = article.ToList();
-            var result = article.ToPagedList(currentPage, pagesize);
+            var result = article.OrderBy(s => s.f活動發起日期).ToPagedList(currentPage, pagesize);
 
 
             return View(result);
@@ -240,20 +243,34 @@ namespace IIIProject_travel.Controllers
             article.f活動團圖 = p.f活動團圖;
             article.fQRcode網址 = p.QRcode;
             article.fQRcodeImage = p.QRcodeImage;
-            article.f活動發起日期 = p.txtTime;
+            article.f活動發起日期 = (DateTime.Now).ToString();
             article.f活動地區 = p.f活動地區;
-            article.f活動瀏覽次數 += 1;
+            article.f活動瀏覽次數 = 0;
             article.f活動讚數 = 0;
 
             var LoginMember = (tMember)Session["member"];
-            article.f會員編號 = LoginMember.f會員編號; 
+            article.f會員編號 = LoginMember.f會員編號;
 
+
+            if (article != null)
+            {
 
             dbJoutaEntities db = new dbJoutaEntities();
             db.tActivity.Add(article);
             db.SaveChanges();
 
-            return RedirectToAction("index");
+               return RedirectToAction("index");
+
+            }
+
+            else
+            {
+
+                return RedirectToAction("index");
+
+            }
+ 
+    
 
         }
 

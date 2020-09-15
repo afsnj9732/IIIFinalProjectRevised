@@ -59,9 +59,18 @@ namespace IIIProject_travel.Controllers
             return RedirectToAction("ProfileIndex");
         }
 
-        public ActionResult Chat()
+        public ActionResult Chat(int? id)
         {
-            return View();
+            CMember c = new CMember();
+            var z = (tMember)Session["member"];
+            //if (z != null)
+            //{
+            //    if (z.f會員編號 == id)
+            //    {
+
+            //    }
+            //}
+            return View(z);
         }
         public ActionResult otherprofile(int? id)
         {

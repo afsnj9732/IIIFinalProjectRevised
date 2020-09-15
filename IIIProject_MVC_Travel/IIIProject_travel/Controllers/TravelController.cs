@@ -35,8 +35,10 @@ namespace IIIProject_travel.Controllers
                         var NowMemberAct = db.tActivity.Where(t => t.f活動編號.ToString() == item).FirstOrDefault();
                         CalendarEvents CalendarEvent = new CalendarEvents();
                         CalendarEvent.title = NowMemberAct.f活動標題;
+                        
                         CalendarEvent.start = NowMemberAct.f活動開始時間;
-                        CalendarEvent.end = NowMemberAct.f活動結束時間 + " 00:00:01";
+                        CalendarEvent.end = 
+                            NowMemberAct.f活動開始時間 == NowMemberAct.f活動結束時間 ?  NowMemberAct.f活動結束時間 : NowMemberAct.f活動結束時間 + " 23:59:59";
                         CalendarEvent.classNames = "CalendarEvent" + " " + "EventActID" + NowMemberAct.f活動編號;
                         NowMemberTotalEvents[i] = CalendarEvent;
                         i++;
@@ -104,6 +106,39 @@ namespace IIIProject_travel.Controllers
             HomeSearch += ","+ Request.Form["txtTotalGood"];
             HomeSearch += ",";
             return View((object)HomeSearch);
+        }
+
+        public dynamic GetDateLimit(int? act_id)
+        {
+            if (Session["member"] != null)
+            {            
+            tMember loginMember = (tMember)Session["member"];
+            var realMember = db.tMember.Where(t => t.f會員編號 == loginMember.f會員編號).FirstOrDefault();
+            if (!string.IsNullOrEmpty(realMember.f會員已占用時間))
+            {
+                //如果有act_id，表示是編輯模式，要先移除該筆活動的占用時間((none
+
+                //若無，則為一般開團，直接回傳已佔用的時間陣列
+                string[] timeList = realMember.f會員已占用時間.Split(',');
+                string[] returnArray = { };
+                foreach (string item in timeList)
+                {
+                    if (string.IsNullOrEmpty(item))
+                        continue;
+                    string[] timeRange = item.Split('~');
+                    int limit = Convert.ToInt32((Convert.ToDateTime(timeRange[1]) - Convert.ToDateTime(timeRange[0]))
+                            .ToString("dd"));
+                    for (int i = 0;i < limit; i++)
+                    {
+                       returnArray[i] = Convert.ToDateTime(timeRange[0]).AddDays(1.0).ToString("yyyy-MM-dd");
+                    }
+                }
+                //JavaScriptSerializer serializer = new JavaScriptSerializer();
+                //var obj = serializer.Serialize(List);
+                return returnArray; //correct
+            }
+            }
+            return null;
         }
 
         [ValidateInput(false)]
@@ -225,6 +260,26 @@ namespace IIIProject_travel.Controllers
             p.f會員編號 = Member.f會員編號;
             p.f活動類型 = "旅遊";
             p.f活動參加的會員編號 = "," + Member.f會員編號;
+            var theCategory = Convert.ToDateTime(p.f活動結束時間) - Convert.ToDateTime(p.f活動開始時間);
+            int timeCheck = Convert.ToInt32(theCategory.ToString("dd"));
+            switch(timeCheck)//時間判斷
+            {
+                case 1:
+                    p.f活動分類 = "兩天一夜";
+                    break;
+                case 2:
+                    p.f活動分類 = "三天兩夜";
+                    break;
+                case 4:
+                    p.f活動分類 = "五天四夜";
+                    break;
+                case 6:
+                    p.f活動分類 = "七天六夜";
+                    break;
+                default:
+                    p.f活動分類 = "其他";
+                    break;
+            }
             db.tActivity.Add(p);
             db.SaveChanges();
             int ID = db.tActivity.Where(t => t.f會員編號 == Member.f會員編號)
