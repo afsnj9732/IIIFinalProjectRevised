@@ -218,7 +218,7 @@
                         var post = db.tMember.Where(a => a.f會員編號 == Model.tMembers.f會員編號).Select(b => b.f會員發起的活動編號).FirstOrDefault();
                         if (string.IsNullOrEmpty(post))
                         {
-                            <p>目前無發文紀錄</p>
+                    <p>目前無發文紀錄  aaaa</p>
                             //空
                         }
                         else
@@ -226,7 +226,7 @@
                             string[] words = post.Split(',');
                             if (words.Length < 2)
                             {
-                                <p>目前無發文紀錄</p>
+                                <p>目前無發文紀錄 @words.Length bbbb</p>
                                 //"",
                             }
                             else
@@ -240,11 +240,11 @@
                                     else
                                     {
                                         var post_item = db.tActivity.Where(c => c.f活動編號.ToString() == i && c.f活動類型 == "文章").FirstOrDefault();
-                                        if (post_item == null)
-                                        {
-                                            goto nothing;
-                                        }
-                                        else
+                                        if (post_item != null)
+                                        //{
+                                        //    goto nothing;
+                                        //}
+                                        //else
                                         {
                                             <div class="card mb-3" style="max-width: 540px;">
                                                 <div class="row no-gutters">
@@ -267,8 +267,8 @@
                                 }
                             }
                         }
-                        nothing:;
-                         @:<p> 目前無發文紀錄 </p>
+                        @*nothing:;
+                         @:<p> 目前無發文紀錄 cccc </p>*@
                     }
                 </div>
 
