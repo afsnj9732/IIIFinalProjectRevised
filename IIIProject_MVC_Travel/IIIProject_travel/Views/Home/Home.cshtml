@@ -123,11 +123,11 @@
                                 <option value="100">讚>100</option>
                             </select>
                         </div>
-                        <div class="form-group col-lg-3 col-md-3 col-sm-12 inner">
+                        <div class="form-group col-lg-4 col-md-4 col-sm-12 inner">
                             <label for="keyword">關鍵字:</label>
                             <input type="text" name="txtEatKeyword" class="form-control" id="keyword">
                         </div>
-                        <div class="form-group col-lg-3 col-md-3 col-sm-12 inner mb-0">
+                        <div class="form-group col-lg-2 col-md-2 col-sm-12 inner mb-0">
                             <button type="submit" class="btn btn-warning">搜尋去</button>
                         </div>
 
@@ -161,11 +161,11 @@
                                 <option value="100">&nbsp;讚>100</option>
                             </select>
                         </div>
-                        <div class="form-group col-lg-3 col-md-3 col-sm-12 inner">
+                        <div class="form-group col-lg-4 col-md-4 col-sm-12 inner">
                             <label for="keyword_travel">關鍵字:</label>
                             <input type="text" name="txtTravelKeyword" class="form-control" id="keyword_travel">
                         </div>
-                        <div class="form-group col-lg-3 col-md-3 col-sm-12 inner mb-0">
+                        <div class="form-group col-lg-2 col-md-2 col-sm-12 inner mb-0">
                             <button type="submit" class="btn btn-warning">搜尋去</button>
                         </div>
                     </form>
@@ -173,11 +173,11 @@
                 <div id="tabthree" class="tab-pane fade">
                     <form class="form-inline table d-flex align-items-end" method="POST" action="~/Blog/Index">
 
-                        <div class="form-group col-lg-3 col-md-3 col-sm-12 inner">
+                        <div class="form-group col-lg-4 col-md-4 col-sm-12 inner">
                             <label for="keyword_article">關鍵字:</label>
-                            <input type="text" name="txtKeyword" class="form-control" id="keyword_article">
+                            <input type="text" name="txtKey" class="form-control" id="keyword_article">
                         </div>
-                        <div class="form-group col-lg-3 col-md-3 col-sm-12 inner mb-0">
+                        <div class="form-group col-lg-2 col-md-2 col-sm-12 inner mb-0">
                             <button type="submit" class="btn btn-warning">搜尋去</button>
                         </div>
                     </form>
@@ -338,7 +338,7 @@
                                 <p class="card-text" style="text-align: left;">
                                     @a.f活動內容
                                 </p>
-                                <button class = "btn btnContent mt-2" data-toggle="modal" data-target="#modal_@a.f活動編號">我要+1</button>
+                                <button class = "btn btnContent mt-2" data-toggle="modal" data-target="#modal_@a.f活動編號">查看詳情</button>
 
                                 <section class="block_footer row justify-content-between">
                                     <div class="date">@a.f活動開始時間</div>
@@ -380,6 +380,7 @@
 
                                 <!-- Modal footer -->
                                 <div class="modal-footer">
+                                    <button type="button" class="btn btn-warning"><a id=@a.f會員編號 href="~/Travel/TravelIndex">來去+1</a></button>
                                     <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                                 </div>
 

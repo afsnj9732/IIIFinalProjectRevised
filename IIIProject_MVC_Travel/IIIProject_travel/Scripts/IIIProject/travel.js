@@ -104,10 +104,51 @@
         });
     });
 
+    //for (var d = new Date(startDate); d <= new Date(endDate); d.setDate(d.getDate() + 1)) {
+    //    array.push($.datepicker.formatDate('yy-mm-dd', d));
+    //}
+
+    //開團+編輯時間限制
     function TheDatePicker(index) {
-        $(".ActivityStart").eq(index).datepicker({ dateFormat: 'yy-mm-dd' });
-        $(".ActivityEnd").eq(index).datepicker({ dateFormat: 'yy-mm-dd' });
-        $(".ActivityFindEnd").eq(index).datepicker({ dateFormat: 'yy-mm-dd' });
+        //act_id = "";
+        $.ajax({
+            url: "/Travel/GetDateLimit",
+            type: "POST",
+            //data: { "act_id": act_id },
+            success: function (data) {
+                array = JSON.parse(data);
+            }
+        });        
+        $(".ActivityStart").eq(index).datepicker(
+            {
+                dateFormat: 'yy-mm-dd',
+                beforeShowDay: function (date) {
+                    var string = jQuery.datepicker.formatDate('yy-mm-dd', date);
+                    return [array.indexOf(string) === -1];
+                },                 
+                minDate: '2'
+            }
+        );
+        $(".ActivityEnd").eq(index).datepicker(
+            {
+                dateFormat: 'yy-mm-dd',
+                beforeShowDay: function (date) {
+                    var string = jQuery.datepicker.formatDate('yy-mm-dd', date);
+                    return [array.indexOf(string) === -1];
+                },
+                minDate: '2'
+            }
+        );
+        $(".ActivityFindEnd").eq(index).datepicker(
+            {
+                dateFormat: 'yy-mm-dd',
+                beforeShowDay: function (date) {
+                    var string = jQuery.datepicker.formatDate('yy-mm-dd', date);
+                    return [array.indexOf(string) === -1];
+                },
+                minDate: '1'
+            }
+        );
     }
     
 

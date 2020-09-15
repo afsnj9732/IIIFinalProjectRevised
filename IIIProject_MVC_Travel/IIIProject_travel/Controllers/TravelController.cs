@@ -108,6 +108,39 @@ namespace IIIProject_travel.Controllers
             return View((object)HomeSearch);
         }
 
+        public dynamic GetDateLimit(int? act_id)
+        {
+            if (Session["member"] != null)
+            {            
+            tMember loginMember = (tMember)Session["member"];
+            var realMember = db.tMember.Where(t => t.f會員編號 == loginMember.f會員編號).FirstOrDefault();
+            if (!string.IsNullOrEmpty(realMember.f會員已占用時間))
+            {
+                //如果有act_id，表示是編輯模式，要先移除該筆活動的占用時間((none
+
+                //若無，則為一般開團，直接回傳已佔用的時間陣列
+                string[] timeList = realMember.f會員已占用時間.Split(',');
+                string[] returnArray = { };
+                foreach (string item in timeList)
+                {
+                    if (string.IsNullOrEmpty(item))
+                        continue;
+                    string[] timeRange = item.Split('~');
+                    int limit = Convert.ToInt32((Convert.ToDateTime(timeRange[1]) - Convert.ToDateTime(timeRange[0]))
+                            .ToString("dd"));
+                    for (int i = 0;i < limit; i++)
+                    {
+                       returnArray[i] = Convert.ToDateTime(timeRange[0]).AddDays(1.0).ToString("yyyy-MM-dd");
+                    }
+                }
+                //JavaScriptSerializer serializer = new JavaScriptSerializer();
+                //var obj = serializer.Serialize(List);
+                return returnArray; //correct
+            }
+            }
+            return null;
+        }
+
         [ValidateInput(false)]
         public ActionResult Edit(tActivity p)
         {
