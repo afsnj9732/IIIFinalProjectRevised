@@ -248,6 +248,7 @@
   <ItemGroup>
     <Content Include="App_Start\proheadshot.jpg" />
     <Content Include="Content\css\login2.css" />
+    <Content Include="Content\css\resetpassword.css" />
     <Content Include="Content\css\sweetalert2.min.css" />
     <Content Include="Content\images\29.png" />
     <Content Include="Content\images\30.png" />
