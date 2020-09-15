@@ -13,7 +13,7 @@
                         initialView: 'dayGridMonth',
                         displayEventTime: false,
                         locale: 'zh-tw',
-                        height: 750,
+                        height: 750
                     });
                     calendar.render();
                 } else if (data !== "1") {
