@@ -23,7 +23,7 @@ namespace IIIProject_travel.Controllers
 
             dbJoutaEntities db = new dbJoutaEntities();
             var x = (from t in db.tMember
-                     where t.f會員評分 >= 4
+                     where t.f會員評分 >= 0
                      select new
                      {
                          mMemberNum = t.f會員編號,
