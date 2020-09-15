@@ -127,7 +127,6 @@
                                 <td>自我介紹</td>
                                 <td>@Html.ActionLink("暱稱", "List", new { sortOrder = ViewBag.暱稱排序, currentFilter = ViewBag.當前搜尋 })</td>
                                 <td>@Html.ActionLink("性別", "List", new { sortOrder = ViewBag.性別排序, currentFilter = ViewBag.當前搜尋 })</td>
-                                <td>@Html.ActionLink("興趣", "List", new { sortOrder = ViewBag.興趣排序, currentFilter = ViewBag.當前搜尋 })</td>
                                 <td>按鈕</td>
                                 <td>按鈕</td>
                             </tr>
@@ -182,9 +181,6 @@
                                     </td>
                                     <td>
                                         @Html.DisplayFor(modelItem => item.f會員性別)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.f會員興趣)
                                     </td>
                                     <td>
                                         @Html.ActionLink("編輯", "e修改", "後台會員", new { id = item.f會員編號 }, new { Class = "btn btn-info" })

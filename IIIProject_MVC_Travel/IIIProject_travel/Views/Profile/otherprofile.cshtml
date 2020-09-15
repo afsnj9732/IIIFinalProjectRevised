@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="~/Content/css/bootstrap.min.css">
     <link rel="stylesheet" href="~/Content/sass/style.css">
     <link rel="stylesheet" href="~/Content/css/otherprofile.css">
-    <link  rel="stylesheet" href="~/Content/fontawesome/css/all.css">
+    <link rel="stylesheet" href="~/Content/fontawesome/css/all.css">
 </head>
 
 <body>
@@ -46,8 +46,8 @@
                         {
                             <li class="nav-item nav-link nav-login text-dark">@Html.ActionLink("您好，" + x.f會員名稱, "ProfileIndex", "Profile") </li>
                             @*<li class="nav-item">
-                                <img src="@ViewData["Img"]" alt="img" width="30" height="30" style="border:2px solid green;" />
-                            </li>*@
+                                    <img src="@ViewData["Img"]" alt="img" width="30" height="30" style="border:2px solid green;" />
+                                </li>*@
                             <li class="nav-item">@Html.ActionLink("登出", "Home", "Home", new { id = 0 }, new { @class = "nav-link nav-login text-dark" })</li>
                         }
                         else
@@ -125,7 +125,7 @@
                         <h3 class="rating">@Model.tMembers.f會員評分</h3>
                         <div class="rate">
                             <div class="stars">
-                                @switch (x.f會員評分)
+                                @switch (Model.tMembers.f會員評分)
                                 {
                                     case 5:
                                         <i class="fa fa-star"></i>
@@ -219,6 +219,7 @@
                         if (string.IsNullOrEmpty(post))
                         {
                             <p>目前無發文紀錄</p>
+                            //空
                         }
                         else
                         {
@@ -226,6 +227,7 @@
                             if (words.Length < 2)
                             {
                                 <p>目前無發文紀錄</p>
+                                //"",
                             }
                             else
                             {
@@ -240,7 +242,7 @@
                                         var post_item = db.tActivity.Where(c => c.f活動編號.ToString() == i && c.f活動類型 == "文章").FirstOrDefault();
                                         if (post_item == null)
                                         {
-                                            continue;
+                                            goto nothing;
                                         }
                                         else
                                         {
@@ -264,8 +266,9 @@
                                     }
                                 }
                             }
-
                         }
+                        nothing:;
+                         @:<p> 目前無發文紀錄 </p>
                     }
                 </div>
 
@@ -275,14 +278,14 @@
                         var join = db.tMember.Where(a => a.f會員編號 == Model.tMembers.f會員編號).Select(b => b.f會員參加的活動編號).FirstOrDefault();
                         if (string.IsNullOrEmpty(join))
                         {
-                            <p>目前無發文紀錄</p>
+                            <p>目前無參與紀錄</p>
                         }
                         else
                         {
                             string[] words = join.Split(',');
                             if (words.Length < 2)
                             {
-                                <p>目前無發文紀錄</p>
+                                <p>目前無參與紀錄</p>
                             }
                             else
                             {
@@ -404,7 +407,7 @@
                                         var make_item = db.tActivity.Where(c => c.f活動編號.ToString() == i && c.f活動類型 != "文章").FirstOrDefault();
                                         if (make_item == null)
                                         {
-                                            <p>目前無開團紀錄</p>
+                                            continue;
                                         }
                                         else
                                         {

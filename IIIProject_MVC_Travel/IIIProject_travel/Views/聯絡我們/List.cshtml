@@ -111,7 +111,6 @@
                     <table class="table table-striped table-sm">
                         <thead>
                             <tr>
-                                <td>筆數</td>
                                 <td>@Html.ActionLink("編號", "List", new { sortOrder = ViewBag.編號排序, dateStartFilter = ViewBag.當前起日, dateEndFiler = ViewBag.當前迄日, currentFilter = ViewBag.當前搜尋 })</td>
                                 <td>@Html.ActionLink("標題", "List", new { sortOrder = ViewBag.標題排序, dateStartFilter = ViewBag.當前起日, dateEndFiler = ViewBag.當前迄日, currentFilter = ViewBag.當前搜尋 })</td>
                                 <td>@Html.ActionLink("聯絡人", "List", new { sortOrder = ViewBag.聯絡人排序, dateStartFilter = ViewBag.當前起日, dateEndFiler = ViewBag.當前迄日, currentFilter = ViewBag.當前搜尋 })</td>
@@ -121,6 +120,7 @@
                                 <td>@Html.ActionLink("電話", "List", new { sortOrder = ViewBag.電話排序, dateStartFilter = ViewBag.當前起日, dateEndFiler = ViewBag.當前迄日, currentFilter = ViewBag.當前搜尋 })</td>
                                 <td>@Html.ActionLink("分類", "List", new { sortOrder = ViewBag.分類排序, dateStartFilter = ViewBag.當前起日, dateEndFiler = ViewBag.當前迄日, currentFilter = ViewBag.當前搜尋 })</td>
                                 <td>@Html.ActionLink("內容", "List", new { sortOrder = ViewBag.內容排序, dateStartFilter = ViewBag.當前起日, dateEndFiler = ViewBag.當前迄日, currentFilter = ViewBag.當前搜尋 })</td>
+                                <td>@Html.ActionLink("狀態", "List", new { sortOrder = ViewBag.狀態排序, dateStartFilter = ViewBag.當前起日, dateEndFiler = ViewBag.當前迄日, currentFilter = ViewBag.當前搜尋 })</td>
                                 <td>按鈕</td>
                                 <td>按鈕</td>
                             </tr>
@@ -129,12 +129,9 @@
                         <tbody>
 
                             @{
-                                int c筆數 = 0;
                                 foreach (var item in Model)
                                 {
-                                    c筆數++;
                                                         <tr>
-                                                            <td>@c筆數.ToString()</td>
                                                             <td>@Html.DisplayFor(modelItem => item.fID)</td>
                                                             <td>@Html.DisplayFor(modelItem => item.f標題)</td>
                                                             <td>@Html.DisplayFor(modelItem => item.f聯絡人)</td>
@@ -144,6 +141,8 @@
                                                             <td>@Html.DisplayFor(modelItem => item.f電話)</td>
                                                             <td>@Html.DisplayFor(modelItem => item.f意見類型)</td>
                                                             <td>@Html.DisplayFor(modelItem => item.f意見)</td>
+                                                            <td>@Html.DisplayFor(modelItem => item.f意見狀態)</td>
+
                                                             <td>
                                                                 @Html.ActionLink("回覆", "r回覆", "聯絡我們", new { id = item.fID }, new { Class = "btn btn-info" })
                                                             </td>
