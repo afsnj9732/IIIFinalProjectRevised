@@ -86,9 +86,9 @@
                     <div class="container-fluid">
                         <span>標題：<input type="text" name="f活動標題" style="width:90%" class="NeedAT" value="@Model.f活動標題"><p class="NeedATTo" style="color:red" hidden>活動標題請至少填滿8個字</p></span>
                         <div class="row m-0 mb-3 justify-content-around">
-                            <span>旅遊開始日期： <input type="text" min="@DateTime.Now.AddDays(2.0).ToString("yyyy-MM-dd")" max="" class="ActivityStart" name="f活動開始時間" value="@Model.f活動開始時間"><p class="ActivityStartTo" style="color:red" hidden>活動開始時間必填</p></span>
-                            <span>旅遊結束日期： <input type="text" min="@DateTime.Now.AddDays(2.0).ToString("yyyy-MM-dd")" max="" class="ActivityEnd" name="f活動結束時間" value="@Model.f活動結束時間"><p class="ActivityEndTo" style="color:red" hidden>活動結束時間必填</p></span>
-                            <span>入團截止： <input type="text" min="@DateTime.Now.AddDays(1.0).ToString("yyyy-MM-dd")" max="" class="ActivityFindEnd" name="f活動招募截止時間" value="@Model.f活動招募截止時間"><p class="ActivityFindEndTo" style="color:red" hidden>招募截止時間必填</p></span>
+                            <span>旅遊開始日期： <input type="text" min="@DateTime.Now.AddDays(2.0).ToString("yyyy-MM-dd")" max="" class="ActivityStart" listNumber="1" name="f活動開始時間" value="@Model.f活動開始時間" readonly><p class="ActivityStartTo" style="color:red" hidden>活動開始時間必填</p></span>
+                            <span>旅遊結束日期： <input type="text" min="@DateTime.Now.AddDays(2.0).ToString("yyyy-MM-dd")" max="" class="ActivityEnd" name="f活動結束時間" value="@Model.f活動結束時間" readonly><p class="ActivityEndTo" style="color:red" hidden>活動結束時間必填</p></span>
+                            <span>入團截止： <input type="text" min="@DateTime.Now.AddDays(1.0).ToString("yyyy-MM-dd")" max="" class="ActivityFindEnd" name="f活動招募截止時間" value="@Model.f活動招募截止時間" readonly><p class="ActivityFindEndTo" style="color:red" hidden>招募截止時間必填</p></span>
                         </div>
                         <div class="row mb-4 mx-auto align-items-center justify-content-around">
                             <span><img src="~/Content/images/04.png" class="mb-1" alt="">預算：<input type="text" name="f活動預算" class="NeedAC" value="@Model.f活動預算"><span class="NeedACTo" style="color:red" hidden>活動預算必填</span></span>
@@ -456,7 +456,7 @@
                         if (string.Compare(Model.f活動招募截止時間, DateTime.Now.ToString("yyyy-MM-dd")) > 0)
                         {
                             //招募未結束才可編輯
-                            <button class="btn btn-info  JoutaEdit" limitNumber="1" data-toggle="modal" data-target="#ajax_edit"  >
+                            <button class="btn btn-info  JoutaEdit" limitNumber="1" act_id="@Model.f活動編號" data-toggle="modal" data-target="#ajax_edit"  >
                                 編輯
                             </button>
                         }

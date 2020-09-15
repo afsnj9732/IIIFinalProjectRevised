@@ -224,9 +224,9 @@
                                             <div class="container-fluid">
                                                 <span>標題：<input type="text" name="f活動標題" style="width:90%" class="NeedAT" placeholder="活動標題至少8個字"><p class="NeedATTo" style="color:red" hidden>活動標題請至少填滿8個字</p></span>
                                                 <div class="row m-0 mb-3 justify-content-around">
-                                                    <span>旅遊開始日期： <input type="text" min="@DateTime.Now.AddDays(2.0).ToString("yyyy-MM-dd")" max="" class="ActivityStart" name="f活動開始時間"><p class="ActivityStartTo" style="color:red" hidden>活動開始時間必填</p></span>
-                                                    <span>旅遊結束日期： <input type="text" min="@DateTime.Now.AddDays(2.0).ToString("yyyy-MM-dd")" max="" class="ActivityEnd" disabled name="f活動結束時間"><p class="ActivityEndTo" style="color:red" hidden>活動結束時間必填</p></span>
-                                                    <span>入團截止： <input type="text" min="@DateTime.Now.AddDays(1.0).ToString("yyyy-MM-dd")" max="" class="ActivityFindEnd" disabled name="f活動招募截止時間"><p class="ActivityFindEndTo" style="color:red" hidden>招募截止時間必填</p></span>
+                                                    <span>旅遊開始日期： <input type="text" min="@DateTime.Now.AddDays(2.0).ToString("yyyy-MM-dd")" listNumber="0" max="" class="ActivityStart" name="f活動開始時間" readonly><p class="ActivityStartTo" style="color:red" hidden>活動開始時間必填</p></span>
+                                                    <span>旅遊結束日期： <input type="text" min="@DateTime.Now.AddDays(2.0).ToString("yyyy-MM-dd")" max="" class="ActivityEnd" disabled name="f活動結束時間" readonly><p class="ActivityEndTo" style="color:red" hidden>活動結束時間必填</p></span>
+                                                    <span>入團截止： <input type="text" min="@DateTime.Now.AddDays(1.0).ToString("yyyy-MM-dd")" max="" class="ActivityFindEnd" disabled name="f活動招募截止時間" readonly><p class="ActivityFindEndTo" style="color:red" hidden>招募截止時間必填</p></span>
                                                 </div>
                                                 <div class="row mb-4 mx-auto align-items-center justify-content-around">
                                                     <span><img src="~/Content/images/04.png" class="mb-1" alt="">預算：<input type="text" name="f活動預算" class="NeedAC"><span class="NeedACTo" style="color:red" hidden>活動預算必填</span></span>

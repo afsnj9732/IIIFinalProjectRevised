@@ -108,35 +108,39 @@ namespace IIIProject_travel.Controllers
             return View((object)HomeSearch);
         }
 
-        public dynamic GetDateLimit(int? act_id)
+        public string GetDateLimit(int act_id)
         {
             if (Session["member"] != null)
-            {            
-            tMember loginMember = (tMember)Session["member"];
-            var realMember = db.tMember.Where(t => t.f會員編號 == loginMember.f會員編號).FirstOrDefault();
-            if (!string.IsNullOrEmpty(realMember.f會員已占用時間))
             {
-                //如果有act_id，表示是編輯模式，要先移除該筆活動的占用時間((none
-
-                //若無，則為一般開團，直接回傳已佔用的時間陣列
-                string[] timeList = realMember.f會員已占用時間.Split(',');
-                string[] returnArray = { };
-                foreach (string item in timeList)
+                tMember loginMember = (tMember)Session["member"];
+                var realMember = db.tMember.Where(t => t.f會員編號 == loginMember.f會員編號).FirstOrDefault();
+                if (!string.IsNullOrEmpty(realMember.f會員已占用時間))
                 {
-                    if (string.IsNullOrEmpty(item))
-                        continue;
-                    string[] timeRange = item.Split('~');
-                    int limit = Convert.ToInt32((Convert.ToDateTime(timeRange[1]) - Convert.ToDateTime(timeRange[0]))
-                            .ToString("dd"));
-                    for (int i = 0;i < limit; i++)
+                    string[] timeList = realMember.f會員已占用時間.Split(',');
+                    //act_id!=0，表示是編輯模式，要先移除該筆活動的占用時間才符合時間限制條件
+                    if (act_id != 0)
                     {
-                       returnArray[i] = Convert.ToDateTime(timeRange[0]).AddDays(1.0).ToString("yyyy-MM-dd");
+                        var targetAct = db.tActivity.Where(t => t.f活動編號 == act_id).FirstOrDefault();
+                        timeList = timeList.Where(t => t != targetAct.f活動開始時間 + "~" + targetAct.f活動結束時間).ToArray();
                     }
+                    //若無，則為一般開團，直接回傳已佔用的時間陣列                    
+                    string totalTime = "[";
+                    foreach (string item in timeList)
+                    {
+                        if (string.IsNullOrEmpty(item))
+                            continue;
+                        string[] timeRange = item.Split('~');
+                        int limit = Convert.ToInt32((Convert.ToDateTime(timeRange[1]) - Convert.ToDateTime(timeRange[0]))
+                                .ToString("dd"));
+                        for (double i = 0.0; i <= limit; i++)
+                        {
+                            totalTime += "\"" + Convert.ToDateTime(timeRange[0]).AddDays(i).ToString("yyyy-MM-dd") + "\",";
+
+                        }
+                    }
+                    totalTime += "]";
+                    return totalTime;
                 }
-                //JavaScriptSerializer serializer = new JavaScriptSerializer();
-                //var obj = serializer.Serialize(List);
-                return returnArray; //correct
-            }
             }
             return null;
         }
@@ -144,8 +148,7 @@ namespace IIIProject_travel.Controllers
         [ValidateInput(false)]
         public ActionResult Edit(tActivity p)
         {
-            tMember Member = (tMember)Session["member"];
-            dbJoutaEntities db = new dbJoutaEntities();            
+            tMember Member = (tMember)Session["member"];          
             tActivity targetAct = db.tActivity.Where(t => t.f活動編號 == p.f活動編號).FirstOrDefault();
 
 
