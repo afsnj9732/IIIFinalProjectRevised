@@ -9,6 +9,8 @@ namespace IIIProject_travel.ViewModel
     public class CProfile
     {
         [Required]
+        public string txtName { get; set; }
+        [Required]
         public string txtNickName { get; set; }
         [DataType(DataType.DateTime)]
         public DateTime txtBirth { get; set; }
