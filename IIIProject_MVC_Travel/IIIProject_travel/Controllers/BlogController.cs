@@ -20,19 +20,6 @@ namespace IIIProject_travel.Controllers
         dbJoutaEntities db = new dbJoutaEntities();
         int pagesize = 3;
         // GET: Blog
-        //public actionresult articleindex(string keyword)        //首頁搜尋用
-        //{
-        //    string homesearch = keyword;
-        //    return view((object)homesearch);
-        //}
-        //[httppost]
-        //public actionresult articleindex(int? id)
-        //{
-        //    string homesearch = "";
-        //    homesearch += request.form["txtkeyword"];
-        //    homesearch += ",";
-        //    return view((object)homesearch);
-        //}
 
         public ActionResult Index(string sortOder,string txtKey, string currentfilter, int page = 1)
         {

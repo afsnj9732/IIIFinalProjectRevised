@@ -63,14 +63,18 @@ namespace IIIProject_travel.Controllers
         {
             CMember c = new CMember();
             var z = (tMember)Session["member"];
-            //if (z != null)
-            //{
-            //    if (z.f會員編號 == id)
-            //    {
-
-            //    }
-            //}
-            return View(z);
+            if (z != null)
+            {
+                if (z.f會員編號 == id)
+                {
+                    var user = db.tMember.Where(x => x.f會員編號 == id).FirstOrDefault();
+                    z.f會員編號 = user.f會員編號;
+                    return View(z);
+                }
+            }
+            var member = db.tMember.Where(x => x.f會員編號 == id).FirstOrDefault();
+            c.tMembers = member;
+            return View(c);
         }
         public ActionResult otherprofile(int? id)
         {
