@@ -47,7 +47,8 @@ namespace IIIProject_travel.Controllers
                            m.fID.ToString().Contains(txt關鍵字) || m.f標題.Contains(txt關鍵字) ||
                            m.f性別.Contains(txt關鍵字) || m.f意見.Contains(txt關鍵字) ||
                            m.f意見類型.Contains(txt關鍵字) || m.f聯絡人.Contains(txt關鍵字) ||
-                           m.f電子郵件.Contains(txt關鍵字) || m.f電話.Contains(txt關鍵字)
+                           m.f電子郵件.Contains(txt關鍵字) || m.f電話.Contains(txt關鍵字)||
+                           m.f意見狀態.Contains(txt關鍵字)
                      select m;
             }
 
@@ -64,6 +65,7 @@ namespace IIIProject_travel.Controllers
             ViewBag.性別排序 = sortOrder == "性別升冪" ? "性別降冪" : "性別升冪";
             ViewBag.電子郵件排序 = sortOrder == "電子郵件升冪" ? "電子郵件降冪" : "電子郵件升冪";
             ViewBag.電話排序 = sortOrder == "電話升冪" ? "電話降冪" : "電話升冪";
+            ViewBag.狀態排序 = sortOrder == "狀態升冪" ? "狀態降冪" : "狀態升冪";
 
 
             switch (sortOrder)
@@ -119,6 +121,13 @@ namespace IIIProject_travel.Controllers
                 case "電話升冪":
                     意見 = 意見.OrderBy(s => s.f電話);
                     break;
+                case "狀態降冪":
+                    意見 = 意見.OrderByDescending(s => s.f意見狀態);
+                    break;
+                case "狀態升冪":
+                    意見 = 意見.OrderBy(s => s.f意見狀態);
+                    break;
+
 
                 default:
                     意見 = 意見.OrderBy(s => s.f標題);
