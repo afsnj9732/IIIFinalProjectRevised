@@ -21,6 +21,10 @@ body {
     transition-duration: 1s;
 }
 
+.modal-content{
+    height:100%;
+}
+
 #mapid {
     height: 220px;
     margin: 0 0 1rem 0;
