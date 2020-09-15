@@ -2,10 +2,10 @@
 $(document).ready(function () {
     console.log("333");
     $.getJSON("/後台Home/GetLineChartData", function (data) {
-        var Names = [];
+        var date = [];
         var Qts = [];
         for (var i = 0; i < data.length; i++) {
-            Names.push(data[i].name);
+            date.push(data[i].name);
             Qts.push(data[i].count);
         }
 
@@ -14,17 +14,17 @@ $(document).ready(function () {
                 type: 'line'
             },
             title: {
-                text: 'Monthly Average Temperature'
+                text: '瀏覽趨勢'
             },
             subtitle: {
-                text: 'Source: WorldClimate.com'
+                text: 'Jouta Data'
             },
             xAxis: {
-                categories: Names
+                categories: date
             },
             yAxis: {
                 title: {
-                    text: 'Temperature (°C)'
+                    text: '瀏覽次數'
                 }
             },
             plotOptions: {
@@ -36,7 +36,7 @@ $(document).ready(function () {
                 }
             },
             series: [{
-                name: 'Trend',
+                name: '瀏覽次數 v.s 時間',
                 data: Qts
             }]
         });
