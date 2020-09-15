@@ -131,26 +131,26 @@
                             @{
                                 foreach (var item in Model)
                                 {
-                                                        <tr>
-                                                            <td>@Html.DisplayFor(modelItem => item.fID)</td>
-                                                            <td>@Html.DisplayFor(modelItem => item.f標題)</td>
-                                                            <td>@Html.DisplayFor(modelItem => item.f聯絡人)</td>
-                                                            <td>@Html.DisplayFor(modelItem => item.f意見時間)</td>
-                                                            <td>@Html.DisplayFor(modelItem => item.f性別)</td>
-                                                            <td>@Html.DisplayFor(modelItem => item.f電子郵件)</td>
-                                                            <td>@Html.DisplayFor(modelItem => item.f電話)</td>
-                                                            <td>@Html.DisplayFor(modelItem => item.f意見類型)</td>
-                                                            <td>@Html.DisplayFor(modelItem => item.f意見)</td>
-                                                            <td>@Html.DisplayFor(modelItem => item.f意見狀態)</td>
+                                    <tr>
+                                        <td>@Html.DisplayFor(modelItem => item.fID)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.f標題)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.f聯絡人)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.f意見時間)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.f性別)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.f電子郵件)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.f電話)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.f意見類型)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.f意見)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.f意見狀態)</td>
 
-                                                            <td>
-                                                                @Html.ActionLink("回覆", "r回覆", "聯絡我們", new { id = item.fID }, new { Class = "btn btn-info" })
-                                                            </td>
-                                                            <td>
-                                                                @Html.ActionLink("刪除", "d刪除", "聯絡我們", new { id = item.fID },
-                                                                new { OnClick = "return confirm('確定要刪除嗎?')", Class = "btn btn-danger" })
-                                                            </td>
-                                                        </tr>
+                                        <td>
+                                            @Html.ActionLink("回覆", "r回覆", "聯絡我們", new { id = item.fID }, new { Class = "btn btn-info" })
+                                        </td>
+                                        <td>
+                                            @Html.ActionLink("刪除", "d刪除", "聯絡我們", new { id = item.fID },
+                                            new { OnClick = "return confirm('確定要刪除嗎?')", Class = "btn btn-danger" })
+                                        </td>
+                                    </tr>
                                 }
                             }
 
@@ -158,7 +158,7 @@
                         </tbody>
                     </table>
                     @Html.PagedListPager(Model, page => Url.Action("List", new { page }))
-
+                    @ViewBag.ll
                 </div>
             </main>
         </div>
