@@ -230,17 +230,17 @@
     $("body").on("click", ".CalendarEvent", function () {
         let targetclass = this.classList.item(this.classList.length-1);
         readmore_target = targetclass.substring(10, targetclass.length);        
-        get_ajax_readmore();
-        let target = readmore_target;
-        var combine = "[ToUpdateVC=" + target + "]";
-        var getCounts = parseInt($(combine).html()) + 1;
-        $(combine).html(getCounts);
-        $.ajax({
-            url: "/Travel/ViewCounts",
-            type: "POST",
-            data: { "ActivityID": target }
-        }
-        );
+        //get_ajax_readmore();
+        //let target = readmore_target;
+        //var combine = "[ToUpdateVC=" + target + "]";
+        //var getCounts = parseInt($(combine).html()) + 1;
+        //$(combine).html(getCounts);
+        //$.ajax({
+        //    url: "/Travel/ViewCounts",
+        //    type: "POST",
+        //    data: { "ActivityID": target }
+        //}
+        //);
         $("#calendarEventGo").attr("act_id", readmore_target);
         $("#calendarEventGo").click();
 
@@ -749,12 +749,12 @@
         var combine = "[ToUpdateVC=" + target + "]";
         var getCounts = parseInt($(combine).html()) + 1;
         $(combine).html(getCounts);
-        $.ajax({
-            url: "/Travel/ViewCounts",
-            type: "POST",
-            data: { "ActivityID": target }
-        }
-        );
+        //$.ajax({
+        //    url: "/Travel/ViewCounts",
+        //    type: "POST",
+        //    data: { "ActivityID": target }
+        //}
+        //);
     }
     //因為文章項目是ajax動態產生，因此事件必須使用氣泡動態綁定寫法
     $("body").on('click', ".ViewCounts", getViewCounts);
