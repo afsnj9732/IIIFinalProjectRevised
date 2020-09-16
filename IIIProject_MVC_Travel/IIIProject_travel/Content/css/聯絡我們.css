@@ -1,5 +1,8 @@
-body{
-    background-image: url("../images/backimg1.jpg");
+html, body {
+    background: linear-gradient(rgba(255,255,230,0.5),rgba(255,255,230,0.51)), url('http://subtlepatterns.com/patterns/geometry2.png');
+}
+
+body {
     background-repeat: repeat-x;
 }
 
