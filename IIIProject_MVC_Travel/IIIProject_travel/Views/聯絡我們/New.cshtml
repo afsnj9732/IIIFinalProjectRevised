@@ -24,18 +24,18 @@
 <body>
     <div class="container-fluid">
         <!-- navbar -->
-        <nav class="navbar navbar-expand-lg navbar-fixed-top">
+        <nav class="navbar navbar-expand-lg navbar-fixed-top" id="main">
             <div class="container">
                 <a class="navbar-brand" href="@Url.Action("Home", "Home")">
                     @*改用Url.Action*@
                     <img src="~/Content/images/joutalogo_black.png" alt="" width="100">
                 </a>
-                @*<div class="navbar-header" id="main">*@
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-                        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                @*</div>*@
+                <div class="navbar-header">
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                </div>
                 <div class="navbar-collapse collapse justify-content-between" id="navbarNav">
                     <ul class="nav navbar-nav">
                         <li class="nav-item active">@Html.ActionLink("首頁", "Home", "Home", new { }, new { @class = "nav-link nav-main text-dark" })</li>
@@ -44,17 +44,23 @@
                         <li class="nav-item">@Html.ActionLink("找文章", "Index", "Blog", new { }, new { @class = "nav-link nav-blog text-dark" })</li>
                     </ul>
                     <ul class="nav navbar-nav">
+
+                        <li class="nav-item">@Html.ActionLink("關於我們", "About", "Home", new { }, new { @class = "nav-link nav-register text-dark" })</li>
+                        <li class="nav-item">@Html.ActionLink("聯絡我們", "New", "聯絡我們", new { }, new { @class = "nav-link nav-login text-dark" })</li>
                         @if (Session["member"] != null)
                         {
+
+
                             <li class="nav-item nav-link nav-login text-dark">@Html.ActionLink("您好，" + x.f會員名稱, "ProfileIndex", "Profile") </li>
-                            @*<li class="nav-item">
-                                <img src="@ViewData["Img"]" alt="img" width="30" height="30" style="border:2px solid green;" />
-                            </li>*@
+
                             <li class="nav-item">@Html.ActionLink("登出", "Home", "Home", new { id = 0 }, new { @class = "nav-link nav-login text-dark" })</li>
                         }
                         else
                         {
+
+
                             <li class="nav-item">@Html.ActionLink("登入", "LoginIndex", "Login", new { }, new { @class = "nav-link nav-login text-dark" })</li>
+
                             <li class="nav-item">@Html.ActionLink("註冊", "Register", "Home", new { }, new { @class = "nav-link nav-register text-dark" })</li>
                         }
                     </ul>
@@ -131,7 +137,7 @@
                             <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="f意見" required></textarea>
                         </div>
                     </div>
-                    <div class="text-danger" style="display:none;">@ViewBag.ll</div> 
+                    <div class="text-danger" style="display:none;">@ViewBag.ll</div>
                     <div class="sub">
                         <button type="submit" class="btn btn-success" id="btn123">送出</button>
                         <button type="reset" class="btn btn-success">取消</button>
@@ -139,11 +145,12 @@
 
                 </div>
             </fieldset>
-        </div>
-        <div>
-            <p class="pb">本信箱的郵件處理時間為一般工作日上午 8 點 30 分至下午 5 點 30 分</p>
-        </div>
+            <div>
+                <p class="pb" style="width:1000px">本信箱的郵件處理時間為一般工作日上午 8 點 30 分至下午 5 點 30 分</p>
+            </div>
 
+        </div>
+   
     </form>
 
     <!-- footer -->
