@@ -296,48 +296,6 @@
         }
     });
 
-    //function TheDatePicker(index, dateLimitID) {
-    //    $.ajax({
-    //        url: "/Travel/GetDateLimit",
-    //        type: "POST",
-    //        data: { "act_id": dateLimitID },
-    //        success: function (data) {
-    //            if (data !== "")
-    //                tiemLimit = data;
-    //        }
-    //    });
-
-    //    $(".ActivityStart").eq(index).datepicker(
-    //        {
-    //            dateFormat: 'yy-mm-dd',
-    //            beforeShowDay: function (date) {
-    //                var string = jQuery.datepicker.formatDate('yy-mm-dd', date);
-    //                return [tiemLimit.indexOf(string) === -1];
-    //            },
-    //            minDate: '2',
-    //        }
-    //    );
-    //    $(".ActivityEnd").eq(index).datepicker(
-    //        {
-    //            dateFormat: 'yy-mm-dd',
-    //            beforeShowDay: function (date) {
-    //                var string = jQuery.datepicker.formatDate('yy-mm-dd', date);
-    //                return [tiemLimit.indexOf(string) === -1];
-    //            },
-    //            minDate: '2'
-    //        }
-    //    );
-    //    $(".ActivityFindEnd").eq(index).datepicker(
-    //        {
-    //            dateFormat: 'yy-mm-dd',
-    //            beforeShowDay: function (date) {
-    //                var string = jQuery.datepicker.formatDate('yy-mm-dd', date);
-    //                return [tiemLimit.indexOf(string) === -1];
-    //            },
-    //            minDate: '1'
-    //        }
-    //    );
-    //}
 
     //揪團時間限制   
     $("body").on("change", ".ActivityStart", function () {

@@ -36,8 +36,10 @@ namespace IIIProject_travel.Controllers
                         var NowMemberAct = db.tActivity.Where(t => t.f活動編號.ToString() == item).FirstOrDefault();
                         CalendarEvents CalendarEvent = new CalendarEvents();
                         CalendarEvent.title = NowMemberAct.f活動標題;
+
                         CalendarEvent.start = NowMemberAct.f活動開始時間;
-                        CalendarEvent.end = NowMemberAct.f活動結束時間 + " 00:00:01";
+                        CalendarEvent.end =
+                            NowMemberAct.f活動開始時間 == NowMemberAct.f活動結束時間 ? NowMemberAct.f活動結束時間 : NowMemberAct.f活動結束時間 + " 23:59:59";
                         CalendarEvent.classNames = "CalendarEvent" + " " + "EventActID" + NowMemberAct.f活動編號;
                         NowMemberTotalEvents[i] = CalendarEvent;
                         i++;
@@ -89,6 +91,44 @@ namespace IIIProject_travel.Controllers
             return View(List);
         }
 
+        public string GetDateLimit(int act_id)
+        {
+            if (Session["member"] != null)
+            {
+                tMember loginMember = (tMember)Session["member"];
+                var realMember = db.tMember.Where(t => t.f會員編號 == loginMember.f會員編號).FirstOrDefault();
+                if (!string.IsNullOrEmpty(realMember.f會員已占用時間))
+                {
+                    string[] timeList = realMember.f會員已占用時間.Split(',');
+                    //act_id!=0，表示是編輯模式，要先移除該筆活動的占用時間才符合時間限制條件
+                    if (act_id != 0)
+                    {
+                        var targetAct = db.tActivity.Where(t => t.f活動編號 == act_id).FirstOrDefault();
+                        timeList = timeList.Where(t => t != targetAct.f活動開始時間 + "~" + targetAct.f活動結束時間).ToArray();
+                    }
+                    //若無，則為一般開團，直接回傳已佔用的時間陣列                    
+                    //string totalTime = "[";
+                    string totalTime = "";
+                    foreach (string item in timeList)
+                    {
+                        if (string.IsNullOrEmpty(item))
+                            continue;
+                        string[] timeRange = item.Split('~');
+                        double limit = Convert.ToInt32((Convert.ToDateTime(timeRange[1]) - Convert.ToDateTime(timeRange[0]))
+                                .ToString("dd"));
+                        for (double i = 0.0; i <= limit; i++)
+                        {
+                            totalTime += Convert.ToDateTime(timeRange[0]).AddDays(i).ToString("yyyy-MM-dd") + ",";
+                        }
+                    }
+                    totalTime = totalTime.Substring(0, totalTime.Length - 1);
+                    //totalTime += "]";
+                    return totalTime;
+                }
+            }
+            return null;
+        }
+
         // GET: Eat
         public ActionResult EatIndex(string msg)
         {
@@ -111,7 +151,6 @@ namespace IIIProject_travel.Controllers
         public ActionResult Edit(tActivity p)
         {
             tMember Member = (tMember)Session["member"];
-            dbJoutaEntities db = new dbJoutaEntities();
             tActivity targetAct = db.tActivity.Where(t => t.f活動編號 == p.f活動編號).FirstOrDefault();
 
 
