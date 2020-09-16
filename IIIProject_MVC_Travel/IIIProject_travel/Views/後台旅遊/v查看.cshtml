@@ -108,59 +108,60 @@
                         <input type="hidden" name="f活動編號" value="@Model.f活動編號" />
                         <div class="row">
                             <div class="col">
-                                <img src="~/Content/images/@Model.f活動團圖" style="width:500px;height:500px" />
+                                <img src="~/Content/images/@Model.f活動團圖" style="width:500px;height:500px; display:block; margin:auto;" />
 
                                 <p>
-                                    標題<br />
-                                    <input type="text" name="f活動標題" value="@Model.f活動標題" />
+                                    標題：<br />
+                                    <input type="text" name="f活動標題" value="@Model.f活動標題" class="form-control" readonly/>
                                 </p>
                                 <p>
-                                    帳號<br />
-                                    <input type="text" name="f會員編號" value="@Model.f會員編號" />
+                                    帳號：<br />
+                                    <input type="text" name="f會員編號" value="@Model.f會員編號" class="form-control" readonly/>
                                 </p>
                                 <p>
-                                    讚數<br />
-                                    <input type="text" name="f活動讚數" value="@Model.f活動讚數" />
+                                    讚數：<br />
+                                    <input type="text" name="f活動讚數" value="@Model.f活動讚數" class="form-control" readonly/>
                                 </p>
                                 <p>
-                                    建立時間<br />
-                                    <input type="text" name="f活動發起日期" value="@Model.f活動發起日期" />
+                                    建立時間：<br />
+                                    <input type="text" name="f活動發起日期" value="@Model.f活動發起日期" class="form-control" readonly/>
                                 </p>
                                 <p>
-                                    召募截止時間<br />
-                                    <input type="text" name="f活動招募截止時間" value="@Model.f活動招募截止時間" />
+                                    召募截止時間：<br />
+                                    <input type="text" name="f活動招募截止時間" value="@Model.f活動招募截止時間" class="form-control" readonly/>
                                 </p>
                                 <p>
-                                    開始時間<br />
-                                    <input type="text" name="f活動開始時間" value="@Model.f活動開始時間" />
+                                    開始時間：<br />
+                                    <input type="text" name="f活動開始時間" value="@Model.f活動開始時間" class="form-control" readonly/>
                                 </p>
                                 <p>
-                                    結束時間<br />
-                                    <input type="text" name="f活動結束時間" value="@Model.f活動結束時間" />
+                                    結束時間：<br />
+                                    <input type="text" name="f活動結束時間" value="@Model.f活動結束時間" class="form-control" readonly/>
                                 </p>
                                 <p>
-                                    團圖<br />
-                                    <input type="text" name="f活動團圖" value="@Model.f活動團圖" />
+                                    團圖：<br />
+                                    <input type="text" name="f活動團圖" value="@Model.f活動團圖" class="form-control" readonly/>
                                 </p>
                                 <p>
-                                    地點<br />
-                                    <input type="text" name="f活動地點" value="@Model.f活動地點" />
+                                    地點：<br />
+                                    <input type="text" name="f活動地點" value="@Model.f活動地點" class="form-control" readonly/>
                                 </p>
                                 <p>
-                                    地區<br />
-                                    <input type="text" name="ff活動地區" value="@Model.f活動地區" />
+                                    地區：<br />
+                                    <input type="text" name="ff活動地區" value="@Model.f活動地區" class="form-control" readonly/>
                                 </p>
                                 <p>
-                                    預算<br />
-                                    <input type="text" name="f活動預算" value="@Model.f活動預算" />
+                                    預算：<br />
+                                    <input type="text" name="f活動預算" value="@Model.f活動預算" class="form-control" readonly/>
                                 </p>
                                 <p>
-                                    活動分類<br />
-                                    <input type="text" name="f活動分類" value="@Model.f活動分類" />
+                                    活動分類：<br />
+                                    <input type="text" name="f活動分類" value="@Model.f活動分類" class="form-control" readonly/>
                                 </p>
                                 <p>
-                                    內容<br />
-                                    <textarea name="f活動內容" cols="50" rows="6" readonly>@Model.f活動內容</textarea>
+                                    內容：<br />
+                                    <textarea name="f活動內容" cols="50" rows="6" class="form-control" readonly>@Model.f活動內容</textarea>
+
                                 </p>
 
 
@@ -168,6 +169,10 @@
 
                         </div>
                     </form>
+                    @Html.ActionLink("刪除", "d刪除", "後台旅遊", new { id = Model.f活動編號 },
+                    new { OnClick = "return confirm('確定要刪除嗎?')", Class = "btn btn-danger" })
+
+                    <input type="button" onclick="history.back()" value="關閉" class="btn btn-secondary" />
 
                 </div>
             </main>
