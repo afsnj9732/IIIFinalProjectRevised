@@ -1,6 +1,7 @@
 (function () {  
     var order, background_color, contain, category, label, page, condition, readmore_target;
-    var timeLimit = new Array();
+    var timeLimitEdit = new Array();
+    var timeLimitJouta = new Array();
     var calendarEl = document.getElementById('calendar');
     //動態生成行事曆
     function getCalendar() {
@@ -113,23 +114,30 @@
             type: "POST",
             data: { "act_id": dateLimitID },
             success: function (data) {
-                if (data !== "")
-                    timeLimit = data.split(',');
+                if (data !== "") {
+                    if (index === "0") {
+                        timeLimitJouta = data.split(',');
+                    } else {
+                        timeLimitEidt = data.split(',');
+                    }
+                }
+                    
             }
         });
-        $(".ActivityStart").eq(index).datepicker(
-            {
-                dateFormat: 'yy-mm-dd',
-                monthNames: ["1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"],
-                dayNamesMin: ["日", "一", "二", "三", "四", "五", "六"],
-                beforeShowDay: function (date) {
-                    var string = jQuery.datepicker.formatDate('yy-mm-dd', date);
-                    return [timeLimit.indexOf(string) === -1];
-                },
-                minDate: '2'
-            }
-        );
         if (index === "0") {
+            $(".ActivityStart").eq(index).datepicker(
+                {
+                    dateFormat: 'yy-mm-dd',
+                    monthNames: ["1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"],
+                    dayNamesMin: ["日", "一", "二", "三", "四", "五", "六"],
+                    beforeShowDay: function (date) {
+                        var string = jQuery.datepicker.formatDate('yy-mm-dd', date);
+                        return [timeLimitJouta.indexOf(string) === -1];
+                    },
+                    minDate: '2'
+                }
+            );
+
             $(".ActivityEnd").eq(index).datepicker(
                 {
                     dateFormat: 'yy-mm-dd',
@@ -137,7 +145,7 @@
                     dayNamesMin: ["日", "一", "二", "三", "四", "五", "六"],
                     beforeShowDay: function (date) {
                         var string = jQuery.datepicker.formatDate('yy-mm-dd', date);
-                        return [timeLimit.indexOf(string) === -1];
+                        return [timeLimitJouta.indexOf(string) === -1];
                     },
                     minDate: '2'
                 }
@@ -151,6 +159,18 @@
                 }
             );
         } else {
+            $(".ActivityStart").eq(index).datepicker(
+                {
+                    dateFormat: 'yy-mm-dd',
+                    monthNames: ["1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"],
+                    dayNamesMin: ["日", "一", "二", "三", "四", "五", "六"],
+                    beforeShowDay: function (date) {
+                        var string = jQuery.datepicker.formatDate('yy-mm-dd', date);
+                        return [timeLimitEdit.indexOf(string) === -1];
+                    },
+                    minDate: '2'
+                }
+            );
             let NowDate = new Date(Date.parse($(".ActivityStart").eq(index).val()));
             theMonth = NowDate.getMonth() + 1;
             theDay = NowDate.getDate() - 1;
@@ -160,7 +180,7 @@
             let endLimit;
             let temp1, temp2;
             let i = 0;
-            for (let item of timeLimit) {
+            for (let item of timeLimitEdit) {
                 let itemDate = new Date(Date.parse(item));
                 if (itemDate > NowDate) {
                     temp1 = itemDate;
@@ -178,7 +198,7 @@
                     dayNamesMin: ["日", "一", "二", "三", "四", "五", "六"],
                     beforeShowDay: function (date) {
                         var string = jQuery.datepicker.formatDate('yy-mm-dd', date);
-                        return [timeLimit.indexOf(string) === -1];
+                        return [timeLimitEdit.indexOf(string) === -1];
                     },
                     minDate: $(".ActivityStart").eq(index).val(), //因為有當天行程所以允許在同一天
                     maxDate: endLimit //maxDate 找最接近minDate的日期
@@ -317,7 +337,11 @@
         //$(".ActivityEnd").attr("min", $(this).val());
         //$(".ActivityFindEnd").attr("max", $(this).val());
         let index = $(this).attr("listNumber");
-
+        if (index === "0") {
+            timeLimit = timeLimitJouta;
+        } else {
+            timeLimit = timeLimitEidt;
+        }
         //let themax = new Date(Date.parse($(this).val().replace(/-/g, "/"))); 日期字串dash轉斜線
         let NowDate = new Date(Date.parse($(this).val()));
         theMonth = NowDate.getMonth() + 1;
