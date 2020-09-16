@@ -2225,7 +2225,6 @@
     <Content Include="Scripts\IIIProject\coupon.js" />
     <Content Include="Scripts\IIIProject\dashboard.js" />
     <Content Include="Scripts\IIIProject\debounce.js" />
-    <Content Include="Scripts\IIIProject\duck.js" />
     <Content Include="Scripts\IIIProject\eat.js" />
     <Content Include="Scripts\IIIProject\exporting.js" />
     <Content Include="Scripts\IIIProject\highcharts.js" />

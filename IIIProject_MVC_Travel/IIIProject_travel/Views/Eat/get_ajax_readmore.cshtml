@@ -433,7 +433,17 @@
                                     <img src="~/Content/images/05.png" class="pb-1 ">覺得讚
                                 </button>
                                 <button class="btn btn-block mr-1  p-1 pr-2 pl-2" data-toggle="modal" data-target="#ajax_join" style="background-color:#FFE0B2 ;">
-                                    <img src="~/Content/images/10.png" class="pb-1" alt="">想加入
+                                    <img src="~/Content/images/10.png" class="pb-1" alt="">
+                                    @{
+                                        if (NowMember.f會員編號 != Model.f會員編號)
+                                        {
+                                            @:入退團
+                                        }
+                                        else
+                                        {
+                                            @:來審核
+                                        }
+                                    }
                                 </button>
                                 <button class="btn btn-block mr-1  p-1 pr-2 pl-2" data-toggle="modal" data-target="#ajax_score" style="background-color:#FFE0B2 ;">
                                     <img src="~/Content/images/10.png" class="pb-1" alt="">給分數

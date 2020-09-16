@@ -125,7 +125,7 @@
                     var string = jQuery.datepicker.formatDate('yy-mm-dd', date);
                     return [timeLimit.indexOf(string) === -1];
                 },
-                minDate: '2',
+                minDate: '2'
             }
         );
         if (index === "0") {
