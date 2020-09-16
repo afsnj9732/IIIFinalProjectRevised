@@ -1,6 +1,7 @@
 ; (function () {
     let nav = document.querySelector("#main");
     let navPosition = nav.offsetTop;
+    console.log(navPosition);
     
     function scrollHandler() {
         if (window.scrollY >= navPosition) {

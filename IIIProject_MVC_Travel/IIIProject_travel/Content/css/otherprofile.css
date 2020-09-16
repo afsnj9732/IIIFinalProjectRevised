@@ -1,3 +1,12 @@
+body, html {
+    font-family: 'Noto Sans TC','·L³n¥¿¶ÂÅé', monospace !important;
+}
+
+body {
+    background-color: #fffef4;
+    height: 100vh;
+}
+
 #limit {
     display: flex;
     width: 500px;
@@ -20,6 +29,10 @@
 .activityphoto {
     width: 300px;
     height: 200px;
+}
+
+h2{
+    font-size:2.5rem;
 }
 
 .col-md-4 {
@@ -154,6 +167,15 @@ body {
     color: var(--color);
     margin-right: 10px;
 }
+
+p {
+    display: -webkit-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+}
+
 .mobile-no i {
    transform: rotateY(180deg);
 }
@@ -257,12 +279,22 @@ input[type="text"]:focus{
     border: solid gainsboro;
     z-index: 1;
 }
-.tab_info{
+.tab_info {
+    border: solid gainsboro;
     margin-bottom: 50px;
     padding: 20px;
     width: 100%;
     display: none;
 }
+
+#title {
+    text-align: center;
+}
+
+#theTabContent {
+    text-align: center;
+}
+
 #see-more-bio,
 #see-less-bio{
     color: blue;
