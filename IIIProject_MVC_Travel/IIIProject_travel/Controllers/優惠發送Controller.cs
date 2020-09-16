@@ -22,8 +22,12 @@ namespace IIIProject_travel.Controllers
         {
 
             dbJoutaEntities db = new dbJoutaEntities();
+
             var x = (from t in db.tMember
-                     where t.f會員評分 >= 0
+                     //where (t.f會員緯度 < curLat+0.02 && 
+                     //t.f會員緯度 > curLat - 0.02 &&
+                     //t.f會員經度 < curLng + 0.02 &&
+                     //t.f會員經度 > curLng - 0.02)
                      select new
                      {
                          mMemberNum = t.f會員編號,
@@ -37,10 +41,10 @@ namespace IIIProject_travel.Controllers
         }
 
         [HttpPost]
-        public ActionResult SendMail(string txtCouponInfo, int memberId1)
+        public ActionResult SendMail(string txtCouponInfo, int? memberId1)
         {
-
             dbJoutaEntities db = new dbJoutaEntities();
+
             var x = db.tMember.Where(a => a.f會員編號 == memberId1).FirstOrDefault();
 
             string randCode = Guid.NewGuid().ToString();

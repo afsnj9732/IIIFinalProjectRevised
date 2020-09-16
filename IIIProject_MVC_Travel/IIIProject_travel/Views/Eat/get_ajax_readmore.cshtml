@@ -467,13 +467,13 @@
                             <button class="btn btn-info  JoutaEdit" limitNumber="1" act_id="@Model.f活動編號" data-toggle="modal" data-target="#ajax_edit">
                                 編輯
                             </button>
+                            @Html.ActionLink("刪除", "Delete", "Eat", new { id = Model.f活動編號 }, new { @class = "btn btn-danger delete_act" })
+
                         }
                         else
                         {
                             <p>招募結束不可編輯</p>
                         }
-
-                        @Html.ActionLink("刪除", "Delete", "Eat", new { id = Model.f活動編號 }, new { @class = "btn btn-danger delete_act" })
                     }
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
                 </div>

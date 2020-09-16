@@ -19,6 +19,7 @@
 
     $('#content').text(time[randTime] + '在' + location[randLocation] + '方圓三公里範圍內，將送出' + store[randStore] + discount[randDiscount] + '優惠券!');
     $('#hidcontent').text(store[randStore] + "-" + discount[randDiscount] + "優惠券");
+    $('.sendBtn').removeAttr('disabled');
     //$('#sendBtn').html(`<button type="submit" class="btn btn-primary ml-3 sendBtn" onclick="sendCoupon()">送出優惠券</button>`);
     //$('#sendBtn').html(`<a class="btn btn-primary ml-3 sendBtn" onclick="sendCoupon()" value="送出優惠券"></a>`);
 
@@ -118,4 +119,12 @@ $('.sendBtn').click(function () {
             }
         });
     }
+});
+
+//demo if needed
+$('h2').click(function () {
+    $('#mMemberNum1').text('35');
+    $('#mEmail1').text('pikaqiu193@gmail.com');
+    $('#mName1').text('皮卡丘');
+    $('#mRating1').text('4');
 });

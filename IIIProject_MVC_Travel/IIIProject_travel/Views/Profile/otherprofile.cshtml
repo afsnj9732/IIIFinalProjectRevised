@@ -19,16 +19,16 @@
     <link rel="stylesheet" href="~/Content/fontawesome/css/all.css">
 </head>
 
-<body>
+<body class="fixedMenu" style="padding-top: 59px;">
     <div class="container-fluid topbanner">
         <!-- navbar -->
-        <nav class="navbar navbar-expand-lg navbar-fixed-top">
+        <nav class="navbar navbar-expand-lg navbar-fixed-top" id="main">
             <div class="container">
                 <a class="navbar-brand" href="@Url.Action("Home", "Home")">
                     @*改用Url.Action*@
                     <img src="~/Content/images/joutalogo_black.png" alt="" width="100">
                 </a>
-                @*<div class="navbar-header" id="main">*@
+                @*<div class="navbar-header">*@
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
                         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -45,9 +45,6 @@
                         @if (Session["member"] != null)
                         {
                             <li class="nav-item nav-link nav-login text-dark">@Html.ActionLink("您好，" + x.f會員名稱, "ProfileIndex", "Profile") </li>
-                            @*<li class="nav-item">
-                                    <img src="@ViewData["Img"]" alt="img" width="30" height="30" style="border:2px solid green;" />
-                                </li>*@
                             <li class="nav-item">@Html.ActionLink("登出", "Home", "Home", new { id = 0 }, new { @class = "nav-link nav-login text-dark" })</li>
                         }
                         else
@@ -101,11 +98,11 @@
                     <p class="mobile-no">
                         @if (Model.tMembers.f會員生日 == null)
                         {
-                        <i class="fas fa-birthday-cake"></i> @:YYYY-MM-DD
+                            <i class="fas fa-birthday-cake"></i> @:YYYY-MM-DD
                         }
                         else
                         {
-                        <i class="fas fa-birthday-cake"></i>@Model.tMembers.f會員生日
+                            <i class="fas fa-birthday-cake"></i>@Model.tMembers.f會員生日
                         }
                     </p>
                     <p class="user-mail">
@@ -172,16 +169,16 @@
                 <div class="tab_nav">
                     <ul>
                         <li class="user active" onclick="tabs(0)">個人檔案</li>
-                        <li id="p1" class="user" onclick="tabs(1)">我的發文</li>
+                        <li id="p1" class="user" onclick="tabs(1)">他的發文</li>
                         <li id="p2" class="user" onclick="tabs(2)">參加活動</li>
                         <li id="p3" class="user" onclick="tabs(3)">關注活動</li>
-                        <li id="p4" class="user" onclick="tabs(4)">我的開團</li>
+                        <li id="p4" class="user" onclick="tabs(4)">他的開團</li>
                         <li id="p5" class="user" onclick="tabs(5)">歷史紀錄</li>
                     </ul>
                 </div>
                 <div class="profile-body">
                     <div class="profile-detail tab_info">
-                        <h1 id="title">個人檔案</h1>
+                        <h2 id="title" id="title">個人檔案</h2>
                         <form>
                             <h6 class="profiletag">信箱</h6>
                             <p class="backgroundBlock">
@@ -213,12 +210,13 @@
                 </div>
 
                 <div class="profile-posts tab_info" id="myPost">
-                    <h1>@Model.tMembers.f會員名稱 的發文</h1>
+                    <h2 id="title">@Model.tMembers.f會員名稱 的發文</h2>
                     @{ //擷取會員發過文章編號，並對應
                         var post = db.tMember.Where(a => a.f會員編號 == Model.tMembers.f會員編號).Select(b => b.f會員發起的活動編號).FirstOrDefault();
+
                         if (string.IsNullOrEmpty(post))
                         {
-                    <p>目前無發文紀錄  aaaa</p>
+                            <p id="theTabContent">目前無發文紀錄</p>
                             //空
                         }
                         else
@@ -226,8 +224,8 @@
                             string[] words = post.Split(',');
                             if (words.Length < 2)
                             {
-                                <p>目前無發文紀錄 @words.Length bbbb</p>
-                                //"",
+                                <p>目前無發文紀錄</p>
+                                goto label;
                             }
                             else
                             {
@@ -246,7 +244,7 @@
                                         //}
                                         //else
                                         {
-                                            <div class="card mb-3" style="max-width: 540px;">
+                                            <div class="card mb-3" style="max-width:800px;">
                                                 <div class="row no-gutters">
                                                     <div class="col-md-4">
                                                         <img src="~/Content/images/@post_item.f活動團圖" class="card-img" alt="@post_item.f活動編號">
@@ -254,7 +252,7 @@
                                                     <div class="col-md-8">
                                                         <div class="card-body">
                                                             <h5 class="card-title">@post_item.f活動標題</h5>
-                                                            <p class="card-text">@Html.Raw(post_item.f活動內容)</p>
+                                                            <p class="card-text actContent">@Html.Raw(post_item.f活動內容)</p>
                                                             <p class="card-text">
                                                                 <small class="text-muted">Posted on @post_item.f活動發起日期</small>
                                                             </p>
@@ -266,26 +264,27 @@
                                     }
                                 }
                             }
+                            label:;
                         }
                         @*nothing:;
-                         @:<p> 目前無發文紀錄 cccc </p>*@
+                            @:<p> 目前無發文紀錄 cccc </p>*@
                     }
                 </div>
 
                 <div class="profile-event tab_info" id="myActivity">
-                    <h1>參加的活動</h1>
+                    <h2 id="title">參加的活動</h2>
                     @{
                         var join = db.tMember.Where(a => a.f會員編號 == Model.tMembers.f會員編號).Select(b => b.f會員參加的活動編號).FirstOrDefault();
                         if (string.IsNullOrEmpty(join))
                         {
-                            <p>目前無參與紀錄</p>
+                            <p id="theTabContent">目前無參加活動</p>
                         }
                         else
                         {
                             string[] words = join.Split(',');
                             if (words.Length < 2)
                             {
-                                <p>目前無參與紀錄</p>
+                                <p id="theTabContent">目前無參加活動</p>
                             }
                             else
                             {
@@ -300,46 +299,45 @@
                                         var join_item = db.tActivity.Where(c => c.f活動編號.ToString() == i).FirstOrDefault();
                                         <div class="card mb-3" style="max-width: 800px;">
                                             <div class="row no-gutters">
+                                                <div class="col-md-4">
+                                                    <img src="~/Content/images/@join_item.f活動團圖" class="card-img" alt="@join_item.f活動編號">
+                                                </div>
                                                 <div class="col-md-8 activityadjust">
-                                                    <div class="card-body" style="text-align:center">
+                                                    <div class="card-body">
                                                         <h5 class="card-title"> @join_item.f活動標題</h5>
-                                                        <p class="card-text">@Html.Raw(join_item.f活動內容)</p>
-                                                        揪團者 :
-                                                        <span style="cursor: pointer;">@join_item.tMember.f會員名稱</span>
-                                                        <p class="card-text">
-                                                            <small class="text-muted">@join_item.f活動開始時間</small>
-                                                        </p>
-                                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg">來去看看</button>
-                                                    </div>
-                                                    <div class="col-md-4">
-                                                        <img src="~/Content/images/@join_item.f活動團圖" class="card-img activityphoto" alt="@join_item.f活動編號">
+                                                        <p class="card-text actContent">@Html.Raw(join_item.f活動內容)</p>
+                                                        <span style="cursor: pointer;">揪團者: @join_item.tMember.f會員名稱</span>
+                                                        <div class="row justify-content-between">
+                                                            <p class="card-text">
+                                                                <small class="text-muted">@join_item.f活動開始時間</small>
+                                                            </p>
+                                                            <button type="button" class="btn btn-warning" data-toggle="modal" data-target=".bd-example-modal-lg">Read More</button>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-
                                     }
                                 }
                             }
-
                         }
                     }
                 </div>
 
                 <div class="profile-follow tab_info" id="myFollow">
-                    <h1>關注活動</h1>
+                    <h2 id="title">關注活動</h2>
                     @{
                         var favorite = db.tMember.Where(a => a.f會員編號 == Model.tMembers.f會員編號).Select(b => b.f會員收藏的活動編號).FirstOrDefault();
                         if (string.IsNullOrEmpty(favorite))
                         {
-                            <p>目前無關注活動</p>
+                            <p id="theTabContent">目前無關注活動</p>
                         }
                         else
                         {
                             string[] words = favorite.Split(',');
                             if (words.Length < 2)
                             {
-                                <p>目前無關注活動</p>
+                                <p id="theTabContent">目前無關注活動</p>
                             }
                             else
                             {
@@ -360,12 +358,14 @@
                                                 <div class="col-md-8">
                                                     <div class="card-body">
                                                         <h5 class="card-title"> @favorite_item.f活動標題</h5>
-                                                        <p class="card-text">@Html.Raw(favorite_item.f活動內容)</p>
+                                                        <p class="card-text actContent">@Html.Raw(favorite_item.f活動內容)</p>
                                                         <p class="card-text">揪團者: @favorite_item.tMember.f會員名稱</p>
-                                                        <p class="card-text">
-                                                            <small class="text-muted">@favorite_item.f活動結束時間</small>
-                                                        </p>
-                                                        <a class="nav-item">@Html.ActionLink("Read More", "TravelIndex", "Travel", new { id = favorite_item.f活動編號 }, new { @class = "btn btnContent  btn-warning" })</a>
+                                                        <div class="row justify-content-between">
+                                                            <p class="card-text">
+                                                                <small class="text-muted">@favorite_item.f活動結束時間</small>
+                                                            </p>
+                                                            <a class="nav-item">@Html.ActionLink("Read More", "TravelIndex", "Travel", new { id = favorite_item.f活動編號 }, new { @class = "btn btnContent  btn-warning" })</a>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -380,19 +380,19 @@
 
 
                 <div class="profile-mygroup tab_info" id="mygroup">
-                    <h1>@Model.tMembers.f會員名稱 的開團</h1>
+                    <h2 id="title">@Model.tMembers.f會員名稱 的開團</h2>
                     @{
                         var make = db.tMember.Where(a => a.f會員編號 == Model.tMembers.f會員編號).Select(b => b.f會員發起的活動編號).FirstOrDefault();
                         if (string.IsNullOrEmpty(make))
                         {
-                            <p>目前無開團紀錄</p>
+                            <p id="theTabContent">目前無開團紀錄</p>
                         }
                         else
                         {
                             string[] words = make.Split(',');
                             if (words.Length < 2)
                             {
-                                <p>目前無開團紀錄</p>
+                                <p id="theTabContent">目前無開團紀錄</p>
                             }
                             else
                             {
@@ -419,7 +419,7 @@
                                                     <div class="col-md-8">
                                                         <div class="card-body">
                                                             <h5 class="card-title">@make_item.f活動標題</h5>
-                                                            <p class="card-text">@Html.Raw(make_item.f活動內容)</p>
+                                                            <p class="card-text actContent">@Html.Raw(make_item.f活動內容)</p>
                                                             <p class="card-text">
                                                                 <small class="text-muted">Posted on @make_item.f活動發起日期</small>
                                                             </p>
@@ -437,7 +437,7 @@
                 </div>
 
                 <div class="profile-history tab_info" id="history">
-                    <h1>歷史紀錄</h1>
+                    <h2 id="title">歷史紀錄</h2>
                     @{
                         var history = db.tMember.Where(a => a.f會員編號 == Model.tMembers.f會員編號).Select(b => new
                         {
@@ -466,12 +466,14 @@
                                             <div class="col-md-8">
                                                 <div class="card-body">
                                                     <h5 class="card-title"> @history_item.f活動標題</h5>
-                                                    <p class="card-text">@Html.Raw(history_item.f活動內容)</p>
+                                                    <p class="card-text actContent">@Html.Raw(history_item.f活動內容)</p>
                                                     <p class="card-text">揪團者: @history_item.tMember.f會員名稱</p>
-                                                    <p class="card-text">
-                                                        <small class="text-muted">@history_item.f活動結束時間</small>
-                                                    </p>
-                                                    <a class="nav-item">@Html.ActionLink("Read More", "TravelIndex", "Travel", new { id = history_item.f活動編號 }, new { @class = "btn btnContent  btn-warning" })</a>
+                                                    <div class="row justify-content-between">
+                                                        <p class="card-text">
+                                                            <small class="text-muted">@history_item.f活動結束時間</small>
+                                                        </p>
+                                                        <a class="nav-item">@Html.ActionLink("Read More", "TravelIndex", "Travel", new { id = history_item.f活動編號 }, new { @class = "btn btnContent  btn-warning" })</a>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -499,12 +501,14 @@
                                             <div class="col-md-8">
                                                 <div class="card-body">
                                                     <h5 class="card-title"> @unit_item.f活動標題</h5>
-                                                    <p class="card-text">@Html.Raw(unit_item.f活動內容)</p>
+                                                    <p class="card-text actContent">@Html.Raw(unit_item.f活動內容)</p>
                                                     <p class="card-text">揪團者: @unit_item.tMember.f會員名稱</p>
-                                                    <p class="card-text">
-                                                        <small class="text-muted">@unit_item.f活動結束時間</small>
-                                                    </p>
-                                                    <a class="nav-item">@Html.ActionLink("Read More", "TravelIndex", "Travel", new { id = unit_item.f活動編號 }, new { @class = "btn btnContent  btn-warning" })</a>
+                                                    <div class="row justify-content-between">
+                                                        <p class="card-text">
+                                                            <small class="text-muted">@unit_item.f活動結束時間</small>
+                                                        </p>
+                                                        <a class="nav-item">@Html.ActionLink("Read More", "TravelIndex", "Travel", new { id = unit_item.f活動編號 }, new { @class = "btn btnContent  btn-warning" })</a>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -532,12 +536,14 @@
                                             <div class="col-md-8">
                                                 <div class="card-body">
                                                     <h5 class="card-title"> @unit_item.f活動標題</h5>
-                                                    <p class="card-text">@Html.Raw(unit_item.f活動內容)</p>
+                                                    <p class="card-text actContent">@Html.Raw(unit_item.f活動內容)</p>
                                                     <p class="card-text">揪團者: @unit_item.tMember.f會員名稱</p>
-                                                    <p class="card-text">
-                                                        <small class="text-muted">@unit_item.f活動結束時間</small>
-                                                    </p>
-                                                    <a class="nav-item">@Html.ActionLink("Read More", "TravelIndex", "Travel", new { id = unit_item.f活動編號 }, new { @class = "btn btnContent  btn-warning" })</a>
+                                                    <div class="row justify-content-between">
+                                                        <p class="card-text">
+                                                            <small class="text-muted">@unit_item.f活動結束時間</small>
+                                                        </p>
+                                                        <a class="nav-item">@Html.ActionLink("Read More", "TravelIndex", "Travel", new { id = unit_item.f活動編號 }, new { @class = "btn btnContent  btn-warning" })</a>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -547,7 +553,7 @@
                         }
                         else
                         {
-                            <p>目前無歷史紀錄</p>
+                            <p id="theTabContent">目前無歷史紀錄</p>
                         }
                     }
 
