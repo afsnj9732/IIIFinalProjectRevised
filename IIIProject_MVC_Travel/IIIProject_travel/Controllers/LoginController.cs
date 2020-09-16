@@ -32,7 +32,7 @@ namespace IIIProject_travel.Controllers
         {
             
             if (user.txtEmail == "admin" && user.txtPassword == "admin")
-                return RedirectToAction("List", "後台會員");
+                return RedirectToAction("Home", "後台Home");
             string ValidateStr = membersService.LoginCheck(user.txtEmail,user.txtPassword);
             if (string.IsNullOrEmpty(ValidateStr))
             {
