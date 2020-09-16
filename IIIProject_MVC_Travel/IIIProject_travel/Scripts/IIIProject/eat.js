@@ -119,6 +119,8 @@
         $(".ActivityStart").eq(index).datepicker(
             {
                 dateFormat: 'yy-mm-dd',
+                monthNames: ["1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"],
+                dayNamesMin: ["日", "一", "二", "三", "四", "五", "六"],
                 beforeShowDay: function (date) {
                     var string = jQuery.datepicker.formatDate('yy-mm-dd', date);
                     return [timeLimit.indexOf(string) === -1];
@@ -130,6 +132,8 @@
             $(".ActivityEnd").eq(index).datepicker(
                 {
                     dateFormat: 'yy-mm-dd',
+                    monthNames: ["1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"],
+                    dayNamesMin: ["日", "一", "二", "三", "四", "五", "六"],
                     beforeShowDay: function (date) {
                         var string = jQuery.datepicker.formatDate('yy-mm-dd', date);
                         return [timeLimit.indexOf(string) === -1];
@@ -140,6 +144,8 @@
             $(".ActivityFindEnd").eq(index).datepicker(
                 {
                     dateFormat: 'yy-mm-dd',
+                    monthNames: ["1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"],
+                    dayNamesMin: ["日", "一", "二", "三", "四", "五", "六"],
                     minDate: '1'
                 }
             );
@@ -167,6 +173,8 @@
             $(".ActivityEnd").eq(index).datepicker(
                 {
                     dateFormat: 'yy-mm-dd',
+                    monthNames: ["1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"],
+                    dayNamesMin: ["日", "一", "二", "三", "四", "五", "六"],
                     beforeShowDay: function (date) {
                         var string = jQuery.datepicker.formatDate('yy-mm-dd', date);
                         return [timeLimit.indexOf(string) === -1];
@@ -179,6 +187,8 @@
             $(".ActivityFindEnd").eq(index).datepicker(
                 {
                     dateFormat: 'yy-mm-dd',
+                    monthNames: ["1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"],
+                    dayNamesMin: ["日", "一", "二", "三", "四", "五", "六"],
                     minDate: '1',
                     maxDate: deadLine //變為活動開始前一天，要原本的值-1
                 }
@@ -330,6 +340,8 @@
         $(".ActivityEnd").eq(index).datepicker(
             {
                 dateFormat: 'yy-mm-dd',
+                monthNames: ["1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"],
+                dayNamesMin: ["日", "一", "二", "三", "四", "五", "六"],
                 beforeShowDay: function (date) {
                     var string = jQuery.datepicker.formatDate('yy-mm-dd', date);
                     return [timeLimit.indexOf(string) === -1];
@@ -343,6 +355,8 @@
         $(".ActivityFindEnd").eq(index).datepicker(
             {
                 dateFormat: 'yy-mm-dd',
+                monthNames: ["1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"],
+                dayNamesMin: ["日", "一", "二", "三", "四", "五", "六"],
                 minDate: '1',
                 maxDate: deadLine //變為活動開始前一天，要原本的值-1
             }
