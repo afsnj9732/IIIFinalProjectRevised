@@ -120,17 +120,21 @@
         $(".ActivityStart").eq(index).datepicker(
             {
                 dateFormat: 'yy-mm-dd',
+                monthNames: ["1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"],
+                dayNamesMin: ["日", "一", "二", "三", "四", "五", "六"],
                 beforeShowDay: function (date) {
                     var string = jQuery.datepicker.formatDate('yy-mm-dd', date);
                     return [timeLimit.indexOf(string) === -1];
                 },
-                minDate: '2',
+                minDate: '2'
             }
         );
         if (index === "0") {
             $(".ActivityEnd").eq(index).datepicker(
                 {
                     dateFormat: 'yy-mm-dd',
+                    monthNames: ["1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"],
+                    dayNamesMin: ["日", "一", "二", "三", "四", "五", "六"],
                     beforeShowDay: function (date) {
                         var string = jQuery.datepicker.formatDate('yy-mm-dd', date);
                         return [timeLimit.indexOf(string) === -1];
@@ -141,6 +145,8 @@
             $(".ActivityFindEnd").eq(index).datepicker(
                 {
                     dateFormat: 'yy-mm-dd',
+                    monthNames: ["1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"],
+                    dayNamesMin: ["日", "一", "二", "三", "四", "五", "六"],
                     minDate: '1'
                 }
             );
@@ -168,6 +174,8 @@
             $(".ActivityEnd").eq(index).datepicker(
                 {
                     dateFormat: 'yy-mm-dd',
+                    monthNames: ["1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"],
+                    dayNamesMin: ["日", "一", "二", "三", "四", "五", "六"],
                     beforeShowDay: function (date) {
                         var string = jQuery.datepicker.formatDate('yy-mm-dd', date);
                         return [timeLimit.indexOf(string) === -1];
@@ -180,6 +188,8 @@
             $(".ActivityFindEnd").eq(index).datepicker(
                 {
                     dateFormat: 'yy-mm-dd',
+                    monthNames: ["1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"],
+                    dayNamesMin: ["日", "一", "二", "三", "四", "五", "六"],
                     minDate: '1',
                     maxDate: deadLine //變為活動開始前一天，要原本的值-1
                 }
@@ -296,48 +306,6 @@
         }
     });
 
-    //function TheDatePicker(index, dateLimitID) {
-    //    $.ajax({
-    //        url: "/Travel/GetDateLimit",
-    //        type: "POST",
-    //        data: { "act_id": dateLimitID },
-    //        success: function (data) {
-    //            if (data !== "")
-    //                tiemLimit = data;
-    //        }
-    //    });
-
-    //    $(".ActivityStart").eq(index).datepicker(
-    //        {
-    //            dateFormat: 'yy-mm-dd',
-    //            beforeShowDay: function (date) {
-    //                var string = jQuery.datepicker.formatDate('yy-mm-dd', date);
-    //                return [tiemLimit.indexOf(string) === -1];
-    //            },
-    //            minDate: '2',
-    //        }
-    //    );
-    //    $(".ActivityEnd").eq(index).datepicker(
-    //        {
-    //            dateFormat: 'yy-mm-dd',
-    //            beforeShowDay: function (date) {
-    //                var string = jQuery.datepicker.formatDate('yy-mm-dd', date);
-    //                return [tiemLimit.indexOf(string) === -1];
-    //            },
-    //            minDate: '2'
-    //        }
-    //    );
-    //    $(".ActivityFindEnd").eq(index).datepicker(
-    //        {
-    //            dateFormat: 'yy-mm-dd',
-    //            beforeShowDay: function (date) {
-    //                var string = jQuery.datepicker.formatDate('yy-mm-dd', date);
-    //                return [tiemLimit.indexOf(string) === -1];
-    //            },
-    //            minDate: '1'
-    //        }
-    //    );
-    //}
 
     //揪團時間限制   
     $("body").on("change", ".ActivityStart", function () {
@@ -375,6 +343,8 @@
         $(".ActivityEnd").eq(index).datepicker(
             {
                 dateFormat: 'yy-mm-dd',
+                monthNames: ["1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"],
+                dayNamesMin: ["日", "一", "二", "三", "四", "五", "六"],
                 beforeShowDay: function (date) {
                     var string = jQuery.datepicker.formatDate('yy-mm-dd', date);
                     return [timeLimit.indexOf(string) === -1];
@@ -388,6 +358,8 @@
         $(".ActivityFindEnd").eq(index).datepicker(
             {
                 dateFormat: 'yy-mm-dd',
+                monthNames: ["1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"],
+                dayNamesMin: ["日", "一", "二", "三", "四", "五", "六"],
                 minDate: '1',
                 maxDate: deadLine //變為活動開始前一天，要原本的值-1
             }
