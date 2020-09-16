@@ -466,16 +466,15 @@
                         if (string.Compare(Model.f活動招募截止時間, DateTime.Now.ToString("yyyy-MM-dd")) > 0)
                         {
                             //招募未結束才可編輯
-                            <button class="btn btn-info  JoutaEdit" limitNumber="1" act_id="@Model.f活動編號" data-toggle="modal" data-target="#ajax_edit"  >
+                            <button class="btn btn-info  JoutaEdit" limitNumber="1" act_id="@Model.f活動編號" data-toggle="modal" data-target="#ajax_edit">
                                 編輯
                             </button>
+                            @Html.ActionLink("刪除", "Delete", "Travel", new { id = Model.f活動編號 }, new { @class = "btn btn-danger delete_act" })
                         }
                         else
                         {
-                            <p>招募結束不可編輯</p>
+                            <p>招募結束不可編輯不可刪除</p>
                         }
-
-                        @Html.ActionLink("刪除", "Delete", "Travel", new { id = Model.f活動編號 }, new { @class = "btn btn-danger delete_act" })
                     }
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
                 </div>
