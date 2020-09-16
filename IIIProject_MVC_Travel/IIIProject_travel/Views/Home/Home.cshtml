@@ -49,9 +49,7 @@
 
 
                             <li class="nav-item nav-link nav-login text-dark">@Html.ActionLink("您好，" + x.f會員名稱, "ProfileIndex", "Profile") </li>
-                            @*<li class="nav-item">
-                                    <img src="@ViewData["Img"]" alt="img" width="30" height="30" style="border:2px solid green;" />
-                                </li>*@
+                            
                             <li class="nav-item">@Html.ActionLink("登出", "Home", "Home", new { id = 0 }, new { @class = "nav-link nav-login text-dark" })</li>
                         }
                         else
@@ -338,7 +336,7 @@
                                 <p class="card-text" style="text-align: left;">
                                     @a.f活動內容
                                 </p>
-                                <button class = "btn btnContent mt-2" data-toggle="modal" data-target="#modal_@a.f活動編號">查看詳情</button>
+                                <button class="btn btnContent mt-2" data-toggle="modal" data-target="#modal_@a.f活動編號">查看詳情</button>
 
                                 <section class="block_footer row justify-content-between">
                                     <div class="date">@a.f活動開始時間</div>
@@ -505,6 +503,11 @@
                 slogan3: `想要一同歡樂卻總是3缺1呢?`
             }
         });
+    </script>
+    <script>
+        function kk() {
+            $('#form1').submit();
+        }
     </script>
 </body>
 
