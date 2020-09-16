@@ -107,7 +107,10 @@
                 <div class="table-responsive">
 
                     <form method="post">
-
+                        @if (Model.f會員大頭貼 == null)
+                        {
+                            Model.f會員大頭貼 = "nullhead.jpg";
+                        }
                         <input type="hidden" name="f會員編號" value="@Model.f會員編號" />
                         <div class="row; overflow-x: hidden;">
                             <div class="col">
@@ -159,16 +162,16 @@
                                     </div>
                                 </div>
 
-                                    <div class="row">
-                                        <div class="col">
-                                            電話：<br />
-                                            <input type="text" name="f會員密碼" value="@Model.f會員電話" class="form-control" />
-                                        </div>
-                                        <div class="col">
-                                            生日：<br />
-                                            <input type="text" name="f會員生日" value="@Model.f會員生日" class="form-control" />
-                                        </div>
+                                <div class="row">
+                                    <div class="col">
+                                        電話：<br />
+                                        <input type="text" name="f會員密碼" value="@Model.f會員電話" class="form-control" />
                                     </div>
+                                    <div class="col">
+                                        生日：<br />
+                                        <input type="text" name="f會員生日" value="@Model.f會員生日" class="form-control" />
+                                    </div>
+                                </div>
 
                                 <div class="row">
                                     <div class="col">
@@ -194,8 +197,8 @@
 
                         </div>
                         <p>
-                            <input type="submit" value="存檔" class="btn btn-primary"/>
-                            <input type="button" onclick="history.back()" value="關閉" class="btn btn-secondary"/>
+                            <input type="submit" value="存檔" class="btn btn-primary" />
+                            <input type="button" onclick="history.back()" value="關閉" class="btn btn-secondary" />
                         </p>
                     </form>
 

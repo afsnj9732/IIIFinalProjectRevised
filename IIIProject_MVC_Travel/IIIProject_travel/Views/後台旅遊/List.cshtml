@@ -50,10 +50,16 @@
     <form action="/後台旅遊/List" method="GET">
         <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
             <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="@Url.Action("Home","後台Home")">Jouta Admin</a>
-            <input type="date" name="date起日" />
-            <input type="date" name="date迄日" />
+            <div>
+                <span class="badge badge-secondary">建立起日：</span>
+                <input type="date" name="date起日" />
+            </div>
+            <div>
+                <span class="badge badge-secondary">建立迄日：</span>
+                <input type="date" name="date迄日" />
+            </div>
             <input type="text" placeholder="關鍵字" aria-label="Search" name="txt關鍵字" class="form-control form-control-dark w-100">
-            <input type="submit" value="搜尋" class=" btn btn-dark" />
+            <input type="submit" value="搜尋" class=" btn btn-secondary" />
             <ul class="navbar-nav px-3">
                 <li class="nav-item text-nowrap">
                     <a>
