@@ -28,6 +28,9 @@
             font-size: 1.125rem;
             text-anchor: middle;
         }
+        body {
+            margin-bottom: 5px;
+        }
     </style>
 
 </head>
@@ -106,59 +109,81 @@
                     <form method="post">
 
                         <input type="hidden" name="f會員編號" value="@Model.f會員編號" />
-                        <div class="row">
+                        <div class="row; overflow-x: hidden;">
                             <div class="col">
-                                <p>
-                                    姓名：<br />
-                                    <input type="text" name="f會員名稱" value="@Model.f會員名稱" class="form-control"/>
-                                </p>
-                                <p>
-                                    評分：<br />
-                                    <input type="text" name="f會員評分" value="@Model.f會員評分" class="form-control" />
-                                </p>
-                                <p>
-                                    稱號：<br />
-                                    <input type="text" name="f會員稱號" value="@Model.f會員稱號" class="form-control" />
-                                </p>
+                                <div>
+                                    <img src="~/Content/images/@Model.f會員大頭貼" style="width:100px;height:100px;" />
+
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        姓名：<br />
+                                        <input type="text" name="f會員名稱" value="@Model.f會員名稱" class="form-control" />
+                                    </div>
+                                    <div class="col">
+                                        評分：<br />
+                                        <input type="text" name="f會員評分" value="@Model.f會員評分" class="form-control" />
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col">
+                                        稱號：<br />
+                                        <input type="text" name="f會員稱號" value="@Model.f會員稱號" class="form-control" />
+                                    </div>
+                                    <div class="col">
+                                        興趣：<br />
+                                        <input type="text" name="f會員興趣" value="@Model.f會員興趣" class="form-control" />
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col">
+                                        帳號：<br />
+                                        <input type="text" name="f會員帳號" value="@Model.f會員帳號" class="form-control" />
+                                    </div>
+                                    <div class="col">
+                                        密碼：<br />
+                                        <input type="text" name="f會員密碼" value="@Model.f會員密碼" class="form-control" />
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col">
+                                        電子郵件：<br />
+                                        <input type="text" name="f會員電子郵件" value="@Model.f會員電子郵件" class="form-control" />
+                                    </div>
+                                    <div class="col">
+                                        手機：<br />
+                                        <input type="text" name="f會員手機" value="@Model.f會員手機" class="form-control" />
+                                    </div>
+                                </div>
+
+                                    <div class="row">
+                                        <div class="col">
+                                            電話：<br />
+                                            <input type="text" name="f會員密碼" value="@Model.f會員電話" class="form-control" />
+                                        </div>
+                                        <div class="col">
+                                            生日：<br />
+                                            <input type="text" name="f會員生日" value="@Model.f會員生日" class="form-control" />
+                                        </div>
+                                    </div>
+
+                                <div class="row">
+                                    <div class="col">
+                                        暱稱：<br />
+                                        <input type="text" name="f會員暱稱" value="@Model.f會員暱稱" class="form-control" />
+                                    </div>
+                                    <div class="col">
+                                        性別：<br />
+                                        <input type="text" name="f會員性別" value="@Model.f會員性別" class="form-control" />
+                                    </div>
+                                </div>
+
                                 <p>
                                     大頭貼：<br />
                                     <input type="text" name="f會員大頭貼" value="@Model.f會員大頭貼" class="form-control" />
-                                </p>
-                                <p>
-                                    帳號：<br />
-                                    <input type="text" name="f會員帳號" value="@Model.f會員帳號" class="form-control" />
-                                </p>
-                                <p>
-                                    密碼：<br />
-                                    <input type="text" name="f會員密碼" value="@Model.f會員密碼" class="form-control" />
-                                </p>
-                                <p>
-                                    電子郵件：<br />
-                                    <input type="text" name="f會員電子郵件" value="@Model.f會員電子郵件" class="form-control" />
-                                </p>
-                                <p>
-                                    手機：<br />
-                                    <input type="text" name="f會員手機" value="@Model.f會員手機" class="form-control" />
-                                </p>
-                                <p>
-                                    電話：<br />
-                                    <input type="text" name="f會員密碼" value="@Model.f會員電話" class="form-control" />
-                                </p>
-                                <p>
-                                    生日：<br />
-                                    <input type="text" name="f會員生日" value="@Model.f會員生日" class="form-control" />
-                                </p>
-                                <p>
-                                    暱稱：<br />
-                                    <input type="text" name="f會員暱稱" value="@Model.f會員暱稱" class="form-control" />
-                                </p>
-                                <p>
-                                    性別：<br />
-                                    <input type="text" name="f會員性別" value="@Model.f會員性別" class="form-control" />
-                                </p>
-                                <p>
-                                    興趣：<br />
-                                    <input type="text" name="f會員興趣" value="@Model.f會員興趣" class="form-control" />
                                 </p>
                                 <p>
                                     自我介紹：<br />

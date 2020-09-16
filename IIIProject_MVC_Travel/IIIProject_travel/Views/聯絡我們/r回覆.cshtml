@@ -28,6 +28,9 @@
             font-size: 1.125rem;
             text-anchor: middle;
         }
+        body {
+            margin-bottom: 5px;
+        }
     </style>
 
 </head>
@@ -109,32 +112,36 @@
                     <form method="post">
 
                         <input type="hidden" name="fID" value="@Model.fID" />
-                        <div class="row">
+                        <div class="row; overflow-x: hidden;">
                             <div class="col">
-                                <p>
-                                    聯絡人<br />
-                                    <input type="text" name="f聯絡人" value="@Model.f聯絡人" class="form-control" readonly/>
-                                </p>
-                                <p>
-                                    標題<br />
-                                    <input type="text" name="f標題" value="@Model.f標題" class="form-control" readonly/>
-                                </p>
-                                <p>
-                                    建立時間<br />
-                                    <input type="text" name="f意見時間" value="@Model.f意見時間" class="form-control" readonly/>
-                                </p>
-                                <p>
-                                    電子郵件<br />
-                                    <input type="text" name="f電子郵件" value="@Model.f電子郵件" class="form-control" readonly/>
-                                </p>
-                                <p>
-                                    分類<br />
-                                    <input type="text" name="f電子郵件" value="@Model.f意見類型" class="form-control" readonly/>
-                                </p>
-                                <p>
-                                    性別<br />
-                                    <input type="text" name="f性別" value="@Model.f性別" cols="50" rows="6" class="form-control" readonly/>
-                                </p>
+                                <div class="row">
+                                    <div class="col">
+                                        聯絡人<br />
+                                        <input type="text" name="f聯絡人" value="@Model.f聯絡人" class="form-control" readonly />
+                                                                            </div>
+                                    <div class="col">
+                                        標題<br />
+                                        <input type="text" name="f標題" value="@Model.f標題" class="form-control" readonly />
+                                    </div>
+                                    <div class="col">
+                                        建立時間<br />
+                                        <input type="text" name="f意見時間" value="@Model.f意見時間" class="form-control" readonly />
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        電子郵件<br />
+                                        <input type="text" name="f電子郵件" value="@Model.f電子郵件" class="form-control" readonly />
+                                    </div>
+                                    <div class="col">
+                                        分類<br />
+                                        <input type="text" name="f電子郵件" value="@Model.f意見類型" class="form-control" readonly />
+                                    </div>
+                                    <div class="col">
+                                        性別<br />
+                                        <input type="text" name="f性別" value="@Model.f性別" cols="50" rows="6" class="form-control" readonly />
+                                    </div>
+                                </div>
                                 <p>
                                     內容<br />
                                       <textarea name="f意見" cols="50" rows="6" class="form-control" readonly>@Model.f意見</textarea>
