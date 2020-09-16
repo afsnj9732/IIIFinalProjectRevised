@@ -395,6 +395,7 @@
     //但其他功能可以正常運作
     //按下開團/編輯的按鈕，進入開團/編輯頁面，重置所有欄位的驗證
     $("body").on("click", ".JoutaEdit", function () {
+        TheDatePicker(0, 0);
         //文字編輯器重置
         if (CKEDITOR.instances.AddAct) {
             CKEDITOR.instances.AddAct.destroy();
