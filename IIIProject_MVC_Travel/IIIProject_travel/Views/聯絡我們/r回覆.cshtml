@@ -113,39 +113,39 @@
                             <div class="col">
                                 <p>
                                     聯絡人<br />
-                                    <input type="text" name="f聯絡人" value="@Model.f聯絡人" />
+                                    <input type="text" name="f聯絡人" value="@Model.f聯絡人" class="form-control" readonly/>
                                 </p>
                                 <p>
                                     標題<br />
-                                    <input type="text" name="f標題" value="@Model.f標題" />
+                                    <input type="text" name="f標題" value="@Model.f標題" class="form-control" readonly/>
                                 </p>
                                 <p>
                                     建立時間<br />
-                                    <input type="text" name="f意見時間" value="@Model.f意見時間" />
+                                    <input type="text" name="f意見時間" value="@Model.f意見時間" class="form-control" readonly/>
                                 </p>
                                 <p>
                                     電子郵件<br />
-                                    <input type="text" name="f電子郵件" value="@Model.f電子郵件" />
+                                    <input type="text" name="f電子郵件" value="@Model.f電子郵件" class="form-control" readonly/>
                                 </p>
                                 <p>
                                     分類<br />
-                                    <input type="text" name="f電子郵件" value="@Model.f意見類型" />
+                                    <input type="text" name="f電子郵件" value="@Model.f意見類型" class="form-control" readonly/>
                                 </p>
                                 <p>
                                     性別<br />
-                                    <input type="text" name="f性別" value="@Model.f性別" />
+                                    <input type="text" name="f性別" value="@Model.f性別" cols="50" rows="6" class="form-control" readonly/>
                                 </p>
                                 <p>
                                     內容<br />
-                                    <input type="text" name="f意見" value="@Model.f意見" style="width:300px;height:100px" readonly />
+                                      <textarea name="f意見" cols="50" rows="6" class="form-control" readonly>@Model.f意見</textarea>
                                 </p>
                                 <p>
                                     回覆內容<br />
-                                    <input type="text" name="f回覆" value="" style="width:300px;height:100px" />
+                                    <textarea name="f回覆" cols="50" rows="6" class="form-control" ></textarea>
                                 </p>
                                 <p>
-                                    <input type="submit" value="存檔" />
-                                    <input type="button" onclick="history.back()" value="關閉">
+                                    <input type="submit" value="送出" class="btn btn-primary"/>
+                                    <input type="button" onclick="history.back()" value="關閉" class="btn btn-danger">
 
                                 </p>
                                 <p>
