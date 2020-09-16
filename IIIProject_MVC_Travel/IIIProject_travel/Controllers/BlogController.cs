@@ -41,10 +41,7 @@ namespace IIIProject_travel.Controllers
 
             if (string.IsNullOrEmpty(txtKey))
             {
-                    article = from torder in (new dbJoutaEntities()).tActivity
-                                               where torder.f活動類型 =="文章"
-                                               orderby torder.f活動發起日期 
-                                               select torder;
+                article = article.OrderBy(s => s.f活動發起日期);
             }
                 
             else
@@ -69,6 +66,10 @@ namespace IIIProject_travel.Controllers
 
             switch (sortOder)
             {
+                case null:
+                    article = article.OrderBy(s => s.f活動發起日期);
+                    break;
+
                 case "NameDown":
                     article = article.OrderByDescending(s => s.f活動標題);
                     break;
@@ -102,7 +103,7 @@ namespace IIIProject_travel.Controllers
 
            
             //var articleList = article.ToList();
-            var result = article.OrderBy(s => s.f活動發起日期).ToPagedList(currentPage, pagesize);
+            var result = article.ToPagedList(currentPage, pagesize);
 
 
             return View(result);

@@ -99,13 +99,13 @@
             <div class="col-lg-3 left-side">
                 <div class="profile-side">
                     <p class="mobile-no">
-                        @if (Model.tMembers.f會員手機 == null)
+                        @if (Model.tMembers.f會員生日 == null)
                         {
-                            <i class="fa fa-phone"></i> @:09-xxxxxxxx
+                        <i class="fas fa-birthday-cake"></i> @:YYYY-MM-DD
                         }
                         else
                         {
-                            <i class="fa fa-phone"></i>@Model.tMembers.f會員手機
+                        <i class="fas fa-birthday-cake"></i>@Model.tMembers.f會員生日
                         }
                     </p>
                     <p class="user-mail">
