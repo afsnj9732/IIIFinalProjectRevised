@@ -13,7 +13,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>聯絡我們 | Jouta</title>
     <link rel="stylesheet" href="~/Content/css/bootstrap.min.css">
-    <link rel="stylesheet" href="~/Content/css/style.css">
+    <link rel="stylesheet" href="~/Content/sass/style.css">
     <link rel="stylesheet" href="~/Content/css/聯絡我們.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css">
 
@@ -24,25 +24,39 @@
 <body>
     <div class="container-fluid">
         <!-- navbar -->
-        <nav class="navbar navbar-expand-lg navbar-light header" id="main">
+        <nav class="navbar navbar-expand-lg navbar-fixed-top">
             <div class="container">
-                <a class="navbar-brand" href="main.html">
+                <a class="navbar-brand" href="@Url.Action("Home", "Home")">
+                    @*改用Url.Action*@
                     <img src="~/Content/images/joutalogo_black.png" alt="" width="100">
                 </a>
+                @*<div class="navbar-header" id="main">*@
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
                         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
+                @*</div>*@
+                <div class="navbar-collapse collapse justify-content-between" id="navbarNav">
                     <ul class="nav navbar-nav">
-                        <li class="nav-item">@Html.ActionLink("首頁", "Home", "Home", new { }, new { @class = "nav-link nav-main text-dark" })</li>
+                        <li class="nav-item active">@Html.ActionLink("首頁", "Home", "Home", new { }, new { @class = "nav-link nav-main text-dark" })</li>
                         <li class="nav-item">@Html.ActionLink("找飯局", "EatIndex", "Eat", new { }, new { @class = "nav-link nav-eat text-dark" })</li>
                         <li class="nav-item">@Html.ActionLink("找旅遊", "TravelIndex", "Travel", new { }, new { @class = "nav-link nav-travel text-dark" })</li>
-                        <li class="nav-item">@Html.ActionLink("找文章", "List", "Blog", new { }, new { @class = "nav-link nav-blog text-dark" })</li>
+                        <li class="nav-item">@Html.ActionLink("找文章", "Index", "Blog", new { }, new { @class = "nav-link nav-blog text-dark" })</li>
                     </ul>
                     <ul class="nav navbar-nav">
-                        <li class="nav-item">@Html.ActionLink("登入", "LoginIndex", "Login", new { }, new { @class = "nav-link nav-login text-dark" })</li>
-                        <li class="nav-item">@Html.ActionLink("註冊", "Register", "Home", new { }, new { @class = "nav-link nav-register text-dark" })</li>
+                        @if (Session["member"] != null)
+                        {
+                            <li class="nav-item nav-link nav-login text-dark">@Html.ActionLink("您好，" + x.f會員名稱, "ProfileIndex", "Profile") </li>
+                            @*<li class="nav-item">
+                                <img src="@ViewData["Img"]" alt="img" width="30" height="30" style="border:2px solid green;" />
+                            </li>*@
+                            <li class="nav-item">@Html.ActionLink("登出", "Home", "Home", new { id = 0 }, new { @class = "nav-link nav-login text-dark" })</li>
+                        }
+                        else
+                        {
+                            <li class="nav-item">@Html.ActionLink("登入", "LoginIndex", "Login", new { }, new { @class = "nav-link nav-login text-dark" })</li>
+                            <li class="nav-item">@Html.ActionLink("註冊", "Register", "Home", new { }, new { @class = "nav-link nav-register text-dark" })</li>
+                        }
                     </ul>
                 </div>
             </div>
@@ -55,7 +69,7 @@
         <h2 style="text-align:center">聯絡我們</h2>
     </div>
     <form method="post"  id="xx">
-        <p style="text-align: center">我們十分重視您的寶貴意見與問題，我們將竭誠儘速為您服務</p>
+        <p class="mb-5" style="text-align: center;">我們十分重視您的寶貴意見與問題，我們將竭誠儘速為您服務</p>
 
 
         <div class="container" style="margin-bottom: 5rem;">
