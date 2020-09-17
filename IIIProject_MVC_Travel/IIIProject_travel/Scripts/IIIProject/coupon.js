@@ -63,12 +63,31 @@ $('.sendBtn').click(function () {
     $('.sendBtn').attr('disabled', '');
     $('.sendBtn').attr('onclick', '');
 
+    if (!('Notification' in window)) {
+        console.log('本瀏覽器不支援推播通知');
+    }
+
+    if ("Notification" in window) {
+        let ask = Notification.requestPermission();
+        ask.then(permission => {
+            if (permission === "granted") {
+                let msg = new Notification("發送成功", {
+                    body: "已將優惠資訊成功發送至所有中獎會員信箱!",
+                    icon: "../Content/images/joutalogo.png"
+                });
+                msg.addEventListener("click", event => {
+                    alert("點擊接受");
+                });
+            }
+        });
+    }
+
     hidcontent = document.querySelector('#hidcontent').innerHTML;
     var txtCouponInfo = $('#txtCouponInfo').val(hidcontent);
     txtCouponInfo = hidcontent;
     console.log(txtCouponInfo);
 
-    member1 = document.querySelector('#mMemberNum1').innerHTML;
+    member1 = document.querySelector('#mEmail1').innerHTML;
     var memberId1 = $('#memberId1').val(member1);
     memberId1 = member1;
     console.log(memberId1);
@@ -101,29 +120,12 @@ $('.sendBtn').click(function () {
 
     //console.log($("input[name='txtCouponInfo'].innerHTML"));
 
-    if (!('Notification' in window)) {
-        console.log('本瀏覽器不支援推播通知');
-    }
-
-    if ("Notification" in window) {
-        let ask = Notification.requestPermission();
-        ask.then(permission => {
-            if (permission === "granted") {
-                let msg = new Notification("發送成功", {
-                    body: "已將優惠資訊成功發送至所有中獎會員信箱!",
-                    icon: "../Content/images/joutalogo.png"
-                });
-                msg.addEventListener("click", event => {
-                    alert("點擊接受");
-                });
-            }
-        });
-    }
+    
 });
 
 //demo if needed
 $('h2').click(function () {
-    $('#mMemberNum1').text('35');
+    //$('#mMemberNum1').text('37');
     $('#mEmail1').text('pikaqiu193@gmail.com');
     $('#mName1').text('皮卡丘');
     $('#mRating1').text('4');
