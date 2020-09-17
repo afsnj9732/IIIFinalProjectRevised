@@ -247,7 +247,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Start\proheadshot.jpg" />
-    <Content Include="Content\css\eat2.css" />
     <Content Include="Content\css\login2.css" />
     <Content Include="Content\css\resetpassword.css" />
     <Content Include="Content\css\sweetalert2.min.css" />
@@ -266,7 +265,6 @@
     <Content Include="Content\css\match.css" />
     <Content Include="Content\css\otherprofile.css" />
     <Content Include="Content\css\profile.css" />
-    <Content Include="Content\css\quickmatch.css" />
     <Content Include="Content\css\register.css" />
     <Content Include="Content\css\style_n.css" />
     <Content Include="Content\css\travel.css" />
@@ -2226,7 +2224,6 @@
     <Content Include="Scripts\IIIProject\coupon.js" />
     <Content Include="Scripts\IIIProject\dashboard.js" />
     <Content Include="Scripts\IIIProject\debounce.js" />
-    <Content Include="Scripts\IIIProject\eat2.js" />
     <Content Include="Scripts\IIIProject\eat.js" />
     <Content Include="Scripts\IIIProject\exporting.js" />
     <Content Include="Scripts\IIIProject\highcharts.js" />
