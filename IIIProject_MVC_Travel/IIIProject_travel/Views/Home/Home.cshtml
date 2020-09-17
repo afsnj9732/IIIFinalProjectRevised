@@ -334,7 +334,7 @@
                             <figcaption style="border-radius:0 0 5px 5px;">
                                 <h3>@a.f活動標題</h3>
                                 <p class="card-text" style="text-align: left;">
-                                    @a.f活動內容
+                                    @Html.Raw(a.f活動內容)
                                 </p>
                                 <button class="btn btnContent mt-2" data-toggle="modal" data-target="#modal_@a.f活動編號">查看詳情</button>
 
@@ -366,7 +366,7 @@
                                 <!-- Modal body -->
                                 <div class="modal-body">
                                     <img src="~/Content/images/@a.f活動團圖" alt="@a.f活動編號" />
-                                    <p>@a.f活動內容</p>
+                                    <p>@Html.Raw(a.f活動內容)</p>
                                     <div class="container">
                                         <img src="~/Content/images/17.png" alt="">@a.f活動分類
                                         <img src="~/Content/images/03.png" alt="">@a.f活動地區

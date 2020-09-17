@@ -4,7 +4,12 @@
     Layout = null;
     var x = (tMember)Session["member"];
     dbJoutaEntities db = new dbJoutaEntities();
+    if (x.f會員評分 == null)
+    {
+        x.f會員評分 = 0;
+    }
 }
+
 <!DOCTYPE html>
 <html lang="zh-hant">
 
