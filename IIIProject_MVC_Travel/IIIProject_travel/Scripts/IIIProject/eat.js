@@ -886,4 +886,6 @@
 
     TheDatePicker(0, 0);
 
+    travel_sort_scrollHandler();
+
 })(); 
