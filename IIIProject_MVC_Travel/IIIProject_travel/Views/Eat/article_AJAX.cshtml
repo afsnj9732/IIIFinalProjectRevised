@@ -33,19 +33,19 @@
         <!-- -------------文章區頭-------------- -->
         <div class="row Travel_border align-items-center p-3 pl-4">
             <div class="container-fluid">
-                <div class="row m-0 mb-4   justify-content-between">
+                <div class="row m-0 justify-content-between">
                     <div class="pl-1">
                         <div class="row" style="cursor: pointer;">
-                            <img src="~/Content/images/09.png" alt="">
-                            <div class="user_name">@item.tMember.f會員名稱</div>
+                            <img src="~/Content/images/@item.tMember.f會員大頭貼" width="28" alt="" class="mr-1" style="border-radius:50%">
+                            <div class="user_name" style="font-weight:800;font-size:18px">@item.tMember.f會員名稱</div>
                         </div>
                     </div>
                     <div class="RWD_1851">
-                        <span>發文日期： <span>@item.f活動發起日期</span></span>
+                        <span style="color:#8e8e8e">發文日期：<span style="color:#333333">@item.f活動發起日期</span></span>
                         <span>&nbsp; &nbsp;</span>
-                        <span>活動日期： <span>@item.f活動開始時間</span></span>
+                        <span style="color:#8e8e8e">活動日期：<span style="color:#333333">@item.f活動開始時間</span></span>
                         <span>&nbsp; &nbsp;</span>
-                        <span>入團截止： <span>@item.f活動招募截止時間</span></span>
+                        <span style="color:#8e8e8e">入團截止：<span style="color:#333333">@item.f活動招募截止時間</span></span>
                     </div>
                     <div class="row ">
                         <div class="dropdown RWD_1850 pr-3">
@@ -78,23 +78,21 @@
             </div>
 
 
-            <div class="row pl-2 flex-wrap-reverse align-items-start  mt-2 " style="width:100%;">
+            <div class="row pl-2 pr-1 pt-2 pb-2 flex-wrap-reverse align-items-start mt-4" style="width:100%;">
 
-                <div class="  pl-4 pr-4 mx-auto  ViewCounts" updateVC="@item.f活動編號" style="cursor: pointer;width:66%;" act_id="@item.f活動編號" data-toggle="modal" data-target="#ajax_readmore">
-                    <div class="" style="font-weight:bolder;"> <p class="mb-4   content-title">@item.f活動標題</p></div>
-
+                <div class="pl-4 pr-4 mx-auto col-8 ViewCounts" updateVC="@item.f活動編號" style="cursor: pointer;" act_id="@item.f活動編號" data-toggle="modal" data-target="#ajax_readmore">
+                    <div class="" style="font-weight:bolder;"><p class="content-title" style="font-size:20px">@item.f活動標題</p></div><hr>
                     <span class="content" style="font-size: 16px;line-height:1.8;overflow-y:scroll;height:220px;">
                         @Html.Raw(item.f活動內容)
                     </span>
-
                 </div>
-
-                <img src="~/Content/images/@item.f活動團圖" alt="" class="col-xl-auto col-6    mx-auto" style="width: 30%;overflow-y:scroll; height:220px;">
-
+                <div class="col-4 p-0">
+                    <img src="~/Content/images/@item.f活動團圖" alt="" class="col-xl-auto col-6 mx-auto p-0" style="overflow-y:scroll; text-align:center;border-radius:5px; height:280px;width:auto;">
+                </div>
             </div>
             <div class="container mt-2">
-                <div class="row   justify-content-between  mt-2">
-                    <div>
+                <div class="row justify-content-between mt-2">
+                    <div style="position:relative">
                         <img src="~/Content/images/17.png" alt="">@item.f活動分類
                         <img src="~/Content/images/03.png" alt="">@item.f活動地區
                         <img src="~/Content/images/04.png" alt="">@item.f活動預算

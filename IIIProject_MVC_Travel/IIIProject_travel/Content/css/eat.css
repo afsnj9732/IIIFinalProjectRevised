@@ -1,10 +1,20 @@
+*{
+    /*border: 1px solid red;*/
+}
+
+a{
+    color:#212529;
+}
+
 body {
     height: 100%;
     background-color: #fffef4;
     padding-right: 0 !important;
 }
 
-
+span{
+    font-size:18px;
+}
 
 .NowPage {
     /*現在頁數樣式*/
@@ -257,7 +267,7 @@ p {
     overflow: hidden;
     text-overflow: ellipsis;
     width: 100px;
-    height: 29px;
+    /*height: 29px;*/
     /* border-color:#fde57a */
     /* background-color: rgba(20, 80, 220, 0.746); */
     display: -webkit-box;

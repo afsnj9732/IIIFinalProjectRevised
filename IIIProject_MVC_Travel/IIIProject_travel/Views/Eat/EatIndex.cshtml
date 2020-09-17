@@ -21,7 +21,7 @@
         <title>揪飯局 | Jouta</title>
         <link rel="stylesheet" href="~/Content/css/bootstrap.min.css">
         <link rel="stylesheet" href="~/Content/fontawesome/css/all.css">
-        <link rel="stylesheet" href="~/Content/css/style.css">
+        <link rel="stylesheet" href="~/Content/sass/style.css">
         <link rel="stylesheet" href="~/Content/css/eat.css">
         <link rel="shortcut icon" href="favicon.ico" />
         <link href="~/Content/jquery-ui-1.12.1/jquery-ui.css" rel="stylesheet" />
@@ -58,7 +58,7 @@
                         <ul class="nav navbar-nav">
                             @if (Session["member"] != null)
                             {
-                                <li class="nav-item nav-link nav-login text-dark">@Html.ActionLink("您好，" + x.f會員名稱, "ProfileIndex", "Profile") </li>
+                                <li class="nav-item nav-link nav-login text-dark">@Html.ActionLink("您好，" + x.f會員名稱, "ProfileIndex", "Profile", new { style = "color:#007bff;" }) </li>
                                 <li class="nav-item">@Html.ActionLink("登出", "Home", "Home", new { id = 0 }, new { @class = "nav-link nav-login text-dark" })</li>
                             }
                             else
@@ -76,16 +76,16 @@
             <div class="row justify-content-between">
                 <!-- 各項排序 -->
                 <div id="replace"></div>
-                <div class="col-xl-3 col-lg-3 col-9 pt-5 pl-5 mx-auto" id="travel_sort">
+                <div class="col-xl-3 col-lg-3 col-9 pt-4 pl-5 mx-auto" id="travel_sort">
                     <!--左邊欄位-->
-                    <div class=" pl-2 " style="cursor: pointer;">
+                    <div class="pl-2 pt-1 mb-5" style="cursor: pointer;position:relative;">
                         <!-- 查詢 搜尋-->
                         @*<form method="post">*@
                         @*action="./article_AJAX"*@
                         @*<input type="hidden" name="order" value="null" />
                             <input type="hidden" name="border_color" value="null" />*@
-                        <input type="text" class="mt-4" style="width:86%;" name="contain" id="contain" value="@HomeSearch[0]">
-                        <input type="image" src="~/Content/images/18.png" id="contain_pic" />  @*alt="submit"*@
+                        <input type="text" class="mt-5 mr-1" style="width:85%;" name="contain" id="contain" value="@HomeSearch[0]">
+                        <input type="image" src="~/Content/images/18.png" id="contain_pic" style="position:absolute;bottom:0;"/>  @*alt="submit"*@
                         @*</form>*@
                         <br>
                     </div>
@@ -151,7 +151,7 @@
                                 {
                                     <a href="@Url.Action("otherprofile","Profile",new { id= item.f會員編號 })">
                                         <img src="~/Content/images/@item.f會員大頭貼"
-                                             title="@item.f會員名稱" class="popguys" width="30" height="30">
+                                             title="@item.f會員名稱" class="popguys" width="30" height="30" style="border-radius:5px;">
                                     </a>
                                 }
                             </li>
@@ -163,7 +163,7 @@
                 <!-- 文章區主體 -->
 
                 <div class="col-xl-6 col-lg-6 col-10 mt-1 mx-auto pr-2 pl-2">
-                    <div class="button row justify-content-between pt-1 pb-2 align-items-center">
+                    <div class="button row justify-content-between mb-2 pt-1 pb-2 align-items-center">
                         <!-- 現在排序頭 -->
                         <div id="row">
                             <div style="list-style-type:none;cursor: pointer;"></div>
