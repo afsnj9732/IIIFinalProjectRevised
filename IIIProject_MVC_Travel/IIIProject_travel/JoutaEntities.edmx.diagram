@@ -4,14 +4,14 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="3366e08b969549428ba08e06b77777ce" Name="Diagram1" ZoomLevel="85">
+      <Diagram DiagramId="2f7198472f6f4c2398b8adcd3cc93004" Name="Diagram1" ZoomLevel="85">
         <EntityTypeShape EntityType="joutaModel.sysdiagrams" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="joutaModel.tActivity" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="joutaModel.tMember" Width="1.5" PointX="0.75" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="joutaModel.tBlogComment" Width="1.5" PointX="5.25" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="joutaModel.tComment" Width="1.5" PointX="8.625" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="joutaModel.tMember" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
         <AssociationConnector Association="joutaModel.FK_tActivity_tMember" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="joutaModel.tComment" Width="1.5" PointX="5.375" PointY="3.75" />
-        <EntityTypeShape EntityType="joutaModel.tBlogComment" Width="1.5" PointX="5.25" PointY="7.5" />
-        <AssociationConnector Association="joutaModel.FK_tBlogComment_tActivity" />
+        <AssociationConnector Association="joutaModel.FK_tBlogComment_tActivity" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

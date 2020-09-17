@@ -196,16 +196,19 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>JoutaEntities.edmx</DependentUpon>
     </Compile>
-    <Compile Include="sp_helpdiagramdefinition_Result.cs">
+    <Compile Include="sysdiagrams.cs">
       <DependentUpon>JoutaEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="sp_helpdiagrams_Result.cs">
+    <Compile Include="tActivity.cs">
       <DependentUpon>JoutaEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="tBlogComment.cs">
       <DependentUpon>JoutaEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="tComment.cs">
+      <DependentUpon>JoutaEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tMember.cs">
       <DependentUpon>JoutaEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\CalendarEvents.cs" />
@@ -221,15 +224,6 @@
     <Compile Include="Services\MembersService.cs" />
     <Compile Include="signalr\hubs\ChatHub.cs" />
     <Compile Include="Startup.cs" />
-    <Compile Include="sysdiagrams.cs">
-      <DependentUpon>JoutaEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="tActivity.cs">
-      <DependentUpon>JoutaEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="tMember.cs">
-      <DependentUpon>JoutaEntities.tt</DependentUpon>
-    </Compile>
     <Compile Include="ViewModel\CBlog.cs" />
     <Compile Include="ViewModel\CBlogComment.cs" />
     <Compile Include="ViewModel\CCoupon.cs" />
@@ -2208,6 +2202,8 @@
     <Content Include="Content\sass\slider.scss" />
     <Content Include="Content\sass\style.css.map" />
     <Content Include="Content\sass\style.scss" />
+    <Content Include="Content\fullcalendar-5.3.2\examples\json\events.json" />
+    <Content Include="Content\fullcalendar-5.3.2\README.md" />
     <EntityDeploy Include="JoutaEntities.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>JoutaEntities.Designer.cs</LastGenOutput>
@@ -2215,8 +2211,6 @@
     <Content Include="JoutaEntities.edmx.diagram">
       <DependentUpon>JoutaEntities.edmx</DependentUpon>
     </Content>
-    <Content Include="Content\fullcalendar-5.3.2\examples\json\events.json" />
-    <Content Include="Content\fullcalendar-5.3.2\README.md" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\IIIProject\adminchart.js" />
     <Content Include="Scripts\IIIProject\blog.js" />
