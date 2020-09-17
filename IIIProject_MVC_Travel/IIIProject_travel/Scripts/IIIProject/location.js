@@ -145,15 +145,15 @@ $('.resultTrigger').click(function () {
                 $('.secY').addClass('active');
 
                 $('.mImg').attr('src', '../Content/images/' + data[0].mImg);
-                $('.mContent').text(data[0].mContent);
-                $('.mSort').text(data[0].mSort);
-                $('.mPlace').text(data[0].mPlace);
-                $('.mEstimate').text(data[0].mEstimate);
-                $('.mView').text(data[0].mView);
-                $('.mLike').text(data[0].mLike);
-                $('.mTitle').text(data[0].mTitle);
-                $('.mName').text(data[0].mName);
-                $('.mDeadline').text(data[0].mDeadline);
+                $('.mContent').html(data[0].mContent);
+                $('.mSort').html(data[0].mSort);
+                $('.mPlace').html(data[0].mPlace);
+                $('.mEstimate').html(data[0].mEstimate);
+                $('.mView').html(data[0].mView);
+                $('.mLike').html(data[0].mLike);
+                $('.mTitle').html(data[0].mTitle);
+                $('.mName').html(data[0].mName);
+                $('.mDeadline').html(data[0].mDeadline);
             }
             //沒撈到資料 (還可調整)
             else {
