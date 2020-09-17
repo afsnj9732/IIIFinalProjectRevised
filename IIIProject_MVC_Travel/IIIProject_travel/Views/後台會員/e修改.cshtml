@@ -17,7 +17,7 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Jekyll v3.8.5">
-    <title>Jouta</title>
+    <title>查看 | Jouta</title>
 
     <!-- Bootstrap core CSS -->
     <link href="~/Content/css/bootstrap.min.css" rel="stylesheet" />
@@ -28,6 +28,7 @@
             font-size: 1.125rem;
             text-anchor: middle;
         }
+
         body {
             margin-bottom: 5px;
         }
@@ -37,7 +38,9 @@
 
 <body>
     <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
-        <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="@Url.Action("Home","後台Home")">Jouta Admin</a>
+        <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="@Url.Action("Home","後台Home")">
+            <img src="~/Content/images/joutalogo.png" width="14" class="mr-2" />Jouta Admin
+        </a>
         <ul class="navbar-nav px-3">
             <li class="nav-item text-nowrap">
                 <a>
@@ -61,7 +64,7 @@
                         <li class="nav-item">
                             <a class="nav-link" href="@Url.Action("List","後台會員")">
                                 <span data-feather="users"></span>
-                                會員列表
+                                會員列表　<
                             </a>
                         </li>
 

@@ -17,7 +17,7 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Jekyll v3.8.5">
-    <title>Jouta</title>
+    <title>查看 | Jouta</title>
 
     <!-- Bootstrap core CSS -->
     <link href="~/Content/css/bootstrap.min.css" rel="stylesheet" />
@@ -28,17 +28,19 @@
             font-size: 1.125rem;
             text-anchor: middle;
         }
+
         body {
             margin-bottom: 5px;
         }
-        
     </style>
 
 </head>
 
 <body>
     <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
-        <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="@Url.Action("Home","後台Home")">Jouta Admin</a>
+        <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="@Url.Action("Home","後台Home")">
+            <img src="~/Content/images/joutalogo.png" width="14" class="mr-2" />Jouta Admin
+        </a>
         <ul class="navbar-nav px-3">
             <li class="nav-item text-nowrap">
                 <a>
@@ -76,7 +78,7 @@
                         <li class="nav-item">
                             <a class="nav-link" href="@Url.Action("List","後台飯局")">
                                 <span data-feather="bar-chart-2"></span>
-                                飯局列表
+                                飯局列表　<
                             </a>
                         </li>
                         <li class="nav-item">
@@ -162,10 +164,10 @@
                                         <input type="text" name="f活動分類" value="@Model.f活動分類" class="form-control" readonly />
                                     </div>
                                 </div>
-                                
+
                                 <p>
                                     團圖：<br />
-                                    <input type="text" name="f活動團圖" value="@Model.f活動團圖" class="form-control" readonly/>
+                                    <input type="text" name="f活動團圖" value="@Model.f活動團圖" class="form-control" readonly />
                                 </p>
                                 <p>
                                     內容：<br />

@@ -17,7 +17,7 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Jekyll v3.8.5">
-    <title>Jouta</title>
+    <title>回覆 | Jouta</title>
 
     <!-- Bootstrap core CSS -->
     <link href="~/Content/css/bootstrap.min.css" rel="stylesheet" />
@@ -28,6 +28,7 @@
             font-size: 1.125rem;
             text-anchor: middle;
         }
+
         body {
             margin-bottom: 5px;
         }
@@ -37,7 +38,9 @@
 
 <body>
     <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
-        <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="@Url.Action("Home","後台Home")">Jouta後台</a>
+        <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="@Url.Action("Home","後台Home")">
+            <img src="~/Content/images/joutalogo.png" width="14" class="mr-2" />Jouta Admin
+        </a>
         <ul class="navbar-nav px-3">
             <li class="nav-item text-nowrap">
                 <a>
@@ -87,7 +90,7 @@
                         <li class="nav-item">
                             <a class="nav-link" href="@Url.Action("List","聯絡我們")">
                                 <span data-feather="layers"></span>
-                                意見列表
+                                意見列表　<
                             </a>
                         </li>
                         <li class="nav-item">
@@ -105,64 +108,64 @@
 
                 @using (Html.BeginForm())
                 {
-                <h2>查看意見</h2>
-                <div class="table-responsive">
+                    <h2>查看意見</h2>
+                    <div class="table-responsive">
 
-                    <form method="post">
+                        <form method="post">
 
-                        <input type="hidden" name="fID" value="@Model.fID" />
-                        <div class="row; overflow-x: hidden;">
-                            <div class="col">
-                                <div class="row">
-                                    <div class="col">
-                                        聯絡人<br />
-                                        <input type="text" name="f聯絡人" value="@Model.f聯絡人" class="form-control" readonly />
-                                                                            </div>
-                                    <div class="col">
-                                        標題<br />
-                                        <input type="text" name="f標題" value="@Model.f標題" class="form-control" readonly />
+                            <input type="hidden" name="fID" value="@Model.fID" />
+                            <div class="row; overflow-x: hidden;">
+                                <div class="col">
+                                    <div class="row">
+                                        <div class="col">
+                                            聯絡人<br />
+                                            <input type="text" name="f聯絡人" value="@Model.f聯絡人" class="form-control" readonly />
+                                        </div>
+                                        <div class="col">
+                                            標題<br />
+                                            <input type="text" name="f標題" value="@Model.f標題" class="form-control" readonly />
+                                        </div>
+                                        <div class="col">
+                                            建立時間<br />
+                                            <input type="text" name="f意見時間" value="@Model.f意見時間" class="form-control" readonly />
+                                        </div>
                                     </div>
-                                    <div class="col">
-                                        建立時間<br />
-                                        <input type="text" name="f意見時間" value="@Model.f意見時間" class="form-control" readonly />
+                                    <div class="row">
+                                        <div class="col">
+                                            電子郵件<br />
+                                            <input type="text" name="f電子郵件" value="@Model.f電子郵件" class="form-control" readonly />
+                                        </div>
+                                        <div class="col">
+                                            分類<br />
+                                            <input type="text" name="f電子郵件" value="@Model.f意見類型" class="form-control" readonly />
+                                        </div>
+                                        <div class="col">
+                                            性別<br />
+                                            <input type="text" name="f性別" value="@Model.f性別" cols="50" rows="6" class="form-control" readonly />
+                                        </div>
                                     </div>
+                                    <p>
+                                        內容<br />
+                                        <textarea name="f意見" cols="50" rows="6" class="form-control" readonly>@Model.f意見</textarea>
+                                    </p>
+                                    <p>
+                                        回覆內容<br />
+                                        <textarea name="f回覆" cols="50" rows="6" class="form-control"></textarea>
+                                    </p>
+                                    <p>
+                                        <input type="submit" value="送出" class="btn btn-primary" />
+                                        <input type="button" onclick="history.back()" value="關閉" class="btn btn-danger">
+
+                                    </p>
+                                    <p>
+                                        @ViewBag.kk
+                                    </p>
                                 </div>
-                                <div class="row">
-                                    <div class="col">
-                                        電子郵件<br />
-                                        <input type="text" name="f電子郵件" value="@Model.f電子郵件" class="form-control" readonly />
-                                    </div>
-                                    <div class="col">
-                                        分類<br />
-                                        <input type="text" name="f電子郵件" value="@Model.f意見類型" class="form-control" readonly />
-                                    </div>
-                                    <div class="col">
-                                        性別<br />
-                                        <input type="text" name="f性別" value="@Model.f性別" cols="50" rows="6" class="form-control" readonly />
-                                    </div>
-                                </div>
-                                <p>
-                                    內容<br />
-                                      <textarea name="f意見" cols="50" rows="6" class="form-control" readonly>@Model.f意見</textarea>
-                                </p>
-                                <p>
-                                    回覆內容<br />
-                                    <textarea name="f回覆" cols="50" rows="6" class="form-control" ></textarea>
-                                </p>
-                                <p>
-                                    <input type="submit" value="送出" class="btn btn-primary"/>
-                                    <input type="button" onclick="history.back()" value="關閉" class="btn btn-danger">
 
-                                </p>
-                                <p>
-                                    @ViewBag.kk
-                                </p>
                             </div>
+                        </form>
 
-                        </div>
-                    </form>
-
-                </div>
+                    </div>
                 }
             </main>
         </div>

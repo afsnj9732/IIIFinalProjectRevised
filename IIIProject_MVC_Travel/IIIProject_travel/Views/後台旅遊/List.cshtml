@@ -29,6 +29,7 @@
             font-size: 1.125rem;
             text-anchor: middle;
         }
+
         #line {
             overflow: hidden;
             text-overflow: ellipsis;
@@ -39,7 +40,6 @@
         .table td, .table th {
             vertical-align: middle;
         }
-
     </style>
 
 </head>
@@ -49,7 +49,9 @@
     @*navbar*@
     <form action="/後台旅遊/List" method="GET">
         <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
-            <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="@Url.Action("Home","後台Home")">Jouta Admin</a>
+            <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="@Url.Action("Home","後台Home")">
+                <img src="~/Content/images/joutalogo.png" width="14" class="mr-2" />Jouta Admin
+            </a>
             <div>
                 <span class="badge badge-secondary">建立起日：</span>
                 <input type="date" name="date起日" />
@@ -92,7 +94,7 @@
                         <li class="nav-item">
                             <a class="nav-link" href="@Url.Action("List","後台旅遊")">
                                 <span data-feather="file"></span>
-                                旅遊列表
+                                旅遊列表　<
                             </a>
                         </li>
 
@@ -155,28 +157,28 @@
                             @{
                                 foreach (var item in Model)
                                 {
-                            <tr>
-                                <td>@Html.DisplayFor(modelItem => item.f活動編號)</td>
-                                <td>@Html.DisplayFor(modelItem => item.tMember.f會員名稱)</td>
-                                <td>@Html.DisplayFor(modelItem => item.f活動標題)</td>
-                                <td id="line">@Html.DisplayFor(modelItem => item.f活動內容)</td>
-                                <td>@Html.DisplayFor(modelItem => item.f活動讚數)</td>
-                                <td>@Html.DisplayFor(modelItem => item.f活動發起日期).ToString().Substring(0, 10)</td>
-                                <td>@Html.DisplayFor(modelItem => item.f活動招募截止時間)</td>
-                                <td>@Html.DisplayFor(modelItem => item.f活動開始時間)</td>
-                                <td>@Html.DisplayFor(modelItem => item.f活動結束時間)</td>
-                                <td>@Html.DisplayFor(modelItem => item.f活動地點)</td>
-                                <td>@Html.DisplayFor(modelItem => item.f活動地區)</td>
-                                <td>@Html.DisplayFor(modelItem => item.f活動預算)</td>
-                                <td>@Html.DisplayFor(modelItem => item.f活動分類)</td>
-                                <td>
-                                    @Html.ActionLink("查看", "v查看", "後台旅遊", new { id = item.f活動編號 }, new { Class = "btn btn-info" })
-                                </td>
-                                <td>
-                                    @Html.ActionLink("刪除", "d刪除", "後台旅遊", new { id = item.f活動編號 },
-                                   new { OnClick = "return confirm('確定要刪除嗎?')", Class = "btn btn-danger" })
-                                </td>
-                            </tr>
+                                    <tr>
+                                        <td>@Html.DisplayFor(modelItem => item.f活動編號)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.tMember.f會員名稱)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.f活動標題)</td>
+                                        <td id="line">@Html.DisplayFor(modelItem => item.f活動內容)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.f活動讚數)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.f活動發起日期).ToString().Substring(0, 10)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.f活動招募截止時間)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.f活動開始時間)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.f活動結束時間)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.f活動地點)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.f活動地區)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.f活動預算)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.f活動分類)</td>
+                                        <td>
+                                            @Html.ActionLink("查看", "v查看", "後台旅遊", new { id = item.f活動編號 }, new { Class = "btn btn-info" })
+                                        </td>
+                                        <td>
+                                            @Html.ActionLink("刪除", "d刪除", "後台旅遊", new { id = item.f活動編號 },
+                                           new { OnClick = "return confirm('確定要刪除嗎?')", Class = "btn btn-danger" })
+                                        </td>
+                                    </tr>
                                 }
                             }
 
