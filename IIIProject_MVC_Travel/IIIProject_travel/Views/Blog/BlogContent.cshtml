@@ -85,9 +85,7 @@
 
                 <!-- Author -->
                 <p class="lead">
-                    by
-                    <a href="#">Jouta </a>
-
+                    by @Model.tMember.f會員名稱
                 </p>
 
 
@@ -165,16 +163,12 @@
                             foreach (var commemt in commentList)
                             {
 
-
-
-                                <div class="media mb-4">
-                                    <img class="d-flex mr-3 rounded-circle" src="https://picsum.photos/50/50/?random=1" alt="">
-                                    <div class="media-body">
-                                        <h5 class="mt-0">Commenter Name</h5>
-                                        @commemt.fBlogComment (@commemt.fCreateDate)
+                                    <div class="row">
+                                        <img class="d-flex mr-3 rounded-circle" src="~/Content/images/09.png" alt="" >
+                                        <div >@commemt.fBlogComment</div>
                                     </div>
-                                </div>
-
+                                  
+                                <div>@commemt.fCreateDate </div>
                                 }
 
                         }
