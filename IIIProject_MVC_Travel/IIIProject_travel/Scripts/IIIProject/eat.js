@@ -449,7 +449,7 @@
             $('#EditAct').val(data2);
         }
 
-        if ($(".NeedAT").eq(target).val().length < 8) {
+        if ($(".NeedAT").eq(target).val().length < 5) {
             e.preventDefault();
             $(".NeedATTo").eq(target).removeAttr("hidden");
         }
