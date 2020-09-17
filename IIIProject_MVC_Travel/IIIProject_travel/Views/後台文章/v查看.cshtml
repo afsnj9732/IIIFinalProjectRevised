@@ -17,7 +17,7 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Jekyll v3.8.5">
-    <title>Jouta</title>
+    <title>查看 | Jouta</title>
 
     <!-- Bootstrap core CSS -->
     <link href="~/Content/css/bootstrap.min.css" rel="stylesheet" />
@@ -28,16 +28,19 @@
             font-size: 1.125rem;
             text-anchor: middle;
         }
+
         body {
             margin-bottom: 5px;
         }
     </style>
-    
+
 </head>
 
-<body >
+<body>
     <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
-        <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="@Url.Action("Home","後台Home")">Jouta Admin</a>
+        <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="@Url.Action("Home","後台Home")">
+            <img src="~/Content/images/joutalogo.png" width="14" class="mr-2" />Jouta Admin
+        </a>
         <ul class="navbar-nav px-3">
             <li class="nav-item text-nowrap">
                 <a>
@@ -81,7 +84,7 @@
                         <li class="nav-item">
                             <a class="nav-link" href="@Url.Action("List","後台文章")">
                                 <span data-feather="layers"></span>
-                                文章列表
+                                文章列表　<
                             </a>
                         </li>
                         <li class="nav-item">
@@ -111,7 +114,7 @@
                         <input type="hidden" name="f活動編號" value="@Model.f活動編號" />
                         <div class="row; overflow-x:hidden;">
                             <div class="col">
-                                <img src="~/Content/images/@Model.f活動團圖" style="width:500px;height:500px; display:block; margin:auto;" />
+                                <img src="~/Content/images/@Model.f活動團圖" style="height:400px; display:block; margin:auto;" />
                                 <div class="row">
                                     <div class="col">
                                         <p>
@@ -148,10 +151,10 @@
                             </div>
                         </div>
                     </form>
-                    
-                        @Html.ActionLink("刪除", "d刪除", "後台文章", new { id = Model.f活動編號 },
-                        new { OnClick = "return confirm('確定要刪除嗎?')", Class = "btn btn-danger" })
-                        <input type="button" onclick="history.back()" value="關閉" class="btn btn-secondary">
+
+                    @Html.ActionLink("刪除", "d刪除", "後台文章", new { id = Model.f活動編號 },
+                    new { OnClick = "return confirm('確定要刪除嗎?')", Class = "btn btn-danger" })
+                    <input type="button" onclick="history.back()" value="關閉" class="btn btn-secondary">
 
                 </div>
             </main>

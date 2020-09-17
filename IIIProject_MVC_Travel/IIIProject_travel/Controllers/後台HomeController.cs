@@ -18,6 +18,7 @@ namespace IIIProject_travel.Controllers
         {
             dbJoutaEntities db = new dbJoutaEntities();
             var query = from t in db.tActivity
+                        orderby t.f活動發起日期
                         select new { name = t.f活動發起日期, count = t.f活動瀏覽次數 };
             //var query = context.tActivity.Include("f活動預算")
             //.GroupBy(p => p.Product.ProductName)

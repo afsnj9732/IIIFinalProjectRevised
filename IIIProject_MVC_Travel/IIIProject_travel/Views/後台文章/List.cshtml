@@ -46,11 +46,20 @@
     @*navbar*@
     <form action="/後台文章/List" method="GET">
         <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
-            <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="@Url.Action("Home","後台Home")">Jouta Admin</a>
-            <input type="date" name="date起日" />
-            <input type="date" name="date迄日" />
-            <input type="text" placeholder="關鍵字" aria-label="Search" name="txt關鍵字" class="form-control form-control-dark w-100">
-            <input type="submit" value="搜尋" class=" btn btn-dark" />
+            <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="@Url.Action("Home","後台Home")">
+                <img src="~/Content/images/joutalogo.png" width="14" class="mr-2" />Jouta Admin
+            </a>
+            <div>
+                <span class="badge badge-secondary">建立起日：</span>
+                <input type="date" name="date起日" />
+            </div>
+            <div>
+                <span class="badge badge-secondary">建立迄日：</span>
+                <input type="date" name="date迄日" />
+            </div>
+
+            <input type="text" placeholder="關鍵字" aria-label="Search" name="txt關鍵字" class="form-control form-control-dark w-200">
+            <input type="submit" value="搜尋" class=" btn btn-secondary" />
             <ul class="navbar-nav px-3">
                 <li class="nav-item text-nowrap">
                     <a>
@@ -96,7 +105,7 @@
                         <li class="nav-item">
                             <a class="nav-link" href="@Url.Action("List","後台文章")">
                                 <span data-feather="layers"></span>
-                                文章列表
+                                文章列表　<
                             </a>
                         </li>
                         <li class="nav-item">

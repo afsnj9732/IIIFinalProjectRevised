@@ -60,7 +60,8 @@ namespace IIIProject_travel.Controllers
 
         public ActionResult get_ajax_readmore(int act_id)
         {
-            tActivity target_act = db.tActivity.Where(t => t.f活動編號 == act_id).FirstOrDefault();
+            ViewCounts(act_id);
+            tActivity target_act = db.tActivity.Where(t => t.f活動編號 == act_id).FirstOrDefault();            
             return View(target_act);
         }
 
