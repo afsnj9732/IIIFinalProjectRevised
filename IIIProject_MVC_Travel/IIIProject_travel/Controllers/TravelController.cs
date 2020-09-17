@@ -597,7 +597,8 @@ namespace IIIProject_travel.Controllers
                     return "5";
                 }
             }
-            var result = string.Compare(DateTime.Now.ToString("yyyy,MM,dd"), theActivity.FirstOrDefault().f活動結束時間);           
+            var x123 = theActivity.FirstOrDefault().f活動結束時間;
+            var result = string.Compare(DateTime.Now.ToString("yyyy-MM-dd"), theActivity.FirstOrDefault().f活動結束時間);           
             if (result < 0)  //result=1 活動已結束 ， result=-1 活動尚未結束
             {
                 return "3"; //活動尚未結束
