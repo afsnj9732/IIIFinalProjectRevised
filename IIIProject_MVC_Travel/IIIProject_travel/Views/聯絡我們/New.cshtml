@@ -75,15 +75,15 @@
         <h2 style="text-align:center">聯絡我們</h2>
     </div>
     <form method="post"  id="xx">
-        <p class="mb-5" style="text-align: center;">我們十分重視您的寶貴意見與問題，我們將竭誠儘速為您服務</p>
+        <p class="mb-5" style="text-align: center;" >我們十分重視您的寶貴意見與問題，我們將竭誠儘速為您服務</p>
 
 
         <div class="container" style="margin-bottom: 5rem;">
 
             <fieldset>
-                <legend><img src="~/Content/images/letter.jpg" class="imgLetter" alt="" width="100"></legend>
+                <legend><img src="~/Content/images/letter.jpg" class="imgLetter" alt="" width="100" id="fordemo"></legend>
                 <div class="st1">
-
+                    
                     <div class="op" style="text-align: center;">
                         <select name="f意見類型" required>
                             <option value="">請選擇</option>
@@ -134,7 +134,7 @@
                     <div style="text-align:center;">
                         <div class="form-group w-50 " style="  margin: 0 auto;">
                             <label for="exampleFormControlTextarea1">意見</label>
-                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="f意見" required></textarea>
+                            <textarea class="form-control" id="comment" rows="3" name="f意見" required></textarea>
                         </div>
                     </div>
                     <div class="text-danger" style="display:none;">@ViewBag.ll</div>
