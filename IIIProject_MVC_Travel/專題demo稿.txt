@@ -18,3 +18,5 @@ password: pika123456
 
 飯局: 給我番茄醬加滿!!
 	content: 對番茄醬愛不釋手，幾乎都是捧在手心裡舔番茄醬，不過皮卡丘的番茄醬後來被飛天螳螂劈成了兩半，皮卡丘兩眼淚汪汪的樣子可以說是真的很萌
+
+https://linetvl-staticfile.line-objects.com/article/picture/37262343-5f21-4ab2-be5f-a6fd023cc7bc.jpg
