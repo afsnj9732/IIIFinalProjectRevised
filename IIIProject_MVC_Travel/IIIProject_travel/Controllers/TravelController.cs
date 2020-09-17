@@ -139,7 +139,8 @@ namespace IIIProject_travel.Controllers
                             totalTime += Convert.ToDateTime(timeRange[0]).AddDays(i).ToString("yyyy-MM-dd") + ",";                           
                         }
                     }
-                    totalTime = totalTime.Substring(0, totalTime.Length - 1);
+                    if(totalTime.Length>2)
+                        totalTime = totalTime.Substring(0, totalTime.Length - 1);
                     //totalTime += "]";
                     return totalTime;
                 }
