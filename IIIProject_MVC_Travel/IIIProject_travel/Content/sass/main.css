@@ -307,6 +307,14 @@ body {
     -webkit-box-orient: vertical;
 }
 
+.card-text-title {
+    display: -webkit-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+}
+
 .card {
     font-family: 'Lato', Arial, sans-serif;
     -webkit-box-shadow: 3px 3px 10px #e8e8e8;
