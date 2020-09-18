@@ -125,36 +125,54 @@
                         <h3 class="rating">@x.f會員評分</h3>
                         <div class="rate">
                             <div class="stars">
-                                @switch(Math.Round(double.Parse(x.f會員評分.ToString())))
+                                @if (Model.tMembers.f會員評分 == null)
                                 {
-                                    case 5:
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        break;
-                                    case 4:
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        break;
-                                    case 3:
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        break;
-                                    case 2:
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        break;
-                                    case 1:
-                                        <i class="fa fa-star"></i>
-                                        break;
+                                    <p>尚未評分</p>
                                 }
+                                else
+                                {
+                                    switch (Math.Round(double.Parse(x.f會員評分.ToString())))
+                                    {
+                                        case 5:
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            break;
+                                        case 4:
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            break;
+                                        case 3:
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            break;
+                                        case 2:
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            break;
+                                        case 1:
+                                            <i class="fa fa-star"></i>
+                                            break;
+                                    }
+                                }
+
                             </div>
-                            <span class="no-user"><span>@x.f會員評分人數</span>&nbsp;&nbsp;瀏覽人數</span>
+                            <span class="no-user">
+                                @if (x.f會員評分人數 == null)
+                                {
+                                    @:<span>0</span>&nbsp; &nbsp; 瀏覽人數
+                                }
+                                else
+                                {
+                                    @:<span>@x.f會員評分人數</span>&nbsp; &nbsp; 瀏覽人數
+                                }
+
+                            </span>
                         </div>
                     </div>
                 </div>
