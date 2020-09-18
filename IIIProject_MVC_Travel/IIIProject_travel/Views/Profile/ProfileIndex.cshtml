@@ -4,12 +4,7 @@
     Layout = null;
     var x = (tMember)Session["member"];
     dbJoutaEntities db = new dbJoutaEntities();
-    if (x.f會員評分 == null)
-    {
-        x.f會員評分 = 0;
-    }
 }
-
 <!DOCTYPE html>
 <html lang="zh-hant">
 
@@ -159,7 +154,7 @@
                                         break;
                                 }
                             </div>
-                            <span class="no-user"><span>@x.f會員評分人數</span>&nbsp;&nbsp;瀏覽</span>
+                            <span class="no-user"><span>@x.f會員評分人數</span>&nbsp;&nbsp;瀏覽人數</span>
                         </div>
                     </div>
                 </div>
@@ -217,62 +212,34 @@
                 <div class="profile-posts tab_info" id="myPost">
                     <h2 id="title">@Model.tMembers.f會員名稱 的發文</h2>
                     @{ //擷取會員發過文章編號，並對應
-                        @*var post = db.tMember.Where(a => a.f會員編號 == Model.tMembers.f會員編號).Select(b => b.f會員發起的活動編號).FirstOrDefault();
-
-                        if (string.IsNullOrEmpty(post))
+                        var post = db.tActivity.Where(a => a.f會員編號 == Model.tMembers.f會員編號 && a.f活動類型 == "文章");
+                        foreach (var i in post)
                         {
-                            <p id="theTabContent">目前無發文紀錄</p>
-                        }
-                        else
-                        {
-                            string[] words = post.Split(',');
-                            if (words.Length < 2)
+                            if (string.IsNullOrEmpty(i.ToString()))
                             {
-                                <p>目前無發文紀錄</p>
-                                goto label;
+                                <p id="theTabContent">目前無發文紀錄</p>
                             }
                             else
                             {
-                                foreach (var i in words)
-                                {
-                                    if (string.IsNullOrEmpty(i))
-                                    {
-                                        continue;
-                                    }
-                                    else
-                                    {*@
-                                        var post_item = db.tActivity.Where(c => c.f會員編號 == Model.tMembers.f會員編號 && c.f活動類型 == "文章").FirstOrDefault();
-                                        if (post_item == null)
-                                        {
-                                            <p>目前無發文紀錄</p>
-                                        }
-                                        else
-                                        {
-                                            <div class="card mb-3" style="max-width: 800px;">
-                                                <div class="row no-gutters">
-                                                    <div class="col-md-4">
-                                                        <img src="~/Content/images/@post_item.f活動團圖" class="card-img" alt="@post_item.f活動編號">
-                                                    </div>
-                                                    <div class="col-md-8">
-                                                        <div class="card-body">
-                                                            <h5 class="card-title">@post_item.f活動標題</h5>
-                                                            <p class="card-text actContent">@Html.Raw(post_item.f活動內容)</p>
-                                                            <p class="card-text">
-                                                                <small class="text-muted">Posted on @post_item.f活動發起日期</small>
-                                                            </p>
-                                                        </div>
-                                                    </div>
+                                <div class="card mb-3" style="max-width: 800px;">
+                                        <div class="row no-gutters">
+                                            <div class="col-md-4">
+                                                <img src="~/Content/images/@i.f活動團圖" class="card-img" alt="@i.f活動編號">
+                                            </div>
+                                            <div class="col-md-8">
+                                                <div class="card-body">
+                                                    <h5 class="card-title">@i.f活動標題</h5>
+                                                    <p class="card-text actContent">@Html.Raw(i.f活動內容)</p>
+                                                    <p class="card-text">
+                                                        <small class="text-muted">Posted on @i.f活動發起日期</small>
+                                                    </p>
                                                 </div>
                                             </div>
-                                        }
-                                    }
-                                
-                            
-
-                            @*label:;*@
-
-                        
-                    
+                                        </div>
+                                    </div>
+                            }
+                        }
+                    }
                 </div>
 
                 <div class="profile-event tab_info" id="myActivity">
@@ -418,7 +385,7 @@
                                             <div class="card mb-3" style="max-width: 800px;">
                                                 <div class="row no-gutters">
                                                     <div class="col-md-4">
-                                                        <img src="~/Content/images/@x.f會員大頭貼" class="card-img" alt="@x.f會員名稱">
+                                                        <img src="~/Content/images/@make_item.f活動團圖" class="card-img" alt="@x.f會員名稱">
                                                     </div>
                                                     <div class="col-md-8">
                                                         <div class="card-body">
