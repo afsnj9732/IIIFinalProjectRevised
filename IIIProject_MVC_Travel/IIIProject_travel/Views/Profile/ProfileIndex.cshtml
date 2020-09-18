@@ -217,7 +217,7 @@
                 <div class="profile-posts tab_info" id="myPost">
                     <h2 id="title">@Model.tMembers.f會員名稱 的發文</h2>
                     @{ //擷取會員發過文章編號，並對應
-                        var post = db.tMember.Where(a => a.f會員編號 == Model.tMembers.f會員編號).Select(b => b.f會員發起的活動編號).FirstOrDefault();
+                        @*var post = db.tMember.Where(a => a.f會員編號 == Model.tMembers.f會員編號).Select(b => b.f會員發起的活動編號).FirstOrDefault();
 
                         if (string.IsNullOrEmpty(post))
                         {
@@ -240,11 +240,11 @@
                                         continue;
                                     }
                                     else
-                                    {
-                                        var post_item = db.tActivity.Where(c => c.f活動編號.ToString() == i && c.f活動類型 == "文章").FirstOrDefault();
+                                    {*@
+                                        var post_item = db.tActivity.Where(c => c.f會員編號 == Model.tMembers.f會員編號 && c.f活動類型 == "文章").FirstOrDefault();
                                         if (post_item == null)
                                         {
-                                            continue;
+                                            <p>目前無發文紀錄</p>
                                         }
                                         else
                                         {
@@ -266,13 +266,13 @@
                                             </div>
                                         }
                                     }
-                                }
-                            }
+                                
+                            
 
-                            label:;
+                            @*label:;*@
 
-                        }
-                    }
+                        
+                    
                 </div>
 
                 <div class="profile-event tab_info" id="myActivity">
