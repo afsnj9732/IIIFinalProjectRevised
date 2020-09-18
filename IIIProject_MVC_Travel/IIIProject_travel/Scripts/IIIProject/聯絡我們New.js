@@ -1,8 +1,15 @@
 ﻿function validateEmail(email) {
-    const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    if (!re.test(String(email).toLowerCase())) {
-        alert("請輸入正確的信箱");
-        document.idform.txtMail.value = "";
+    const re = /([a-zA-Z0-9]+)([\.{1}])?([a-zA-Z0-9]+)\@gmail([\.])com/;
+
+    if ($("#email").val()=="") {
+        alert("必填欄位");
+    }
+    else if (!re.test(String(email).toLowerCase())) {
+        alert("請使用gmail信箱");
+        $(document).ready(function () {
+            $('#email').val('');
+        });
+        
     }
 }
 $("#fordemo").click(function () {
