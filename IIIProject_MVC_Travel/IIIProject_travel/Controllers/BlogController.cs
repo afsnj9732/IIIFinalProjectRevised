@@ -56,7 +56,7 @@ namespace IIIProject_travel.Controllers
             }
                 
             ViewBag.Sernow = txtKey;
-            ViewBag.keyName = string.IsNullOrEmpty(sortOder) ? "NameDown" : "";
+            //ViewBag.keyName = string.IsNullOrEmpty(sortOder) ? "NameDown" : "";
             ViewBag.dateOrder = sortOder == "dateUp" ? "dateDown" : "dateUp";
             ViewBag.preViewOrder = sortOder == "preViewUp" ? "preViewDown" : "preViewUp";
             ViewBag.LikeOrder = sortOder == "LikeUp" ? "LikeDown" : "LikeUp";
@@ -67,7 +67,7 @@ namespace IIIProject_travel.Controllers
             switch (sortOder)
             {
                 case null:
-                    article = article.OrderBy(s => s.f活動發起日期);
+                    article = article.OrderByDescending(s => s.f活動發起日期);
                     break;
 
                 case "NameDown":
@@ -117,7 +117,7 @@ namespace IIIProject_travel.Controllers
 
             var article = from t in (new dbJoutaEntities()).tActivity
                           where t.f活動類型 == "文章" && t.f會員編號 == id
-                          orderby t.f會員編號
+                          orderby t.f會員編號 descending
                           select t;
             if (txtKey != null)
             {
@@ -138,7 +138,7 @@ namespace IIIProject_travel.Controllers
 
                  article = from t in (new dbJoutaEntities()).tActivity
                               where t.f活動類型 == "文章" && t.f會員編號 == id
-                              orderby t.f活動編號
+                              orderby t.f活動編號 descending
                               select t;
             }
 
@@ -147,7 +147,7 @@ namespace IIIProject_travel.Controllers
 
                 article = from t in (new dbJoutaEntities()).tActivity
                           where t.f活動類型 == "文章" && t.f會員編號 == id && t.f活動標題.Contains(txtKey)
-                          orderby t.f活動編號
+                          orderby t.f活動編號 descending
                           select t;
 
             }
@@ -231,7 +231,7 @@ namespace IIIProject_travel.Controllers
             article.f活動團圖 = p.f活動團圖;
             article.fQRcode網址 = p.QRcode;
             article.fQRcodeImage = p.QRcodeImage;
-            article.f活動發起日期 = (DateTime.Now).ToString();
+            article.f活動發起日期 = (DateTime.Now).ToString("yyyy-MM-dd HH:mm:ss");
             article.f活動地區 = p.f活動地區;
             article.f活動瀏覽次數 = 0;
             article.f活動讚數 = 0;

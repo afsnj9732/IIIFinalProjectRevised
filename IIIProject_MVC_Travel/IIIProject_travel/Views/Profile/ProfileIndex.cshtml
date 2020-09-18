@@ -125,36 +125,54 @@
                         <h3 class="rating">@x.f會員評分</h3>
                         <div class="rate">
                             <div class="stars">
-                                @switch(Math.Round(double.Parse(x.f會員評分.ToString())))
+                                @if (Model.tMembers.f會員評分 == null)
                                 {
-                                    case 5:
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        break;
-                                    case 4:
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        break;
-                                    case 3:
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        break;
-                                    case 2:
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        break;
-                                    case 1:
-                                        <i class="fa fa-star"></i>
-                                        break;
+                                    <p>尚未評分</p>
                                 }
+                                else
+                                {
+                                    switch (Math.Round(double.Parse(x.f會員評分.ToString())))
+                                    {
+                                        case 5:
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            break;
+                                        case 4:
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            break;
+                                        case 3:
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            break;
+                                        case 2:
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            break;
+                                        case 1:
+                                            <i class="fa fa-star"></i>
+                                            break;
+                                    }
+                                }
+
                             </div>
-                            <span class="no-user"><span>@x.f會員評分人數</span>&nbsp;&nbsp;瀏覽人數</span>
+                            <span class="no-user">
+                                @if (x.f會員評分人數 == null)
+                                {
+                                    @:<span>0</span>&nbsp; &nbsp; 瀏覽人數
+                                }
+                                else
+                                {
+                                    @:<span>@x.f會員評分人數</span>&nbsp; &nbsp; 瀏覽人數
+                                }
+
+                            </span>
                         </div>
                     </div>
                 </div>
@@ -213,31 +231,28 @@
                     <h2 id="title">@Model.tMembers.f會員名稱 的發文</h2>
                     @{ //擷取會員發過文章編號，並對應
                         var post = db.tActivity.Where(a => a.f會員編號 == Model.tMembers.f會員編號 && a.f活動類型 == "文章");
+                        if (post.Count()<1)
+                        {
+                            <p id="theTabContent">目前無發文紀錄</p>
+                        }
                         foreach (var i in post)
                         {
-                            if (string.IsNullOrEmpty(i.ToString()))
-                            {
-                                <p id="theTabContent">目前無發文紀錄</p>
-                            }
-                            else
-                            {
-                                <div class="card mb-3" style="max-width: 800px;">
-                                        <div class="row no-gutters">
-                                            <div class="col-md-4">
-                                                <img src="~/Content/images/@i.f活動團圖" class="card-img" alt="@i.f活動編號">
-                                            </div>
-                                            <div class="col-md-8">
-                                                <div class="card-body">
-                                                    <h5 class="card-title">@i.f活動標題</h5>
-                                                    <p class="card-text actContent">@Html.Raw(i.f活動內容)</p>
-                                                    <p class="card-text">
-                                                        <small class="text-muted">Posted on @i.f活動發起日期</small>
-                                                    </p>
-                                                </div>
+                            <div class="card mb-3" style="max-width: 800px;">
+                                    <div class="row no-gutters">
+                                        <div class="col-md-4">
+                                            <img src="~/Content/images/@i.f活動團圖" class="card-img" alt="@i.f活動編號">
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="card-body">
+                                                <h5 class="card-title">@i.f活動標題</h5>
+                                                <p class="card-text actContent">@Html.Raw(i.f活動內容)</p>
+                                                <p class="card-text">
+                                                    <small class="text-muted">Posted on @i.f活動發起日期</small>
+                                                </p>
                                             </div>
                                         </div>
                                     </div>
-                            }
+                                </div>
                         }
                     }
                 </div>

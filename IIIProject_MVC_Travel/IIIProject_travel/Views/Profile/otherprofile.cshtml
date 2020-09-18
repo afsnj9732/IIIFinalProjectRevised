@@ -217,15 +217,13 @@
                     <h2 id="title">@Model.tMembers.f會員名稱 的發文</h2>
                     @{ //擷取會員發過文章編號，並對應
                         var post = db.tActivity.Where(a => a.f會員編號 == Model.tMembers.f會員編號 && a.f活動類型 == "文章");
+                        if (post.Count()<1)
+                        {
+                            <p id="theTabContent">目前無發文紀錄</p>
+                        }
                         foreach (var i in post)
                         {
-                            if (string.IsNullOrEmpty(i.ToString()))
-                            {
-                                <p id="theTabContent">目前無發文紀錄</p>
-                            }
-                            else
-                            {
-                                <div class="card mb-3" style="max-width:800px;">
+                            <div class="card mb-3" style="max-width:800px;">
                                     <div class="row no-gutters">
                                         <div class="col-md-4">
                                             <img src="~/Content/images/@i.f活動團圖" class="card-img" alt="@i.f活動編號">
@@ -241,7 +239,6 @@
                                         </div>
                                     </div>
                                 </div>
-                                }
                             }
                         }
                     </div>
