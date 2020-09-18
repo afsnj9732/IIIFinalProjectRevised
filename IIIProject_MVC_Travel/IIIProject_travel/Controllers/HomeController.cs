@@ -31,7 +31,8 @@ namespace IIIProject_travel.Controllers
                     where !string.IsNullOrEmpty(m.f會員自我介紹)
                     select m;
             var y = from k in (new dbJoutaEntities()).tActivity
-                    where k.tMember.f會員評分>4&&k.f活動類型=="旅遊"
+                    orderby k.f活動內容 descending
+                    where k.tMember.f會員評分>3&&k.f活動類型=="旅遊"                   
                     select k;
             y = y.Take(3);
             x = x.OrderBy(t=> Guid.NewGuid()).Take(3);
