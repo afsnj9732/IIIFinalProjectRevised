@@ -21,7 +21,7 @@
         <title>揪旅遊 | Jouta</title>
         <link rel="stylesheet" href="~/Content/css/bootstrap.min.css">
         <link rel="stylesheet" href="~/Content/fontawesome/css/all.css">
-        <link rel="stylesheet" href="~/Content/css/style.css">
+        <link rel="stylesheet" href="~/Content/sass/style.css">
         <link rel="stylesheet" href="~/Content/css/travel.css">
         <link rel="shortcut icon" href="favicon.ico" />
         <link href="~/Content/jquery-ui-1.12.1/jquery-ui.css" rel="stylesheet" />
@@ -58,14 +58,14 @@
                         <ul class="nav navbar-nav">
                             @if (Session["member"] != null)
                             {
-                                <li class="nav-item nav-link nav-login text-dark">@Html.ActionLink("您好，" + x.f會員名稱, "ProfileIndex", "Profile") </li>
+                                <li class="nav-item nav-link nav-login text-dark">@Html.ActionLink("您好，" + x.f會員名稱, "ProfileIndex", "Profile", new { style = "color:#007bff;" }) </li>
                                 <li class="nav-item">@Html.ActionLink("登出", "Home", "Home", new { id = 0 }, new { @class = "nav-link nav-login text-dark" })</li>
                             }
                             else
                             {
                                 <li class="nav-item">@Html.ActionLink("登入", "LoginIndex", "Login", new { }, new { @class = "nav-link nav-login text-dark" })</li>
                                 <li class="nav-item">@Html.ActionLink("註冊", "Register", "Home", new { }, new { @class = "nav-link nav-register text-dark" })</li>
-                            }
+                            } 
                         </ul>
                     </div>
                 </div>
@@ -76,16 +76,16 @@
             <div class="row justify-content-between">
                 <!-- 各項排序 -->
                 <div id="replace"></div>
-                <div class="col-xl-3 col-lg-3 col-9 pt-5 pl-5 mx-auto" id="travel_sort">
+                <div class="col-xl-3 col-lg-3 col-9 pt-4 pl-5 mx-auto" id="travel_sort">
                     <!--左邊欄位-->
-                    <div class=" pl-2 " style="cursor: pointer;">
+                    <div class="pl-2 pt-1 mb-5" style="cursor: pointer;position:relative;">
                         <!-- 查詢 搜尋-->
                         @*<form method="post">*@
                         @*action="./article_AJAX"*@
                         @*<input type="hidden" name="order" value="null" />
-                        <input type="hidden" name="border_color" value="null" />*@
-                        <input type="text" class="mt-4" style="width:86%;" name="contain" id="contain" value="@HomeSearch[0]">
-                        <input type="image" src="~/Content/images/18.png" id="contain_pic" />  @*alt="submit"*@
+                            <input type="hidden" name="border_color" value="null" />*@
+                        <input type="text" class="mt-5 mr-1" style="width:85%;" name="contain" id="contain" value="@HomeSearch[0]">
+                        <input type="image" src="~/Content/images/18.png" id="contain_pic" style="position:absolute;bottom:0;" />  @*alt="submit"*@
                         @*</form>*@
                         <br>
                     </div>
@@ -151,7 +151,7 @@
                                 {
                                     <a href="@Url.Action("otherprofile","Profile",new { id= item.f會員編號 })">
                                         <img src="~/Content/images/@item.f會員大頭貼"
-                                             title="@item.f會員名稱" class="popguys" width="30" height="30">
+                                             title="@item.f會員名稱" class="popguys" width="30" height="30" style="border-radius:5px;">
                                     </a>
                                 }
                             </li>
@@ -163,7 +163,7 @@
                 <!-- 文章區主體 -->
 
                 <div class="col-xl-6 col-lg-6 col-10 mt-1 mx-auto pr-2 pl-2">
-                    <div class="button row justify-content-between pt-1 pb-2 align-items-center">
+                    <div class="button row justify-content-between mb-2 pt-1 pb-2 align-items-center">
                         <!-- 現在排序頭 -->
                         <div id="row">
                             <div style="list-style-type:none;cursor: pointer;"></div>
@@ -222,7 +222,7 @@
                                     <div class="modal-body">
                                         <form enctype="multipart/form-data" action="~/Travel/Add" method="post">
                                             <div class="container-fluid">
-                                                <span>標題：<input type="text" name="f活動標題" style="width:90%" class="NeedAT" placeholder="活動標題至少8個字"><p class="NeedATTo" style="color:red" hidden>活動標題請至少填滿8個字</p></span>
+                                                <span>標題：<input type="text" name="f活動標題" style="width:90%" class="NeedAT" placeholder="活動標題至少5個字"><p class="NeedATTo" style="color:red" hidden>活動標題請至少填滿5個字</p></span>
                                                 <div class="row m-0 mb-3 justify-content-around">
                                                     <span>旅遊開始日期： <input type="text"   class="ActivityStart" name="f活動開始時間" listNumber="0" readonly><p class="ActivityStartTo" style="color:red" hidden>活動開始時間必填</p></span>
                                                     <span>旅遊結束日期： <input type="text"  class="ActivityEnd" disabled name="f活動結束時間" readonly><p class="ActivityEndTo" style="color:red" hidden>活動結束時間必填</p></span>
@@ -294,10 +294,10 @@
                                 }
                                 else
                                 {
-                                     
-                                        <div  class="modal-body row  align-items-center mx-auto" id="need_login">
-                                            <p>先登入才能揪團</p>
-                                        </div>
+
+                                    <div class="modal-body row  align-items-center mx-auto" id="need_login">
+                                        <p>先登入才能揪團</p>
+                                    </div>
 
                                 }
 
@@ -310,12 +310,12 @@
                     <div id="article">
                         <div id="article_ajax"></div>
                         @*<button id="showCharts">顯示統計圖表</button>
-                        <img src="~/Views/Travel/Chart"/>
-                        <div id="showChartsTag"></div>*@
+                            <img src="~/Views/Travel/Chart"/>
+                            <div id="showChartsTag"></div>*@
                         <div class="mt-3">
                             @*<button class="btn btn-block mr-1  p-1 row mx-auto" style="background-color:#FFE0B2 ;">
-                                <img src="~/Content/images/10.png" alt="" class="pb-1">讀取更多
-                            </button>*@
+                                    <img src="~/Content/images/10.png" alt="" class="pb-1">讀取更多
+                                </button>*@
                         </div>
                         <div class="mb-5"></div> <!--底部墊高-->
 
@@ -325,7 +325,7 @@
                 <!-- 文章內容區結束 -->
                 @*行事曆*@
                 <div class="col-xl-3 col-lg-3   col-10"></div>
-                <div id="calendar" class="pr-4   row mx-auto" >
+                <div id="calendar" class="pr-4   row mx-auto">
 
                 </div>
                 @*readmore事件，含行事曆*@
@@ -342,7 +342,7 @@
         <div class="modal fade get_map" id="getMap" role="dialog"
              aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog change-max-width-1400" role="document">
-                <div class="modal-content" >
+                <div class="modal-content">
                     <div class="modal-header border-main-color">
                         <h5 class="modal-title" id="exampleModalLabel"><span style="font-weight:bolder;">地點設定</span></h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -350,7 +350,7 @@
                         </button>
                     </div>
                     <div class="modal-body" style="height:100%">
-                        <div class="mb-4 mx-auto align-items-center justify-content-around"> 
+                        <div class="mb-4 mx-auto align-items-center justify-content-around">
                             <span class="mb-1">點選一個地點：</span>
                             <div id="mapid" style="height:600px">
 

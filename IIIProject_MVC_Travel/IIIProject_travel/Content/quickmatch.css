@@ -3,8 +3,8 @@
 }*/
 
 body {
-    background-color: #fffef4;
-    /*height:auto;*/
+    background: linear-gradient(rgba(255,255,230,0.5),rgba(255,255,230,0.51)), url('http://subtlepatterns.com/patterns/geometry2.png');
+    overflow: hidden;
 }
 
 .btnLocation {
@@ -216,6 +216,8 @@ body {
     background-color: #fff;
     box-shadow: 0 0 8px 2px rgba(0,0,0,0.25);
     transition-duration: 1s;
+    height:350px;
+    position:relative;
 }
 
     .resultbox:hover {
@@ -250,6 +252,7 @@ body {
     overflow: hidden;
     text-overflow: ellipsis;
     -webkit-line-clamp: 3;
+    text-align:center;  
     -webkit-box-orient: vertical;
 }
 
@@ -264,12 +267,22 @@ body {
 }
 
 .mImg{
-    height:100%;
+    position:absolute;
+    height:90%;
     width:100%;
     background-size:cover;
     background-attachment:fixed;
     background-repeat:no-repeat;
     background-position:center;
+}
+
+.mTitle {
+    display: -webkit-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 1;
+    text-align:center;
+    -webkit-box-orient: vertical;
 }
 
 section {

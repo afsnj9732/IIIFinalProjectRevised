@@ -84,7 +84,7 @@
             <div class="modal-body">
                 <form enctype="multipart/form-data" action="~/Travel/Edit" method="post">
                     <div class="container-fluid">
-                        <span>標題：<input type="text" name="f活動標題" style="width:90%" class="NeedAT" value="@Model.f活動標題"><p class="NeedATTo" style="color:red" hidden>活動標題請至少填滿8個字</p></span>
+                        <span>標題：<input type="text" name="f活動標題" style="width:90%" class="NeedAT" value="@Model.f活動標題"><p class="NeedATTo" style="color:red" hidden>活動標題請至少填滿5個字</p></span>
                         <div class="row m-0 mb-3 justify-content-around">
                             <span>旅遊開始日期： <input type="text"  class="ActivityStart"  name="f活動開始時間" value="@Model.f活動開始時間" listNumber="1" readonly><p class="ActivityStartTo" style="color:red" hidden>活動開始時間必填</p></span>
                             <span>旅遊結束日期： <input type="text"  class="ActivityEnd" name="f活動結束時間" value="@Model.f活動結束時間" readonly><p class="ActivityEndTo" style="color:red" hidden>活動結束時間必填</p></span>
@@ -298,10 +298,10 @@
                                 <div class="mx-auto join_user_name" title="@theGuy.f會員名稱">@theGuy.f會員名稱</div>
                             </div>
 
-                            <button class="button btn-secondary jouta_black_list pr-1 pl-1" member_id="@theGuy.f會員編號" act_target="join" act_id="@Model.f活動編號">加入黑名單</button>
+                            <button class="button btn-secondary jouta_black_list pr-1 pl-1" member_id="@theGuy.f會員編號" act_target="join" act_id="@Model.f活動編號" style="width:114px">加入黑名單</button>
                             @if (Session["member"] != null && Model.f會員編號 == NowMember.f會員編號)
                             {
-                                <button class="button btn-info jouta_agree pr-1 pl-1" member_id="@theGuy.f會員編號" act_target="agree" act_id="@Model.f活動編號">入團</button>
+                                <button class="button btn-info jouta_agree pr-1 pl-1" member_id="@theGuy.f會員編號" act_target="agree" act_id="@Model.f活動編號" style="width:54px">入團</button>
                                 <button class="button btn-danger jouta_agree pr-1 pl-1" style="width:168px;" member_id="@theGuy.f會員編號" act_target="refuse" act_id="@Model.f活動編號">拒絕入團</button>
                             }
 
@@ -344,10 +344,10 @@
                                     <div class="mx-auto join_user_name" title="@theGuy.f會員名稱">@theGuy.f會員名稱</div>
                                 </div>
 
-                                <button class="button btn-secondary jouta_black_list pr-1 pl-1" member_id="@theGuy.f會員編號" act_target="join" act_id="@Model.f活動編號">加入黑名單</button>
+                                <button class="button btn-secondary jouta_black_list pr-1 pl-1" member_id="@theGuy.f會員編號" act_target="join" act_id="@Model.f活動編號" style="width:114px">加入黑名單</button>
                                 @if (Session["member"] != null && Model.f會員編號 == NowMember.f會員編號)
                                 {
-                                    <button class="button btn-danger jouta_kick pr-1 pl-1" member_id="@theGuy.f會員編號" act_id="@Model.f活動編號">踢他</button>
+                                    <button class="button btn-danger jouta_kick pr-1 pl-1" member_id="@theGuy.f會員編號" act_id="@Model.f活動編號" style="width:54px">踢他</button>
                                 }
 
                             </div>

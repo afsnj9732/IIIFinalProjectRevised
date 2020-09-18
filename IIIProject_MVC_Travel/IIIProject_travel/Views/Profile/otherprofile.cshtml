@@ -3,6 +3,10 @@
     Layout = null;
     var x = (tMember)Session["member"];
     dbJoutaEntities db = new dbJoutaEntities();
+    if(Model.tMembers.f會員評分 == null)
+    {
+        Model.tMembers.f會員評分 = 0;
+    }
 }
 
 

@@ -449,7 +449,7 @@
             $('#EditAct').val(data2);
         }
 
-        if ($(".NeedAT").eq(target).val().length < 8) {
+        if ($(".NeedAT").eq(target).val().length < 5) {
             e.preventDefault();
             $(".NeedATTo").eq(target).removeAttr("hidden");
         }
@@ -826,19 +826,19 @@
 
             $("#temp").remove();
             if ($(this).attr('id') === "07") {
-                $(this).append("<span id='temp'>近－>遠</span>");
+                $(this).append("<span id='temp'>近 → 遠</span>");
             }
             else if ($(this).attr('id') === "08") {
-                $(this).append("<span id='temp'>快－>慢</span>");
+                $(this).append("<span id='temp'>快 → 慢</span>");
             }
             else if ($(this).attr('id') === "03") {
-                $(this).append("<span id='temp'>北－>南</span>");
+                $(this).append("<span id='temp'>北 → 南</span>");
             }
             else if ($(this).attr('id') === "02") {
-                $(this).append("<span id='temp'>舊－>新</span>");
+                $(this).append("<span id='temp'>舊 → 新</span>");
             }
             else {
-                $(this).append("<span id='temp'>低－>高</span>");
+                $(this).append("<span id='temp'>低 → 高</span>");
             }
         }
         else {
@@ -846,24 +846,25 @@
 
             $("#temp").remove();
             if ($(this).attr('id') === "07") {
-                $(this).append("<span id='temp'>遠－>近</span>");
+                $(this).append("<span id='temp'>遠 → 近</span>");
             }
             else if ($(this).attr('id') === "08") {
-                $(this).append("<span id='temp'>慢－>快</span>");
+                $(this).append("<span id='temp'>慢 → 快</span>");
             }
             else if ($(this).attr('id') === "03") {
-                $(this).append("<span id='temp'>南－>北</span>");
+                $(this).append("<span id='temp'>南 → 北</span>");
             }
             else if ($(this).attr('id') === "02") {
-                $(this).append("<span id='temp'>新－>舊</span>");
+                $(this).append("<span id='temp'>新 → 舊</span>");
             }
             else {
-                $(this).append("<span id='temp'>高－>低</span>");
+                $(this).append("<span id='temp'>高 → 低</span>");
             }
         }
         background_color = document.querySelector(".using").style.backgroundColor;
         //$(this).css()抓出來的有點問題，與項目實際情形不符，待查證
-        $(this).css('border-color', 'rgb(250, 224, 110)');
+        $(this).css('border-radius', '5px');
+        $(this).css('border-color', '#fee567');
         $(this).siblings().css('background-color', 'transparent');    //剔除未選取排序   
         $(this).siblings().css('border-color', 'transparent');    //剔除未選取排序    
         get_now_condition();
@@ -885,5 +886,7 @@
 
 
     TheDatePicker(0, 0);
+
+    travel_sort_scrollHandler();
 
 })(); 

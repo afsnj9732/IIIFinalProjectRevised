@@ -41,11 +41,11 @@ namespace IIIProject_travel.Controllers
         }
 
         [HttpPost]
-        public ActionResult SendMail(string txtCouponInfo, int? memberId1)
+        public ActionResult SendMail(string txtCouponInfo, string memberId1)
         {
             dbJoutaEntities db = new dbJoutaEntities();
 
-            var x = db.tMember.Where(a => a.f會員編號 == memberId1).FirstOrDefault();
+            var x = db.tMember.Where(a => a.f會員帳號 == memberId1.ToString()).FirstOrDefault();
 
             string randCode = Guid.NewGuid().ToString();
 

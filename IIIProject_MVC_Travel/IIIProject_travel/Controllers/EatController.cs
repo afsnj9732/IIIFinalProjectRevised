@@ -122,7 +122,8 @@ namespace IIIProject_travel.Controllers
                             totalTime += Convert.ToDateTime(timeRange[0]).AddDays(i).ToString("yyyy-MM-dd") + ",";
                         }
                     }
-                    totalTime = totalTime.Substring(0, totalTime.Length - 1);
+                    if (totalTime.Length > 2)
+                        totalTime = totalTime.Substring(0, totalTime.Length - 1);
                     //totalTime += "]";
                     return totalTime;
                 }
@@ -577,7 +578,7 @@ namespace IIIProject_travel.Controllers
                     return "5";
                 }
             }
-            var result = string.Compare(DateTime.Now.ToString("yyyy,MM,dd"), theActivity.FirstOrDefault().f活動結束時間);
+            var result = string.Compare(DateTime.Now.ToString("yyyy-MM-dd"), theActivity.FirstOrDefault().f活動結束時間);
             if (result < 0)  //result=1 活動已結束 ， result=-1 活動尚未結束
             {
                 return "3"; //活動尚未結束

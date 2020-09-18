@@ -196,16 +196,19 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>JoutaEntities.edmx</DependentUpon>
     </Compile>
-    <Compile Include="sp_helpdiagramdefinition_Result.cs">
+    <Compile Include="sysdiagrams.cs">
       <DependentUpon>JoutaEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="sp_helpdiagrams_Result.cs">
+    <Compile Include="tActivity.cs">
       <DependentUpon>JoutaEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="tBlogComment.cs">
       <DependentUpon>JoutaEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="tComment.cs">
+      <DependentUpon>JoutaEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tMember.cs">
       <DependentUpon>JoutaEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\CalendarEvents.cs" />
@@ -221,15 +224,6 @@
     <Compile Include="Services\MembersService.cs" />
     <Compile Include="signalr\hubs\ChatHub.cs" />
     <Compile Include="Startup.cs" />
-    <Compile Include="sysdiagrams.cs">
-      <DependentUpon>JoutaEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="tActivity.cs">
-      <DependentUpon>JoutaEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="tMember.cs">
-      <DependentUpon>JoutaEntities.tt</DependentUpon>
-    </Compile>
     <Compile Include="ViewModel\CBlog.cs" />
     <Compile Include="ViewModel\CBlogComment.cs" />
     <Compile Include="ViewModel\CCoupon.cs" />
@@ -250,6 +244,7 @@
     <Content Include="Content\css\login2.css" />
     <Content Include="Content\css\resetpassword.css" />
     <Content Include="Content\css\sweetalert2.min.css" />
+    <Content Include="Content\images\273cc7b6-e2f0-4fe2-ad3b-36031e7d21c3.jpg" />
     <Content Include="Content\images\29.png" />
     <Content Include="Content\images\30.png" />
     <Content Include="Content\bootstrap-theme.css" />
@@ -265,7 +260,6 @@
     <Content Include="Content\css\match.css" />
     <Content Include="Content\css\otherprofile.css" />
     <Content Include="Content\css\profile.css" />
-    <Content Include="Content\css\quickmatch.css" />
     <Content Include="Content\css\register.css" />
     <Content Include="Content\css\style_n.css" />
     <Content Include="Content\css\travel.css" />
@@ -2209,6 +2203,8 @@
     <Content Include="Content\sass\slider.scss" />
     <Content Include="Content\sass\style.css.map" />
     <Content Include="Content\sass\style.scss" />
+    <Content Include="Content\fullcalendar-5.3.2\examples\json\events.json" />
+    <Content Include="Content\fullcalendar-5.3.2\README.md" />
     <EntityDeploy Include="JoutaEntities.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>JoutaEntities.Designer.cs</LastGenOutput>
@@ -2216,8 +2212,6 @@
     <Content Include="JoutaEntities.edmx.diagram">
       <DependentUpon>JoutaEntities.edmx</DependentUpon>
     </Content>
-    <Content Include="Content\fullcalendar-5.3.2\examples\json\events.json" />
-    <Content Include="Content\fullcalendar-5.3.2\README.md" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\IIIProject\adminchart.js" />
     <Content Include="Scripts\IIIProject\blog.js" />
@@ -2231,8 +2225,6 @@
     <Content Include="Scripts\IIIProject\location_jou.js" />
     <Content Include="Scripts\IIIProject\profile.js" />
     <Content Include="Scripts\IIIProject\quickmatch.js" />
-    <Content Include="Scripts\IIIProject\sweetalert2.all.min.js" />
-    <Content Include="Scripts\IIIProject\sweetalert2.min.css" />
     <Content Include="Scripts\IIIProject\travel.js" />
     <Content Include="Scripts\IIIProject\聯絡我們New.js" />
     <Content Include="Scripts\jquery-3.5.1.js" />
