@@ -157,6 +157,13 @@ namespace IIIProject_travel.Controllers
 
 
             var articleList = article.ToList();
+
+            if (articleList.Count < 1)
+            {
+                RedirectToAction("personalIndex", new { id = id, page = 1 });
+            }
+
+            
             var result = articleList.ToPagedList(currentPage, pagesize);
 
 
