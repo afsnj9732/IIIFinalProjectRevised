@@ -18,7 +18,10 @@
             }
         }
     }
-
+    if(Model.tMember.f會員評分 == null)
+    {
+        Model.tMember.f會員評分 = 0.0;
+    }
 
 
     //join
@@ -415,8 +418,17 @@
                                 <img src="~/Content/images/@Model.tMember.f會員大頭貼" alt="" class="col-auto" style="width: 300px;">
                             </a>
                             <p>@Model.tMember.f會員名稱</p>
-                            <p>團主評分:@Model.tMember.f會員評分 </p>
+                            <div class="row d-flex flex-column bd-highlight mx-auto">
+                                <p>團主評分:</p>
+                                <div class="mx-auto">
+                                    @for (int i = 0; i < Model.tMember.f會員評分; i++)
+                                    {
+                                        <img src="~/Content/images/ChangeStar.png" width="30" height="30" />
+                                    }
+                                </div>
+                            </div>
                         </div>
+                        
                         <div class="change-max-width-1000 ml-4">
                             <div class="row align-items-center m-0 ml-2 mr-2 textBox  ">
                                 @Html.Raw(Model.f活動內容)
