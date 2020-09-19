@@ -25,41 +25,45 @@
     var targetMsgs = Msgs.Zip(MsgsTime, (n, w) => new { msg = n, time = w });//合併兩陣列
 }
 
-
-@foreach (var Msg in targetMsgs)
+@if (string.IsNullOrEmpty(Model.f活動留言))
 {
-    exclude++;
-    if (exclude == 1)
+    <h2 class="mx-auto ml-2">暫無留言</h2>
+}
+else
+{
+    foreach (var Msg in targetMsgs)
     {
-        continue;
-    }
-    MsgsTimeAndID = Msg.time.Split(new string[] { "_^$" }, StringSplitOptions.None);
-    if (MsgsTimeAndID.Length > 1)
-    {
-        target = MsgsTimeAndID[1];
-    }
-    if (black_list.Length > 1)
-    {
-        if (Array.IndexOf(black_list, target) > -1)
+        if (string.IsNullOrEmpty(Msg.time))
         {
             continue;
         }
-    }
+        MsgsTimeAndID = Msg.time.Split(new string[] { "_^$" }, StringSplitOptions.None);
+        if (MsgsTimeAndID.Length > 1)
+        {
+            target = MsgsTimeAndID[1];
+        }
+        if (black_list.Length > 1)
+        {
+            if (Array.IndexOf(black_list, target) > -1)
+            {
+                continue;
+            }
+        }
 
-    img = db.tMember.Where(t => t.f會員編號.ToString() == target)
-          .Select(t => t.f會員大頭貼).FirstOrDefault();
+        img = db.tMember.Where(t => t.f會員編號.ToString() == target)
+              .Select(t => t.f會員大頭貼).FirstOrDefault();
 
-    <div class="row justify-content-between   mr-1 ml-4">
-        <div class="row the_msg_block">
-            <button class="button btn-secondary jouta_black_list" member_id="@target" act_target="msg" act_id="@Model">加入黑名單</button>
-            <a href="@Url.Action("otherprofile","Profile",new { id= target })">
-                <img src="~/Content/images/@img" width="34" height="34">
-            </a>
-            <div class="m-0 the_msgs">@Msg.msg</div>
+        <div class="row justify-content-between   mr-1 ml-4">
+            <div class="row the_msg_block">
+                <button class="button btn-secondary jouta_black_list" member_id="@target" act_target="msg" act_id="@Model">加入黑名單</button>
+                <a href="@Url.Action("otherprofile", "Profile", new { id = target })">
+                    <img src="~/Content/images/@img" width="34" height="34">
+                </a>
+                <div class="m-0 the_msgs">@Msg.msg</div>
+            </div>
+            <div class="pr-5 mr-3">@MsgsTimeAndID[0]</div>
         </div>
-        <div class="pr-5 mr-3">@MsgsTimeAndID[0]</div>
-    </div>
-    <br />
+        <br />
 
+    }
 }
-@{exclude = 0;}
