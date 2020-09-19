@@ -715,11 +715,14 @@ namespace IIIProject_travel.Controllers
 
         public ActionResult MsgAdd(int target, string sentMsg)
         {
-            var NowMember = (tMember)Session["member"];
-            var ActList = db.tActivity.Where(n => n.f活動編號 == target).FirstOrDefault();
-            ActList.f活動留言 += "_^$" + NowMember.f會員名稱 + ":" + sentMsg;
-            ActList.f活動留言時間 += "," + DateTime.Now.ToString("MM/dd HH:mm:ss") + "_^$" + NowMember.f會員編號;
-            db.SaveChanges();
+            if (!string.IsNullOrEmpty(sentMsg))
+            {
+                var NowMember = (tMember)Session["member"];
+                var ActList = db.tActivity.Where(n => n.f活動編號 == target).FirstOrDefault();
+                ActList.f活動留言 += "_^$" + NowMember.f會員名稱 + ":" + sentMsg;
+                ActList.f活動留言時間 += "," + DateTime.Now.ToString("MM/dd HH:mm:ss") + "_^$" + NowMember.f會員編號;
+                db.SaveChanges();
+            }
             return View(target);
         }
 
