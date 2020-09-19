@@ -2,6 +2,15 @@
     var order, background_color, contain, category, label, page, condition, readmore_target;
     var timeLimit = new Array();
     var calendarEl = document.getElementById('calendar');
+    $("#Travel_Demo_Click").on("click", function () {
+        $(".NeedAT").eq(0).val("陽明山國家公園");
+        $(".NeedAC").eq(0).val("20000");
+        CKEDITOR.instances.AddAct.setData(`
+一般人印象裡的陽明山，春季裡有好花綻放，盛開如畫；炎夏時，
+它是躲開襲人熱浪的最佳避暑之地；秋天，起伏於山谷間的芒花與枝頭零落的紅葉為大地染上蕭瑟的色彩；寒冬中的疾風勁雨，
+使偶爾露臉的冬陽或突如其來的一陣瑞雪都特別的令人驚喜；這豐富多變的面貌呈現出陽明山國家公園鮮明的四季景觀。`)
+    });
+
     //動態生成行事曆
     function getCalendar() {
         $.ajax({
