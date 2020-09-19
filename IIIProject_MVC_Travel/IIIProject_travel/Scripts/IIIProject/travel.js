@@ -618,6 +618,7 @@
 
     //留言
     function leaveMsg() {
+        console.log("1")
         let target = $(this).attr("leaveMsg");
         let sentMsg = $("[sentMsg=" + target + "]").val();
         $.ajax({
@@ -632,6 +633,7 @@
 
     }
     $("body").on('click', ".leaveMsg", leaveMsg);
+    $("body").on('click', '[data-target="#ajax_msg"]', leaveMsg)
 
     //踢人
     function kickAct() {

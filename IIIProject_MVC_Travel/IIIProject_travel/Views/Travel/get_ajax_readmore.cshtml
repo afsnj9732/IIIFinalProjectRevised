@@ -200,7 +200,7 @@
             </div>
             <div class="modal-body">
                 <div MsgAdd="@Model.f活動編號">
-                    @if (string.IsNullOrEmpty(Model.f活動留言))
+                    @*@if (string.IsNullOrEmpty(Model.f活動留言))
                     {
                         <h2 class="mx-auto ml-2">暫無留言</h2>
                     }
@@ -242,7 +242,7 @@
                                 <br />
                             }
                         }
-                    }
+                    }*@
 
                 </div>
             </div>
@@ -445,7 +445,7 @@
                                 <button class="btn btn-block mr-1  p-1 pr-2 pl-2 FeelGood" style="background-color:#FFE0B2;" target="@Model.f活動編號">
                                     <img src="~/Content/images/05.png" class="pb-1 ">覺得讚
                                 </button>
-                                <button class="btn btn-block mr-1  p-1 pr-2 pl-2" data-toggle="modal" data-target="#ajax_join" style="background-color:#FFE0B2 ;">
+                                <button class="btn btn-block mr-1  p-1 pr-2 pl-2" data-toggle="modal"  data-target="#ajax_join" style="background-color:#FFE0B2 ;">
                                     <img src="~/Content/images/10.png" class="pb-1" alt="">
                                     @{ 
                                         if (NowMember.f會員編號!=Model.f會員編號)
@@ -462,7 +462,7 @@
                                     <img src="~/Content/images/10.png" class="pb-1" alt="">給分數
                                 </button>
                                 <div style="cursor: pointer;">
-                                    <button class="btn btn-block mr-1  p-1 pr-2 pl-2" data-toggle="modal" data-target="#ajax_msg" style="background-color:#FFE0B2;">
+                                    <button class="btn btn-block mr-1  p-1 pr-2 pl-2" data-toggle="modal" leaveMsg="@Model.f活動編號" data-target="#ajax_msg" style="background-color:#FFE0B2;">
                                         <img src="~/Content/images/12.png" alt="">留言區
                                     </button>
                                 </div>
