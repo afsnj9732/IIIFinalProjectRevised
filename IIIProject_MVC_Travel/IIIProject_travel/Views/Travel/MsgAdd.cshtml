@@ -8,7 +8,6 @@
     {
         black_list = nowRealMember.f會員黑名單.Split(',');
     }
-    int exclude = 0;
     string img;
     string target = "";
     string[] Msgs = { };
@@ -25,7 +24,7 @@
     var targetMsgs = Msgs.Zip(MsgsTime, (n, w) => new { msg = n, time = w });//合併兩陣列
 }
 
-@if (string.IsNullOrEmpty(Model.f活動留言))
+@if (string.IsNullOrEmpty(targetAct.f活動留言))
 {
     <h2 class="mx-auto ml-2">暫無留言</h2>
 }
