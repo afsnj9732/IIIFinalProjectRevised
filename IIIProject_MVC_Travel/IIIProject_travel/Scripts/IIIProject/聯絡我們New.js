@@ -1,6 +1,6 @@
 ﻿function validateEmail(email) {
-    const re = /([a-zA-Z0-9]+)([\.{1}])?([a-zA-Z0-9]+)\@gmail([\.])com/;
-
+    //const re = /([a-zA-Z0-9]+)([\.{1}])?([a-zA-Z0-9]+)\@gmail([\.])com/;
+    const re = /^[a-z0-9](\.?[a-z0-9]){5,}@gmail\.com$/;
     if ($("#email").val()=="") {
         alert("必填欄位");
     }
