@@ -28,6 +28,7 @@ namespace IIIProject_travel.Services
             t.f會員密碼 = newMember.txtPassword;
             t.f驗證碼 = newMember.fActivationCode;
             t.isAdmin = false;
+            t.f瀏覽人數 = 0;
             db.tMember.Add(t);
             db.SaveChanges();
         }
