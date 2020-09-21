@@ -139,10 +139,10 @@ $(document).ready(function () {
 });
 
 
-//Area圖
+//Column圖
 $(document).ready(function () {
     console.log("333");
-    $.getJSON("/後台Home/GetLineChartData", function (data) {
+    $.getJSON("/後台Home/GetColumnChartData", function (data) {
         var date = [];
         var Qts = [];
         for (var i = 0; i < data.length; i++) {
@@ -150,12 +150,12 @@ $(document).ready(function () {
             Qts.push(data[i].count);
         }
 
-        Highcharts.chart('chart-area', {
+        Highcharts.chart('chart-column', {
             chart: {
-                type: 'area'
+                type: 'column'
             },
             title: {
-                text: '瀏覽趨勢'
+                text: '個人頁瀏覽次數'
             },
             subtitle: {
                 text: 'Jouta Data'
@@ -177,7 +177,7 @@ $(document).ready(function () {
                 }
             },
             series: [{
-                name: '瀏覽次數 v.s 時間',
+                name: '瀏覽次數 v.s會員名稱',
                 data: Qts
             }]
         });
