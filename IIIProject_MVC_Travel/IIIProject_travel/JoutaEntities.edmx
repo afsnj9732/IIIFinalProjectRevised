@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="joutaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="joutaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="sysdiagrams">
           <Key>
             <PropertyRef Name="diagram_id" />
@@ -66,7 +66,7 @@
           <Property Name="f電子郵件" Type="nvarchar" MaxLength="100" />
           <Property Name="f電話" Type="nvarchar" MaxLength="100" />
           <Property Name="f標題" Type="nvarchar" MaxLength="100" />
-          <Property Name="f意見" Type="nvarchar(max)" />
+          <Property Name="f意見" Type="nvarchar" MaxLength="100" />
           <Property Name="f性別" Type="nvarchar" MaxLength="100" />
           <Property Name="f聯絡人" Type="nvarchar" MaxLength="100" />
           <Property Name="f意見類型" Type="nvarchar" MaxLength="100" />
@@ -104,6 +104,7 @@
           <Property Name="f重置驗證碼" Type="nvarchar" MaxLength="100" />
           <Property Name="f會員擁有的優惠券" Type="nvarchar(max)" />
           <Property Name="f會員黑名單" Type="nvarchar(max)" />
+          <Property Name="f瀏覽人數" Type="int" />
         </EntityType>
         <Association Name="FK_tActivity_tMember">
           <End Role="tMember" Type="Self.tMember" Multiplicity="1" />
@@ -144,8 +145,7 @@
             <End Role="tBlogComment" EntitySet="tBlogComment" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="joutaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -213,7 +213,7 @@
           <Property Name="f電子郵件" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="f電話" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="f標題" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="f意見" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="f意見" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="f性別" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="f聯絡人" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="f意見類型" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
@@ -252,6 +252,7 @@
           <Property Name="f會員擁有的優惠券" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="f會員黑名單" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="tActivity" Relationship="Self.FK_tActivity_tMember" FromRole="tMember" ToRole="tActivity" />
+          <Property Name="f瀏覽人數" Type="Int32" />
         </EntityType>
         <Association Name="FK_tActivity_tMember">
           <End Role="tMember" Type="Self.tMember" Multiplicity="1" />
@@ -373,6 +374,7 @@
           <EntitySetMapping Name="tMember">
             <EntityTypeMapping TypeName="joutaModel.tMember">
               <MappingFragment StoreEntitySet="tMember">
+                <ScalarProperty Name="f瀏覽人數" ColumnName="f瀏覽人數" />
                 <ScalarProperty Name="f會員編號" ColumnName="f會員編號" />
                 <ScalarProperty Name="f會員帳號" ColumnName="f會員帳號" />
                 <ScalarProperty Name="f會員密碼" ColumnName="f會員密碼" />
