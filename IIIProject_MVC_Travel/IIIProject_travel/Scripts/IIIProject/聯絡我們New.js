@@ -19,4 +19,5 @@ $("#fordemo").click(function () {
     $("#post聯絡人").val("十元瑞");
     $("#phone").val("0976703669");
     $("#comment").val("今天我們去六福村的時候，前前後後帶了我們進去禮品店購物了3次，真的是夠了!!");
+    $("#email").val("pikaqiu193@gmail.com");
 });
