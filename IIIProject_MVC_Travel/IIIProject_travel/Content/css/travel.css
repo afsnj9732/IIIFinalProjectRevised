@@ -352,6 +352,9 @@ input[type="text"] {
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
 }
+#activity_content p{
+    margin:0 auto;
+}
 
 #mapid {
     height: 600px;
