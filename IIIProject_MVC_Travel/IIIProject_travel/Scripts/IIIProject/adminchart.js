@@ -55,7 +55,7 @@ $(document).ready(function () {
                 type: 'pie'
             },
             title: {
-                text: 'Region Ratio'
+                text: '區域分布'
             },
             tooltip: {
                 pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
@@ -88,6 +88,97 @@ $(document).ready(function () {
                     name: '東部',
                     y: data.East
                 }]
+            }]
+        });
+    });
+});
+
+//Bar圖
+$(document).ready(function () {
+    console.log("333");
+    $.getJSON("/後台Home/GetBarChartData", function (data) {
+        var date = [];
+        var Qts = [];
+        for (var i = 0; i < data.length; i++) {
+            date.push(data[i].name);
+            Qts.push(data[i].count);
+        }
+
+        Highcharts.chart('chart-bar', {
+            chart: {
+                type: 'bar'
+            },
+            title: {
+                text: '會員評分'
+            },
+            subtitle: {
+                text: 'Jouta Data'
+            },
+            xAxis: {
+                categories: date
+            },
+            yAxis: {
+                title: {
+                    text: '會員名稱'
+                }
+            },
+            plotOptions: {
+                line: {
+                    dataLabels: {
+                        enabled: true
+                    },
+                    enableMouseTracking: false
+                }
+            },
+            series: [{
+                name: '會員名稱 v.s 總分',
+                data: Qts
+            }]
+        });
+    });
+});
+
+
+//Area圖
+$(document).ready(function () {
+    console.log("333");
+    $.getJSON("/後台Home/GetLineChartData", function (data) {
+        var date = [];
+        var Qts = [];
+        for (var i = 0; i < data.length; i++) {
+            date.push(data[i].name);
+            Qts.push(data[i].count);
+        }
+
+        Highcharts.chart('chart-area', {
+            chart: {
+                type: 'area'
+            },
+            title: {
+                text: '瀏覽趨勢'
+            },
+            subtitle: {
+                text: 'Jouta Data'
+            },
+            xAxis: {
+                categories: date
+            },
+            yAxis: {
+                title: {
+                    text: '瀏覽次數'
+                }
+            },
+            plotOptions: {
+                line: {
+                    dataLabels: {
+                        enabled: true
+                    },
+                    enableMouseTracking: false
+                }
+            },
+            series: [{
+                name: '瀏覽次數 v.s 時間',
+                data: Qts
             }]
         });
     });
