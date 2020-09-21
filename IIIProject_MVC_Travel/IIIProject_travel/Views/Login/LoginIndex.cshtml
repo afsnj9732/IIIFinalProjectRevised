@@ -13,7 +13,17 @@
     <link rel="stylesheet" href="~/Content/css/bootstrap.min.css">
     <link rel="stylesheet" href="~/Content/sass/style.css">
     <link rel="stylesheet" href="~/Content/css/login2.css">
+    <link href="~/Content/fontawesome/css/all.css" rel="stylesheet" />
     <link rel="shortcut icon" href="favicon.ico" />
+    <style>
+        #eye {
+            float: right;
+            position: relative;
+            bottom: 30px;
+            right: 10px;
+            color:black;
+        }
+    </style>
 </head>
 
 <body>
@@ -60,7 +70,7 @@
                     @Html.ValidationMessageFor(model => model.txtEmail, "", new { @class = "text-danger" })
                 </label>
                 <label>
-                    <input id="txtPassword" type="password" name="txtPassword" placeholder="密碼" />
+                    <input id="txtPassword" type="password" name="txtPassword" placeholder="密碼"/><span id="eye"><i class="fas fa-eye"></i></span>
                     @Html.ValidationMessageFor(model => model.txtPassword, "", new { @class = "text-danger" })
                 </label>
                 <p class="forgot-pass">Forgot password?</p>
@@ -110,6 +120,17 @@
         $("#txtEmail").val("pikaqiu193@gmail.com");
         $("#txtPassword").val("pika123456");
     });
+
+    $('#eye').click(function () {
+        icon = $(this).find("i");
+        if (icon.hasClass("fa-eye")) {
+            $("#txtPassword").attr("type", "text");
+            icon.addClass("fa-eye-slash").removeClass("fa-eye");
+        } else {
+            $("#txtPassword").attr("type", "password");
+            icon.addClass("fa-eye").removeClass("fa-eye-slash");
+        }
+    }) 
 </script>
 </body>
 

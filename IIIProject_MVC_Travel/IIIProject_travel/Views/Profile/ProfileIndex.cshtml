@@ -207,19 +207,19 @@
                             <input type="password" size="50" value="@Model.tMembers.f會員密碼" name="txtPassword" disabled>
 
                             <h6 class="profiletag">會員名稱</h6>
-                            <input type="text" class="txtName" name="txtName" disabled size="50" value="@Model.tMembers.f會員名稱">
+                            <input type="text" class="txtName" name="txtName" disabled size="50" value="@Model.tMembers.f會員名稱" id="name">
 
                             <h6 class="profiletag">會員暱稱</h6>
-                            <input type="text" class="txtNickName" name="txtNickName" disabled size="50" value="@Model.tMembers.f會員暱稱">
+                            <input type="text" class="txtNickName" name="txtNickName" disabled size="50" value="@Model.tMembers.f會員暱稱" id="nickname">
 
                             <h6 class="profiletag">生日</h6>
-                            <input type="date" class="txtBirth" size="50" name="txtBirth" disabled value="@Model.tMembers.f會員生日">
+                            <input type="date" class="txtBirth" size="50" name="txtBirth" disabled value="@Model.tMembers.f會員生日" id="birth">
 
                             <h6 class="profiletag">興趣</h6>
-                            <input type="text" class="txtHobby" size="50" name="txtHobby" disabled value="@Model.tMembers.f會員興趣">
+                            <input type="text" class="txtHobby" size="50" name="txtHobby" disabled value="@Model.tMembers.f會員興趣" id="hobby">
 
                             <h6 class="profiletag">自我介紹</h6>
-                            <textarea class="intro" rows="5" cols="50" name="txtIntro" disabled>@Model.tMembers.f會員自我介紹</textarea><br>
+                            <textarea class="intro" rows="5" cols="50" name="txtIntro" disabled id="intro">@Model.tMembers.f會員自我介紹</textarea><br>
                             <div id="sth"></div>
 
                         </form>
@@ -591,6 +591,16 @@
         function kk() {
             $('#form1').submit();
         }
+    </script>
+
+    <script>
+        $("#title").click(function () {
+            $("#name").val("皮卡丘");
+            $("#nickname").val("皮神");
+            $("#birth").val("1996/02/27");
+            $("#hobby").val("對小智放電");
+            $("#intro").val("皮卡丘為電屬性的鼠寶可夢。代表技能是電擊、十萬伏特、電光一閃、鐵尾、打雷、伏特攻擊、電球、電網。可利用雷之石進化為雷丘。在阿羅拉地區進化成電、超能力系的雷丘。");
+        });
     </script>
 </body>
 

@@ -244,6 +244,7 @@
     <Content Include="Content\css\login2.css" />
     <Content Include="Content\css\resetpassword.css" />
     <Content Include="Content\css\sweetalert2.min.css" />
+    <Content Include="Content\images\1_臺北商圈吃玩買.jpg" />
     <Content Include="Content\images\273cc7b6-e2f0-4fe2-ad3b-36031e7d21c3.jpg" />
     <Content Include="Content\images\29.png" />
     <Content Include="Content\images\30.png" />
@@ -378,6 +379,8 @@
     <Content Include="Content\images\foodie3.jpg" />
     <Content Include="Content\images\foodie4.jpg" />
     <Content Include="Content\images\foodie5.jpg" />
+    <Content Include="Content\images\homabout7.jpg" />
+    <Content Include="Content\images\homeabout5.jpg" />
     <Content Include="Content\images\McDonalds.png" />
     <Content Include="Content\images\mume.jpg" />
     <Content Include="Content\images\proheadshot.jpg" />

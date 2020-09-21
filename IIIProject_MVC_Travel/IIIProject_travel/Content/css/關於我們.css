@@ -19,6 +19,7 @@ body{
     background-position: center;
     background-size: cover;
     width: 100%;
+
 }
 
 .t2{
@@ -106,4 +107,7 @@ p{
 .shadow-lg:hover{
     box-shadow: 0px 0px 10px 1px #666666 !important;
     transition-duration: 3s;
+}
+.banner{
+    height:500px;
 }

@@ -620,7 +620,7 @@
 
     }
     $("body").on('click', ".leaveMsg", leaveMsg);
-
+    $("body").on('click', '[data-target="#ajax_msg"]', leaveMsg)
     //踢人
     function kickAct() {
         let target = $(this).attr("member_id");

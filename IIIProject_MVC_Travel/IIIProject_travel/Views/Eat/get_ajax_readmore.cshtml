@@ -18,7 +18,10 @@
             }
         }
     }
-
+    if(Model.tMember.f會員評分 == null)
+    {
+        Model.tMember.f會員評分 = 0.0;
+    }
 
 
     //join
@@ -195,7 +198,7 @@
             </div>
             <div class="modal-body">
                 <div MsgAdd="@Model.f活動編號">
-                    @if (string.IsNullOrEmpty(Model.f活動留言))
+                    @*@if (string.IsNullOrEmpty(Model.f活動留言))
                     {
                         <h2 class="mx-auto ml-2">暫無留言</h2>
                     }
@@ -237,7 +240,7 @@
                                 <br />
                             }
                         }
-                    }
+                    }*@
 
                 </div>
             </div>
@@ -415,8 +418,17 @@
                                 <img src="~/Content/images/@Model.tMember.f會員大頭貼" alt="" class="col-auto" style="width: 300px;">
                             </a>
                             <p>@Model.tMember.f會員名稱</p>
-                            <p>團主評分:@Model.tMember.f會員評分 </p>
+                            <div class="row d-flex flex-column bd-highlight mx-auto">
+                                <p>團主評分:</p>
+                                <div class="mx-auto">
+                                    @for (int i = 0; i < Model.tMember.f會員評分; i++)
+                                    {
+                                        <img src="~/Content/images/ChangeStar.png" width="30" height="30" />
+                                    }
+                                </div>
+                            </div>
                         </div>
+                        
                         <div class="change-max-width-1000 ml-4">
                             <div class="row align-items-center m-0 ml-2 mr-2 textBox  ">
                                 @Html.Raw(Model.f活動內容)
@@ -432,7 +444,7 @@
                                 <button class="btn btn-block mr-1  p-1 pr-2 pl-2 FeelGood" style="background-color:#FFE0B2;" target="@Model.f活動編號">
                                     <img src="~/Content/images/05.png" class="pb-1 ">覺得讚
                                 </button>
-                                <button class="btn btn-block mr-1  p-1 pr-2 pl-2" data-toggle="modal" data-target="#ajax_join" style="background-color:#FFE0B2 ;">
+                                <button class="btn btn-block mr-1  p-1 pr-2 pl-2" data-toggle="modal"  data-target="#ajax_join" style="background-color:#FFE0B2 ;">
                                     <img src="~/Content/images/10.png" class="pb-1" alt="">
                                     @{
                                         if (NowMember.f會員編號 != Model.f會員編號)
@@ -449,7 +461,7 @@
                                     <img src="~/Content/images/10.png" class="pb-1" alt="">給分數
                                 </button>
                                 <div style="cursor: pointer;">
-                                    <button class="btn btn-block mr-1  p-1 pr-2 pl-2" data-toggle="modal" data-target="#ajax_msg" style="background-color:#FFE0B2 ;">
+                                    <button class="btn btn-block mr-1  p-1 pr-2 pl-2" data-toggle="modal" leaveMsg="@Model.f活動編號" data-target="#ajax_msg" style="background-color:#FFE0B2 ;">
                                         <img src="~/Content/images/12.png" alt="">留言區
                                     </button>
                                 </div>
