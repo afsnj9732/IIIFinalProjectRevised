@@ -26,6 +26,31 @@ namespace IIIProject_travel.Controllers
             return Json(query, JsonRequestBehavior.AllowGet);
         }
 
+        public ActionResult GetBarChartData()
+        {
+            dbJoutaEntities db = new dbJoutaEntities();
+            var query = from t in db.tMember
+                        orderby t.f會員名稱
+                        select new { name = t.f會員名稱, count = t.f會員總分 };
+            //var query = context.tActivity.Include("f活動預算")
+            //.GroupBy(p => p.Product.ProductName)
+            //.Select(g => new { name = g.Key, name =  g.Sum(w => w.Quantity) }).ToList();
+            return Json(query, JsonRequestBehavior.AllowGet);
+        }
+
+
+        public ActionResult GetAreaChartData()
+        {
+            dbJoutaEntities db = new dbJoutaEntities();
+            var query = from t in db.tActivity
+                        orderby t.f活動發起日期
+                        select new { name = t.tMember.f會員名稱, count = t.tMember.f會員總分 };
+            //var query = context.tActivity.Include("f活動預算")
+            //.GroupBy(p => p.Product.ProductName)
+            //.Select(g => new { name = g.Key, name =  g.Sum(w => w.Quantity) }).ToList();
+            return Json(query, JsonRequestBehavior.AllowGet);
+        }
+
         public ActionResult GetPieChartData()
         {
             dbJoutaEntities db = new dbJoutaEntities();
