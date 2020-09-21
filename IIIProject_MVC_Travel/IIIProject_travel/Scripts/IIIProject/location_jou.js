@@ -25,6 +25,7 @@ function callmap() {
         }
         callmap();
         getmarker();
+        setTimeout(function () { mymap.invalidateSize() }, 400);
     });
 
     function getmarker() {
