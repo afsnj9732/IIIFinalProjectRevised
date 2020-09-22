@@ -52,12 +52,10 @@
                 <div class="outercontainer3" style="height:250px;">
                     <div class="outercontainer4">
                         <h2>信箱驗證</h2>
-                        @if (ViewData["emailValidation"] != null)
-                        {
-                            <div class="alert alert-info">
-                                @ViewData["emailValidation"]
-                            </div>
-                        }
+                        
+                        <div class="alert alert-info">
+                            信箱驗證成功
+                        </div>
 
                         <div class="align-content-center">
                             <a class="btn btn-warning" href="~/Login/LoginIndex">登入去</a>

@@ -28,7 +28,7 @@ namespace IIIProject_travel.Controllers
         {
             CData c = new CData();
             var x = from m in (new dbJoutaEntities()).tMember
-                    where !string.IsNullOrEmpty(m.f會員自我介紹)
+                    where m.f會員評分>=4
                     select m;
             var y = from k in (new dbJoutaEntities()).tActivity
                     orderby k.f活動內容 descending
