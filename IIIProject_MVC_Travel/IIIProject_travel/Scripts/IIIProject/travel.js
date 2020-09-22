@@ -135,7 +135,7 @@
                     var string = jQuery.datepicker.formatDate('yy-mm-dd', date);
                     return [timeLimit.indexOf(string) === -1];
                 },
-                minDate: '2'
+                minDate: '0'
             }
         );
         if (index === "0") {
@@ -148,7 +148,7 @@
                         var string = jQuery.datepicker.formatDate('yy-mm-dd', date);
                         return [timeLimit.indexOf(string) === -1];
                     },
-                    minDate: '2'
+                    minDate: '0'
                 }
             );
             $(".ActivityFindEnd").eq(index).datepicker(
@@ -156,13 +156,13 @@
                     dateFormat: 'yy-mm-dd',
                     monthNames: ["1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"],
                     dayNamesMin: ["日", "一", "二", "三", "四", "五", "六"],
-                    minDate: '1'
+                    minDate: '0'
                 }
             );
         } else {
             let NowDate = new Date(Date.parse($(".ActivityStart").eq(index).val()));
             theMonth = NowDate.getMonth() + 1;
-            theDay = NowDate.getDate() - 1;
+            theDay = NowDate.getDate() /*NowDate.getDate() - 1*/;
             FormatTime();
             let deadLine = NowDate.getFullYear() + "-" + theMonth + "-" + theDay;
 
@@ -199,7 +199,7 @@
                     dateFormat: 'yy-mm-dd',
                     monthNames: ["1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"],
                     dayNamesMin: ["日", "一", "二", "三", "四", "五", "六"],
-                    minDate: '1',
+                    minDate: '0',
                     maxDate: deadLine //變為活動開始前一天，要原本的值-1
                 }
             );
@@ -330,7 +330,7 @@
         //let themax = new Date(Date.parse($(this).val().replace(/-/g, "/"))); 日期字串dash轉斜線
         let NowDate = new Date(Date.parse($(this).val()));
         theMonth = NowDate.getMonth() + 1;
-        theDay = NowDate.getDate() - 1;
+        theDay = NowDate.getDate() /*NowDate.getDate() - 1*/;
         FormatTime();
         let deadLine = NowDate.getFullYear() + "-" + theMonth + "-" + theDay;
 
@@ -369,7 +369,7 @@
                 dateFormat: 'yy-mm-dd',
                 monthNames: ["1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"],
                 dayNamesMin: ["日", "一", "二", "三", "四", "五", "六"],
-                minDate: '1',
+                minDate: '0',
                 maxDate: deadLine //變為活動開始前一天，要原本的值-1
             }
         );
