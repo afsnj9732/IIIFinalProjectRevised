@@ -1,4 +1,5 @@
-﻿using IIIProject_travel.ViewModel;
+﻿using IIIProject_travel.Models;
+using IIIProject_travel.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -11,15 +12,52 @@ using System.Web.Script.Serialization;
 namespace IIIProject_travel.Controllers
 {
     public class TravelController : Controller
-    {
-        dbJoutaEntities db = new dbJoutaEntities();
+    {       
+        TravelModel travelModel = new TravelModel();
 
-
-        public dynamic getCalendar()
+        public ActionResult GetTravelList(string condition) //活動總列表回傳
         {
+            var Final = travelModel.SortList(condition);
             if (Session["member"] != null)
             {
+                tMember loginMember = (tMember)Session["member"];
+                if (!string.IsNullOrEmpty(loginMember.f會員收藏的活動編號))
+                {
+                    Final.MemberLike = loginMember.f會員收藏的活動編號.Split(',');
+                }
+            }
+            return View(Final);
+        }
+
+        // GET: Travel
+        public ActionResult TravelIndex(string msg)
+        {
+            string HomeSearch = ",所有,全部," + msg;
+            return View((object)HomeSearch);
+        }
+
+        [HttpPost]
+        public ActionResult TravelIndex(int? id) //HomeSearch才用
+        {
+            string HomeSearch = "";
+            HomeSearch += Request.Form["txtTravelKeyword"];
+            HomeSearch += "," + Request.Form["txtTravelCategory"];
+            HomeSearch += "," + Request.Form["txtTotalGood"];
+            HomeSearch += ",";
+            return View((object)HomeSearch);
+        }
+
+        // up is finish
+
+        dbJoutaEntities db = new dbJoutaEntities();  // will remove
+        public dynamic getCalendar()
+        {
+            //var ge2312 = travelModel.GetMemberData(LoginMember.f會員編號, "f會員帳號");
+            if (Session["member"] != null)
+            {
+                
                 var LoginMember = (tMember)Session["member"];
+                
                 var nowRealMember = db.tMember.Where(t => t.f會員編號 == LoginMember.f會員編號).FirstOrDefault();
                 if (!string.IsNullOrEmpty(nowRealMember.f會員參加的活動編號))
                 {
@@ -35,10 +73,10 @@ namespace IIIProject_travel.Controllers
                         var NowMemberAct = db.tActivity.Where(t => t.f活動編號.ToString() == item).FirstOrDefault();
                         CalendarEvents CalendarEvent = new CalendarEvents();
                         CalendarEvent.title = NowMemberAct.f活動標題;
-                        
+
                         CalendarEvent.start = NowMemberAct.f活動開始時間;
-                        CalendarEvent.end = 
-                            NowMemberAct.f活動開始時間 == NowMemberAct.f活動結束時間 ?  NowMemberAct.f活動結束時間 : NowMemberAct.f活動結束時間 + " 23:59:59";
+                        CalendarEvent.end =
+                            NowMemberAct.f活動開始時間 == NowMemberAct.f活動結束時間 ? NowMemberAct.f活動結束時間 : NowMemberAct.f活動結束時間 + " 23:59:59";
                         CalendarEvent.classNames = "CalendarEvent" + " " + "EventActID" + NowMemberAct.f活動編號;
                         NowMemberTotalEvents[i] = CalendarEvent;
                         i++;
@@ -55,59 +93,19 @@ namespace IIIProject_travel.Controllers
             else
             {
                 return "1";
-            }           
+            }
         }
 
         public ActionResult get_ajax_readmore(int act_id)
         {
             ViewCounts(act_id);
-            tActivity target_act = db.tActivity.Where(t => t.f活動編號 == act_id).FirstOrDefault();            
+            tActivity target_act = db.tActivity.Where(t => t.f活動編號 == act_id).FirstOrDefault();
             return View(target_act);
         }
 
-        public ActionResult article_AJAX(string condition)
-        {
-            JavaScriptSerializer serializer = new JavaScriptSerializer();
-            CSelect obj = serializer.Deserialize<CSelect>(condition);
-            var FinalList = AJAXcondition(condition).Where(a => a.f活動類型 == "旅遊").Select(a => a);
-            CTravel List = new CTravel();
 
-            //頁數判斷
-            if (FinalList.Count() % 4 == 0 && FinalList.Count()!=0)
-            {
-                List.TotalPage = FinalList.Count() / 4;
-            }
-            else
-            {
-                List.TotalPage = (FinalList.Count() - FinalList.Count() % 4) / 4 + 1;
-            }   
-            List.NowPage = obj.page;
-            if (obj.page == 0 || obj.page>List.TotalPage)
-            {
-                List.NowPage = 1;  
-            }
-            
-            List.FinalList = FinalList.Skip(4 * (List.NowPage - 1)).Take(4);
-            return View(List);
-        }
 
-        // GET: Travel
-        public ActionResult TravelIndex(string msg)
-        {
-            string HomeSearch = ",所有,全部,"+ msg;
-            return View((object)HomeSearch);
-        }
 
-        [HttpPost]
-        public ActionResult TravelIndex(int? id) //HomeSearch才用
-        {
-            string HomeSearch = "";
-            HomeSearch += Request.Form["txtTravelKeyword"]; 
-            HomeSearch += ","+ Request.Form["txtTravelCategory"]; 
-            HomeSearch += ","+ Request.Form["txtTotalGood"];
-            HomeSearch += ",";
-            return View((object)HomeSearch);
-        }
 
         public string GetDateLimit(int act_id)
         {
@@ -136,10 +134,10 @@ namespace IIIProject_travel.Controllers
                                 .ToString("dd"));
                         for (double i = 0.0; i <= limit; i++)
                         {
-                            totalTime += Convert.ToDateTime(timeRange[0]).AddDays(i).ToString("yyyy-MM-dd") + ",";                           
+                            totalTime += Convert.ToDateTime(timeRange[0]).AddDays(i).ToString("yyyy-MM-dd") + ",";
                         }
                     }
-                    if(totalTime.Length>2)
+                    if (totalTime.Length > 2)
                         totalTime = totalTime.Substring(0, totalTime.Length - 1);
                     //totalTime += "]";
                     return totalTime;
@@ -151,15 +149,15 @@ namespace IIIProject_travel.Controllers
         [ValidateInput(false)]
         public ActionResult Edit(tActivity p)
         {
-            tMember Member = (tMember)Session["member"];          
+            tMember Member = (tMember)Session["member"];
             tActivity targetAct = db.tActivity.Where(t => t.f活動編號 == p.f活動編號).FirstOrDefault();
 
 
             var NowMember = db.tMember.Where(t => t.f會員編號 == Member.f會員編號).FirstOrDefault();
             string[] usedTime = { };
             if (!string.IsNullOrEmpty(NowMember.f會員已占用時間))
-            {           
-            usedTime = NowMember.f會員已占用時間.Split(',');
+            {
+                usedTime = NowMember.f會員已占用時間.Split(',');
                 //先移除登入會員原本這筆活動的活動時段
                 usedTime = usedTime.Where(t => t != targetAct.f活動開始時間 + "~" + targetAct.f活動結束時間).ToArray();
                 //再判別修改的活動時段是否已占用 
@@ -180,7 +178,7 @@ namespace IIIProject_travel.Controllers
                     }
 
                 }
-}
+            }
             //時間過關
             //因為活動時段變更所以要剔除所有參加者(不是每個人都想參加新時段)
             //撈出所有參加會員的編號，並讓他們退團
@@ -221,7 +219,7 @@ namespace IIIProject_travel.Controllers
             targetAct.f活動緯度 = p.f活動緯度;
             targetAct.f活動審核名單 = null;
 
-            HttpPostedFileBase PicFile = Request.Files["PicFile2"]; 
+            HttpPostedFileBase PicFile = Request.Files["PicFile2"];
             if (PicFile != null)
             {
                 var NewFileName = Guid.NewGuid() + Path.GetExtension(PicFile.FileName);
@@ -243,21 +241,21 @@ namespace IIIProject_travel.Controllers
             var NowMember = db.tMember.Where(t => t.f會員編號 == Member.f會員編號).FirstOrDefault();
             if (!string.IsNullOrEmpty(NowMember.f會員已占用時間))
             {
-                string[] usedTime = NowMember.f會員已占用時間.Split(',');                      
+                string[] usedTime = NowMember.f會員已占用時間.Split(',');
                 string[] used;
                 foreach (var item in usedTime)
                 {
                     if (!string.IsNullOrEmpty(item))
                     {
-                    used = item.Split('~');  //used[0] 已佔用的開始時間，used[1] 已佔用的結束時間
-                    if (string.Compare(p.f活動開始時間, used[1]) > 0 || string.Compare(used[0], p.f活動結束時間) > 0)
-                    {
+                        used = item.Split('~');  //used[0] 已佔用的開始時間，used[1] 已佔用的結束時間
+                        if (string.Compare(p.f活動開始時間, used[1]) > 0 || string.Compare(used[0], p.f活動結束時間) > 0)
+                        {
 
-                    }
-                    else
-                    {
-                        return  RedirectToAction("TravelIndex","Travel",new { msg = "錯誤! 新增的活動與既有活動時間相衝" } );
-                    }
+                        }
+                        else
+                        {
+                            return RedirectToAction("TravelIndex", "Travel", new { msg = "錯誤! 新增的活動與既有活動時間相衝" });
+                        }
                     }
 
                 }
@@ -269,7 +267,7 @@ namespace IIIProject_travel.Controllers
             p.f活動參加的會員編號 = "," + Member.f會員編號;
             var theCategory = Convert.ToDateTime(p.f活動結束時間) - Convert.ToDateTime(p.f活動開始時間);
             int timeCheck = Convert.ToInt32(theCategory.ToString("dd"));
-            switch(timeCheck)//時間判斷
+            switch (timeCheck)//時間判斷
             {
                 case 1:
                     p.f活動分類 = "兩天一夜";
@@ -290,8 +288,8 @@ namespace IIIProject_travel.Controllers
             db.tActivity.Add(p);
             db.SaveChanges();
             int ID = db.tActivity.Where(t => t.f會員編號 == Member.f會員編號)
-                .OrderByDescending(t=>t.f活動發起日期).Select(t => t.f活動編號).FirstOrDefault();
-            NowMember.f會員發起的活動編號 += "," + ID;   
+                .OrderByDescending(t => t.f活動發起日期).Select(t => t.f活動編號).FirstOrDefault();
+            NowMember.f會員發起的活動編號 += "," + ID;
             NowMember.f會員參加的活動編號 += "," + ID;
             HttpPostedFileBase PicFile = Request.Files["PicFile"];
             if (PicFile != null)
@@ -301,7 +299,7 @@ namespace IIIProject_travel.Controllers
                 PicFile.SaveAs(NewFilePath);
                 p.f活動團圖 = NewFileName;
             }
-            db.SaveChanges();            
+            db.SaveChanges();
             return RedirectToAction("TravelIndex");
         }
 
@@ -341,7 +339,7 @@ namespace IIIProject_travel.Controllers
                 }
             }
             db.tActivity.Remove(target);
-            db.SaveChanges();          
+            db.SaveChanges();
             return RedirectToAction("TravelIndex");
         }
 
@@ -354,12 +352,12 @@ namespace IIIProject_travel.Controllers
                 return "0";
             }
 
-            
+
             var nowRealMember = db.tMember.Where(t => t.f會員編號 == loginMember.f會員編號).FirstOrDefault();
             if (!string.IsNullOrEmpty(nowRealMember.f會員黑名單))
             {
                 var black_list = nowRealMember.f會員黑名單.Split(',');
-                if (Array.IndexOf(black_list,target_member.ToString())>-1) //已經加入黑單
+                if (Array.IndexOf(black_list, target_member.ToString()) > -1) //已經加入黑單
                 {
                     return "1";
                 }
@@ -377,7 +375,7 @@ namespace IIIProject_travel.Controllers
             }
         }
 
-        public dynamic ActKick(int target_member,int act_id)
+        public dynamic ActKick(int target_member, int act_id)
         {
             var loginMember = (tMember)Session["member"];
             if (target_member == loginMember.f會員編號) //不可以黑自己
@@ -413,16 +411,16 @@ namespace IIIProject_travel.Controllers
             var LoginMember = (tMember)Session["member"];
             var ActList = db.tActivity.Where(t => t.f活動編號 == target).FirstOrDefault();
             string[] black_list = { };
-            if (ActList.tMember.f會員黑名單!=null)
+            if (ActList.tMember.f會員黑名單 != null)
             {
                 black_list = ActList.tMember.f會員黑名單.Split(',');
             }
-            
+
             var NowMember = db.tMember.Where(t => t.f會員編號 == LoginMember.f會員編號)
                          .FirstOrDefault();//因Session存取的資料沒有和資料庫內部做綁定
-                                                          //所以不能存取，要用Session登入會員的會員編號
-                                                          //撈出目前會員的資料
-                                                          //檢查登入會員是否為本活動團主，團主不可入團退團
+                                           //所以不能存取，要用Session登入會員的會員編號
+                                           //撈出目前會員的資料
+                                           //檢查登入會員是否為本活動團主，團主不可入團退團
             int index = -1; //先假設不是團主
             if (!string.IsNullOrEmpty(NowMember.f會員發起的活動編號)) //若登入會員有開團紀錄
             {
@@ -445,7 +443,7 @@ namespace IIIProject_travel.Controllers
             {
                 if (black_list.Length > 1)
                 {
-                    if (Array.IndexOf(black_list,LoginMember.f會員編號.ToString())>-1)
+                    if (Array.IndexOf(black_list, LoginMember.f會員編號.ToString()) > -1)
                     {
                         return "7";
                     }
@@ -484,7 +482,7 @@ namespace IIIProject_travel.Controllers
                         {
                             return "8";
                         }
-                    }                    
+                    }
                     //進入審核
                     ActList.f活動審核名單 += "," + NowMember.f會員編號;
                     db.SaveChanges();
@@ -537,7 +535,7 @@ namespace IIIProject_travel.Controllers
             return View(target);
         }
 
-        public dynamic agree_add(int target_member , int act_id , string act)
+        public dynamic agree_add(int target_member, int act_id, string act)
         {
             var ActList = db.tActivity.Where(t => t.f活動編號 == act_id).FirstOrDefault();
             var targetMember = db.tMember.Where(t => t.f會員編號 == target_member).FirstOrDefault();
@@ -570,17 +568,17 @@ namespace IIIProject_travel.Controllers
 
                 targetMember.f會員參加的活動編號 += "," + ActList.f活動編號;
                 ActList.f活動參加的會員編號 += "," + targetMember.f會員編號;
-                
+
             }
             ActList.f活動審核名單 = string.Join(",",
                 ActList.f活動審核名單.Split(',').Where(t => t != targetMember.f會員編號.ToString()));
             db.SaveChanges();
-            return View("Actadd",act_id);
+            return View("Actadd", act_id);
         }
 
 
 
-        public object ScoreAdd(int target,int Score)
+        public object ScoreAdd(int target, int Score)
         {
             var NowMember = (tMember)Session["member"];
             var theActivity = db.tActivity.Where(x => x.f活動編號 == target)
@@ -590,7 +588,7 @@ namespace IIIProject_travel.Controllers
             int pos;
             var nowRealMember = db.tMember.Where(t => t.f會員編號 == NowMember.f會員編號).FirstOrDefault();
             if (!string.IsNullOrEmpty(nowRealMember.f會員發起的活動編號))
-            { 
+            {
                 pos = Array.IndexOf(nowRealMember.f會員發起的活動編號.Split(','), target.ToString());
                 if (pos != -1)//團主不可自行評分
                 {
@@ -598,24 +596,24 @@ namespace IIIProject_travel.Controllers
                 }
             }
             var x123 = theActivity.FirstOrDefault().f活動結束時間;
-            var result = string.Compare(DateTime.Now.ToString("yyyy-MM-dd"), theActivity.FirstOrDefault().f活動結束時間);           
+            var result = string.Compare(DateTime.Now.ToString("yyyy-MM-dd"), theActivity.FirstOrDefault().f活動結束時間);
             if (result < 0)  //result=1 活動已結束 ， result=-1 活動尚未結束
             {
                 return "3"; //活動尚未結束
             }
 
             pos = Array.IndexOf(isExist, NowMember.f會員編號.ToString());
-            if (pos == -1 ) //先找有沒有參加本次活動
-            { 
+            if (pos == -1) //先找有沒有參加本次活動
+            {
                 return "0";//沒參加
             }
 
             if (!string.IsNullOrEmpty(theActivity.Select(a => a.f活動評分過的會員編號).FirstOrDefault()))
-            {  
+            {
                 //若有曾經評分過的會員編號
                 isExist = theActivity.Select(a => a.f活動評分過的會員編號).FirstOrDefault().Split(',');
                 pos = Array.IndexOf(isExist, NowMember.f會員編號.ToString());//再找現在登入會員有沒有評分過
-                if (pos != -1) 
+                if (pos != -1)
                 {
                     return "1"; //有評分過
                 }
@@ -623,9 +621,9 @@ namespace IIIProject_travel.Controllers
             //若無曾經評分過的會員編號則直接往下
 
             //若通過上面判定則進行評分
-            var SaveData = theActivity.FirstOrDefault();            
+            var SaveData = theActivity.FirstOrDefault();
             SaveData.f活動評分過的會員編號 += "," + NowMember.f會員編號;
-            if(SaveData.tMember.f會員評分人數 == null)
+            if (SaveData.tMember.f會員評分人數 == null)
             {
                 SaveData.tMember.f會員評分人數 = 0;
             }
@@ -639,7 +637,7 @@ namespace IIIProject_travel.Controllers
             {
                 SaveData.tMember.f會員評分 = 0;
             }
-            SaveData.tMember.f會員評分 = 
+            SaveData.tMember.f會員評分 =
                 Math.Round(Convert.ToDouble(SaveData.tMember.f會員總分 / SaveData.tMember.f會員評分人數), 1);
             db.SaveChanges();
             return "2";
@@ -652,7 +650,7 @@ namespace IIIProject_travel.Controllers
             db.SaveChanges();
         }
 
-        public string likeIt(string ActivityID)  
+        public string likeIt(string ActivityID)
         {
             var condition = (tMember)Session["member"];
             var targetAct = db.tActivity.Where(t => t.f活動編號.ToString() == ActivityID).FirstOrDefault();
@@ -668,7 +666,7 @@ namespace IIIProject_travel.Controllers
                     db.SaveChanges();
                 }
                 else  //若找到
-                {                     
+                {
                     var FinalList = isExist.ToList();
                     FinalList.RemoveAt(pos);  //移除
                     member.f會員收藏的活動編號 = string.Join(",", FinalList);
@@ -692,45 +690,7 @@ namespace IIIProject_travel.Controllers
             return string.Join(",", autoComplete);
         }
 
-        public IEnumerable<tActivity> AJAXcondition(string condition)
-        {
-            JavaScriptSerializer serializer = new JavaScriptSerializer();
-            CSelect obj = serializer.Deserialize<CSelect>(condition);
 
-            var tTravel_order = typeof(tActivity).GetProperty(obj.order);
-
-            //不使用if，動態抓取排序條件
-            var CountViewList = db.tActivity
-                        .AsEnumerable().OrderBy(a => tTravel_order.GetValue(a, null))
-                        .Select(a => a); //升冪
-
-            if (obj.background_color == "rgb(250, 224, 178)")
-            {
-                CountViewList = db.tActivity
-                .AsEnumerable().OrderByDescending(a => tTravel_order.GetValue(a, null))
-                .Select(a => a); //降冪
-            }
-
-            if (!string.IsNullOrEmpty(obj.contain)) //搜尋欄位若非空
-            {
-                CountViewList = CountViewList.Where(b => b.f活動標題.Contains(obj.contain))
-                            .Select(a => a);
-            }
-            if (obj.category != "所有")
-            {
-                CountViewList = CountViewList
-                                    .Where(b => b.f活動分類 == obj.category)
-                                    .Select(a => a);
-            }
-
-            if (obj.label != "全部")
-            {
-                CountViewList = CountViewList
-                                    .Where(b => b.f活動讚數 > Convert.ToInt32(obj.label))
-                                    .Select(a => a);
-            }
-            return CountViewList;
-        }
 
 
         public ActionResult MsgAdd(int target, string sentMsg)
@@ -749,10 +709,10 @@ namespace IIIProject_travel.Controllers
 
 
         public string FeelGood(string target)
-        {           
-            if (Session["member"]!=null)
+        {
+            if (Session["member"] != null)
             {
-                var loginMember = (tMember)Session["member"];                             
+                var loginMember = (tMember)Session["member"];
                 int select = Convert.ToInt32(target);
                 tActivity theTarget = db.tActivity.FirstOrDefault(x => x.f活動編號 == select);
                 int index = -1;
@@ -761,14 +721,14 @@ namespace IIIProject_travel.Controllers
                     var past = theTarget.f活動按過讚的會員編號.Split(',');//將按過讚得會員編號 字串 切割 成陣列
 
                     index = Array.IndexOf(past, loginMember.f會員編號.ToString());//透過查詢值在陣列內的索引值(不存在則回傳-1)
-                                                                         //查看是否會員編號包含在陣列內
+                                                                              //查看是否會員編號包含在陣列內
                 }
 
-                if (index == -1 )//陣列起始為0，因此只要pos>=0則表示該編號已存在，反之index=-1表示該編號不存在，可執行
+                if (index == -1)//陣列起始為0，因此只要pos>=0則表示該編號已存在，反之index=-1表示該編號不存在，可執行
                 {
-                theTarget.f活動讚數 = (theTarget.f活動讚數 + 1);
-                theTarget.f活動按過讚的會員編號 += "," + loginMember.f會員編號;
-                db.SaveChanges();
+                    theTarget.f活動讚數 = (theTarget.f活動讚數 + 1);
+                    theTarget.f活動按過讚的會員編號 += "," + loginMember.f會員編號;
+                    db.SaveChanges();
                 }
                 else
                 {

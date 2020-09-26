@@ -196,6 +196,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>JoutaEntities.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\TravelModel.cs" />
     <Compile Include="sysdiagrams.cs">
       <DependentUpon>JoutaEntities.tt</DependentUpon>
     </Compile>
@@ -2264,7 +2265,6 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Travel\TravelIndex.cshtml" />
     <Content Include="Views\Login\LoginIndex.cshtml" />
-    <Content Include="Views\Travel\article_AJAX.cshtml" />
     <Content Include="Views\Blog\Create.cshtml" />
     <Content Include="Views\Blog\BlogContent.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
@@ -2302,6 +2302,7 @@
     <Content Include="Views\Eat\article_AJAX.cshtml" />
     <Content Include="Views\Eat\get_ajax_readmore.cshtml" />
     <Content Include="Views\Eat\MsgAdd.cshtml" />
+    <Content Include="Views\Travel\GetTravelList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

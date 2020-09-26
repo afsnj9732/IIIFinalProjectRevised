@@ -1,36 +1,12 @@
 ﻿@model IIIProject_travel.ViewModel.CTravel
 @{
-    dbJoutaEntities db = new dbJoutaEntities();
-    Layout = null;
-    tMember nowRealMember = null;
-    if (Session["member"] != null)
-    {
-        var loginMember = (tMember)Session["member"]; //注意Session抓到的資料，其資料內容為取得該Session當下的資料內容，
-                                                      //因此若有修改過資料庫的資料，就要改藉由Session的會員編號
-                                                      //去抓取現在資料庫的資料，否則會一直撈到不變的Session資料
-        nowRealMember = db.tMember.FirstOrDefault(x => x.f會員編號 == loginMember.f會員編號);
-    }
+    Layout = null;  //finish
 }
 
 @{
-
     foreach (var item in Model.FinalList)
     {
-        string iflikeit = "11.png";
-        int index = -1;
-        if (Session["member"] != null)
-        {
-            if (!string.IsNullOrEmpty(nowRealMember.f會員收藏的活動編號))
-            {
-                var analyze = nowRealMember.f會員收藏的活動編號.Split(',');
-                index = Array.IndexOf(analyze, item.f活動編號.ToString());
-                if (index > -1)
-                {
-                    iflikeit = "14.png";
-                }
-            }
-        }
-        <!-- -------------文章區頭-------------- -->
+        <!-- -------------文章區start-------------- -->
         <div class="row Travel_border align-items-center p-3 pl-4">
             <div class="container-fluid">
                 <div class="row m-0 justify-content-between">
@@ -69,11 +45,12 @@
                         <div class="p-0 pr-2">
                             @if (Session["member"] != null)
                             {
+                                string iflikeit = (Array.IndexOf(Model.MemberLike, item.f活動編號.ToString()) > -1)
+                                    ? "14.png" : "11.png";
                                 <img style="cursor: pointer;" class="pb-1 likeIt" likeIndex="@item.f活動編號" src="~/Content/images/@iflikeit" alt="">
                             }
                         </div>
                     </div>
-                    @*<div class="col-12"><hr /></div>*@
                 </div>
             </div>
 
@@ -113,9 +90,6 @@
     }
     <nav aria-label="...">
         <ul class="pagination">
-            @*<li class="page-item disabled">
-                    <span class="page-link">Previous</span>
-                </li>*@
             @for (int i = 1; i < Model.TotalPage + 1; i++)
             {
                 if (i == Model.NowPage)
@@ -132,9 +106,6 @@
                     <li class="page-item  MyPage" page="@i"><a class="page-link" style="cursor:pointer">@i</a></li>
                 }
             }
-            @*<li class="page-item">
-                    <a class="page-link" style="cursor:pointer">Next</a>
-                </li>*@
         </ul>
     </nav>
 }

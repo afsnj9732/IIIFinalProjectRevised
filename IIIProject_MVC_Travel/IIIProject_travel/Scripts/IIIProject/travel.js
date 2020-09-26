@@ -780,12 +780,12 @@
         label = $("#label").val();
         page = $(".NowPage").attr("page");
         condition = JSON.stringify({
-            "order": order, "background_color": background_color, "contain": contain
-            , "category": category, "label": label , "page":page
+            "Order": order, "BackgroundColor": background_color, "Contain": contain
+            , "Category": category, "Label": label , "Page":page
         });
         
         $.ajax({
-            url: "/Travel/article_AJAX",
+            url: "/Travel/GetTravelList",
             type: "POST",
             data: { "condition": condition },
             success: function (data) {
