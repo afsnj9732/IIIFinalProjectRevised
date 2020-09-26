@@ -1,4 +1,5 @@
-﻿using System;
+﻿using IIIProject_travel.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
@@ -28,16 +29,16 @@ namespace IIIProject_travel.Models
             return obj;
         }
 
-        public ViewModel.CTravel SortList(string condition) //活動列表+排序
+        public CTravel SortList(string condition) //活動列表+排序
         {
             int totalPage, nowPage;
-            ViewModel.CTravel returnValue = new ViewModel.CTravel();
-            CSelect obj = CSelectDeserialize(condition);           
+            CTravel returnValue = new CTravel();
+            CSelect obj = CSelectDeserialize(condition);
             var order = typeof(tActivity).GetProperty(obj.Order);//使用映射動態抓取排序條件
             var activityList = db.tActivity.AsEnumerable()
                 .Where(t => t.f活動類型 == "旅遊").Select(t => t);
 
-            activityList = (obj.BackgroundColor == "rgb(250, 224, 178)") 
+            activityList = (obj.BackgroundColor == "rgb(250, 224, 178)")
                 ? activityList.OrderByDescending(t => order.GetValue(t, null))//降冪
                 : activityList.OrderBy(t => order.GetValue(t, null));//升冪        
 
@@ -67,12 +68,12 @@ namespace IIIProject_travel.Models
 
             returnValue.FinalList = activityList;
             returnValue.TotalPage = totalPage;
-            returnValue.NowPage = nowPage;            
+            returnValue.NowPage = nowPage;
             return returnValue;
         }
 
         //使用ID取得想要的會員其資料庫中最新的特定欄位之資料
-        public dynamic GetMemberData(int memberID,string wantGet) 
+        public dynamic GetMemberData(int memberID, string wantGet)
         {
             var targetMember = db.tMember.Where(t => t.f會員編號 == memberID).FirstOrDefault();
 
@@ -81,6 +82,117 @@ namespace IIIProject_travel.Models
             return targetData;
         }
 
+        public dynamic CalendarList(int memberID)
+        {
+            var memberAct = GetMemberData(memberID, "f會員參加的活動編號");
+            if (!string.IsNullOrEmpty(memberAct))
+            {
+                string[] memberEvents = memberAct.Split(',');
+                CalendarEvents[] nowMemberTotalEvents = new CalendarEvents[memberEvents.Length - 1];
+                int i = 0;
+                foreach (var item in memberEvents)
+                {
+                    if (string.IsNullOrEmpty(item))
+                    {
+                        continue;
+                    }
+                    var nowMemberAct = db.tActivity.Where(t => t.f活動編號.ToString() == item).FirstOrDefault();
+                    CalendarEvents calendarEvent = new CalendarEvents();
+                    calendarEvent.title = nowMemberAct.f活動標題;
 
+                    calendarEvent.start = nowMemberAct.f活動開始時間;
+                    calendarEvent.end =
+                        nowMemberAct.f活動開始時間 == nowMemberAct.f活動結束時間 ? nowMemberAct.f活動結束時間 : nowMemberAct.f活動結束時間 + " 23:59:59";
+                    calendarEvent.classNames = "CalendarEvent" + " " + "EventActID" + nowMemberAct.f活動編號;
+                    nowMemberTotalEvents[i] = calendarEvent;
+                    i++;
+                }
+                JavaScriptSerializer serializer = new JavaScriptSerializer();
+                var obj = serializer.Serialize(nowMemberTotalEvents);
+                return obj;  //序列化後已是Json字串，傳到前端用JSON.parse即可轉成js物件
+            }
+            else
+            {
+                return "";
+            }
+        }
+
+        public string AutoCompleteList()
+        {
+            var autoComplete = db.tActivity.Where(t => t.f活動類型 == "旅遊").Select(t => t.f活動標題).ToArray();
+            return string.Join(",", autoComplete);
+        }
+
+        public string DateLimit(int memberID , int actID)
+        {
+            var memberTimeLimit = GetMemberData(memberID, "f會員已占用時間");
+            if (!string.IsNullOrEmpty(memberTimeLimit))
+            {
+                string[] timeList = memberTimeLimit.Split(',');
+                //actID!=0，表示是編輯模式，要先移除該筆活動的占用時間才符合時間限制條件
+                if (actID != 0)
+                {
+                    var targetAct = db.tActivity.Where(t => t.f活動編號 == actID).FirstOrDefault();
+                    timeList = timeList.Where(t => t != targetAct.f活動開始時間 + "~" + targetAct.f活動結束時間).ToArray();
+                }
+                //若無，則為一般開團，直接回傳已佔用的時間陣列                    
+                string totalTime = "";
+                foreach (string item in timeList)
+                {
+                    if (string.IsNullOrEmpty(item))
+                        continue;
+                    string[] timeRange = item.Split('~');
+                    double limit = Convert.ToInt32((Convert.ToDateTime(timeRange[1]) - Convert.ToDateTime(timeRange[0]))
+                            .ToString("dd"));
+                    for (double i = 0.0; i <= limit; i++)
+                    {
+                        totalTime += Convert.ToDateTime(timeRange[0]).AddDays(i).ToString("yyyy-MM-dd") + ",";
+                    }
+                }
+                if (totalTime.Length > 2)
+                    totalTime = totalTime.Substring(0, totalTime.Length - 1);
+                return totalTime;
+            }
+            return null;
+        }
+
+        public string FeelGood(int memberID , int actID)
+        {
+            tActivity theTarget = db.tActivity.FirstOrDefault(x => x.f活動編號 == actID);
+            int index = -1;
+            if (!string.IsNullOrEmpty(theTarget.f活動按過讚的會員編號))
+            {
+                var past = theTarget.f活動按過讚的會員編號.Split(',');//將按過讚得會員編號 字串 切割 成陣列
+
+                index = Array.IndexOf(past, memberID.ToString());//透過查詢值在陣列內的索引值(不存在則回傳-1)
+                                                                          //查看是否會員編號包含在陣列內
+            }
+
+            if (index == -1)//陣列起始為0，因此只要pos>=0則表示該編號已存在，反之index=-1表示該編號不存在，可執行
+            {
+                theTarget.f活動讚數 = (theTarget.f活動讚數 + 1);
+                theTarget.f活動按過讚的會員編號 += "," + memberID;
+                db.SaveChanges();
+                return null;
+            }
+            else
+            {
+                return "0";
+            }
+        }
+
+        public void AddViewCounts(int actID)
+        {
+            var target = db.tActivity.Where(t => t.f活動編號 == actID).FirstOrDefault();
+            target.f活動瀏覽次數 += 1;
+            db.SaveChanges();
+        }
+
+        public tActivity ReadMore(int actID)
+        {
+            AddViewCounts(actID);
+            tActivity targetAct = db.tActivity.Where(t => t.f活動編號 == actID).FirstOrDefault();
+            return targetAct;
+        }
     }
 }

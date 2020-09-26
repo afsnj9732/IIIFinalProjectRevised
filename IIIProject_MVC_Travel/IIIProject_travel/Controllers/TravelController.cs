@@ -47,48 +47,12 @@ namespace IIIProject_travel.Controllers
             return View((object)HomeSearch);
         }
 
-        // up is finish
-
-        dbJoutaEntities db = new dbJoutaEntities();  // will remove
-        public dynamic getCalendar()
+        public dynamic GetCalendar()
         {
-            //var ge2312 = travelModel.GetMemberData(LoginMember.f會員編號, "f會員帳號");
             if (Session["member"] != null)
-            {
-                
-                var LoginMember = (tMember)Session["member"];
-                
-                var nowRealMember = db.tMember.Where(t => t.f會員編號 == LoginMember.f會員編號).FirstOrDefault();
-                if (!string.IsNullOrEmpty(nowRealMember.f會員參加的活動編號))
-                {
-                    string[] nowMemberEvents = nowRealMember.f會員參加的活動編號.Split(',');
-                    CalendarEvents[] NowMemberTotalEvents = new CalendarEvents[nowMemberEvents.Length - 1];
-                    int i = 0;
-                    foreach (var item in nowMemberEvents)
-                    {
-                        if (string.IsNullOrEmpty(item))
-                        {
-                            continue;
-                        }
-                        var NowMemberAct = db.tActivity.Where(t => t.f活動編號.ToString() == item).FirstOrDefault();
-                        CalendarEvents CalendarEvent = new CalendarEvents();
-                        CalendarEvent.title = NowMemberAct.f活動標題;
-
-                        CalendarEvent.start = NowMemberAct.f活動開始時間;
-                        CalendarEvent.end =
-                            NowMemberAct.f活動開始時間 == NowMemberAct.f活動結束時間 ? NowMemberAct.f活動結束時間 : NowMemberAct.f活動結束時間 + " 23:59:59";
-                        CalendarEvent.classNames = "CalendarEvent" + " " + "EventActID" + NowMemberAct.f活動編號;
-                        NowMemberTotalEvents[i] = CalendarEvent;
-                        i++;
-                    }
-                    JavaScriptSerializer serializer = new JavaScriptSerializer();
-                    var obj = serializer.Serialize(NowMemberTotalEvents);
-                    return obj;  //序列化後已是Json字串，傳到前端用JSON.parse即可轉成js物件
-                }
-                else
-                {
-                    return "";
-                }
+            {                
+                var loginMember = (tMember)Session["member"];
+                return travelModel.CalendarList(loginMember.f會員編號);
             }
             else
             {
@@ -96,55 +60,47 @@ namespace IIIProject_travel.Controllers
             }
         }
 
-        public ActionResult get_ajax_readmore(int act_id)
+        public string AutoComplete()
         {
-            ViewCounts(act_id);
-            tActivity target_act = db.tActivity.Where(t => t.f活動編號 == act_id).FirstOrDefault();
-            return View(target_act);
+            return travelModel.AutoCompleteList();
         }
 
-
-
-
-
-        public string GetDateLimit(int act_id)
+        public string GetDateLimit(int actID)
         {
             if (Session["member"] != null)
             {
                 tMember loginMember = (tMember)Session["member"];
-                var realMember = db.tMember.Where(t => t.f會員編號 == loginMember.f會員編號).FirstOrDefault();
-                if (!string.IsNullOrEmpty(realMember.f會員已占用時間))
-                {
-                    string[] timeList = realMember.f會員已占用時間.Split(',');
-                    //act_id!=0，表示是編輯模式，要先移除該筆活動的占用時間才符合時間限制條件
-                    if (act_id != 0)
-                    {
-                        var targetAct = db.tActivity.Where(t => t.f活動編號 == act_id).FirstOrDefault();
-                        timeList = timeList.Where(t => t != targetAct.f活動開始時間 + "~" + targetAct.f活動結束時間).ToArray();
-                    }
-                    //若無，則為一般開團，直接回傳已佔用的時間陣列                    
-                    //string totalTime = "[";
-                    string totalTime = "";
-                    foreach (string item in timeList)
-                    {
-                        if (string.IsNullOrEmpty(item))
-                            continue;
-                        string[] timeRange = item.Split('~');
-                        double limit = Convert.ToInt32((Convert.ToDateTime(timeRange[1]) - Convert.ToDateTime(timeRange[0]))
-                                .ToString("dd"));
-                        for (double i = 0.0; i <= limit; i++)
-                        {
-                            totalTime += Convert.ToDateTime(timeRange[0]).AddDays(i).ToString("yyyy-MM-dd") + ",";
-                        }
-                    }
-                    if (totalTime.Length > 2)
-                        totalTime = totalTime.Substring(0, totalTime.Length - 1);
-                    //totalTime += "]";
-                    return totalTime;
-                }
+                return travelModel.DateLimit(loginMember.f會員編號, actID);
             }
             return null;
         }
+
+        public string GetFeelGood(int actID)
+        {
+            if (Session["member"] != null)
+            {
+                var loginMember = (tMember)Session["member"];
+                return travelModel.FeelGood(loginMember.f會員編號, actID);
+            }
+
+            return "1";
+        }
+
+        public ActionResult GetReadMore(int actID)  //view需改良
+        {             
+            return View(travelModel.ReadMore(actID));
+        }
+
+        // up is finish
+
+        dbJoutaEntities db = new dbJoutaEntities();  // will remove
+
+
+
+
+
+
+
 
         [ValidateInput(false)]
         public ActionResult Edit(tActivity p)
@@ -643,12 +599,7 @@ namespace IIIProject_travel.Controllers
             return "2";
         }
 
-        public void ViewCounts(int activityID)
-        {
-            var target = db.tActivity.Where(t => t.f活動編號 == activityID).FirstOrDefault();
-            target.f活動瀏覽次數 += 1;
-            db.SaveChanges();
-        }
+
 
         public string likeIt(string ActivityID)
         {
@@ -684,11 +635,7 @@ namespace IIIProject_travel.Controllers
             return "1";
         }
 
-        public string autoComplete()
-        {
-            var autoComplete = db.tActivity.Where(t => t.f活動類型 == "旅遊").Select(t => t.f活動標題).ToArray();
-            return string.Join(",", autoComplete);
-        }
+
 
 
 
@@ -708,36 +655,7 @@ namespace IIIProject_travel.Controllers
 
 
 
-        public string FeelGood(string target)
-        {
-            if (Session["member"] != null)
-            {
-                var loginMember = (tMember)Session["member"];
-                int select = Convert.ToInt32(target);
-                tActivity theTarget = db.tActivity.FirstOrDefault(x => x.f活動編號 == select);
-                int index = -1;
-                if (!string.IsNullOrEmpty(theTarget.f活動按過讚的會員編號))
-                {
-                    var past = theTarget.f活動按過讚的會員編號.Split(',');//將按過讚得會員編號 字串 切割 成陣列
 
-                    index = Array.IndexOf(past, loginMember.f會員編號.ToString());//透過查詢值在陣列內的索引值(不存在則回傳-1)
-                                                                              //查看是否會員編號包含在陣列內
-                }
-
-                if (index == -1)//陣列起始為0，因此只要pos>=0則表示該編號已存在，反之index=-1表示該編號不存在，可執行
-                {
-                    theTarget.f活動讚數 = (theTarget.f活動讚數 + 1);
-                    theTarget.f活動按過讚的會員編號 += "," + loginMember.f會員編號;
-                    db.SaveChanges();
-                }
-                else
-                {
-                    return "0";
-                }
-            }
-
-            return "1";
-        }
 
 
 

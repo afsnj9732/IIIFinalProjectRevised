@@ -12,9 +12,9 @@
     });
 
     //動態生成行事曆
-    function getCalendar() {
+    function GetCalendar() {
         $.ajax({
-            url: "/Travel/getCalendar",
+            url: "/Travel/GetCalendar",
             type: "POST",
             success: function (data) {
                 if (data === "") {
@@ -41,7 +41,7 @@
             }
         });
     }
-    getCalendar();
+    GetCalendar();
     //排序固定   
     let header = document.querySelector(".header");
     let travel_sort = document.querySelector("#travel_sort");
@@ -103,7 +103,7 @@
     //搜尋推薦
     $("#contain").on('keyup', function () {
         $.ajax({
-            url: "/Travel/autoComplete",
+            url: "/Travel/AutoComplete",
             type: "POST",
             success: function (data) {
                 var getautoComplete = data.split(',');
@@ -120,7 +120,7 @@
         $.ajax({
             url: "/Travel/GetDateLimit",
             type: "POST",
-            data: { "act_id": dateLimitID },
+            data: { "actID": dateLimitID },
             success: function (data) {
                 if (data !== "")
                     timeLimit = data.split(',');
@@ -211,10 +211,10 @@
     //ajax取得readmore
     function get_ajax_readmore() {
         $.ajax({            
-            url: "/Travel/get_ajax_readmore",  
+            url: "/Travel/GetReadMore",  
             async: false,         
             type: "POST",
-            data: { "act_id": readmore_target },
+            data: { "actID": readmore_target },
             success: function (data) {
                 $("#add_ajax_readmore").html(data); //更新readmore項目     
                 //$('#ajax_readmore').modal("show");
@@ -238,20 +238,12 @@
     //行事曆觸發readmore
     $("body").on("click", ".CalendarEvent", function () {
         let targetclass = this.classList.item(this.classList.length-1);
-        readmore_target = targetclass.substring(10, targetclass.length);        
-        //get_ajax_readmore();
-        //let target = readmore_target;
-        //var combine = "[ToUpdateVC=" + target + "]";
-        //var getCounts = parseInt($(combine).html()) + 1;
-        //$(combine).html(getCounts);
-        //$.ajax({
-        //    url: "/Travel/ViewCounts",
-        //    type: "POST",
-        //    data: { "ActivityID": target }
-        //}
-        //);
+        readmore_target = targetclass.substring(10, targetclass.length);               
         $("#calendarEventGo").attr("act_id", readmore_target);
         $("#calendarEventGo").click();
+        var combine = "[ToUpdateVC=" + readmore_target + "]";
+        var getCounts = parseInt($(combine).html()) + 1;
+        $(combine).html(getCounts);
 
     });
 
@@ -650,7 +642,7 @@
                 } else {
                     $("[ActAdd=" + id + "]").html(data);
                     window.confirm("踢除成功!");
-                //getCalendar(); 踢人行事曆不用動
+                //GetCalendar(); 踢人行事曆不用動
                 }
             }
         });
@@ -723,7 +715,7 @@
                     window.confirm("你沒有入團哦!");                    
                 } else {
                     $("[ActAdd=" + target + "]").html(data);
-                    getCalendar();
+                    GetCalendar();
                 }              
             }
         });
@@ -737,9 +729,9 @@
         let target = $(this).attr("target");
         let FeelGood = $("[ToUpdateGC =" + target + "]").html();
         $.ajax({
-            url: "/Travel/FeelGood",
+            url: "/Travel/GetFeelGood",
             type: "POST",
-            data: { "target": target },
+            data: { "actID": target },
             success: function (data) {
                 if (data === "0") {
                     window.confirm("這篇文章你按過讚囉!");
@@ -755,18 +747,12 @@
     $("body").on('click', ".FeelGood", getGoodCounts);
 
 
-    //增加瀏覽次數
+    //增加瀏覽次數，前後端分離，前端為假數字，後端直接計數
     function getViewCounts() {
         let target = $(this).attr("updateVC");
         var combine = "[ToUpdateVC=" + target + "]";
         var getCounts = parseInt($(combine).html()) + 1;
         $(combine).html(getCounts);
-        //$.ajax({
-        //    url: "/Travel/ViewCounts",
-        //    type: "POST",
-        //    data: { "ActivityID": target }
-        //}
-        //);
     }
     //因為文章項目是ajax動態產生，因此事件必須使用氣泡動態綁定寫法
     $("body").on('click', ".ViewCounts", getViewCounts);
@@ -791,11 +777,6 @@
             success: function (data) {
                 $("#article_ajax").html(data); 
                 travel_RWD(); 
-                readmore_target = $('.ViewCounts').eq(0).attr("act_id");
-                if (readmore_target !== undefined) {
-                    get_ajax_readmore();
-                    
-                }
             }
         });
 

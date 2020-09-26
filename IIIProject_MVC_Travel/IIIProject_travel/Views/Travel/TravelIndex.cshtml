@@ -2,8 +2,6 @@
     Layout = null;
     var topMember = (new dbJoutaEntities()).tMember.OrderByDescending(n => n.f會員評分).Take(5);//抓評分前五團主
     var x = (tMember)Session["member"];
-    //tMember x = (new dbJoutaEntities()).tMember.FirstOrDefault(y => y.f會員編號 == 4);
-    //Session["member"] = x;
     string[] HomeSearch = { "", "所有", "全部", "" };
     if (!string.IsNullOrEmpty(Model))
     {
@@ -80,13 +78,8 @@
                     <!--左邊欄位-->
                     <div class="pl-2 pt-1 mb-5" style="cursor: pointer;position:relative;">
                         <!-- 查詢 搜尋-->
-                        @*<form method="post">*@
-                        @*action="./article_AJAX"*@
-                        @*<input type="hidden" name="order" value="null" />
-                            <input type="hidden" name="border_color" value="null" />*@
                         <input type="text" class="mt-5 mr-1" style="width:85%;" name="contain" id="contain" value="@HomeSearch[0]">
-                        <input type="image" src="~/Content/images/18.png" id="contain_pic" style="position:absolute;bottom:0;" />  @*alt="submit"*@
-                        @*</form>*@
+                        <input type="image" src="~/Content/images/18.png" id="contain_pic" style="position:absolute;bottom:0;" />
                         <br>
                     </div>
 
@@ -121,12 +114,6 @@
                                      alt="">讚數
                             </span>
                         </li>
-                        @*<li class="m-2 mb-3 row justify-content-between" id="06" style="list-style-type:none;cursor: pointer;">
-                            <span>
-                                <img src="~/Content/images/06.png" order="f活動瀏覽次數"
-                                     alt="">瀏覽次數
-                            </span>
-                        </li>*@
                         <li class="m-2 mb-3 row justify-content-between" id="07" order="f活動開始時間" style="list-style-type:none;cursor: pointer;">
                             <span>
                                 <img src="~/Content/images/07.png"
@@ -231,20 +218,6 @@
                                                 <div class="row mb-4 mx-auto align-items-center justify-content-around">
                                                     <span><img src="~/Content/images/04.png" class="mb-1" alt="">預算：<input type="text" name="f活動預算" class="NeedAC"><span class="NeedACTo" style="color:red" hidden>活動預算必填</span></span>
 
-                                                    @*<div class="pr-5">
-                                                        <img src="~/Content/images/17.png" class="mb-1" alt="">分類：
-                                                        <select name="f活動分類" style="">
-                                                            <option value="兩天一夜">兩天一夜</option>
-                                                            <option value="三天兩夜">三天兩夜</option>
-                                                            <option value="五天四夜">五天四夜</option>
-                                                            <option value="七天六夜">七天六夜</option>
-                                                            <option style="text-align:center;" value="其他">
-                                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;其他
-                                                            </option>
-
-                                                        </select>
-                                                    </div>*@
-
                                                 </div>
                                                 <div class="row mb-4 mx-auto align-items-center justify-content-around">
                                                     <span class="row  align-items-center">團圖：<input type="file" name="PicFile" class="NeedAP"><span class="mr-5 NeedAPTo" style="color:red" hidden>活動團圖必填</span></span>
@@ -309,13 +282,7 @@
                     <!-- 文章內容區 -->
                     <div id="article">
                         <div id="article_ajax"></div>
-                        @*<button id="showCharts">顯示統計圖表</button>
-                            <img src="~/Views/Travel/Chart"/>
-                            <div id="showChartsTag"></div>*@
                         <div class="mt-3">
-                            @*<button class="btn btn-block mr-1  p-1 row mx-auto" style="background-color:#FFE0B2 ;">
-                                    <img src="~/Content/images/10.png" alt="" class="pb-1">讀取更多
-                                </button>*@
                         </div>
                         <div class="mb-5"></div> <!--底部墊高-->
 
@@ -387,21 +354,6 @@
         {
             @:window.confirm("@HomeSearch[3]");
         }
-
-        //function a123(){
-        //    var vm = new Vue({
-        //        el: ".likeIt",
-        //        data: {
-        //            IflikeIt: false
-        //        },
-        //        methods: {
-        //            likeItClick: function () {
-        //                this.IflikeIt = !this.IflikeIt;
-        //            }
-        //        }
-        //    })
-        //}
-
         </script>
     </body>
 

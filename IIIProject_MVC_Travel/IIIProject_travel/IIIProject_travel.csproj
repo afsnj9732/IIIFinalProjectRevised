@@ -2297,12 +2297,12 @@
     <Content Include="Views\OpenDataConnect\TravelOpenDataIndex.cshtml" />
     <Content Include="Views\後台文章\v查看.cshtml" />
     <Content Include="Views\聯絡我們\r回覆.cshtml" />
-    <Content Include="Views\Travel\get_ajax_readmore.cshtml" />
     <Content Include="Views\Eat\Actadd.cshtml" />
     <Content Include="Views\Eat\article_AJAX.cshtml" />
     <Content Include="Views\Eat\get_ajax_readmore.cshtml" />
     <Content Include="Views\Eat\MsgAdd.cshtml" />
     <Content Include="Views\Travel\GetTravelList.cshtml" />
+    <Content Include="Views\Travel\GetReadMore.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
