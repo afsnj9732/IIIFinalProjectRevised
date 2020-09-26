@@ -26,15 +26,15 @@
     }
 }
 
-    <h2>審核名單</h2><br />
-    <div class="row">
-        @foreach (string wantguy in wantGuys)
+<h2>審核名單</h2><br />
+<div class="row">
+    @foreach (string wantguy in wantGuys)
+    {
+        if (string.IsNullOrEmpty(wantguy))
         {
-            if (string.IsNullOrEmpty(wantguy))
-            {
-                continue;
-            }
-            var theGuy = db.tMember.Where(t => t.f會員編號.ToString() == wantguy).FirstOrDefault();
+            continue;
+        }
+        var theGuy = db.tMember.Where(t => t.f會員編號.ToString() == wantguy).FirstOrDefault();
         <div class="m-3 row  align-items-center   " style="width:210px;">
 
             <a href="@Url.Action("otherprofile","Profile",new { id= theGuy.f會員編號 })">
@@ -66,50 +66,50 @@
 
 
         </div>
-        }
-    </div>
-    <br />
-    <hr />
-    <br />
-    <h2>入團名單</h2><br />
-    <div class="row">
-        @foreach (string guy in attendGuys) //先直接撈原本的資料，若有變動針對此處做AJAX修改
+    }
+</div>
+<br />
+<hr />
+<br />
+<h2>入團名單</h2><br />
+<div class="row">
+    @foreach (string guy in attendGuys) //先直接撈原本的資料，若有變動針對此處做AJAX修改
+    {
+        var theGuy = totalMember.Where(x => x.f會員編號.ToString() == guy).FirstOrDefault();
+        if (string.IsNullOrEmpty(guy))
         {
-            var theGuy = totalMember.Where(x => x.f會員編號.ToString() == guy).FirstOrDefault();
-            if (string.IsNullOrEmpty(guy))
-            {
-                continue;
-            }
+            continue;
+        }
 
-            <div class="m-3 row  align-items-center   " style="width:210px;">
+        <div class="m-3 row  align-items-center   " style="width:210px;">
 
-                <a href="@Url.Action("otherprofile","Profile",new { id= theGuy.f會員編號 })">
-                    <img width="114" height="114" src="~/Content/images/@theGuy.f會員大頭貼" title="@theGuy.f會員名稱" />
-                </a>
-                <div class="d-flex flex-column bd-highlight align-items-center">
-                    @if (black_list.Length > 1 && Array.IndexOf(black_list, theGuy.f會員編號.ToString()) > -1)
-                    {
-                        <span class="mx-auto" style="width:40px;">
-                            <img width="40" height="40" src="~/Content/images/30.png" />
-                        </span>
-                    }
-                    else
-                    {
-                        <span class="mx-auto" style="width:40px;">
-                            <img width="40" height="40" src="~/Content/images/29.png" />
-                        </span>
-
-                    }
-                        <div class="mx-auto join_user_name" title="@theGuy.f會員名稱">@theGuy.f會員名稱</div>
-                </div>
-
-                <button class="button btn-secondary jouta_black_list pr-1 pl-1" member_id="@theGuy.f會員編號" act_target="join" act_id="@targetAct.f活動編號" style="width:114px">加入黑名單</button>
-                @if (Session["member"] != null && targetAct.f會員編號 == NowMember.f會員編號)
+            <a href="@Url.Action("otherprofile","Profile",new { id= theGuy.f會員編號 })">
+                <img width="114" height="114" src="~/Content/images/@theGuy.f會員大頭貼" title="@theGuy.f會員名稱" />
+            </a>
+            <div class="d-flex flex-column bd-highlight align-items-center">
+                @if (black_list.Length > 1 && Array.IndexOf(black_list, theGuy.f會員編號.ToString()) > -1)
                 {
-                    <button class="button btn-danger jouta_kick pr-1 pl-1" member_id="@theGuy.f會員編號" act_id="@targetAct.f活動編號" style="width:54px">踢他</button>
+                    <span class="mx-auto" style="width:40px;">
+                        <img width="40" height="40" src="~/Content/images/30.png" />
+                    </span>
                 }
+                else
+                {
+                    <span class="mx-auto" style="width:40px;">
+                        <img width="40" height="40" src="~/Content/images/29.png" />
+                    </span>
 
+                }
+                <div class="mx-auto join_user_name" title="@theGuy.f會員名稱">@theGuy.f會員名稱</div>
             </div>
 
-        }
-    </div>
+            <button class="button btn-secondary jouta_black_list pr-1 pl-1" member_id="@theGuy.f會員編號" act_target="join" act_id="@targetAct.f活動編號" style="width:114px">加入黑名單</button>
+            @if (Session["member"] != null && targetAct.f會員編號 == NowMember.f會員編號)
+            {
+                <button class="button btn-danger jouta_kick pr-1 pl-1" member_id="@theGuy.f會員編號" act_id="@targetAct.f活動編號" style="width:54px">踢他</button>
+            }
+
+        </div>
+
+    }
+</div>

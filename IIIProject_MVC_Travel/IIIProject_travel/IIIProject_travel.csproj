@@ -2285,7 +2285,6 @@
     <Content Include="Views\Home\ResetPassword.cshtml" />
     <Content Include="Views\Home\forgetPassword.cshtml" />
     <Content Include="Views\DataPresent\ShowLineChart.cshtml" />
-    <Content Include="Views\Travel\Actadd.cshtml" />
     <Content Include="Views\Travel\MsgAdd.cshtml" />
     <Content Include="Views\Blog\personalIndex.cshtml" />
     <Content Include="Views\DataPresent\ShowPieChart.cshtml" />
@@ -2303,6 +2302,7 @@
     <Content Include="Views\Eat\MsgAdd.cshtml" />
     <Content Include="Views\Travel\GetTravelList.cshtml" />
     <Content Include="Views\Travel\GetReadMore.cshtml" />
+    <Content Include="Views\Travel\ActAdd.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -539,7 +539,7 @@
         $.ajax({
             url: "/Travel/ScoreAdd",
             type: "POST",
-            data: { "target": target, "Score": Score },
+            data: { "actID": target, "Score": Score },
             success: function (data) {
                 if (data === "5") {
                     window.confirm("團主不可自行評分");
@@ -586,9 +586,9 @@
         let id = $(this).attr("act_id");
         let act_target = $(this).attr("act_target");
         $.ajax({
-            url: "/Travel/addBlackList",
+            url: "/Travel/AddBlackList",
             type: "POST",
-            data: { "target_member": target, "act_id": id, "act_target": act_target},
+            data: { "targetMemberID": target, "actID": id, "actTarget": act_target},
             success: function (data) {
                 if (data === "0") {
                     window.confirm("不可以自己黑單自己")
@@ -618,7 +618,7 @@
         $.ajax({
             url: "/Travel/MsgAdd",
             type: "POST",
-            data: { "target": target, "sentMsg": sentMsg },
+            data: { "actID": target, "sentMsg": sentMsg },
             success: function (data) {
                 $("[MsgAdd=" + target + "]").html(data);
                 $("[sentMsg=" + target + "]").val("");
@@ -655,9 +655,9 @@
         let id = $(this).attr("act_id");
         let act = $(this).attr("act_target");
         $.ajax({
-            url: "/Travel/agree_add",
+            url: "/Travel/AgreeAdd",
             type: "POST",
-            data: { "target_member": target, "act_id": id , "act":act },
+            data: { "targetMemberID": target, "actID": id , "isAgree":act },
             success: function (data) {
                 if (data === "6") {
                     window.confirm("活動時間與對象既有活動時間衝突!");
@@ -677,13 +677,13 @@
         $.ajax({
             url: "/Travel/ActAdd",
             type: "POST",
-            data: { "target": target,"isAdd":true},
+            data: { "actID": target,"isAdd":true},
             success: function (data) {
                 if (data === "1") {
                     window.confirm("已是團主不用入團");            
                 }
                 else if (data === "7") {
-                    window.confirm("慘遭團主黑單，不予入團!");
+                    window.confirm("遭團主黑單，不予入團!");
                 } else if (data === "8") {
                     window.confirm("團主審核中，請靜待佳音!");
                 }
@@ -706,7 +706,7 @@
         $.ajax({
             url: "/Travel/ActAdd",
             type: "POST",
-            data: { "target": target, "isAdd": false},
+            data: { "actID": target, "isAdd": false},
             success: function (data) {
                 if (data === "1") {
                     window.confirm("團主不可退團");

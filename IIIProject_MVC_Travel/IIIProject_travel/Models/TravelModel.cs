@@ -263,6 +263,263 @@ namespace IIIProject_travel.Models
 
         }
 
+        public string AgreeAddEvent(int targetMemberID, int actID , string isAgree)
+        {
+            var actList = db.tActivity.Where(t => t.f活動編號 == actID).FirstOrDefault();
+            var targetMember = db.tMember.Where(t => t.f會員編號 == targetMemberID).FirstOrDefault();
+            if (isAgree == "agree") //點允許入團
+            {
+                //判斷欲允許的審核對象在審核期間是否成功加入了其他活動
+                if (!string.IsNullOrEmpty(targetMember.f會員已占用時間))
+                {
+                    string[] usedTime = targetMember.f會員已占用時間.Split(',');
+                    string[] used;
+                    foreach (var item in usedTime)
+                    {
+                        if (!string.IsNullOrEmpty(item))
+                        {
+                            used = item.Split('~');  //used[0] 已佔用的開始時間，used[1] 已佔用的結束時間
+                            if (string.Compare(actList.f活動開始時間, used[1]) > 0 || string.Compare(used[0], actList.f活動結束時間) > 0)
+                            {
+
+                            }
+                            else
+                            {
+                                return "6";
+                            }
+                        }
+
+                    }
+                    
+                }
+                //加入會員占用時間
+                targetMember.f會員已占用時間 += "," + actList.f活動開始時間 + "~" + actList.f活動結束時間;
+
+                targetMember.f會員參加的活動編號 += "," + actList.f活動編號;
+                actList.f活動參加的會員編號 += "," + targetMember.f會員編號;                
+            }
+            actList.f活動審核名單 = string.Join(",",
+                actList.f活動審核名單.Split(',').Where(t => t != targetMember.f會員編號.ToString()));
+            db.SaveChanges();
+            return null;
+        }
+
+        public string ScoreAddEvent(int memberID, int actID, int Score)
+        {
+            var actList = db.tActivity.Where(x => x.f活動編號 == actID)
+                  .FirstOrDefault();
+            string[] isExist = actList.f活動參加的會員編號.Split(',');
+            int index;
+            var memberStartAct = GetMemberData(memberID, "f會員發起的活動編號");
+            if (!string.IsNullOrEmpty(memberStartAct))
+            {
+                index = Array.IndexOf(memberStartAct.Split(','), actID.ToString());
+                if (index != -1)//團主不可自行評分
+                {
+                    return "5";
+                }
+            }
+            var result = string.Compare(DateTime.Now.ToString("yyyy-MM-dd"), actList.f活動結束時間);
+            if (result < 0)  //result=1 活動已結束 ， result=-1 活動尚未結束
+            {
+                return "3"; //活動尚未結束
+            }
+
+            index = Array.IndexOf(isExist, memberID.ToString());
+            if (index == -1) //先找有沒有參加本次活動
+            {
+                return "0";//沒參加
+            }
+
+            if (!string.IsNullOrEmpty(actList.f活動評分過的會員編號))
+            {
+                //若有曾經評分過的會員編號
+                isExist = actList.f活動評分過的會員編號.Split(',');
+                index = Array.IndexOf(isExist, memberID.ToString());//再找現在登入會員有沒有評分過
+                if (index != -1)
+                {
+                    return "1"; //有評分過
+                }
+            }
+            //若無曾經評分過的會員編號則直接往下
+
+            //若通過上面判定則進行評分
+            actList.f活動評分過的會員編號 += "," + memberID;
+
+            //防止會員註冊遺漏設定
+            if (actList.tMember.f會員評分人數 == null)
+            {
+                actList.tMember.f會員評分人數 = 0;
+            }
+            actList.tMember.f會員評分人數 += 1;
+            if (actList.tMember.f會員總分 == null)
+            {
+                actList.tMember.f會員總分 = 0;
+            }
+            actList.tMember.f會員總分 += Score;
+            if (actList.tMember.f會員評分 == null)
+            {
+                actList.tMember.f會員評分 = 0;
+            }
+            actList.tMember.f會員評分 =
+                Math.Round(Convert.ToDouble(actList.tMember.f會員總分 / actList.tMember.f會員評分人數), 1);
+            db.SaveChanges();
+            return "2";
+        }
+
+
+        public dynamic AddBlackListEvent(int memberID, int targetMemberID)
+        {
+            var loginMember = db.tMember.Where(t => t.f會員編號 == memberID).FirstOrDefault();
+            if (!string.IsNullOrEmpty(loginMember.f會員黑名單))
+            {
+                var blackList = loginMember.f會員黑名單.Split(',');
+                if (Array.IndexOf(blackList, targetMemberID.ToString()) > -1) //已經加入黑單
+                {
+                    return "1";
+                }
+            }
+            loginMember.f會員黑名單 += "," + targetMemberID;
+            db.SaveChanges();
+            return null;
+        }
+
+        public void MsgAddEvent(int memberID, int actID, string Msg)
+        {
+            var actList = db.tActivity.Where(t => t.f活動編號 == actID).FirstOrDefault();
+            var loginMember = db.tMember.Where(t => t.f會員編號 == memberID).FirstOrDefault();
+            actList.f活動留言 += "_^$" + loginMember.f會員名稱 + ":" + Msg;
+            actList.f活動留言時間 += "," + DateTime.Now.ToString("MM/dd HH:mm:ss") + "_^$" + loginMember.f會員編號;
+            db.SaveChanges();
+        }
+
+        public dynamic ActAddEvent(int actID, bool isAdd, int memberID)
+        {
+            var actList = db.tActivity.Where(t => t.f活動編號 == actID).FirstOrDefault();
+            string[] blackList = { };
+            if (!string.IsNullOrEmpty(actList.tMember.f會員黑名單))
+            {
+                blackList = actList.tMember.f會員黑名單.Split(',');
+            }
+
+            var loginMember = db.tMember.Where(t => t.f會員編號 == memberID)
+                         .FirstOrDefault();//因Session存取的資料沒有和資料庫內部做綁定
+                                           //所以不能存取，要用Session登入會員的會員編號
+                                           //撈出目前會員的資料
+                                           //檢查登入會員是否為本活動團主，團主不可入團退團
+            int index = -1; //先假設不是團主
+            if (!string.IsNullOrEmpty(loginMember.f會員發起的活動編號)) //若登入會員有開團紀錄
+            {
+                string[] leaderList = loginMember.f會員發起的活動編號.Split(',');
+                index = Array.IndexOf(leaderList, actID.ToString());
+                if (index != -1)//若找到，表示是團主
+                {
+                    return "1";
+                }
+            }
+
+            //if (!string.IsNullOrEmpty(ActList.f活動參加的會員編號)) 因為有團主，活動必定有人參加            
+            string[] guysList = actList.f活動參加的會員編號.Split(',');
+            index = Array.IndexOf(guysList, loginMember.f會員編號.ToString());  //尋找登入中的會員是否有參加
+                                                                            //注意會員標號是int，陣列內容是str，
+                                                                            //不轉型index永遠會是-1 
+
+            if (isAdd == true)//點選入團
+            {
+                if (blackList.Length > 1) //黑名單有編號
+                {
+                    if (Array.IndexOf(blackList, loginMember.f會員編號.ToString()) > -1)//對象在黑名單
+                    {
+                        return "7";
+                    }
+                }
+
+                if (index == -1)//登入中的會員不存在名單
+                {
+                    //判別活動時段是否已占用
+                    if (!string.IsNullOrEmpty(loginMember.f會員已占用時間))
+                    {
+                        string[] usedTime = loginMember.f會員已占用時間.Split(',');
+                        string[] used;
+                        foreach (var item in usedTime)
+                        {
+                            if (!string.IsNullOrEmpty(item))
+                            {
+                                used = item.Split('~');  //used[0] 已佔用的開始時間，used[1] 已佔用的結束時間
+                                if (string.Compare(actList.f活動開始時間, used[1]) > 0 || string.Compare(used[0], actList.f活動結束時間) > 0)
+                                {
+
+                                }
+                                else
+                                {
+                                    return "6";
+                                }
+                            }
+
+                        }
+                    }
+                    //判別目前登入對象是否已在審核
+                    string[] isAgreeList;
+                    if (!string.IsNullOrEmpty(actList.f活動審核名單))
+                    {
+                        isAgreeList = actList.f活動審核名單.Split(',');
+                        if (Array.IndexOf(isAgreeList, loginMember.f會員編號.ToString()) > -1)
+                        {
+                            return "8";
+                        }
+                    }
+                    //進入審核
+                    actList.f活動審核名單 += "," + loginMember.f會員編號;
+                    db.SaveChanges();
+                }
+                else //若會員已存在
+                {
+                    return "0";
+                }
+            }
+            else //點選退出
+            {
+                //若只是審核中的團員
+                //判別目前登入對象是否已在審核
+                string[] isAgreeList;
+                if (!string.IsNullOrEmpty(actList.f活動審核名單))
+                {
+                    isAgreeList = actList.f活動審核名單.Split(',');
+                    if (Array.IndexOf(isAgreeList, loginMember.f會員編號.ToString()) > -1)
+                    {
+                        actList.f活動審核名單 = string.Join(",",
+                             actList.f活動審核名單.Split(',').Where(t => t != loginMember.f會員編號.ToString()));
+                        db.SaveChanges();
+                        return null;
+                    }
+                }
+
+                if (index != -1)//登入中的會員存在參加名單則讓他退出並更動占用時間
+                {
+                    //移除占用時間
+                    string[] usedTime = loginMember.f會員已占用時間.Split(',');
+                    loginMember.f會員已占用時間 =
+                        string.Join(",", usedTime.Where(t => t != actList.f活動開始時間 + "~" + actList.f活動結束時間));
+
+                    //移除會員資料參加的會員參加的活動編號
+                    string[] NewList = loginMember.f會員參加的活動編號.Split(',');
+                    loginMember.f會員參加的活動編號 =
+                        string.Join(",", NewList.Where(t => t != actList.f活動編號.ToString()));
+
+                    //移除活動紀錄的會員編號
+                    actList.f活動參加的會員編號 =
+                        string.Join(",", guysList.Where(t => t != loginMember.f會員編號.ToString()));
+
+                    db.SaveChanges();
+                }
+                else //若會員不存在
+                {
+                    return "";
+                }
+            }
+            return null;
+        }
+
 
     }
 }
