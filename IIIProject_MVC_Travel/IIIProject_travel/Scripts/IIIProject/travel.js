@@ -566,16 +566,16 @@
         if ($(combine).attr("src") === "/Content/images/14.png") {
             $(combine).attr("src", "/Content/images/11.png");           
             $.ajax({
-                url: "/Travel/likeIt",
+                url: "/Travel/LikeIt",
                 type: "POST",
-                data: { "ActivityID": target }
+                data: { "actID": target }
             });
         } else {
             $(combine).attr("src", "/Content/images/14.png");
             $.ajax({
-                url: "/Travel/likeIt",
+                url: "/Travel/LikeIt",
                 type: "POST",
-                data: { "ActivityID": target }
+                data: { "actID": target }
             });
         }
     });
@@ -635,7 +635,7 @@
         $.ajax({
             url: "/Travel/ActKick",
             type: "POST",
-            data: { "target_member": target,"act_id":id },
+            data: { "targetMemberID": target,"actID":id },
             success: function (data) {
                 if (data === "") {
                     window.confirm("不可以踢自己!");

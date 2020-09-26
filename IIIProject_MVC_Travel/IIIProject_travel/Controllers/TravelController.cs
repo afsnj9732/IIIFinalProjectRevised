@@ -21,16 +21,13 @@ namespace IIIProject_travel.Controllers
             if (Session["member"] != null)
             {
                 tMember loginMember = (tMember)Session["member"];
-                if (!string.IsNullOrEmpty(loginMember.f會員收藏的活動編號))
-                {
-                    Final.MemberLike = loginMember.f會員收藏的活動編號.Split(',');
-                }
+                Final = travelModel.GetLikeList(Final,loginMember.f會員編號);
             }
             return View(Final);
         }
 
         // GET: Travel
-        public ActionResult TravelIndex(string msg)
+        public ActionResult TravelIndex(string msg) //view需改良
         {
             string HomeSearch = ",所有,全部," + msg;
             return View((object)HomeSearch);
@@ -89,6 +86,22 @@ namespace IIIProject_travel.Controllers
         public ActionResult GetReadMore(int actID)  //view需改良
         {             
             return View(travelModel.ReadMore(actID));
+        }
+
+        public void LikeIt(int actID)
+        {
+            var loginMember = (tMember)Session["member"];
+            travelModel.UserLikeIt(loginMember.f會員編號, actID);
+        }
+
+        public dynamic ActKick(int targetMemberID, int actID)
+        {
+            var loginMember = (tMember)Session["member"];
+            if (loginMember.f會員編號 == targetMemberID)
+                return "";//不能把自己加入黑名單
+
+            travelModel.KickEvent(targetMemberID, actID);
+            return View("Actadd", actID);
         }
 
         // up is finish
@@ -331,38 +344,9 @@ namespace IIIProject_travel.Controllers
             }
         }
 
-        public dynamic ActKick(int target_member, int act_id)
-        {
-            var loginMember = (tMember)Session["member"];
-            if (target_member == loginMember.f會員編號) //不可以黑自己
-            {
-                return "";
-            }
-            var ActList = db.tActivity.Where(t => t.f活動編號 == act_id).FirstOrDefault();
-            var kick_member = db.tMember.Where(t => t.f會員編號 == target_member).FirstOrDefault();
 
 
-            //if (!string.IsNullOrEmpty(ActList.f活動參加的會員編號)) 因為有團主，活動必定有人參加            
-            string[] GuysList = ActList.f活動參加的會員編號.Split(',');
-
-            //移除占用時間
-            string[] usedTime = kick_member.f會員已占用時間.Split(',');
-            kick_member.f會員已占用時間 =
-                string.Join(",", usedTime.Where(t => t != ActList.f活動開始時間 + "~" + ActList.f活動結束時間));
-
-            //移除會員資料參加的會員參加的活動編號
-            string[] NewList = kick_member.f會員參加的活動編號.Split(',');
-            kick_member.f會員參加的活動編號 =
-                string.Join(",", NewList.Where(t => t != ActList.f活動編號.ToString()));
-            //移除活動紀錄的會員編號
-            ActList.f活動參加的會員編號 =
-                string.Join(",", GuysList.Where(t => t != kick_member.f會員編號.ToString()));
-            db.SaveChanges();
-
-            return View("Actadd", act_id);
-        }
-
-        public dynamic Actadd(int target, bool isAdd) //退團或入團
+        public dynamic Actadd(int target, bool isAdd) //退團或入團 //view需改良
         {
             var LoginMember = (tMember)Session["member"];
             var ActList = db.tActivity.Where(t => t.f活動編號 == target).FirstOrDefault();
@@ -601,46 +585,14 @@ namespace IIIProject_travel.Controllers
 
 
 
-        public string likeIt(string ActivityID)
-        {
-            var condition = (tMember)Session["member"];
-            var targetAct = db.tActivity.Where(t => t.f活動編號.ToString() == ActivityID).FirstOrDefault();
-            var member = db.tMember.Where(x => x.f會員編號 == condition.f會員編號).Select(a => a).FirstOrDefault();
-            if (!string.IsNullOrEmpty(member.f會員收藏的活動編號))
-            {
-                string[] isExist = member.f會員收藏的活動編號.Split(',');
-                int pos = Array.IndexOf(isExist, ActivityID);
-                if (pos < 0)   //若沒找到，存入資料庫，正確
-                {
-                    targetAct.f有收藏活動的會員編號 += "," + member.f會員編號;
-                    member.f會員收藏的活動編號 += "," + ActivityID;
-                    db.SaveChanges();
-                }
-                else  //若找到
-                {
-                    var FinalList = isExist.ToList();
-                    FinalList.RemoveAt(pos);  //移除
-                    member.f會員收藏的活動編號 = string.Join(",", FinalList);
-                    targetAct.f有收藏活動的會員編號 = string.Join(",",
-                        targetAct.f有收藏活動的會員編號.Split(',').Where(t => t != member.f會員編號.ToString()));
-                    db.SaveChanges();
-                }
-            }
-            else
-            {
-                targetAct.f有收藏活動的會員編號 += "," + member.f會員編號;
-                member.f會員收藏的活動編號 += "," + ActivityID; //若資料庫完全是空的，則不可能有重複值，直接存入
-                db.SaveChanges();
-            }
-            return "1";
-        }
 
 
 
 
 
 
-        public ActionResult MsgAdd(int target, string sentMsg)
+
+        public ActionResult MsgAdd(int target, string sentMsg) //view需改良
         {
             if (!string.IsNullOrEmpty(sentMsg))
             {

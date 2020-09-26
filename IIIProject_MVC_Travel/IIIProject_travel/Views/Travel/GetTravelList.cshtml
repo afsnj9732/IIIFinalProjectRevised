@@ -45,8 +45,10 @@
                         <div class="p-0 pr-2">
                             @if (Session["member"] != null)
                             {
-                                string iflikeit = (Array.IndexOf(Model.MemberLike, item.f活動編號.ToString()) > -1)
-                                    ? "14.png" : "11.png";
+                                string iflikeit = Model.MemberLike != null
+                                            ? ((Array.IndexOf(Model.MemberLike, item.f活動編號.ToString()) > -1)
+                                            ? "14.png" : "11.png") : "11.png";
+                            
                                 <img style="cursor: pointer;" class="pb-1 likeIt" likeIndex="@item.f活動編號" src="~/Content/images/@iflikeit" alt="">
                             }
                         </div>

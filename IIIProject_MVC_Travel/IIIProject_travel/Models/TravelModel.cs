@@ -72,6 +72,16 @@ namespace IIIProject_travel.Models
             return returnValue;
         }
 
+        public CTravel GetLikeList(CTravel theList,int memberID)
+        {
+            var memberLikeList = GetMemberData(memberID, "f會員收藏的活動編號");
+            if (!string.IsNullOrEmpty(memberLikeList))
+            {
+                theList.MemberLike = memberLikeList.Split(',');
+            }
+            return theList;
+        }
+
         //使用ID取得想要的會員其資料庫中最新的特定欄位之資料
         public dynamic GetMemberData(int memberID, string wantGet)
         {
@@ -194,5 +204,65 @@ namespace IIIProject_travel.Models
             tActivity targetAct = db.tActivity.Where(t => t.f活動編號 == actID).FirstOrDefault();
             return targetAct;
         }
+
+        public void UserLikeIt(int memberID,int actID)
+        {
+            var targetAct = db.tActivity.Where(t => t.f活動編號 == actID).FirstOrDefault();
+            //要儲存修改，所以不能用GetMemberData
+            //var MemberLike = GetMemberData(memberID, "f會員收藏的活動編號");
+            var memberLike = db.tMember.Where(t => t.f會員編號 == memberID).FirstOrDefault();
+            if (!string.IsNullOrEmpty(memberLike.f會員收藏的活動編號))
+            {
+                string[] isExist = memberLike.f會員收藏的活動編號.Split(',');
+                int pos = Array.IndexOf(isExist, actID.ToString());
+                if (pos < 0)   //若沒找到，存入資料庫，正確
+                {
+                    targetAct.f有收藏活動的會員編號 += "," + memberID;
+                    memberLike.f會員收藏的活動編號 += "," + actID;
+                    db.SaveChanges();
+                }
+                else  //若找到
+                {
+                    var FinalList = isExist.ToList();
+                    FinalList.RemoveAt(pos);  //移除
+                    memberLike.f會員收藏的活動編號 = string.Join(",", FinalList);
+                    targetAct.f有收藏活動的會員編號 = string.Join(",",
+                        targetAct.f有收藏活動的會員編號.Split(',').Where(t => t != memberID.ToString()));
+                    db.SaveChanges();
+                }
+            }
+            else
+            {
+                targetAct.f有收藏活動的會員編號 += "," + memberID;
+                memberLike.f會員收藏的活動編號 += "," + actID; //若資料庫完全是空的，則不可能有重複值，直接存入
+                db.SaveChanges();
+            }
+        }
+
+        public void KickEvent(int targetMemberID, int actID)
+        {
+            var actList = db.tActivity.Where(t => t.f活動編號 == actID).FirstOrDefault();
+            var kickMember = db.tMember.Where(t => t.f會員編號 == targetMemberID).FirstOrDefault();
+
+            //if (!string.IsNullOrEmpty(ActList.f活動參加的會員編號)) 因為有團主，活動必定有人參加            
+            string[] GuysList = actList.f活動參加的會員編號.Split(',');
+
+            //移除占用時間
+            string[] usedTime = kickMember.f會員已占用時間.Split(',');
+            kickMember.f會員已占用時間 =
+                string.Join(",", usedTime.Where(t => t != actList.f活動開始時間 + "~" + actList.f活動結束時間));
+
+            //移除會員資料參加的會員參加的活動編號
+            string[] NewList = kickMember.f會員參加的活動編號.Split(',');
+            kickMember.f會員參加的活動編號 =
+                string.Join(",", NewList.Where(t => t != actList.f活動編號.ToString()));
+            //移除活動紀錄的會員編號
+            actList.f活動參加的會員編號 =
+                string.Join(",", GuysList.Where(t => t != kickMember.f會員編號.ToString()));
+            db.SaveChanges();
+
+        }
+
+
     }
 }
