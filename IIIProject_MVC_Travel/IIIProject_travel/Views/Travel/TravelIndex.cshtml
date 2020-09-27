@@ -1,13 +1,7 @@
-﻿
-@{
-    Layout = null;
-    var topMember = (new dbJoutaEntities()).tMember.OrderByDescending(n => n.f會員評分).Take(5);//抓評分前五團主
-    var x = (tMember)Session["member"];
-    string[] HomeSearch = { "", "所有", "全部", "" };
-    if (!string.IsNullOrEmpty(Model))
-    {
-        HomeSearch = Model.Split(',');
-    }
+﻿@{
+    Layout = null; //f
+    var loginMember = (tMember)Session["member"];
+    string[] HomeSearch = Model.Split(',');
 }
 
 @{
@@ -57,7 +51,7 @@
                         <ul class="nav navbar-nav">
                             @if (Session["member"] != null)
                             {
-                                <li class="nav-item nav-link nav-login text-dark">@Html.ActionLink("您好，" + x.f會員名稱, "ProfileIndex", "Profile", new { }, new { style = "color:#007bff;" }) </li>
+                                <li class="nav-item nav-link nav-login text-dark">@Html.ActionLink("您好，" + loginMember.f會員名稱, "ProfileIndex", "Profile", new { }, new { style = "color:#007bff;" }) </li>
                                 <li class="nav-item">@Html.ActionLink("登出", "Home", "Home", new { id = 0 }, new { @class = "nav-link nav-login text-dark" })</li>
                             }
                             else
@@ -135,12 +129,15 @@
                         <p class=" ml-3 " style="text-align: center;width:83.5%;">優質團主</p>
                         <ul class="row    ml-3" style="width:83.5%;">
                             <li class="mx-auto" style="list-style-type:none;cursor: pointer;">
-                                @foreach (var item in topMember)
-                                {
-                                    <a href="@Url.Action("otherprofile","Profile",new { id= item.f會員編號 })">
-                                        <img src="~/Content/images/@item.f會員大頭貼"
-                                             title="@item.f會員名稱" class="popguys" width="30" height="30" style="border-radius:5px;">
-                                    </a>
+                                @{
+                                    var topMember = (new dbJoutaEntities()).tMember.OrderByDescending(n => n.f會員評分).Take(5);//抓評分前五團主
+                                    foreach (var item in topMember)
+                                    {
+                                        <a href="@Url.Action("otherprofile","Profile",new { id= item.f會員編號 })">
+                                            <img src="~/Content/images/@item.f會員大頭貼"
+                                                 title="@item.f會員名稱" class="popguys" width="30" height="30" style="border-radius:5px;">
+                                        </a>
+                                    }
                                 }
                             </li>
                         </ul>

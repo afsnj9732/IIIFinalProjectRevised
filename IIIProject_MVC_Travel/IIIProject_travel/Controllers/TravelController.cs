@@ -1,7 +1,5 @@
 ﻿using IIIProject_travel.Models;
 using System;
-using System.IO;
-using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
@@ -23,7 +21,7 @@ namespace IIIProject_travel.Controllers
         }
 
         // GET: Travel
-        public ActionResult TravelIndex(string msg) //view需改良
+        public ActionResult TravelIndex(string msg) 
         {
             string HomeSearch = ",所有,全部," + msg;
             return View((object)HomeSearch);
