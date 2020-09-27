@@ -95,15 +95,16 @@ namespace IIIProject_travel.Controllers
                 return "";//不能把自己加入黑名單
 
             travelModel.KickEvent(targetMemberID, actID);
-            return View("Actadd", actID);
+            return View("ActAdd", (object)travelModel.ActAddEvent(actID, loginMember.f會員編號));
         }
 
         public dynamic AgreeAdd(int targetMemberID, int actID, string isAgree)
         {
+            var loginMember = (tMember)Session["member"];
             var result = travelModel.AgreeAddEvent(targetMemberID, actID, isAgree);
             if (result == "6")
                 return "6";
-            return View("Actadd", actID);
+            return View("ActAdd", (object)travelModel.ActAddEvent(actID, loginMember.f會員編號));
         }
 
         public object ScoreAdd(int actID, int Score)
@@ -125,12 +126,17 @@ namespace IIIProject_travel.Controllers
             if (blackAct == "1")
                 return "1";
             //根據actTarget決定刷新哪種頁面
-            return (actTarget == "msg") 
-                ? RedirectToAction("MsgAdd",new {actID=actID, sentMsg = ""}) 
-                : RedirectToAction("Actadd", actID);
+            if (actTarget == "msg")//此處用?:無法做出兩種不同型別之判斷
+            {
+                return RedirectToAction("MsgAdd", new { actID = actID, sentMsg = "" });
+            }
+            else
+            {
+                return View("ActAdd", (object)travelModel.ActAddEvent(actID, loginMember.f會員編號));
+            }
         }
 
-        public ActionResult MsgAdd(int actID, string sentMsg) //view需改良
+        public ActionResult MsgAdd(int actID, string sentMsg) 
         {
             var loginMember = (tMember)Session["member"];
             if (!string.IsNullOrEmpty(sentMsg))
@@ -146,7 +152,7 @@ namespace IIIProject_travel.Controllers
             var result = travelModel.ActAddEvent(actID, isAdd, loginMember.f會員編號);
             if (result != null)
                 return result;
-            return View(actID);
+            return View(travelModel.ActAddEvent(actID, loginMember.f會員編號));
         }
 
         public ActionResult Delete(int id)

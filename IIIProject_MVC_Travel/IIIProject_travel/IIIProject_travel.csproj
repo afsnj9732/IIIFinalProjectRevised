@@ -212,6 +212,7 @@
     <Compile Include="tMember.cs">
       <DependentUpon>JoutaEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="ViewModel\CActAdd.cs" />
     <Compile Include="ViewModel\CalendarEvents.cs" />
     <Compile Include="Models\CDictionary.cs" />
     <Compile Include="Models\Topendata.cs" />

@@ -421,9 +421,9 @@ namespace IIIProject_travel.Models
                 {
                     if (string.IsNullOrEmpty(msgsTimeAndID[i]))
                         continue;
-                    var Temp = msgsTimeAndID[i].Split(new string[] { "_^$" }, StringSplitOptions.None);
-                    msgsTime[i] = Temp[0];
-                    msgsID[i] = Temp[1];
+                    var temp = msgsTimeAndID[i].Split(new string[] { "_^$" }, StringSplitOptions.None);
+                    msgsTime[i] = temp[0];
+                    msgsID[i] = temp[1];
                     int realID = Convert.ToInt32(msgsID[i]);
                     msgsPic[i] = db.tMember.Where(t => t.f會員編號 == realID).FirstOrDefault().f會員大頭貼;
                     if (string.IsNullOrEmpty(msgsPic[i]))//防止註冊沒有預設大頭貼
@@ -566,6 +566,51 @@ namespace IIIProject_travel.Models
                 }
             }
             return null;
+        }
+
+        public CActAdd ActAddEvent(int actID, int memberID)
+        {
+            var loginMember = db.tMember.Where(t => t.f會員編號 == memberID).FirstOrDefault();
+            string[] blackList = { };
+            if (!string.IsNullOrEmpty(loginMember.f會員黑名單))
+            {
+                blackList = loginMember.f會員黑名單.Split(',');
+            }
+            var targetAct = db.tActivity.Where(t => t.f活動編號 == actID).FirstOrDefault();
+            string[] attendGuysID = { };
+            tMember[] attendGuys = { };
+            if (!string.IsNullOrEmpty(targetAct.f活動參加的會員編號))
+            {
+                attendGuysID = targetAct.f活動參加的會員編號.Split(',');
+                attendGuys = new tMember[attendGuysID.Length]; 
+                for(int i = 0;i< attendGuys.Length;i++)
+                {
+                    if (string.IsNullOrEmpty(attendGuysID[i]))
+                        continue;
+                    int temp = Convert.ToInt32(attendGuysID[i]);
+                    attendGuys[i] = db.tMember.Where(t => t.f會員編號 == temp).FirstOrDefault();
+                }
+            }
+            string[] wantGuysID = { };
+            tMember[] wantGuys = { };
+            if (!string.IsNullOrEmpty(targetAct.f活動審核名單))
+            {
+                wantGuysID = targetAct.f活動審核名單.Split(',');
+                wantGuys = new tMember[wantGuysID.Length];
+                for(int i = 0; i < wantGuys.Length; i++)
+                {
+                    if (string.IsNullOrEmpty(wantGuysID[i]))
+                        continue;
+                    int temp = Convert.ToInt32(wantGuysID[i]);
+                    wantGuys[i] = db.tMember.Where(t => t.f會員編號 == temp).FirstOrDefault();
+                }
+            }
+            CActAdd result = new CActAdd();
+            result.TargetAct = targetAct;
+            result.AttendGuys = attendGuys;
+            result.BlackList = blackList;
+            result.WantGuys = wantGuys;
+            return result;
         }
 
         public void DeleteActivity(int memberID, int actID)
