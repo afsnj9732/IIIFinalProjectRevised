@@ -394,6 +394,53 @@ namespace IIIProject_travel.Models
             db.SaveChanges();
         }
 
+        public dynamic MsgAddEvent(int memberID, int actID) 
+        {
+            var loginMember = db.tMember.Where(t => t.f會員編號 == memberID).FirstOrDefault();
+            string[] blackList = { };
+            if (!string.IsNullOrEmpty(loginMember.f會員黑名單))
+            {
+                blackList = loginMember.f會員黑名單.Split(',');
+            }
+
+            string[] msgs = { };
+            string[] msgsTime = { };
+            string[] msgsID = { };
+            string[] msgsPic = { };
+            string[] msgsTimeAndID = { };
+            var targetAct = db.tActivity.Where(t => t.f活動編號 == actID).FirstOrDefault();
+            if (!string.IsNullOrEmpty(targetAct.f活動留言))
+            {
+                msgs = targetAct.f活動留言.Split(new string[] { "_^$" }, StringSplitOptions.None);//因包含對話內容，
+                                                                                              //因此利用複數特殊字元做分割
+                msgsTimeAndID = targetAct.f活動留言時間.Split(',');
+                msgsTime = new string[msgsTimeAndID.Length];
+                msgsID = new string[msgsTimeAndID.Length];
+                msgsPic = new string[msgsTimeAndID.Length];
+                for (int i = 0; i<= msgsTimeAndID.Length-1;i++)
+                {
+                    if (string.IsNullOrEmpty(msgsTimeAndID[i]))
+                        continue;
+                    var Temp = msgsTimeAndID[i].Split(new string[] { "_^$" }, StringSplitOptions.None);
+                    msgsTime[i] = Temp[0];
+                    msgsID[i] = Temp[1];
+                    int realID = Convert.ToInt32(msgsID[i]);
+                    msgsPic[i] = db.tMember.Where(t => t.f會員編號 == realID).FirstOrDefault().f會員大頭貼;
+                    if (string.IsNullOrEmpty(msgsPic[i]))//防止註冊沒有預設大頭貼
+                        msgsPic[i] = "default.jpg";
+                }
+            }
+            CMsg result = new CMsg();
+            result.Msgs = msgs;
+            result.MsgsTime = msgsTime;
+            result.MsgPic = msgsPic;
+            result.MsgID = msgsID;
+            result.BlackList = blackList;
+            result.ActID = actID;
+            return result;
+
+    }
+
         public dynamic ActAddEvent(int actID, bool isAdd, int memberID)
         {
             var actList = db.tActivity.Where(t => t.f活動編號 == actID).FirstOrDefault();

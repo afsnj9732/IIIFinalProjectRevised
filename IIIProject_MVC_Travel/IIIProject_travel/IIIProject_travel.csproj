@@ -232,6 +232,7 @@
     <Compile Include="ViewModel\CEat.cs" />
     <Compile Include="ViewModel\CLogin.cs" />
     <Compile Include="ViewModel\CMember.cs" />
+    <Compile Include="ViewModel\CMsg.cs" />
     <Compile Include="ViewModel\CProfile.cs" />
     <Compile Include="ViewModel\CRegisterModel.cs" />
     <Compile Include="ViewModel\CReset.cs" />

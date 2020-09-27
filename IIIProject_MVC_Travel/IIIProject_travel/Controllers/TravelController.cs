@@ -125,17 +125,19 @@ namespace IIIProject_travel.Controllers
             if (blackAct == "1")
                 return "1";
             //根據actTarget決定刷新哪種頁面
-            return ((actTarget == "msg") ? View("MsgAdd", actID) : View("Actadd", actID));
+            return (actTarget == "msg") 
+                ? RedirectToAction("MsgAdd",new {actID=actID, sentMsg = ""}) 
+                : RedirectToAction("Actadd", actID);
         }
 
         public ActionResult MsgAdd(int actID, string sentMsg) //view需改良
         {
+            var loginMember = (tMember)Session["member"];
             if (!string.IsNullOrEmpty(sentMsg))
-            {
-                var loginMember = (tMember)Session["member"];
+            {            
                 travelModel.MsgAddEvent(loginMember.f會員編號, actID, sentMsg);
             }
-            return View(actID);
+            return View(travelModel.MsgAddEvent(loginMember.f會員編號, actID));
         }
 
         public dynamic ActAdd(int actID, bool isAdd) //退團或入團 //view需改良
