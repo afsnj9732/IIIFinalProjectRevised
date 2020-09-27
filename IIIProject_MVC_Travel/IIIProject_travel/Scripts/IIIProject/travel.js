@@ -410,12 +410,12 @@
         let target = $(this).attr("limitNumber");
         if (target === "0") {
             //文字編輯器
-            CKEDITOR.replace('f活動內容', { height: 400, width: 1100 });
+            CKEDITOR.replace($('#AddAct')[0], { height: 400, width: 1100 });
             TheDatePicker(0, 0);
 
         } else {
             //文字編輯器
-            CKEDITOR.replace('f活動內容2', { height: 400, width: 1100 });
+            CKEDITOR.replace($('#EditAct')[0], { height: 400, width: 1100 });
             TheDatePicker(1, readmore_target);
         }
         

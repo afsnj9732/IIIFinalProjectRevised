@@ -156,102 +156,6 @@ namespace IIIProject_travel.Controllers
             return RedirectToAction("TravelIndex");
         }
 
-        // up is finish
-
-        dbJoutaEntities db = new dbJoutaEntities();  // will remove
-
-
-
-
-
-
-
-
-        [ValidateInput(false)]
-        public ActionResult Edit(tActivity p)
-        {
-            tMember Member = (tMember)Session["member"];
-            tActivity targetAct = db.tActivity.Where(t => t.f活動編號 == p.f活動編號).FirstOrDefault();
-
-
-            var NowMember = db.tMember.Where(t => t.f會員編號 == Member.f會員編號).FirstOrDefault();
-            string[] usedTime = { };
-            if (!string.IsNullOrEmpty(NowMember.f會員已占用時間))
-            {
-                usedTime = NowMember.f會員已占用時間.Split(',');
-                //先移除登入會員原本這筆活動的活動時段
-                usedTime = usedTime.Where(t => t != targetAct.f活動開始時間 + "~" + targetAct.f活動結束時間).ToArray();
-                //再判別修改的活動時段是否已占用 
-                string[] used;
-                foreach (var item in usedTime)
-                {
-                    if (!string.IsNullOrEmpty(item))
-                    {
-                        used = item.Split('~');  //used[0] 已佔用的開始時間，used[1] 已佔用的結束時間
-                        if (string.Compare(p.f活動開始時間, used[1]) > 0 || string.Compare(used[0], p.f活動結束時間) > 0)
-                        {
-
-                        }
-                        else
-                        {
-                            return RedirectToAction("TravelIndex", "Travel", new { msg = "錯誤! 修改的活動時間與既有活動時間相衝" });
-                        }
-                    }
-
-                }
-            }
-            //時間過關
-            //因為活動時段變更所以要剔除所有參加者(不是每個人都想參加新時段)
-            //撈出所有參加會員的編號，並讓他們退團
-            if (!string.IsNullOrEmpty(targetAct.f活動參加的會員編號))
-            {
-                string[] DeleteList = targetAct.f活動參加的會員編號.Split(',');
-                foreach (var item in DeleteList)
-                {
-                    if (!string.IsNullOrEmpty(item))
-                    {
-                        //移除活動編號
-                        tMember Delete = db.tMember.Where(t => t.f會員編號.ToString() == item).FirstOrDefault();
-                        Delete.f會員參加的活動編號 =
-                            string.Join(",", Delete.f會員參加的活動編號.Split(',').Where(t => t != targetAct.f活動編號.ToString()));
-
-                        //移除占用時間
-                        string[] usedTime2 = Delete.f會員已占用時間.Split(',');
-                        Delete.f會員已占用時間 =
-                            string.Join(",", usedTime2.Where(t => t != targetAct.f活動開始時間 + "~" + targetAct.f活動結束時間));
-
-                    }
-                }
-            }
-            //修改變更項目
-            //使用刪除舊活動過後的占用時間加上新的活動時間
-            NowMember.f會員已占用時間 = string.Join(",", usedTime) + "," + p.f活動開始時間 + "~" + p.f活動結束時間;
-            NowMember.f會員參加的活動編號 += "," + targetAct.f活動編號; //因為被剔除了，所以重新添加
-            tActivity Temp = new tActivity();
-            targetAct.f活動內容 = Request.Form["f活動內容2"]; //配合文字編輯器，待改良;
-            targetAct.f活動參加的會員編號 = NowMember.f會員編號.ToString();
-            targetAct.f活動地區 = p.f活動地區;
-            targetAct.f活動招募截止時間 = p.f活動招募截止時間;
-            targetAct.f活動標題 = p.f活動標題;
-            targetAct.f活動結束時間 = p.f活動結束時間;
-            targetAct.f活動開始時間 = p.f活動開始時間;
-            targetAct.f活動預算 = p.f活動預算;
-            targetAct.f活動經度 = p.f活動經度;
-            targetAct.f活動緯度 = p.f活動緯度;
-            targetAct.f活動審核名單 = null;
-
-            HttpPostedFileBase PicFile = Request.Files["PicFile2"];
-            if (PicFile != null)
-            {
-                var NewFileName = Guid.NewGuid() + Path.GetExtension(PicFile.FileName);
-                var NewFilePath = Path.Combine(Server.MapPath("~/Content/images/"), NewFileName);
-                PicFile.SaveAs(NewFilePath);
-                targetAct.f活動團圖 = NewFileName;
-            }
-            db.SaveChanges();
-            return RedirectToAction("TravelIndex");
-        }
-
         [ValidateInput(false)]
         public ActionResult Add(tActivity act)
         {
@@ -259,12 +163,24 @@ namespace IIIProject_travel.Controllers
             HttpPostedFileBase picFile = Request.Files["picFile"];
             string filePath = Server.MapPath("~/Content/images/");
             var result = travelModel.AddAct(loginMember.f會員編號, act, picFile, filePath);
-            if(result == "1")
-            {
-                return RedirectToAction("TravelIndex", "Travel", new { msg = "錯誤! 新增的活動與既有活動時間相衝" });
-            }
+            if (result == "1")            
+                return RedirectToAction("TravelIndex", "Travel", new { msg = "錯誤! 新增的活動與既有活動時間相衝" });            
             return RedirectToAction("TravelIndex");
         }
+
+        [ValidateInput(false)]
+        public ActionResult Edit(tActivity act)
+        {
+            tMember loginMember = (tMember)Session["member"];
+            HttpPostedFileBase picFile = Request.Files["picFile"];
+            string filePath = Server.MapPath("~/Content/images/");
+            var result = travelModel.EditAct(loginMember.f會員編號, act, picFile, filePath);
+            if(result=="1")
+                RedirectToAction("TravelIndex", "Travel", new { msg = "錯誤! 修改的活動時間與既有活動時間相衝" });
+            return RedirectToAction("TravelIndex");
+        }
+
+
 
 
         

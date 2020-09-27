@@ -560,7 +560,7 @@ namespace IIIProject_travel.Models
             db.SaveChanges();
         }
 
-        public dynamic AddAct(int memberID, tActivity act, HttpPostedFileBase picFile,string filePath)
+        public dynamic AddAct(int memberID, tActivity act, HttpPostedFileBase picFile, string filePath)
         {
             //判別登入會員其活動時段是否已占用
             var loginMember = db.tMember.Where(t => t.f會員編號 == memberID).FirstOrDefault();
@@ -623,6 +623,86 @@ namespace IIIProject_travel.Models
                 var newFilePath = Path.Combine(filePath, newFileName);
                 picFile.SaveAs(newFilePath);
                 act.f活動團圖 = newFileName;
+            }
+            db.SaveChanges();
+            return null;
+        }
+
+        public dynamic EditAct(int memberID, tActivity act, HttpPostedFileBase picFile, string filePath)
+        {
+            tActivity targetAct = db.tActivity.Where(t => t.f活動編號 == act.f活動編號).FirstOrDefault();
+
+            var loginMember = db.tMember.Where(t => t.f會員編號 == memberID).FirstOrDefault();
+            string[] usedTime = { };
+            if (!string.IsNullOrEmpty(loginMember.f會員已占用時間))
+            {
+                usedTime = loginMember.f會員已占用時間.Split(',');
+                //先移除登入會員原本這筆活動的活動時段
+                usedTime = usedTime.Where(t => t != targetAct.f活動開始時間 + "~" + targetAct.f活動結束時間).ToArray();
+                //再判別修改的活動時段是否已占用 
+                string[] used;
+                foreach (var item in usedTime)
+                {
+                    if (!string.IsNullOrEmpty(item))
+                    {
+                        used = item.Split('~');  //used[0] 已佔用的開始時間，used[1] 已佔用的結束時間
+                        if (string.Compare(act.f活動開始時間, used[1]) > 0 || string.Compare(used[0], act.f活動結束時間) > 0)
+                        {
+
+                        }
+                        else
+                        {
+                            return "1";
+                        }
+                    }
+
+                }
+            }
+            //時間過關
+            //因為活動時段變更所以要剔除所有參加者(不是每個人都想參加新時段)
+            //撈出所有參加會員的編號，並讓他們退團
+            if (!string.IsNullOrEmpty(targetAct.f活動參加的會員編號))
+            {
+                string[] DeleteList = targetAct.f活動參加的會員編號.Split(',');
+                foreach (var item in DeleteList)
+                {
+                    if (!string.IsNullOrEmpty(item))
+                    {
+                        //移除活動編號
+                        tMember Delete = db.tMember.Where(t => t.f會員編號.ToString() == item).FirstOrDefault();
+                        Delete.f會員參加的活動編號 =
+                            string.Join(",", Delete.f會員參加的活動編號.Split(',').Where(t => t != targetAct.f活動編號.ToString()));
+
+                        //移除占用時間
+                        string[] usedTime2 = Delete.f會員已占用時間.Split(',');
+                        Delete.f會員已占用時間 =
+                            string.Join(",", usedTime2.Where(t => t != targetAct.f活動開始時間 + "~" + targetAct.f活動結束時間));
+
+                    }
+                }
+            }
+            //修改變更項目
+            //使用刪除舊活動過後的占用時間加上新的活動時間
+            loginMember.f會員已占用時間 = string.Join(",", usedTime) + "," + act.f活動開始時間 + "~" + act.f活動結束時間;
+            loginMember.f會員參加的活動編號 += "," + targetAct.f活動編號; //因為被剔除了，所以重新添加
+            targetAct.f活動內容 = act.f活動內容;
+            targetAct.f活動參加的會員編號 = loginMember.f會員編號.ToString();
+            targetAct.f活動地區 = act.f活動地區;
+            targetAct.f活動招募截止時間 = act.f活動招募截止時間;
+            targetAct.f活動標題 = act.f活動標題;
+            targetAct.f活動結束時間 = act.f活動結束時間;
+            targetAct.f活動開始時間 = act.f活動開始時間;
+            targetAct.f活動預算 = act.f活動預算;
+            targetAct.f活動經度 = act.f活動經度;
+            targetAct.f活動緯度 = act.f活動緯度;
+            targetAct.f活動審核名單 = null;
+           
+            if (picFile != null)
+            {
+                var NewFileName = Guid.NewGuid() + Path.GetExtension(picFile.FileName);
+                var NewFilePath = Path.Combine(filePath, NewFileName);
+                picFile.SaveAs(NewFilePath);
+                targetAct.f活動團圖 = NewFileName;
             }
             db.SaveChanges();
             return null;
