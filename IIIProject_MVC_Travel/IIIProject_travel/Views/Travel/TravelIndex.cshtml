@@ -1,4 +1,5 @@
-﻿@{
+﻿
+@{
     Layout = null;
     var topMember = (new dbJoutaEntities()).tMember.OrderByDescending(n => n.f會員評分).Take(5);//抓評分前五團主
     var x = (tMember)Session["member"];
@@ -220,7 +221,7 @@
 
                                                 </div>
                                                 <div class="row mb-4 mx-auto align-items-center justify-content-around">
-                                                    <span class="row  align-items-center">團圖：<input type="file" name="PicFile" class="NeedAP"><span class="mr-5 NeedAPTo" style="color:red" hidden>活動團圖必填</span></span>
+                                                    <span class="row  align-items-center">團圖：<input type="file" name="picFile" class="NeedAP"><span class="mr-5 NeedAPTo" style="color:red" hidden>活動團圖必填</span></span>
 
                                                     <div class="row align-items-center ">
                                                         <button type="button" class="btn btn-secondary btn_get_map" data-toggle="modal" getMapNumber="0" data-target="#getMap" style="background-color:gray">

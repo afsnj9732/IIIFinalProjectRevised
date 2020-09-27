@@ -1,6 +1,7 @@
 ﻿using IIIProject_travel.ViewModel;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Web;
@@ -72,7 +73,7 @@ namespace IIIProject_travel.Models
             return returnValue;
         }
 
-        public CTravel GetLikeList(CTravel theList,int memberID)
+        public CTravel GetLikeList(CTravel theList, int memberID)
         {
             var memberLikeList = GetMemberData(memberID, "f會員收藏的活動編號");
             if (!string.IsNullOrEmpty(memberLikeList))
@@ -133,7 +134,7 @@ namespace IIIProject_travel.Models
             return string.Join(",", autoComplete);
         }
 
-        public string DateLimit(int memberID , int actID)
+        public string DateLimit(int memberID, int actID)
         {
             var memberTimeLimit = GetMemberData(memberID, "f會員已占用時間");
             if (!string.IsNullOrEmpty(memberTimeLimit))
@@ -166,7 +167,7 @@ namespace IIIProject_travel.Models
             return null;
         }
 
-        public string FeelGood(int memberID , int actID)
+        public string FeelGood(int memberID, int actID)
         {
             tActivity theTarget = db.tActivity.FirstOrDefault(x => x.f活動編號 == actID);
             int index = -1;
@@ -175,7 +176,7 @@ namespace IIIProject_travel.Models
                 var past = theTarget.f活動按過讚的會員編號.Split(',');//將按過讚得會員編號 字串 切割 成陣列
 
                 index = Array.IndexOf(past, memberID.ToString());//透過查詢值在陣列內的索引值(不存在則回傳-1)
-                                                                          //查看是否會員編號包含在陣列內
+                                                                 //查看是否會員編號包含在陣列內
             }
 
             if (index == -1)//陣列起始為0，因此只要pos>=0則表示該編號已存在，反之index=-1表示該編號不存在，可執行
@@ -205,7 +206,7 @@ namespace IIIProject_travel.Models
             return targetAct;
         }
 
-        public void UserLikeIt(int memberID,int actID)
+        public void UserLikeIt(int memberID, int actID)
         {
             var targetAct = db.tActivity.Where(t => t.f活動編號 == actID).FirstOrDefault();
             //要儲存修改，所以不能用GetMemberData
@@ -263,7 +264,7 @@ namespace IIIProject_travel.Models
 
         }
 
-        public string AgreeAddEvent(int targetMemberID, int actID , string isAgree)
+        public string AgreeAddEvent(int targetMemberID, int actID, string isAgree)
         {
             var actList = db.tActivity.Where(t => t.f活動編號 == actID).FirstOrDefault();
             var targetMember = db.tMember.Where(t => t.f會員編號 == targetMemberID).FirstOrDefault();
@@ -290,13 +291,13 @@ namespace IIIProject_travel.Models
                         }
 
                     }
-                    
+
                 }
                 //加入會員占用時間
                 targetMember.f會員已占用時間 += "," + actList.f活動開始時間 + "~" + actList.f活動結束時間;
 
                 targetMember.f會員參加的活動編號 += "," + actList.f活動編號;
-                actList.f活動參加的會員編號 += "," + targetMember.f會員編號;                
+                actList.f活動參加的會員編號 += "," + targetMember.f會員編號;
             }
             actList.f活動審核名單 = string.Join(",",
                 actList.f活動審核名單.Split(',').Where(t => t != targetMember.f會員編號.ToString()));
@@ -520,6 +521,111 @@ namespace IIIProject_travel.Models
             return null;
         }
 
+        public void DeleteActivity(int memberID, int actID)
+        {
+            var targetAct = db.tActivity.Where(t => t.f活動編號 == actID).FirstOrDefault();
+            var loginMember = db.tMember.Where(t => t.f會員編號 == memberID).FirstOrDefault();
+            //移除團主的活動發起紀錄
+            loginMember.f會員發起的活動編號 =
+                string.Join(",", loginMember.f會員發起的活動編號.Split(',').Where(t => t != actID.ToString()));
+            //撈出所有參加會員的編號，並讓他們退團並退收藏
+            if (!string.IsNullOrEmpty(targetAct.f活動參加的會員編號))
+            {
+                string[] deleteList = targetAct.f活動參加的會員編號.Split(',');
+                foreach (var item in deleteList)
+                {
+                    if (!string.IsNullOrEmpty(item))
+                    {
+                        //移除活動編號
+                        tMember delete = db.tMember.Where(t => t.f會員編號.ToString() == item).FirstOrDefault();
+                        delete.f會員參加的活動編號 =
+                            string.Join(",", delete.f會員參加的活動編號.Split(',').Where(t => t != actID.ToString()));
 
+                        //移除占用時間
+                        string[] usedTime = delete.f會員已占用時間.Split(',');
+                        delete.f會員已占用時間 =
+                            string.Join(",", usedTime.Where(t => t != targetAct.f活動開始時間 + "~" + targetAct.f活動結束時間));
+
+                        //移除收藏
+                        if (!string.IsNullOrEmpty(delete.f會員收藏的活動編號))
+                        {
+                            delete.f會員收藏的活動編號 = string.Join(",",
+                                  delete.f會員收藏的活動編號.Split(',').Where(t => t != actID.ToString())
+                                );
+                        }
+                    }
+                }
+            }
+            db.tActivity.Remove(targetAct);
+            db.SaveChanges();
+        }
+
+        public dynamic AddAct(int memberID, tActivity act, HttpPostedFileBase picFile,string filePath)
+        {
+            //判別登入會員其活動時段是否已占用
+            var loginMember = db.tMember.Where(t => t.f會員編號 == memberID).FirstOrDefault();
+            if (!string.IsNullOrEmpty(loginMember.f會員已占用時間))
+            {
+                string[] usedTime = loginMember.f會員已占用時間.Split(',');
+                string[] used;
+                foreach (var item in usedTime)
+                {
+                    if (!string.IsNullOrEmpty(item))
+                    {
+                        used = item.Split('~');  //used[0] 已佔用的開始時間，used[1] 已佔用的結束時間
+                        if (string.Compare(act.f活動開始時間, used[1]) > 0 || string.Compare(used[0], act.f活動結束時間) > 0)
+                        {
+
+                        }
+                        else
+                        {
+                            return "1";
+                        }
+                    }
+
+                }
+            }
+            //添加占用時間
+            loginMember.f會員已占用時間 += "," + act.f活動開始時間 + "~" + act.f活動結束時間;
+            act.f會員編號 = memberID;
+            act.f活動類型 = "旅遊";
+            act.f活動參加的會員編號 = "," + memberID;
+            var theCategory = Convert.ToDateTime(act.f活動結束時間) - Convert.ToDateTime(act.f活動開始時間);
+            int timeCheck = Convert.ToInt32(theCategory.ToString("dd"));
+            switch (timeCheck)//時間判斷
+            {
+                case 1:
+                    act.f活動分類 = "兩天一夜";
+                    break;
+                case 2:
+                    act.f活動分類 = "三天兩夜";
+                    break;
+                case 4:
+                    act.f活動分類 = "五天四夜";
+                    break;
+                case 6:
+                    act.f活動分類 = "七天六夜";
+                    break;
+                default:
+                    act.f活動分類 = "其他";
+                    break;
+            }
+            db.tActivity.Add(act);
+            db.SaveChanges();
+            int ID = db.tActivity.Where(t => t.f會員編號 == memberID)
+                .OrderByDescending(t => t.f活動發起日期).Select(t => t.f活動編號).FirstOrDefault();
+            loginMember.f會員發起的活動編號 += "," + ID;
+            loginMember.f會員參加的活動編號 += "," + ID;
+            
+            if (picFile != null)
+            {
+                var newFileName = Guid.NewGuid() + Path.GetExtension(picFile.FileName);
+                var newFilePath = Path.Combine(filePath, newFileName);
+                picFile.SaveAs(newFilePath);
+                act.f活動團圖 = newFileName;
+            }
+            db.SaveChanges();
+            return null;
+        }
     }
 }
