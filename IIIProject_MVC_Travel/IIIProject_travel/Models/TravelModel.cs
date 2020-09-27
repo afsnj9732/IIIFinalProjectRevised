@@ -199,11 +199,44 @@ namespace IIIProject_travel.Models
             db.SaveChanges();
         }
 
-        public tActivity ReadMore(int actID)
+        public CGetMore ReadMore(int memberID, int actID)
+        {
+            AddViewCounts(actID);
+            
+            var loginMember = db.tMember.Where(t => t.f會員編號 == memberID).FirstOrDefault();
+            tActivity targetAct = db.tActivity.Where(t => t.f活動編號 == actID).FirstOrDefault();
+            if (targetAct.tMember.f會員評分 == null)
+                targetAct.tMember.f會員評分 = 0.0;
+            CGetMore result = new CGetMore();
+
+            int index = -1;
+            if (!string.IsNullOrEmpty(loginMember.f會員收藏的活動編號))
+            {
+                var analyze = loginMember.f會員收藏的活動編號.Split(',');
+                index = Array.IndexOf(analyze, actID.ToString());
+            }
+            result.MemberLike = index > -1;
+
+            string[] blackList = { };
+            if (!string.IsNullOrEmpty(loginMember.f會員黑名單))
+            {
+                blackList = loginMember.f會員黑名單.Split(',');
+            }
+            result.BlackList = blackList;
+            result.TargetAct = targetAct;
+            result.LoginMember = loginMember;
+            return result;
+        }
+
+        public CGetMore ReadMore(int actID)
         {
             AddViewCounts(actID);
             tActivity targetAct = db.tActivity.Where(t => t.f活動編號 == actID).FirstOrDefault();
-            return targetAct;
+            if (targetAct.tMember.f會員評分 == null)
+                targetAct.tMember.f會員評分 = 0.0;
+            CGetMore result = new CGetMore();
+            result.TargetAct = targetAct;
+            return result;
         }
 
         public void UserLikeIt(int memberID, int actID)

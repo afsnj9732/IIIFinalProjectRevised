@@ -231,6 +231,7 @@
     <Compile Include="ViewModel\CCoupon.cs" />
     <Compile Include="ViewModel\CData.cs" />
     <Compile Include="ViewModel\CEat.cs" />
+    <Compile Include="ViewModel\CGetMore.cs" />
     <Compile Include="ViewModel\CLogin.cs" />
     <Compile Include="ViewModel\CMember.cs" />
     <Compile Include="ViewModel\CMsg.cs" />

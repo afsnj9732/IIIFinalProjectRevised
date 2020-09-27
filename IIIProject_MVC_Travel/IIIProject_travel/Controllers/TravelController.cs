@@ -77,8 +77,13 @@ namespace IIIProject_travel.Controllers
             return "1";
         }
 
-        public ActionResult GetReadMore(int actID)  //view需改良
-        {             
+        public ActionResult GetReadMore(int actID)  
+        {
+            if (Session["member"] != null)
+            {
+                var loginMember = (tMember)Session["member"];
+                return View(travelModel.ReadMore(loginMember.f會員編號, actID));
+            }
             return View(travelModel.ReadMore(actID));
         }
 
@@ -146,13 +151,19 @@ namespace IIIProject_travel.Controllers
             return View(travelModel.MsgAddEvent(loginMember.f會員編號, actID));
         }
 
-        public dynamic ActAdd(int actID, bool isAdd) //退團或入團 //view需改良
+        public dynamic ActAdd(int actID, bool isAdd) //退團或入團 
         {
             var loginMember = (tMember)Session["member"];
             var result = travelModel.ActAddEvent(actID, isAdd, loginMember.f會員編號);
             if (result != null)
                 return result;
             return View(travelModel.ActAddEvent(actID, loginMember.f會員編號));
+        }
+
+        public ActionResult ShowMemberList(int actID)
+        {
+            var loginMember = (tMember)Session["member"];
+            return View("ActAdd", (object)travelModel.ActAddEvent(actID, loginMember.f會員編號));
         }
 
         public ActionResult Delete(int id)

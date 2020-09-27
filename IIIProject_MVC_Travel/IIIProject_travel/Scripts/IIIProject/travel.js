@@ -671,6 +671,19 @@
     $("body").on('click', ".jouta_agree", agreeAct);
 
 
+    //團員列表顯示
+    $('body').on("click", '[data-target="#ajax_join"]', function () {
+        let actID = $(this).attr("actID");
+        $.ajax({
+            url: "/Travel/ShowMemberList",
+            type: "POST",
+            data: { "actID": actID },
+            success: function (data) {
+                $("[ActAdd=" + actID + "]").html(data);
+            }
+        })
+    })
+
     //想要入團
     function joinAct() {
         let target = $(this).attr("joinAct");
