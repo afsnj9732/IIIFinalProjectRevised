@@ -84,7 +84,7 @@ namespace IIIProject_travel.Models
         }
 
         //使用ID取得想要的會員其資料庫中最新的特定欄位之資料
-        public dynamic GetMemberData(int memberID, string wantGet)
+        private dynamic GetMemberData(int memberID, string wantGet)
         {
             var targetMember = db.tMember.Where(t => t.f會員編號 == memberID).FirstOrDefault();
 
