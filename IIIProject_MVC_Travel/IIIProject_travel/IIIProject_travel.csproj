@@ -2311,7 +2311,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Upload\Members\" />
-    <Folder Include="Views\Activity\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
