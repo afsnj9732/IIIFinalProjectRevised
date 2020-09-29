@@ -196,6 +196,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>JoutaEntities.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\ActivityModel.cs" />
     <Compile Include="Models\TravelModel.cs" />
     <Compile Include="sysdiagrams.cs">
       <DependentUpon>JoutaEntities.tt</DependentUpon>
@@ -213,6 +214,7 @@
       <DependentUpon>JoutaEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\CActAdd.cs" />
+    <Compile Include="ViewModel\CActivity.cs" />
     <Compile Include="ViewModel\CalendarEvents.cs" />
     <Compile Include="Models\CDictionary.cs" />
     <Compile Include="Models\Topendata.cs" />
@@ -239,7 +241,6 @@
     <Compile Include="ViewModel\CRegisterModel.cs" />
     <Compile Include="ViewModel\CReset.cs" />
     <Compile Include="ViewModel\CSelect.cs" />
-    <Compile Include="ViewModel\CTravel.cs" />
     <Compile Include="ViewModel\C回覆.cs" />
     <Compile Include="ViewModel\PData.cs" />
   </ItemGroup>
@@ -2310,6 +2311,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Upload\Members\" />
+    <Folder Include="Views\Activity\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

@@ -5,7 +5,7 @@ using System.Web;
 
 namespace IIIProject_travel.ViewModel
 {
-    public class CTravel
+    public class CActivity
     {
         public IEnumerable<tActivity> FinalList { get; set; }
         public int NowPage { get; set; }

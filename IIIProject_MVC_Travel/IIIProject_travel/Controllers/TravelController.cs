@@ -196,21 +196,6 @@ namespace IIIProject_travel.Controllers
                 RedirectToAction("TravelIndex", "Travel", new { msg = "錯誤! 修改的活動時間與既有活動時間相衝" });
             return RedirectToAction("TravelIndex");
         }
-
-
-
-
-        
-
-     
-        
-
-
-
-
-
-
-
-
+                   
     }
 }
